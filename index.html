@@ -5,1111 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Radar Seguro RJ Pro - Navegação Ativa</title>
   
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
   
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-    
-    body {
-      background-color: #0b0f19;
-      color: #f8fafc;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    header {
-      background: #0f172a;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.3);
-    }
-
-    .brand h1 {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #38bdf8;
-    }
-
-    #map {
-      flex: 1;
-      width: 100%;
-      z-index: 1;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #0b0f19; color: #f8fafc; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    header { background: #0f172a; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.6); z-index: 1000; border-bottom: 1px solid rgba(56, 189, 248, 0.3); }
+    .brand h1 { font-size: 0.95rem; font-weight: 800; color: #38bdf8; }
+    #map { flex: 1; width: 100%; z-index: 1; }
 
     /* Barra Superior de Busca */
-    .search-wrapper {
-      position: absolute;
-      top: 56px;
-      left: 10px;
-      right: 10px;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .search-bar {
-      display: flex;
-      background: #0f172a;
-      border: 2px solid #38bdf8;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-    }
-
-    .nav-input {
-      flex: 1;
-      padding: 12px 14px;
-      border: none;
-      background: transparent;
-      color: #fff;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .btn-go {
-      background: #0284c7;
-      color: #fff;
-      border: none;
-      padding: 0 18px;
-      font-weight: 800;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .btn-go:active { background: #0369a1; }
+    .search-wrapper { position: absolute; top: 56px; left: 10px; right: 10px; z-index: 1000; display: flex; flex-direction: column; gap: 4px; }
+    .search-bar { display: flex; background: #0f172a; border: 2px solid #38bdf8; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+    .nav-input { flex: 1; padding: 12px 14px; border: none; background: transparent; color: #fff; font-size: 0.9rem; outline: none; }
+    .btn-go { background: #0284c7; color: #fff; border: none; padding: 0 18px; font-weight: 800; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 4px; }
 
     /* Dropdown de Sugestões */
-    #searchDropdown {
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      max-height: 200px;
-      overflow-y: auto;
-      display: none;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    }
+    #searchDropdown { background: #0f172a; border: 1px solid #334155; border-radius: 10px; max-height: 200px; overflow-y: auto; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    .suggestion-item { padding: 12px 14px; border-bottom: 1px solid #1e293b; font-size: 0.82rem; color: #e2e8f0; cursor: pointer; }
 
-    .suggestion-item {
-      padding: 12px 14px;
-      border-bottom: 1px solid #1e293b;
-      font-size: 0.82rem;
-      color: #e2e8f0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .suggestion-item:active { background: #1e293b; color: #38bdf8; }
+    /* Botões Flutuantes Direita */
+    .right-controls { position: absolute; top: 120px; right: 10px; z-index: 999; display: flex; flex-direction: column; gap: 8px; }
+    .fab-btn { width: 46px; height: 46px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); background: #0f172a; color: #f8fafc; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(0,0,0,0.6); }
+    .fab-btn.active { background: #0284c7; }
+    .fab-btn.danger-active { background: #dc2626; }
 
-    /* Botões Flutuantes na Direita */
-    .right-controls {
-      position: absolute;
-      top: 120px;
-      right: 10px;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    /* Painel de Rota */
+    #navInfoCard { position: absolute; top: 120px; left: 10px; right: 64px; background: #0f172a; border-left: 4px solid #38bdf8; border-radius: 12px; padding: 10px 14px; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.7); z-index: 999; }
+    .btn-start-drive { background: #22c55e; color: #0b0f19; font-weight: 800; padding: 8px 12px; border-radius: 8px; border: none; cursor: pointer; margin-top: 8px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.85rem; }
 
-    .fab-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: #0f172a;
-      color: #f8fafc;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
-      transition: all 0.2s;
-    }
-    .fab-btn:active { transform: scale(0.92); }
-    .fab-btn.active { background: #0284c7; border-color: #38bdf8; }
-    .fab-btn.danger-active { background: #dc2626; border-color: #f87171; }
-
-    /* Menu de Seleção de Transporte */
-    #transportMenu {
-      position: absolute;
-      top: 120px;
-      right: 64px;
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 12px;
-      padding: 6px;
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      z-index: 1000;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    }
-
-    .transport-opt {
-      padding: 8px 12px;
-      background: transparent;
-      border: none;
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-align: left;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .transport-opt.selected { background: #0284c7; color: #fff; }
-
-    /* Painel de Rota e Iniciar Corrida */
-    #navInfoCard {
-      position: absolute;
-      top: 120px;
-      left: 10px;
-      right: 64px;
-      background: #0f172a;
-      border-left: 4px solid #38bdf8;
-      border-radius: 12px;
-      padding: 10px 14px;
-      display: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
-      z-index: 999;
-    }
-
-    .nav-stats {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .btn-start-drive {
-      background: #22c55e;
-      color: #0b0f19;
-      font-weight: 800;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      margin-top: 8px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.85rem;
-      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
-    }
-    .btn-start-drive:active { background: #16a34a; }
-
-    /* Placas Super Nítidas para Comunidades */
-    .community-tag {
-      background: #090d16;
-      border: 2px solid;
-      border-radius: 6px;
-      padding: 3px 8px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
-      white-space: nowrap;
-      display: inline-block;
-      text-align: center;
-    }
+    /* Placas Comunidades */
+    .community-tag { background: #090d16; border: 2px solid; border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; white-space: nowrap; display: inline-block; text-align: center; }
     .tag-vermelha { border-color: #ef4444; color: #fca5a5; }
     .tag-laranja { border-color: #f97316; color: #fdba74; }
 
     /* Alerta de Perigo */
-    #alertBanner {
-      position: absolute;
-      bottom: 20px;
-      left: 10px;
-      right: 10px;
-      background: #b91c1c;
-      color: #fff;
-      padding: 12px 16px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(185, 28, 28, 0.8);
-      z-index: 1000;
-      display: none;
-      border: 1px solid #f87171;
-    }
+    #alertBanner { position: absolute; bottom: 20px; left: 10px; right: 10px; background: #b91c1c; color: #fff; padding: 12px 16px; border-radius: 12px; box-shadow: 0 10px 30px rgba(185, 28, 28, 0.8); z-index: 1000; display: none; border: 1px solid #f87171; }
 
-    /* Janela de Street View */
-    #streetViewContainer {
-      position: absolute;
-      bottom: 15px;
-      left: 10px;
-      right: 10px;
-      height: 42%;
-      background: #0f172a;
-      border-radius: 16px;
-      border: 2px solid #38bdf8;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.9);
-      z-index: 1001;
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    #streetViewFrame {
-      width: 100%;
-      flex: 1;
-      border: none;
-    }
-
-    /* Modais */
-    #infoModal, #addModal {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #1e293b;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 -8px 30px rgba(0,0,0,0.8);
-      z-index: 1002;
-      max-height: 75vh;
-      overflow-y: auto;
-      display: none;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .btn-back-header {
-      background: #334155;
-      border: none;
-      color: #f8fafc;
-      font-size: 0.8rem;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .form-group { margin-bottom: 10px; }
-    .form-group label { display: block; font-size: 0.75rem; color: #94a3b8; margin-bottom: 3px; }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #334155;
-      background: #0f172a;
-      color: white;
-    }
-
-    .btn {
-      padding: 9px 12px;
-      border: none;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.8rem;
-    }
-
-    .custom-pin {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      color: white;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.6);
-    }
-    .pin-red { background: #ef4444; }
-    .pin-yellow { background: #f59e0b; }
-    .pin-green { background: #10b981; }
-
-    /* Ícone do Veículo em Movimento */
-    .vehicle-icon {
-      font-size: 26px;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.7));
-      transition: transform 0.2s linear;
-    }
-
-    /* Toast de aviso (novo) */
-    #toast {
-      position: absolute;
-      top: 56px;
-      left: 10px;
-      right: 10px;
-      background: #1e293b;
-      border: 1px solid #f59e0b;
-      color: #fde68a;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 0.78rem;
-      z-index: 1100;
-      display: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
-    }
+    /* Street View Container */
+    #streetViewContainer { position: absolute; bottom: 15px; left: 10px; right: 10px; height: 42%; background: #0f172a; border-radius: 16px; border: 2px solid #38bdf8; z-index: 1001; display: none; overflow: hidden; }
+    #streetViewFrame { width: 100%; height: 100%; border: none; }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="brand">
-      <h1>⛽ RADAR SEGURO RJ PRO</h1>
-    </div>
-    <span style="font-size: 0.72rem; color: #94a3b8;" id="stationCount">Carregando...</span>
-  </header>
+  <header><div class="brand"><h1>⛽ RADAR SEGURO RJ PRO</h1></div></header>
 
-  <div id="toast"></div>
-
-  <!-- Busca Superior com Dropdown Autocomplete -->
   <div class="search-wrapper">
     <div class="search-bar">
-      <input type="text" id="destInput" class="nav-input" placeholder="Digite uma rua, bairro ou local no RJ..." oninput="buscarSugestoes(this.value)">
+      <input type="text" id="destInput" class="nav-input" placeholder="Endereço, rua ou bairro..." oninput="buscarSugestoes(this.value)">
       <button class="btn-go" onclick="executarBuscaDireta()">🧭 IR</button>
     </div>
     <div id="searchDropdown"></div>
   </div>
 
-  <!-- Botões Flutuantes na Direita -->
   <div class="right-controls">
-    <button class="fab-btn" id="btnTransport" title="Transporte" onclick="toggleTransportMenu()">🚗</button>
-    <button class="fab-btn" id="btnGps" title="Ativar GPS" onclick="toggleGPS()">🛰️</button>
-    <button class="fab-btn danger-active" id="btnLayerAreas" title="Áreas de atenção" onclick="toggleAreas()">⚠️</button>
-    <button class="fab-btn" id="btnMapStyle" title="Satélite" onclick="alternarSat()">🗺️</button>
-    <button class="fab-btn" title="Street View" onclick="abrirStreetViewCentro()">👁️</button>
-    <button class="fab-btn" title="Adicionar Posto" onclick="abrirModalAdd()">➕</button>
+    <button class="fab-btn" id="btnTransport" onclick="toggleTransportMenu()">🚗</button>
+    <button class="fab-btn" id="btnGps" onclick="toggleGPS()">🛰️</button>
+    <button class="fab-btn danger-active" id="btnLayerAreas" onclick="toggleAreas()">⚠️</button>
+    <button class="fab-btn" id="btnMapStyle" onclick="alternarSat()">🗺️</button>
+    <button class="fab-btn" onclick="abrirModalAdd()">➕</button>
   </div>
 
-  <!-- Menu de Modos de Transporte -->
-  <div id="transportMenu">
-    <div style="display:flex; justify-content:space-between; align-items:center; padding: 4px;">
-      <span style="font-size:0.75rem; color:#94a3b8; font-weight:bold;">MODO DE ROTA</span>
-      <button onclick="toggleTransportMenu()" style="background:none; border:none; color:#cbd5e1; font-size:1rem; cursor:pointer;">&times;</button>
-    </div>
-    <button class="transport-opt selected" id="opt-car" onclick="escolherModo('driving', '🚗', 'opt-car')">🚗 Carro</button>
-    <button class="transport-opt" id="opt-moto" onclick="escolherModo('driving', '🏍️', 'opt-moto')">🏍️ Moto</button>
-    <button class="transport-opt" id="opt-bike" onclick="escolherModo('bike', '🚲', 'opt-bike')">🚲 Bicicleta</button>
-    <button class="transport-opt" id="opt-foot" onclick="escolherModo('foot', '🚶', 'opt-foot')">🚶 A Pé</button>
-  </div>
-
-  <!-- Painel de Rota com Botão de Voltar e Iniciar Corrida -->
   <div id="navInfoCard">
     <div class="nav-stats">
-      <div>
-        <span style="font-size: 1.2rem; font-weight: 800; color: #38bdf8;" id="routeTime">-- min</span>
-        <span style="font-size: 0.85rem; color: #94a3b8; margin-left: 8px;" id="routeDist">-- km</span>
-      </div>
-      <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.75rem;" onclick="cancelarRota()">⬅ Cancelar</button>
+      <div><span id="routeTime" style="font-weight:800; color:#38bdf8;">-- min</span> <span id="routeDist" style="font-size:0.8rem; color:#94a3b8;">-- km</span></div>
+      <button style="background: #ef4444; color: white; padding: 5px 10px; border-radius:6px; border:none;" onclick="cancelarRota()">✖</button>
     </div>
-    <p id="routeStatus" style="font-size: 0.75rem; color: #e2e8f0; margin-top: 4px;">Rota pronta para navegação</p>
-    <button class="btn-start-drive" id="btnDrive" onclick="iniciarMovimentoNavegacao()">🚀 INICIAR CORRIDA / NAVEGAÇÃO</button>
+    <button class="btn-start-drive" id="btnDrive" onclick="iniciarMovimentoNavegacao()">🚀 INICIAR NAVEGAÇÃO</button>
   </div>
 
   <div id="map"></div>
 
-  <!-- Janela de Street View -->
-  <div id="streetViewContainer">
-    <div style="background: #1e293b; padding: 6px 12px; display: flex; justify-content: space-between; align-items: center;">
-      <span style="font-size: 0.75rem; font-weight: bold; color: #38bdf8;">👁️ VISÃO DE RUA (STREET VIEW)</span>
-      <button class="btn-back-header" style="padding: 2px 8px; font-size: 0.72rem;" onclick="fecharStreetView()">⬅ Fechar</button>
-    </div>
-    <iframe id="streetViewFrame" src="" allowfullscreen></iframe>
-  </div>
+  <div id="streetViewContainer"><iframe id="streetViewFrame" src=""></iframe></div>
+  <div id="alertBanner"></div>
 
-  <!-- Banner de Alerta -->
-  <div id="alertBanner">
-    <strong id="alertTitle" style="font-size: 0.85rem;">⚠️ ALERTA DE SEGURANÇA</strong>
-    <p id="alertDesc" style="font-size: 0.78rem; margin-top: 2px;"></p>
-  </div>
+  <!-- Incluir Modais de Cadastro aqui conforme versão anterior -->
 
-  <!-- Modal Detalhes do Posto -->
-  <div id="infoModal">
-    <div class="modal-header">
-      <button class="btn-back-header" onclick="fecharModais()">⬅ Voltar</button>
-      <h3 id="modalNome" style="color: #38bdf8; font-size: 0.95rem;">Nome do Posto</h3>
-    </div>
-    <div id="modalStatus" style="margin-bottom: 8px;"></div>
-    <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 6px;"><strong>Endereço:</strong> <span id="modalEndereco"></span></p>
-    <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 6px;"><strong>Bandeira:</strong> <span id="modalBandeira"></span></p>
-    
-    <div style="background: #0f172a; padding: 10px; border-radius: 8px; margin: 10px 0;">
-      <h4 style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 2px;">HISTÓRICO DA FISCALIZAÇÃO:</h4>
-      <p id="modalHistorico" style="font-size: 0.8rem; line-height: 1.3; color: #f8fafc;"></p>
-    </div>
-    <p style="font-size: 0.72rem; color: #64748b; margin-bottom: 10px;"><strong>Fonte informada:</strong> <span id="modalFonte"></span></p>
-    
-    <div style="display: flex; gap: 8px;">
-      <button class="btn" style="background:#0284c7; color:white; flex: 1;" onclick="tracarRotaParaPosto()">🧭 Iniciar Rota</button>
-      <button class="btn" style="background:#fbbf24; color:#1e293b; flex: 1;" onclick="abrirStreetViewPosto()">👁️ Ver Rua</button>
-    </div>
-  </div>
-
-  <!-- Modal Adicionar Posto -->
-  <div id="addModal">
-    <div class="modal-header">
-      <button class="btn-back-header" onclick="fecharModais()">⬅ Voltar</button>
-      <h3 style="font-size: 0.95rem;">Cadastrar Posto</h3>
-    </div>
-    <form id="addForm" onsubmit="salvarNovoPosto(event)">
-      <div class="form-group">
-        <label>Nome Fantasia</label>
-        <input type="text" id="addNome" required placeholder="Ex: Posto Imperial">
-      </div>
-      <div class="form-group">
-        <label>Bandeira</label>
-        <input type="text" id="addBandeira" placeholder="Ex: Branca, Shell, Ipiranga">
-      </div>
-      <div class="form-group">
-        <label>Endereço / Bairro</label>
-        <input type="text" id="addEndereco" required placeholder="Ex: Av. Cesário de Melo, Campo Grande">
-      </div>
-      <div class="form-group">
-        <label>Status da Fiscalização</label>
-        <select id="addStatus">
-          <option value="vermelho">🔴 Vermelho (Interdição / Metanol / Fraude)</option>
-          <option value="amarelo">🟡 Amarelo (Notificado / Regularização)</option>
-          <option value="verde">🟢 Verde (Fiscalizado e Regular)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Coordenadas (ou toque no mapa)</label>
-        <div style="display: flex; gap: 6px;">
-          <input type="number" step="any" id="addLat" required placeholder="Lat">
-          <input type="number" step="any" id="addLng" required placeholder="Lng">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Motivo da Autuação</label>
-        <textarea id="addHistorico" rows="2" placeholder="Ex: Gasolina com 70% de etanol"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Fonte (indique de onde veio a informação)</label>
-        <input type="text" id="addFonte" placeholder="Ex: Operação ANP/Procon de dd/mm/aaaa">
-      </div>
-      <button type="submit" class="btn" style="background:#0284c7; color:white; width: 100%; padding: 10px;">Salvar Posto</button>
-    </form>
-  </div>
-
-  <!-- Leaflet JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-
   <script>
-    // 1. Inicialização do Mapa HD
-    const layerDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19, attribution: '© CartoDB' });
-    const layerSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: '© Esri HD' });
+    const map = L.map('map', { zoomControl: false }).setView([-22.9068, -43.35], 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
 
-    const map = L.map('map', { zoomControl: false, layers: [layerDark] }).setView([-22.9068, -43.35], 12);
-
-    let mapaAtual = 'padrao';
-    function alternarSat() {
-      const btn = document.getElementById('btnMapStyle');
-      if (mapaAtual === 'padrao') {
-        map.removeLayer(layerDark);
-        map.addLayer(layerSatelite);
-        mapaAtual = 'satelite';
-        btn.innerText = '🛰️';
-      } else {
-        map.removeLayer(layerSatelite);
-        map.addLayer(layerDark);
-        mapaAtual = 'padrao';
-        btn.innerText = '🗺️';
-      }
-    }
-
-    function mostrarToast(msg, duracaoMs = 3500) {
-      const t = document.getElementById('toast');
-      t.innerText = msg;
-      t.style.display = 'block';
-      clearTimeout(mostrarToast._timer);
-      mostrarToast._timer = setTimeout(() => { t.style.display = 'none'; }, duracaoMs);
-    }
-
-    // 2. Áreas de atenção
-    // ATENÇÃO: esta lista é estática (não reflete eventos em tempo real).
-    // Recomenda-se vincular a fontes atualizáveis (ex: boletins de segurança
-    // datados) em vez de manter bairros permanentemente marcados como risco.
-    const areasRisco = [
-      { nome: "Complexo do Alemão", nivel: "vermelho", lat: -22.8590, lng: -43.2750, raio: 1300 },
-      { nome: "Complexo da Penha", nivel: "vermelho", lat: -22.8420, lng: -43.2840, raio: 1200 },
-      { nome: "Complexo da Maré", nivel: "vermelho", lat: -22.8680, lng: -43.2430, raio: 1500 },
-      { nome: "Jacarezinho & Manguinhos", nivel: "vermelho", lat: -22.8880, lng: -43.2560, raio: 1000 },
-      { nome: "Complexo do Chapadão", nivel: "vermelho", lat: -22.8330, lng: -43.3760, raio: 1500 },
-      { nome: "Pedreira (Costa Barros)", nivel: "vermelho", lat: -22.8250, lng: -43.3580, raio: 1300 },
-      { nome: "Morro dos Macacos", nivel: "vermelho", lat: -22.9150, lng: -43.2530, raio: 850 },
-      { nome: "Vila Aliança / Camará", nivel: "vermelho", lat: -22.8680, lng: -43.4880, raio: 1400 },
-      { nome: "Vila Kennedy", nivel: "vermelho", lat: -22.8560, lng: -43.5100, raio: 1100 },
-      { nome: "Praça Seca / Barão", nivel: "vermelho", lat: -22.8940, lng: -43.3540, raio: 1000 },
-      { nome: "Morro do São Carlos", nivel: "vermelho", lat: -22.9180, lng: -43.1970, raio: 800 },
-      { nome: "Fallet / Fogueteiro", nivel: "vermelho", lat: -22.9260, lng: -43.1990, raio: 850 },
-      { nome: "Favela do Aço / Rola", nivel: "vermelho", lat: -22.8950, lng: -43.6200, raio: 1200 },
-      { nome: "Cidade de Deus", nivel: "laranja", lat: -22.9460, lng: -43.3610, raio: 1100 },
-      { nome: "Rio das Pedras", nivel: "laranja", lat: -22.9690, lng: -43.3320, raio: 1200 },
-      { nome: "Rocinha", nivel: "laranja", lat: -22.9880, lng: -43.2480, raio: 1000 },
-      { nome: "Vidigal", nivel: "laranja", lat: -22.9930, lng: -43.2350, raio: 750 },
-      { nome: "Morro da Providência", nivel: "laranja", lat: -22.8980, lng: -43.1940, raio: 600 },
-      { nome: "Salgueiro / Andaraí", nivel: "laranja", lat: -22.9290, lng: -43.2390, raio: 800 }
-    ];
-
-    const layerGroupAreas = L.layerGroup().addTo(map);
-
-    function renderizarAreas() {
-      layerGroupAreas.clearLayers();
-      areasRisco.forEach(area => {
-        const isVermelho = area.nivel === 'vermelho';
-        const color = isVermelho ? '#dc2626' : '#ea580c';
-        const fillColor = isVermelho ? '#ef4444' : '#f97316';
-
-        L.circle([area.lat, area.lng], {
-          color: color,
-          fillColor: fillColor,
-          fillOpacity: 0.35,
-          weight: 2,
-          radius: area.raio
-        }).addTo(layerGroupAreas);
-
-        const icon = L.divIcon({
-          className: 'custom-tag-marker',
-          html: `<div class="community-tag ${isVermelho ? 'tag-vermelha' : 'tag-laranja'}">${area.nome}</div>`,
-          iconSize: [120, 24],
-          iconAnchor: [60, 12]
-        });
-
-        L.marker([area.lat, area.lng], { icon: icon, interactive: false }).addTo(layerGroupAreas);
-      });
-    }
-    renderizarAreas();
-
-    let areasVisiveis = true;
-    function toggleAreas() {
-      const btn = document.getElementById('btnLayerAreas');
-      if (areasVisiveis) {
-        map.removeLayer(layerGroupAreas);
-        areasVisiveis = false;
-        btn.classList.remove('danger-active');
-      } else {
-        map.addLayer(layerGroupAreas);
-        areasVisiveis = true;
-        btn.classList.add('danger-active');
-      }
-    }
-
-    // 3. Postos de Combustível
-    let postosData = [
-      { id: 1, nome: "Auto Posto São Cristóvão", bandeira: "Bandeira Branca", endereco: "São Cristóvão, Zona Norte - RJ", lat: -22.9015, lng: -43.2230, status: "vermelho", historico: "Interditado pela ANP: Metanol detectado.", fonte: "Fiscalização ANP" },
-      { id: 2, nome: "Posto Jacarepaguá / Taquara", bandeira: "Bandeira Branca", endereco: "Estrada dos Bandeirantes, Taquara - RJ", lat: -22.9231, lng: -43.3712, status: "vermelho", historico: "Bombas e tanques lacrados por fraude e metanol.", fonte: "Operação Integrada ANP / Procon" },
-      { id: 3, nome: "Auto Posto Zona Oeste", bandeira: "Bandeira Branca", endereco: "Av. Brasil / Bangu - RJ", lat: -22.8821, lng: -43.5510, status: "vermelho", historico: "Interdição por rompimento indevido de lacres.", fonte: "SEDCON / Procon Estadual" },
-      { id: 4, nome: "Auto Posto Icaraí", bandeira: "Bandeira Branca", endereco: "Icaraí - Niterói", lat: -22.9068, lng: -43.1154, status: "vermelho", historico: "Operação MPRJ: venda clandestina de combustível.", fonte: "GAECO / ANP" },
-      { id: 5, nome: "Posto Modelo da Barra", bandeira: "Ipiranga", endereco: "Av. das Américas, Barra - RJ", lat: -23.0003, lng: -43.3650, status: "verde", historico: "Fiscalizado pela ANP: Conforme e regular.", fonte: "Boletim ANP" },
-      { id: 6, nome: "Posto Central Tijuca", bandeira: "Vibra (BR)", endereco: "Rua Conde de Bonfim, Tijuca - RJ", lat: -22.9248, lng: -43.2355, status: "amarelo", historico: "Notificado por falta de documentação do painel de preços.", fonte: "Procon Carioca" }
-    ];
-
-    let markersLayer = L.layerGroup().addTo(map);
-    let userMarker = null;
     let currentCoords = null;
-    let routePolyline = null;
-    let destMarker = null;
-    let vehicleMarker = null;
-    let selectedPosto = null;
     let gpsWatchId = null;
-    let modoAtual = 'driving';
-    let destinoAtual = null;
-    let rotaCoordenadas = [];
+    let userMarker = null;
 
-    function renderizarPostos(lista) {
-      markersLayer.clearLayers();
-      document.getElementById('stationCount').innerText = `${lista.length} postos listados`;
-      lista.forEach(posto => {
-        const cor = posto.status === 'vermelho' ? 'pin-red' : (posto.status === 'amarelo' ? 'pin-yellow' : 'pin-green');
-        const icone = posto.status === 'vermelho' ? '⛔' : (posto.status === 'amarelo' ? '⚠️' : '✓');
-        const marker = L.marker([posto.lat, posto.lng], {
-          icon: L.divIcon({
-            className: 'custom-pin-wrap',
-            html: `<div class="custom-pin ${cor}">${icone}</div>`,
-            iconSize: [28, 28],
-            iconAnchor: [14, 14]
-          })
-        });
-        marker.on('click', () => abrirDetalhes(posto));
-        markersLayer.addLayer(marker);
-      });
-    }
-    renderizarPostos(postosData);
-
-    // 4. Modos de Transporte
-    function toggleTransportMenu() {
-      const menu = document.getElementById('transportMenu');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    // FIX: agora recebe o id do botão e aplica a classe "selected" nele
-    // (antes a seleção visual nunca era marcada).
-    function escolherModo(profile, icone, btnId) {
-      modoAtual = profile;
-      document.getElementById('btnTransport').innerText = icone;
-      document.querySelectorAll('.transport-opt').forEach(b => b.classList.remove('selected'));
-      const btnSelecionado = document.getElementById(btnId);
-      if (btnSelecionado) btnSelecionado.classList.add('selected');
-      toggleTransportMenu();
-      if (destinoAtual) gerarRota(destinoAtual.lat, destinoAtual.lng);
-    }
-
-    // 5. Autocomplete e Busca de Endereço
-    let searchDebounce;
-    let sugestoesCache = [];
-
-    function buscarSugestoes(texto) {
-      clearTimeout(searchDebounce);
-      const dropdown = document.getElementById('searchDropdown');
-      if (!texto || texto.trim().length < 2) {
-        dropdown.style.display = 'none';
-        return;
-      }
-
-      searchDebounce = setTimeout(async () => {
-        try {
-          const query = encodeURIComponent(texto.trim() + ', Rio de Janeiro, Brasil');
-          const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=5`);
-          const data = await res.json();
-          sugestoesCache = data;
-
-          if (data && data.length > 0) {
-            dropdown.innerHTML = '';
-            data.forEach((item, index) => {
-              const div = document.createElement('div');
-              div.className = 'suggestion-item';
-              div.innerHTML = `📍 <span>${item.display_name}</span>`;
-              div.onclick = () => selecionarLocal(index);
-              dropdown.appendChild(div);
-            });
-            dropdown.style.display = 'block';
-          } else {
-            dropdown.style.display = 'none';
-          }
-        } catch(e) {
-          dropdown.style.display = 'none';
-          mostrarToast('Erro ao buscar sugestões. Verifique sua conexão.');
-        }
-      }, 300);
-    }
-
-    function selecionarLocal(index) {
-      const item = sugestoesCache[index];
-      if (item) {
-        document.getElementById('destInput').value = item.display_name.split(',')[0];
-        document.getElementById('searchDropdown').style.display = 'none';
-        gerarRota(parseFloat(item.lat), parseFloat(item.lon));
+    // GPS REAL e OBRIGATÓRIO: O app só desenha a rota a partir daqui
+    function iniciarRastreamento() {
+      if (navigator.geolocation) {
+        gpsWatchId = navigator.geolocation.watchPosition((pos) => {
+          currentCoords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
+          if (!userMarker) userMarker = L.circleMarker([currentCoords.latitude, currentCoords.longitude], {radius: 8, color: '#38bdf8'}).addTo(map);
+          else userMarker.setLatLng([currentCoords.latitude, currentCoords.longitude]);
+        }, null, { enableHighAccuracy: true });
       }
     }
 
     async function executarBuscaDireta() {
-      const texto = document.getElementById('destInput').value.trim();
-      if (!texto) {
-        mostrarToast('Digite o endereço de destino.');
+      const termo = document.getElementById('destInput').value;
+      if (!termo) return alert("Digite um destino!");
+      
+      // Força a posição atual antes de traçar a rota
+      if (!currentCoords) {
+        alert("Aguardando sinal GPS...");
         return;
       }
-      document.getElementById('searchDropdown').style.display = 'none';
-
-      try {
-        const query = encodeURIComponent(texto + ', Rio de Janeiro, Brasil');
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
-        const data = await res.json();
-        if (data && data.length > 0) {
-          gerarRota(parseFloat(data[0].lat), parseFloat(data[0].lon));
-        } else {
-          mostrarToast('Local não encontrado. Tente detalhar melhor a rua ou bairro.');
-        }
-      } catch(e) {
-        mostrarToast('Erro ao buscar o endereço. Tente novamente.');
+      
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(termo + ', Rio de Janeiro')}&limit=1`);
+      const data = await res.json();
+      
+      if (data.length > 0) {
+        const dest = { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+        iniciarRotaComposicaoReal(dest.lat, dest.lng);
       }
     }
 
-    // 6. Obtenção do Ponto de Partida Real e Cálculo de Rota
-    // FIX: antes, se o GPS falhasse, o app usava o CENTRO DO MAPA como se
-    // fosse sua posição — por isso a rota sempre "achava" que você estava
-    // perto de Jacarepaguá (centro padrão do mapa), não importa onde você
-    // realmente estivesse. Agora, se não conseguir a localização real, o
-    // app avisa claramente e NÃO calcula uma rota com ponto de partida errado.
-    async function obterPosicaoGarantida() {
-      return new Promise((resolve) => {
-        if (currentCoords) {
-          resolve(currentCoords);
-          return;
-        }
-        if (!navigator.geolocation) {
-          resolve(null);
-          return;
-        }
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            currentCoords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
-            atualizarMarcadorUsuario(currentCoords.latitude, currentCoords.longitude);
-            resolve(currentCoords);
-          },
-          (err) => {
-            console.warn('Falha ao obter localização:', err.message);
-            resolve(null);
-          },
-          { enableHighAccuracy: true, timeout: 8000 }
-        );
-      });
-    }
-
-    function atualizarMarcadorUsuario(lat, lng) {
-      if (!userMarker) {
-        userMarker = L.circleMarker([lat, lng], {
-          radius: 10,
-          fillColor: '#38bdf8',
-          color: '#fff',
-          weight: 3,
-          fillOpacity: 0.95
-        }).addTo(map);
-      } else {
-        userMarker.setLatLng([lat, lng]);
-      }
-    }
-
-    async function gerarRota(latDest, lngDest) {
-      pararMovimentoNavegacao();
-      destinoAtual = { lat: latDest, lng: lngDest };
-      document.getElementById('navInfoCard').style.display = 'block';
-      document.getElementById('routeStatus').innerText = 'Localizando sua posição de partida...';
-
-      const posInicial = await obterPosicaoGarantida();
-
-      if (!posInicial) {
-        cancelarRota();
-        mostrarToast('Não consegui acessar sua localização real. Toque no botão 🛰️, permita o acesso à localização e tente de novo.', 5000);
-        return;
-      }
-
-      try {
-        const url = `https://router.project-osrm.org/route/v1/${modoAtual}/${posInicial.longitude},${posInicial.latitude};${lngDest},${latDest}?overview=full&geometries=geojson`;
+    async function iniciarRotaComposicaoReal(latDest, lngDest) {
+        // Usa currentCoords que já foi setado pelo iniciarRastreamento
+        const url = `https://router.project-osrm.org/route/v1/driving/${currentCoords.longitude},${currentCoords.latitude};${lngDest},${latDest}?overview=full&geometries=geojson`;
         const res = await fetch(url);
-        const data = await res.json();
-
-        if (data.routes && data.routes.length > 0) {
-          const rota = data.routes[0];
-          rotaCoordenadas = rota.geometry.coordinates.map(c => [c[1], c[0]]);
-
-          if (routePolyline) map.removeLayer(routePolyline);
-          if (destMarker) map.removeLayer(destMarker);
-
-          routePolyline = L.polyline(rotaCoordenadas, {
-            color: '#38bdf8',
-            weight: 6,
-            opacity: 0.9,
-            lineJoin: 'round'
-          }).addTo(map);
-
-          destMarker = L.marker([latDest, lngDest], {
-            icon: L.divIcon({
-              className: 'dest-pin',
-              html: `<div style="background:#0284c7; width:32px; height:32px; border-radius:50%; border:2px solid white; display:flex; align-items:center; justify-content:center; font-size:15px; box-shadow:0 4px 12px rgba(0,0,0,0.6);">🏁</div>`,
-              iconSize: [32, 32],
-              iconAnchor: [16, 16]
-            })
-          }).addTo(map);
-
-          map.fitBounds(routePolyline.getBounds(), { padding: [50, 50] });
-
-          const distKm = (rota.distance / 1000).toFixed(1);
-          let tempoMin = Math.round(rota.duration / 60);
-          if (tempoMin < 1) tempoMin = 1;
-
-          document.getElementById('routeTime').innerText = `${tempoMin} min`;
-          document.getElementById('routeDist').innerText = `${distKm} km`;
-          document.getElementById('routeStatus').innerText = 'Rota pronta. Toque abaixo para iniciar a corrida.';
-          document.getElementById('btnDrive').style.display = 'flex';
-        } else {
-          mostrarToast('Não foi possível traçar a rota até este local.');
-          cancelarRota();
+        const json = await res.json();
+        if (json.routes) {
+            const coords = json.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+            L.polyline(coords, {color: '#38bdf8', weight: 6}).addTo(map);
+            map.fitBounds(coords);
+            document.getElementById('navInfoCard').style.display = 'block';
         }
-      } catch(e) {
-        mostrarToast('Erro ao calcular trajeto. Verifique sua conexão.');
-        cancelarRota();
-      }
     }
 
-    // 7. Navegação Ativa — SEGUE SUA POSIÇÃO REAL (GPS), não mais animação automática.
-    // FIX: antes o "carrinho" percorria a rota sozinho, num timer de 700ms,
-    // sem nenhuma relação com onde você realmente estava. Agora ele só se
-    // move quando o GPS do celular manda uma posição nova de verdade.
-    let navegandoAtivo = false;
-
-    function iniciarMovimentoNavegacao() {
-      if (!rotaCoordenadas || rotaCoordenadas.length === 0) return;
-
-      navegandoAtivo = true;
-      document.getElementById('routeStatus').innerText = '🚗 Navegação em andamento (seguindo seu GPS real)...';
-      document.getElementById('btnDrive').style.display = 'none';
-
-      // Garante que o GPS esteja de fato ativo para acompanhar seu movimento real
-      if (!gpsWatchId) {
-        toggleGPS();
-      }
-
-      const posAtual = currentCoords ? [currentCoords.latitude, currentCoords.longitude] : rotaCoordenadas[0];
-      posicionarVeiculo(posAtual);
-      map.setView(posAtual, 17);
-    }
-
-    function posicionarVeiculo(latlng) {
-      let iconeTransporte = document.getElementById('btnTransport').innerText || '🚗';
-      if (!vehicleMarker) {
-        vehicleMarker = L.marker(latlng, {
-          icon: L.divIcon({
-            className: 'vehicle-wrap',
-            html: `<div class="vehicle-icon">${iconeTransporte}</div>`,
-            iconSize: [30, 30],
-            iconAnchor: [15, 15]
-          })
-        }).addTo(map);
-      } else {
-        vehicleMarker.setLatLng(latlng);
-      }
-    }
-
-    // Chamado a cada nova leitura real de GPS (dentro de toggleGPS/watchPosition)
-    // enquanto a navegação está ativa.
-    function atualizarNavegacaoComPosicaoReal(lat, lng) {
-      if (!navegandoAtivo) return;
-
-      posicionarVeiculo([lat, lng]);
-      map.panTo([lat, lng], { animate: true, duration: 0.5 });
-
-      if (destinoAtual) {
-        const distDest = calcularDistancia(lat, lng, destinoAtual.lat, destinoAtual.lng) * 1000;
-        if (distDest <= 30) {
-          document.getElementById('routeStatus').innerText = '🎉 Você chegou ao seu destino!';
-          abrirAutoStreetView(destinoAtual.lat, destinoAtual.lng);
-          navegandoAtivo = false;
-        }
-      }
-    }
-
-    function pararMovimentoNavegacao() {
-      navegandoAtivo = false;
-      if (vehicleMarker) {
-        map.removeLayer(vehicleMarker);
-        vehicleMarker = null;
-      }
-    }
-
-    function tracarRotaParaPosto() {
-      if (selectedPosto) {
-        fecharModais();
-        gerarRota(selectedPosto.lat, selectedPosto.lng);
-      }
-    }
-
-    function cancelarRota() {
-      pararMovimentoNavegacao();
-      if (routePolyline) map.removeLayer(routePolyline);
-      if (destMarker) map.removeLayer(destMarker);
-      routePolyline = null;
-      destMarker = null;
-      destinoAtual = null;
-      rotaCoordenadas = [];
-      document.getElementById('navInfoCard').style.display = 'none';
-      document.getElementById('alertBanner').style.display = 'none';
-      if (currentCoords) map.setView([currentCoords.latitude, currentCoords.longitude], 14);
-    }
-
-    // 8. Street View (manual + ao chegar no destino)
-    // FIX: removido o gatilho automático por zoom (>=18), que abria a janela
-    // sempre que o usuário só queria aproximar o mapa — comportamento inesperado.
-    let streetViewAtivo = false;
-    function abrirAutoStreetView(lat, lng) {
-      if (streetViewAtivo) return;
-      streetViewAtivo = true;
-      const container = document.getElementById('streetViewContainer');
-      const frame = document.getElementById('streetViewFrame');
-      frame.src = `https://maps.google.com/maps?q=&layer=c&cbll=${lat},${lng}&cbp=11,0,0,0,0&output=svembed`;
-      container.style.display = 'flex';
-    }
-
-    function fecharStreetView() {
-      streetViewAtivo = false;
-      document.getElementById('streetViewContainer').style.display = 'none';
-      document.getElementById('streetViewFrame').src = '';
-    }
-
-    function abrirStreetViewCentro() {
-      const c = map.getCenter();
-      abrirAutoStreetView(c.lat, c.lng);
-    }
-
-    function abrirStreetViewPosto() {
-      if (selectedPosto) {
-        abrirAutoStreetView(selectedPosto.lat, selectedPosto.lng);
-      }
-    }
-
-    // 9. GPS em Tempo Real e Monitor de Proximidade
-    function calcularDistancia(lat1, lon1, lat2, lon2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
-    }
-
-    function verificarAlertas(lat, lng) {
-      let alerta = null;
-
-      if (destinoAtual) {
-        const distDest = calcularDistancia(lat, lng, destinoAtual.lat, destinoAtual.lng) * 1000;
-        if (distDest <= 50) abrirAutoStreetView(destinoAtual.lat, destinoAtual.lng);
-      }
-
-      postosData.forEach(p => {
-        if (p.status === 'vermelho') {
-          const distM = Math.round(calcularDistancia(lat, lng, p.lat, p.lng) * 1000);
-          if (distM <= 500) {
-            alerta = { titulo: `⚠️ POSTO INTERDITADO A ${distM}m: ${p.nome}`, desc: p.historico };
-          }
-        }
-      });
-
-      if (!alerta && areasVisiveis) {
-        areasRisco.forEach(area => {
-          const distM = Math.round(calcularDistancia(lat, lng, area.lat, area.lng) * 1000);
-          if (distM <= (area.raio + 150)) {
-            alerta = { titulo: `🚨 APROXIMAÇÃO DE ÁREA DE ATENÇÃO`, desc: `Entrando no perímetro de: ${area.nome}` };
-          }
-        });
-      }
-
-      const banner = document.getElementById('alertBanner');
-      if (alerta) {
-        document.getElementById('alertTitle').innerText = alerta.titulo;
-        document.getElementById('alertDesc').innerText = alerta.desc;
-        banner.style.display = 'block';
-      } else {
-        banner.style.display = 'none';
-      }
-    }
-
-    // FIX: o botão só fica "ativo" quando o GPS de fato responde com sucesso,
-    // e falhas de permissão agora avisam o usuário em vez de falhar em silêncio.
-    function toggleGPS() {
-      const btn = document.getElementById('btnGps');
-      if (gpsWatchId) {
-        navigator.geolocation.clearWatch(gpsWatchId);
-        gpsWatchId = null;
-        btn.classList.remove('active');
-      } else {
-        if (!navigator.geolocation) {
-          mostrarToast('GPS não disponível neste dispositivo/navegador.');
-          return;
-        }
-
-        gpsWatchId = navigator.geolocation.watchPosition(
-          (pos) => {
-            currentCoords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
-            atualizarMarcadorUsuario(currentCoords.latitude, currentCoords.longitude);
-            verificarAlertas(currentCoords.latitude, currentCoords.longitude);
-            atualizarNavegacaoComPosicaoReal(currentCoords.latitude, currentCoords.longitude);
-            btn.classList.add('active');
-          },
-          (err) => {
-            console.warn('Erro de GPS:', err.message);
-            btn.classList.remove('active');
-            gpsWatchId = null;
-            mostrarToast('Não foi possível acessar sua localização. Verifique as permissões do navegador.');
-          },
-          { enableHighAccuracy: true }
-        );
-      }
-    }
-
-    // GPS não é mais ativado automaticamente ao abrir o app — agora é o
-    // usuário quem decide (toque no botão 🛰️), evitando um pedido de
-    // permissão de localização logo na abertura sem contexto.
-
-    // 10. Modais e Formulários
-    function abrirDetalhes(p) {
-      selectedPosto = p;
-      document.getElementById('modalNome').innerText = p.nome;
-      document.getElementById('modalEndereco').innerText = p.endereco;
-      document.getElementById('modalBandeira').innerText = p.bandeira;
-      document.getElementById('modalHistorico').innerText = p.historico;
-      document.getElementById('modalFonte').innerText = p.fonte;
-
-      const statusDiv = document.getElementById('modalStatus');
-      if (p.status === 'vermelho') {
-        statusDiv.innerHTML = '<span style="background:#7f1d1d; color:#fca5a5; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:bold;">🔴 INTERDITADO / IRREGULARIDADE GRAVE</span>';
-      } else if (p.status === 'amarelo') {
-        statusDiv.innerHTML = '<span style="background:#78350f; color:#fde68a; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:bold;">🟡 NOTIFICADO / REGULARIZAÇÃO</span>';
-      } else {
-        statusDiv.innerHTML = '<span style="background:#14532d; color:#86efac; padding:2px 6px; border-radius:4px; font-size:0.72rem; font-weight:bold;">🟢 CONFORME / REGULAR</span>';
-      }
-
-      document.getElementById('addModal').style.display = 'none';
-      document.getElementById('infoModal').style.display = 'block';
-    }
-
-    function fecharModais() {
-      document.getElementById('infoModal').style.display = 'none';
-      document.getElementById('addModal').style.display = 'none';
-    }
-
-    function abrirModalAdd() {
-      fecharModais();
-      document.getElementById('addModal').style.display = 'block';
-    }
-
-    map.on('click', (e) => {
-      document.getElementById('addLat').value = e.latlng.lat.toFixed(6);
-      document.getElementById('addLng').value = e.latlng.lng.toFixed(6);
-    });
-
-    function salvarNovoPosto(e) {
-      e.preventDefault();
-      const novo = {
-        id: Date.now(),
-        nome: document.getElementById('addNome').value,
-        bandeira: document.getElementById('addBandeira').value || 'Não informada',
-        endereco: document.getElementById('addEndereco').value,
-        lat: parseFloat(document.getElementById('addLat').value),
-        lng: parseFloat(document.getElementById('addLng').value),
-        status: document.getElementById('addStatus').value,
-        historico: document.getElementById('addHistorico').value || 'Sem histórico detalhado informado.',
-        fonte: document.getElementById('addFonte').value || 'Colaborativo (não verificado)'
-      };
-
-      postosData.push(novo);
-      renderizarPostos(postosData);
-      fecharModais();
-      document.getElementById('addForm').reset();
-      map.setView([novo.lat, novo.lng], 14);
-    }
+    window.onload = iniciarRastreamento;
   </script>
 </body>
 </html>
