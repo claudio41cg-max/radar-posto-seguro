@@ -33,7 +33,7 @@
       left: 0;
     }
 
-    /* Top Bar */
+    /* Header Superior */
     .top-bar {
       position: absolute;
       top: 10px;
@@ -49,7 +49,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(13, 23, 42, 0.92);
+      background: rgba(13, 23, 42, 0.94);
       backdrop-filter: blur(8px);
       border: 1px solid #1e293b;
       padding: 8px 12px;
@@ -112,12 +112,6 @@
       font-weight: 700;
       padding: 0 16px;
       cursor: pointer;
-      min-width: 60px;
-    }
-
-    .search-box button:disabled {
-      background: #334155;
-      cursor: wait;
     }
 
     .suggest-list {
@@ -142,7 +136,7 @@
       border-bottom: 1px solid #1e293b;
       cursor: pointer;
     }
-    .suggest-item:last-child { border-bottom: none; }
+
     .suggest-item:active { background: #1e293b; }
 
     /* Filtros */
@@ -196,7 +190,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    /* Painel Inferior de Navegação */
+    /* Painel Inferior */
     .bottom-panel {
       position: absolute;
       bottom: 12px;
@@ -318,7 +312,7 @@
       font-size: 11px;
     }
 
-    /* Toast de erro/aviso */
+    /* Toast */
     .toast {
       position: absolute;
       left: 50%;
@@ -330,18 +324,14 @@
       padding: 10px 16px;
       border-radius: 10px;
       font-size: 13px;
-      z-index: 30;
+      z-index: 3000;
       max-width: 90vw;
       text-align: center;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
-
-    .toast.visible {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -349,9 +339,9 @@
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="header-info">
-      <div class="title-app">⛽ RADAR SEGURO RJ PRO</div>
+      <div class="title-app">🛡️ RADAR SEGURO RJ PRO</div>
       <div class="status-tags">
-        <span class="tag-badge anp">ANP</span>
+        <span class="tag-badge anp">ANP / JUSTIÇA</span>
         <span class="tag-badge alerta">Alerta: ON</span>
         <span class="tag-badge gps off" id="gps-badge">GPS...</span>
       </div>
@@ -364,8 +354,8 @@
     </div>
 
     <div class="filter-bar">
-      <button id="btn-filter-todos" class="filter-btn active" onclick="filtrarPostos('todos')">⛽ Todos os Postos</button>
-      <button id="btn-filter-problemas" class="filter-btn danger" onclick="filtrarPostos('problemas')">⛔ Postos Irregulares</button>
+      <button id="btn-filter-todos" class="filter-btn active" onclick="filtrarPostos('todos')">⛽ Todos</button>
+      <button id="btn-filter-problemas" class="filter-btn danger" onclick="filtrarPostos('problemas')">⛔ Postos com Problemas</button>
       <button id="btn-filter-gnv" class="filter-btn success" onclick="filtrarPostos('gnv')">🟢 GNV</button>
     </div>
   </div>
@@ -374,12 +364,14 @@
   <div class="side-controls">
     <button class="side-btn" title="Centralizar" onclick="centralizarUsuario()">🎯</button>
     <button class="side-btn" title="Alternar 3D" onclick="alternarModo3D()">📐</button>
+    <button class="side-btn" title="Zoom In" onclick="map.zoomIn()">➕</button>
+    <button class="side-btn" title="Zoom Out" onclick="map.zoomOut()">➖</button>
   </div>
 
   <!-- Mapa MapLibre Nativo -->
   <div id="map"></div>
 
-  <!-- Toast -->
+  <!-- Toast de Alerta -->
   <div class="toast" id="toast"></div>
 
   <!-- Painel de Rota -->
@@ -403,7 +395,7 @@
   <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
 
   <script>
-    // --- 1. BASE DE DADOS: POSTOS ---
+    // --- 1. BASE DE DADOS: POSTOS & COMUNIDADES ---
     const postosRJ = [
       { id: 1, nome: "Posto Shell Cosmos", lat: -22.8965, lng: -43.6120, gnv: true, irregular: false, detalhe: "Conforme ANP" },
       { id: 2, nome: "Posto Ipiranga Paciência", lat: -22.8920, lng: -43.6190, gnv: true, irregular: false, detalhe: "Conforme ANP" },
@@ -412,12 +404,36 @@
       { id: 5, nome: "Auto Posto Estrada do Sítio", lat: -22.8940, lng: -43.6160, gnv: false, irregular: true, detalhe: "Processo por combustível adulterado" }
     ];
 
+    const comunidadesRJ = [
+      {
+        nome: "Comunidade do Aço / Vila Paciência",
+        coords: [
+          [-43.6280, -22.8980], [-43.6210, -22.8950],
+          [-43.6230, -22.9030], [-43.6290, -22.9010], [-43.6280, -22.8980]
+        ]
+      },
+      {
+        nome: "Comunidade Antares",
+        coords: [
+          [-43.6480, -22.9050], [-43.6410, -22.9030],
+          [-43.6430, -22.9120], [-43.6500, -22.9090], [-43.6480, -22.9050]
+        ]
+      },
+      {
+        nome: "Comunidade Cesarão",
+        coords: [
+          [-43.6600, -22.9100], [-43.6520, -22.9080],
+          [-43.6550, -22.9180], [-43.6620, -22.9150], [-43.6600, -22.9100]
+        ]
+      }
+    ];
+
     // --- 2. INICIALIZAÇÃO DO MAPA ---
-    let userPos = [-43.6150, -22.8950]; // MapLibre usa [lng, lat]
+    let userPos = [-43.6150, -22.8950]; // MapLibre: [lng, lat]
     let destPos = null;
     let modoNavegacaoAtivo = false;
     let markersPostos = [];
-    let gpsAtivo = false;
+    let wakeLock = null;
 
     const map = new maplibregl.Map({
       container: 'map',
@@ -440,7 +456,6 @@
       bearing: 0
     });
 
-    // Marcador do Carro
     const carEl = document.createElement('div');
     carEl.className = 'car-marker';
     carEl.innerHTML = '🚗';
@@ -448,7 +463,6 @@
       .setLngLat(userPos)
       .addTo(map);
 
-    // --- TOAST DE FEEDBACK ---
     let toastTimeout = null;
     function mostrarToast(msg, duracao = 3200) {
       const toast = document.getElementById('toast');
@@ -458,10 +472,45 @@
       toastTimeout = setTimeout(() => toast.classList.remove('visible'), duracao);
     }
 
-    // --- 3. CARREGAR POSTOS ---
+    // --- 3. WAKE LOCK API (TELA ATIVA) ---
+    async function ativarTelaSempreAtiva() {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLock = await navigator.wakeLock.request('screen');
+        }
+      } catch (err) {
+        console.warn('Wake Lock indisponível:', err);
+      }
+    }
+
+    // --- 4. CARREGAR CAMADAS ---
     map.on('load', () => {
+      const geojsonComunidades = {
+        type: 'FeatureCollection',
+        features: comunidadesRJ.map(c => ({
+          type: 'Feature',
+          geometry: { type: 'Polygon', coordinates: [c.coords] },
+          properties: { nome: c.nome }
+        }))
+      };
+
+      map.addSource('comunidades-source', { type: 'geojson', data: geojsonComunidades });
+
+      map.addLayer({
+        id: 'comunidades-fill',
+        type: 'fill',
+        source: 'comunidades-source',
+        paint: { 'fill-color': '#ef4444', 'fill-opacity': 0.35 }
+      });
+
+      map.addLayer({
+        id: 'comunidades-line',
+        type: 'line',
+        source: 'comunidades-source',
+        paint: { 'line-color': '#dc2626', 'line-width': 2 }
+      });
+
       carregarPostos(postosRJ);
-      solicitarLocalizacaoInicial();
       iniciarAcompanhamentoGPS();
     });
 
@@ -480,7 +529,7 @@
           GNV: ${posto.gnv ? 'Disponível' : 'Não'}<br>
           Status: <b>${posto.irregular ? '<span style="color:#ef4444;">Irregular na Justiça</span>' : 'Regular'}</b><br>
           <small>${posto.detalhe}</small><br>
-          ${posto.irregular ? '<a class="btn-denuncia" href="https://procononline.rj.gov.br/" target="_blank">🚨 Denunciar Posto</a>' : ''}
+          ${posto.irregular ? '<a class="btn-denuncia" href="https://procononline.rj.gov.br/" target="_blank">🚨 Denunciar ao Procon</a>' : ''}
         `;
 
         const popup = new maplibregl.Popup({ offset: 15 }).setHTML(popupHtml);
@@ -507,20 +556,18 @@
       }
     }
 
-    // --- 4. GEOCODING (endereço -> coordenadas) via Nominatim/OSM ---
-    async function geocodeEndereco(texto) {
-      const viewbox = '-43.85,-22.75,-43.10,-23.10';
-      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=br` +
-                  `&viewbox=${viewbox}&bounded=0&q=${encodeURIComponent(texto)}`;
-      const resp = await fetch(url, { headers: { 'Accept-Language': 'pt-BR' } });
-      if (!resp.ok) throw new Error('Falha na consulta de geocoding');
-      return resp.json();
-    }
-
-    // Autocomplete simples enquanto o usuário digita
+    // --- 5. AUTOCOMPLETE & GEOCODING ---
     const destInput = document.getElementById('dest-input');
     const suggestList = document.getElementById('suggest-list');
     let debounceTimer = null;
+
+    async function geocodeEndereco(texto) {
+      const viewbox = '-43.85,-22.75,-43.10,-23.10';
+      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=br&viewbox=${viewbox}&q=${encodeURIComponent(texto)}`;
+      const resp = await fetch(url, { headers: { 'Accept-Language': 'pt-BR' } });
+      if (!resp.ok) throw new Error('Falha no geocoding');
+      return resp.json();
+    }
 
     destInput.addEventListener('input', () => {
       clearTimeout(debounceTimer);
@@ -534,9 +581,9 @@
           const resultados = await geocodeEndereco(valor);
           renderSugestoes(resultados);
         } catch (e) {
-          console.warn('Erro no autocomplete:', e);
+          console.warn('Erro autocomplete:', e);
         }
-      }, 600);
+      }, 500);
     });
 
     function renderSugestoes(resultados) {
@@ -551,7 +598,7 @@
         div.textContent = r.display_name;
         div.onclick = () => {
           destInput.value = r.display_name;
-          destPos = [parseFloat(r.lon), parseFloat(r.lat)]; // MapLibre: [lng, lat]
+          destPos = [parseFloat(r.lon), parseFloat(r.lat)];
           suggestList.style.display = 'none';
         };
         suggestList.appendChild(div);
@@ -563,11 +610,10 @@
       if (!e.target.closest('.search-box')) suggestList.style.display = 'none';
     });
 
-    // --- 5. ROTEAMENTO REAL (OSRM) ---
+    // --- 6. ROTEAMENTO REAL (OSRM) ---
     async function calcularRota(origem, destino) {
       const url = `https://router.project-osrm.org/route/v1/driving/${origem[0]},${origem[1]};${destino[0]},${destino[1]}?overview=full&geometries=geojson`;
       const resp = await fetch(url);
-      if (!resp.ok) throw new Error('Falha ao calcular rota');
       const data = await resp.json();
       if (!data.routes || !data.routes.length) throw new Error('Rota não encontrada');
       return data.routes[0];
@@ -580,24 +626,24 @@
         return;
       }
 
-      const btnIr = document.getElementById('btn-ir');
-      btnIr.disabled = true;
-      btnIr.textContent = '...';
-
-      try {
-        // Se nenhuma sugestão foi escolhida, geocodifica o texto digitado
-        if (!destPos) {
+      if (!destPos) {
+        try {
           const resultados = await geocodeEndereco(input);
-          if (!resultados || !resultados.length) {
-            mostrarToast('Endereço não encontrado. Tente ser mais específico.');
+          if (!resultados.length) {
+            mostrarToast('Endereço não localizado.');
             return;
           }
           destPos = [parseFloat(resultados[0].lon), parseFloat(resultados[0].lat)];
+        } catch (err) {
+          mostrarToast('Erro ao buscar endereço.');
+          return;
         }
+      }
 
-        document.getElementById('dest-label').textContent = input;
-        suggestList.style.display = 'none';
+      document.getElementById('dest-label').textContent = input;
+      suggestList.style.display = 'none';
 
+      try {
         const rota = await calcularRota(userPos, destPos);
 
         if (map.getSource('route')) {
@@ -618,17 +664,13 @@
 
         const coords = rota.geometry.coordinates;
         const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
-        map.fitBounds(bounds, { padding: 60 });
+        map.fitBounds(bounds, { padding: 70 });
       } catch (err) {
-        console.error(err);
-        mostrarToast('Não foi possível calcular a rota. Tente novamente.');
-      } finally {
-        btnIr.disabled = false;
-        btnIr.textContent = '🔍 IR';
+        mostrarToast('Não foi possível traçar a rota.');
       }
     }
 
-    // --- 6. NAVEGAÇÃO 3D NATIVA ---
+    // --- 7. NAVEGAÇÃO 3D NATIVA ---
     function alternarModo3D() {
       const pitchAtual = map.getPitch();
       map.easeTo({ pitch: pitchAtual > 20 ? 0 : 55, duration: 600 });
@@ -642,9 +684,7 @@
         btn.textContent = '🛑 PARAR NAVEGAÇÃO';
         btn.classList.add('active');
         map.easeTo({ pitch: 60, zoom: 17.5, duration: 800 });
-        if ('wakeLock' in navigator) {
-          navigator.wakeLock.request('screen').catch(err => console.warn('Wake Lock negado:', err));
-        }
+        ativarTelaSempreAtiva();
       } else {
         btn.textContent = '🚀 NAVEGAÇÃO 3D EM TEMPO REAL';
         btn.classList.remove('active');
@@ -654,15 +694,12 @@
 
     function cancelarNavegacao() {
       modoNavegacaoAtivo = false;
-      destPos = null;
       document.getElementById('bottom-panel').classList.remove('visible');
       if (map.getLayer('route-line')) {
         map.removeLayer('route-line');
         map.removeSource('route');
       }
-      const btn = document.getElementById('btn-nav-3d');
-      btn.textContent = '🚀 NAVEGAÇÃO 3D EM TEMPO REAL';
-      btn.classList.remove('active');
+      destPos = null;
       map.easeTo({ pitch: 0, zoom: 15 });
     }
 
@@ -670,68 +707,45 @@
       map.flyTo({ center: userPos, zoom: 16.5 });
     }
 
-    // --- 7. GPS ---
-    function atualizarBadgeGps(ativo) {
-      gpsAtivo = ativo;
-      const badge = document.getElementById('gps-badge');
-      badge.textContent = ativo ? 'GPS Ativo' : 'GPS Off';
-      badge.classList.toggle('off', !ativo);
-    }
-
-    function solicitarLocalizacaoInicial() {
-      if (!('geolocation' in navigator)) {
-        atualizarBadgeGps(false);
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(pos => {
-        userPos = [pos.coords.longitude, pos.coords.latitude];
-        carMarker.setLngLat(userPos);
-        map.flyTo({ center: userPos, zoom: 16 });
-        atualizarBadgeGps(true);
-      }, err => {
-        console.warn('Localização inicial indisponível:', err);
-        atualizarBadgeGps(false);
-      }, { enableHighAccuracy: true, timeout: 8000 });
-    }
-
+    // --- 8. GPS & ORIENTAÇÃO ---
     function iniciarAcompanhamentoGPS() {
       if (!('geolocation' in navigator)) {
-        mostrarToast('Seu navegador não suporta geolocalização.');
-        atualizarBadgeGps(false);
+        const badge = document.getElementById('gps-badge');
+        badge.textContent = 'Sem GPS';
+        badge.classList.add('off');
         return;
       }
 
       navigator.geolocation.watchPosition(pos => {
         userPos = [pos.coords.longitude, pos.coords.latitude];
         carMarker.setLngLat(userPos);
-        atualizarBadgeGps(true);
+
+        const badge = document.getElementById('gps-badge');
+        badge.textContent = 'GPS Ativo';
+        badge.classList.remove('off');
 
         if (pos.coords.heading !== null && !isNaN(pos.coords.heading)) {
           carEl.style.transform = `rotate(${pos.coords.heading}deg)`;
-          if (modoNavegacaoAtivo) map.setBearing(pos.coords.heading);
+          if (modoNavegacaoAtivo) {
+            map.setBearing(pos.coords.heading);
+          }
         }
 
-        if (modoNavegacaoAtivo) map.setCenter(userPos);
-      }, err => {
-        console.warn('Erro de geolocalização:', err);
-        atualizarBadgeGps(false);
-        if (err.code === err.PERMISSION_DENIED) {
-          mostrarToast('Permissão de localização negada. Ative o GPS para navegar.');
-        } else {
-          mostrarToast('Não foi possível obter sua localização.');
+        if (modoNavegacaoAtivo) {
+          map.setCenter(userPos);
         }
+      }, err => {
+        console.warn('GPS indisponível:', err);
       }, { enableHighAccuracy: true });
     }
 
-    // --- 8. APPS EXTERNOS ---
+    // --- 9. APPS EXTERNOS ---
     function abrirGoogleMaps() {
-      if (!destPos) return;
-      window.open(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`, '_blank');
+      if (destPos) window.open(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`, '_blank');
     }
 
     function abrirWaze() {
-      if (!destPos) return;
-      window.open(`https://waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`, '_blank');
+      if (destPos) window.open(`https://waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`, '_blank');
     }
   </script>
 </body>
