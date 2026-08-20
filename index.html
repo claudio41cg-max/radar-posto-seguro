@@ -112,6 +112,12 @@
       font-weight: 700;
       padding: 0 16px;
       cursor: pointer;
+      min-width: 60px;
+    }
+
+    .search-box button:disabled {
+      background: #334155;
+      cursor: wait;
     }
 
     .suggest-list {
@@ -136,6 +142,8 @@
       border-bottom: 1px solid #1e293b;
       cursor: pointer;
     }
+    .suggest-item:last-child { border-bottom: none; }
+    .suggest-item:active { background: #1e293b; }
 
     /* Filtros */
     .filter-bar {
@@ -309,6 +317,31 @@
       font-weight: 700;
       font-size: 11px;
     }
+
+    /* Toast de erro/aviso */
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 100px;
+      transform: translateX(-50%) translateY(20px);
+      background: #1e293b;
+      border: 1px solid #ef4444;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      z-index: 30;
+      max-width: 90vw;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -316,9 +349,9 @@
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="header-info">
-      <div class="title-app">🛡️ RADAR SEGURO RJ PRO</div>
+      <div class="title-app">⛽ RADAR SEGURO RJ PRO</div>
       <div class="status-tags">
-        <span class="tag-badge anp">ANP / JUSTIÇA</span>
+        <span class="tag-badge anp">ANP</span>
         <span class="tag-badge alerta">Alerta: ON</span>
         <span class="tag-badge gps off" id="gps-badge">GPS...</span>
       </div>
@@ -346,6 +379,9 @@
   <!-- Mapa MapLibre Nativo -->
   <div id="map"></div>
 
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
   <!-- Painel de Rota -->
   <div class="bottom-panel" id="bottom-panel">
     <div class="route-header">
@@ -367,7 +403,7 @@
   <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
 
   <script>
-    // --- 1. BASE DE DADOS: POSTOS & COMUNIDADES ---
+    // --- 1. BASE DE DADOS: POSTOS ---
     const postosRJ = [
       { id: 1, nome: "Posto Shell Cosmos", lat: -22.8965, lng: -43.6120, gnv: true, irregular: false, detalhe: "Conforme ANP" },
       { id: 2, nome: "Posto Ipiranga Paciência", lat: -22.8920, lng: -43.6190, gnv: true, irregular: false, detalhe: "Conforme ANP" },
@@ -376,28 +412,12 @@
       { id: 5, nome: "Auto Posto Estrada do Sítio", lat: -22.8940, lng: -43.6160, gnv: false, irregular: true, detalhe: "Processo por combustível adulterado" }
     ];
 
-    const comunidadesRJ = [
-      {
-        nome: "Comunidade do Aço / Vila Paciência",
-        coords: [
-          [-43.6280, -22.8980], [-43.6210, -22.8950],
-          [-43.6230, -22.9030], [-43.6290, -22.9010], [-43.6280, -22.8980]
-        ]
-      },
-      {
-        nome: "Comunidade Antares",
-        coords: [
-          [-43.6480, -22.9050], [-43.6410, -22.9030],
-          [-43.6430, -22.9120], [-43.6500, -22.9090], [-43.6480, -22.9050]
-        ]
-      }
-    ];
-
     // --- 2. INICIALIZAÇÃO DO MAPA ---
     let userPos = [-43.6150, -22.8950]; // MapLibre usa [lng, lat]
     let destPos = null;
     let modoNavegacaoAtivo = false;
     let markersPostos = [];
+    let gpsAtivo = false;
 
     const map = new maplibregl.Map({
       container: 'map',
@@ -428,35 +448,20 @@
       .setLngLat(userPos)
       .addTo(map);
 
-    // --- 3. CARREGAR CAMADAS (COMUNIDADES E POSTOS) ---
+    // --- TOAST DE FEEDBACK ---
+    let toastTimeout = null;
+    function mostrarToast(msg, duracao = 3200) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('visible'), duracao);
+    }
+
+    // --- 3. CARREGAR POSTOS ---
     map.on('load', () => {
-      // Camada de Comunidades (Polígonos Vermelhos)
-      const geojsonComunidades = {
-        type: 'FeatureCollection',
-        features: comunidadesRJ.map(c => ({
-          type: 'Feature',
-          geometry: { type: 'Polygon', coordinates: [c.coords] },
-          properties: { nome: c.nome }
-        }))
-      };
-
-      map.addSource('comunidades-source', { type: 'geojson', data: geojsonComunidades });
-
-      map.addLayer({
-        id: 'comunidades-fill',
-        type: 'fill',
-        source: 'comunidades-source',
-        paint: { 'fill-color': '#ef4444', 'fill-opacity': 0.35 }
-      });
-
-      map.addLayer({
-        id: 'comunidades-line',
-        type: 'line',
-        source: 'comunidades-source',
-        paint: { 'line-color': '#dc2626', 'line-width': 2 }
-      });
-
       carregarPostos(postosRJ);
+      solicitarLocalizacaoInicial();
       iniciarAcompanhamentoGPS();
     });
 
@@ -502,56 +507,128 @@
       }
     }
 
-    // --- 4. ROTEAMENTO REAL (OSRM) ---
+    // --- 4. GEOCODING (endereço -> coordenadas) via Nominatim/OSM ---
+    async function geocodeEndereco(texto) {
+      const viewbox = '-43.85,-22.75,-43.10,-23.10';
+      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=br` +
+                  `&viewbox=${viewbox}&bounded=0&q=${encodeURIComponent(texto)}`;
+      const resp = await fetch(url, { headers: { 'Accept-Language': 'pt-BR' } });
+      if (!resp.ok) throw new Error('Falha na consulta de geocoding');
+      return resp.json();
+    }
+
+    // Autocomplete simples enquanto o usuário digita
+    const destInput = document.getElementById('dest-input');
+    const suggestList = document.getElementById('suggest-list');
+    let debounceTimer = null;
+
+    destInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      const valor = destInput.value.trim();
+      if (valor.length < 4) {
+        suggestList.style.display = 'none';
+        return;
+      }
+      debounceTimer = setTimeout(async () => {
+        try {
+          const resultados = await geocodeEndereco(valor);
+          renderSugestoes(resultados);
+        } catch (e) {
+          console.warn('Erro no autocomplete:', e);
+        }
+      }, 600);
+    });
+
+    function renderSugestoes(resultados) {
+      if (!resultados || resultados.length === 0) {
+        suggestList.style.display = 'none';
+        return;
+      }
+      suggestList.innerHTML = '';
+      resultados.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'suggest-item';
+        div.textContent = r.display_name;
+        div.onclick = () => {
+          destInput.value = r.display_name;
+          destPos = [parseFloat(r.lon), parseFloat(r.lat)]; // MapLibre: [lng, lat]
+          suggestList.style.display = 'none';
+        };
+        suggestList.appendChild(div);
+      });
+      suggestList.style.display = 'block';
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-box')) suggestList.style.display = 'none';
+    });
+
+    // --- 5. ROTEAMENTO REAL (OSRM) ---
     async function calcularRota(origem, destino) {
       const url = `https://router.project-osrm.org/route/v1/driving/${origem[0]},${origem[1]};${destino[0]},${destino[1]}?overview=full&geometries=geojson`;
       const resp = await fetch(url);
+      if (!resp.ok) throw new Error('Falha ao calcular rota');
       const data = await resp.json();
       if (!data.routes || !data.routes.length) throw new Error('Rota não encontrada');
       return data.routes[0];
     }
 
     async function iniciarRota() {
-      const input = document.getElementById('dest-input').value.trim();
-      if (!input) return;
-
-      const viewbox = '-43.85,-22.75,-43.10,-23.10';
-      const geoUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=br&viewbox=${viewbox}&q=${encodeURIComponent(input)}`;
-      const resGeo = await fetch(geoUrl, { headers: { 'Accept-Language': 'pt-BR' } });
-      const dataGeo = await resGeo.json();
-
-      if (!dataGeo.length) {
-        alert('Endereço não localizado.');
+      const input = destInput.value.trim();
+      if (!input) {
+        mostrarToast('Digite um endereço de destino.');
         return;
       }
 
-      destPos = [parseFloat(dataGeo[0].lon), parseFloat(dataGeo[0].lat)];
-      document.getElementById('dest-label').textContent = input;
+      const btnIr = document.getElementById('btn-ir');
+      btnIr.disabled = true;
+      btnIr.textContent = '...';
 
-      const rota = await calcularRota(userPos, destPos);
+      try {
+        // Se nenhuma sugestão foi escolhida, geocodifica o texto digitado
+        if (!destPos) {
+          const resultados = await geocodeEndereco(input);
+          if (!resultados || !resultados.length) {
+            mostrarToast('Endereço não encontrado. Tente ser mais específico.');
+            return;
+          }
+          destPos = [parseFloat(resultados[0].lon), parseFloat(resultados[0].lat)];
+        }
 
-      if (map.getSource('route')) {
-        map.getSource('route').setData(rota.geometry);
-      } else {
-        map.addSource('route', { type: 'geojson', data: rota.geometry });
-        map.addLayer({
-          id: 'route-line',
-          type: 'line',
-          source: 'route',
-          paint: { 'line-color': '#0284c7', 'line-width': 6, 'line-opacity': 0.9 }
-        });
+        document.getElementById('dest-label').textContent = input;
+        suggestList.style.display = 'none';
+
+        const rota = await calcularRota(userPos, destPos);
+
+        if (map.getSource('route')) {
+          map.getSource('route').setData(rota.geometry);
+        } else {
+          map.addSource('route', { type: 'geojson', data: rota.geometry });
+          map.addLayer({
+            id: 'route-line',
+            type: 'line',
+            source: 'route',
+            paint: { 'line-color': '#0284c7', 'line-width': 6, 'line-opacity': 0.9 }
+          });
+        }
+
+        document.getElementById('route-time').textContent = `${Math.round(rota.duration / 60)} min`;
+        document.getElementById('route-dist').textContent = `${(rota.distance / 1000).toFixed(1)} km`;
+        document.getElementById('bottom-panel').classList.add('visible');
+
+        const coords = rota.geometry.coordinates;
+        const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
+        map.fitBounds(bounds, { padding: 60 });
+      } catch (err) {
+        console.error(err);
+        mostrarToast('Não foi possível calcular a rota. Tente novamente.');
+      } finally {
+        btnIr.disabled = false;
+        btnIr.textContent = '🔍 IR';
       }
-
-      document.getElementById('route-time').textContent = `${Math.round(rota.duration / 60)} min`;
-      document.getElementById('route-dist').textContent = `${(rota.distance / 1000).toFixed(1)} km`;
-      document.getElementById('bottom-panel').classList.add('visible');
-
-      const coords = rota.geometry.coordinates;
-      const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
-      map.fitBounds(bounds, { padding: 60 });
     }
 
-    // --- 5. NAVEGAÇÃO 3D NATIVA ---
+    // --- 6. NAVEGAÇÃO 3D NATIVA ---
     function alternarModo3D() {
       const pitchAtual = map.getPitch();
       map.easeTo({ pitch: pitchAtual > 20 ? 0 : 55, duration: 600 });
@@ -565,7 +642,9 @@
         btn.textContent = '🛑 PARAR NAVEGAÇÃO';
         btn.classList.add('active');
         map.easeTo({ pitch: 60, zoom: 17.5, duration: 800 });
-        if ('wakeLock' in navigator) navigator.wakeLock.request('screen').catch(() => {});
+        if ('wakeLock' in navigator) {
+          navigator.wakeLock.request('screen').catch(err => console.warn('Wake Lock negado:', err));
+        }
       } else {
         btn.textContent = '🚀 NAVEGAÇÃO 3D EM TEMPO REAL';
         btn.classList.remove('active');
@@ -575,11 +654,15 @@
 
     function cancelarNavegacao() {
       modoNavegacaoAtivo = false;
+      destPos = null;
       document.getElementById('bottom-panel').classList.remove('visible');
       if (map.getLayer('route-line')) {
         map.removeLayer('route-line');
         map.removeSource('route');
       }
+      const btn = document.getElementById('btn-nav-3d');
+      btn.textContent = '🚀 NAVEGAÇÃO 3D EM TEMPO REAL';
+      btn.classList.remove('active');
       map.easeTo({ pitch: 0, zoom: 15 });
     }
 
@@ -587,39 +670,68 @@
       map.flyTo({ center: userPos, zoom: 16.5 });
     }
 
-    // --- 6. GPS E ORIENTAÇÃO ---
+    // --- 7. GPS ---
+    function atualizarBadgeGps(ativo) {
+      gpsAtivo = ativo;
+      const badge = document.getElementById('gps-badge');
+      badge.textContent = ativo ? 'GPS Ativo' : 'GPS Off';
+      badge.classList.toggle('off', !ativo);
+    }
+
+    function solicitarLocalizacaoInicial() {
+      if (!('geolocation' in navigator)) {
+        atualizarBadgeGps(false);
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(pos => {
+        userPos = [pos.coords.longitude, pos.coords.latitude];
+        carMarker.setLngLat(userPos);
+        map.flyTo({ center: userPos, zoom: 16 });
+        atualizarBadgeGps(true);
+      }, err => {
+        console.warn('Localização inicial indisponível:', err);
+        atualizarBadgeGps(false);
+      }, { enableHighAccuracy: true, timeout: 8000 });
+    }
+
     function iniciarAcompanhamentoGPS() {
-      if (!('geolocation' in navigator)) return;
+      if (!('geolocation' in navigator)) {
+        mostrarToast('Seu navegador não suporta geolocalização.');
+        atualizarBadgeGps(false);
+        return;
+      }
 
       navigator.geolocation.watchPosition(pos => {
         userPos = [pos.coords.longitude, pos.coords.latitude];
         carMarker.setLngLat(userPos);
-
-        const badge = document.getElementById('gps-badge');
-        badge.textContent = 'GPS Ativo';
-        badge.classList.remove('off');
+        atualizarBadgeGps(true);
 
         if (pos.coords.heading !== null && !isNaN(pos.coords.heading)) {
           carEl.style.transform = `rotate(${pos.coords.heading}deg)`;
-          if (modoNavegacaoAtivo) {
-            map.setBearing(pos.coords.heading);
-          }
+          if (modoNavegacaoAtivo) map.setBearing(pos.coords.heading);
         }
 
-        if (modoNavegacaoAtivo) {
-          map.setCenter(userPos);
-        }
+        if (modoNavegacaoAtivo) map.setCenter(userPos);
       }, err => {
-        console.warn('GPS indisponível:', err);
+        console.warn('Erro de geolocalização:', err);
+        atualizarBadgeGps(false);
+        if (err.code === err.PERMISSION_DENIED) {
+          mostrarToast('Permissão de localização negada. Ative o GPS para navegar.');
+        } else {
+          mostrarToast('Não foi possível obter sua localização.');
+        }
       }, { enableHighAccuracy: true });
     }
 
+    // --- 8. APPS EXTERNOS ---
     function abrirGoogleMaps() {
-      if (destPos) window.open(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`, '_blank');
+      if (!destPos) return;
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`, '_blank');
     }
 
     function abrirWaze() {
-      if (destPos) window.open(`https://waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`, '_blank');
+      if (!destPos) return;
+      window.open(`https://waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`, '_blank');
     }
   </script>
 </body>
