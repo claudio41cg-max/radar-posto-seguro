@@ -1,1 +1,755 @@
 
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Radar Seguro RJ PRO</title>
+
+  <!-- MapLibre GL CSS -->
+  <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0d1117;
+    }
+
+    #map {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Header Superior */
+    .top-bar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13, 23, 42, 0.94);
+      backdrop-filter: blur(8px);
+      border: 1px solid #1e293b;
+      padding: 8px 12px;
+      border-radius: 12px;
+      color: #fff;
+    }
+
+    .title-app {
+      font-size: 13px;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tag-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 7px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .tag-badge.anp { background: #eab308; color: #000; }
+    .tag-badge.alerta { background: #0284c7; color: #fff; }
+    .tag-badge.gps { background: #10b981; color: #fff; }
+    .tag-badge.gps.off { background: #64748b; color: #fff; }
+
+    /* Barra de Busca */
+    .search-box {
+      display: flex;
+      background: #0f172a;
+      border-radius: 10px;
+      border: 1px solid #38bdf8;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .search-box button {
+      background: #0284c7;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: 0 16px;
+      cursor: pointer;
+    }
+
+    .suggest-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 4px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      z-index: 20;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .suggest-item {
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #e2e8f0;
+      border-bottom: 1px solid #1e293b;
+      cursor: pointer;
+    }
+
+    .suggest-item:active { background: #1e293b; }
+
+    /* Filtros */
+    .filter-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .filter-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
+    .filter-btn.danger.active { background: #ef4444; border-color: #f87171; }
+    .filter-btn.success.active { background: #10b981; border-color: #34d399; }
+
+    /* Controles Laterais */
+    .side-controls {
+      position: absolute;
+      right: 12px;
+      top: 150px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .side-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #334155;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Painel Inferior */
+    .bottom-panel {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 10;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 14px;
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      display: none;
+    }
+
+    .bottom-panel.visible { display: block; }
+
+    .route-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .destination-name {
+      font-size: 14px;
+      font-weight: 700;
+      max-width: 70%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-cancel {
+      background: #ef4444;
+      border: none;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .route-metrics {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .metric-time {
+      font-size: 22px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+
+    .metric-dist {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-action {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-nav-app {
+      grid-column: span 2;
+      background: #0284c7;
+      margin-bottom: 4px;
+    }
+    .btn-nav-app.active { background: #059669; }
+
+    .btn-gmaps { background: #10b981; }
+    .btn-waze { background: #0284c7; }
+
+    /* Marcador do Carro */
+    .car-marker {
+      font-size: 28px;
+      text-align: center;
+      transition: transform 0.2s linear;
+    }
+
+    /* Popups customizados */
+    .maplibregl-popup-content {
+      background: #0f172a !important;
+      color: #fff !important;
+      border: 1px solid #334155;
+      border-radius: 10px !important;
+      padding: 12px !important;
+      font-size: 12px !important;
+    }
+    .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+      border-top-color: #0f172a !important;
+    }
+    .btn-denuncia {
+      display: inline-block;
+      margin-top: 8px;
+      background: #ef4444;
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    /* Toast */
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 100px;
+      transform: translateX(-50%) translateY(20px);
+      background: #1e293b;
+      border: 1px solid #ef4444;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      z-index: 3000;
+      max-width: 90vw;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="header-info">
+      <div class="title-app">🛡️ RADAR SEGURO RJ PRO</div>
+      <div class="status-tags">
+        <span class="tag-badge anp">ANP / JUSTIÇA</span>
+        <span class="tag-badge alerta">Alerta: ON</span>
+        <span class="tag-badge gps off" id="gps-badge">GPS...</span>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="dest-input" placeholder="Digite o destino..." value="Caminho de Tutóia 520, Rio de Janeiro" autocomplete="off" />
+      <button id="btn-ir" onclick="iniciarRota()">🔍 IR</button>
+      <div class="suggest-list" id="suggest-list"></div>
+    </div>
+
+    <div class="filter-bar">
+      <button id="btn-filter-todos" class="filter-btn active" onclick="filtrarPostos('todos')">⛽ Todos</button>
+      <button id="btn-filter-problemas" class="filter-btn danger" onclick="filtrarPostos('problemas')">⛔ Postos com Problemas</button>
+      <button id="btn-filter-gnv" class="filter-btn success" onclick="filtrarPostos('gnv')">🟢 GNV</button>
+    </div>
+  </div>
+
+  <!-- Controles Laterais -->
+  <div class="side-controls">
+    <button class="side-btn" title="Centralizar" onclick="centralizarUsuario()">🎯</button>
+    <button class="side-btn" title="Alternar 3D" onclick="alternarModo3D()">📐</button>
+    <button class="side-btn" title="Zoom In" onclick="map.zoomIn()">➕</button>
+    <button class="side-btn" title="Zoom Out" onclick="map.zoomOut()">➖</button>
+  </div>
+
+  <!-- Mapa MapLibre Nativo -->
+  <div id="map"></div>
+
+  <!-- Toast de Alerta -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Painel de Rota -->
+  <div class="bottom-panel" id="bottom-panel">
+    <div class="route-header">
+      <div class="destination-name" id="dest-label">Destino</div>
+      <button class="btn-cancel" onclick="cancelarNavegacao()">✖ Cancelar</button>
+    </div>
+    <div class="route-metrics">
+      <div class="metric-time" id="route-time">-- min</div>
+      <div class="metric-dist" id="route-dist">-- km</div>
+    </div>
+    <div class="action-grid">
+      <button class="btn-action btn-nav-app" id="btn-nav-3d" onclick="toggleNavegacao3D()">🚀 NAVEGAÇÃO 3D EM TEMPO REAL</button>
+      <button class="btn-action btn-gmaps" onclick="abrirGoogleMaps()">Google Maps</button>
+      <button class="btn-action btn-waze" onclick="abrirWaze()">Waze</button>
+    </div>
+  </div>
+
+  <!-- MapLibre GL JS -->
+  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+
+  <script>
+    // --- 1. BASE DE DADOS: POSTOS & COMUNIDADES ---
+    const postosRJ = [
+      { id: 1, nome: "Posto Shell Cosmos", lat: -22.8965, lng: -43.6120, gnv: true, irregular: false, detalhe: "Conforme ANP" },
+      { id: 2, nome: "Posto Ipiranga Paciência", lat: -22.8920, lng: -43.6190, gnv: true, irregular: false, detalhe: "Conforme ANP" },
+      { id: 3, nome: "Posto BR Cesário de Melo", lat: -22.8980, lng: -43.6100, gnv: false, irregular: true, detalhe: "Autuado por fraude na bomba (Justiça/Procon)" },
+      { id: 4, nome: "Posto GNV Santa Margarida", lat: -22.8910, lng: -43.6090, gnv: true, irregular: false, detalhe: "Conforme ANP" },
+      { id: 5, nome: "Auto Posto Estrada do Sítio", lat: -22.8940, lng: -43.6160, gnv: false, irregular: true, detalhe: "Processo por combustível adulterado" }
+    ];
+
+    const comunidadesRJ = [
+      {
+        nome: "Comunidade do Aço / Vila Paciência",
+        coords: [
+          [-43.6280, -22.8980], [-43.6210, -22.8950],
+          [-43.6230, -22.9030], [-43.6290, -22.9010], [-43.6280, -22.8980]
+        ]
+      },
+      {
+        nome: "Comunidade Antares",
+        coords: [
+          [-43.6480, -22.9050], [-43.6410, -22.9030],
+          [-43.6430, -22.9120], [-43.6500, -22.9090], [-43.6480, -22.9050]
+        ]
+      },
+      {
+        nome: "Comunidade Cesarão",
+        coords: [
+          [-43.6600, -22.9100], [-43.6520, -22.9080],
+          [-43.6550, -22.9180], [-43.6620, -22.9150], [-43.6600, -22.9100]
+        ]
+      }
+    ];
+
+    // --- 2. INICIALIZAÇÃO DO MAPA ---
+    let userPos = [-43.6150, -22.8950]; // MapLibre: [lng, lat]
+    let destPos = null;
+    let modoNavegacaoAtivo = false;
+    let markersPostos = [];
+    let wakeLock = null;
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: {
+        version: 8,
+        sources: {
+          'osm-tiles': {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256
+          }
+        },
+        layers: [
+          { id: 'osm-tiles-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
+        ]
+      },
+      center: userPos,
+      zoom: 15,
+      pitch: 0,
+      bearing: 0
+    });
+
+    const carEl = document.createElement('div');
+    carEl.className = 'car-marker';
+    carEl.innerHTML = '🚗';
+    const carMarker = new maplibregl.Marker({ element: carEl })
+      .setLngLat(userPos)
+      .addTo(map);
+
+    let toastTimeout = null;
+    function mostrarToast(msg, duracao = 3200) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('visible'), duracao);
+    }
+
+    // --- 3. WAKE LOCK API (TELA ATIVA) ---
+    async function ativarTelaSempreAtiva() {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLock = await navigator.wakeLock.request('screen');
+        }
+      } catch (err) {
+        console.warn('Wake Lock indisponível:', err);
+      }
+    }
+
+    // --- 4. CARREGAR CAMADAS ---
+    map.on('load', () => {
+      const geojsonComunidades = {
+        type: 'FeatureCollection',
+        features: comunidadesRJ.map(c => ({
+          type: 'Feature',
+          geometry: { type: 'Polygon', coordinates: [c.coords] },
+          properties: { nome: c.nome }
+        }))
+      };
+
+      map.addSource('comunidades-source', { type: 'geojson', data: geojsonComunidades });
+
+      map.addLayer({
+        id: 'comunidades-fill',
+        type: 'fill',
+        source: 'comunidades-source',
+        paint: { 'fill-color': '#ef4444', 'fill-opacity': 0.35 }
+      });
+
+      map.addLayer({
+        id: 'comunidades-line',
+        type: 'line',
+        source: 'comunidades-source',
+        paint: { 'line-color': '#dc2626', 'line-width': 2 }
+      });
+
+      carregarPostos(postosRJ);
+      iniciarAcompanhamentoGPS();
+    });
+
+    function carregarPostos(lista) {
+      markersPostos.forEach(m => m.remove());
+      markersPostos = [];
+
+      lista.forEach(posto => {
+        const el = document.createElement('div');
+        const cor = posto.irregular ? '#ef4444' : (posto.gnv ? '#10b981' : '#0284c7');
+        el.style.cssText = `background:${cor}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 6px rgba(0,0,0,0.5); font-size:12px; cursor:pointer;`;
+        el.innerHTML = posto.irregular ? '⛔' : (posto.gnv ? '🟢' : '⛽');
+
+        const popupHtml = `
+          <strong>${posto.nome}</strong><br>
+          GNV: ${posto.gnv ? 'Disponível' : 'Não'}<br>
+          Status: <b>${posto.irregular ? '<span style="color:#ef4444;">Irregular na Justiça</span>' : 'Regular'}</b><br>
+          <small>${posto.detalhe}</small><br>
+          ${posto.irregular ? '<a class="btn-denuncia" href="https://procononline.rj.gov.br/" target="_blank">🚨 Denunciar ao Procon</a>' : ''}
+        `;
+
+        const popup = new maplibregl.Popup({ offset: 15 }).setHTML(popupHtml);
+        const marker = new maplibregl.Marker({ element: el })
+          .setLngLat([posto.lng, posto.lat])
+          .setPopup(popup)
+          .addTo(map);
+
+        markersPostos.push(marker);
+      });
+    }
+
+    function filtrarPostos(tipo) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (tipo === 'gnv') {
+        document.getElementById('btn-filter-gnv').classList.add('active');
+        carregarPostos(postosRJ.filter(p => p.gnv));
+      } else if (tipo === 'problemas') {
+        document.getElementById('btn-filter-problemas').classList.add('active');
+        carregarPostos(postosRJ.filter(p => p.irregular));
+      } else {
+        document.getElementById('btn-filter-todos').classList.add('active');
+        carregarPostos(postosRJ);
+      }
+    }
+
+    // --- 5. AUTOCOMPLETE & GEOCODING ---
+    const destInput = document.getElementById('dest-input');
+    const suggestList = document.getElementById('suggest-list');
+    let debounceTimer = null;
+
+    async function geocodeEndereco(texto) {
+      const viewbox = '-43.85,-22.75,-43.10,-23.10';
+      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=br&viewbox=${viewbox}&q=${encodeURIComponent(texto)}`;
+      const resp = await fetch(url, { headers: { 'Accept-Language': 'pt-BR' } });
+      if (!resp.ok) throw new Error('Falha no geocoding');
+      return resp.json();
+    }
+
+    destInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      const valor = destInput.value.trim();
+      if (valor.length < 4) {
+        suggestList.style.display = 'none';
+        return;
+      }
+      debounceTimer = setTimeout(async () => {
+        try {
+          const resultados = await geocodeEndereco(valor);
+          renderSugestoes(resultados);
+        } catch (e) {
+          console.warn('Erro autocomplete:', e);
+        }
+      }, 500);
+    });
+
+    function renderSugestoes(resultados) {
+      if (!resultados || resultados.length === 0) {
+        suggestList.style.display = 'none';
+        return;
+      }
+      suggestList.innerHTML = '';
+      resultados.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'suggest-item';
+        div.textContent = r.display_name;
+        div.onclick = () => {
+          destInput.value = r.display_name;
+          destPos = [parseFloat(r.lon), parseFloat(r.lat)];
+          suggestList.style.display = 'none';
+        };
+        suggestList.appendChild(div);
+      });
+      suggestList.style.display = 'block';
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-box')) suggestList.style.display = 'none';
+    });
+
+    // --- 6. ROTEAMENTO REAL (OSRM) ---
+    async function calcularRota(origem, destino) {
+      const url = `https://router.project-osrm.org/route/v1/driving/${origem[0]},${origem[1]};${destino[0]},${destino[1]}?overview=full&geometries=geojson`;
+      const resp = await fetch(url);
+      const data = await resp.json();
+      if (!data.routes || !data.routes.length) throw new Error('Rota não encontrada');
+      return data.routes[0];
+    }
+
+    async function iniciarRota() {
+      const input = destInput.value.trim();
+      if (!input) {
+        mostrarToast('Digite um endereço de destino.');
+        return;
+      }
+
+      if (!destPos) {
+        try {
+          const resultados = await geocodeEndereco(input);
+          if (!resultados.length) {
+            mostrarToast('Endereço não localizado.');
+            return;
+          }
+          destPos = [parseFloat(resultados[0].lon), parseFloat(resultados[0].lat)];
+        } catch (err) {
+          mostrarToast('Erro ao buscar endereço.');
+          return;
+        }
+      }
+
+      document.getElementById('dest-label').textContent = input;
+      suggestList.style.display = 'none';
+
+      try {
+        const rota = await calcularRota(userPos, destPos);
+
+        if (map.getSource('route')) {
+          map.getSource('route').setData(rota.geometry);
+        } else {
+          map.addSource('route', { type: 'geojson', data: rota.geometry });
+          map.addLayer({
+            id: 'route-line',
+            type: 'line',
+            source: 'route',
+            paint: { 'line-color': '#0284c7', 'line-width': 6, 'line-opacity': 0.9 }
+          });
+        }
+
+        document.getElementById('route-time').textContent = `${Math.round(rota.duration / 60)} min`;
+        document.getElementById('route-dist').textContent = `${(rota.distance / 1000).toFixed(1)} km`;
+        document.getElementById('bottom-panel').classList.add('visible');
+
+        const coords = rota.geometry.coordinates;
+        const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
+        map.fitBounds(bounds, { padding: 70 });
+      } catch (err) {
+        mostrarToast('Não foi possível traçar a rota.');
+      }
+    }
+
+    // --- 7. NAVEGAÇÃO 3D NATIVA ---
+    function alternarModo3D() {
+      const pitchAtual = map.getPitch();
+      map.easeTo({ pitch: pitchAtual > 20 ? 0 : 55, duration: 600 });
+    }
+
+    function toggleNavegacao3D() {
+      modoNavegacaoAtivo = !modoNavegacaoAtivo;
+      const btn = document.getElementById('btn-nav-3d');
+
+      if (modoNavegacaoAtivo) {
+        btn.textContent = '🛑 PARAR NAVEGAÇÃO';
+        btn.classList.add('active');
+        map.easeTo({ pitch: 60, zoom: 17.5, duration: 800 });
+        ativarTelaSempreAtiva();
+      } else {
+        btn.textContent = '🚀 NAVEGAÇÃO 3D EM TEMPO REAL';
+        btn.classList.remove('active');
+        map.easeTo({ pitch: 0, zoom: 15, duration: 800 });
+      }
+    }
+
+    function cancelarNavegacao() {
+      modoNavegacaoAtivo = false;
+      document.getElementById('bottom-panel').classList.remove('visible');
+      if (map.getLayer('route-line')) {
+        map.removeLayer('route-line');
+        map.removeSource('route');
+      }
+      destPos = null;
+      map.easeTo({ pitch: 0, zoom: 15 });
+    }
+
+    function centralizarUsuario() {
+      map.flyTo({ center: userPos, zoom: 16.5 });
+    }
+
+    // --- 8. GPS & ORIENTAÇÃO ---
+    function iniciarAcompanhamentoGPS() {
+      if (!('geolocation' in navigator)) {
+        const badge = document.getElementById('gps-badge');
+        badge.textContent = 'Sem GPS';
+        badge.classList.add('off');
+        return;
+      }
+
+      navigator.geolocation.watchPosition(pos => {
+        userPos = [pos.coords.longitude, pos.coords.latitude];
+        carMarker.setLngLat(userPos);
+
+        const badge = document.getElementById('gps-badge');
+        badge.textContent = 'GPS Ativo';
+        badge.classList.remove('off');
+
+        if (pos.coords.heading !== null && !isNaN(pos.coords.heading)) {
+          carEl.style.transform = `rotate(${pos.coords.heading}deg)`;
+          if (modoNavegacaoAtivo) {
+            map.setBearing(pos.coords.heading);
+          }
+        }
+
+        if (modoNavegacaoAtivo) {
+          map.setCenter(userPos);
+        }
+      }, err => {
+        console.warn('GPS indisponível:', err);
+      }, { enableHighAccuracy: true });
+    }
+
+    // --- 9. APPS EXTERNOS ---
+    function abrirGoogleMaps() {
+      if (destPos) window.open(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`, '_blank');
+    }
+
+    function abrirWaze() {
+      if (destPos) window.open(`https://waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`, '_blank');
+    }
+  </script>
+</body>
+</html>
