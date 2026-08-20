@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -36,7 +33,7 @@
       left: 0;
     }
 
-    /* Header Superior */
+    /* Top Bar de Busca / Status */
     .top-bar {
       position: absolute;
       top: 10px;
@@ -46,6 +43,12 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .top-bar.hide-nav {
+      transform: translateY(-200px);
+      pointer-events: none;
     }
 
     .header-info {
@@ -69,10 +72,7 @@
       gap: 6px;
     }
 
-    .status-tags {
-      display: flex;
-      gap: 6px;
-    }
+    .status-tags { display: flex; gap: 6px; }
 
     .tag-badge {
       font-size: 10px;
@@ -87,7 +87,6 @@
     .tag-badge.gps { background: #10b981; color: #fff; }
     .tag-badge.gps.off { background: #64748b; color: #fff; }
 
-    /* Barra de Busca */
     .search-box {
       display: flex;
       background: #0f172a;
@@ -140,71 +139,85 @@
       cursor: pointer;
     }
 
-    .suggest-item:active { background: #1e293b; }
-
-    /* Filtros */
-    .filter-bar {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .filter-bar::-webkit-scrollbar { display: none; }
-
-    .filter-btn {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid #334155;
-      color: #cbd5e1;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .filter-btn.active { background: #0284c7; color: #fff; border-color: #38bdf8; }
-    .filter-btn.danger.active { background: #ef4444; border-color: #f87171; }
-    .filter-btn.success.active { background: #10b981; border-color: #34d399; }
-
-    /* Controles Laterais */
-    .side-controls {
+    /* Card Superior Estilo Google Maps / Waze */
+    .turn-card {
       position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      z-index: 15;
+      background: #064e3b;
+      border: 2px solid #10b981;
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: #fff;
+      display: none;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+
+    .turn-card.visible { display: flex; }
+    .turn-icon { font-size: 32px; font-weight: 900; line-height: 1; }
+    .turn-info { flex: 1; overflow: hidden; }
+    .turn-dist { font-size: 20px; font-weight: 800; }
+    .turn-street { font-size: 14px; font-weight: 700; opacity: 0.95; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* HUD Inferior - Velocímetro & Rua Atual */
+    .nav-hud {
+      position: absolute;
+      bottom: 105px;
+      left: 12px;
       right: 12px;
-      top: 150px;
       z-index: 10;
+      display: none;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .nav-hud.visible { display: flex; }
+
+    .speedometer {
+      background: rgba(15, 23, 42, 0.9);
+      border: 2px solid #38bdf8;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
-
-    .side-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid #334155;
-      color: #fff;
-      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
 
-    /* Painel Inferior */
+    .speed-val { font-size: 18px; font-weight: 800; line-height: 1; color: #38bdf8; }
+    .speed-unit { font-size: 8px; font-weight: 700; color: #94a3b8; }
+
+    .current-street-pill {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #334155;
+      padding: 8px 14px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    /* Painel Inferior de Navegação */
     .bottom-panel {
       position: absolute;
       bottom: 12px;
       left: 12px;
       right: 12px;
-      z-index: 10;
-      background: rgba(15, 23, 42, 0.95);
+      z-index: 15;
+      background: rgba(15, 23, 42, 0.96);
       backdrop-filter: blur(10px);
       border: 1px solid #1e293b;
       border-radius: 16px;
-      padding: 14px;
+      padding: 12px;
       color: #fff;
       box-shadow: 0 10px 25px rgba(0,0,0,0.6);
       display: none;
@@ -216,7 +229,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .destination-name {
@@ -234,7 +247,7 @@
       color: #fff;
       font-size: 11px;
       font-weight: 700;
-      padding: 5px 10px;
+      padding: 6px 12px;
       border-radius: 6px;
       cursor: pointer;
     }
@@ -243,19 +256,11 @@
       display: flex;
       gap: 12px;
       align-items: baseline;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .metric-time {
-      font-size: 22px;
-      font-weight: 800;
-      color: #38bdf8;
-    }
-
-    .metric-dist {
-      font-size: 13px;
-      color: #94a3b8;
-    }
+    .metric-time { font-size: 22px; font-weight: 800; color: #10b981; }
+    .metric-dist { font-size: 13px; color: #94a3b8; }
 
     .action-grid {
       display: grid;
@@ -274,59 +279,43 @@
       text-align: center;
     }
 
-    .btn-nav-app {
-      grid-column: span 2;
-      background: #0284c7;
-      margin-bottom: 4px;
-    }
+    .btn-nav-app { grid-column: span 2; background: #0284c7; }
     .btn-nav-app.active { background: #059669; }
-
     .btn-gmaps { background: #10b981; }
     .btn-waze { background: #0284c7; }
 
     /* Marcador do Carro */
     .car-marker {
-      font-size: 28px;
+      font-size: 32px;
       text-align: center;
-      transition: transform 0.2s linear;
+      transition: transform 0.15s linear;
+      transform-origin: center center;
     }
 
-    /* Popups customizados */
-    .maplibregl-popup-content {
-      background: #0f172a !important;
-      color: #fff !important;
-      border: 1px solid #334155;
-      border-radius: 10px !important;
-      padding: 12px !important;
-      font-size: 12px !important;
-    }
-    .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
-      border-top-color: #0f172a !important;
-    }
-    .btn-denuncia {
-      display: inline-block;
-      margin-top: 8px;
-      background: #ef4444;
+    /* Rótulo de Comunidade */
+    .comunidade-label {
+      background: rgba(239, 68, 68, 0.9);
       color: #fff;
-      text-decoration: none;
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 11px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 6px;
+      border-radius: 4px;
+      border: 1px solid #b91c1c;
+      white-space: nowrap;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
     }
 
-    /* Toast */
     .toast {
       position: absolute;
       left: 50%;
-      bottom: 100px;
+      bottom: 90px;
       transform: translateX(-50%) translateY(20px);
       background: #1e293b;
       border: 1px solid #ef4444;
       color: #fff;
       padding: 10px 16px;
       border-radius: 10px;
-      font-size: 13px;
+      font-size: 12px;
       z-index: 3000;
       max-width: 90vw;
       text-align: center;
@@ -339,12 +328,12 @@
 </head>
 <body>
 
-  <!-- Top Bar -->
-  <div class="top-bar">
+  <!-- Top Bar de Busca / Modo Padrão -->
+  <div class="top-bar" id="top-bar">
     <div class="header-info">
       <div class="title-app">🛡️ RADAR SEGURO RJ PRO</div>
       <div class="status-tags">
-        <span class="tag-badge anp">ANP / JUSTIÇA</span>
+        <span class="tag-badge anp">ANP</span>
         <span class="tag-badge alerta">Alerta: ON</span>
         <span class="tag-badge gps off" id="gps-badge">GPS...</span>
       </div>
@@ -355,40 +344,44 @@
       <button id="btn-ir" onclick="iniciarRota()">🔍 IR</button>
       <div class="suggest-list" id="suggest-list"></div>
     </div>
+  </div>
 
-    <div class="filter-bar">
-      <button id="btn-filter-todos" class="filter-btn active" onclick="filtrarPostos('todos')">⛽ Todos</button>
-      <button id="btn-filter-problemas" class="filter-btn danger" onclick="filtrarPostos('problemas')">⛔ Postos com Problemas</button>
-      <button id="btn-filter-gnv" class="filter-btn success" onclick="filtrarPostos('gnv')">🟢 GNV</button>
+  <!-- Card Superior Estilo Waze/Maps com Manobras -->
+  <div class="turn-card" id="turn-card">
+    <div class="turn-icon" id="turn-icon">⬆️</div>
+    <div class="turn-info">
+      <div class="turn-dist" id="turn-dist">Siga em frente</div>
+      <div class="turn-street" id="turn-street">Calculando rota...</div>
     </div>
   </div>
 
-  <!-- Controles Laterais -->
-  <div class="side-controls">
-    <button class="side-btn" title="Centralizar" onclick="centralizarUsuario()">🎯</button>
-    <button class="side-btn" title="Alternar 3D" onclick="alternarModo3D()">📐</button>
-    <button class="side-btn" title="Zoom In" onclick="map.zoomIn()">➕</button>
-    <button class="side-btn" title="Zoom Out" onclick="map.zoomOut()">➖</button>
+  <!-- HUD Inferior da Navegação -->
+  <div class="nav-hud" id="nav-hud">
+    <div class="speedometer">
+      <span class="speed-val" id="speed-val">0</span>
+      <span class="speed-unit">km/h</span>
+    </div>
+    <div class="current-street-pill" id="current-street">Aguardando GPS...</div>
   </div>
 
-  <!-- Mapa MapLibre Nativo -->
+  <!-- Mapa -->
   <div id="map"></div>
 
-  <!-- Toast de Alerta -->
+  <!-- Toast -->
   <div class="toast" id="toast"></div>
 
-  <!-- Painel de Rota -->
+  <!-- Painel Inferior -->
   <div class="bottom-panel" id="bottom-panel">
     <div class="route-header">
       <div class="destination-name" id="dest-label">Destino</div>
-      <button class="btn-cancel" onclick="cancelarNavegacao()">✖ Cancelar</button>
+      <button class="btn-cancel" onclick="cancelarNavegacao()">✖ Sair</button>
     </div>
     <div class="route-metrics">
       <div class="metric-time" id="route-time">-- min</div>
       <div class="metric-dist" id="route-dist">-- km</div>
     </div>
     <div class="action-grid">
-      <button class="btn-action btn-nav-app" id="btn-nav-3d" onclick="toggleNavegacao3D()">🚀 NAVEGAÇÃO 3D EM TEMPO REAL</button>
+      <button class="btn-action btn-nav-app" id="btn-nav-3d" onclick="toggleNavegacao3D()">🚀 INICIAR NAVEGAÇÃO 3D COM VOZ</button>
       <button class="btn-action btn-gmaps" onclick="abrirGoogleMaps()">Google Maps</button>
       <button class="btn-action btn-waze" onclick="abrirWaze()">Waze</button>
     </div>
@@ -404,57 +397,51 @@
       { id: 2, nome: "Posto Ipiranga Paciência", lat: -22.8920, lng: -43.6190, gnv: true, irregular: false, detalhe: "Conforme ANP" },
       { id: 3, nome: "Posto BR Cesário de Melo", lat: -22.8980, lng: -43.6100, gnv: false, irregular: true, detalhe: "Autuado por fraude na bomba (Justiça/Procon)" },
       { id: 4, nome: "Posto GNV Santa Margarida", lat: -22.8910, lng: -43.6090, gnv: true, irregular: false, detalhe: "Conforme ANP" },
-      { id: 5, nome: "Auto Posto Estrada do Sítio", lat: -22.8940, lng: -43.6160, gnv: false, irregular: true, detalhe: "Processo por combustível adulterado" }
+      { id: 5, nome: "Auto Posto Estrada do Sítio", lat: -22.8940, lng: -43.6160, gnv: false, irregular: true, detalhe: "Combustível adulterado detectado" }
     ];
 
     const comunidadesRJ = [
       {
-        nome: "Comunidade do Aço / Vila Paciência",
+        nome: "⚠️ COMUNIDADE DO AÇO",
+        centro: [-43.6250, -22.8980],
         coords: [
           [-43.6280, -22.8980], [-43.6210, -22.8950],
           [-43.6230, -22.9030], [-43.6290, -22.9010], [-43.6280, -22.8980]
         ]
       },
       {
-        nome: "Comunidade Antares",
+        nome: "⚠️ COMUNIDADE ANTARES",
+        centro: [-43.6450, -22.9070],
         coords: [
           [-43.6480, -22.9050], [-43.6410, -22.9030],
           [-43.6430, -22.9120], [-43.6500, -22.9090], [-43.6480, -22.9050]
         ]
       },
       {
-        nome: "Comunidade Cesarão",
+        nome: "⚠️ COMUNIDADE CESARÃO",
+        centro: [-43.6580, -22.9120],
         coords: [
-          [-43.6600, -22.9100], [-43.6520, -22.9080],
-          [-43.6550, -22.9180], [-43.6620, -22.9150], [-43.6600, -22.9100]
+          [-43.6620, -22.9100], [-43.6520, -22.9080],
+          [-43.6550, -22.9180], [-43.6640, -22.9150], [-43.6620, -22.9100]
         ]
       }
     ];
 
-    // --- 2. INICIALIZAÇÃO DO MAPA ---
-    let userPos = [-43.6150, -22.8950]; // MapLibre: [lng, lat]
+    // --- 2. CONFIGURAÇÃO BASE DO MAPA ---
+    let userPos = [-43.6150, -22.8950];
     let destPos = null;
-    let modoNavegacaoAtivo = false;
-    let markersPostos = [];
-    let wakeLock = null;
+    let modoNavegacao = false;
+    let passosRota = [];
+    let rotaCoords = [];
+    let passoAtualIdx = 0;
+    let ultimaFala = "";
+    let synth = window.speechSynthesis;
 
     const map = new maplibregl.Map({
       container: 'map',
-      style: {
-        version: 8,
-        sources: {
-          'osm-tiles': {
-            type: 'raster',
-            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-            tileSize: 256
-          }
-        },
-        layers: [
-          { id: 'osm-tiles-layer', type: 'raster', source: 'osm-tiles', minzoom: 0, maxzoom: 19 }
-        ]
-      },
+      style: 'https://tiles.openfreemap.org/styles/liberty', // Estilo vetorial 3D contínuo sem tela preta
       center: userPos,
-      zoom: 15,
+      zoom: 16,
       pitch: 0,
       bearing: 0
     });
@@ -462,160 +449,88 @@
     const carEl = document.createElement('div');
     carEl.className = 'car-marker';
     carEl.innerHTML = '🚗';
-    const carMarker = new maplibregl.Marker({ element: carEl })
+    const carMarker = new maplibregl.Marker({ element: carEl, rotationAlignment: 'map' })
       .setLngLat(userPos)
       .addTo(map);
 
-    let toastTimeout = null;
-    function mostrarToast(msg, duracao = 3200) {
+    function mostrarToast(msg) {
       const toast = document.getElementById('toast');
       toast.textContent = msg;
       toast.classList.add('visible');
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => toast.classList.remove('visible'), duracao);
+      setTimeout(() => toast.classList.remove('visible'), 3200);
     }
 
-    // --- 3. WAKE LOCK API (TELA ATIVA) ---
-    async function ativarTelaSempreAtiva() {
-      try {
-        if ('wakeLock' in navigator) {
-          wakeLock = await navigator.wakeLock.request('screen');
-        }
-      } catch (err) {
-        console.warn('Wake Lock indisponível:', err);
-      }
+    // Assistente de Voz em Português
+    function falarInstrucao(texto) {
+      if (!synth || texto === ultimaFala) return;
+      ultimaFala = texto;
+      synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(texto);
+      utterance.lang = 'pt-BR';
+      utterance.rate = 1.05;
+      synth.speak(utterance);
     }
 
-    // --- 4. CARREGAR CAMADAS ---
+    // --- 3. CARREGAMENTO DAS CAMADAS ---
     map.on('load', () => {
-      const geojsonComunidades = {
-        type: 'FeatureCollection',
-        features: comunidadesRJ.map(c => ({
-          type: 'Feature',
-          geometry: { type: 'Polygon', coordinates: [c.coords] },
-          properties: { nome: c.nome }
-        }))
-      };
-
-      map.addSource('comunidades-source', { type: 'geojson', data: geojsonComunidades });
+      // Polígonos de Comunidades
+      map.addSource('comunidades-src', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: comunidadesRJ.map(c => ({
+            type: 'Feature',
+            geometry: { type: 'Polygon', coordinates: [c.coords] },
+            properties: { nome: c.nome }
+          }))
+        }
+      });
 
       map.addLayer({
         id: 'comunidades-fill',
         type: 'fill',
-        source: 'comunidades-source',
-        paint: { 'fill-color': '#ef4444', 'fill-opacity': 0.35 }
+        source: 'comunidades-src',
+        paint: { 'fill-color': '#ef4444', 'fill-opacity': 0.45 }
       });
 
       map.addLayer({
         id: 'comunidades-line',
         type: 'line',
-        source: 'comunidades-source',
-        paint: { 'line-color': '#dc2626', 'line-width': 2 }
+        source: 'comunidades-src',
+        paint: { 'line-color': '#b91c1c', 'line-width': 2.5 }
       });
 
-      carregarPostos(postosRJ);
+      // Rótulos de Comunidades
+      comunidadesRJ.forEach(c => {
+        const el = document.createElement('div');
+        el.className = 'comunidade-label';
+        el.textContent = c.nome;
+        new maplibregl.Marker({ element: el }).setLngLat(c.centro).addTo(map);
+      });
+
+      // Marcadores de Postos
+      postosRJ.forEach(p => {
+        const el = document.createElement('div');
+        const cor = p.irregular ? '#ef4444' : (p.gnv ? '#10b981' : '#0284c7');
+        el.style.cssText = `background:${cor}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 6px rgba(0,0,0,0.5); font-size:12px; cursor:pointer;`;
+        el.innerHTML = p.irregular ? '⛔' : (p.gnv ? '🟢' : '⛽');
+
+        const popup = new maplibregl.Popup({ offset: 15 }).setHTML(`
+          <strong>${p.nome}</strong><br>
+          GNV: ${p.gnv ? 'Disponível' : 'Não'}<br>
+          Status: <b>${p.irregular ? '<span style="color:#ef4444;">Irregular na Justiça</span>' : 'Regular'}</b><br>
+          <small>${p.detalhe}</small>
+        `);
+
+        new maplibregl.Marker({ element: el }).setLngLat([p.lng, p.lat]).setPopup(popup).addTo(map);
+      });
+
       iniciarAcompanhamentoGPS();
     });
 
-    function carregarPostos(lista) {
-      markersPostos.forEach(m => m.remove());
-      markersPostos = [];
-
-      lista.forEach(posto => {
-        const el = document.createElement('div');
-        const cor = posto.irregular ? '#ef4444' : (posto.gnv ? '#10b981' : '#0284c7');
-        el.style.cssText = `background:${cor}; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 6px rgba(0,0,0,0.5); font-size:12px; cursor:pointer;`;
-        el.innerHTML = posto.irregular ? '⛔' : (posto.gnv ? '🟢' : '⛽');
-
-        const popupHtml = `
-          <strong>${posto.nome}</strong><br>
-          GNV: ${posto.gnv ? 'Disponível' : 'Não'}<br>
-          Status: <b>${posto.irregular ? '<span style="color:#ef4444;">Irregular na Justiça</span>' : 'Regular'}</b><br>
-          <small>${posto.detalhe}</small><br>
-          ${posto.irregular ? '<a class="btn-denuncia" href="https://procononline.rj.gov.br/" target="_blank">🚨 Denunciar ao Procon</a>' : ''}
-        `;
-
-        const popup = new maplibregl.Popup({ offset: 15 }).setHTML(popupHtml);
-        const marker = new maplibregl.Marker({ element: el })
-          .setLngLat([posto.lng, posto.lat])
-          .setPopup(popup)
-          .addTo(map);
-
-        markersPostos.push(marker);
-      });
-    }
-
-    function filtrarPostos(tipo) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      if (tipo === 'gnv') {
-        document.getElementById('btn-filter-gnv').classList.add('active');
-        carregarPostos(postosRJ.filter(p => p.gnv));
-      } else if (tipo === 'problemas') {
-        document.getElementById('btn-filter-problemas').classList.add('active');
-        carregarPostos(postosRJ.filter(p => p.irregular));
-      } else {
-        document.getElementById('btn-filter-todos').classList.add('active');
-        carregarPostos(postosRJ);
-      }
-    }
-
-    // --- 5. AUTOCOMPLETE & GEOCODING ---
-    const destInput = document.getElementById('dest-input');
-    const suggestList = document.getElementById('suggest-list');
-    let debounceTimer = null;
-
-    async function geocodeEndereco(texto) {
-      const viewbox = '-43.85,-22.75,-43.10,-23.10';
-      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=br&viewbox=${viewbox}&q=${encodeURIComponent(texto)}`;
-      const resp = await fetch(url, { headers: { 'Accept-Language': 'pt-BR' } });
-      if (!resp.ok) throw new Error('Falha no geocoding');
-      return resp.json();
-    }
-
-    destInput.addEventListener('input', () => {
-      clearTimeout(debounceTimer);
-      const valor = destInput.value.trim();
-      if (valor.length < 4) {
-        suggestList.style.display = 'none';
-        return;
-      }
-      debounceTimer = setTimeout(async () => {
-        try {
-          const resultados = await geocodeEndereco(valor);
-          renderSugestoes(resultados);
-        } catch (e) {
-          console.warn('Erro autocomplete:', e);
-        }
-      }, 500);
-    });
-
-    function renderSugestoes(resultados) {
-      if (!resultados || resultados.length === 0) {
-        suggestList.style.display = 'none';
-        return;
-      }
-      suggestList.innerHTML = '';
-      resultados.forEach(r => {
-        const div = document.createElement('div');
-        div.className = 'suggest-item';
-        div.textContent = r.display_name;
-        div.onclick = () => {
-          destInput.value = r.display_name;
-          destPos = [parseFloat(r.lon), parseFloat(r.lat)];
-          suggestList.style.display = 'none';
-        };
-        suggestList.appendChild(div);
-      });
-      suggestList.style.display = 'block';
-    }
-
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search-box')) suggestList.style.display = 'none';
-    });
-
-    // --- 6. ROTEAMENTO REAL (OSRM) ---
+    // --- 4. ROTEAMENTO REAL COM INSTRUÇÕES DE VOZ (OSRM) ---
     async function calcularRota(origem, destino) {
-      const url = `https://router.project-osrm.org/route/v1/driving/${origem[0]},${origem[1]};${destino[0]},${destino[1]}?overview=full&geometries=geojson`;
+      const url = `https://router.project-osrm.org/route/v1/driving/${origem[0]},${origem[1]};${destino[0]},${destino[1]}?overview=full&geometries=geojson&steps=true`;
       const resp = await fetch(url);
       const data = await resp.json();
       if (!data.routes || !data.routes.length) throw new Error('Rota não encontrada');
@@ -623,103 +538,131 @@
     }
 
     async function iniciarRota() {
-      const input = destInput.value.trim();
-      if (!input) {
-        mostrarToast('Digite um endereço de destino.');
+      const input = document.getElementById('dest-input').value.trim();
+      if (!input) return;
+
+      const viewbox = '-43.85,-22.75,-43.10,-23.10';
+      const geoUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=br&viewbox=${viewbox}&q=${encodeURIComponent(input)}`;
+      const resGeo = await fetch(geoUrl, { headers: { 'Accept-Language': 'pt-BR' } });
+      const dataGeo = await resGeo.json();
+
+      if (!dataGeo.length) {
+        mostrarToast('Endereço não localizado.');
         return;
       }
 
-      if (!destPos) {
-        try {
-          const resultados = await geocodeEndereco(input);
-          if (!resultados.length) {
-            mostrarToast('Endereço não localizado.');
-            return;
-          }
-          destPos = [parseFloat(resultados[0].lon), parseFloat(resultados[0].lat)];
-        } catch (err) {
-          mostrarToast('Erro ao buscar endereço.');
-          return;
-        }
-      }
-
+      destPos = [parseFloat(dataGeo[0].lon), parseFloat(dataGeo[0].lat)];
       document.getElementById('dest-label').textContent = input;
-      suggestList.style.display = 'none';
 
-      try {
-        const rota = await calcularRota(userPos, destPos);
+      const rota = await calcularRota(userPos, destPos);
+      passosRota = rota.legs[0].steps;
+      rotaCoords = rota.geometry.coordinates;
+      passoAtualIdx = 0;
 
-        if (map.getSource('route')) {
-          map.getSource('route').setData(rota.geometry);
-        } else {
-          map.addSource('route', { type: 'geojson', data: rota.geometry });
-          map.addLayer({
-            id: 'route-line',
-            type: 'line',
-            source: 'route',
-            paint: { 'line-color': '#0284c7', 'line-width': 6, 'line-opacity': 0.9 }
-          });
-        }
-
-        document.getElementById('route-time').textContent = `${Math.round(rota.duration / 60)} min`;
-        document.getElementById('route-dist').textContent = `${(rota.distance / 1000).toFixed(1)} km`;
-        document.getElementById('bottom-panel').classList.add('visible');
-
-        const coords = rota.geometry.coordinates;
-        const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
-        map.fitBounds(bounds, { padding: 70 });
-      } catch (err) {
-        mostrarToast('Não foi possível traçar a rota.');
+      if (map.getSource('route')) {
+        map.getSource('route').setData(rota.geometry);
+      } else {
+        map.addSource('route', { type: 'geojson', data: rota.geometry });
+        map.addLayer({
+          id: 'route-line',
+          type: 'line',
+          source: 'route',
+          paint: { 'line-color': '#3b82f6', 'line-width': 7, 'line-opacity': 0.95 }
+        });
       }
+
+      document.getElementById('route-time').textContent = `${Math.round(rota.duration / 60)} min`;
+      document.getElementById('route-dist').textContent = `${(rota.distance / 1000).toFixed(1)} km`;
+      document.getElementById('bottom-panel').classList.add('visible');
+
+      const bounds = rotaCoords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(rotaCoords[0], rotaCoords[0]));
+      map.fitBounds(bounds, { padding: 60 });
     }
 
-    // --- 7. NAVEGAÇÃO 3D NATIVA ---
-    function alternarModo3D() {
-      const pitchAtual = map.getPitch();
-      map.easeTo({ pitch: pitchAtual > 20 ? 0 : 55, duration: 600 });
-    }
-
+    // --- 5. MODO NAVEGAÇÃO 3D ESTILO MAPS/WAZE ---
     function toggleNavegacao3D() {
-      modoNavegacaoAtivo = !modoNavegacaoAtivo;
+      modoNavegacao = !modoNavegacao;
       const btn = document.getElementById('btn-nav-3d');
+      const topBar = document.getElementById('top-bar');
+      const turnCard = document.getElementById('turn-card');
+      const navHud = document.getElementById('nav-hud');
 
-      if (modoNavegacaoAtivo) {
+      if (modoNavegacao) {
         btn.textContent = '🛑 PARAR NAVEGAÇÃO';
         btn.classList.add('active');
-        map.easeTo({ pitch: 60, zoom: 17.5, duration: 800 });
-        ativarTelaSempreAtiva();
+        topBar.classList.add('hide-nav');
+        turnCard.classList.add('visible');
+        navHud.classList.add('visible');
+
+        map.easeTo({ pitch: 60, zoom: 18, duration: 600 });
+        if ('wakeLock' in navigator) navigator.wakeLock.request('screen').catch(() => {});
+        falarInstrucao('Iniciando navegação. Siga a rota traçada.');
       } else {
-        btn.textContent = '🚀 NAVEGAÇÃO 3D EM TEMPO REAL';
-        btn.classList.remove('active');
-        map.easeTo({ pitch: 0, zoom: 15, duration: 800 });
+        cancelarNavegacao();
       }
     }
 
     function cancelarNavegacao() {
-      modoNavegacaoAtivo = false;
+      modoNavegacao = false;
+      document.getElementById('btn-nav-3d').textContent = '🚀 INICIAR NAVEGAÇÃO 3D COM VOZ';
+      document.getElementById('btn-nav-3d').classList.remove('active');
+      document.getElementById('top-bar').classList.remove('hide-nav');
+      document.getElementById('turn-card').classList.remove('visible');
+      document.getElementById('nav-hud').classList.remove('visible');
       document.getElementById('bottom-panel').classList.remove('visible');
-      if (map.getLayer('route-line')) {
-        map.removeLayer('route-line');
-        map.removeSource('route');
-      }
-      destPos = null;
+      if (synth) synth.cancel();
       map.easeTo({ pitch: 0, zoom: 15 });
     }
 
-    function centralizarUsuario() {
-      map.flyTo({ center: userPos, zoom: 16.5 });
+    // Cálculo de distância simples (em metros)
+    function calcularDistanciaMetros(c1, c2) {
+      const R = 6371e3;
+      const φ1 = c1[1] * Math.PI / 180;
+      const φ2 = c2[1] * Math.PI / 180;
+      const Δφ = (c2[1] - c1[1]) * Math.PI / 180;
+      const Δλ = (c2[0] - c1[0]) * Math.PI / 180;
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
     }
 
-    // --- 8. GPS & ORIENTAÇÃO ---
-    function iniciarAcompanhamentoGPS() {
-      if (!('geolocation' in navigator)) {
-        const badge = document.getElementById('gps-badge');
-        badge.textContent = 'Sem GPS';
-        badge.classList.add('off');
-        return;
+    // Atualização das manobras durante o trajeto
+    function atualizarInstrucoesNavegacao() {
+      if (!passosRota.length || passoAtualIdx >= passosRota.length) return;
+
+      const passo = passosRota[passoAtualIdx];
+      const manobraCoord = passo.maneuver.location;
+      const dist = calcularDistanciaMetros(userPos, manobraCoord);
+
+      // Ícones de curva
+      let icone = '⬆️';
+      const tipo = passo.maneuver.modifier || '';
+      if (tipo.includes('right')) icone = '↱';
+      if (tipo.includes('left')) icone = '↰';
+      if (tipo.includes('straight')) icone = '⬆️';
+
+      document.getElementById('turn-icon').textContent = icone;
+      document.getElementById('turn-dist').textContent = dist > 1000 ? `${(dist/1000).toFixed(1)} km` : `${Math.round(dist)} m`;
+      document.getElementById('turn-street').textContent = passo.name || 'Siga na via';
+      document.getElementById('current-street').textContent = passo.name ? `Via: ${passo.name}` : 'Navegando';
+
+      // Avisos por voz baseados na aproximação
+      if (dist < 100 && !passo.avisado) {
+        passo.avisado = true;
+        const textoVoz = `Em 100 metros, vire ${tipo.includes('right') ? 'à direita' : tipo.includes('left') ? 'à esquerda' : 'em frente'} na ${passo.name || 'próxima via'}`;
+        falarInstrucao(textoVoz);
       }
 
-      navigator.geolocation.watchPosition(pos => {
+      // Concluiu a manobra, passa para o próximo passo
+      if (dist < 25) {
+        passoAtualIdx++;
+      }
+    }
+
+    // --- 6. GPS, RECÁLCULO DE ROTA E VELOCÍMETRO ---
+    function iniciarAcompanhamentoGPS() {
+      if (!('geolocation' in navigator)) return;
+
+      navigator.geolocation.watchPosition(async pos => {
         userPos = [pos.coords.longitude, pos.coords.latitude];
         carMarker.setLngLat(userPos);
 
@@ -727,22 +670,40 @@
         badge.textContent = 'GPS Ativo';
         badge.classList.remove('off');
 
+        // Velocímetro
+        const kmh = pos.coords.speed ? Math.round(pos.coords.speed * 3.6) : 0;
+        document.getElementById('speed-val').textContent = kmh;
+
+        // Rotação da câmera e do ícone do veículo
         if (pos.coords.heading !== null && !isNaN(pos.coords.heading)) {
           carEl.style.transform = `rotate(${pos.coords.heading}deg)`;
-          if (modoNavegacaoAtivo) {
+          if (modoNavegacao) {
             map.setBearing(pos.coords.heading);
           }
         }
 
-        if (modoNavegacaoAtivo) {
+        if (modoNavegacao) {
           map.setCenter(userPos);
+          atualizarInstrucoesNavegacao();
+
+          // Recálculo automático se desviar da rota traçada (> 50m)
+          if (rotaCoords.length) {
+            const distMaisProxima = Math.min(...rotaCoords.map(c => calcularDistanciaMetros(userPos, c)));
+            if (distMaisProxima > 50 && destPos) {
+              falarInstrucao('Recalculando rota.');
+              const novaRota = await calcularRota(userPos, destPos);
+              passosRota = novaRota.legs[0].steps;
+              rotaCoords = novaRota.geometry.coordinates;
+              passoAtualIdx = 0;
+              map.getSource('route').setData(novaRota.geometry);
+            }
+          }
         }
       }, err => {
         console.warn('GPS indisponível:', err);
       }, { enableHighAccuracy: true });
     }
 
-    // --- 9. APPS EXTERNOS ---
     function abrirGoogleMaps() {
       if (destPos) window.open(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`, '_blank');
     }
