@@ -22,7 +22,7 @@ button,input{font:inherit}
 
 .appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:16px;background:rgba(4,16,28,.94);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px #0007;backdrop-filter:blur(12px)}
 .brand{font-size:13px;font-weight:900}.brand span{color:#38bdf8}
-.badges{display:flex;gap:5px}.badge{font-size:9px;font-weight:900;padding:5px 7px;border-radius:999px;background:#075985}.badge.off{background:#475569}.badge.ok{background:#059669}
+.badges{display:flex;gap:5px}.badge{font-size:9px;font-weight:900;padding:5px 7px;border-radius:999px;background:#075985;cursor:pointer}.badge.off{background:#475569}.badge.ok{background:#059669}
 
 .search{position:relative;display:flex;gap:4px;padding:5px;background:#07131ff5;border:1px solid #38bdf8;border-radius:15px;box-shadow:0 8px 24px #0008}
 .search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;padding:10px 8px;font-size:14px}.search input::placeholder{color:#94a3b8}
@@ -49,9 +49,10 @@ button,input{font:inherit}
 
 /* SIDE BUTTONS */
 .side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}
+body.nav-mode .side{top:118px}
 .side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px #0008;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .side button.locate{border-color:#38bdf8}
-.side button.sv{background:#0369a1;border-color:#38bdf8}
+.side button svg{display:block}
 
 /* RECENTRALIZAR (NAVEGAÇÃO) */
 .nav-recenter{position:fixed;right:14px;bottom:100px;z-index:34;width:54px;height:54px;border-radius:50%;background:#0284c7;color:#fff;font-size:22px;border:2px solid #fff;box-shadow:0 8px 22px #0008;display:none;align-items:center;justify-content:center;cursor:pointer}
@@ -91,6 +92,18 @@ button,input{font:inherit}
 
 .toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:11px 15px;border-radius:13px;font-size:12px;font-weight:700;max-width:90vw;text-align:center;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
 
+/* PLACA DE AVISO DE COMUNIDADE PRÓXIMA */
+.favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px #0008;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}
+.favela-sign.show{opacity:1;transform:translate(-50%,0)}
+body.nav-mode .favela-sign{top:132px}
+
+/* BANNER DE ALERTA - ENTRANDO EM COMUNIDADE */
+.danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px #000a;border:2px solid #fecaca}
+.danger-banner.show{display:flex}
+.danger-banner b{font-size:13px;line-height:1.35;font-weight:800}
+.danger-banner button{border:0;background:#ffffff33;color:#fff;width:30px;height:30px;border-radius:50%;font-weight:900;cursor:pointer;flex-shrink:0}
+@media(min-width:700px){.danger-banner{left:20px;right:auto;width:430px}}
+
 .modal{display:none;position:fixed;inset:0;z-index:90;background:#0009;align-items:flex-end}.modal.show{display:flex}.sheet{width:100%;background:#07131f;border-radius:22px 22px 0 0;padding:18px;border-top:1px solid #334155}.sheet h2{font-size:18px;margin-bottom:8px}.sheet p{font-size:12px;color:#94a3b8;line-height:1.45;margin-bottom:14px}.sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.sheet-grid button{border:1px solid #334155;border-radius:13px;padding:12px;background:#0b1b2a;color:#fff;text-align:left;font-weight:800;cursor:pointer}.sheet-close{width:100%;border:0;border-radius:12px;padding:12px;background:#1e293b;color:#fff;font-weight:900;margin-top:12px;cursor:pointer}
 
 @media(min-width:700px){
@@ -107,7 +120,7 @@ button,input{font:inherit}
     <div class="brand">🛡️ RADAR <span>SEGURO RJ PRO</span></div>
     <div class="badges">
       <span class="badge" id="themeBadge">AUTO</span>
-      <span class="badge">ANP</span>
+      <span class="badge" id="anpBadge">ANP</span>
       <span id="gpsBadge" class="badge off">GPS...</span>
     </div>
   </div>
@@ -143,7 +156,7 @@ button,input{font:inherit}
 
 <div class="side" id="sideControls">
   <button class="locate" id="locateBtn" title="Onde estou">◎</button>
-  <button class="sv" id="streetViewBtn" title="Abrir Google Street View">👁️</button>
+  <button id="streetViewBtn" title="Abrir Google Street View"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="3" fill="#fbbf24"/><path d="M12 9.2c-3 0-5.4 2.1-5.4 4.8v1.6h2l.6 6.4h5.6l.6-6.4h2v-1.6c0-2.7-2.4-4.8-5.4-4.8z" fill="#fbbf24"/></svg></button>
   <button id="northBtn" title="Norte">N</button>
   <button id="zoomIn">+</button>
   <button id="zoomOut">−</button>
@@ -184,6 +197,11 @@ button,input{font:inherit}
 </div>
 
 <div class="toast" id="toast"></div>
+<div class="favela-sign" id="favelaSign"></div>
+<div class="danger-banner" id="dangerBanner">
+  <b id="dangerBannerText"></b>
+  <button id="dangerBannerClose">✕</button>
+</div>
 
 <div class="modal" id="layersModal">
   <div class="sheet">
@@ -207,17 +225,19 @@ const ANP_APP='https://anpcomvcpostos.anp.gov.br/';
 const ANP_REPORT='https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
 const RJ_CENTER=[-43.40,-22.90];
 
-// Raio ajustado de 300m (0.3km) a 500m (0.5km) no máximo
-function makePerimeter(lon, lat, rKm=0.35){
+// Raio ajustado de 300m (0.3km) a 500m (0.5km) no máximo — círculo real (não quadrado)
+function makePerimeter(lon, lat, rKm=0.35, points=48){
   const rLat = rKm / 111.0;
   const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
-  return [
-    [+(lon - rLon).toFixed(5), +(lat - rLat).toFixed(5)],
-    [+(lon + rLon).toFixed(5), +(lat - rLat).toFixed(5)],
-    [+(lon + rLon).toFixed(5), +(lat + rLat).toFixed(5)],
-    [+(lon - rLon).toFixed(5), +(lat + rLat).toFixed(5)],
-    [+(lon - rLon).toFixed(5), +(lat - rLat).toFixed(5)]
-  ];
+  const coords=[];
+  for(let i=0;i<=points;i++){
+    const ang = (i/points) * 2 * Math.PI;
+    coords.push([
+      +(lon + rLon*Math.cos(ang)).toFixed(5),
+      +(lat + rLat*Math.sin(ang)).toFixed(5)
+    ]);
+  }
+  return coords;
 }
 
 const rawAreas = [
@@ -337,7 +357,7 @@ let fuelVisible=true, communityVisible=true, satelliteVisible=false;
 let fuelMarkers=[];
 let lastFuelLoad=0, lastFuelCenter=null, isFuelLoading=false;
 let geocodeTimer=null, geocodeAbort=null, lastGeocodeAt=0, toastTimer=null;
-let currentStep=0, lastAnnouncedStep=-1;
+let currentStep=0;
 let sheetExpanded=false;
 
 const map=new maplibregl.Map({
@@ -366,6 +386,22 @@ sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/
 
 map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-left');
 
+// FOLLOW MODE: durante a navegação o mapa segue o usuário automaticamente.
+// Se o usuário mexer no mapa manualmente (arrastar, zoom, girar), o
+// acompanhamento pausa por alguns segundos, ou até tocar em recentralizar.
+let followMode = true, followResumeTimer = null;
+function pauseFollow(){
+  followMode = false;
+  clearTimeout(followResumeTimer);
+  followResumeTimer = setTimeout(()=>{ followMode = true; }, 5000);
+}
+map.on('dragstart', e=>{ if(e.originalEvent) pauseFollow(); });
+map.on('zoomstart', e=>{ if(e.originalEvent) pauseFollow(); });
+map.on('rotatestart', e=>{ if(e.originalEvent) pauseFollow(); });
+
+// Reaplica o tema automático periodicamente (dia/noite muda com o horário)
+setInterval(()=>{ if(themeMode==='auto' && !satelliteVisible) applyTheme(); }, 5*60*1000);
+
 function applyTheme(){
   if(satelliteVisible) return;
   const isNight = () => {
@@ -389,6 +425,9 @@ function cycleTheme(){
 
 document.getElementById('themeChip').onclick = cycleTheme;
 document.getElementById('modalTheme').onclick = () => { cycleTheme(); document.getElementById('layersModal').classList.remove('show'); };
+document.getElementById('themeBadge').onclick = cycleTheme;
+document.getElementById('anpBadge').onclick = () => openExternal(ANP_APP);
+document.getElementById('gpsBadge').onclick = () => { if(!userPos){ startGPSWatch(); toast('Buscando localização...'); } else { locate(); } };
 
 function toast(msg,ms=3200){
 const e=document.getElementById('toast');e.textContent=msg;e.classList.add('show');
@@ -420,7 +459,7 @@ updateUserMarker(userPos, heading);
 setGPS(true,'GPS ATIVO');
 
 if(isFirst){map.flyTo({center:userPos,zoom:15.5,duration:700})}
-if(navActive){
+if(navActive && followMode){
   map.easeTo({
     center:userPos,
     zoom:18,
@@ -498,22 +537,62 @@ startGPSWatch();
 maybeLoadFuel(true);
 });
 
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'pt-BR';
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function showDangerBanner(name){
+  document.getElementById('dangerBannerText').textContent = `⚠ Você está entrando na comunidade ${name} — área de risco. Fique atento.`;
+  document.getElementById('dangerBanner').classList.add('show');
+}
+document.getElementById('dangerBannerClose').onclick = () => document.getElementById('dangerBanner').classList.remove('show');
+
+let insideAlertGiven = {}; // nome da comunidade -> já alertado nesta passagem
+
 function checkProximityDanger(){
   if(!userPos) return;
+  const sign = document.getElementById('favelaSign');
   const tag = document.getElementById('hudDangerTag');
-  for(let c of rawAreas){
-    let d = distanceKm(userPos, [c.c[0], c.c[1]]);
-    if(d <= (c.r + 0.3)){
-      tag.textContent = `⚠ ALERTA: ${c.name.toUpperCase()}`;
-      tag.classList.add('active');
-      return;
+  let nearest = null, nearestDist = Infinity;
+
+  for(const c of rawAreas){
+    const d = distanceKm(userPos, [c.c[0], c.c[1]]);
+    if(d < nearestDist){ nearestDist = d; nearest = c; }
+    // saiu do raio + margem: libera para alertar de novo numa próxima passagem
+    if(insideAlertGiven[c.name] && d > c.r + 0.3){
+      delete insideAlertGiven[c.name];
     }
   }
-  tag.classList.remove('active');
+
+  if(nearest && nearestDist <= nearest.r + 0.3){
+    sign.textContent = '⚠ Comunidade próxima: ' + nearest.name;
+    sign.classList.add('show');
+    tag.textContent = `⚠ ALERTA: ${nearest.name.toUpperCase()}`;
+    tag.classList.add('active');
+  }else{
+    sign.classList.remove('show');
+    tag.classList.remove('active');
+  }
+
+  // Entrando de fato na área da comunidade: aviso forte, 2x por voz
+  if(nearest && nearestDist <= nearest.r && !insideAlertGiven[nearest.name]){
+    insideAlertGiven[nearest.name] = true;
+    showDangerBanner(nearest.name);
+    speak(`Atenção! Você está entrando na comunidade ${nearest.name}, área de risco.`);
+    setTimeout(()=>{ speak(`Atenção! Você está entrando na comunidade ${nearest.name}, área de risco.`); }, 3800);
+  }
 }
 
 function locate(){
 if(!userPos){startGPSWatch();toast('Obtendo localização...');return}
+followMode = true;
+clearTimeout(followResumeTimer);
 map.flyTo({center:userPos,zoom:navActive?18:16.5,pitch:navActive?62:0,bearing:navActive?map.getBearing():0,duration:700});
 }
 document.getElementById('locateBtn').onclick=locate;
@@ -676,6 +755,7 @@ return j.routes;
 }
 
 function showRoute(){
+  stepAnnounce = {};
   document.getElementById('wazeSheet').classList.add('show');
   drawRoute(routeData);
   document.getElementById('sheetTime').textContent = Math.max(1, Math.round(routeData.duration/60)) + ' min';
@@ -713,10 +793,12 @@ document.getElementById('sheetToggleBtn').onclick=(e)=>{e.stopPropagation();togg
 async function startNav(){
 if(!routeData){toast('Calcule uma rota primeiro.');return}
 navActive=true;
+document.body.classList.add('nav-mode');
 document.getElementById('wazeHud').classList.add('show');
 document.getElementById('mainTopbar').classList.add('hide-nav');
 document.getElementById('mainBottomActions').classList.add('hide-nav');
 document.getElementById('navRecenter').classList.add('show');
+followMode = true;
 toggleSheet(false);
 
 try{if('wakeLock'in navigator)wakeLock=await navigator.wakeLock.request('screen')}catch(e){}
@@ -726,6 +808,7 @@ updateNavigation();
 
 function stopNav(){
 navActive=false;
+document.body.classList.remove('nav-mode');
 document.getElementById('wazeHud').classList.remove('show');
 document.getElementById('mainTopbar').classList.remove('hide-nav');
 document.getElementById('mainBottomActions').classList.remove('hide-nav');
@@ -750,6 +833,34 @@ function stepIconArrow(s){
   if(m.type==='roundabout'||m.type==='rotary') return '🔄';
   return '⬆';
 }
+function maneuverPhrase(s){
+  const m=s.maneuver||{};
+  if(m.type==='arrive') return 'você chegou ao seu destino';
+  if(m.type==='roundabout'||m.type==='rotary') return 'entre na rotatória';
+  if(m.modifier==='sharp left') return 'vire acentuadamente à esquerda';
+  if(m.modifier==='left') return 'vire à esquerda';
+  if(m.modifier==='slight left') return 'mantenha-se à esquerda';
+  if(m.modifier==='sharp right') return 'vire acentuadamente à direita';
+  if(m.modifier==='right') return 'vire à direita';
+  if(m.modifier==='slight right') return 'mantenha-se à direita';
+  return 'siga em frente';
+}
+
+let stepAnnounce = {}; // índice do passo -> distâncias já anunciadas
+function maybeAnnounceVoice(stepIdx, s, distMeters){
+  const thresholds = [300,100,40];
+  if(!stepAnnounce[stepIdx]) stepAnnounce[stepIdx] = new Set();
+  const done = stepAnnounce[stepIdx];
+  for(const t of thresholds){
+    if(distMeters <= t && !done.has(t)){
+      done.add(t);
+      const phrase = maneuverPhrase(s);
+      const street = s.name ? ` na ${s.name}` : '';
+      speak(t===40 ? `Agora, ${phrase}${street}` : `Em ${t} metros, ${phrase}${street}`);
+      break;
+    }
+  }
+}
 
 function updateNavigation(){
 if(!navActive||!userPos||!routeData)return;
@@ -771,10 +882,7 @@ if(next){
   document.getElementById('hudNextStreet').textContent = 'Destino final';
 }
 
-if(currentStep!==lastAnnouncedStep && bestDist<.09){
-  lastAnnouncedStep=currentStep;
-  if('speechSynthesis'in window){try{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(s.name?`Acesse ${s.name}`:'Siga em frente');u.lang='pt-BR';speechSynthesis.speak(u)}catch(e){}}
-}
+maybeAnnounceVoice(currentStep, s, distMeters);
 }
 
 document.getElementById('reportBtn').onclick=()=>openExternal(ANP_REPORT);
