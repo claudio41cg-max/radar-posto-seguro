@@ -16,8 +16,10 @@ button,input{font:inherit}
 .maplibregl-ctrl-attrib{font-size:9px;background:rgba(0,0,0,.55)!important;color:#ddd!important}
 .maplibregl-ctrl-attrib a{color:#ddd!important}
 
-.topbar{position:fixed;top:10px;left:10px;right:10px;z-index:20;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.topbar{position:fixed;top:10px;left:10px;right:10px;z-index:20;display:flex;flex-direction:column;gap:8px;pointer-events:none;transition:.3s}
 .topbar>*{pointer-events:auto}
+.topbar.hide-nav{transform:translateY(-120%);opacity:0;pointer-events:none}
+
 .appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:16px;background:rgba(4,16,28,.94);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px #0007;backdrop-filter:blur(12px)}
 .brand{font-size:13px;font-weight:900}.brand span{color:#38bdf8}
 .badges{display:flex;gap:5px}.badge{font-size:9px;font-weight:900;padding:5px 7px;border-radius:999px;background:#075985}.badge.off{background:#475569}.badge.ok{background:#059669}
@@ -32,43 +34,61 @@ button,input{font:inherit}
 .chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 11px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer}
 .chip.active{background:#075985;border-color:#38bdf8}
 
-.side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px}
-.side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px #0008;font-size:20px;cursor:pointer}
+/* WAZE HUD BANNER */
+.waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#000;color:#fff;padding:12px 16px 8px;box-shadow:0 6px 20px #000a;display:none;flex-direction:column}
+.waze-top-hud.show{display:flex}
+.waze-maneuver-row{display:flex;align-items:center;gap:16px}
+.waze-arrow{font-size:44px;line-height:1;font-weight:900;color:#fff;transform:translateY(-2px)}
+.waze-meta{flex:1}
+.waze-dist{font-size:24px;font-weight:900;letter-spacing:-0.5px}
+.waze-street{font-size:20px;font-weight:900;color:#38bdf8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.waze-sub-hud{background:#111;margin:8px -16px -8px;padding:6px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:#cbd5e1;border-top:1px solid #222}
+.waze-sub-hud span.next-name{color:#fff}
+.waze-danger-tag{color:#f87171;font-weight:900;display:none}
+.waze-danger-tag.active{display:inline}
+
+/* SIDE BUTTONS */
+.side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}
+.side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px #0008;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .side button.locate{border-color:#38bdf8}
+.side button.sv{background:#0369a1;border-color:#38bdf8}
 
-.bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px}
-.action{flex:1;border:0;border-radius:15px;padding:13px 7px;background:#000e;color:#fff;font-size:11px;font-weight:900;box-shadow:0 8px 22px #0008;cursor:pointer}
-.action.primary{background:#0284c7}.action.danger{background:#991b1b}.action.anp{background:#166534}
+/* BOTTOM RETRACTABLE WAZE PANEL */
+.waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#ffffff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(0.1,0.9,0.2,1);transform:translateY(calc(100% - 75px));display:none}
+.waze-bottom-sheet.show{display:block}
+.waze-bottom-sheet.expanded{transform:translateY(0)}
+.sheet-handle{width:40px;height:5px;background:#cbd5e1;border-radius:99px;margin:8px auto 4px;cursor:pointer}
+.sheet-bar{display:flex;align-items:center;justify-content:space-between;padding:4px 18px 12px;cursor:pointer}
+.sheet-recenter{display:flex;align-items:center;gap:10px}
+.recenter-icon{width:40px;height:40px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.sheet-time-dist{display:flex;flex-direction:column}
+.sheet-time-dist b{font-size:18px;font-weight:900;color:#0f172a}
+.sheet-time-dist span{font-size:13px;color:#64748b;font-weight:700}
+.sheet-toggle-btn{padding:8px 14px;border-radius:99px;background:#f1f5f9;color:#0284c7;font-size:13px;font-weight:900;border:0}
 
-.route-panel{position:fixed;left:10px;right:10px;bottom:75px;z-index:25;display:none;background:#020a12f7;border:1px solid #1e3a4f;border-radius:20px;padding:14px;box-shadow:0 15px 40px #000b;backdrop-filter:blur(14px)}
-.route-panel.show{display:block}.route-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.route-dest{font-size:14px;font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.close-route{border:0;background:#1e293b;color:#fff;border-radius:10px;padding:7px 9px;cursor:pointer}
-.route-main{display:flex;align-items:end;gap:10px;margin:10px 0}.route-time{font-size:30px;font-weight:900;color:#7dd3fc}.route-dist{font-size:14px;color:#94a3b8;padding-bottom:4px}
-.route-options{display:flex;gap:7px;overflow-x:auto;padding-bottom:5px}.route-card{min-width:125px;border:1px solid #334155;background:#0b1b2a;border-radius:12px;padding:9px;cursor:pointer}.route-card.active{border-color:#38bdf8;background:#082f49}.route-card b{font-size:16px}.route-card span{display:block;font-size:10px;color:#94a3b8;margin-top:3px}
-.route-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.route-buttons button{border:0;border-radius:11px;padding:11px;font-weight:900;color:#fff;cursor:pointer}.start{background:#059669}.external{background:#334155}
+.sheet-content{padding:0 18px 20px;border-top:1px solid #f1f5f9;display:flex;flex-direction:column;gap:10px}
+.sheet-nav-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.sheet-nav-actions button{border:0;border-radius:14px;padding:12px;font-size:13px;font-weight:900;color:#fff;cursor:pointer}
+.btn-nav-radar{background:#0284c7}.btn-nav-stop{background:#dc2626}
+.sheet-external-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sheet-external-grid button{border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;border-radius:12px;padding:11px;font-size:12px;font-weight:800;cursor:pointer}
 
-.nav-banner{position:fixed;top:10px;left:10px;right:10px;z-index:35;display:none;border-radius:20px;padding:15px 18px;background:#034444fa;border:2px solid #34d399;box-shadow:0 12px 32px #000c}.nav-banner.show{display:block}
-.nav-waze-row{display:flex;align-items:center;gap:14px}
-.nav-turn-icon{font-size:36px;font-weight:900;line-height:1}
-.nav-turn-text{flex:1}
-.nav-small{font-size:11px;font-weight:700;color:#a7f3d0;text-transform:uppercase;letter-spacing:1px}
-.nav-instruction{font-size:20px;font-weight:900;margin-top:2px;color:#fff}
-.nav-next{font-size:12px;color:#d1fae5;margin-top:4px}
-.nav-speedo{background:#000a;border:2px solid #38bdf8;border-radius:50%;width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
-.nav-speedo span{font-size:8px;color:#94a3b8}
-
-.user-marker{width:24px;height:24px;border-radius:50%;background:#0284c7;border:3px solid #fff;box-shadow:0 0 0 6px rgba(2,132,199,0.4),0 4px 12px #000a;position:relative}
-.user-marker::after{content:'';position:absolute;top:-8px;left:7px;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid #fff}
-.fuel-marker{width:30px;height:30px;border-radius:50%;background:#0ea5e9;border:2px solid #fff;box-shadow:0 3px 10px #0008;display:flex;align-items:center;justify-content:center;font-size:15px}
+/* MAP USER ARROW (WAZE STYLE) */
+.user-marker-waze{width:36px;height:36px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="%230284c7" opacity="0.3"/><path d="M20 4 L33 32 L20 26 L7 32 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="2.5"/></svg>') no-repeat center/contain;transform:translate(-50%,-50%)}
+.fuel-marker{width:28px;height:28px;border-radius:50%;background:#0ea5e9;border:2px solid #fff;box-shadow:0 3px 10px #0008;display:flex;align-items:center;justify-content:center;font-size:14px}
 .fuel-marker.gnv{background:#16a34a}
 
-.popup{font-size:12px;line-height:1.4;min-width:190px}.popup h3{font-size:14px;margin-bottom:5px}.muted{color:#94a3b8}.popup-actions{display:flex;gap:6px;margin-top:9px}.popup-actions a{flex:1;text-align:center;text-decoration:none;padding:7px;border-radius:8px;font-size:10px;font-weight:900;color:#fff;background:#166534}.popup-actions a.report{background:#991b1b}
+.bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
+.bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
+.action{flex:1;border:0;border-radius:15px;padding:13px 7px;background:#000e;color:#fff;font-size:11px;font-weight:900;box-shadow:0 8px 22px #0008;cursor:pointer}
+.action.primary{background:#0284c7}.action.danger{background:#991b1b}.action.anp{background:#166534}
 
 .toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:11px 15px;border-radius:13px;font-size:12px;font-weight:700;max-width:90vw;text-align:center;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
 
 .modal{display:none;position:fixed;inset:0;z-index:90;background:#0009;align-items:flex-end}.modal.show{display:flex}.sheet{width:100%;background:#07131f;border-radius:22px 22px 0 0;padding:18px;border-top:1px solid #334155}.sheet h2{font-size:18px;margin-bottom:8px}.sheet p{font-size:12px;color:#94a3b8;line-height:1.45;margin-bottom:14px}.sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.sheet-grid button{border:1px solid #334155;border-radius:13px;padding:12px;background:#0b1b2a;color:#fff;text-align:left;font-weight:800;cursor:pointer}.sheet-close{width:100%;border:0;border-radius:12px;padding:12px;background:#1e293b;color:#fff;font-weight:900;margin-top:12px;cursor:pointer}
 
 @media(min-width:700px){
-.topbar{left:20px;right:auto;width:460px}.route-panel{left:20px;right:auto;width:430px}.bottom-actions{left:auto;right:20px;width:430px}.nav-banner{left:20px;right:auto;width:560px}
+.topbar{left:20px;right:auto;width:460px}.waze-bottom-sheet{left:20px;right:auto;width:430px;border-radius:20px}.bottom-actions{left:auto;right:20px;width:430px}
 }
 </style>
 </head>
@@ -76,7 +96,8 @@ button,input{font:inherit}
 <body>
 <div id="map"></div>
 
-<div class="topbar">
+<!-- TOPBAR NORMAL -->
+<div class="topbar" id="mainTopbar">
   <div class="appbar">
     <div class="brand">🛡️ RADAR <span>SEGURO RJ PRO</span></div>
     <div class="badges">
@@ -101,45 +122,58 @@ button,input{font:inherit}
   </div>
 </div>
 
-<div class="nav-banner" id="navBanner">
-  <div class="nav-waze-row">
-    <div class="nav-turn-icon" id="navIcon">⬆️</div>
-    <div class="nav-turn-text">
-      <div class="nav-small" id="navAlertStatus">NAVEGAÇÃO ATIVA</div>
-      <div class="nav-instruction" id="navInstruction">Siga pela rota</div>
-      <div class="nav-next" id="navNext">Aguardando percurso...</div>
+<!-- WAZE TURN BY TURN HUD -->
+<div class="waze-top-hud" id="wazeHud">
+  <div class="waze-maneuver-row">
+    <div class="waze-arrow" id="hudArrow">↰</div>
+    <div class="waze-meta">
+      <div class="waze-dist" id="hudDist">110 m</div>
+      <div class="waze-street" id="hudStreet">Rua de Destino</div>
     </div>
-    <div class="nav-speedo"><span id="speedVal">0</span><span>km/h</span></div>
+  </div>
+  <div class="waze-sub-hud">
+    <div>em seguida <span id="hudNextIcon">↰</span> <span class="next-name" id="hudNextStreet">Próxima via</span></div>
+    <div class="waze-danger-tag" id="hudDangerTag">⚠ ALERTA DE ÁREA</div>
   </div>
 </div>
 
-<div class="side">
+<!-- SIDE BUTTONS -->
+<div class="side" id="sideControls">
   <button class="locate" id="locateBtn" title="Onde estou">◎</button>
+  <button class="sv" id="streetViewBtn" title="Abrir Google Street View">👁️</button>
   <button id="northBtn" title="Norte">N</button>
   <button id="zoomIn">+</button>
   <button id="zoomOut">−</button>
   <button id="layersBtn">☷</button>
 </div>
 
-<div class="route-panel" id="routePanel">
-  <div class="route-head">
-    <div class="route-dest" id="routeDest">Destino</div>
-    <button class="close-route" id="closeRoute">✕</button>
+<!-- RETRACTABLE WAZE PANEL -->
+<div class="waze-bottom-sheet" id="wazeSheet">
+  <div class="sheet-handle" id="sheetHandle"></div>
+  <div class="sheet-bar" id="sheetBar">
+    <div class="sheet-recenter" id="btnRecenter">
+      <div class="recenter-icon">🎯</div>
+      <div class="sheet-time-dist">
+        <b id="sheetTime">-- min</b>
+        <span id="sheetDist">-- km • Chegada prevista</span>
+      </div>
+    </div>
+    <button class="sheet-toggle-btn" id="sheetToggleBtn">Opções ▴</button>
   </div>
-  <div class="route-main">
-    <div class="route-time" id="routeTime">-- min</div>
-    <div class="route-dist" id="routeDist">-- km</div>
-  </div>
-  <div class="route-options" id="routeOptions"></div>
-  <div class="route-buttons">
-    <button class="start" id="startNav">▶ Iniciar estilo Waze</button>
-    <button class="external" id="openMaps">Google Maps</button>
-    <button class="external" id="openWaze">Waze</button>
-    <button class="external" id="stopNav">Parar</button>
+  
+  <div class="sheet-content">
+    <div class="sheet-nav-actions">
+      <button class="btn-nav-radar" id="startRadarBtn">▶ Iniciar Radar Seguro</button>
+      <button class="btn-nav-stop" id="stopNavBtn">⏹ Parar</button>
+    </div>
+    <div class="sheet-external-grid">
+      <button id="openWaze">Abrir no Waze</button>
+      <button id="openMaps">Abrir Google Maps</button>
+    </div>
   </div>
 </div>
 
-<div class="bottom-actions">
+<div class="bottom-actions" id="mainBottomActions">
   <button class="action danger" id="reportBtn">🚨 Denunciar</button>
   <button class="action primary" id="postosBtn">⛽ Postos</button>
   <button class="action anp" id="anpBtn">🏛️ ANP</button>
@@ -147,17 +181,18 @@ button,input{font:inherit}
 
 <div class="toast" id="toast"></div>
 
+<!-- LAYERS MODAL -->
 <div class="modal" id="layersModal">
   <div class="sheet">
-    <h2>Camadas e Visualização</h2>
-    <p>O Radar Seguro mapeia áreas de alerta de Santa Cruz a Paraty, otimizado para navegação contínua.</p>
+    <h2>Camadas e Serviços</h2>
+    <p>Perímetros de segurança dinâmicos e monitoramento continuo de vias.</p>
     <div class="sheet-grid">
-      <button id="modalTheme">🌓 Alternar Tema (Claro/Escuro/Auto)</button>
+      <button id="modalTheme">🌓 Alternar Tema</button>
       <button id="modalCommunity">🟥 Zonas de Risco</button>
       <button id="modalFuel">⛽ Postos</button>
       <button id="modalSatellite">🛰️ Satélite</button>
+      <button id="modalStreetView">👁️ Google Street View</button>
       <button id="modalLocate">📍 Minha Posição</button>
-      <button id="modalReport">🚨 Denúncia ANP</button>
     </div>
     <button class="sheet-close" id="closeLayers">Fechar</button>
   </div>
@@ -169,123 +204,126 @@ const ANP_APP='https://anpcomvcpostos.anp.gov.br/';
 const ANP_REPORT='https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
 const RJ_CENTER=[-43.40,-22.90];
 
-function makePolygon(lon, lat, rX, rY=rX){
+// Gera perimetro aproximado real de 500m a 900m conforme densidade
+function makePerimeter(lon, lat, rKm=0.5){
+  const rLat = rKm / 111.0;
+  const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
   return [
-    [+(lon - rX).toFixed(5), +(lat - rY).toFixed(5)],
-    [+(lon + rX).toFixed(5), +(lat - rY).toFixed(5)],
-    [+(lon + rX).toFixed(5), +(lat + rY).toFixed(5)],
-    [+(lon - rX).toFixed(5), +(lat + rY).toFixed(5)],
-    [+(lon - rX).toFixed(5), +(lat - rY).toFixed(5)]
+    [+(lon - rLon).toFixed(5), +(lat - rLat).toFixed(5)],
+    [+(lon + rLon).toFixed(5), +(lat - rLat).toFixed(5)],
+    [+(lon + rLon).toFixed(5), +(lat + rLat).toFixed(5)],
+    [+(lon - rLon).toFixed(5), +(lat + rLat).toFixed(5)],
+    [+(lon - rLon).toFixed(5), +(lat - rLat).toFixed(5)]
   ];
 }
 
 const rawAreas = [
-  // SANTA CRUZ, CAMPO GRANDE E BANGU
-  {name:'Favela do Aço', c:[-43.6475,-22.8942], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Antares', c:[-43.6702,-22.9158], rx:0.008, ry:0.006, type:'conflito'},
-  {name:'Comunidade do Rola', c:[-43.6825,-22.9231], rx:0.010, ry:0.008, type:'conflito'},
-  {name:'Cesarão', c:[-43.6558,-22.9114], rx:0.010, ry:0.007, type:'conflito'},
-  {name:'Barbante / Carobinha', c:[-43.5419,-22.8631], rx:0.010, ry:0.008, type:'conflito'},
-  {name:'Vila Nova (Cabuçu)', c:[-43.5283,-22.8725], rx:0.007, ry:0.006, type:'conflito'},
-  {name:'Pedregoso / Pai João', c:[-43.5600,-22.8950], rx:0.008, ry:0.006, type:'conflito'},
-  {name:'Vila Aliança', c:[-43.4889,-22.8719], rx:0.011, ry:0.009, type:'conflito'},
-  {name:'Vila Kennedy', c:[-43.4772,-22.8597], rx:0.012, ry:0.009, type:'conflito'},
-  {name:'Complexo da Coreia', c:[-43.4958,-22.8833], rx:0.014, ry:0.011, type:'conflito'},
-  {name:'Vila Vintém', c:[-43.4356,-22.8778], rx:0.011, ry:0.008, type:'conflito'},
-  {name:'Catiri', c:[-43.4697,-22.8519], rx:0.008, ry:0.006, type:'conflito'},
-  {name:'Batan', c:[-43.4258,-22.8683], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Fumacê', c:[-43.4194,-22.8875], rx:0.007, ry:0.006, type:'conflito'},
+  // SANTA CRUZ A REALENGO (500m a 800m)
+  {name:'Favela do Aço', c:[-43.6475,-22.8942], r:0.65, type:'conflito'},
+  {name:'Antares', c:[-43.6702,-22.9158], r:0.55, type:'conflito'},
+  {name:'Comunidade do Rola', c:[-43.6825,-22.9231], r:0.75, type:'conflito'},
+  {name:'Cesarão', c:[-43.6558,-22.9114], r:0.70, type:'conflito'},
+  {name:'Carobinha / Barbante', c:[-43.5419,-22.8631], r:0.65, type:'conflito'},
+  {name:'Vila Nova (Cabuçu)', c:[-43.5283,-22.8725], r:0.50, type:'conflito'},
+  {name:'Pedregoso / Pai João', c:[-43.5600,-22.8950], r:0.55, type:'conflito'},
+  {name:'Vila Aliança', c:[-43.4889,-22.8719], r:0.70, type:'conflito'},
+  {name:'Vila Kennedy', c:[-43.4772,-22.8597], r:0.80, type:'conflito'},
+  {name:'Complexo da Coreia', c:[-43.4958,-22.8833], r:0.90, type:'conflito'},
+  {name:'Vila Vintém', c:[-43.4356,-22.8778], r:0.70, type:'conflito'},
+  {name:'Catiri', c:[-43.4697,-22.8519], r:0.55, type:'conflito'},
+  {name:'Batan (Realengo)', c:[-43.4258,-22.8683], r:0.60, type:'conflito'},
+  {name:'Fumacê', c:[-43.4194,-22.8875], r:0.50, type:'conflito'},
 
-  // EIXO AV. BRASIL / ZONA NORTE
-  {name:'Muquiço / Palmeirinha', c:[-43.3778,-22.8461], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], rx:0.016, ry:0.013, type:'conflito'},
-  {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Complexo de Acari', c:[-43.3283,-22.8292], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Complexo de Israel / Vigário', c:[-43.2981,-22.8258], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Morro do Juramento', c:[-43.3153,-22.8647], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Complexo da Penha', c:[-43.2847,-22.8425], rx:0.016, ry:0.013, type:'conflito'},
-  {name:'Complexo do Alemão', c:[-43.2725,-22.8592], rx:0.017, ry:0.014, type:'conflito'},
-  {name:'Complexo da Maré', c:[-43.2458,-22.8583], rx:0.018, ry:0.015, type:'conflito'},
-  {name:'Manguinhos', c:[-43.2453,-22.8803], rx:0.011, ry:0.009, type:'conflito'},
-  {name:'Jacarezinho', c:[-43.2558,-22.8886], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Parque Arará / Mandela', c:[-43.2386,-22.8847], rx:0.008, ry:0.007, type:'conflito'},
-  {name:'Complexo do Caju', c:[-43.2181,-22.8892], rx:0.010, ry:0.008, type:'conflito'},
-  {name:'Morro da Providência', c:[-43.1917,-22.8986], rx:0.007, ry:0.006, type:'conflito'},
-  {name:'São Carlos / Mineira', c:[-43.1978,-22.9142], rx:0.010, ry:0.008, type:'conflito'},
-  {name:'Morro da Serrinha', c:[-43.3308,-22.8683], rx:0.008, ry:0.007, type:'conflito'},
-  {name:'Cajueiro e Congonha', c:[-43.3375,-22.8617], rx:0.008, ry:0.007, type:'conflito'},
-  {name:'Faz Quem Quer', c:[-43.3486,-22.8572], rx:0.007, ry:0.006, type:'conflito'},
-  {name:'Morro dos Macacos', c:[-43.2561,-22.9150], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Salgueiro / Borel / Formiga', c:[-43.2444,-22.9333], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Turano', c:[-43.2208,-22.9239], rx:0.007, ry:0.006, type:'conflito'},
-  {name:'Mangueira', c:[-43.2389,-22.9039], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Dendê (Ilha)', c:[-43.2039,-22.8028], rx:0.011, ry:0.009, type:'conflito'},
-  {name:'Barbante / Pq. Royal (Ilha)', c:[-43.1972,-22.7917], rx:0.009, ry:0.007, type:'conflito'},
+  // EIXO AV. BRASIL / ZONA NORTE / CENTRO
+  {name:'Muquiço / Palmeirinha', c:[-43.3778,-22.8461], r:0.60, type:'conflito'},
+  {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.95, type:'conflito'},
+  {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.90, type:'conflito'},
+  {name:'Complexo de Acari / Amarelinho', c:[-43.3283,-22.8292], r:0.75, type:'conflito'},
+  {name:'Complexo de Israel / Vigário', c:[-43.2981,-22.8258], r:0.90, type:'conflito'},
+  {name:'Morro do Juramento', c:[-43.3153,-22.8647], r:0.60, type:'conflito'},
+  {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.95, type:'conflito'},
+  {name:'Complexo do Alemão', c:[-43.2725,-22.8592], r:0.95, type:'conflito'},
+  {name:'Complexo da Maré', c:[-43.2458,-22.8583], r:0.95, type:'conflito'},
+  {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.70, type:'conflito'},
+  {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.75, type:'conflito'},
+  {name:'Parque Arará / Mandela', c:[-43.2386,-22.8847], r:0.55, type:'conflito'},
+  {name:'Complexo do Caju', c:[-43.2181,-22.8892], r:0.70, type:'conflito'},
+  {name:'Morro da Providência', c:[-43.1917,-22.8986], r:0.50, type:'conflito'},
+  {name:'São Carlos / Mineira (Estácio)', c:[-43.1978,-22.9142], r:0.65, type:'conflito'},
+  {name:'Morro da Serrinha', c:[-43.3308,-22.8683], r:0.60, type:'conflito'},
+  {name:'Cajueiro / Congonha', c:[-43.3375,-22.8617], r:0.55, type:'conflito'},
+  {name:'Faz Quem Quer', c:[-43.3486,-22.8572], r:0.50, type:'conflito'},
+  {name:'Morro dos Macacos', c:[-43.2561,-22.9150], r:0.60, type:'conflito'},
+  {name:'Salgueiro / Borel / Formiga', c:[-43.2444,-22.9333], r:0.80, type:'conflito'},
+  {name:'Turano', c:[-43.2208,-22.9239], r:0.50, type:'conflito'},
+  {name:'Mangueira', c:[-43.2389,-22.9039], r:0.65, type:'conflito'},
+  {name:'Dendê (Ilha)', c:[-43.2039,-22.8028], r:0.75, type:'conflito'},
+  {name:'Barbante / Pq. Royal (Ilha)', c:[-43.1972,-22.7917], r:0.60, type:'conflito'},
 
-  // JACAREPAGUÁ / PRAÇA SECA / ZONA SUL
-  {name:'Cidade de Deus', c:[-43.3611,-22.9467], rx:0.014, ry:0.011, type:'conflito'},
-  {name:'Rio das Pedras', c:[-43.3364,-22.9772], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Muzema / Tijuquinha', c:[-43.3128,-22.9908], rx:0.011, ry:0.009, type:'conflito'},
-  {name:'Gardênia Azul', c:[-43.3486,-22.9614], rx:0.010, ry:0.008, type:'conflito'},
-  {name:'Curicica / Vila União', c:[-43.3858,-22.9725], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Covanca / Barão (Praça Seca)', c:[-43.3556,-22.8931], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Chacrinha (Praça Seca)', c:[-43.3492,-22.9006], rx:0.008, ry:0.007, type:'conflito'},
-  {name:'Morro do Jordão', c:[-43.3853,-22.9236], rx:0.009, ry:0.008, type:'conflito'},
-  {name:'Boiúna', c:[-43.4014,-22.9367], rx:0.008, ry:0.007, type:'conflito'},
-  {name:'Freguesia (Trânsito Monitorado)', c:[-43.3414,-22.9389], rx:0.016, ry:0.013, type:'atencao'},
-  {name:'Rocinha', c:[-43.2481,-22.9883], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Vidigal', c:[-43.2356,-22.9939], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Pavão-Pavãozinho / Cantagalo', c:[-43.1947,-22.9797], rx:0.008, ry:0.007, type:'conflito'},
-  {name:'Tabajaras / Cabritos', c:[-43.1906,-22.9669], rx:0.008, ry:0.006, type:'conflito'},
-  {name:'Babilônia / Chapéu Mangueira', c:[-43.1678,-22.9619], rx:0.006, ry:0.005, type:'conflito'},
-  {name:'Santa Marta', c:[-43.1931,-22.9472], rx:0.006, ry:0.005, type:'conflito'},
-  {name:'Fallet / Prazeres / Coroa', c:[-43.1989,-22.9231], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Terreirão (Recreio)', c:[-43.4908,-23.0231], rx:0.011, ry:0.008, type:'conflito'},
-  {name:'Morro do Banco (Barra)', c:[-43.2981,-23.0014], rx:0.007, ry:0.006, type:'conflito'},
+  // JACAREPAGUÁ / PRAÇA SECA / ZONA SUL / BARRA
+  {name:'Cidade de Deus (CDD)', c:[-43.3611,-22.9467], r:0.85, type:'conflito'},
+  {name:'Rio das Pedras', c:[-43.3364,-22.9772], r:0.90, type:'conflito'},
+  {name:'Muzema e Tijuquinha', c:[-43.3128,-22.9908], r:0.70, type:'conflito'},
+  {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.65, type:'conflito'},
+  {name:'Curicica / Vila União', c:[-43.3858,-22.9725], r:0.60, type:'conflito'},
+  {name:'Covanca / Barão (Praça Seca)', c:[-43.3556,-22.8931], r:0.75, type:'conflito'},
+  {name:'Chacrinha (Praça Seca)', c:[-43.3492,-22.9006], r:0.55, type:'conflito'},
+  {name:'Morro do Jordão', c:[-43.3853,-22.9236], r:0.65, type:'conflito'},
+  {name:'Boiúna', c:[-43.4014,-22.9367], r:0.55, type:'conflito'},
+  {name:'Freguesia (Trânsito Monitorado)', c:[-43.3414,-22.9389], r:0.80, type:'atencao'},
+  {name:'Rocinha', c:[-43.2481,-22.9883], r:0.90, type:'conflito'},
+  {name:'Vidigal', c:[-43.2356,-22.9939], r:0.60, type:'conflito'},
+  {name:'Pavão-Pavãozinho / Cantagalo', c:[-43.1947,-22.9797], r:0.55, type:'conflito'},
+  {name:'Tabajaras / Cabritos', c:[-43.1906,-22.9669], r:0.50, type:'conflito'},
+  {name:'Babilônia / Chapéu Mangueira', c:[-43.1678,-22.9619], r:0.45, type:'conflito'},
+  {name:'Santa Marta', c:[-43.1931,-22.9472], r:0.45, type:'conflito'},
+  {name:'Fallet / Prazeres / Coroa', c:[-43.1989,-22.9231], r:0.70, type:'conflito'},
+  {name:'Terreirão (Recreio)', c:[-43.4908,-23.0231], r:0.65, type:'conflito'},
+  {name:'Morro do Banco (Barra)', c:[-43.2981,-23.0014], r:0.50, type:'conflito'},
 
   // BAIXADA FLUMINENSE
-  {name:'Lixão / Mangueirinha (Caxias)', c:[-43.3108,-22.7844], rx:0.014, ry:0.011, type:'conflito'},
-  {name:'Beira-Mar / Missões (Caxias)', c:[-43.2756,-22.7661], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Vila Operária / Imbariê', c:[-43.2842,-22.7236], rx:0.016, ry:0.013, type:'atencao'},
-  {name:'Trio de Ouro / Vilar dos Teles', c:[-43.3714,-22.7958], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Igrejinha (Meriti)', c:[-43.3853,-22.7886], rx:0.009, ry:0.007, type:'conflito'},
-  {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Guacha / Sta. Tereza (B. Roxo)', c:[-43.3867,-22.7364], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Castelar (Belford Roxo)', c:[-43.3981,-22.7597], rx:0.008, ry:0.007, type:'conflito'},
-  {name:'Chatuba (Mesquita/Nilópolis)', c:[-43.4183,-22.7817], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Corumbá / Dom Bosco (N. Iguaçu)', c:[-43.4683,-22.7558], rx:0.014, ry:0.011, type:'conflito'},
-  {name:'Danon / Ipiranga (N. Iguaçu)', c:[-43.4536,-22.7561], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Cabuçu / Valverde', c:[-43.5186,-22.7719], rx:0.016, ry:0.013, type:'atencao'},
-  {name:'Carlos Sampaio / Austin', c:[-43.5281,-22.7303], rx:0.014, ry:0.011, type:'conflito'},
-  {name:'São Simão (Queimados)', c:[-43.5683,-22.7094], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Eixo KM 32 / Marapicu', c:[-43.5519,-22.7681], rx:0.017, ry:0.014, type:'atencao'},
-  {name:'Guandu / Lagoinha', c:[-43.6083,-22.7911], rx:0.016, ry:0.013, type:'atencao'},
-  {name:'KM 40 / Seropédica', c:[-43.6742,-22.7689], rx:0.017, ry:0.014, type:'atencao'},
+  {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.75, type:'conflito'},
+  {name:'Beira-Mar / Missões (Caxias)', c:[-43.2756,-22.7661], r:0.70, type:'conflito'},
+  {name:'Vila Operária / Imbariê', c:[-43.2842,-22.7236], r:0.80, type:'atencao'},
+  {name:'Trio de Ouro / Vilar dos Teles', c:[-43.3714,-22.7958], r:0.75, type:'conflito'},
+  {name:'Igrejinha (Meriti)', c:[-43.3853,-22.7886], r:0.55, type:'conflito'},
+  {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.80, type:'conflito'},
+  {name:'Guacha / Sta. Tereza (B. Roxo)', c:[-43.3867,-22.7364], r:0.70, type:'conflito'},
+  {name:'Castelar (Belford Roxo)', c:[-43.3981,-22.7597], r:0.55, type:'conflito'},
+  {name:'Chatuba (Mesquita/Nilópolis)', c:[-43.4183,-22.7817], r:0.80, type:'conflito'},
+  {name:'Corumbá / Dom Bosco (N. Iguaçu)', c:[-43.4683,-22.7558], r:0.75, type:'conflito'},
+  {name:'Danon / Ipiranga (N. Iguaçu)', c:[-43.4536,-22.7561], r:0.70, type:'conflito'},
+  {name:'Cabuçu / Valverde', c:[-43.5186,-22.7719], r:0.80, type:'atencao'},
+  {name:'Carlos Sampaio / Austin', c:[-43.5281,-22.7303], r:0.70, type:'conflito'},
+  {name:'São Simão (Queimados)', c:[-43.5683,-22.7094], r:0.75, type:'conflito'},
+  {name:'Eixo KM 32 / Marapicu', c:[-43.5519,-22.7681], r:0.85, type:'atencao'},
+  {name:'Guandu / Lagoinha', c:[-43.6083,-22.7911], r:0.80, type:'atencao'},
+  {name:'KM 40 / Seropédica', c:[-43.6742,-22.7689], r:0.85, type:'atencao'},
 
-  // COSTA VERDE (ITAGUAÍ A PARATY)
-  {name:'Piranema (Itaguaí/Seropédica)', c:[-43.7389,-22.7931], rx:0.015, ry:0.012, type:'atencao'},
-  {name:'Chaperó (Itaguaí)', c:[-43.7364,-22.8347], rx:0.016, ry:0.013, type:'conflito'},
-  {name:'Sem Terra / Monte Serrat', c:[-43.7744,-22.8681], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Engenho / Brisamar', c:[-43.7917,-22.8794], rx:0.011, ry:0.009, type:'conflito'},
-  {name:'Mazomba', c:[-43.8258,-22.8833], rx:0.010, ry:0.008, type:'conflito'},
-  {name:'Praia Grande / Ranchito (Mangaratiba)', c:[-44.0411,-22.9558], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Itacuruçá / Muriqui', c:[-43.9167,-22.9467], rx:0.011, ry:0.009, type:'conflito'},
-  {name:'Belém (Angra)', c:[-44.2986,-22.9719], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Japuíba / Areal (Angra)', c:[-44.3092,-22.9839], rx:0.014, ry:0.011, type:'conflito'},
-  {name:'Frade (Angra)', c:[-44.4367,-22.9972], rx:0.015, ry:0.012, type:'conflito'},
-  {name:'Camorim (Angra)', c:[-44.2711,-23.0031], rx:0.012, ry:0.010, type:'conflito'},
-  {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], rx:0.010, ry:0.008, type:'conflito'},
-  {name:'Pq. Mambucaba / Perequê', c:[-44.5261,-23.0236], rx:0.016, ry:0.012, type:'conflito'},
-  {name:'Ilha das Cobras (Paraty)', c:[-44.7189,-23.2167], rx:0.008, ry:0.006, type:'conflito'},
-  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], rx:0.011, ry:0.008, type:'conflito'},
-  {name:'Mangueira (Paraty)', c:[-44.7175,-23.2208], rx:0.007, ry:0.006, type:'conflito'},
-  {name:'Patrimônio / Trindade', c:[-44.7214,-23.3361], rx:0.012, ry:0.009, type:'atencao'}
+  // COSTA VERDE A PARATY
+  {name:'Reta de Piranema', c:[-43.7389,-22.7931], r:0.75, type:'atencao'},
+  {name:'Chaperó (Itaguaí)', c:[-43.7364,-22.8347], r:0.80, type:'conflito'},
+  {name:'Sem Terra / Monte Serrat', c:[-43.7744,-22.8681], r:0.65, type:'conflito'},
+  {name:'Engenho / Brisamar', c:[-43.7917,-22.8794], r:0.60, type:'conflito'},
+  {name:'Mazomba (Itaguaí)', c:[-43.8258,-22.8833], r:0.55, type:'conflito'},
+  {name:'Praia Grande / Ranchito (Mangaratiba)', c:[-44.0411,-22.9558], r:0.65, type:'conflito'},
+  {name:'Itacuruçá / Muriqui', c:[-43.9167,-22.9467], r:0.60, type:'conflito'},
+  {name:'Belém (Angra)', c:[-44.2986,-22.9719], r:0.75, type:'conflito'},
+  {name:'Japuíba / Areal (Angra)', c:[-44.3092,-22.9839], r:0.70, type:'conflito'},
+  {name:'Frade (Angra)', c:[-44.4367,-22.9972], r:0.75, type:'conflito'},
+  {name:'Camorim (Angra)', c:[-44.2711,-23.0031], r:0.60, type:'conflito'},
+  {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], r:0.55, type:'conflito'},
+  {name:'Pq. Mambucaba / Perequê', c:[-44.5261,-23.0236], r:0.80, type:'conflito'},
+  {name:'Ilha das Cobras (Paraty)', c:[-44.7189,-23.2167], r:0.50, type:'conflito'},
+  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.65, type:'conflito'},
+  {name:'Mangueira (Paraty)', c:[-44.7175,-23.2208], r:0.45, type:'conflito'},
+  {name:'Patrimônio / Trindade', c:[-44.7214,-23.3361], r:0.65, type:'atencao'}
 ];
 
 const communities = rawAreas.map(a => ({
   name: a.name,
   type: a.type,
-  coords: makePolygon(a.c[0], a.c[1], a.rx, a.ry)
+  coords: makePerimeter(a.c[0], a.c[1], a.r)
 }));
 
 let themeMode = 'auto';
@@ -296,12 +334,11 @@ let fuelMarkers=[];
 let lastFuelLoad=0, lastFuelCenter=null, isFuelLoading=false;
 let geocodeTimer=null, geocodeAbort=null, lastGeocodeAt=0, toastTimer=null;
 let currentStep=0, lastAnnouncedStep=-1;
+let sheetExpanded=false;
 
 const map=new maplibregl.Map({
 container:'map',center:RJ_CENTER,zoom:11,pitch:0,bearing:0,attributionControl:false,
-style:{version:8,
-glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-sources:{
+style:{version:8,sources:{
 dark:{type:'raster',tiles:[
 'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
 'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
@@ -355,13 +392,15 @@ function safe(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&
 function openExternal(url){window.open(url,'_blank','noopener,noreferrer')}
 function setGPS(ok,text){const b=document.getElementById('gpsBadge');b.textContent=text;b.classList.toggle('off',!ok);b.classList.toggle('ok',ok)}
 
-function updateUserMarker(coords){
-if(!userMarker){
-const el=document.createElement('div');el.className='user-marker';
-userMarker=new maplibregl.Marker({element:el}).setLngLat(coords).addTo(map);
-}else{
-userMarker.setLngLat(coords);
-}
+function updateUserMarker(coords, heading=0){
+  if(!userMarker){
+    const el=document.createElement('div');
+    el.className='user-marker-waze';
+    userMarker=new maplibregl.Marker({element:el, rotationAlignment:'map'}).setLngLat(coords).addTo(map);
+  }else{
+    userMarker.setLngLat(coords);
+    if(heading!=null && !Number.isNaN(heading)) userMarker.setRotation(heading);
+  }
 }
 
 function startGPSWatch(){
@@ -370,25 +409,24 @@ if(watchId!==null)navigator.geolocation.clearWatch(watchId);
 watchId=navigator.geolocation.watchPosition(p=>{
 const isFirst=!userPos;
 userPos=[p.coords.longitude,p.coords.latitude];
-updateUserMarker(userPos);
+const heading = p.coords.heading || 0;
+updateUserMarker(userPos, heading);
 setGPS(true,'GPS ATIVO');
-const spd = Math.round((p.coords.speed || 0) * 3.6);
-document.getElementById('speedVal').textContent = spd > 0 ? spd : '0';
 
 if(isFirst){map.flyTo({center:userPos,zoom:15.5,duration:700})}
 if(navActive){
   map.easeTo({
     center:userPos,
-    zoom:17.5,
-    pitch:60,
-    bearing: p.coords.heading && !Number.isNaN(p.coords.heading) ? p.coords.heading : map.getBearing(),
+    zoom:18,
+    pitch:62,
+    bearing: (p.coords.heading!=null && !Number.isNaN(p.coords.heading)) ? p.coords.heading : map.getBearing(),
     duration:400
   });
 }
-maybeLoadFuel();updateNavigation();checkProximityAlert();
+maybeLoadFuel();updateNavigation();checkProximityDanger();
 },e=>{
 setGPS(false,e.code===1?'GPS BLOQ.':'GPS...');
-if(e.code===1)toast('Permita o acesso à localização.');
+if(e.code===1)toast('Permita o acesso ao GPS.');
 },{enableHighAccuracy:true,maximumAge:1500,timeout:12000});
 }
 
@@ -399,48 +437,26 @@ type:'Feature',properties:{name:c.name,type:c.type},geometry:{type:'Polygon',coo
 
 map.addSource('communities',{type:'geojson',data:geo});
 
+// Preenchimento bem transparente (sem poluição visual)
 map.addLayer({
   id:'community-fill',
   type:'fill',
   source:'communities',
   paint:{
-    'fill-color': ['case', ['==', ['get', 'type'], 'conflito'], '#ef4444', '#f59e0b'],
-    'fill-opacity': [
-      'interpolate', ['linear'], ['zoom'],
-      10, 0.05,
-      13, 0.12,
-      16, 0.22
-    ]
+    'fill-color': ['case', ['==', ['get', 'type'], 'conflito'], '#dc2626', '#d97706'],
+    'fill-opacity': 0.10
   }
 });
 
+// Contorno tracejado fino
 map.addLayer({
   id:'community-line',
   type:'line',
   source:'communities',
   paint:{
-    'line-color': ['case', ['==', ['get', 'type'], 'conflito'], '#f87171', '#fbbf24'],
-    'line-width': 1.5,
-    'line-dasharray': [3, 2]
-  }
-});
-
-map.addLayer({
-  id:'community-labels',
-  type:'symbol',
-  source:'communities',
-  minzoom: 13.5,
-  layout:{
-    'text-field': ['concat', '⚠ ', ['get', 'name']],
-    'text-size': 11,
-    'text-allow-overlap': false,
-    'text-ignore-placement': false,
-    'text-anchor': 'center'
-  },
-  paint:{
-    'text-color': '#fee2e2',
-    'text-halo-color': '#7f1d1d',
-    'text-halo-width': 2
+    'line-color': ['case', ['==', ['get', 'type'], 'conflito'], '#f87171', '#f59e0b'],
+    'line-width': 1.2,
+    'line-dasharray': [4, 3]
   }
 });
 
@@ -449,28 +465,39 @@ startGPSWatch();
 maybeLoadFuel(true);
 });
 
-function checkProximityAlert(){
+// Alerta com nome exato da favela mais próxima durante a condução
+function checkProximityDanger(){
   if(!userPos) return;
-  for(let c of communities){
-    let pCenter = c.coords[0];
-    let d = distanceKm(userPos, [pCenter[0], pCenter[1]]);
-    if(d < 0.6){
-      const msg = (c.type==='conflito' ? 'ALERTA: Zona de Conflito próxima - ' : 'ATENÇÃO: Área Monitorada - ') + c.name;
-      document.getElementById('navAlertStatus').textContent = msg;
+  const tag = document.getElementById('hudDangerTag');
+  for(let c of rawAreas){
+    let d = distanceKm(userPos, [c.c[0], c.c[1]]);
+    if(d <= (c.r + 0.3)){
+      tag.textContent = `⚠ ALERTA: ${c.name.toUpperCase()}`;
+      tag.classList.add('active');
       return;
     }
   }
-  document.getElementById('navAlertStatus').textContent = 'NAVEGAÇÃO ATIVA';
+  tag.classList.remove('active');
 }
 
 function locate(){
 if(!userPos){startGPSWatch();toast('Obtendo localização...');return}
-map.flyTo({center:userPos,zoom:17,pitch:navActive?60:0,duration:700});
+map.flyTo({center:userPos,zoom:navActive?18:16.5,pitch:navActive?62:0,duration:700});
 }
 document.getElementById('locateBtn').onclick=locate;
+document.getElementById('btnRecenter').onclick=locate;
 document.getElementById('zoomIn').onclick=()=>map.zoomIn();
 document.getElementById('zoomOut').onclick=()=>map.zoomOut();
 document.getElementById('northBtn').onclick=()=>map.easeTo({bearing:0,pitch:0,duration:500});
+
+// STREET VIEW
+function openStreetView(){
+  const target = destPos || userPos || map.getCenter().toArray();
+  const url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${target[1]},${target[0]}`;
+  openExternal(url);
+}
+document.getElementById('streetViewBtn').onclick=openStreetView;
+document.getElementById('modalStreetView').onclick=()=>{openStreetView();document.getElementById('layersModal').classList.remove('show')};
 
 function toggleFuel(){
 fuelVisible=!fuelVisible;document.getElementById('fuelChip').classList.toggle('active',fuelVisible);
@@ -481,7 +508,6 @@ function toggleCommunity(){
 communityVisible=!communityVisible;document.getElementById('communityChip').classList.toggle('active',communityVisible);
 map.setLayoutProperty('community-fill','visibility',communityVisible?'visible':'none');
 map.setLayoutProperty('community-line','visibility',communityVisible?'visible':'none');
-map.setLayoutProperty('community-labels','visibility',communityVisible?'visible':'none');
 }
 function toggleSatellite(){
 satelliteVisible=!satelliteVisible;document.getElementById('satChip').classList.toggle('active',satelliteVisible);
@@ -513,12 +539,12 @@ if(!force&&lastFuelCenter&&distanceKm(center,lastFuelCenter)<2)return;
 isFuelLoading=true;
 lastFuelLoad=now;lastFuelCenter=center;
 
-const q=`[out:json][timeout:20];(node["amenity"="fuel"](around:7000,${center[1]},${center[0]});way["amenity"="fuel"](around:7000,${center[1]},${center[0]}););out center tags;`;
+const q=`[out:json][timeout:20];(node["amenity"="fuel"](around:6000,${center[1]},${center[0]});way["amenity"="fuel"](around:6000,${center[1]},${center[0]}););out center tags;`;
 try{
 const r=await fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(q));
 if(!r.ok)throw Error('Overpass');
 const data=await r.json();renderFuel(data.elements||[]);
-}catch(e){console.warn(e);if(!fuelMarkers.length)toast('Postos indisponíveis no momento.')}
+}catch(e){console.warn(e)}
 finally{isFuelLoading=false}
 }
 function maybeLoadFuel(force=false){loadFuelStations(force)}
@@ -527,12 +553,12 @@ function renderFuel(items){
 fuelMarkers.forEach(m=>m.remove());fuelMarkers=[];
 items.forEach(item=>{
 const lat=item.lat??item.center?.lat,lng=item.lon??item.center?.lon;if(lat==null||lng==null)return;
-const t=item.tags||{},name=t.name||t.brand||'Posto de combustível',brand=t.brand||'Não informada';
+const t=item.tags||{},name=t.name||t.brand||'Posto',brand=t.brand||'Não informada';
 const gnv=t['fuel:gnv']==='yes'||t['fuel:cng']==='yes';
 const address=[t['addr:street'],t['addr:housenumber'],t['addr:suburb']].filter(Boolean).join(', ');
 const el=document.createElement('div');el.className='fuel-marker'+(gnv?' gnv':'');el.textContent=gnv?'G':'⛽';
 const popup=document.createElement('div');popup.className='popup';
-popup.innerHTML=`<h3>${safe(name)}</h3><div><b>Bandeira:</b> ${safe(brand)}</div>${gnv?'<div style="color:#4ade80;font-weight:bold;margin-top:2px">🟢 GNV disponível</div>':''}${address?`<div class="muted">${safe(address)}</div>`:''}<div class="muted" style="margin-top:5px">Consulte situação oficial na ANP</div><div class="popup-actions"><a href="${ANP_APP}" target="_blank" rel="noopener">🏛️ ANP</a><a class="report" href="${ANP_REPORT}" target="_blank" rel="noopener">🚨 Denunciar</a></div>`;
+popup.innerHTML=`<h3>${safe(name)}</h3><div><b>Bandeira:</b> ${safe(brand)}</div>${gnv?'<div style="color:#4ade80;font-weight:bold;margin-top:2px">🟢 GNV disponível</div>':''}${address?`<div class="muted">${safe(address)}</div>`:''}<div class="popup-actions"><a href="${ANP_APP}" target="_blank" rel="noopener">🏛️ ANP</a><a class="report" href="${ANP_REPORT}" target="_blank" rel="noopener">🚨 Denunciar</a></div>`;
 const m=new maplibregl.Marker({element:el}).setLngLat([lng,lat]).setPopup(new maplibregl.Popup({offset:18}).setDOMContent(popup)).addTo(map);
 fuelMarkers.push(m);
 });
@@ -577,7 +603,7 @@ return photon(q);
 
 function renderSuggestions(results){
 const box=document.getElementById('suggest');box.innerHTML='';
-if(!results||!results.length){box.innerHTML='<div class="suggest-item">Endereço não encontrado. Digite com mais detalhes.</div>';box.classList.add('show');return}
+if(!results||!results.length){box.innerHTML='<div class="suggest-item">Endereço não encontrado.</div>';box.classList.add('show');return}
 results.slice(0,6).forEach(r=>{
 const d=document.createElement('div');d.className='suggest-item';d.textContent=r.display_name;
 d.onclick=()=>{document.getElementById('destInput').value=r.display_name;destPos=[+r.lon,+r.lat];box.classList.remove('show');map.flyTo({center:destPos,zoom:16.5,duration:700})};
@@ -604,8 +630,9 @@ if(!userPos){startGPSWatch();await new Promise((resolve,reject)=>{let t=0;const 
 if(!destPos){
 const r=await geocode(text);if(!r||!r.length)throw Error('ENDERECO');destPos=[+r[0].lon,+r[0].lat];input.value=r[0].display_name;
 }
-routeAlternatives=await getRoutes(userPos,destPos);activeRoute=0;routeData=routeAlternatives[0];showRoute();
-}catch(e){toast(e.message==='ENDERECO'?'Endereço não localizado.':'Falha ao calcular a rota.')}
+routeAlternatives=await getRoutes(userPos,destPos);activeRoute=0;routeData=routeAlternatives[0];
+showRoute();
+}catch(e){toast('Falha ao calcular a rota.')}
 finally{btn.disabled=false}
 }
 
@@ -615,80 +642,83 @@ const r=await fetch(url);if(!r.ok)throw Error('OSRM');
 const j=await r.json();if(j.code!=='Ok'||!j.routes?.length)throw Error('ROTA');
 return j.routes;
 }
-function minutes(r){return Math.max(1,Math.round(r.duration/60))}
-function km(r){return (r.distance/1000).toFixed(1)}
+
 function showRoute(){
-document.getElementById('routePanel').classList.add('show');
-document.getElementById('routeDest').textContent=input.value;
-renderRouteCards();drawRoute(routeData);
+  document.getElementById('wazeSheet').classList.add('show');
+  drawRoute(routeData);
+  document.getElementById('sheetTime').textContent = Math.max(1, Math.round(routeData.duration/60)) + ' min';
+  document.getElementById('sheetDist').textContent = (routeData.distance/1000).toFixed(1) + ' km • Chegada prevista';
 }
-function renderRouteCards(){
-const box=document.getElementById('routeOptions');box.innerHTML='';
-routeAlternatives.forEach((r,i)=>{
-const d=document.createElement('div');d.className='route-card'+(i===activeRoute?' active':'');
-d.innerHTML=`<b>${minutes(r)} min</b><span>${km(r)} km${i===0?' • Principal':''}</span>`;
-d.onclick=()=>{activeRoute=i;routeData=r;renderRouteCards();drawRoute(r)};box.appendChild(d);
-});
-document.getElementById('routeTime').textContent=minutes(routeData)+' min';
-document.getElementById('routeDist').textContent=km(routeData)+' km';
-}
+
 function drawRoute(r){
 const data={type:'Feature',geometry:r.geometry,properties:{}};
 if(map.getSource('route'))map.getSource('route').setData(data);
 else{
 map.addSource('route',{type:'geojson',data});
-map.addLayer({id:'route-outline',type:'line',source:'route',paint:{'line-color':'#001827','line-width':10}});
-map.addLayer({id:'route-line',type:'line',source:'route',paint:{'line-color':'#19c7ff','line-width':6}});
+map.addLayer({id:'route-outline',type:'line',source:'route',paint:{'line-color':'#2e1065','line-width':10}});
+// Linha roxa estilo Waze
+map.addLayer({id:'route-line',type:'line',source:'route',paint:{'line-color':'#9333ea','line-width':6}});
 }
 const c=r.geometry.coordinates,b=c.reduce((x,p)=>x.extend(p),new maplibregl.LngLatBounds(c[0],c[0]));
-map.fitBounds(b,{padding:{top:125,bottom:230,left:30,right:30},duration:700,maxZoom:17});
+map.fitBounds(b,{padding:{top:130,bottom:140,left:30,right:30},duration:700,maxZoom:17});
 }
+
 function clearRoute(){
 if(map.getLayer('route-line'))map.removeLayer('route-line');
 if(map.getLayer('route-outline'))map.removeLayer('route-outline');
 if(map.getSource('route'))map.removeSource('route');
-routeData=null;routeAlternatives=[];destPos=null;stopNav(false);
-document.getElementById('routePanel').classList.remove('show');
+routeData=null;routeAlternatives=[];destPos=null;stopNav();
+document.getElementById('wazeSheet').classList.remove('show');
 }
-document.getElementById('closeRoute').onclick=clearRoute;
+
+// TOGGLE RETRACTABLE SHEET
+function toggleSheet(forceState=null){
+  sheetExpanded = forceState !== null ? forceState : !sheetExpanded;
+  document.getElementById('wazeSheet').classList.toggle('expanded', sheetExpanded);
+  document.getElementById('sheetToggleBtn').textContent = sheetExpanded ? 'Recolher ▾' : 'Opções ▴';
+}
+document.getElementById('sheetHandle').onclick=()=>toggleSheet();
+document.getElementById('sheetToggleBtn').onclick=(e)=>{e.stopPropagation();toggleSheet()};
 
 async function startNav(){
 if(!routeData){toast('Calcule uma rota primeiro.');return}
-navActive=true;document.getElementById('navBanner').classList.add('show');
-document.getElementById('startNav').textContent='🛑 Navegação ativa';
+navActive=true;
+document.getElementById('wazeHud').classList.add('show');
+document.getElementById('mainTopbar').classList.add('hide-nav');
+document.getElementById('mainBottomActions').classList.add('hide-nav');
+toggleSheet(false);
+
 try{if('wakeLock'in navigator)wakeLock=await navigator.wakeLock.request('screen')}catch(e){}
-map.easeTo({center:userPos||RJ_CENTER,zoom:17.5,pitch:60,duration:700});updateNavigation();
+map.easeTo({center:userPos||RJ_CENTER,zoom:18,pitch:62,duration:700});
+updateNavigation();
 }
-function stopNav(reset=true){
-navActive=false;document.getElementById('navBanner').classList.remove('show');document.getElementById('startNav').textContent='▶ Iniciar estilo Waze';
-if(wakeLock){wakeLock.release?.();wakeLock=null}if(reset)map.easeTo({pitch:0,bearing:0,duration:500});
+
+function stopNav(){
+navActive=false;
+document.getElementById('wazeHud').classList.remove('show');
+document.getElementById('mainTopbar').classList.remove('hide-nav');
+document.getElementById('mainBottomActions').classList.remove('hide-nav');
+if(wakeLock){wakeLock.release?.();wakeLock=null}
+map.easeTo({pitch:0,bearing:0,duration:500});
 }
-document.getElementById('startNav').onclick=()=>navActive?stopNav():startNav();
-document.getElementById('stopNav').onclick=()=>stopNav();
+
+document.getElementById('startRadarBtn').onclick=startNav;
+document.getElementById('stopNavBtn').onclick=()=>{stopNav();clearRoute()};
 document.getElementById('openMaps').onclick=()=>destPos&&openExternal(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`);
 document.getElementById('openWaze').onclick=()=>destPos&&openExternal(`https://www.waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`);
 
 function allSteps(){return(routeData?.legs||[]).flatMap(l=>l.steps||[])}
-function stepIcon(s){
+function stepIconArrow(s){
   const m=s.maneuver||{};
   if(m.type==='arrive') return '🏁';
-  if(m.modifier==='left'||m.modifier==='sharp left') return '⬅️';
-  if(m.modifier==='slight left') return '↖️';
-  if(m.modifier==='right'||m.modifier==='sharp right') return '➡️';
-  if(m.modifier==='slight right') return '↗️';
+  if(m.modifier==='left'||m.modifier==='sharp left') return '↰';
+  if(m.modifier==='slight left') return '↖';
+  if(m.modifier==='right'||m.modifier==='sharp right') return '↱';
+  if(m.modifier==='slight right') return '↗';
   if(m.type==='roundabout'||m.type==='rotary') return '🔄';
-  return '⬆️';
+  return '⬆';
 }
-function stepText(s){
-const m=s.maneuver||{},road=s.name?` na ${s.name}`:'';
-if(m.type==='arrive')return'Destino alcançado';
-if(m.type==='depart')return'Siga pela via'+road;
-if(m.type==='roundabout'||m.type==='rotary')return'Entre na rotatória'+road;
-if(m.type==='merge')return'Acesse a pista'+road;
-if(m.type==='fork')return`Mantenha-se ${m.modifier==='left'?'à esquerda':'à direita'}${road}`;
-if(m.type==='turn')return`Vire ${m.modifier==='left'?'à esquerda':m.modifier==='right'?'à direita':'em frente'}${road}`;
-return'Siga em frente'+road;
-}
+
 function updateNavigation(){
 if(!navActive||!userPos||!routeData)return;
 const steps=allSteps();if(!steps.length)return;
@@ -696,12 +726,22 @@ let best=0,bestDist=Infinity;
 steps.forEach((s,i)=>{const c=s.maneuver?.location;if(!c)return;const d=distanceKm(userPos,c);if(d<bestDist){bestDist=d;best=i}});
 currentStep=best;
 const s=steps[currentStep],next=steps[currentStep+1];
-document.getElementById('navIcon').textContent=stepIcon(s);
-document.getElementById('navInstruction').textContent=stepText(s);
-document.getElementById('navNext').textContent=next?'Depois: '+stepText(next):'Siga até o destino final';
-if(currentStep!==lastAnnouncedStep&&bestDist<.09){
-lastAnnouncedStep=currentStep;
-if('speechSynthesis'in window){try{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(stepText(s));u.lang='pt-BR';speechSynthesis.speak(u)}catch(e){}}
+
+const distMeters = Math.round(bestDist * 1000);
+document.getElementById('hudDist').textContent = distMeters < 1000 ? `${distMeters} m` : `${(distMeters/1000).toFixed(1)} km`;
+document.getElementById('hudArrow').textContent = stepIconArrow(s);
+document.getElementById('hudStreet').textContent = s.name || 'Siga na via indicada';
+
+if(next){
+  document.getElementById('hudNextIcon').textContent = stepIconArrow(next);
+  document.getElementById('hudNextStreet').textContent = next.name || 'Próximo acesso';
+}else{
+  document.getElementById('hudNextStreet').textContent = 'Destino final';
+}
+
+if(currentStep!==lastAnnouncedStep && bestDist<.09){
+  lastAnnouncedStep=currentStep;
+  if('speechSynthesis'in window){try{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(s.name?`Acesse ${s.name}`:'Siga em frente');u.lang='pt-BR';speechSynthesis.speak(u)}catch(e){}}
 }
 }
 
@@ -715,7 +755,6 @@ document.getElementById('modalFuel').onclick=toggleFuel;
 document.getElementById('modalCommunity').onclick=toggleCommunity;
 document.getElementById('modalSatellite').onclick=toggleSatellite;
 document.getElementById('modalLocate').onclick=()=>{document.getElementById('layersModal').classList.remove('show');locate()};
-document.getElementById('modalReport').onclick=()=>openExternal(ANP_REPORT);
 
 document.getElementById('searchBtn').onclick=iniciarRota;
 window.addEventListener('pagehide',()=>{if(watchId!=null)navigator.geolocation.clearWatch(watchId);wakeLock?.release?.()});
