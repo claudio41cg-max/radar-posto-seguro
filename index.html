@@ -225,6 +225,21 @@ const ANP_APP='https://anpcomvcpostos.anp.gov.br/';
 const ANP_REPORT='https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
 const RJ_CENTER=[-43.40,-22.90];
 
+// Mapas vetoriais gratuitos (OpenFreeMap) — visual rico tipo Google Maps/Waze,
+// com ruas coloridas por hierarquia, ícones de POI e rótulos nítidos em
+// qualquer zoom, ao contrário do raster simples usado antes.
+const STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/liberty';
+const STYLE_DARK  = 'https://tiles.openfreemap.org/styles/dark';
+const FONT_STACK = ['Noto Sans Regular'];
+function buildSatelliteStyle(){
+  return {
+    version:8,
+    glyphs:'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+    sources:{ sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri'} },
+    layers:[ {id:'sat',type:'raster',source:'sat'} ]
+  };
+}
+
 // Raio ajustado de 300m (0.3km) a 500m (0.5km) no máximo — círculo real (não quadrado)
 function makePerimeter(lon, lat, rKm=0.35, points=48){
   const rLat = rKm / 111.0;
@@ -360,29 +375,13 @@ let geocodeTimer=null, geocodeAbort=null, lastGeocodeAt=0, toastTimer=null;
 let currentStep=0;
 let sheetExpanded=false;
 
+const initialIsNight = (()=>{ const h=new Date().getHours(); return h>=18||h<6; })();
+let currentBaseStyle = initialIsNight ? 'dark' : 'light';
+
 const map=new maplibregl.Map({
 container:'map',center:RJ_CENTER,zoom:11,pitch:0,bearing:0,attributionControl:false,
-style:{version:8,
-glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-sources:{
-dark:{type:'raster',tiles:[
-'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-'https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-],tileSize:256,attribution:'© CARTO © OSM'},
-light:{type:'raster',tiles:[
-'https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-'https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-'https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-'https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-],tileSize:256,attribution:'© CARTO © OSM'},
-sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri'}
-},layers:[
-{id:'light',type:'raster',source:'light',layout:{visibility:'none'}},
-{id:'dark',type:'raster',source:'dark',layout:{visibility:'visible'}},
-{id:'sat',type:'raster',source:'sat',layout:{visibility:'none'}}
-]}});
+style: currentBaseStyle==='dark' ? STYLE_DARK : STYLE_LIGHT
+});
 
 map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-left');
 
@@ -402,17 +401,21 @@ map.on('rotatestart', e=>{ if(e.originalEvent) pauseFollow(); });
 // Reaplica o tema automático periodicamente (dia/noite muda com o horário)
 setInterval(()=>{ if(themeMode==='auto' && !satelliteVisible) applyTheme(); }, 5*60*1000);
 
-function applyTheme(){
-  if(satelliteVisible) return;
-  const isNight = () => {
-    const h = new Date().getHours();
-    return (h >= 18 || h < 6) || window.matchMedia('(prefers-color-scheme: dark)').matches;
-  };
+function desiredStyleKey(){
+  if(satelliteVisible) return 'satellite';
+  const isNight = () => { const h = new Date().getHours(); return (h >= 18 || h < 6); };
   const activeDark = themeMode === 'dark' || (themeMode === 'auto' && isNight());
-  map.setLayoutProperty('dark', 'visibility', activeDark ? 'visible' : 'none');
-  map.setLayoutProperty('light', 'visibility', !activeDark ? 'visible' : 'none');
+  return activeDark ? 'dark' : 'light';
+}
+
+function applyTheme(){
   document.getElementById('themeBadge').textContent = themeMode.toUpperCase();
   document.getElementById('themeChip').textContent = '🌓 ' + (themeMode === 'auto' ? 'Tema: Auto' : themeMode === 'dark' ? 'Tema: Escuro' : 'Tema: Claro');
+  const desired = desiredStyleKey();
+  if(desired === currentBaseStyle) return;
+  currentBaseStyle = desired;
+  const styleUrl = desired==='satellite' ? buildSatelliteStyle() : (desired==='dark' ? STYLE_DARK : STYLE_LIGHT);
+  map.setStyle(styleUrl);
 }
 
 function cycleTheme(){
@@ -468,23 +471,23 @@ if(navActive && followMode){
     duration:400
   });
 }
-maybeLoadFuel();updateNavigation();checkProximityDanger();
+maybeLoadFuel();updateNavigation();checkProximityDanger();checkOffRoute();
 },e=>{
 setGPS(false,e.code===1?'GPS BLOQ.':'GPS...');
 if(e.code===1)toast('Permita o acesso ao GPS.');
 },{enableHighAccuracy:true,maximumAge:1500,timeout:12000});
 }
 
-map.on('load',()=>{
+function addCommunityLayers(){
 const geo={type:'FeatureCollection',features:communities.map(c=>({
 type:'Feature',properties:{name:c.name,type:c.type,major:c.major},geometry:{type:'Polygon',coordinates:[c.coords]}
 }))};
 
 map.addSource('communities',{type:'geojson',data:geo});
 
-// Preenchimento hiper-sutil, progressivo por zoom.
-// Comunidades "major" (principais) aparecem já afastado; as demais só
-// surgem ao aproximar, para não poluir a tela com excesso de áreas.
+// Preenchimento progressivo por zoom. Comunidades "major" (principais)
+// aparecem já afastado; as demais só surgem ao aproximar, para não
+// poluir a tela com excesso de áreas.
 map.addLayer({
   id:'community-fill',
   type:'fill',
@@ -494,8 +497,8 @@ map.addLayer({
     'fill-color': ['case', ['==', ['get', 'type'], 'conflito'], '#dc2626', '#d97706'],
     'fill-opacity': [
       'case', ['==', ['get','major'], true],
-      ['interpolate', ['linear'], ['zoom'], 10.5, 0.03, 12, 0.06, 14, 0.10, 16, 0.13],
-      ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.04, 15, 0.09, 16.5, 0.12]
+      ['interpolate', ['linear'], ['zoom'], 10.5, 0.08, 12, 0.13, 14, 0.18, 16, 0.24],
+      ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.10, 15, 0.18, 16.5, 0.24]
     ]
   }
 });
@@ -510,6 +513,7 @@ map.addLayer({
   minzoom: 10.5,
   layout:{
     'text-field': ['concat', '⚠ ', ['get', 'name']],
+    'text-font': FONT_STACK,
     'text-size': [
       'case', ['==', ['get','major'], true],
       ['interpolate', ['linear'], ['zoom'], 11, 9, 13, 11, 16, 13],
@@ -526,15 +530,36 @@ map.addLayer({
     'text-halo-width': 1.5,
     'text-opacity': [
       'case', ['==', ['get','major'], true],
-      ['interpolate', ['linear'], ['zoom'], 11, 0.0, 11.5, 0.75, 13, 1.0],
-      ['interpolate', ['linear'], ['zoom'], 13.5, 0.0, 14, 0.7, 15.5, 1.0]
+      ['interpolate', ['linear'], ['zoom'], 10.5, 0.0, 11, 0.85, 12.5, 1.0],
+      ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.85, 15, 1.0]
     ]
   }
 });
 
-applyTheme();
-startGPSWatch();
-maybeLoadFuel(true);
+map.setLayoutProperty('community-fill','visibility',communityVisible?'visible':'none');
+map.setLayoutProperty('community-labels','visibility',communityVisible?'visible':'none');
+}
+
+function restoreRouteLayer(){
+if(!routeData) return;
+const data={type:'Feature',geometry:routeData.geometry,properties:{}};
+if(map.getSource('route')) return;
+map.addSource('route',{type:'geojson',data});
+map.addLayer({id:'route-outline',type:'line',source:'route',paint:{'line-color':'#2e1065','line-width':10}});
+map.addLayer({id:'route-line',type:'line',source:'route',paint:{'line-color':'#9333ea','line-width':6}});
+}
+
+// Toda vez que o estilo do mapa é (re)carregado — na inicialização e a
+// cada troca de tema/satélite via setStyle — as camadas próprias do app
+// (zonas de risco e rota) precisam ser recriadas por cima do novo estilo.
+map.on('style.load', ()=>{
+  addCommunityLayers();
+  restoreRouteLayer();
+});
+
+map.once('load', ()=>{
+  startGPSWatch();
+  maybeLoadFuel(true);
 });
 
 function speak(text){
@@ -622,12 +647,7 @@ map.setLayoutProperty('community-labels','visibility',communityVisible?'visible'
 }
 function toggleSatellite(){
 satelliteVisible=!satelliteVisible;document.getElementById('satChip').classList.toggle('active',satelliteVisible);
-map.setLayoutProperty('sat','visibility',satelliteVisible?'visible':'none');
-if(!satelliteVisible) applyTheme();
-else {
-  map.setLayoutProperty('dark','visibility','none');
-  map.setLayoutProperty('light','visibility','none');
-}
+applyTheme();
 }
 
 document.getElementById('fuelChip').onclick=toggleFuel;
@@ -639,6 +659,52 @@ const R=6371,lat1=a[1]*Math.PI/180,lat2=b[1]*Math.PI/180;
 const dLat=(b[1]-a[1])*Math.PI/180,dLon=(b[0]-a[0])*Math.PI/180;
 const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;
 return 2*R*Math.asin(Math.sqrt(h));
+}
+
+// --- RECÁLCULO AUTOMÁTICO DE ROTA (rerouting) ---
+function pointToSegmentKm(p,a,b){
+  const cosLat=Math.cos(p[1]*Math.PI/180);
+  const P=[p[0]*cosLat,p[1]], A=[a[0]*cosLat,a[1]], B=[b[0]*cosLat,b[1]];
+  const dx=B[0]-A[0], dy=B[1]-A[1];
+  const len2=dx*dx+dy*dy;
+  let t = len2>0 ? ((P[0]-A[0])*dx+(P[1]-A[1])*dy)/len2 : 0;
+  t = Math.max(0,Math.min(1,t));
+  const projX=A[0]+t*dx, projY=A[1]+t*dy;
+  return distanceKm(p,[projX/cosLat,projY]);
+}
+function distanceToRouteKm(p,coords){
+  let min=Infinity;
+  for(let i=0;i<coords.length-1;i++){
+    const d=pointToSegmentKm(p,coords[i],coords[i+1]);
+    if(d<min)min=d;
+  }
+  return min;
+}
+
+let offRouteCount=0, isRerouting=false;
+function checkOffRoute(){
+  if(!navActive||!routeData||!userPos||isRerouting)return;
+  const dKm=distanceToRouteKm(userPos,routeData.geometry.coordinates);
+  if(dKm*1000>45){offRouteCount++}else{offRouteCount=0}
+  if(offRouteCount>=3){offRouteCount=0;recalculateRoute()}
+}
+async function recalculateRoute(){
+  if(!destPos||!userPos||isRerouting)return;
+  isRerouting=true;
+  toast('Você saiu da rota. Recalculando...');
+  try{
+    const routes=await getRoutes(userPos,destPos);
+    routeAlternatives=routes;activeRoute=0;routeData=routes[0];
+    stepAnnounce={};
+    drawRoute(routeData);
+    document.getElementById('sheetTime').textContent=Math.max(1,Math.round(routeData.duration/60))+' min';
+    document.getElementById('sheetDist').textContent=(routeData.distance/1000).toFixed(1)+' km • Chegada prevista';
+    toast('Nova rota calculada.');
+  }catch(e){
+    toast('Falha ao recalcular a rota.');
+  }finally{
+    isRerouting=false;
+  }
 }
 
 async function loadFuelStations(force=false){
