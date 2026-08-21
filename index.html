@@ -225,9 +225,7 @@ const ANP_APP='https://anpcomvcpostos.anp.gov.br/';
 const ANP_REPORT='https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
 const RJ_CENTER=[-43.40,-22.90];
 
-// Mapas vetoriais gratuitos (OpenFreeMap) — visual rico tipo Google Maps/Waze,
-// com ruas coloridas por hierarquia, ícones de POI e rótulos nítidos em
-// qualquer zoom, ao contrário do raster simples usado antes.
+// Mapas vetoriais gratuitos (OpenFreeMap)
 const STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/liberty';
 const STYLE_DARK  = 'https://tiles.openfreemap.org/styles/dark';
 const FONT_STACK = ['Noto Sans Regular'];
@@ -235,12 +233,11 @@ function buildSatelliteStyle(){
   return {
     version:8,
     glyphs:'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
-    sources:{ sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri'} },
-    layers:[ {id:'sat',type:'raster',source:'sat'} ]
+    sources:{ sat:{ type:'raster', tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'], tileSize:256, attribution:'Tiles © Esri' } },
+    layers:[ { id:'sat', type:'raster', source:'sat' } ]
   };
 }
 
-// Raio ajustado de 300m (0.3km) a 500m (0.5km) no máximo — círculo real (não quadrado)
 function makePerimeter(lon, lat, rKm=0.35, points=48){
   const rLat = rKm / 111.0;
   const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
@@ -256,7 +253,7 @@ function makePerimeter(lon, lat, rKm=0.35, points=48){
 }
 
 const rawAreas = [
-  // SANTA CRUZ A BANGU / REALENGO (300m a 500m)
+  // SANTA CRUZ A BANGU / REALENGO
   {name:'Favela do Aço', c:[-43.6475,-22.8942], r:0.40, type:'conflito'},
   {name:'Antares', c:[-43.6702,-22.9158], r:0.35, type:'conflito'},
   {name:'Comunidade do Rola', c:[-43.6825,-22.9231], r:0.45, type:'conflito'},
@@ -371,12 +368,12 @@ let activeRoute=0, navActive=false, watchId=null, wakeLock=null, userMarker=null
 let fuelVisible=true, communityVisible=true, satelliteVisible=false;
 let fuelMarkers=[];
 let lastFuelLoad=0, lastFuelCenter=null, isFuelLoading=false;
+let fuelDebounceTimeout = null; // debounce para requisições Overpass
 let geocodeTimer=null, geocodeAbort=null, lastGeocodeAt=0, toastTimer=null;
 let currentStep=0;
 let sheetExpanded=false;
 
-const initialIsNight = (()=>{ const h=new Date().getHours(); return h>=18||h<6; })();
-let currentBaseStyle = initialIsNight ? 'dark' : 'light';
+let currentBaseStyle = (() => { const h=new Date().getHours(); return (h>=18||h<6) ? 'dark' : 'light'; })();
 
 const map=new maplibregl.Map({
 container:'map',center:RJ_CENTER,zoom:11,pitch:0,bearing:0,attributionControl:false,
@@ -385,9 +382,7 @@ style: currentBaseStyle==='dark' ? STYLE_DARK : STYLE_LIGHT
 
 map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-left');
 
-// FOLLOW MODE: durante a navegação o mapa segue o usuário automaticamente.
-// Se o usuário mexer no mapa manualmente (arrastar, zoom, girar), o
-// acompanhamento pausa por alguns segundos, ou até tocar em recentralizar.
+// FOLLOW MODE
 let followMode = true, followResumeTimer = null;
 function pauseFollow(){
   followMode = false;
@@ -398,7 +393,6 @@ map.on('dragstart', e=>{ if(e.originalEvent) pauseFollow(); });
 map.on('zoomstart', e=>{ if(e.originalEvent) pauseFollow(); });
 map.on('rotatestart', e=>{ if(e.originalEvent) pauseFollow(); });
 
-// Reaplica o tema automático periodicamente (dia/noite muda com o horário)
 setInterval(()=>{ if(themeMode==='auto' && !satelliteVisible) applyTheme(); }, 5*60*1000);
 
 function desiredStyleKey(){
@@ -471,97 +465,124 @@ if(navActive && followMode){
     duration:400
   });
 }
-maybeLoadFuel();updateNavigation();checkProximityDanger();checkOffRoute();
+maybeLoadFuel(); // com debounce interno
+updateNavigation();checkProximityDanger();checkOffRoute();
 },e=>{
 setGPS(false,e.code===1?'GPS BLOQ.':'GPS...');
 if(e.code===1)toast('Permita o acesso ao GPS.');
 },{enableHighAccuracy:true,maximumAge:1500,timeout:12000});
 }
 
-function addCommunityLayers(){
-const geo={type:'FeatureCollection',features:communities.map(c=>({
-type:'Feature',properties:{name:c.name,type:c.type,major:c.major},geometry:{type:'Polygon',coordinates:[c.coords]}
-}))};
-
-map.addSource('communities',{type:'geojson',data:geo});
-
-// Preenchimento progressivo por zoom. Comunidades "major" (principais)
-// aparecem já afastado; as demais só surgem ao aproximar, para não
-// poluir a tela com excesso de áreas.
-map.addLayer({
-  id:'community-fill',
-  type:'fill',
-  source:'communities',
-  minzoom: 10.5,
-  paint:{
-    'fill-color': ['case', ['==', ['get', 'type'], 'conflito'], '#dc2626', '#d97706'],
-    'fill-opacity': [
-      'case', ['==', ['get','major'], true],
-      ['interpolate', ['linear'], ['zoom'], 10.5, 0.08, 12, 0.13, 14, 0.18, 16, 0.24],
-      ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.10, 15, 0.18, 16.5, 0.24]
-    ]
+// ============================================================
+// CAMADAS DE COMUNIDADES (CORRIGIDAS)
+// ============================================================
+function addCommunityLayers() {
+  if (!map.isStyleLoaded()) {
+    map.once('style.load', addCommunityLayers);
+    return;
   }
-});
 
-// Nomes das comunidades: as principais aparecem mais cedo (zoom menor);
-// as demais só surgem ao aproximar bastante, e todas somem ao afastar —
-// nada é excluído, apenas a visibilidade acompanha o zoom.
-map.addLayer({
-  id:'community-labels',
-  type:'symbol',
-  source:'communities',
-  minzoom: 10.5,
-  layout:{
-    'text-field': ['concat', '⚠ ', ['get', 'name']],
-    'text-font': FONT_STACK,
-    'text-size': [
-      'case', ['==', ['get','major'], true],
-      ['interpolate', ['linear'], ['zoom'], 11, 9, 13, 11, 16, 13],
-      ['interpolate', ['linear'], ['zoom'], 13.5, 8, 15, 10, 17, 12]
-    ],
-    'text-allow-overlap': false,
-    'text-ignore-placement': false,
-    'text-anchor': 'center',
-    'symbol-sort-key': ['case', ['==', ['get','major'], true], 0, 1]
-  },
-  paint:{
-    'text-color': '#fee2e2',
-    'text-halo-color': '#450a0a',
-    'text-halo-width': 1.5,
-    'text-opacity': [
-      'case', ['==', ['get','major'], true],
-      ['interpolate', ['linear'], ['zoom'], 10.5, 0.0, 11, 0.85, 12.5, 1.0],
-      ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.85, 15, 1.0]
-    ]
-  }
-});
+  // Remove layers/sources antigas para evitar duplicação
+  if (map.getLayer('community-fill')) map.removeLayer('community-fill');
+  if (map.getLayer('community-labels')) map.removeLayer('community-labels');
+  if (map.getSource('communities')) map.removeSource('communities');
 
-map.setLayoutProperty('community-fill','visibility',communityVisible?'visible':'none');
-map.setLayoutProperty('community-labels','visibility',communityVisible?'visible':'none');
+  const geo = {
+    type: 'FeatureCollection',
+    features: communities.map(c => ({
+      type: 'Feature',
+      properties: { name: c.name, type: c.type, major: c.major },
+      geometry: { type: 'Polygon', coordinates: [c.coords] }
+    }))
+  };
+
+  map.addSource('communities', { type: 'geojson', data: geo });
+
+  map.addLayer({
+    id: 'community-fill',
+    type: 'fill',
+    source: 'communities',
+    minzoom: 10.5,
+    paint: {
+      'fill-color': ['case', ['==', ['get', 'type'], 'conflito'], '#dc2626', '#d97706'],
+      'fill-opacity': [
+        'case', ['==', ['get','major'], true],
+        ['interpolate', ['linear'], ['zoom'], 10.5, 0.08, 12, 0.13, 14, 0.18, 16, 0.24],
+        ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.10, 15, 0.18, 16.5, 0.24]
+      ]
+    }
+  });
+
+  map.addLayer({
+    id: 'community-labels',
+    type: 'symbol',
+    source: 'communities',
+    minzoom: 10.5,
+    layout: {
+      'text-field': ['concat', '⚠ ', ['get', 'name']],
+      'text-font': FONT_STACK,
+      'text-size': [
+        'case', ['==', ['get','major'], true],
+        ['interpolate', ['linear'], ['zoom'], 11, 9, 13, 11, 16, 13],
+        ['interpolate', ['linear'], ['zoom'], 13.5, 8, 15, 10, 17, 12]
+      ],
+      'text-allow-overlap': false,
+      'text-ignore-placement': false,
+      'text-anchor': 'center',
+      'symbol-sort-key': ['case', ['==', ['get','major'], true], 0, 1]
+    },
+    paint: {
+      'text-color': '#fee2e2',
+      'text-halo-color': '#450a0a',
+      'text-halo-width': 1.5,
+      'text-opacity': [
+        'case', ['==', ['get','major'], true],
+        ['interpolate', ['linear'], ['zoom'], 10.5, 0.0, 11, 0.85, 12.5, 1.0],
+        ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.85, 15, 1.0]
+      ]
+    }
+  });
+
+  map.setLayoutProperty('community-fill', 'visibility', communityVisible ? 'visible' : 'none');
+  map.setLayoutProperty('community-labels', 'visibility', communityVisible ? 'visible' : 'none');
 }
 
+// ============================================================
+// ROTA (CORRIGIDA)
+// ============================================================
 function restoreRouteLayer(){
-if(!routeData) return;
-const data={type:'Feature',geometry:routeData.geometry,properties:{}};
-if(map.getSource('route')) return;
-map.addSource('route',{type:'geojson',data});
-map.addLayer({id:'route-outline',type:'line',source:'route',paint:{'line-color':'#2e1065','line-width':10}});
-map.addLayer({id:'route-line',type:'line',source:'route',paint:{'line-color':'#9333ea','line-width':6}});
+  if(!routeData) return;
+  if(map.getLayer('route-line')) map.removeLayer('route-line');
+  if(map.getLayer('route-outline')) map.removeLayer('route-outline');
+  if(map.getSource('route')) map.removeSource('route');
+
+  const data={type:'Feature', geometry:routeData.geometry, properties:{}};
+  map.addSource('route',{type:'geojson', data});
+  map.addLayer({id:'route-outline', type:'line', source:'route', paint:{'line-color':'#2e1065','line-width':10}});
+  map.addLayer({id:'route-line', type:'line', source:'route', paint:{'line-color':'#9333ea','line-width':6}});
 }
 
-// Toda vez que o estilo do mapa é (re)carregado — na inicialização e a
-// cada troca de tema/satélite via setStyle — as camadas próprias do app
-// (zonas de risco e rota) precisam ser recriadas por cima do novo estilo.
-map.on('style.load', ()=>{
+// ============================================================
+// EVENTOS DO MAPA
+// ============================================================
+map.on('style.load', () => {
   addCommunityLayers();
   restoreRouteLayer();
 });
 
-map.once('load', ()=>{
+map.on('load', () => {
+  if (map.isStyleLoaded()) {
+    addCommunityLayers();
+  } else {
+    map.once('style.load', addCommunityLayers);
+  }
   startGPSWatch();
   maybeLoadFuel(true);
 });
 
+// ============================================================
+// DEMAIS FUNÇÕES (mantidas com pequenas correções)
+// ============================================================
 function speak(text){
   if(!('speechSynthesis' in window)) return;
   try{
@@ -578,7 +599,7 @@ function showDangerBanner(name){
 }
 document.getElementById('dangerBannerClose').onclick = () => document.getElementById('dangerBanner').classList.remove('show');
 
-let insideAlertGiven = {}; // nome da comunidade -> já alertado nesta passagem
+let insideAlertGiven = {};
 
 function checkProximityDanger(){
   if(!userPos) return;
@@ -589,7 +610,6 @@ function checkProximityDanger(){
   for(const c of rawAreas){
     const d = distanceKm(userPos, [c.c[0], c.c[1]]);
     if(d < nearestDist){ nearestDist = d; nearest = c; }
-    // saiu do raio + margem: libera para alertar de novo numa próxima passagem
     if(insideAlertGiven[c.name] && d > c.r + 0.3){
       delete insideAlertGiven[c.name];
     }
@@ -605,7 +625,6 @@ function checkProximityDanger(){
     tag.classList.remove('active');
   }
 
-  // Entrando de fato na área da comunidade: aviso forte, 2x por voz
   if(nearest && nearestDist <= nearest.r && !insideAlertGiven[nearest.name]){
     insideAlertGiven[nearest.name] = true;
     showDangerBanner(nearest.name);
@@ -661,7 +680,6 @@ const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;
 return 2*R*Math.asin(Math.sqrt(h));
 }
 
-// --- RECÁLCULO AUTOMÁTICO DE ROTA (rerouting) ---
 function pointToSegmentKm(p,a,b){
   const cosLat=Math.cos(p[1]*Math.PI/180);
   const P=[p[0]*cosLat,p[1]], A=[a[0]*cosLat,a[1]], B=[b[0]*cosLat,b[1]];
@@ -688,6 +706,7 @@ function checkOffRoute(){
   if(dKm*1000>45){offRouteCount++}else{offRouteCount=0}
   if(offRouteCount>=3){offRouteCount=0;recalculateRoute()}
 }
+
 async function recalculateRoute(){
   if(!destPos||!userPos||isRerouting)return;
   isRerouting=true;
@@ -695,7 +714,7 @@ async function recalculateRoute(){
   try{
     const routes=await getRoutes(userPos,destPos);
     routeAlternatives=routes;activeRoute=0;routeData=routes[0];
-    stepAnnounce={};
+    stepAnnounce = {};
     drawRoute(routeData);
     document.getElementById('sheetTime').textContent=Math.max(1,Math.round(routeData.duration/60))+' min';
     document.getElementById('sheetDist').textContent=(routeData.distance/1000).toFixed(1)+' km • Chegada prevista';
@@ -705,6 +724,14 @@ async function recalculateRoute(){
   }finally{
     isRerouting=false;
   }
+}
+
+// ============================================================
+// FUEL COM DEBOUNCE
+// ============================================================
+function maybeLoadFuel(force=false){
+  clearTimeout(fuelDebounceTimeout);
+  fuelDebounceTimeout = setTimeout(() => loadFuelStations(force), 500);
 }
 
 async function loadFuelStations(force=false){
@@ -724,7 +751,6 @@ const data=await r.json();renderFuel(data.elements||[]);
 }catch(e){console.warn(e)}
 finally{isFuelLoading=false}
 }
-function maybeLoadFuel(force=false){loadFuelStations(force)}
 
 function renderFuel(items){
 fuelMarkers.forEach(m=>m.remove());fuelMarkers=[];
@@ -741,6 +767,9 @@ fuelMarkers.push(m);
 });
 }
 
+// ============================================================
+// GEOCODE CORRIGIDO (geocodeAbort)
+// ============================================================
 function normalizeQuery(q){
 q=q.trim().replace(/\s+/g,' ');
 if(!/rio de janeiro|rj|brasil|itaguaí|mangaratiba|angra|paraty/i.test(q))q+=', RJ, Brasil';
@@ -756,20 +785,22 @@ return [p.name,p.street,p.housenumber,p.district||p.suburb,p.city,p.state].filte
 }
 async function nominatim(q){
 const p=new URLSearchParams({format:'jsonv2',addressdetails:'1',limit:'8',countrycodes:'br',bounded:'1',viewbox:'-44.85,-22.60,-43.00,-23.40',q});
-const r=await fetch('https://nominatim.openstreetmap.org/search?'+p,{headers:{'Accept-Language':'pt-BR,pt;q=.9'},signal:geocodeAbort.signal});
+const r=await fetch('https://nominatim.openstreetmap.org/search?'+p,{headers:{'Accept-Language':'pt-BR,pt;q=.9'},signal:geocodeAbort?.signal});
 if(!r.ok)throw Error('Nominatim');
 return r.json();
 }
 async function photon(q){
 const c=userPos||map.getCenter().toArray();
-const r=await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=8&lat=${c[1]}&lon=${c[0]}&lang=pt`,{signal:geocodeAbort.signal});
+const r=await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=8&lat=${c[1]}&lon=${c[0]}&lang=pt`,{signal:geocodeAbort?.signal});
 if(!r.ok)throw Error('Photon');
 const j=await r.json();
 return (j.features||[]).map(f=>({lat:f.geometry.coordinates[1],lon:f.geometry.coordinates[0],display_name:photonText(f)}));
 }
 async function geocode(q){
 const wait=Math.max(0,1100-(Date.now()-lastGeocodeAt));if(wait)await new Promise(r=>setTimeout(r,wait));
-lastGeocodeAt=Date.now();geocodeAbort?.abort();geocodeAbort=new AbortController();
+lastGeocodeAt=Date.now();
+if(geocodeAbort) geocodeAbort.abort(); // verifica se existe antes de abortar
+geocodeAbort=new AbortController();
 q=normalizeQuery(q);
 try{
 const r=await nominatim(q);
@@ -799,6 +830,9 @@ input.addEventListener('keydown',e=>{if(e.key==='Enter')iniciarRota()});
 document.getElementById('clearBtn').onclick=()=>{input.value='';destPos=null;document.getElementById('suggest').classList.remove('show');input.focus()};
 document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.getElementById('suggest').classList.remove('show')});
 
+// ============================================================
+// ROTA PRINCIPAL
+// ============================================================
 async function iniciarRota(){
 const text=input.value.trim();if(!text){toast('Digite um destino.');return}
 const btn=document.getElementById('searchBtn');btn.disabled=true;
@@ -820,6 +854,11 @@ const j=await r.json();if(j.code!=='Ok'||!j.routes?.length)throw Error('ROTA');
 return j.routes;
 }
 
+// ============================================================
+// EXIBIÇÃO DA ROTA
+// ============================================================
+let stepAnnounce = {};
+
 function showRoute(){
   stepAnnounce = {};
   document.getElementById('wazeSheet').classList.add('show');
@@ -829,25 +868,31 @@ function showRoute(){
 }
 
 function drawRoute(r){
-const data={type:'Feature',geometry:r.geometry,properties:{}};
-if(map.getSource('route'))map.getSource('route').setData(data);
-else{
-map.addSource('route',{type:'geojson',data});
-map.addLayer({id:'route-outline',type:'line',source:'route',paint:{'line-color':'#2e1065','line-width':10}});
-map.addLayer({id:'route-line',type:'line',source:'route',paint:{'line-color':'#9333ea','line-width':6}});
-}
-const c=r.geometry.coordinates,b=c.reduce((x,p)=>x.extend(p),new maplibregl.LngLatBounds(c[0],c[0]));
-map.fitBounds(b,{padding:{top:130,bottom:140,left:30,right:30},duration:700,maxZoom:17});
+  // Remove layers/sources antigas para evitar duplicação
+  if(map.getLayer('route-line')) map.removeLayer('route-line');
+  if(map.getLayer('route-outline')) map.removeLayer('route-outline');
+  if(map.getSource('route')) map.removeSource('route');
+
+  const data={type:'Feature',geometry:r.geometry,properties:{}};
+  map.addSource('route',{type:'geojson',data});
+  map.addLayer({id:'route-outline',type:'line',source:'route',paint:{'line-color':'#2e1065','line-width':10}});
+  map.addLayer({id:'route-line',type:'line',source:'route',paint:{'line-color':'#9333ea','line-width':6}});
+
+  const c=r.geometry.coordinates,b=c.reduce((x,p)=>x.extend(p),new maplibregl.LngLatBounds(c[0],c[0]));
+  map.fitBounds(b,{padding:{top:130,bottom:140,left:30,right:30},duration:700,maxZoom:17});
 }
 
 function clearRoute(){
-if(map.getLayer('route-line'))map.removeLayer('route-line');
-if(map.getLayer('route-outline'))map.removeLayer('route-outline');
-if(map.getSource('route'))map.removeSource('route');
+if(map.getLayer('route-line')) map.removeLayer('route-line');
+if(map.getLayer('route-outline')) map.removeLayer('route-outline');
+if(map.getSource('route')) map.removeSource('route');
 routeData=null;routeAlternatives=[];destPos=null;stopNav();
 document.getElementById('wazeSheet').classList.remove('show');
 }
 
+// ============================================================
+// NAVEGAÇÃO
+// ============================================================
 function toggleSheet(forceState=null){
   sheetExpanded = forceState !== null ? forceState : !sheetExpanded;
   document.getElementById('wazeSheet').classList.toggle('expanded', sheetExpanded);
@@ -912,22 +957,6 @@ function maneuverPhrase(s){
   return 'siga em frente';
 }
 
-let stepAnnounce = {}; // índice do passo -> distâncias já anunciadas
-function maybeAnnounceVoice(stepIdx, s, distMeters){
-  const thresholds = [300,100,40];
-  if(!stepAnnounce[stepIdx]) stepAnnounce[stepIdx] = new Set();
-  const done = stepAnnounce[stepIdx];
-  for(const t of thresholds){
-    if(distMeters <= t && !done.has(t)){
-      done.add(t);
-      const phrase = maneuverPhrase(s);
-      const street = s.name ? ` na ${s.name}` : '';
-      speak(t===40 ? `Agora, ${phrase}${street}` : `Em ${t} metros, ${phrase}${street}`);
-      break;
-    }
-  }
-}
-
 function updateNavigation(){
 if(!navActive||!userPos||!routeData)return;
 const steps=allSteps();if(!steps.length)return;
@@ -948,9 +977,24 @@ if(next){
   document.getElementById('hudNextStreet').textContent = 'Destino final';
 }
 
-maybeAnnounceVoice(currentStep, s, distMeters);
+// Anúncio de voz
+const thresholds = [300,100,40];
+if(!stepAnnounce[currentStep]) stepAnnounce[currentStep] = new Set();
+const done = stepAnnounce[currentStep];
+for(const t of thresholds){
+  if(distMeters <= t && !done.has(t)){
+    done.add(t);
+    const phrase = maneuverPhrase(s);
+    const street = s.name ? ` na ${s.name}` : '';
+    speak(t===40 ? `Agora, ${phrase}${street}` : `Em ${t} metros, ${phrase}${street}`);
+    break;
+  }
+}
 }
 
+// ============================================================
+// BOTÕES ADICIONAIS
+// ============================================================
 document.getElementById('reportBtn').onclick=()=>openExternal(ANP_REPORT);
 document.getElementById('anpBtn').onclick=()=>openExternal(ANP_APP);
 document.getElementById('postosBtn').onclick=()=>{if(!fuelVisible)toggleFuel();locate();loadFuelStations(true)};
