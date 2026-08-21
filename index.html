@@ -53,6 +53,10 @@ button,input{font:inherit}
 .side button.locate{border-color:#38bdf8}
 .side button.sv{background:#0369a1;border-color:#38bdf8}
 
+/* RECENTRALIZAR (NAVEGAÇÃO) */
+.nav-recenter{position:fixed;right:14px;bottom:100px;z-index:34;width:54px;height:54px;border-radius:50%;background:#0284c7;color:#fff;font-size:22px;border:2px solid #fff;box-shadow:0 8px 22px #0008;display:none;align-items:center;justify-content:center;cursor:pointer}
+.nav-recenter.show{display:flex}
+
 /* BOTTOM RETRACTABLE WAZE PANEL */
 .waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#ffffff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(0.1,0.9,0.2,1);transform:translateY(calc(100% - 75px));display:none}
 .waze-bottom-sheet.show{display:block}
@@ -71,7 +75,9 @@ button,input{font:inherit}
 .sheet-nav-actions button{border:0;border-radius:14px;padding:12px;font-size:13px;font-weight:900;color:#fff;cursor:pointer}
 .btn-nav-radar{background:#0284c7}.btn-nav-stop{background:#dc2626}
 .sheet-external-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sheet-external-grid button{border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;border-radius:12px;padding:11px;font-size:12px;font-weight:800;cursor:pointer}
+.sheet-external-grid button{border:0;border-radius:12px;padding:11px;font-size:12px;font-weight:900;cursor:pointer;color:#fff}
+.btn-waze{background:#05c8f6}
+.btn-maps{background:#1a73e8}
 
 /* MAP USER ARROW */
 .user-marker-waze{width:36px;height:36px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="%230284c7" opacity="0.3"/><path d="M20 4 L33 32 L20 26 L7 32 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="2.5"/></svg>') no-repeat center/contain;transform:translate(-50%,-50%)}
@@ -144,6 +150,8 @@ button,input{font:inherit}
   <button id="layersBtn">☷</button>
 </div>
 
+<button class="nav-recenter" id="navRecenter" title="Recentralizar">🎯</button>
+
 <div class="waze-bottom-sheet" id="wazeSheet">
   <div class="sheet-handle" id="sheetHandle"></div>
   <div class="sheet-bar" id="sheetBar">
@@ -163,8 +171,8 @@ button,input{font:inherit}
       <button class="btn-nav-stop" id="stopNavBtn">⏹ Parar</button>
     </div>
     <div class="sheet-external-grid">
-      <button id="openWaze">Abrir no Waze</button>
-      <button id="openMaps">Abrir Google Maps</button>
+      <button class="btn-waze" id="openWaze">🅆 Abrir no Waze</button>
+      <button class="btn-maps" id="openMaps">🅖 Abrir Google Maps</button>
     </div>
   </div>
 </div>
@@ -222,7 +230,7 @@ const rawAreas = [
   {name:'Vila Nova (Cabuçu)', c:[-43.5283,-22.8725], r:0.30, type:'conflito'},
   {name:'Pedregoso / Pai João', c:[-43.5600,-22.8950], r:0.35, type:'conflito'},
   {name:'Vila Aliança', c:[-43.4889,-22.8719], r:0.45, type:'conflito'},
-  {name:'Vila Kennedy', c:[-43.4772,-22.8597], r:0.50, type:'conflito'},
+  {name:'Vila Kennedy', c:[-43.4772,-22.8597], r:0.50, type:'conflito', major:true},
   {name:'Complexo da Coreia', c:[-43.4958,-22.8833], r:0.50, type:'conflito'},
   {name:'Vila Vintém', c:[-43.4356,-22.8778], r:0.45, type:'conflito'},
   {name:'Catiri', c:[-43.4697,-22.8519], r:0.35, type:'conflito'},
@@ -231,16 +239,16 @@ const rawAreas = [
 
   // EIXO AV. BRASIL / ZONA NORTE / CENTRO
   {name:'Muquiço / Palmeirinha', c:[-43.3778,-22.8461], r:0.40, type:'conflito'},
-  {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.50, type:'conflito'},
+  {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.50, type:'conflito', major:true},
   {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.50, type:'conflito'},
   {name:'Complexo de Acari / Amarelinho', c:[-43.3283,-22.8292], r:0.45, type:'conflito'},
   {name:'Complexo de Israel / Vigário', c:[-43.2981,-22.8258], r:0.50, type:'conflito'},
   {name:'Morro do Juramento', c:[-43.3153,-22.8647], r:0.40, type:'conflito'},
-  {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.50, type:'conflito'},
-  {name:'Complexo do Alemão', c:[-43.2725,-22.8592], r:0.50, type:'conflito'},
-  {name:'Complexo da Maré', c:[-43.2458,-22.8583], r:0.50, type:'conflito'},
-  {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45, type:'conflito'},
-  {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.45, type:'conflito'},
+  {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.50, type:'conflito', major:true},
+  {name:'Complexo do Alemão', c:[-43.2725,-22.8592], r:0.50, type:'conflito', major:true},
+  {name:'Complexo da Maré', c:[-43.2458,-22.8583], r:0.50, type:'conflito', major:true},
+  {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45, type:'conflito', major:true},
+  {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.45, type:'conflito', major:true},
   {name:'Parque Arará / Mandela', c:[-43.2386,-22.8847], r:0.35, type:'conflito'},
   {name:'Complexo do Caju', c:[-43.2181,-22.8892], r:0.45, type:'conflito'},
   {name:'Morro da Providência', c:[-43.1917,-22.8986], r:0.35, type:'conflito'},
@@ -251,13 +259,13 @@ const rawAreas = [
   {name:'Morro dos Macacos', c:[-43.2561,-22.9150], r:0.40, type:'conflito'},
   {name:'Salgueiro / Borel / Formiga', c:[-43.2444,-22.9333], r:0.50, type:'conflito'},
   {name:'Turano', c:[-43.2208,-22.9239], r:0.35, type:'conflito'},
-  {name:'Mangueira', c:[-43.2389,-22.9039], r:0.40, type:'conflito'},
+  {name:'Mangueira', c:[-43.2389,-22.9039], r:0.40, type:'conflito', major:true},
   {name:'Dendê (Ilha)', c:[-43.2039,-22.8028], r:0.45, type:'conflito'},
   {name:'Barbante / Pq. Royal (Ilha)', c:[-43.1972,-22.7917], r:0.40, type:'conflito'},
 
   // JACAREPAGUÁ / PRAÇA SECA / ZONA SUL / BARRA
-  {name:'Cidade de Deus (CDD)', c:[-43.3611,-22.9467], r:0.50, type:'conflito'},
-  {name:'Rio das Pedras', c:[-43.3364,-22.9772], r:0.50, type:'conflito'},
+  {name:'Cidade de Deus (CDD)', c:[-43.3611,-22.9467], r:0.50, type:'conflito', major:true},
+  {name:'Rio das Pedras', c:[-43.3364,-22.9772], r:0.50, type:'conflito', major:true},
   {name:'Muzema e Tijuquinha', c:[-43.3128,-22.9908], r:0.45, type:'conflito'},
   {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.40, type:'conflito'},
   {name:'Curicica / Vila União', c:[-43.3858,-22.9725], r:0.35, type:'conflito'},
@@ -266,23 +274,23 @@ const rawAreas = [
   {name:'Morro do Jordão', c:[-43.3853,-22.9236], r:0.40, type:'conflito'},
   {name:'Boiúna', c:[-43.4014,-22.9367], r:0.35, type:'conflito'},
   {name:'Freguesia (Trânsito Monitorado)', c:[-43.3414,-22.9389], r:0.50, type:'atencao'},
-  {name:'Rocinha', c:[-43.2481,-22.9883], r:0.50, type:'conflito'},
-  {name:'Vidigal', c:[-43.2356,-22.9939], r:0.40, type:'conflito'},
+  {name:'Rocinha', c:[-43.2481,-22.9883], r:0.50, type:'conflito', major:true},
+  {name:'Vidigal', c:[-43.2356,-22.9939], r:0.40, type:'conflito', major:true},
   {name:'Pavão-Pavãozinho / Cantagalo', c:[-43.1947,-22.9797], r:0.35, type:'conflito'},
   {name:'Tabajaras / Cabritos', c:[-43.1906,-22.9669], r:0.30, type:'conflito'},
   {name:'Babilônia / Chapéu Mangueira', c:[-43.1678,-22.9619], r:0.30, type:'conflito'},
-  {name:'Santa Marta', c:[-43.1931,-22.9472], r:0.30, type:'conflito'},
+  {name:'Santa Marta', c:[-43.1931,-22.9472], r:0.30, type:'conflito', major:true},
   {name:'Fallet / Prazeres / Coroa', c:[-43.1989,-22.9231], r:0.45, type:'conflito'},
   {name:'Terreirão (Recreio)', c:[-43.4908,-23.0231], r:0.40, type:'conflito'},
   {name:'Morro do Banco (Barra)', c:[-43.2981,-23.0014], r:0.30, type:'conflito'},
 
   // BAIXADA FLUMINENSE
-  {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45, type:'conflito'},
+  {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45, type:'conflito', major:true},
   {name:'Beira-Mar / Missões (Caxias)', c:[-43.2756,-22.7661], r:0.45, type:'conflito'},
   {name:'Vila Operária / Imbariê', c:[-43.2842,-22.7236], r:0.50, type:'atencao'},
   {name:'Trio de Ouro / Vilar dos Teles', c:[-43.3714,-22.7958], r:0.45, type:'conflito'},
   {name:'Igrejinha (Meriti)', c:[-43.3853,-22.7886], r:0.35, type:'conflito'},
-  {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.50, type:'conflito'},
+  {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.50, type:'conflito', major:true},
   {name:'Guacha / Sta. Tereza (B. Roxo)', c:[-43.3867,-22.7364], r:0.45, type:'conflito'},
   {name:'Castelar (Belford Roxo)', c:[-43.3981,-22.7597], r:0.35, type:'conflito'},
   {name:'Chatuba (Mesquita/Nilópolis)', c:[-43.4183,-22.7817], r:0.50, type:'conflito'},
@@ -307,10 +315,10 @@ const rawAreas = [
   {name:'Japuíba / Areal (Angra)', c:[-44.3092,-22.9839], r:0.45, type:'conflito'},
   {name:'Frade (Angra)', c:[-44.4367,-22.9972], r:0.50, type:'conflito'},
   {name:'Camorim (Angra)', c:[-44.2711,-23.0031], r:0.40, type:'conflito'},
-  {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], r:0.35, type:'conflito'},
+  {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], r:0.35, type:'conflito', major:true},
   {name:'Pq. Mambucaba / Perequê', c:[-44.5261,-23.0236], r:0.50, type:'conflito'},
   {name:'Ilha das Cobras (Paraty)', c:[-44.7189,-23.2167], r:0.30, type:'conflito'},
-  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.40, type:'conflito'},
+  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.40, type:'conflito', major:true},
   {name:'Mangueira (Paraty)', c:[-44.7175,-23.2208], r:0.30, type:'conflito'},
   {name:'Patrimônio / Trindade', c:[-44.7214,-23.3361], r:0.40, type:'atencao'}
 ];
@@ -318,6 +326,7 @@ const rawAreas = [
 const communities = rawAreas.map(a => ({
   name: a.name,
   type: a.type,
+  major: !!a.major,
   coords: makePerimeter(a.c[0], a.c[1], a.r)
 }));
 
@@ -429,78 +438,57 @@ if(e.code===1)toast('Permita o acesso ao GPS.');
 
 map.on('load',()=>{
 const geo={type:'FeatureCollection',features:communities.map(c=>({
-type:'Feature',properties:{name:c.name,type:c.type},geometry:{type:'Polygon',coordinates:[c.coords]}
+type:'Feature',properties:{name:c.name,type:c.type,major:c.major},geometry:{type:'Polygon',coordinates:[c.coords]}
 }))};
 
 map.addSource('communities',{type:'geojson',data:geo});
 
-// Preenchimento hipertransparente (desaparece no mapa afastado e surge suave no zoom)
+// Preenchimento hiper-sutil, progressivo por zoom.
+// Comunidades "major" (principais) aparecem já afastado; as demais só
+// surgem ao aproximar, para não poluir a tela com excesso de áreas.
 map.addLayer({
   id:'community-fill',
   type:'fill',
   source:'communities',
-  minzoom: 11,
+  minzoom: 10.5,
   paint:{
     'fill-color': ['case', ['==', ['get', 'type'], 'conflito'], '#dc2626', '#d97706'],
     'fill-opacity': [
-      'interpolate', ['linear'], ['zoom'],
-      11, 0.0,
-      12.5, 0.04,
-      15, 0.09
+      'case', ['==', ['get','major'], true],
+      ['interpolate', ['linear'], ['zoom'], 10.5, 0.03, 12, 0.06, 14, 0.10, 16, 0.13],
+      ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.04, 15, 0.09, 16.5, 0.12]
     ]
   }
 });
 
-// Linha contínua sólida e fina (sem pontilhado), controlada por zoom
-map.addLayer({
-  id:'community-line',
-  type:'line',
-  source:'communities',
-  minzoom: 11.5,
-  paint:{
-    'line-color': ['case', ['==', ['get', 'type'], 'conflito'], '#f87171', '#f59e0b'],
-    'line-width': [
-      'interpolate', ['linear'], ['zoom'],
-      11.5, 0.4,
-      14, 0.9,
-      16, 1.3
-    ],
-    'line-opacity': [
-      'interpolate', ['linear'], ['zoom'],
-      11.5, 0.0,
-      12.5, 0.5,
-      15, 0.8
-    ]
-  }
-});
-
-// Nomes das comunidades: somem totalmente ao afastar e surgem ao aproximar (zoom >= 13) sem colisão
+// Nomes das comunidades: as principais aparecem mais cedo (zoom menor);
+// as demais só surgem ao aproximar bastante, e todas somem ao afastar —
+// nada é excluído, apenas a visibilidade acompanha o zoom.
 map.addLayer({
   id:'community-labels',
   type:'symbol',
   source:'communities',
-  minzoom: 13,
+  minzoom: 10.5,
   layout:{
     'text-field': ['concat', '⚠ ', ['get', 'name']],
     'text-size': [
-      'interpolate', ['linear'], ['zoom'],
-      13, 9,
-      15, 11,
-      17, 13
+      'case', ['==', ['get','major'], true],
+      ['interpolate', ['linear'], ['zoom'], 11, 9, 13, 11, 16, 13],
+      ['interpolate', ['linear'], ['zoom'], 13.5, 8, 15, 10, 17, 12]
     ],
     'text-allow-overlap': false,
     'text-ignore-placement': false,
-    'text-anchor': 'center'
+    'text-anchor': 'center',
+    'symbol-sort-key': ['case', ['==', ['get','major'], true], 0, 1]
   },
   paint:{
     'text-color': '#fee2e2',
     'text-halo-color': '#450a0a',
     'text-halo-width': 1.5,
     'text-opacity': [
-      'interpolate', ['linear'], ['zoom'],
-      13, 0.0,
-      13.5, 0.7,
-      15, 1.0
+      'case', ['==', ['get','major'], true],
+      ['interpolate', ['linear'], ['zoom'], 11, 0.0, 11.5, 0.75, 13, 1.0],
+      ['interpolate', ['linear'], ['zoom'], 13.5, 0.0, 14, 0.7, 15.5, 1.0]
     ]
   }
 });
@@ -526,10 +514,11 @@ function checkProximityDanger(){
 
 function locate(){
 if(!userPos){startGPSWatch();toast('Obtendo localização...');return}
-map.flyTo({center:userPos,zoom:navActive?18:16.5,pitch:navActive?62:0,duration:700});
+map.flyTo({center:userPos,zoom:navActive?18:16.5,pitch:navActive?62:0,bearing:navActive?map.getBearing():0,duration:700});
 }
 document.getElementById('locateBtn').onclick=locate;
 document.getElementById('btnRecenter').onclick=locate;
+document.getElementById('navRecenter').onclick=locate;
 document.getElementById('zoomIn').onclick=()=>map.zoomIn();
 document.getElementById('zoomOut').onclick=()=>map.zoomOut();
 document.getElementById('northBtn').onclick=()=>map.easeTo({bearing:0,pitch:0,duration:500});
@@ -550,7 +539,6 @@ if(fuelVisible)loadFuelStations(true);
 function toggleCommunity(){
 communityVisible=!communityVisible;document.getElementById('communityChip').classList.toggle('active',communityVisible);
 map.setLayoutProperty('community-fill','visibility',communityVisible?'visible':'none');
-map.setLayoutProperty('community-line','visibility',communityVisible?'visible':'none');
 map.setLayoutProperty('community-labels','visibility',communityVisible?'visible':'none');
 }
 function toggleSatellite(){
@@ -728,6 +716,7 @@ navActive=true;
 document.getElementById('wazeHud').classList.add('show');
 document.getElementById('mainTopbar').classList.add('hide-nav');
 document.getElementById('mainBottomActions').classList.add('hide-nav');
+document.getElementById('navRecenter').classList.add('show');
 toggleSheet(false);
 
 try{if('wakeLock'in navigator)wakeLock=await navigator.wakeLock.request('screen')}catch(e){}
@@ -740,6 +729,7 @@ navActive=false;
 document.getElementById('wazeHud').classList.remove('show');
 document.getElementById('mainTopbar').classList.remove('hide-nav');
 document.getElementById('mainBottomActions').classList.remove('hide-nav');
+document.getElementById('navRecenter').classList.remove('show');
 if(wakeLock){wakeLock.release?.();wakeLock=null}
 map.easeTo({pitch:0,bearing:0,duration:500});
 }
