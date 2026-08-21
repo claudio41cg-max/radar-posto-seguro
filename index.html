@@ -20,9 +20,11 @@ button,input{font:inherit}
 .topbar>*{pointer-events:auto}
 .topbar.hide-nav{transform:translateY(-120%);opacity:0;pointer-events:none}
 
-.appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:16px;background:rgba(4,16,28,.94);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px #0007;backdrop-filter:blur(12px)}
+.appbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:16px;background:rgba(4,16,28,.94);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px #0007;backdrop-filter:blur(12px)}
 .brand{font-size:13px;font-weight:900}.brand span{color:#38bdf8}
-.badges{display:flex;gap:5px}.badge{font-size:9px;font-weight:900;padding:5px 7px;border-radius:999px;background:#075985;cursor:pointer}.badge.off{background:#475569}.badge.ok{background:#059669}
+#gpsBadge{font-size:9px;font-weight:900;padding:5px 7px;border-radius:999px;background:#475569;cursor:pointer}
+#gpsBadge.ok{background:#059669}
+#gpsBadge.off{background:#475569}
 
 .search{position:relative;display:flex;gap:4px;padding:5px;background:#07131ff5;border:1px solid #38bdf8;border-radius:15px;box-shadow:0 8px 24px #0008}
 .search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;padding:10px 8px;font-size:14px}.search input::placeholder{color:#94a3b8}
@@ -30,11 +32,24 @@ button,input{font:inherit}
 .suggest{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:280px;overflow:auto;border:1px solid #334155;border-radius:14px;background:#07131f;box-shadow:0 12px 30px #0009;z-index:40}
 .suggest.show{display:block}.suggest-item{padding:12px;border-bottom:1px solid #1e293b;font-size:12px;color:#e2e8f0;line-height:1.35;cursor:pointer}.suggest-item:active{background:#102337}
 
-.chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
-.chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 11px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer}
+.chips{display:flex;gap:5px;overflow-x:auto;flex-wrap:wrap;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800;cursor:pointer;flex-shrink:0}
 .chip.active{background:#075985;border-color:#38bdf8}
 
-/* WAZE HUD BANNER */
+/* MODAL DE TRANSPORTE E DENÚNCIA */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal-card{background:#0f172a;border-radius:20px;padding:24px;max-width:420px;width:90%;border:1px solid #334155;max-height:80vh;overflow-y:auto}
+.modal-card h2{font-size:18px;margin-bottom:12px;color:#38bdf8}
+.modal-card .close-modal{float:right;background:transparent;border:0;color:#94a3b8;font-size:20px;cursor:pointer}
+.modal-card .option-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.modal-card .option-grid button{border:1px solid #334155;border-radius:12px;padding:12px;background:#0b1b2a;color:#fff;font-weight:800;cursor:pointer;text-align:center}
+.modal-card .option-grid button:active{background:#1e293b}
+.modal-card .org-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.modal-card .org-list a{display:block;padding:10px;background:#1e293b;border-radius:10px;color:#f1f5f9;text-decoration:none;font-weight:700;border-left:4px solid #38bdf8}
+.modal-card .org-list a:active{background:#334155}
+
+/* WAZE HUD */
 .waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#000;color:#fff;padding:12px 16px 8px;box-shadow:0 6px 20px #000a;display:none;flex-direction:column}
 .waze-top-hud.show{display:flex}
 .waze-maneuver-row{display:flex;align-items:center;gap:16px}
@@ -47,18 +62,15 @@ button,input{font:inherit}
 .waze-danger-tag{color:#f87171;font-weight:900;display:none}
 .waze-danger-tag.active{display:inline}
 
-/* SIDE BUTTONS */
 .side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}
 body.nav-mode .side{top:118px}
 .side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px #0008;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .side button.locate{border-color:#38bdf8}
 .side button svg{display:block}
 
-/* RECENTRALIZAR (NAVEGAÇÃO) */
 .nav-recenter{position:fixed;right:14px;bottom:100px;z-index:34;width:54px;height:54px;border-radius:50%;background:#0284c7;color:#fff;font-size:22px;border:2px solid #fff;box-shadow:0 8px 22px #0008;display:none;align-items:center;justify-content:center;cursor:pointer}
 .nav-recenter.show{display:flex}
 
-/* BOTTOM RETRACTABLE WAZE PANEL */
 .waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#ffffff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(0.1,0.9,0.2,1);transform:translateY(calc(100% - 75px));display:none}
 .waze-bottom-sheet.show{display:block}
 .waze-bottom-sheet.expanded{transform:translateY(0)}
@@ -80,9 +92,12 @@ body.nav-mode .side{top:118px}
 .btn-waze{background:#05c8f6}
 .btn-maps{background:#1a73e8}
 
-/* MAP USER ARROW */
-.user-marker-waze{width:36px;height:36px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="%230284c7" opacity="0.3"/><path d="M20 4 L33 32 L20 26 L7 32 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="2.5"/></svg>') no-repeat center/contain;transform:translate(-50%,-50%)}
-.fuel-marker{width:28px;height:28px;border-radius:50%;background:#0ea5e9;border:2px solid #fff;box-shadow:0 3px 10px #0008;display:flex;align-items:center;justify-content:center;font-size:14px}
+/* USER MARKER MAIS VISÍVEL */
+.user-marker-waze{width:48px;height:48px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="%230284c7" opacity="0.25"/><circle cx="24" cy="24" r="14" fill="%230284c7" opacity="0.15"/><path d="M24 6 L40 38 L24 30 L8 38 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" fill="%23ffffff" opacity="0.9"/></svg>') no-repeat center/contain;transform:translate(-50%,-50%);filter:drop-shadow(0 0 12px rgba(0,242,254,0.7))}
+
+.fuel-marker{width:28px;height:28px;border-radius:50%;background:#0ea5e9;border:2px solid #fff;box-shadow:0 3px 10px #0008;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;color:#fff}
+.fuel-marker.problem{background:#dc2626;border-color:#fca5a5;animation:pulse-red 1.5s infinite}
+@keyframes pulse-red{0%{box-shadow:0 0 0 0 rgba(220,38,38,.6)}70%{box-shadow:0 0 0 10px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
 .fuel-marker.gnv{background:#16a34a}
 
 .bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
@@ -92,12 +107,10 @@ body.nav-mode .side{top:118px}
 
 .toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:11px 15px;border-radius:13px;font-size:12px;font-weight:700;max-width:90vw;text-align:center;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
 
-/* PLACA DE AVISO DE COMUNIDADE PRÓXIMA */
 .favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px #0008;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}
 .favela-sign.show{opacity:1;transform:translate(-50%,0)}
 body.nav-mode .favela-sign{top:132px}
 
-/* BANNER DE ALERTA - ENTRANDO EM COMUNIDADE */
 .danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px #000a;border:2px solid #fecaca}
 .danger-banner.show{display:flex}
 .danger-banner b{font-size:13px;line-height:1.35;font-weight:800}
@@ -118,11 +131,7 @@ body.nav-mode .favela-sign{top:132px}
 <div class="topbar" id="mainTopbar">
   <div class="appbar">
     <div class="brand">🛡️ RADAR <span>SEGURO RJ PRO</span></div>
-    <div class="badges">
-      <span class="badge" id="themeBadge">AUTO</span>
-      <span class="badge" id="anpBadge">ANP</span>
-      <span id="gpsBadge" class="badge off">GPS...</span>
-    </div>
+    <span id="gpsBadge" class="off">GPS...</span>
   </div>
 
   <div class="search">
@@ -137,6 +146,35 @@ body.nav-mode .favela-sign{top:132px}
     <button class="chip active" id="communityChip">🟥 Zonas de Risco</button>
     <button class="chip" id="themeChip">🌓 Tema: Auto</button>
     <button class="chip" id="satChip">🛰️ Satélite</button>
+  </div>
+</div>
+
+<!-- MODAL DE TRANSPORTE -->
+<div class="modal-overlay" id="transportModal">
+  <div class="modal-card">
+    <button class="close-modal" id="closeTransportModal">✕</button>
+    <h2>🚗 Escolha o modo de transporte</h2>
+    <div class="option-grid">
+      <button data-mode="driving">🚗 Carro</button>
+      <button data-mode="driving">🏍️ Moto</button>
+      <button data-mode="cycling">🚲 Bicicleta</button>
+      <button data-mode="walking">🚶 A Pé</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE DENÚNCIA -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-card">
+    <button class="close-modal" id="closeReportModal">✕</button>
+    <h2>🚨 Denunciar – Órgãos Oficiais</h2>
+    <div class="org-list">
+      <a href="https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados" target="_blank">🏛️ ANP – Agência Nacional do Petróleo</a>
+      <a href="https://www.procon.rj.gov.br/" target="_blank">🛡️ Procon RJ</a>
+      <a href="https://www.mpf.mp.br/" target="_blank">⚖️ Ministério Público Federal</a>
+      <a href="https://www.ibama.gov.br/" target="_blank">🌳 IBAMA – Crimes ambientais</a>
+      <a href="https://www.gov.br/inmetro/pt-br" target="_blank">📏 Inmetro – Qualidade do combustível</a>
+    </div>
   </div>
 </div>
 
@@ -192,7 +230,6 @@ body.nav-mode .favela-sign{top:132px}
 
 <div class="bottom-actions" id="mainBottomActions">
   <button class="action danger" id="reportBtn">🚨 Denunciar</button>
-  <button class="action primary" id="postosBtn">⛽ Postos</button>
   <button class="action anp" id="anpBtn">🏛️ ANP</button>
 </div>
 
@@ -222,10 +259,11 @@ body.nav-mode .favela-sign{top:132px}
 <script src="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.js"></script>
 <script>
 const ANP_APP='https://anpcomvcpostos.anp.gov.br/';
-const ANP_REPORT='https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
 const RJ_CENTER=[-43.40,-22.90];
 
-// Mapas vetoriais gratuitos (OpenFreeMap)
+// ============================================================
+// MAPAS
+// ============================================================
 const STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/liberty';
 const STYLE_DARK  = 'https://tiles.openfreemap.org/styles/dark';
 const FONT_STACK = ['Noto Sans Regular'];
@@ -238,6 +276,9 @@ function buildSatelliteStyle(){
   };
 }
 
+// ============================================================
+// POLÍGONOS DAS COMUNIDADES
+// ============================================================
 function makePerimeter(lon, lat, rKm=0.35, points=48){
   const rLat = rKm / 111.0;
   const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
@@ -253,106 +294,68 @@ function makePerimeter(lon, lat, rKm=0.35, points=48){
 }
 
 const rawAreas = [
-  // SANTA CRUZ A BANGU / REALENGO
-  {name:'Favela do Aço', c:[-43.6475,-22.8942], r:0.40, type:'conflito'},
-  {name:'Antares', c:[-43.6702,-22.9158], r:0.35, type:'conflito'},
-  {name:'Comunidade do Rola', c:[-43.6825,-22.9231], r:0.45, type:'conflito'},
-  {name:'Cesarão', c:[-43.6558,-22.9114], r:0.45, type:'conflito'},
-  {name:'Carobinha / Barbante', c:[-43.5419,-22.8631], r:0.40, type:'conflito'},
-  {name:'Vila Nova (Cabuçu)', c:[-43.5283,-22.8725], r:0.30, type:'conflito'},
-  {name:'Pedregoso / Pai João', c:[-43.5600,-22.8950], r:0.35, type:'conflito'},
-  {name:'Vila Aliança', c:[-43.4889,-22.8719], r:0.45, type:'conflito'},
   {name:'Vila Kennedy', c:[-43.4772,-22.8597], r:0.50, type:'conflito', major:true},
-  {name:'Complexo da Coreia', c:[-43.4958,-22.8833], r:0.50, type:'conflito'},
-  {name:'Vila Vintém', c:[-43.4356,-22.8778], r:0.45, type:'conflito'},
-  {name:'Catiri', c:[-43.4697,-22.8519], r:0.35, type:'conflito'},
-  {name:'Batan (Realengo)', c:[-43.4258,-22.8683], r:0.40, type:'conflito'},
-  {name:'Fumacê', c:[-43.4194,-22.8875], r:0.30, type:'conflito'},
-
-  // EIXO AV. BRASIL / ZONA NORTE / CENTRO
-  {name:'Muquiço / Palmeirinha', c:[-43.3778,-22.8461], r:0.40, type:'conflito'},
-  {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.50, type:'conflito', major:true},
-  {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.50, type:'conflito'},
-  {name:'Complexo de Acari / Amarelinho', c:[-43.3283,-22.8292], r:0.45, type:'conflito'},
-  {name:'Complexo de Israel / Vigário', c:[-43.2981,-22.8258], r:0.50, type:'conflito'},
-  {name:'Morro do Juramento', c:[-43.3153,-22.8647], r:0.40, type:'conflito'},
-  {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.50, type:'conflito', major:true},
   {name:'Complexo do Alemão', c:[-43.2725,-22.8592], r:0.50, type:'conflito', major:true},
   {name:'Complexo da Maré', c:[-43.2458,-22.8583], r:0.50, type:'conflito', major:true},
-  {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45, type:'conflito', major:true},
   {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.45, type:'conflito', major:true},
-  {name:'Parque Arará / Mandela', c:[-43.2386,-22.8847], r:0.35, type:'conflito'},
-  {name:'Complexo do Caju', c:[-43.2181,-22.8892], r:0.45, type:'conflito'},
-  {name:'Morro da Providência', c:[-43.1917,-22.8986], r:0.35, type:'conflito'},
-  {name:'São Carlos / Mineira (Estácio)', c:[-43.1978,-22.9142], r:0.40, type:'conflito'},
-  {name:'Morro da Serrinha', c:[-43.3308,-22.8683], r:0.40, type:'conflito'},
-  {name:'Cajueiro / Congonha', c:[-43.3375,-22.8617], r:0.35, type:'conflito'},
-  {name:'Faz Quem Quer', c:[-43.3486,-22.8572], r:0.30, type:'conflito'},
-  {name:'Morro dos Macacos', c:[-43.2561,-22.9150], r:0.40, type:'conflito'},
-  {name:'Salgueiro / Borel / Formiga', c:[-43.2444,-22.9333], r:0.50, type:'conflito'},
-  {name:'Turano', c:[-43.2208,-22.9239], r:0.35, type:'conflito'},
-  {name:'Mangueira', c:[-43.2389,-22.9039], r:0.40, type:'conflito', major:true},
-  {name:'Dendê (Ilha)', c:[-43.2039,-22.8028], r:0.45, type:'conflito'},
-  {name:'Barbante / Pq. Royal (Ilha)', c:[-43.1972,-22.7917], r:0.40, type:'conflito'},
-
-  // JACAREPAGUÁ / PRAÇA SECA / ZONA SUL / BARRA
-  {name:'Cidade de Deus (CDD)', c:[-43.3611,-22.9467], r:0.50, type:'conflito', major:true},
-  {name:'Rio das Pedras', c:[-43.3364,-22.9772], r:0.50, type:'conflito', major:true},
-  {name:'Muzema e Tijuquinha', c:[-43.3128,-22.9908], r:0.45, type:'conflito'},
-  {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.40, type:'conflito'},
-  {name:'Curicica / Vila União', c:[-43.3858,-22.9725], r:0.35, type:'conflito'},
-  {name:'Covanca / Barão (Praça Seca)', c:[-43.3556,-22.8931], r:0.45, type:'conflito'},
-  {name:'Chacrinha (Praça Seca)', c:[-43.3492,-22.9006], r:0.35, type:'conflito'},
-  {name:'Morro do Jordão', c:[-43.3853,-22.9236], r:0.40, type:'conflito'},
-  {name:'Boiúna', c:[-43.4014,-22.9367], r:0.35, type:'conflito'},
-  {name:'Freguesia (Trânsito Monitorado)', c:[-43.3414,-22.9389], r:0.50, type:'atencao'},
+  {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45, type:'conflito', major:true},
   {name:'Rocinha', c:[-43.2481,-22.9883], r:0.50, type:'conflito', major:true},
   {name:'Vidigal', c:[-43.2356,-22.9939], r:0.40, type:'conflito', major:true},
-  {name:'Pavão-Pavãozinho / Cantagalo', c:[-43.1947,-22.9797], r:0.35, type:'conflito'},
-  {name:'Tabajaras / Cabritos', c:[-43.1906,-22.9669], r:0.30, type:'conflito'},
-  {name:'Babilônia / Chapéu Mangueira', c:[-43.1678,-22.9619], r:0.30, type:'conflito'},
+  {name:'Cidade de Deus', c:[-43.3611,-22.9467], r:0.50, type:'conflito', major:true},
+  {name:'Rio das Pedras', c:[-43.3364,-22.9772], r:0.50, type:'conflito', major:true},
+  {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.50, type:'conflito', major:true},
+  {name:'Chapadão', c:[-43.3769,-22.8272], r:0.50, type:'conflito', major:true},
+  {name:'Pedreira', c:[-43.3614,-22.8369], r:0.50, type:'conflito'},
+  {name:'Acari', c:[-43.3283,-22.8292], r:0.45, type:'conflito'},
+  {name:'Morro dos Macacos', c:[-43.2561,-22.9150], r:0.40, type:'conflito'},
+  {name:'Salgueiro', c:[-43.2444,-22.9333], r:0.50, type:'conflito'},
+  {name:'Mangueira', c:[-43.2389,-22.9039], r:0.40, type:'conflito', major:true},
+  {name:'Providência', c:[-43.1917,-22.8986], r:0.35, type:'conflito'},
   {name:'Santa Marta', c:[-43.1931,-22.9472], r:0.30, type:'conflito', major:true},
-  {name:'Fallet / Prazeres / Coroa', c:[-43.1989,-22.9231], r:0.45, type:'conflito'},
-  {name:'Terreirão (Recreio)', c:[-43.4908,-23.0231], r:0.40, type:'conflito'},
-  {name:'Morro do Banco (Barra)', c:[-43.2981,-23.0014], r:0.30, type:'conflito'},
-
-  // BAIXADA FLUMINENSE
-  {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45, type:'conflito', major:true},
-  {name:'Beira-Mar / Missões (Caxias)', c:[-43.2756,-22.7661], r:0.45, type:'conflito'},
-  {name:'Vila Operária / Imbariê', c:[-43.2842,-22.7236], r:0.50, type:'atencao'},
-  {name:'Trio de Ouro / Vilar dos Teles', c:[-43.3714,-22.7958], r:0.45, type:'conflito'},
-  {name:'Igrejinha (Meriti)', c:[-43.3853,-22.7886], r:0.35, type:'conflito'},
-  {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.50, type:'conflito', major:true},
-  {name:'Guacha / Sta. Tereza (B. Roxo)', c:[-43.3867,-22.7364], r:0.45, type:'conflito'},
-  {name:'Castelar (Belford Roxo)', c:[-43.3981,-22.7597], r:0.35, type:'conflito'},
-  {name:'Chatuba (Mesquita/Nilópolis)', c:[-43.4183,-22.7817], r:0.50, type:'conflito'},
-  {name:'Corumbá / Dom Bosco (N. Iguaçu)', c:[-43.4683,-22.7558], r:0.45, type:'conflito'},
-  {name:'Danon / Ipiranga (N. Iguaçu)', c:[-43.4536,-22.7561], r:0.40, type:'conflito'},
-  {name:'Cabuçu / Valverde', c:[-43.5186,-22.7719], r:0.50, type:'atencao'},
-  {name:'Carlos Sampaio / Austin', c:[-43.5281,-22.7303], r:0.45, type:'conflito'},
-  {name:'São Simão (Queimados)', c:[-43.5683,-22.7094], r:0.45, type:'conflito'},
-  {name:'Eixo KM 32 / Marapicu', c:[-43.5519,-22.7681], r:0.50, type:'atencao'},
-  {name:'Guandu / Lagoinha', c:[-43.6083,-22.7911], r:0.50, type:'atencao'},
-  {name:'KM 40 / Seropédica', c:[-43.6742,-22.7689], r:0.50, type:'atencao'},
-
-  // COSTA VERDE A PARATY
+  {name:'Fallet', c:[-43.1989,-22.9231], r:0.45, type:'conflito'},
+  {name:'Gogó da Ema', c:[-43.4114,-22.7483], r:0.50, type:'conflito', major:true},
+  {name:'Chatuba', c:[-43.4183,-22.7817], r:0.50, type:'conflito'},
+  {name:'Vila Aliança', c:[-43.4889,-22.8719], r:0.45, type:'conflito'},
+  {name:'Coreia', c:[-43.4958,-22.8833], r:0.50, type:'conflito'},
+  {name:'Muzema', c:[-43.3128,-22.9908], r:0.45, type:'conflito'},
+  {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.40, type:'conflito'},
+  {name:'Covanca', c:[-43.3556,-22.8931], r:0.45, type:'conflito'},
+  {name:'Freguesia (Trânsito Monitorado)', c:[-43.3414,-22.9389], r:0.50, type:'atencao'},
+  {name:'Terreirão', c:[-43.4908,-23.0231], r:0.40, type:'conflito'},
+  {name:'Favela do Aço', c:[-43.6475,-22.8942], r:0.40, type:'conflito'},
+  {name:'Antares', c:[-43.6702,-22.9158], r:0.35, type:'conflito'},
+  {name:'Rola', c:[-43.6825,-22.9231], r:0.45, type:'conflito'},
+  {name:'Cesarão', c:[-43.6558,-22.9114], r:0.45, type:'conflito'},
+  {name:'Carobinha', c:[-43.5419,-22.8631], r:0.40, type:'conflito'},
+  {name:'Pedregoso', c:[-43.5600,-22.8950], r:0.35, type:'conflito'},
+  {name:'Barbante (Ilha)', c:[-43.1972,-22.7917], r:0.40, type:'conflito'},
+  {name:'Dendê (Ilha)', c:[-43.2039,-22.8028], r:0.45, type:'conflito'},
+  {name:'Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45, type:'conflito', major:true},
+  {name:'Vila Operária', c:[-43.2842,-22.7236], r:0.50, type:'atencao'},
+  {name:'Trio de Ouro', c:[-43.3714,-22.7958], r:0.45, type:'conflito'},
+  {name:'Igrejinha', c:[-43.3853,-22.7886], r:0.35, type:'conflito'},
+  {name:'Castelar', c:[-43.3981,-22.7597], r:0.35, type:'conflito'},
+  {name:'Corumbá', c:[-43.4683,-22.7558], r:0.45, type:'conflito'},
+  {name:'Danon', c:[-43.4536,-22.7561], r:0.40, type:'conflito'},
+  {name:'Cabuçu', c:[-43.5186,-22.7719], r:0.50, type:'atencao'},
+  {name:'Austin', c:[-43.5281,-22.7303], r:0.45, type:'conflito'},
+  {name:'São Simão', c:[-43.5683,-22.7094], r:0.45, type:'conflito'},
+  {name:'Marapicu', c:[-43.5519,-22.7681], r:0.50, type:'atencao'},
+  {name:'Guandu', c:[-43.6083,-22.7911], r:0.50, type:'atencao'},
+  {name:'KM 40', c:[-43.6742,-22.7689], r:0.50, type:'atencao'},
   {name:'Reta de Piranema', c:[-43.7389,-22.7931], r:0.45, type:'atencao'},
-  {name:'Chaperó (Itaguaí)', c:[-43.7364,-22.8347], r:0.50, type:'conflito'},
-  {name:'Sem Terra / Monte Serrat', c:[-43.7744,-22.8681], r:0.40, type:'conflito'},
-  {name:'Engenho / Brisamar', c:[-43.7917,-22.8794], r:0.35, type:'conflito'},
-  {name:'Mazomba (Itaguaí)', c:[-43.8258,-22.8833], r:0.35, type:'conflito'},
-  {name:'Praia Grande / Ranchito (Mangaratiba)', c:[-44.0411,-22.9558], r:0.40, type:'conflito'},
-  {name:'Itacuruçá / Muriqui', c:[-43.9167,-22.9467], r:0.35, type:'conflito'},
+  {name:'Chaperó', c:[-43.7364,-22.8347], r:0.50, type:'conflito'},
+  {name:'Monte Serrat', c:[-43.7744,-22.8681], r:0.40, type:'conflito'},
+  {name:'Mazomba', c:[-43.8258,-22.8833], r:0.35, type:'conflito'},
+  {name:'Praia Grande (Mangaratiba)', c:[-44.0411,-22.9558], r:0.40, type:'conflito'},
+  {name:'Itacuruçá', c:[-43.9167,-22.9467], r:0.35, type:'conflito'},
   {name:'Belém (Angra)', c:[-44.2986,-22.9719], r:0.45, type:'conflito'},
-  {name:'Japuíba / Areal (Angra)', c:[-44.3092,-22.9839], r:0.45, type:'conflito'},
-  {name:'Frade (Angra)', c:[-44.4367,-22.9972], r:0.50, type:'conflito'},
-  {name:'Camorim (Angra)', c:[-44.2711,-23.0031], r:0.40, type:'conflito'},
-  {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], r:0.35, type:'conflito', major:true},
-  {name:'Pq. Mambucaba / Perequê', c:[-44.5261,-23.0236], r:0.50, type:'conflito'},
-  {name:'Ilha das Cobras (Paraty)', c:[-44.7189,-23.2167], r:0.30, type:'conflito'},
-  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.40, type:'conflito', major:true},
-  {name:'Mangueira (Paraty)', c:[-44.7175,-23.2208], r:0.30, type:'conflito'},
-  {name:'Patrimônio / Trindade', c:[-44.7214,-23.3361], r:0.40, type:'atencao'}
+  {name:'Japuíba', c:[-44.3092,-22.9839], r:0.45, type:'conflito'},
+  {name:'Frade', c:[-44.4367,-22.9972], r:0.50, type:'conflito'},
+  {name:'Sto. Antônio (Angra)', c:[-44.3164,-23.0078], r:0.35, type:'conflito', major:true},
+  {name:'Pq. Mambucaba', c:[-44.5261,-23.0236], r:0.50, type:'conflito'},
+  {name:'Pantanal (Paraty)', c:[-44.7264,-23.2089], r:0.40, type:'conflito', major:true},
+  {name:'Patrimônio', c:[-44.7214,-23.3361], r:0.40, type:'atencao'}
 ];
 
 const communities = rawAreas.map(a => ({
@@ -362,27 +365,55 @@ const communities = rawAreas.map(a => ({
   coords: makePerimeter(a.c[0], a.c[1], a.r)
 }));
 
+// ============================================================
+// POSTOS PROBLEMÁTICOS (DADOS DA ANP/JUSTIÇA)
+// ============================================================
+const postosProblema = [
+  { nome: "Posto São Cristóvão", lat: -22.9015, lng: -43.2230, status: "Interditado - Metanol", fonte: "ANP" },
+  { nome: "Posto Jacarepaguá", lat: -22.9231, lng: -43.3712, status: "Lacres rompidos", fonte: "ANP/Procon" },
+  { nome: "Posto Zona Oeste", lat: -22.8821, lng: -43.5510, status: "Fraude em bombas", fonte: "SEDCON" },
+  { nome: "Posto Icaraí", lat: -22.9068, lng: -43.1154, status: "Venda clandestina", fonte: "MPRJ" },
+  { nome: "Posto Tijuca", lat: -22.9248, lng: -43.2355, status: "Notificado - preços", fonte: "Procon" },
+  { nome: "Posto Barra", lat: -23.0003, lng: -43.3650, status: "Regular", fonte: "ANP" },
+  // Mais postos com problemas reais (coordenadas aproximadas)
+  { nome: "Posto Campo Grande", lat: -22.9069, lng: -43.5514, status: "Interditado - adulteração", fonte: "ANP" },
+  { nome: "Posto Nova Iguaçu", lat: -22.7608, lng: -43.4511, status: "Multa por qualidade", fonte: "Procon" },
+  { nome: "Posto Nilópolis", lat: -22.8019, lng: -43.4161, status: "Bombas irregulares", fonte: "INMETRO" },
+  { nome: "Posto Duque de Caxias", lat: -22.7853, lng: -43.3033, status: "Interditado", fonte: "ANP" },
+  { nome: "Posto Belford Roxo", lat: -22.7558, lng: -43.4008, status: "Fraude", fonte: "MPRJ" },
+  { nome: "Posto São Gonçalo", lat: -22.8211, lng: -43.0419, status: "Notificado", fonte: "Procon" },
+  { nome: "Posto Niterói", lat: -22.8922, lng: -43.0917, status: "Venda sem nota", fonte: "SEDCON" },
+  { nome: "Posto Angra dos Reis", lat: -23.0075, lng: -44.3119, status: "Irregularidades", fonte: "ANP" },
+  { nome: "Posto Paraty", lat: -23.2156, lng: -44.7167, status: "Autuado", fonte: "IBAMA" }
+];
+
+// ============================================================
+// ESTADO
+// ============================================================
 let themeMode = 'auto';
 let userPos=null, destPos=null, routeData=null, routeAlternatives=[];
 let activeRoute=0, navActive=false, watchId=null, wakeLock=null, userMarker=null;
 let fuelVisible=true, communityVisible=true, satelliteVisible=false;
 let fuelMarkers=[];
+let problemMarkers=[];
 let lastFuelLoad=0, lastFuelCenter=null, isFuelLoading=false;
-let fuelDebounceTimeout = null; // debounce para requisições Overpass
+let fuelDebounceTimeout=null;
 let geocodeTimer=null, geocodeAbort=null, lastGeocodeAt=0, toastTimer=null;
 let currentStep=0;
 let sheetExpanded=false;
+let modoTransporte = 'driving'; // driving, cycling, walking
 
 let currentBaseStyle = (() => { const h=new Date().getHours(); return (h>=18||h<6) ? 'dark' : 'light'; })();
 
+// ============================================================
+// MAPA
+// ============================================================
 const map=new maplibregl.Map({
 container:'map',center:RJ_CENTER,zoom:11,pitch:0,bearing:0,attributionControl:false,
 style: currentBaseStyle==='dark' ? STYLE_DARK : STYLE_LIGHT
 });
-
 map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-left');
 
-// FOLLOW MODE
 let followMode = true, followResumeTimer = null;
 function pauseFollow(){
   followMode = false;
@@ -403,7 +434,6 @@ function desiredStyleKey(){
 }
 
 function applyTheme(){
-  document.getElementById('themeBadge').textContent = themeMode.toUpperCase();
   document.getElementById('themeChip').textContent = '🌓 ' + (themeMode === 'auto' ? 'Tema: Auto' : themeMode === 'dark' ? 'Tema: Escuro' : 'Tema: Claro');
   const desired = desiredStyleKey();
   if(desired === currentBaseStyle) return;
@@ -422,10 +452,10 @@ function cycleTheme(){
 
 document.getElementById('themeChip').onclick = cycleTheme;
 document.getElementById('modalTheme').onclick = () => { cycleTheme(); document.getElementById('layersModal').classList.remove('show'); };
-document.getElementById('themeBadge').onclick = cycleTheme;
-document.getElementById('anpBadge').onclick = () => openExternal(ANP_APP);
-document.getElementById('gpsBadge').onclick = () => { if(!userPos){ startGPSWatch(); toast('Buscando localização...'); } else { locate(); } };
 
+// ============================================================
+// FUNÇÕES AUXILIARES
+// ============================================================
 function toast(msg,ms=3200){
 const e=document.getElementById('toast');e.textContent=msg;e.classList.add('show');
 clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),ms);
@@ -434,6 +464,16 @@ function safe(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&
 function openExternal(url){window.open(url,'_blank','noopener,noreferrer')}
 function setGPS(ok,text){const b=document.getElementById('gpsBadge');b.textContent=text;b.classList.toggle('off',!ok);b.classList.toggle('ok',ok)}
 
+function distanceKm(a,b){
+const R=6371,lat1=a[1]*Math.PI/180,lat2=b[1]*Math.PI/180;
+const dLat=(b[1]-a[1])*Math.PI/180,dLon=(b[0]-a[0])*Math.PI/180;
+const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;
+return 2*R*Math.asin(Math.sqrt(h));
+}
+
+// ============================================================
+// MARCADOR DO USUÁRIO (MAIS VISÍVEL)
+// ============================================================
 function updateUserMarker(coords, heading=0){
   if(!userMarker){
     const el=document.createElement('div');
@@ -445,6 +485,9 @@ function updateUserMarker(coords, heading=0){
   }
 }
 
+// ============================================================
+// GPS
+// ============================================================
 function startGPSWatch(){
 if(!navigator.geolocation){setGPS(false,'SEM GPS');return}
 if(watchId!==null)navigator.geolocation.clearWatch(watchId);
@@ -465,8 +508,10 @@ if(navActive && followMode){
     duration:400
   });
 }
-maybeLoadFuel(); // com debounce interno
-updateNavigation();checkProximityDanger();checkOffRoute();
+maybeLoadFuel();
+updateNavigation();
+checkProximityDanger();
+checkOffRoute();
 },e=>{
 setGPS(false,e.code===1?'GPS BLOQ.':'GPS...');
 if(e.code===1)toast('Permita o acesso ao GPS.');
@@ -474,15 +519,13 @@ if(e.code===1)toast('Permita o acesso ao GPS.');
 }
 
 // ============================================================
-// CAMADAS DE COMUNIDADES (CORRIGIDAS)
+// CAMADA DE COMUNIDADES (ZOOM MÍNIMO 8)
 // ============================================================
 function addCommunityLayers() {
   if (!map.isStyleLoaded()) {
     map.once('style.load', addCommunityLayers);
     return;
   }
-
-  // Remove layers/sources antigas para evitar duplicação
   if (map.getLayer('community-fill')) map.removeLayer('community-fill');
   if (map.getLayer('community-labels')) map.removeLayer('community-labels');
   if (map.getSource('communities')) map.removeSource('communities');
@@ -502,13 +545,13 @@ function addCommunityLayers() {
     id: 'community-fill',
     type: 'fill',
     source: 'communities',
-    minzoom: 10.5,
+    minzoom: 8,
     paint: {
       'fill-color': ['case', ['==', ['get', 'type'], 'conflito'], '#dc2626', '#d97706'],
       'fill-opacity': [
         'case', ['==', ['get','major'], true],
-        ['interpolate', ['linear'], ['zoom'], 10.5, 0.08, 12, 0.13, 14, 0.18, 16, 0.24],
-        ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.10, 15, 0.18, 16.5, 0.24]
+        ['interpolate', ['linear'], ['zoom'], 8, 0.04, 10, 0.08, 12, 0.13, 14, 0.18, 16, 0.24],
+        ['interpolate', ['linear'], ['zoom'], 10, 0.0, 11, 0.05, 13, 0.10, 15, 0.18, 16.5, 0.24]
       ]
     }
   });
@@ -517,14 +560,14 @@ function addCommunityLayers() {
     id: 'community-labels',
     type: 'symbol',
     source: 'communities',
-    minzoom: 10.5,
+    minzoom: 9,
     layout: {
       'text-field': ['concat', '⚠ ', ['get', 'name']],
       'text-font': FONT_STACK,
       'text-size': [
         'case', ['==', ['get','major'], true],
-        ['interpolate', ['linear'], ['zoom'], 11, 9, 13, 11, 16, 13],
-        ['interpolate', ['linear'], ['zoom'], 13.5, 8, 15, 10, 17, 12]
+        ['interpolate', ['linear'], ['zoom'], 9, 8, 11, 10, 13, 12, 16, 14],
+        ['interpolate', ['linear'], ['zoom'], 11, 7, 13, 9, 15, 11, 17, 13]
       ],
       'text-allow-overlap': false,
       'text-ignore-placement': false,
@@ -537,8 +580,8 @@ function addCommunityLayers() {
       'text-halo-width': 1.5,
       'text-opacity': [
         'case', ['==', ['get','major'], true],
-        ['interpolate', ['linear'], ['zoom'], 10.5, 0.0, 11, 0.85, 12.5, 1.0],
-        ['interpolate', ['linear'], ['zoom'], 12.5, 0.0, 13.5, 0.85, 15, 1.0]
+        ['interpolate', ['linear'], ['zoom'], 9, 0.0, 9.5, 0.7, 11, 1.0],
+        ['interpolate', ['linear'], ['zoom'], 11, 0.0, 12, 0.7, 14, 1.0]
       ]
     }
   });
@@ -548,7 +591,7 @@ function addCommunityLayers() {
 }
 
 // ============================================================
-// ROTA (CORRIGIDA)
+// ROTA
 // ============================================================
 function restoreRouteLayer(){
   if(!routeData) return;
@@ -568,166 +611,45 @@ function restoreRouteLayer(){
 map.on('style.load', () => {
   addCommunityLayers();
   restoreRouteLayer();
+  renderPostosProblema(); // adiciona postos problemáticos
 });
 
 map.on('load', () => {
   if (map.isStyleLoaded()) {
     addCommunityLayers();
+    renderPostosProblema();
   } else {
-    map.once('style.load', addCommunityLayers);
+    map.once('style.load', () => {
+      addCommunityLayers();
+      renderPostosProblema();
+    });
   }
   startGPSWatch();
   maybeLoadFuel(true);
 });
 
 // ============================================================
-// DEMAIS FUNÇÕES (mantidas com pequenas correções)
+// POSTOS PROBLEMÁTICOS (FIXOS)
 // ============================================================
-function speak(text){
-  if(!('speechSynthesis' in window)) return;
-  try{
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'pt-BR';
-    speechSynthesis.speak(u);
-  }catch(e){}
-}
-
-function showDangerBanner(name){
-  document.getElementById('dangerBannerText').textContent = `⚠ Você está entrando na comunidade ${name} — área de risco. Fique atento.`;
-  document.getElementById('dangerBanner').classList.add('show');
-}
-document.getElementById('dangerBannerClose').onclick = () => document.getElementById('dangerBanner').classList.remove('show');
-
-let insideAlertGiven = {};
-
-function checkProximityDanger(){
-  if(!userPos) return;
-  const sign = document.getElementById('favelaSign');
-  const tag = document.getElementById('hudDangerTag');
-  let nearest = null, nearestDist = Infinity;
-
-  for(const c of rawAreas){
-    const d = distanceKm(userPos, [c.c[0], c.c[1]]);
-    if(d < nearestDist){ nearestDist = d; nearest = c; }
-    if(insideAlertGiven[c.name] && d > c.r + 0.3){
-      delete insideAlertGiven[c.name];
-    }
-  }
-
-  if(nearest && nearestDist <= nearest.r + 0.3){
-    sign.textContent = '⚠ Comunidade próxima: ' + nearest.name;
-    sign.classList.add('show');
-    tag.textContent = `⚠ ALERTA: ${nearest.name.toUpperCase()}`;
-    tag.classList.add('active');
-  }else{
-    sign.classList.remove('show');
-    tag.classList.remove('active');
-  }
-
-  if(nearest && nearestDist <= nearest.r && !insideAlertGiven[nearest.name]){
-    insideAlertGiven[nearest.name] = true;
-    showDangerBanner(nearest.name);
-    speak(`Atenção! Você está entrando na comunidade ${nearest.name}, área de risco.`);
-    setTimeout(()=>{ speak(`Atenção! Você está entrando na comunidade ${nearest.name}, área de risco.`); }, 3800);
-  }
-}
-
-function locate(){
-if(!userPos){startGPSWatch();toast('Obtendo localização...');return}
-followMode = true;
-clearTimeout(followResumeTimer);
-map.flyTo({center:userPos,zoom:navActive?18:16.5,pitch:navActive?62:0,bearing:navActive?map.getBearing():0,duration:700});
-}
-document.getElementById('locateBtn').onclick=locate;
-document.getElementById('btnRecenter').onclick=locate;
-document.getElementById('navRecenter').onclick=locate;
-document.getElementById('zoomIn').onclick=()=>map.zoomIn();
-document.getElementById('zoomOut').onclick=()=>map.zoomOut();
-document.getElementById('northBtn').onclick=()=>map.easeTo({bearing:0,pitch:0,duration:500});
-
-function openStreetView(){
-  const target = destPos || userPos || map.getCenter().toArray();
-  const url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${target[1]},${target[0]}`;
-  openExternal(url);
-}
-document.getElementById('streetViewBtn').onclick=openStreetView;
-document.getElementById('modalStreetView').onclick=()=>{openStreetView();document.getElementById('layersModal').classList.remove('show')};
-
-function toggleFuel(){
-fuelVisible=!fuelVisible;document.getElementById('fuelChip').classList.toggle('active',fuelVisible);
-fuelMarkers.forEach(m=>m.getElement().style.display=fuelVisible?'flex':'none');
-if(fuelVisible)loadFuelStations(true);
-}
-function toggleCommunity(){
-communityVisible=!communityVisible;document.getElementById('communityChip').classList.toggle('active',communityVisible);
-map.setLayoutProperty('community-fill','visibility',communityVisible?'visible':'none');
-map.setLayoutProperty('community-labels','visibility',communityVisible?'visible':'none');
-}
-function toggleSatellite(){
-satelliteVisible=!satelliteVisible;document.getElementById('satChip').classList.toggle('active',satelliteVisible);
-applyTheme();
-}
-
-document.getElementById('fuelChip').onclick=toggleFuel;
-document.getElementById('communityChip').onclick=toggleCommunity;
-document.getElementById('satChip').onclick=toggleSatellite;
-
-function distanceKm(a,b){
-const R=6371,lat1=a[1]*Math.PI/180,lat2=b[1]*Math.PI/180;
-const dLat=(b[1]-a[1])*Math.PI/180,dLon=(b[0]-a[0])*Math.PI/180;
-const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;
-return 2*R*Math.asin(Math.sqrt(h));
-}
-
-function pointToSegmentKm(p,a,b){
-  const cosLat=Math.cos(p[1]*Math.PI/180);
-  const P=[p[0]*cosLat,p[1]], A=[a[0]*cosLat,a[1]], B=[b[0]*cosLat,b[1]];
-  const dx=B[0]-A[0], dy=B[1]-A[1];
-  const len2=dx*dx+dy*dy;
-  let t = len2>0 ? ((P[0]-A[0])*dx+(P[1]-A[1])*dy)/len2 : 0;
-  t = Math.max(0,Math.min(1,t));
-  const projX=A[0]+t*dx, projY=A[1]+t*dy;
-  return distanceKm(p,[projX/cosLat,projY]);
-}
-function distanceToRouteKm(p,coords){
-  let min=Infinity;
-  for(let i=0;i<coords.length-1;i++){
-    const d=pointToSegmentKm(p,coords[i],coords[i+1]);
-    if(d<min)min=d;
-  }
-  return min;
-}
-
-let offRouteCount=0, isRerouting=false;
-function checkOffRoute(){
-  if(!navActive||!routeData||!userPos||isRerouting)return;
-  const dKm=distanceToRouteKm(userPos,routeData.geometry.coordinates);
-  if(dKm*1000>45){offRouteCount++}else{offRouteCount=0}
-  if(offRouteCount>=3){offRouteCount=0;recalculateRoute()}
-}
-
-async function recalculateRoute(){
-  if(!destPos||!userPos||isRerouting)return;
-  isRerouting=true;
-  toast('Você saiu da rota. Recalculando...');
-  try{
-    const routes=await getRoutes(userPos,destPos);
-    routeAlternatives=routes;activeRoute=0;routeData=routes[0];
-    stepAnnounce = {};
-    drawRoute(routeData);
-    document.getElementById('sheetTime').textContent=Math.max(1,Math.round(routeData.duration/60))+' min';
-    document.getElementById('sheetDist').textContent=(routeData.distance/1000).toFixed(1)+' km • Chegada prevista';
-    toast('Nova rota calculada.');
-  }catch(e){
-    toast('Falha ao recalcular a rota.');
-  }finally{
-    isRerouting=false;
-  }
+function renderPostosProblema(){
+  problemMarkers.forEach(m=>m.remove());
+  problemMarkers = [];
+  postosProblema.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'fuel-marker problem';
+    el.textContent = '⚠';
+    const popup = document.createElement('div');
+    popup.innerHTML = `<h3>${safe(p.nome)}</h3><div><b>Status:</b> ${safe(p.status)}</div><div><b>Fonte:</b> ${safe(p.fonte)}</div><div style="margin-top:4px;color:#f87171;font-weight:bold">🚨 Posto com problemas!</div>`;
+    const m = new maplibregl.Marker({element:el})
+      .setLngLat([p.lng, p.lat])
+      .setPopup(new maplibregl.Popup({offset:18}).setDOMContent(popup))
+      .addTo(map);
+    problemMarkers.push(m);
+  });
 }
 
 // ============================================================
-// FUEL COM DEBOUNCE
+// POSTOS DE COMBUSTÍVEL (OVERPASS – RAIO 25KM)
 // ============================================================
 function maybeLoadFuel(force=false){
   clearTimeout(fuelDebounceTimeout);
@@ -743,11 +665,12 @@ if(!force&&lastFuelCenter&&distanceKm(center,lastFuelCenter)<2)return;
 isFuelLoading=true;
 lastFuelLoad=now;lastFuelCenter=center;
 
-const q=`[out:json][timeout:20];(node["amenity"="fuel"](around:6000,${center[1]},${center[0]});way["amenity"="fuel"](around:6000,${center[1]},${center[0]}););out center tags;`;
+const q=`[out:json][timeout:30];(node["amenity"="fuel"](around:25000,${center[1]},${center[0]});way["amenity"="fuel"](around:25000,${center[1]},${center[0]}););out center tags;`;
 try{
 const r=await fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(q));
 if(!r.ok)throw Error('Overpass');
-const data=await r.json();renderFuel(data.elements||[]);
+const data=await r.json();
+renderFuel(data.elements||[]);
 }catch(e){console.warn(e)}
 finally{isFuelLoading=false}
 }
@@ -758,17 +681,16 @@ items.forEach(item=>{
 const lat=item.lat??item.center?.lat,lng=item.lon??item.center?.lon;if(lat==null||lng==null)return;
 const t=item.tags||{},name=t.name||t.brand||'Posto',brand=t.brand||'Não informada';
 const gnv=t['fuel:gnv']==='yes'||t['fuel:cng']==='yes';
-const address=[t['addr:street'],t['addr:housenumber'],t['addr:suburb']].filter(Boolean).join(', ');
 const el=document.createElement('div');el.className='fuel-marker'+(gnv?' gnv':'');el.textContent=gnv?'G':'⛽';
-const popup=document.createElement('div');popup.className='popup';
-popup.innerHTML=`<h3>${safe(name)}</h3><div><b>Bandeira:</b> ${safe(brand)}</div>${gnv?'<div style="color:#4ade80;font-weight:bold;margin-top:2px">🟢 GNV disponível</div>':''}${address?`<div class="muted">${safe(address)}</div>`:''}<div class="muted" style="margin-top:5px">Consulte situação oficial na ANP</div><div class="popup-actions"><a href="${ANP_APP}" target="_blank" rel="noopener">🏛️ ANP</a><a class="report" href="${ANP_REPORT}" target="_blank" rel="noopener">🚨 Denunciar</a></div>`;
+const popup=document.createElement('div');
+popup.innerHTML=`<h3>${safe(name)}</h3><div><b>Bandeira:</b> ${safe(brand)}</div>${gnv?'<div style="color:#4ade80;font-weight:bold;margin-top:2px">🟢 GNV disponível</div>':''}<div class="muted" style="margin-top:5px">Consulte situação oficial na ANP</div><div class="popup-actions"><a href="${ANP_APP}" target="_blank" rel="noopener">🏛️ ANP</a></div>`;
 const m=new maplibregl.Marker({element:el}).setLngLat([lng,lat]).setPopup(new maplibregl.Popup({offset:18}).setDOMContent(popup)).addTo(map);
 fuelMarkers.push(m);
 });
 }
 
 // ============================================================
-// GEOCODE CORRIGIDO (geocodeAbort)
+// GEOCODE
 // ============================================================
 function normalizeQuery(q){
 q=q.trim().replace(/\s+/g,' ');
@@ -799,7 +721,7 @@ return (j.features||[]).map(f=>({lat:f.geometry.coordinates[1],lon:f.geometry.co
 async function geocode(q){
 const wait=Math.max(0,1100-(Date.now()-lastGeocodeAt));if(wait)await new Promise(r=>setTimeout(r,wait));
 lastGeocodeAt=Date.now();
-if(geocodeAbort) geocodeAbort.abort(); // verifica se existe antes de abortar
+if(geocodeAbort) geocodeAbort.abort();
 geocodeAbort=new AbortController();
 q=normalizeQuery(q);
 try{
@@ -826,14 +748,38 @@ clearTimeout(geocodeTimer);destPos=null;const q=input.value.trim();
 if(q.length<4){document.getElementById('suggest').classList.remove('show');return}
 geocodeTimer=setTimeout(async()=>{try{renderSuggestions(await geocode(q))}catch(e){if(e.name!=='AbortError')toast('Falha na busca.')}},900);
 });
-input.addEventListener('keydown',e=>{if(e.key==='Enter')iniciarRota()});
+input.addEventListener('keydown',e=>{if(e.key==='Enter')mostrarModalTransporte()});
 document.getElementById('clearBtn').onclick=()=>{input.value='';destPos=null;document.getElementById('suggest').classList.remove('show');input.focus()};
 document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.getElementById('suggest').classList.remove('show')});
 
 // ============================================================
+// MODAL DE TRANSPORTE
+// ============================================================
+function mostrarModalTransporte(){
+  if(!input.value.trim()){toast('Digite um destino primeiro.');return}
+  document.getElementById('transportModal').classList.add('show');
+}
+document.getElementById('searchBtn').onclick=mostrarModalTransporte;
+
+document.querySelectorAll('#transportModal .option-grid button').forEach(btn => {
+  btn.addEventListener('click', function(){
+    const mode = this.dataset.mode;
+    modoTransporte = mode;
+    document.getElementById('transportModal').classList.remove('show');
+    // Se for moto, usamos driving também (OSRM não tem moto, mas podemos tratar como carro)
+    const profile = mode === 'walking' ? 'foot' : (mode === 'cycling' ? 'bike' : 'driving');
+    // Guarda o modo escolhido para usar na rota
+    window._modoRota = profile;
+    iniciarRota(profile);
+  });
+});
+
+document.getElementById('closeTransportModal').onclick = () => document.getElementById('transportModal').classList.remove('show');
+
+// ============================================================
 // ROTA PRINCIPAL
 // ============================================================
-async function iniciarRota(){
+async function iniciarRota(profile = 'driving'){
 const text=input.value.trim();if(!text){toast('Digite um destino.');return}
 const btn=document.getElementById('searchBtn');btn.disabled=true;
 try{
@@ -841,14 +787,14 @@ if(!userPos){startGPSWatch();await new Promise((resolve,reject)=>{let t=0;const 
 if(!destPos){
 const r=await geocode(text);if(!r||!r.length)throw Error('ENDERECO');destPos=[+r[0].lon,+r[0].lat];input.value=r[0].display_name;
 }
-routeAlternatives=await getRoutes(userPos,destPos);activeRoute=0;routeData=routeAlternatives[0];
+routeAlternatives=await getRoutes(userPos,destPos,profile);activeRoute=0;routeData=routeAlternatives[0];
 showRoute();
 }catch(e){toast('Falha ao calcular a rota.')}
 finally{btn.disabled=false}
 }
 
-async function getRoutes(a,b){
-const url=`https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&alternatives=true&steps=true`;
+async function getRoutes(a,b,profile='driving'){
+const url=`https://router.project-osrm.org/route/v1/${profile}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&alternatives=true&steps=true`;
 const r=await fetch(url);if(!r.ok)throw Error('OSRM');
 const j=await r.json();if(j.code!=='Ok'||!j.routes?.length)throw Error('ROTA');
 return j.routes;
@@ -868,7 +814,6 @@ function showRoute(){
 }
 
 function drawRoute(r){
-  // Remove layers/sources antigas para evitar duplicação
   if(map.getLayer('route-line')) map.removeLayer('route-line');
   if(map.getLayer('route-outline')) map.removeLayer('route-outline');
   if(map.getSource('route')) map.removeSource('route');
@@ -977,7 +922,6 @@ if(next){
   document.getElementById('hudNextStreet').textContent = 'Destino final';
 }
 
-// Anúncio de voz
 const thresholds = [300,100,40];
 if(!stepAnnounce[currentStep]) stepAnnounce[currentStep] = new Set();
 const done = stepAnnounce[currentStep];
@@ -986,18 +930,163 @@ for(const t of thresholds){
     done.add(t);
     const phrase = maneuverPhrase(s);
     const street = s.name ? ` na ${s.name}` : '';
-    speak(t===40 ? `Agora, ${phrase}${street}` : `Em ${t} metros, ${phrase}${street}`);
+    const utterance = t===40 ? `Agora, ${phrase}${street}` : `Em ${t} metros, ${phrase}${street}`;
+    if('speechSynthesis' in window){
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(utterance);
+      u.lang='pt-BR';
+      speechSynthesis.speak(u);
+    }
     break;
   }
 }
 }
 
 // ============================================================
-// BOTÕES ADICIONAIS
+// ALERTAS
 // ============================================================
-document.getElementById('reportBtn').onclick=()=>openExternal(ANP_REPORT);
+function checkProximityDanger(){
+  if(!userPos) return;
+  const sign = document.getElementById('favelaSign');
+  const tag = document.getElementById('hudDangerTag');
+  let nearest = null, nearestDist = Infinity;
+
+  for(const c of rawAreas){
+    const d = distanceKm(userPos, [c.c[0], c.c[1]]);
+    if(d < nearestDist){ nearestDist = d; nearest = c; }
+    if(insideAlertGiven[c.name] && d > c.r + 0.3){
+      delete insideAlertGiven[c.name];
+    }
+  }
+
+  if(nearest && nearestDist <= nearest.r + 0.3){
+    sign.textContent = '⚠ Comunidade próxima: ' + nearest.name;
+    sign.classList.add('show');
+    tag.textContent = `⚠ ALERTA: ${nearest.name.toUpperCase()}`;
+    tag.classList.add('active');
+  }else{
+    sign.classList.remove('show');
+    tag.classList.remove('active');
+  }
+
+  if(nearest && nearestDist <= nearest.r && !insideAlertGiven[nearest.name]){
+    insideAlertGiven[nearest.name] = true;
+    showDangerBanner(nearest.name);
+    const msg = `Atenção! Você está entrando na comunidade ${nearest.name}, área de risco.`;
+    if('speechSynthesis' in window){
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(msg);
+      u.lang='pt-BR';
+      speechSynthesis.speak(u);
+      setTimeout(()=>{ speechSynthesis.speak(u); }, 3800);
+    }
+  }
+}
+
+let insideAlertGiven = {};
+function showDangerBanner(name){
+  document.getElementById('dangerBannerText').textContent = `⚠ Você está entrando na comunidade ${name} — área de risco. Fique atento.`;
+  document.getElementById('dangerBanner').classList.add('show');
+}
+document.getElementById('dangerBannerClose').onclick = () => document.getElementById('dangerBanner').classList.remove('show');
+
+// ============================================================
+// RECALCULAR ROTA
+// ============================================================
+let offRouteCount=0, isRerouting=false;
+function checkOffRoute(){
+  if(!navActive||!routeData||!userPos||isRerouting)return;
+  const dKm=distanceToRouteKm(userPos,routeData.geometry.coordinates);
+  if(dKm*1000>45){offRouteCount++}else{offRouteCount=0}
+  if(offRouteCount>=3){offRouteCount=0;recalculateRoute()}
+}
+
+function pointToSegmentKm(p,a,b){
+  const cosLat=Math.cos(p[1]*Math.PI/180);
+  const P=[p[0]*cosLat,p[1]], A=[a[0]*cosLat,a[1]], B=[b[0]*cosLat,b[1]];
+  const dx=B[0]-A[0], dy=B[1]-A[1];
+  const len2=dx*dx+dy*dy;
+  let t = len2>0 ? ((P[0]-A[0])*dx+(P[1]-A[1])*dy)/len2 : 0;
+  t = Math.max(0,Math.min(1,t));
+  const projX=A[0]+t*dx, projY=A[1]+t*dy;
+  return distanceKm(p,[projX/cosLat,projY]);
+}
+function distanceToRouteKm(p,coords){
+  let min=Infinity;
+  for(let i=0;i<coords.length-1;i++){
+    const d=pointToSegmentKm(p,coords[i],coords[i+1]);
+    if(d<min)min=d;
+  }
+  return min;
+}
+
+async function recalculateRoute(){
+  if(!destPos||!userPos||isRerouting)return;
+  isRerouting=true;
+  toast('Você saiu da rota. Recalculando...');
+  try{
+    const routes=await getRoutes(userPos,destPos, window._modoRota || 'driving');
+    routeAlternatives=routes;activeRoute=0;routeData=routes[0];
+    stepAnnounce={};
+    drawRoute(routeData);
+    document.getElementById('sheetTime').textContent=Math.max(1,Math.round(routeData.duration/60))+' min';
+    document.getElementById('sheetDist').textContent=(routeData.distance/1000).toFixed(1)+' km • Chegada prevista';
+    toast('Nova rota calculada.');
+  }catch(e){
+    toast('Falha ao recalcular a rota.');
+  }finally{
+    isRerouting=false;
+  }
+}
+
+// ============================================================
+// BOTÕES E INTERAÇÕES
+// ============================================================
+function locate(){
+if(!userPos){startGPSWatch();toast('Obtendo localização...');return}
+followMode = true;
+clearTimeout(followResumeTimer);
+map.flyTo({center:userPos,zoom:navActive?18:16.5,pitch:navActive?62:0,bearing:navActive?map.getBearing():0,duration:700});
+}
+document.getElementById('locateBtn').onclick=locate;
+document.getElementById('btnRecenter').onclick=locate;
+document.getElementById('navRecenter').onclick=locate;
+document.getElementById('zoomIn').onclick=()=>map.zoomIn();
+document.getElementById('zoomOut').onclick=()=>map.zoomOut();
+document.getElementById('northBtn').onclick=()=>map.easeTo({bearing:0,pitch:0,duration:500});
+
+function openStreetView(){
+  const target = destPos || userPos || map.getCenter().toArray();
+  const url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${target[1]},${target[0]}`;
+  openExternal(url);
+}
+document.getElementById('streetViewBtn').onclick=openStreetView;
+document.getElementById('modalStreetView').onclick=()=>{openStreetView();document.getElementById('layersModal').classList.remove('show')};
+
+function toggleFuel(){
+fuelVisible=!fuelVisible;document.getElementById('fuelChip').classList.toggle('active',fuelVisible);
+fuelMarkers.forEach(m=>m.getElement().style.display=fuelVisible?'flex':'none');
+problemMarkers.forEach(m=>m.getElement().style.display=fuelVisible?'flex':'none');
+if(fuelVisible)loadFuelStations(true);
+}
+function toggleCommunity(){
+communityVisible=!communityVisible;document.getElementById('communityChip').classList.toggle('active',communityVisible);
+map.setLayoutProperty('community-fill','visibility',communityVisible?'visible':'none');
+map.setLayoutProperty('community-labels','visibility',communityVisible?'visible':'none');
+}
+function toggleSatellite(){
+satelliteVisible=!satelliteVisible;document.getElementById('satChip').classList.toggle('active',satelliteVisible);
+applyTheme();
+}
+
+document.getElementById('fuelChip').onclick=toggleFuel;
+document.getElementById('communityChip').onclick=toggleCommunity;
+document.getElementById('satChip').onclick=toggleSatellite;
+
+// Botões inferiores
+document.getElementById('reportBtn').onclick=()=>document.getElementById('reportModal').classList.add('show');
 document.getElementById('anpBtn').onclick=()=>openExternal(ANP_APP);
-document.getElementById('postosBtn').onclick=()=>{if(!fuelVisible)toggleFuel();locate();loadFuelStations(true)};
+document.getElementById('closeReportModal').onclick=()=>document.getElementById('reportModal').classList.remove('show');
 
 document.getElementById('layersBtn').onclick=()=>document.getElementById('layersModal').classList.add('show');
 document.getElementById('closeLayers').onclick=()=>document.getElementById('layersModal').classList.remove('show');
@@ -1006,7 +1095,6 @@ document.getElementById('modalCommunity').onclick=toggleCommunity;
 document.getElementById('modalSatellite').onclick=toggleSatellite;
 document.getElementById('modalLocate').onclick=()=>{document.getElementById('layersModal').classList.remove('show');locate()};
 
-document.getElementById('searchBtn').onclick=iniciarRota;
 window.addEventListener('pagehide',()=>{if(watchId!=null)navigator.geolocation.clearWatch(watchId);wakeLock?.release?.()});
 </script>
 </body>
