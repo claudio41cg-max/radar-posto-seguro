@@ -249,9 +249,9 @@ body.nav-mode .favela-sign{top:132px}
     <h2>🚨 Denunciar</h2>
     <p>Selecione o órgão oficial para denunciar irregularidades em postos de combustível.</p>
     <div class="modal-options">
-      <button onclick="window.open('https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados','_blank')"><span class="icon">🏛️</span> ANP - Agência Nacional do Petróleo</button>
+      <button onclick="window.open('https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados','_blank')"><span class="icon">🏛️</span> ANP</button>
       <button onclick="window.open('https://www.procon.rj.gov.br/','_blank')"><span class="icon">⚖️</span> Procon RJ</button>
-      <button onclick="window.open('https://www.mprj.mp.br/','_blank')"><span class="icon">🏢</span> Ministério Público do RJ</button>
+      <button onclick="window.open('https://www.mprj.mp.br/','_blank')"><span class="icon">🏢</span> MP RJ</button>
       <button onclick="window.open('https://www.ibama.gov.br/','_blank')"><span class="icon">🌳</span> IBAMA</button>
     </div>
     <button class="modal-close" id="closeReportModal">Fechar</button>
@@ -267,7 +267,7 @@ body.nav-mode .favela-sign{top:132px}
       <button id="modalCommunity">🟥 Zonas de Risco</button>
       <button id="modalFuel">⛽ Postos</button>
       <button id="modalSatellite">🛰️ Satélite</button>
-      <button id="modalStreetView">👁️ Google Street View</button>
+      <button id="modalStreetView">👁️ Street View</button>
       <button id="modalLocate">📍 Minha Posição</button>
       <button id="modalTheme">🌓 Alternar Tema</button>
     </div>
@@ -285,7 +285,7 @@ const ANP_REPORT = 'https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-
 const RJ_CENTER = [-43.40, -22.90];
 
 const STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/liberty';
-const STYLE_DARK = 'https://tiles.openfreemap.org/styles/dark';
+const STYLE_DARK  = 'https://tiles.openfreemap.org/styles/dark';
 const FONT_STACK = ['Noto Sans Regular'];
 
 function buildSatelliteStyle() {
@@ -490,13 +490,14 @@ const map = new maplibregl.Map({
 map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
 
 // ================================================================
-// CAMADAS DE COMUNIDADES (COM communityData)
+// CAMADAS DE COMUNIDADES – SEMPRE VISÍVEIS
 // ================================================================
 function addCommunityLayers() {
   if (!map.isStyleLoaded()) {
     map.once('style.load', addCommunityLayers);
     return;
   }
+  // Remove camadas antigas se existirem
   if (map.getLayer('community-fill')) map.removeLayer('community-fill');
   if (map.getLayer('community-labels')) map.removeLayer('community-labels');
   if (map.getSource('community-source')) map.removeSource('community-source');
@@ -516,6 +517,8 @@ function addCommunityLayers() {
   };
 
   map.addSource('community-source', { type: 'geojson', data: geo });
+
+  // Preenchimento
   map.addLayer({
     id: 'community-fill',
     type: 'fill',
@@ -533,6 +536,8 @@ function addCommunityLayers() {
       ]
     }
   });
+
+  // Rótulos
   map.addLayer({
     id: 'community-labels',
     type: 'symbol',
@@ -564,20 +569,18 @@ function addCommunityLayers() {
       ]
     }
   });
+
   map.setLayoutProperty('community-fill', 'visibility', communityVisible ? 'visible' : 'none');
   map.setLayoutProperty('community-labels', 'visibility', communityVisible ? 'visible' : 'none');
-  console.log('✅ Camadas de comunidades adicionadas. Total:', communityData.length);
+  console.log('✅ Comunidades carregadas:', communityData.length);
 }
 
 // ================================================================
-// BUSCA AUTOMÁTICA DE COMUNIDADES (OVERSPASS) COM FALLBACK
+// BUSCA AUTOMÁTICA DE COMUNIDADES (OVERSPASS) – FALLBACK
 // ================================================================
 async function buscarComunidadesOverpass() {
   const btn = document.getElementById('btnBuscarComunidades');
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = '⏳ Buscando...';
-  }
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Buscando...'; }
   toast('Buscando comunidades no OpenStreetMap...', 'spinner fa-pulse', 5000);
 
   try {
@@ -610,14 +613,17 @@ async function buscarComunidadesOverpass() {
       toast('Nenhuma comunidade nova encontrada. Usando lista manual.', 'info-circle', 4000);
       return false;
     }
+
+    // Mescla com a lista manual (evita duplicatas)
     const nomesExistentes = new Set(communityData.map(c => c.name));
     const filtradas = novas.filter(c => !nomesExistentes.has(c.name));
     if (filtradas.length === 0) {
       toast('Nenhuma comunidade nova para adicionar.', 'info-circle', 3000);
       return false;
     }
+
     communityData = [...communityData, ...filtradas];
-    addCommunityLayers();
+    addCommunityLayers(); // recria as camadas
     toast(`✅ ${filtradas.length} comunidades adicionadas! Total: ${communityData.length}`, 'check-circle', 4000);
     return true;
   } catch (e) {
@@ -625,10 +631,7 @@ async function buscarComunidadesOverpass() {
     toast('Falha ao buscar comunidades. Usando lista manual.', 'exclamation-circle', 5000);
     return false;
   } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.textContent = '🔄 Buscar Comunidades Online';
-    }
+    if (btn) { btn.disabled = false; btn.textContent = '🔄 Buscar Comunidades Online'; }
   }
 }
 
@@ -694,7 +697,7 @@ function processarOverpassData(data) {
 }
 
 // ================================================================
-// ROTA
+// ROTA – LAYER
 // ================================================================
 function restoreRouteLayer() {
   if (!routeData) return;
@@ -708,7 +711,7 @@ function restoreRouteLayer() {
 }
 
 // ================================================================
-// EVENTOS DO MAPA (GARANTE QUE COMUNIDADES NUNCA SUMAM)
+// EVENTOS DO MAPA – GARANTE QUE COMUNIDADES APAREÇAM
 // ================================================================
 map.on('style.load', () => {
   addCommunityLayers();
@@ -720,6 +723,7 @@ map.on('load', () => {
   else map.once('style.load', addCommunityLayers);
   startGPSWatch();
   carregarPostosIniciais();
+  // Busca automática após 4 segundos
   setTimeout(async () => {
     console.log('⏳ Iniciando busca automática de comunidades...');
     await buscarComunidadesOverpass();
@@ -853,7 +857,7 @@ function renderFuel(items) {
 }
 
 // ================================================================
-// CONTROLE DE OPACIDADE POR ZOOM
+// OPACIDADE POR ZOOM
 // ================================================================
 function atualizarVisibilidadeZoom() {
   const zoom = map.getZoom();
@@ -936,7 +940,7 @@ document.getElementById('modalSatellite').onclick = () => {
 };
 
 // ================================================================
-// BUSCA (GEOCODE) - SIMPLIFICADA
+// BUSCA (GEOCODE) – SIMPLIFICADA
 // ================================================================
 function normalizeQuery(q) {
   q = q.trim().replace(/\s+/g, ' ');
@@ -964,7 +968,7 @@ async function geocode(q) {
       }));
     }
   } catch (e) { if (e.name === 'AbortError') throw e; }
-  // Fallback: Photon
+  // Fallback Photon
   try {
     const c = userPos || map.getCenter().toArray();
     const r = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=6&lat=${c[1]}&lon=${c[0]}&lang=pt`, { signal: geocodeAbort?.signal });
@@ -1032,7 +1036,6 @@ document.getElementById('searchBtn').onclick = () => {
     if (userPos) iniciarRotaInterna();
     else toast('Aguardando GPS...');
   } else {
-    // Tenta buscar agora
     (async () => {
       try {
         const results = await geocode(text);
