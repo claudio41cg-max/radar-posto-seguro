@@ -273,7 +273,7 @@ const ANP_APP = 'https://anpcomvcpostos.anp.gov.br/';
 const ANP_REPORT = 'https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
 const RJ_CENTER = [-43.40, -22.90];
 
-// Geometria leve e otimizada (300m a 500m)
+// Geometria leve e rápida (300m a 500m)
 function makePerimeter(lon, lat, rKm = 0.35) {
   const rLat = rKm / 111.0;
   const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
