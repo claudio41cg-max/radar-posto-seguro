@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#07131f">
+<meta name="theme-color" content="#0b1326">
 <title>Radar Seguro RJ PRO</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
 html,body,#map{width:100%;height:100%;overflow:hidden}
-body{background:#07131f;color:#fff}
+body{background:#0b1326;color:#fff}
 button,input{font:inherit}
 #map{position:fixed;inset:0}
 .maplibregl-ctrl-attrib{font-size:9px;background:rgba(0,0,0,.55)!important;color:#ddd!important}
@@ -19,45 +19,58 @@ button,input{font:inherit}
 .topbar>*{pointer-events:auto}
 .topbar.hide-nav{transform:translateY(-120%);opacity:0;pointer-events:none}
 
-.appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:16px;background:rgba(4,16,28,.94);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px #0007;backdrop-filter:blur(12px)}
-.brand{font-size:13px;font-weight:900}.brand span{color:#38bdf8}
+.appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:18px;background:rgba(11,21,38,.92);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px rgba(0,0,0,0.6);backdrop-filter:blur(14px)}
+.brand{font-size:13px;font-weight:900;letter-spacing:0.5px}.brand span{color:#38bdf8}
 
-.search{position:relative;display:flex;gap:4px;padding:5px;background:#07131ff5;border:1px solid #38bdf8;border-radius:15px;box-shadow:0 8px 24px #0008}
+.search{position:relative;display:flex;gap:4px;padding:5px;background:#0f1d33f5;border:1px solid #38bdf8;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.6)}
 .search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;padding:10px 8px;font-size:14px}
 .search input::placeholder{color:#94a3b8}
-.search button{border:0;border-radius:11px;background:#0284c7;color:#fff;font-weight:900;padding:10px 13px;cursor:pointer}
+.search button{border:0;border-radius:12px;background:#0284c7;color:#fff;font-weight:900;padding:10px 14px;cursor:pointer}
 .search .clear{background:#1e293b;font-size:16px;padding:10px 14px}
-.suggest{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:280px;overflow:auto;border:1px solid #334155;border-radius:14px;background:#07131f;box-shadow:0 12px 30px #0009;z-index:40}
+.suggest{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:280px;overflow:auto;border:1px solid #334155;border-radius:14px;background:#0b1526;box-shadow:0 12px 30px rgba(0,0,0,0.8);z-index:40}
 .suggest.show{display:block}.suggest-item{padding:12px;border-bottom:1px solid #1e293b;font-size:12px;color:#e2e8f0;line-height:1.35;cursor:pointer}.suggest-item:active{background:#102337}
 
 .chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}.chips::-webkit-scrollbar{display:none}
-.chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 11px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0}
-.chip.active{background:#075985;border-color:#38bdf8}
+.chip{white-space:nowrap;border:1px solid #334155;background:#0a1424e8;color:#dbeafe;padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0}
+.chip.active{background:#0284c7;border-color:#38bdf8}
 
-.waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#000;color:#fff;padding:12px 16px 8px;box-shadow:0 6px 20px #000a;display:none;flex-direction:column}
+/* WAZE TURN-BY-TURN HUD */
+.waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#004a4f;color:#fff;padding:12px 16px 8px;box-shadow:0 8px 24px rgba(0,0,0,0.6);display:none;flex-direction:column}
 .waze-top-hud.show{display:flex}
 .waze-maneuver-row{display:flex;align-items:center;gap:16px}
 .waze-arrow{font-size:44px;line-height:1;font-weight:900;color:#fff;transform:translateY(-2px)}
 .waze-meta{flex:1}
 .waze-dist{font-size:24px;font-weight:900;letter-spacing:-0.5px}
 .waze-street{font-size:20px;font-weight:900;color:#38bdf8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.waze-sub-hud{background:#111;margin:8px -16px -8px;padding:6px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:#cbd5e1;border-top:1px solid #222}
+.waze-sub-hud{background:#003438;margin:8px -16px -8px;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:#a7f3d0}
 .waze-sub-hud span.next-name{color:#fff}
 .waze-danger-tag{color:#f87171;font-weight:900;display:none}
 .waze-danger-tag.active{display:inline}
 
+/* FLOATING ROAD PILL */
+.current-road-pill{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:22;background:#0284c7;color:#fff;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:900;box-shadow:0 6px 16px rgba(0,0,0,0.5);border:2px solid #fff;display:none;white-space:nowrap;max-width:80vw;overflow:hidden;text-overflow:ellipsis}
+body.nav-mode .current-road-pill{display:block}
+
+/* VELOCÍMETRO */
+.speedometer-box{position:fixed;left:14px;bottom:90px;z-index:34;width:60px;height:60px;border-radius:50%;background:#0a1220;border:3px solid #0284c7;display:none;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.7)}
+.speedometer-box b{font-size:18px;font-weight:900;color:#fff;line-height:1}
+.speedometer-box span{font-size:9px;color:#94a3b8;font-weight:800;text-transform:uppercase}
+body.nav-mode .speedometer-box{display:flex}
+
 .side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}
 body.nav-mode .side{top:118px}
-.side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px #0008;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#0a1220dd;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,0.6);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .side button.locate{border-color:#38bdf8}
-.side button.sv{background:#000c}
+.side button.sv{background:#0a1220dd}
 .side button svg{display:block}
-.side .transport-btn{background:#000c;border-color:#334155}
+.side button.active-sound{border-color:#34d399;color:#34d399}
+.side button.muted-sound{border-color:#f87171;color:#f87171}
 
-.nav-recenter{position:fixed;right:14px;bottom:100px;z-index:34;width:54px;height:54px;border-radius:50%;background:#0284c7;color:#fff;font-size:22px;border:2px solid #fff;box-shadow:0 8px 22px #0008;display:none;align-items:center;justify-content:center;cursor:pointer}
+.nav-recenter{position:fixed;right:14px;bottom:160px;z-index:34;width:54px;height:54px;border-radius:50%;background:#0284c7;color:#fff;font-size:22px;border:2px solid #fff;box-shadow:0 8px 22px rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;cursor:pointer}
 .nav-recenter.show{display:flex}
 
-.waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#ffffff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(0.1,0.9,0.2,1);transform:translateY(calc(100% - 75px));display:none}
+/* WAZE BOTTOM SHEET */
+.waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#ffffff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,0.4);transition:transform .3s cubic-bezier(0.1,0.9,0.2,1);transform:translateY(calc(100% - 75px));display:none}
 .waze-bottom-sheet.show{display:block}
 .waze-bottom-sheet.expanded{transform:translateY(0)}
 .sheet-handle{width:40px;height:5px;background:#cbd5e1;border-radius:99px;margin:8px auto 4px;cursor:pointer}
@@ -70,58 +83,60 @@ body.nav-mode .side{top:118px}
 .sheet-toggle-btn{padding:8px 14px;border-radius:99px;background:#f1f5f9;color:#0284c7;font-size:13px;font-weight:900;border:0}
 
 .sheet-content{padding:0 18px 20px;border-top:1px solid #f1f5f9;display:flex;flex-direction:column;gap:10px}
-.sheet-nav-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.sheet-nav-actions button{border:0;border-radius:14px;padding:12px;font-size:13px;font-weight:900;color:#fff;cursor:pointer}
-.btn-nav-radar{background:#0284c7}.btn-nav-stop{background:#dc2626}
+.sheet-nav-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.btn-nav-radar{border:0;border-radius:14px;padding:14px;font-size:15px;font-weight:900;color:#fff;background:linear-gradient(135deg, #0284c7, #0369a1);box-shadow:0 4px 12px rgba(2,132,199,0.35);cursor:pointer}
+.btn-nav-stop{border:0;border-radius:14px;padding:12px;font-size:13px;font-weight:900;color:#fff;background:#dc2626;cursor:pointer;margin-top:4px}
 .sheet-external-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sheet-external-grid button{border:0;border-radius:12px;padding:11px;font-size:12px;font-weight:900;cursor:pointer;color:#fff}
-.btn-waze{background:#05c8f6}.btn-maps{background:#1a73e8}
+.sheet-external-grid button{border:0;border-radius:14px;padding:14px 10px;font-size:13px;font-weight:900;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 10px rgba(0,0,0,0.15)}
+.btn-waze{background:linear-gradient(135deg, #00d2ff, #0099cc)}
+.btn-maps{background:linear-gradient(135deg, #34a853, #1a73e8)}
 
 .user-marker-waze{width:52px;height:52px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="%230284c7" opacity="0.25"/><circle cx="26" cy="26" r="18" fill="%230284c7" opacity="0.45"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5" stroke-linejoin="round"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;transform:translate(-50%,-50%);filter:drop-shadow(0 4px 10px rgba(0,0,0,0.6))}
 
-.fuel-marker{width:28px;height:28px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px #0008;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;cursor:pointer;transition:opacity .3s}
+.fuel-marker{width:28px;height:28px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;cursor:pointer;transition:opacity .3s}
 .fuel-marker.verde{background:#22c55e}.fuel-marker.laranja{background:#f59e0b}.fuel-marker.vermelho{background:#dc2626}.fuel-marker.gnv{background:#16a34a}
 
-/* ÍCONES SEM FUNDO QUADRADO/CIRCULAR */
-.hazard-marker{display:flex;align-items:center;justify-content:center;font-size:24px;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.85));background:transparent;border:none}
+/* ÍCONES VETORIAIS HD */
+.hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.85))}
+.hazard-marker svg{width:32px;height:32px}
 
 .bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
 .bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
-.action{flex:1;border:0;border-radius:15px;padding:13px 7px;background:#000e;color:#fff;font-size:11px;font-weight:900;box-shadow:0 8px 22px #0008;cursor:pointer}
+.action{flex:1;border:0;border-radius:15px;padding:13px 7px;background:#000e;color:#fff;font-size:11px;font-weight:900;box-shadow:0 8px 22px rgba(0,0,0,0.6);cursor:pointer}
 .action.danger{background:#991b1b}.action.anp{background:#166534}.action.chat{background:#7c3aed}
 
 .toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:11px 15px;border-radius:13px;font-size:12px;font-weight:700;max-width:90vw;text-align:center;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px #0008;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}
+.favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}
 .favela-sign.show{opacity:1;transform:translate(-50%,0)}
 body.nav-mode .favela-sign{top:132px}
 
-.hazard-sign{position:fixed;top:224px;left:14px;transform:translateX(-14px);z-index:24;color:#111827;padding:7px 13px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px #0008;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:60vw;overflow:hidden;text-overflow:ellipsis}
+.hazard-sign{position:fixed;top:224px;left:14px;transform:translateX(-14px);z-index:24;color:#111827;padding:7px 13px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:60vw;overflow:hidden;text-overflow:ellipsis}
 .hazard-sign.show{opacity:1;transform:translateX(0)}
 .hazard-sign.lombada{background:#facc15;border:1px solid #a16207}
 .hazard-sign.radar{background:#38bdf8;border:1px solid #0369a1;color:#07131f}
 body.nav-mode .hazard-sign{top:174px}
 
-.danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px #000a;border:2px solid #fecaca}
+.danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.7);border:2px solid #fecaca}
 .danger-banner.show{display:flex}
 .danger-banner b{font-size:13px;line-height:1.35;font-weight:800}
 .danger-banner button{border:0;background:#ffffff33;color:#fff;width:30px;height:30px;border-radius:50%;font-weight:900;cursor:pointer;flex-shrink:0}
 
 .modal-overlay{display:none;position:fixed;inset:0;z-index:90;background:#0009;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
-.modal-card{background:#0b1b2a;border-radius:20px;padding:24px;max-width:440px;width:90%;border:1px solid #334155;max-height:90vh;overflow-y:auto}
+.modal-card{background:#0b1526;border-radius:20px;padding:24px;max-width:440px;width:90%;border:1px solid #334155;max-height:90vh;overflow-y:auto}
 .modal-card h2{font-size:18px;margin-bottom:12px;color:#38bdf8}
 .modal-card p{font-size:13px;color:#94a3b8;margin-bottom:16px;line-height:1.4}
 .modal-options{display:flex;flex-direction:column;gap:10px}
-.modal-options button{background:#0f2640;border:1px solid #334155;border-radius:14px;padding:14px;color:#fff;font-weight:800;font-size:14px;text-align:left;display:flex;align-items:center;gap:12px;cursor:pointer}
-.modal-options button:hover{background:#1a3455}
+.modal-options button{background:#0f2038;border:1px solid #334155;border-radius:14px;padding:14px;color:#fff;font-weight:800;font-size:14px;text-align:left;display:flex;align-items:center;gap:12px;cursor:pointer}
+.modal-options button:hover{background:#162e50}
 .modal-options button .icon{font-size:24px;width:36px;text-align:center}
 .modal-close{width:100%;border:0;border-radius:12px;padding:12px;background:#1e293b;color:#fff;font-weight:900;margin-top:14px;cursor:pointer}
 
-.chat-messages{max-height:300px;overflow-y:auto;background:#0b1b2a;border-radius:12px;padding:10px;margin-bottom:12px;font-size:13px}
-.chat-msg{margin-bottom:8px;padding:8px 12px;background:#0f2640;border-radius:8px;border-left:3px solid #38bdf8}
+.chat-messages{max-height:300px;overflow-y:auto;background:#08101c;border-radius:12px;padding:10px;margin-bottom:12px;font-size:13px}
+.chat-msg{margin-bottom:8px;padding:8px 12px;background:#0f2038;border-radius:8px;border-left:3px solid #38bdf8}
 .chat-msg .user{font-weight:900;color:#38bdf8}
 .chat-msg .time{font-size:10px;color:#64748b;margin-left:8px}
 .chat-input-row{display:flex;gap:8px}
-.chat-input-row input{flex:1;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f1a2a;color:#fff}
+.chat-input-row input{flex:1;padding:10px;border-radius:10px;border:1px solid #334155;background:#08101c;color:#fff}
 .chat-input-row button{padding:10px 16px;border-radius:10px;border:0;background:#0284c7;color:#fff;font-weight:900}
 .chat-status{font-size:11px;color:#64748b;margin:-6px 0 10px}
 
@@ -177,8 +192,12 @@ body.nav-mode .hazard-sign{top:174px}
   </div>
 </div>
 
+<div class="current-road-pill" id="currentRoadPill">Via Atual</div>
+<div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
+
 <div class="side" id="sideControls">
   <button class="locate" id="locateBtn" title="Onde estou">◎</button>
+  <button class="active-sound" id="soundBtn" title="Áudio e Voz">🔊</button>
   <button class="transport-btn" id="transportBtn" title="Modo de transporte">🚗</button>
   <button class="sv" id="streetViewBtn" title="Abrir Google Street View">
     <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="3" fill="#fbbf24"/><path d="M12 9.2c-3 0-5.4 2.1-5.4 4.8v1.6h2l.6 6.4h5.6l.6-6.4h2v-1.6c0-2.7-2.4-4.8-5.4-4.8z" fill="#fbbf24"/></svg>
@@ -204,15 +223,15 @@ body.nav-mode .hazard-sign{top:174px}
     <button class="sheet-toggle-btn" id="sheetToggleBtn">Opções ▴</button>
   </div>
   <div class="sheet-content">
-    <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:4px">Escolha o navegador:</div>
-    <div class="sheet-external-grid" style="margin-bottom:8px">
-      <button class="btn-waze" id="openWaze">🅆 Waze</button>
-      <button class="btn-maps" id="openMaps">🅖 Google Maps</button>
-      <button class="btn-nav-radar" id="startRadarBtn" style="grid-column:span 2">🛡️ Radar Seguro</button>
-    </div>
+    <div style="font-size:13px;font-weight:800;color:#0f172a;margin-bottom:4px">Escolha como navegar:</div>
     <div class="sheet-nav-actions">
-      <button class="btn-nav-stop" id="stopNavBtn">⏹ Parar navegação</button>
+      <button class="btn-nav-radar" id="startRadarBtn">🛡️ Iniciar no Radar Seguro PRO</button>
     </div>
+    <div class="sheet-external-grid">
+      <button class="btn-waze" id="openWaze"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.41 2.87 8.14 6.84 9.47.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33s1.7.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg> Abrir no Waze</button>
+      <button class="btn-maps" id="openMaps"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Google Maps</button>
+    </div>
+    <button class="btn-nav-stop" id="stopNavBtn">⏹ Cancelar Navegação</button>
   </div>
 </div>
 
@@ -305,27 +324,37 @@ const ANP_APP = 'https://anpcomvcpostos.anp.gov.br/';
 const ANP_REPORT = 'https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
 const RJ_CENTER = [-43.40, -22.90];
 
+// PALETA NOTURNA AZUL PROFUNDO ESTILO WAZE / MAPS
+const STYLE_DARK = {
+  version: 8,
+  sources: {
+    dark: {
+      type: 'raster',
+      tiles: ['https://a.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png'],
+      tileSize: 256, attribution: '© CARTO © OpenStreetMap'
+    }
+  },
+  layers: [{ id: 'dark', type: 'raster', source: 'dark' }]
+};
+
 const STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/liberty';
-const STYLE_DARK  = 'https://tiles.openfreemap.org/styles/dark';
-const FONT_STACK = ['Noto Sans Regular'];
+const FONT_STACK = ['Noto Sans Regular', 'Open Sans Regular'];
 
 function buildSatelliteStyle() {
   return {
     version: 8,
-    glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
     sources: {
       sat: {
         type: 'raster',
         tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
-        tileSize: 256,
-        attribution: 'Tiles © Esri'
+        tileSize: 256, attribution: 'Tiles © Esri'
       }
     },
     layers: [{ id: 'sat', type: 'raster', source: 'sat' }]
   };
 }
 
-// Círculo suave de 48 pontos (raio reduzido de 250m a 350m em Santa Cruz)
+// Círculos suaves com raios calibrados
 function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
   const rLat = rKm / 111.0;
   const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
@@ -341,7 +370,7 @@ function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
 }
 
 const rawAreas = [
-  // SANTA CRUZ (CÍRCULOS REDUZIDOS 250m a 350m)
+  // SANTA CRUZ (RAIOS REDUZIDOS DE 250m a 350m)
   {name:'Cesarão', c:[-43.66027,-22.93587], r:0.35, type:'conflito', major:true},
   {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.35, type:'conflito', major:true},
   {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.30, type:'conflito', major:true},
@@ -434,7 +463,7 @@ const rawAreas = [
   {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], r:0.30, type:'conflito'},
   {name:'Pq. Mambucaba / Perequê', c:[-44.5261,-23.0236], r:0.45, type:'conflito'},
   {name:'Ilha das Cobras (Paraty)', c:[-44.7189,-23.2167], r:0.25, type:'conflito'},
-  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.35, type:'conflito'},
+  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.35, type:'conflito', major:true},
   {name:'Mangueira (Paraty)', c:[-44.7175,-23.2208], r:0.25, type:'conflito'},
   {name:'Patrimônio / Trindade', c:[-44.7214,-23.3361], r:0.35, type:'atencao'}
 ];
@@ -453,10 +482,11 @@ let fuelVisible = true, communityVisible = true, satelliteVisible = false;
 let geocodeTimer = null, geocodeAbort = null, lastGeocodeAt = 0, toastTimer = null;
 let currentStep = 0, sheetExpanded = false;
 let followMode = true, followResumeTimer = null;
-let currentBaseStyle = (() => { const h = new Date().getHours(); return (h >= 18 || h < 6) ? 'dark' : 'light'; })();
+let currentBaseStyle = 'dark';
 let transportMode = 'driving';
 let currentFuelFilter = 'all';
 let isRerouting = false;
+let soundEnabled = true;
 
 function toast(msg, ms = 3200) {
   const e = document.getElementById('toast');
@@ -480,8 +510,9 @@ function distanceKm(a, b) {
   const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(h));
 }
+
 function speak(text) {
-  if (!('speechSynthesis' in window) || isRerouting) return;
+  if (!soundEnabled || !('speechSynthesis' in window) || isRerouting) return;
   try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'pt-BR'; speechSynthesis.speak(u); } catch (e) {}
 }
 
@@ -492,7 +523,7 @@ const map = new maplibregl.Map({
   pitch: 0,
   bearing: 0,
   attributionControl: false,
-  style: currentBaseStyle === 'dark' ? STYLE_DARK : STYLE_LIGHT
+  style: STYLE_DARK
 });
 map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
 
@@ -553,8 +584,8 @@ function restoreRouteLayer() {
   if (!routeData) return;
   const data = { type: 'Feature', geometry: routeData.geometry, properties: {} };
   map.addSource('route', { type: 'geojson', data });
-  map.addLayer({ id: 'route-outline', type: 'line', source: 'route', paint: { 'line-color': '#2e1065', 'line-width': 10 } });
-  map.addLayer({ id: 'route-line', type: 'line', source: 'route', paint: { 'line-color': '#9333ea', 'line-width': 6 } });
+  map.addLayer({ id: 'route-outline', type: 'line', source: 'route', paint: { 'line-color': '#1e1b4b', 'line-width': 10 } });
+  map.addLayer({ id: 'route-line', type: 'line', source: 'route', paint: { 'line-color': '#a855f7', 'line-width': 6 } });
 }
 
 map.on('style.load', () => {
@@ -596,6 +627,11 @@ function startGPSWatch() {
     const heading = p.coords.heading || 0;
     updateUserMarker(userPos, heading);
     setGPS(true, 'GPS ATIVO');
+
+    // ATUALIZA VELOCÍMETRO
+    const spd = Math.round((p.coords.speed || 0) * 3.6);
+    document.getElementById('speedVal').textContent = spd > 0 ? spd : '0';
+
     if (isFirst) map.flyTo({ center: userPos, zoom: 15.5, duration: 700 });
     if (navActive && followMode && !isRerouting) {
       map.easeTo({
@@ -616,7 +652,7 @@ function startGPSWatch() {
 }
 
 // ================================================================
-// POSTOS DE COMBUSTÍVEL
+// POSTOS DE COMBUSTÍVEL COM FILTROS E POPUPS FUNCIONAIS
 // ================================================================
 let allFuelStations = [];
 let fuelMarkersMap = {};
@@ -712,7 +748,7 @@ function createFuelMarker(item, opacity) {
 map.on('moveend', updateFuelVisibility);
 map.on('zoomend', updateFuelVisibility);
 
-// BOTÃO SUPERIOR ESQUERDO DE POSTOS (ABRE O FILTRO COMPLETO)
+// BOTÃO SUPERIOR ESQUERDO DE POSTOS
 document.getElementById('fuelChip').onclick = () => {
   document.getElementById('fuelFilterModal').classList.add('show');
 };
@@ -738,6 +774,16 @@ function toggleCommunityVisibility() {
   map.setLayoutProperty('community-labels', 'visibility', communityVisible ? 'visible' : 'none');
 }
 document.getElementById('communityChip').onclick = toggleCommunityVisibility;
+
+// BOTÃO DE ÁUDIO MUTE / UNMUTE
+document.getElementById('soundBtn').onclick = () => {
+  soundEnabled = !soundEnabled;
+  const btn = document.getElementById('soundBtn');
+  btn.classList.toggle('active-sound', soundEnabled);
+  btn.classList.toggle('muted-sound', !soundEnabled);
+  btn.textContent = soundEnabled ? '🔊' : '🔇';
+  toast(soundEnabled ? 'Áudio ativado' : 'Áudio silenciado');
+};
 
 function applyTheme() {
   document.getElementById('themeChip').textContent = '🌓 ' + (themeMode === 'auto' ? 'Tema: Auto' : themeMode === 'dark' ? 'Tema: Escuro' : 'Tema: Claro');
@@ -765,7 +811,7 @@ document.getElementById('satChip').onclick = () => {
 };
 
 // ================================================================
-// BUSCA E ABERTURA AUTOMÁTICA DO PAINEL DE NAVEGAÇÃO
+// BUSCA E PAINEL DE NAVEGAÇÃO
 // ================================================================
 async function geocode(q) {
   const wait = Math.max(0, 1100 - (Date.now() - lastGeocodeAt));
@@ -877,7 +923,6 @@ async function iniciarRotaInterna() {
   } catch (e) { toast('Falha ao calcular rota.'); }
 }
 
-// ALERTA CASO O DESTINO ESTEJA DENTRO OU PRÓXIMO DE COMUNIDADE
 function checkDestinationDanger() {
   if (!destPos) return;
   for (const c of rawAreas) {
@@ -903,13 +948,12 @@ function drawRoute(r) {
   if (map.getSource('route')) map.removeSource('route');
   const data = { type: 'Feature', geometry: r.geometry, properties: {} };
   map.addSource('route', { type: 'geojson', data });
-  map.addLayer({ id: 'route-outline', type: 'line', source: 'route', paint: { 'line-color': '#2e1065', 'line-width': 10 } });
-  map.addLayer({ id: 'route-line', type: 'line', source: 'route', paint: { 'line-color': '#9333ea', 'line-width': 6 } });
+  map.addLayer({ id: 'route-outline', type: 'line', source: 'route', paint: { 'line-color': '#1e1b4b', 'line-width': 10 } });
+  map.addLayer({ id: 'route-line', type: 'line', source: 'route', paint: { 'line-color': '#a855f7', 'line-width': 6 } });
   const c = r.geometry.coordinates, b = c.reduce((x, p) => x.extend(p), new maplibregl.LngLatBounds(c[0], c[0]));
   map.fitBounds(b, { padding: { top: 130, bottom: 140, left: 30, right: 30 }, duration: 700, maxZoom: 17 });
 }
 
-// RECÁLCULO IMEDIATO
 function pointToSegmentKm(p, a, b) {
   const cosLat = Math.cos(p[1] * Math.PI / 180);
   const P = [p[0] * cosLat, p[1]], A = [a[0] * cosLat, a[1]], B = [b[0] * cosLat, b[1]];
@@ -952,7 +996,6 @@ async function recalculateRoute() {
   }
 }
 
-// NAVEGAÇÃO E MANOBRAS
 function allSteps() { return (routeData?.legs || []).flatMap(l => l.steps || []); }
 function stepIconArrow(s) {
   const m = s.maneuver || {};
@@ -985,6 +1028,8 @@ function updateNavigation() {
   document.getElementById('hudDist').textContent = distMeters < 1000 ? `${distMeters} m` : `${(distMeters / 1000).toFixed(1)} km`;
   document.getElementById('hudArrow').textContent = stepIconArrow(s);
   document.getElementById('hudStreet').textContent = s.name || 'Siga na via indicada';
+  document.getElementById('currentRoadPill').textContent = s.name || 'Siga pela via';
+
   if (next) {
     document.getElementById('hudNextIcon').textContent = stepIconArrow(next);
     document.getElementById('hudNextStreet').textContent = next.name || 'Próximo acesso';
@@ -998,15 +1043,21 @@ function updateNavigation() {
     if (distMeters <= t && !done.has(t)) {
       done.add(t);
       const m = s.maneuver || {};
-      let phrase = m.type === 'arrive' ? 'você está chegando' : m.modifier === 'left' ? 'vire à esquerda' : m.modifier === 'right' ? 'vire à direita' : 'siga em frente';
+      let phrase = m.type === 'arrive' ? 'você está chegando ao destino' : m.modifier === 'left' ? 'vire à esquerda' : m.modifier === 'right' ? 'vire à direita' : 'siga em frente';
       speak(t <= 30 ? `Agora, ${phrase}` : `Em ${t} metros, ${phrase}`);
     }
   });
 }
 
-// LOMBADAS E SEMÁFOROS (ÍCONES DIRETOS SEM FUNDO QUADRADO)
+// ================================================================
+// LOMBADAS, RADARES E SEMÁFOROS (SVGs VETORIAIS OFICIAIS HD)
+// ================================================================
 let routeHazards = [];
 let hazardMarkers = [];
+
+const SVG_LOMBADA = `<svg viewBox="0 0 48 48"><polygon points="24,2 46,24 24,46 2,24" fill="#facc15" stroke="#000000" stroke-width="3"/><path d="M12 28 C 16 28, 18 20, 24 20 C 30 20, 32 28, 36 28" fill="none" stroke="#000000" stroke-width="3.5" stroke-linecap="round"/></svg>`;
+const SVG_RADAR = `<svg viewBox="0 0 48 48"><rect x="14" y="6" width="20" height="36" rx="4" fill="#334155" stroke="#ffffff" stroke-width="2"/><circle cx="24" cy="14" r="4" fill="#00f2fe"/><circle cx="24" cy="24" r="3" fill="#64748b"/><circle cx="24" cy="34" r="3" fill="#64748b"/><line x1="24" y1="42" x2="24" y2="48" stroke="#ffffff" stroke-width="3"/></svg>`;
+const SVG_SEMAFORO = `<svg viewBox="0 0 48 48"><rect x="16" y="4" width="16" height="38" rx="6" fill="#1e293b" stroke="#ffffff" stroke-width="2"/><circle cx="24" cy="12" r="3.5" fill="#ef4444"/><circle cx="24" cy="23" r="3.5" fill="#eab308"/><circle cx="24" cy="34" r="3.5" fill="#22c55e"/></svg>`;
 
 async function fetchRouteHazards() {
   routeHazards = [];
@@ -1036,11 +1087,10 @@ async function fetchRouteHazards() {
       if (onRoute) routeHazards.push({ type, coords: [el.lon, el.lat] });
     });
 
-    const icons = { lombada: '🚧', radar: '📷', semaforo: '🚦' };
     routeHazards.forEach(h => {
       const el = document.createElement('div');
       el.className = 'hazard-marker';
-      el.textContent = icons[h.type] || '⚠';
+      el.innerHTML = h.type === 'lombada' ? SVG_LOMBADA : h.type === 'radar' ? SVG_RADAR : SVG_SEMAFORO;
       const m = new maplibregl.Marker({ element: el }).setLngLat(h.coords).addTo(map);
       hazardMarkers.push(m);
     });
@@ -1240,8 +1290,8 @@ document.getElementById('chatSendBtn').onclick = () => {
   inp.value = '';
 };
 
-document.getElementById('chatChip').onclick = () => { document.getElementById('chatModal').classList.add('show'); renderChat(); };
-document.getElementById('chatBottomBtn').onclick = () => { document.getElementById('chatModal').classList.add('show'); renderChat(); };
+document.getElementById('chatChip').onclick = () => document.getElementById('chatModal').classList.add('show');
+document.getElementById('chatBottomBtn').onclick = () => document.getElementById('chatModal').classList.add('show');
 document.getElementById('closeChatModal').onclick = () => document.getElementById('chatModal').classList.remove('show');
 
 toast('Radar Seguro RJ PRO - Pronto!', 3000);
