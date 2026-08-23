@@ -23,8 +23,10 @@ button,input{font:inherit}
 .brand{font-size:13px;font-weight:900}.brand span{color:#38bdf8}
 
 .search{position:relative;display:flex;gap:4px;padding:5px;background:#07131ff5;border:1px solid #38bdf8;border-radius:15px;box-shadow:0 8px 24px #0008}
-.search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;padding:10px 8px;font-size:14px}.search input::placeholder{color:#94a3b8}
-.search button{border:0;border-radius:11px;background:#0284c7;color:#fff;font-weight:900;padding:10px 13px;cursor:pointer}.search .clear{background:#1e293b}
+.search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;padding:10px 8px;font-size:14px}
+.search input::placeholder{color:#94a3b8}
+.search button{border:0;border-radius:11px;background:#0284c7;color:#fff;font-weight:900;padding:10px 13px;cursor:pointer}
+.search .clear{background:#1e293b;font-size:16px;padding:10px 14px}
 .suggest{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:280px;overflow:auto;border:1px solid #334155;border-radius:14px;background:#07131f;box-shadow:0 12px 30px #0009;z-index:40}
 .suggest.show{display:block}.suggest-item{padding:12px;border-bottom:1px solid #1e293b;font-size:12px;color:#e2e8f0;line-height:1.35;cursor:pointer}.suggest-item:active{background:#102337}
 
@@ -80,10 +82,8 @@ body.nav-mode .side{top:118px}
 .fuel-marker{width:28px;height:28px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px #0008;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;cursor:pointer;transition:opacity .3s}
 .fuel-marker.verde{background:#22c55e}.fuel-marker.laranja{background:#f59e0b}.fuel-marker.vermelho{background:#dc2626}.fuel-marker.gnv{background:#16a34a}
 
-.hazard-marker{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 10px #0008;border:2px solid #fff}
-.hazard-marker.lombada{background:#facc15}
-.hazard-marker.radar{background:#38bdf8}
-.hazard-marker.semaforo{background:#1f2937;border-radius:50%}
+/* ÍCONES SEM FUNDO QUADRADO/CIRCULAR */
+.hazard-marker{display:flex;align-items:center;justify-content:center;font-size:24px;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.85));background:transparent;border:none}
 
 .bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
 .bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
@@ -148,8 +148,8 @@ body.nav-mode .hazard-sign{top:174px}
   </div>
 
   <div class="search">
-    <input id="destInput" type="search" placeholder="Rua, número, bairro ou local..." autocomplete="off">
-    <button class="clear" id="clearBtn">✕</button>
+    <input id="destInput" type="text" placeholder="Rua, número, bairro ou local..." autocomplete="off">
+    <button class="clear" id="clearBtn" title="Limpar busca">✕</button>
     <button id="searchBtn">IR</button>
     <div id="suggest" class="suggest"></div>
   </div>
@@ -258,7 +258,7 @@ body.nav-mode .hazard-sign{top:174px}
 <div class="modal-overlay" id="fuelFilterModal">
   <div class="modal-card">
     <h2>⛽ Filtro de Postos</h2>
-    <p>Selecione o tipo de posto que deseja visualizar.</p>
+    <p>Selecione a visualização dos postos de combustível.</p>
     <div class="modal-options">
       <button id="filterAll"><span class="icon">⛽</span> Todos os postos</button>
       <button id="filterRegular"><span class="icon">🟢</span> Postos Regulares</button>
@@ -325,8 +325,8 @@ function buildSatelliteStyle() {
   };
 }
 
-// Círculo suave de 48 pontos (sem quadrados artificiais)
-function makePerimeter(lon, lat, rKm = 0.35, points = 48) {
+// Círculo suave de 48 pontos (raio reduzido de 250m a 350m em Santa Cruz)
+function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
   const rLat = rKm / 111.0;
   const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
   const coords = [];
@@ -340,106 +340,103 @@ function makePerimeter(lon, lat, rKm = 0.35, points = 48) {
   return coords;
 }
 
-// ================================================================
-// LISTA CURADA (Comunidades atualizadas de Santa Cruz e demais regiões)
-// ================================================================
 const rawAreas = [
-  // SANTA CRUZ (COORDENADAS PRECISAS ATUALIZADAS)
-  {name:'Cesarão', c:[-43.66027,-22.93587], r:0.45, type:'conflito', major:true},
-  {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.45, type:'conflito', major:true},
-  {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.40, type:'conflito', major:true},
-  {name:'Comunidade do Aço', c:[-43.6521,-22.9248], r:0.40, type:'conflito', major:true},
-  {name:'Pantanal (Santa Cruz)', c:[-43.6675,-22.9290], r:0.35, type:'conflito'},
-  {name:'Nova Sepetiba', c:[-43.6995,-22.9515], r:0.50, type:'conflito', major:true},
+  // SANTA CRUZ (CÍRCULOS REDUZIDOS 250m a 350m)
+  {name:'Cesarão', c:[-43.66027,-22.93587], r:0.35, type:'conflito', major:true},
+  {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.35, type:'conflito', major:true},
+  {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.30, type:'conflito', major:true},
+  {name:'Comunidade do Aço', c:[-43.6521,-22.9248], r:0.30, type:'conflito', major:true},
+  {name:'Pantanal (Santa Cruz)', c:[-43.6675,-22.9290], r:0.25, type:'conflito'},
+  {name:'Nova Sepetiba', c:[-43.6995,-22.9515], r:0.35, type:'conflito', major:true},
 
   // DEMAIS ZONAS / EIXO AV. BRASIL
-  {name:'Carobinha / Barbante', c:[-43.5419,-22.8631], r:0.40, type:'conflito'},
+  {name:'Carobinha / Barbante', c:[-43.5419,-22.8631], r:0.35, type:'conflito'},
   {name:'Vila Nova (Cabuçu)', c:[-43.5283,-22.8725], r:0.30, type:'conflito'},
-  {name:'Pedregoso / Pai João', c:[-43.5600,-22.8950], r:0.35, type:'conflito'},
-  {name:'Vila Aliança', c:[-43.4889,-22.8719], r:0.45, type:'conflito'},
-  {name:'Vila Kennedy', c:[-43.4772,-22.8597], r:0.50, type:'conflito', major:true},
-  {name:'Complexo da Coreia', c:[-43.4958,-22.8833], r:0.50, type:'conflito'},
-  {name:'Vila Vintém', c:[-43.4356,-22.8778], r:0.45, type:'conflito'},
-  {name:'Catiri', c:[-43.4697,-22.8519], r:0.35, type:'conflito'},
-  {name:'Batan (Realengo)', c:[-43.4258,-22.8683], r:0.40, type:'conflito'},
-  {name:'Fumacê', c:[-43.4194,-22.8875], r:0.30, type:'conflito'},
-  {name:'Muquiço / Palmeirinha', c:[-43.3778,-22.8461], r:0.40, type:'conflito'},
-  {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.50, type:'conflito', major:true},
-  {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.50, type:'conflito'},
-  {name:'Complexo de Acari / Amarelinho', c:[-43.3283,-22.8292], r:0.45, type:'conflito'},
-  {name:'Complexo de Israel / Vigário', c:[-43.2981,-22.8258], r:0.50, type:'conflito'},
-  {name:'Morro do Juramento', c:[-43.3153,-22.8647], r:0.40, type:'conflito'},
-  {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.50, type:'conflito', major:true},
-  {name:'Complexo do Alemão', c:[-43.2725,-22.8592], r:0.50, type:'conflito', major:true},
-  {name:'Complexo da Maré', c:[-43.2458,-22.8583], r:0.50, type:'conflito', major:true},
-  {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45, type:'conflito', major:true},
-  {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.45, type:'conflito', major:true},
-  {name:'Parque Arará / Mandela', c:[-43.2386,-22.8847], r:0.35, type:'conflito'},
-  {name:'Complexo do Caju', c:[-43.2181,-22.8892], r:0.45, type:'conflito'},
-  {name:'Morro da Providência', c:[-43.1917,-22.8986], r:0.35, type:'conflito'},
-  {name:'São Carlos / Mineira', c:[-43.1978,-22.9142], r:0.40, type:'conflito'},
-  {name:'Morro da Serrinha', c:[-43.3308,-22.8683], r:0.40, type:'conflito'},
-  {name:'Cajueiro / Congonha', c:[-43.3375,-22.8617], r:0.35, type:'conflito'},
-  {name:'Faz Quem Quer', c:[-43.3486,-22.8572], r:0.30, type:'conflito'},
-  {name:'Morro dos Macacos', c:[-43.2561,-22.9150], r:0.40, type:'conflito'},
-  {name:'Salgueiro / Borel / Formiga', c:[-43.2444,-22.9333], r:0.50, type:'conflito'},
-  {name:'Turano', c:[-43.2208,-22.9239], r:0.35, type:'conflito'},
-  {name:'Mangueira', c:[-43.2389,-22.9039], r:0.40, type:'conflito', major:true},
-  {name:'Dendê (Ilha)', c:[-43.2039,-22.8028], r:0.45, type:'conflito'},
-  {name:'Barbante / Pq. Royal (Ilha)', c:[-43.1972,-22.7917], r:0.40, type:'conflito'},
-  {name:'Cidade de Deus (CDD)', c:[-43.3611,-22.9467], r:0.50, type:'conflito', major:true},
-  {name:'Rio das Pedras', c:[-43.3364,-22.9772], r:0.50, type:'conflito', major:true},
-  {name:'Muzema e Tijuquinha', c:[-43.3128,-22.9908], r:0.45, type:'conflito'},
-  {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.40, type:'conflito'},
-  {name:'Curicica / Vila União', c:[-43.3858,-22.9725], r:0.35, type:'conflito'},
-  {name:'Covanca / Barão (Praça Seca)', c:[-43.3556,-22.8931], r:0.45, type:'conflito'},
-  {name:'Chacrinha (Praça Seca)', c:[-43.3492,-22.9006], r:0.35, type:'conflito'},
-  {name:'Morro do Jordão', c:[-43.3853,-22.9236], r:0.40, type:'conflito'},
-  {name:'Boiúna', c:[-43.4014,-22.9367], r:0.35, type:'conflito'},
-  {name:'Freguesia (Trânsito Monitorado)', c:[-43.3414,-22.9389], r:0.50, type:'atencao'},
-  {name:'Rocinha', c:[-43.2481,-22.9883], r:0.50, type:'conflito', major:true},
-  {name:'Vidigal', c:[-43.2356,-22.9939], r:0.40, type:'conflito', major:true},
-  {name:'Pavão-Pavãozinho / Cantagalo', c:[-43.1947,-22.9797], r:0.35, type:'conflito'},
-  {name:'Tabajaras / Cabritos', c:[-43.1906,-22.9669], r:0.30, type:'conflito'},
-  {name:'Babilônia / Chapéu Mangueira', c:[-43.1678,-22.9619], r:0.30, type:'conflito'},
-  {name:'Santa Marta', c:[-43.1931,-22.9472], r:0.30, type:'conflito', major:true},
-  {name:'Fallet / Prazeres / Coroa', c:[-43.1989,-22.9231], r:0.45, type:'conflito'},
-  {name:'Terreirão (Recreio)', c:[-43.4908,-23.0231], r:0.40, type:'conflito'},
-  {name:'Morro do Banco (Barra)', c:[-43.2981,-23.0014], r:0.30, type:'conflito'},
-  {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45, type:'conflito', major:true},
-  {name:'Beira-Mar / Missões (Caxias)', c:[-43.2756,-22.7661], r:0.45, type:'conflito'},
-  {name:'Vila Operária / Imbariê', c:[-43.2842,-22.7236], r:0.50, type:'atencao'},
-  {name:'Trio de Ouro / Vilar dos Teles', c:[-43.3714,-22.7958], r:0.45, type:'conflito'},
-  {name:'Igrejinha (Meriti)', c:[-43.3853,-22.7886], r:0.35, type:'conflito'},
-  {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.50, type:'conflito', major:true},
-  {name:'Guacha / Sta. Tereza (B. Roxo)', c:[-43.3867,-22.7364], r:0.45, type:'conflito'},
-  {name:'Castelar (Belford Roxo)', c:[-43.3981,-22.7597], r:0.35, type:'conflito'},
-  {name:'Chatuba (Mesquita/Nilópolis)', c:[-43.4183,-22.7817], r:0.50, type:'conflito'},
-  {name:'Corumbá / Dom Bosco (N. Iguaçu)', c:[-43.4683,-22.7558], r:0.45, type:'conflito'},
-  {name:'Danon / Ipiranga (N. Iguaçu)', c:[-43.4536,-22.7561], r:0.40, type:'conflito'},
-  {name:'Cabuçu / Valverde', c:[-43.5186,-22.7719], r:0.50, type:'atencao'},
-  {name:'Carlos Sampaio / Austin', c:[-43.5281,-22.7303], r:0.45, type:'conflito'},
-  {name:'São Simão (Queimados)', c:[-43.5683,-22.7094], r:0.45, type:'conflito'},
-  {name:'Eixo KM 32 / Marapicu', c:[-43.5519,-22.7681], r:0.50, type:'atencao'},
-  {name:'Guandu / Lagoinha', c:[-43.6083,-22.7911], r:0.50, type:'atencao'},
-  {name:'KM 40 / Seropédica', c:[-43.6742,-22.7689], r:0.50, type:'atencao'},
-  {name:'Reta de Piranema', c:[-43.7389,-22.7931], r:0.45, type:'atencao'},
-  {name:'Chaperó (Itaguaí)', c:[-43.7364,-22.8347], r:0.50, type:'conflito'},
-  {name:'Sem Terra / Monte Serrat', c:[-43.7744,-22.8681], r:0.40, type:'conflito'},
-  {name:'Engenho / Brisamar', c:[-43.7917,-22.8794], r:0.35, type:'conflito'},
-  {name:'Mazomba (Itaguaí)', c:[-43.8258,-22.8833], r:0.35, type:'conflito'},
-  {name:'Praia Grande / Ranchito (Mangaratiba)', c:[-44.0411,-22.9558], r:0.40, type:'conflito'},
-  {name:'Itacuruçá / Muriqui', c:[-43.9167,-22.9467], r:0.35, type:'conflito'},
-  {name:'Belém (Angra)', c:[-44.2986,-22.9719], r:0.45, type:'conflito'},
-  {name:'Japuíba / Areal (Angra)', c:[-44.3092,-22.9839], r:0.45, type:'conflito'},
-  {name:'Frade (Angra)', c:[-44.4367,-22.9972], r:0.50, type:'conflito'},
-  {name:'Camorim (Angra)', c:[-44.2711,-23.0031], r:0.40, type:'conflito'},
-  {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], r:0.35, type:'conflito', major:true},
-  {name:'Pq. Mambucaba / Perequê', c:[-44.5261,-23.0236], r:0.50, type:'conflito'},
-  {name:'Ilha das Cobras (Paraty)', c:[-44.7189,-23.2167], r:0.30, type:'conflito'},
-  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.40, type:'conflito', major:true},
-  {name:'Mangueira (Paraty)', c:[-44.7175,-23.2208], r:0.30, type:'conflito'},
-  {name:'Patrimônio / Trindade', c:[-44.7214,-23.3361], r:0.40, type:'atencao'}
+  {name:'Pedregoso / Pai João', c:[-43.5600,-22.8950], r:0.30, type:'conflito'},
+  {name:'Vila Aliança', c:[-43.4889,-22.8719], r:0.40, type:'conflito'},
+  {name:'Vila Kennedy', c:[-43.4772,-22.8597], r:0.45, type:'conflito', major:true},
+  {name:'Complexo da Coreia', c:[-43.4958,-22.8833], r:0.45, type:'conflito'},
+  {name:'Vila Vintém', c:[-43.4356,-22.8778], r:0.40, type:'conflito'},
+  {name:'Catiri', c:[-43.4697,-22.8519], r:0.30, type:'conflito'},
+  {name:'Batan (Realengo)', c:[-43.4258,-22.8683], r:0.35, type:'conflito'},
+  {name:'Fumacê', c:[-43.4194,-22.8875], r:0.25, type:'conflito'},
+  {name:'Muquiço / Palmeirinha', c:[-43.3778,-22.8461], r:0.35, type:'conflito'},
+  {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.45, type:'conflito', major:true},
+  {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.45, type:'conflito'},
+  {name:'Complexo de Acari / Amarelinho', c:[-43.3283,-22.8292], r:0.40, type:'conflito'},
+  {name:'Complexo de Israel / Vigário', c:[-43.2981,-22.8258], r:0.45, type:'conflito'},
+  {name:'Morro do Juramento', c:[-43.3153,-22.8647], r:0.35, type:'conflito'},
+  {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.45, type:'conflito', major:true},
+  {name:'Complexo do Alemão', c:[-43.2725,-22.8592], r:0.45, type:'conflito', major:true},
+  {name:'Complexo da Maré', c:[-43.2458,-22.8583], r:0.45, type:'conflito', major:true},
+  {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.40, type:'conflito', major:true},
+  {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.40, type:'conflito', major:true},
+  {name:'Parque Arará / Mandela', c:[-43.2386,-22.8847], r:0.30, type:'conflito'},
+  {name:'Complexo do Caju', c:[-43.2181,-22.8892], r:0.40, type:'conflito'},
+  {name:'Morro da Providência', c:[-43.1917,-22.8986], r:0.30, type:'conflito'},
+  {name:'São Carlos / Mineira', c:[-43.1978,-22.9142], r:0.35, type:'conflito'},
+  {name:'Morro da Serrinha', c:[-43.3308,-22.8683], r:0.35, type:'conflito'},
+  {name:'Cajueiro / Congonha', c:[-43.3375,-22.8617], r:0.30, type:'conflito'},
+  {name:'Faz Quem Quer', c:[-43.3486,-22.8572], r:0.25, type:'conflito'},
+  {name:'Morro dos Macacos', c:[-43.2561,-22.9150], r:0.35, type:'conflito'},
+  {name:'Salgueiro / Borel / Formiga', c:[-43.2444,-22.9333], r:0.45, type:'conflito'},
+  {name:'Turano', c:[-43.2208,-22.9239], r:0.30, type:'conflito'},
+  {name:'Mangueira', c:[-43.2389,-22.9039], r:0.35, type:'conflito'},
+  {name:'Dendê (Ilha)', c:[-43.2039,-22.8028], r:0.40, type:'conflito'},
+  {name:'Barbante / Pq. Royal (Ilha)', c:[-43.1972,-22.7917], r:0.35, type:'conflito'},
+  {name:'Cidade de Deus (CDD)', c:[-43.3611,-22.9467], r:0.45, type:'conflito', major:true},
+  {name:'Rio das Pedras', c:[-43.3364,-22.9772], r:0.45, type:'conflito', major:true},
+  {name:'Muzema e Tijuquinha', c:[-43.3128,-22.9908], r:0.40, type:'conflito'},
+  {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.35, type:'conflito'},
+  {name:'Curicica / Vila União', c:[-43.3858,-22.9725], r:0.30, type:'conflito'},
+  {name:'Covanca / Barão (Praça Seca)', c:[-43.3556,-22.8931], r:0.40, type:'conflito'},
+  {name:'Chacrinha (Praça Seca)', c:[-43.3492,-22.9006], r:0.30, type:'conflito'},
+  {name:'Morro do Jordão', c:[-43.3853,-22.9236], r:0.35, type:'conflito'},
+  {name:'Boiúna', c:[-43.4014,-22.9367], r:0.30, type:'conflito'},
+  {name:'Freguesia (Trânsito Monitorado)', c:[-43.3414,-22.9389], r:0.45, type:'atencao'},
+  {name:'Rocinha', c:[-43.2481,-22.9883], r:0.45, type:'conflito', major:true},
+  {name:'Vidigal', c:[-43.2356,-22.9939], r:0.35, type:'conflito', major:true},
+  {name:'Pavão-Pavãozinho / Cantagalo', c:[-43.1947,-22.9797], r:0.30, type:'conflito'},
+  {name:'Tabajaras / Cabritos', c:[-43.1906,-22.9669], r:0.25, type:'conflito'},
+  {name:'Babilônia / Chapéu Mangueira', c:[-43.1678,-22.9619], r:0.25, type:'conflito'},
+  {name:'Santa Marta', c:[-43.1931,-22.9472], r:0.25, type:'conflito', major:true},
+  {name:'Fallet / Prazeres / Coroa', c:[-43.1989,-22.9231], r:0.40, type:'conflito'},
+  {name:'Terreirão (Recreio)', c:[-43.4908,-23.0231], r:0.35, type:'conflito'},
+  {name:'Morro do Banco (Barra)', c:[-43.2981,-23.0014], r:0.25, type:'conflito'},
+  {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.40, type:'conflito', major:true},
+  {name:'Beira-Mar / Missões (Caxias)', c:[-43.2756,-22.7661], r:0.40, type:'conflito'},
+  {name:'Vila Operária / Imbariê', c:[-43.2842,-22.7236], r:0.45, type:'atencao'},
+  {name:'Trio de Ouro / Vilar dos Teles', c:[-43.3714,-22.7958], r:0.40, type:'conflito'},
+  {name:'Igrejinha (Meriti)', c:[-43.3853,-22.7886], r:0.30, type:'conflito'},
+  {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.45, type:'conflito', major:true},
+  {name:'Guacha / Sta. Tereza (B. Roxo)', c:[-43.3867,-22.7364], r:0.40, type:'conflito'},
+  {name:'Castelar (Belford Roxo)', c:[-43.3981,-22.7597], r:0.30, type:'conflito'},
+  {name:'Chatuba (Mesquita/Nilópolis)', c:[-43.4183,-22.7817], r:0.45, type:'conflito'},
+  {name:'Corumbá / Dom Bosco (N. Iguaçu)', c:[-43.4683,-22.7558], r:0.40, type:'conflito'},
+  {name:'Danon / Ipiranga (N. Iguaçu)', c:[-43.4536,-22.7561], r:0.35, type:'conflito'},
+  {name:'Cabuçu / Valverde', c:[-43.5186,-22.7719], r:0.45, type:'atencao'},
+  {name:'Carlos Sampaio / Austin', c:[-43.5281,-22.7303], r:0.40, type:'conflito'},
+  {name:'São Simão (Queimados)', c:[-43.5683,-22.7094], r:0.40, type:'conflito'},
+  {name:'Eixo KM 32 / Marapicu', c:[-43.5519,-22.7681], r:0.45, type:'atencao'},
+  {name:'Guandu / Lagoinha', c:[-43.6083,-22.7911], r:0.45, type:'atencao'},
+  {name:'KM 40 / Seropédica', c:[-43.6742,-22.7689], r:0.45, type:'atencao'},
+  {name:'Reta de Piranema', c:[-43.7389,-22.7931], r:0.40, type:'atencao'},
+  {name:'Chaperó (Itaguaí)', c:[-43.7364,-22.8347], r:0.45, type:'conflito'},
+  {name:'Sem Terra / Monte Serrat', c:[-43.7744,-22.8681], r:0.35, type:'conflito'},
+  {name:'Engenho / Brisamar', c:[-43.7917,-22.8794], r:0.30, type:'conflito'},
+  {name:'Mazomba (Itaguaí)', c:[-43.8258,-22.8833], r:0.30, type:'conflito'},
+  {name:'Praia Grande / Ranchito (Mangaratiba)', c:[-44.0411,-22.9558], r:0.35, type:'conflito'},
+  {name:'Itacuruçá / Muriqui', c:[-43.9167,-22.9467], r:0.30, type:'conflito'},
+  {name:'Belém (Angra)', c:[-44.2986,-22.9719], r:0.40, type:'conflito'},
+  {name:'Japuíba / Areal (Angra)', c:[-44.3092,-22.9839], r:0.40, type:'conflito'},
+  {name:'Frade (Angra)', c:[-44.4367,-22.9972], r:0.45, type:'conflito'},
+  {name:'Camorim (Angra)', c:[-44.2711,-23.0031], r:0.35, type:'conflito'},
+  {name:'Sto. Antônio / Centro (Angra)', c:[-44.3164,-23.0078], r:0.30, type:'conflito'},
+  {name:'Pq. Mambucaba / Perequê', c:[-44.5261,-23.0236], r:0.45, type:'conflito'},
+  {name:'Ilha das Cobras (Paraty)', c:[-44.7189,-23.2167], r:0.25, type:'conflito'},
+  {name:'Pantanal / Condado (Paraty)', c:[-44.7264,-23.2089], r:0.35, type:'conflito'},
+  {name:'Mangueira (Paraty)', c:[-44.7175,-23.2208], r:0.25, type:'conflito'},
+  {name:'Patrimônio / Trindade', c:[-44.7214,-23.3361], r:0.35, type:'atencao'}
 ];
 
 const communityData = rawAreas.map(a => ({
@@ -570,11 +567,10 @@ map.once('load', () => {
   fetchFuelStations();
 });
 
-// FOLLOW MODE SUAVE
 function pauseFollow() {
   followMode = false;
   clearTimeout(followResumeTimer);
-  followResumeTimer = setTimeout(() => { followMode = true; }, 10000); // 10 segundos para explorar livremente
+  followResumeTimer = setTimeout(() => { followMode = true; }, 10000);
 }
 map.on('dragstart', (e) => { if (e.originalEvent) pauseFollow(); });
 map.on('zoomstart', (e) => { if (e.originalEvent) pauseFollow(); });
@@ -620,7 +616,7 @@ function startGPSWatch() {
 }
 
 // ================================================================
-// POSTOS DE COMBUSTÍVEL (OVERPASS COM RAIO DE 7KM E CLIQUE/POPUP FUNCIONAL)
+// POSTOS DE COMBUSTÍVEL
 // ================================================================
 let allFuelStations = [];
 let fuelMarkersMap = {};
@@ -716,23 +712,24 @@ function createFuelMarker(item, opacity) {
 map.on('moveend', updateFuelVisibility);
 map.on('zoomend', updateFuelVisibility);
 
-// ================================================================
-// CONTROLE DE POSTOS E TEMA
-// ================================================================
-function toggleFuel() {
-  fuelVisible = !fuelVisible;
-  document.getElementById('fuelChip').classList.toggle('active', fuelVisible);
-  if (fuelVisible) {
-    fetchFuelStations();
-    updateFuelVisibility();
-    toast('Exibindo postos de combustível');
-  } else {
-    renderFuel([]);
-    toast('Postos ocultados');
-  }
-}
+// BOTÃO SUPERIOR ESQUERDO DE POSTOS (ABRE O FILTRO COMPLETO)
+document.getElementById('fuelChip').onclick = () => {
+  document.getElementById('fuelFilterModal').classList.add('show');
+};
+document.getElementById('closeFuelFilter').onclick = () => document.getElementById('fuelFilterModal').classList.remove('show');
 
-document.getElementById('fuelChip').onclick = toggleFuel;
+function setFuelFilter(f, label) {
+  currentFuelFilter = f;
+  fuelVisible = f !== 'none';
+  document.getElementById('fuelChip').classList.toggle('active', fuelVisible);
+  document.getElementById('fuelFilterModal').classList.remove('show');
+  updateFuelVisibility();
+  toast(label);
+}
+document.getElementById('filterAll').onclick = () => setFuelFilter('all', 'Mostrando todos os postos');
+document.getElementById('filterRegular').onclick = () => setFuelFilter('regular', 'Mostrando postos regulares');
+document.getElementById('filterGNV').onclick = () => setFuelFilter('gnv', 'Mostrando postos com GNV');
+document.getElementById('filterNone').onclick = () => setFuelFilter('none', 'Postos ocultados');
 
 function toggleCommunityVisibility() {
   communityVisible = !communityVisible;
@@ -768,7 +765,7 @@ document.getElementById('satChip').onclick = () => {
 };
 
 // ================================================================
-// BUSCA E ROTAS
+// BUSCA E ABERTURA AUTOMÁTICA DO PAINEL DE NAVEGAÇÃO
 // ================================================================
 async function geocode(q) {
   const wait = Math.max(0, 1100 - (Date.now() - lastGeocodeAt));
@@ -808,7 +805,7 @@ input.addEventListener('input', () => {
           input.value = r.display_name;
           destPos = [+r.lon, +r.lat];
           box.classList.remove('show');
-          iniciarRotaInterna();
+          openNavigationPanel();
         };
         box.appendChild(d);
       });
@@ -817,10 +814,43 @@ input.addEventListener('input', () => {
   }, 700);
 });
 
-document.getElementById('searchBtn').onclick = () => {
-  if (destPos && userPos) iniciarRotaInterna();
-  else if (input.value.trim()) geocode(input.value.trim()).then(res => { if (res[0]) { destPos = [+res[0].lon, +res[0].lat]; iniciarRotaInterna(); } });
+// BOTÃO X GRANDE LIMPAR BUSCA
+document.getElementById('clearBtn').onclick = () => {
+  input.value = '';
+  destPos = null;
+  document.getElementById('suggest').classList.remove('show');
+  clearRoute();
+  input.focus();
 };
+
+// BOTÃO "IR" ABRE O PAINEL COM WAZE / MAPS / RADAR
+document.getElementById('searchBtn').onclick = () => {
+  const text = input.value.trim();
+  if (!text) { toast('Digite um destino.'); return; }
+  if (destPos) {
+    openNavigationPanel();
+  } else {
+    geocode(text).then(res => {
+      if (res && res[0]) {
+        destPos = [+res[0].lon, +res[0].lat];
+        input.value = res[0].display_name;
+        openNavigationPanel();
+      } else {
+        toast('Local não encontrado.');
+      }
+    });
+  }
+};
+
+function openNavigationPanel() {
+  document.getElementById('wazeSheet').classList.add('show');
+  document.getElementById('wazeSheet').classList.add('expanded');
+  sheetExpanded = true;
+  document.getElementById('sheetToggleBtn').textContent = 'Recolher ▾';
+  if (userPos && destPos) {
+    iniciarRotaInterna();
+  }
+}
 
 async function fetchRoute(a, b) {
   const url = `https://router.project-osrm.org/route/v1/${transportMode}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&alternatives=false&steps=true`;
@@ -843,11 +873,25 @@ async function iniciarRotaInterna() {
     routeData = await fetchRoute(userPos, destPos);
     showRoute();
     fetchRouteHazards();
+    checkDestinationDanger();
   } catch (e) { toast('Falha ao calcular rota.'); }
 }
 
+// ALERTA CASO O DESTINO ESTEJA DENTRO OU PRÓXIMO DE COMUNIDADE
+function checkDestinationDanger() {
+  if (!destPos) return;
+  for (const c of rawAreas) {
+    const d = distanceKm(destPos, [c.c[0], c.c[1]]);
+    if (d <= c.r + 0.3) {
+      document.getElementById('dangerBannerText').textContent = `⚠ ATENÇÃO: Seu destino fica dentro ou nas proximidades da ${c.name}. Redobre a atenção!`;
+      document.getElementById('dangerBanner').classList.add('show');
+      speak(`Atenção: o seu destino fica próximo à comunidade ${c.name}.`);
+      return;
+    }
+  }
+}
+
 function showRoute() {
-  document.getElementById('wazeSheet').classList.add('show');
   drawRoute(routeData);
   document.getElementById('sheetTime').textContent = Math.max(1, Math.round(routeData.duration / 60)) + ' min';
   document.getElementById('sheetDist').textContent = (routeData.distance / 1000).toFixed(1) + ' km • Chegada prevista';
@@ -865,9 +909,7 @@ function drawRoute(r) {
   map.fitBounds(b, { padding: { top: 130, bottom: 140, left: 30, right: 30 }, duration: 700, maxZoom: 17 });
 }
 
-// ================================================================
-// RECÁLCULO IMEDIATO E RÁPIDO (SEM FALAS VELHAS)
-// ================================================================
+// RECÁLCULO IMEDIATO
 function pointToSegmentKm(p, a, b) {
   const cosLat = Math.cos(p[1] * Math.PI / 180);
   const P = [p[0] * cosLat, p[1]], A = [a[0] * cosLat, a[1]], B = [b[0] * cosLat, b[1]];
@@ -910,9 +952,7 @@ async function recalculateRoute() {
   }
 }
 
-// ================================================================
 // NAVEGAÇÃO E MANOBRAS
-// ================================================================
 function allSteps() { return (routeData?.legs || []).flatMap(l => l.steps || []); }
 function stepIconArrow(s) {
   const m = s.maneuver || {};
@@ -964,9 +1004,7 @@ function updateNavigation() {
   });
 }
 
-// ================================================================
-// LOMBADAS EXCLUSIVAMENTE NO TRAJETO
-// ================================================================
+// LOMBADAS E SEMÁFOROS (ÍCONES DIRETOS SEM FUNDO QUADRADO)
 let routeHazards = [];
 let hazardMarkers = [];
 
@@ -1001,7 +1039,7 @@ async function fetchRouteHazards() {
     const icons = { lombada: '🚧', radar: '📷', semaforo: '🚦' };
     routeHazards.forEach(h => {
       const el = document.createElement('div');
-      el.className = 'hazard-marker ' + h.type;
+      el.className = 'hazard-marker';
       el.textContent = icons[h.type] || '⚠';
       const m = new maplibregl.Marker({ element: el }).setLngLat(h.coords).addTo(map);
       hazardMarkers.push(m);
@@ -1018,16 +1056,13 @@ function checkHazardsProximity() {
     if (d < minDist) { minDist = d; nearest = h; }
   });
   if (nearest && minDist <= 150) {
-    sign.textContent = nearest.type === 'radar' ? `📷 Radar em ${Math.round(minDist)}m` : `🚧 Lombada na via`;
+    sign.textContent = nearest.type === 'radar' ? `📷 Radar em ${Math.round(minDist)}m` : nearest.type === 'lombada' ? `🚧 Lombada na via` : `🚦 Semáforo à frente`;
     sign.className = 'hazard-sign show ' + nearest.type;
   } else {
     sign.classList.remove('show');
   }
 }
 
-// ================================================================
-// CONTROLE DE NAVEGAÇÃO
-// ================================================================
 function startNav() {
   if (!routeData) { toast('Trace uma rota primeiro.'); return; }
   navActive = true;
@@ -1066,17 +1101,22 @@ document.getElementById('sheetToggleBtn').onclick = (e) => { e.stopPropagation()
 document.getElementById('startRadarBtn').onclick = startNav;
 document.getElementById('stopNavBtn').onclick = () => {
   stopNav();
+  clearRoute();
+};
+
+function clearRoute() {
   if (map.getLayer('route-line')) map.removeLayer('route-line');
   if (map.getLayer('route-outline')) map.removeLayer('route-outline');
   if (map.getSource('route')) map.removeSource('route');
   hazardMarkers.forEach(m => m.remove());
   routeData = null; destPos = null;
   document.getElementById('wazeSheet').classList.remove('show');
-};
+}
 
 document.getElementById('openWaze').onclick = () => destPos && openExternal(`https://www.waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`);
 document.getElementById('openMaps').onclick = () => destPos && openExternal(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`);
 
+let insideAlertGiven = {};
 function checkProximityDanger() {
   if (!userPos) return;
   const sign = document.getElementById('favelaSign');
@@ -1085,6 +1125,7 @@ function checkProximityDanger() {
   for (const c of rawAreas) {
     const d = distanceKm(userPos, [c.c[0], c.c[1]]);
     if (d < nearestDist) { nearestDist = d; nearest = c; }
+    if (insideAlertGiven[c.name] && d > c.r + 0.3) delete insideAlertGiven[c.name];
   }
   if (nearest && nearestDist <= nearest.r + 0.3) {
     sign.textContent = '⚠ Comunidade próxima: ' + nearest.name;
@@ -1094,6 +1135,13 @@ function checkProximityDanger() {
   } else {
     sign.classList.remove('show');
     tag.classList.remove('active');
+  }
+  if (nearest && nearestDist <= nearest.r && !insideAlertGiven[nearest.name]) {
+    insideAlertGiven[nearest.name] = true;
+    document.getElementById('dangerBannerText').textContent = `⚠ Atenção! Você está entrando na área da comunidade ${nearest.name}. Fique atento.`;
+    document.getElementById('dangerBanner').classList.add('show');
+    speak(`Atenção! Você está entrando na área da comunidade ${nearest.name}.`);
+    setTimeout(() => { speak(`Atenção! Área da comunidade ${nearest.name}.`); }, 3800);
   }
 }
 
@@ -1114,6 +1162,7 @@ document.getElementById('streetViewBtn').onclick = () => {
   openExternal(`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${target[1]},${target[0]}`);
 };
 
+document.getElementById('communityChip').onclick = toggleCommunityVisibility;
 document.getElementById('transportBtn').onclick = () => document.getElementById('transportModal').classList.add('show');
 document.getElementById('closeTransportModal').onclick = () => document.getElementById('transportModal').classList.remove('show');
 document.querySelectorAll('#transportModal button[data-mode]').forEach(btn => {
@@ -1133,7 +1182,7 @@ document.getElementById('closeLayers').onclick = () => document.getElementById('
 document.getElementById('dangerBannerClose').onclick = () => document.getElementById('dangerBanner').classList.remove('show');
 
 document.getElementById('modalCommunity').onclick = () => { toggleCommunityVisibility(); document.getElementById('layersModal').classList.remove('show'); };
-document.getElementById('modalFuel').onclick = () => { toggleFuel(); document.getElementById('layersModal').classList.remove('show'); };
+document.getElementById('modalFuel').onclick = () => { document.getElementById('layersModal').classList.remove('show'); document.getElementById('fuelFilterModal').classList.add('show'); };
 document.getElementById('modalSatellite').onclick = () => {
   satelliteVisible = !satelliteVisible;
   document.getElementById('satChip').classList.toggle('active', satelliteVisible);
@@ -1148,7 +1197,23 @@ document.getElementById('modalStreetView').onclick = () => {
 document.getElementById('modalLocate').onclick = () => { document.getElementById('layersModal').classList.remove('show'); locate(); };
 document.getElementById('modalTheme').onclick = () => { cycleTheme(); document.getElementById('layersModal').classList.remove('show'); };
 
-// CHAT MQTT
+// CHAT MQTT COM PERSISTÊNCIA LOCALSTORAGE
+let chatMessages = [];
+try { chatMessages = JSON.parse(localStorage.getItem('rs_chat_history') || '[]'); } catch(e) {}
+
+function renderChat() {
+  const box = document.getElementById('chatMessages');
+  if (!box) return;
+  box.innerHTML = '';
+  chatMessages.slice(-50).forEach(msg => {
+    const d = document.createElement('div');
+    d.className = 'chat-msg';
+    d.innerHTML = `<span class="user">${safe(msg.user)}</span><span class="time">${safe(msg.time)}</span><br>${safe(msg.text)}`;
+    box.appendChild(d);
+  });
+  box.scrollTop = box.scrollHeight;
+}
+
 const mqttClient = mqtt.connect('wss://broker.emqx.io:8084/mqtt', { clientId: 'rsrj-' + Math.random().toString(16).slice(2, 8), clean: true });
 mqttClient.on('connect', () => {
   mqttClient.subscribe('radarseguro-rj-pro/chat/v1');
@@ -1157,22 +1222,26 @@ mqttClient.on('connect', () => {
 mqttClient.on('message', (t, p) => {
   try {
     const msg = JSON.parse(p.toString());
-    const d = document.createElement('div');
-    d.className = 'chat-msg';
-    d.innerHTML = `<span class="user">${safe(msg.user)}</span><span class="time">${safe(msg.time)}</span><br>${safe(msg.text)}`;
-    const box = document.getElementById('chatMessages');
-    box.appendChild(d);
-    box.scrollTop = box.scrollHeight;
+    chatMessages.push(msg);
+    if (chatMessages.length > 50) chatMessages.shift();
+    localStorage.setItem('rs_chat_history', JSON.stringify(chatMessages));
+    renderChat();
   } catch (e) {}
 });
+
 document.getElementById('chatSendBtn').onclick = () => {
   const inp = document.getElementById('chatInput');
   if (!inp.value.trim() || !mqttClient.connected) return;
-  mqttClient.publish('radarseguro-rj-pro/chat/v1', JSON.stringify({ user: 'Motorista', text: inp.value.trim(), time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) }));
+  const msg = { user: 'Motorista', text: inp.value.trim(), time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) };
+  mqttClient.publish('radarseguro-rj-pro/chat/v1', JSON.stringify(msg));
+  chatMessages.push(msg);
+  localStorage.setItem('rs_chat_history', JSON.stringify(chatMessages));
+  renderChat();
   inp.value = '';
 };
-document.getElementById('chatChip').onclick = () => document.getElementById('chatModal').classList.add('show');
-document.getElementById('chatBottomBtn').onclick = () => document.getElementById('chatModal').classList.add('show');
+
+document.getElementById('chatChip').onclick = () => { document.getElementById('chatModal').classList.add('show'); renderChat(); };
+document.getElementById('chatBottomBtn').onclick = () => { document.getElementById('chatModal').classList.add('show'); renderChat(); };
 document.getElementById('closeChatModal').onclick = () => document.getElementById('chatModal').classList.remove('show');
 
 toast('Radar Seguro RJ PRO - Pronto!', 3000);
