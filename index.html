@@ -12,227 +12,339 @@ html,body,#map{width:100%;height:100%;overflow:hidden}
 body{background:#07131f;color:#fff}
 button,input{font:inherit}
 #map{position:fixed;inset:0}
-.maplibregl-ctrl-attrib{font-size:9px;background:rgba(0,0,0,.55)!important;color:#ddd!important}
-.maplibregl-ctrl-attrib a{color:#ddd!important}
 .topbar{position:fixed;top:10px;left:10px;right:10px;z-index:20;display:flex;flex-direction:column;gap:8px;pointer-events:none;transition:.3s}
 .topbar>*{pointer-events:auto}.topbar.hide-nav{transform:translateY(-120%);opacity:0;pointer-events:none}
 .appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:18px;background:rgba(7,19,31,.94);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px rgba(0,0,0,.6);backdrop-filter:blur(14px)}
 .brand{font-size:13px;font-weight:900;letter-spacing:.5px}.brand span{color:#38bdf8}
 .search{position:relative;display:flex;gap:4px;padding:5px;background:#07131ff5;border:1px solid #38bdf8;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.6)}
 .search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;padding:10px 8px;font-size:14px}
-.search input::placeholder{color:#94a3b8}.search button{border:0;border-radius:12px;background:#0284c7;color:#fff;font-weight:900;padding:10px 14px;cursor:pointer}
+.search button{border:0;border-radius:12px;background:#0284c7;color:#fff;font-weight:900;padding:10px 14px;cursor:pointer}
 .search .clear{background:#1e293b;font-size:16px;padding:10px 14px}
 .suggest{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:280px;overflow:auto;border:1px solid #334155;border-radius:14px;background:#07131f;box-shadow:0 12px 30px rgba(0,0,0,.8);z-index:40}
-.suggest.show{display:block}.suggest-item{padding:12px;border-bottom:1px solid #1e293b;font-size:12px;color:#e2e8f0;line-height:1.35;cursor:pointer}.suggest-item:active{background:#102337}
-.chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}.chips::-webkit-scrollbar{display:none}
-.chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0}.chip.active{background:#0284c7;border-color:#38bdf8}
-.waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#004a4f;color:#fff;padding:12px 16px 8px;box-shadow:0 8px 24px rgba(0,0,0,.7);display:none;flex-direction:column}.waze-top-hud.show{display:flex}
-.waze-maneuver-row{display:flex;align-items:center;gap:16px}.waze-arrow{font-size:44px;line-height:1;font-weight:900;color:#fff;transform:translateY(-2px)}.waze-meta{flex:1}.waze-dist{font-size:26px;font-weight:900;letter-spacing:-.5px}.waze-street{font-size:20px;font-weight:900;color:#38bdf8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.waze-sub-hud{background:#003438;margin:8px -16px -8px;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:#a7f3d0}.waze-sub-hud span.next-name{color:#fff}.waze-danger-tag{color:#f87171;font-weight:900;display:none}.waze-danger-tag.active{display:inline}
-.traffic-light-hud{position:fixed;top:105px;left:14px;z-index:28;background:#0f172a;border:2px solid #38bdf8;color:#fff;padding:8px 14px;border-radius:16px;display:none;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,.6)}.traffic-light-hud.show{display:flex}
-.traffic-light-visual{width:16px;height:36px;background:#020617;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:2px;border:1px solid #475569}.traffic-light-dot{width:8px;height:8px;border-radius:50%;background:#334155}.traffic-light-dot.red.active{background:#ef4444;box-shadow:0 0 8px #ef4444}.traffic-light-dot.yellow.active{background:#eab308;box-shadow:0 0 8px #eab308}.traffic-light-dot.green.active{background:#22c55e;box-shadow:0 0 8px #22c55e}.traffic-light-info b{font-size:13px;display:block;color:#f8fafc}.traffic-light-info span{font-size:11px;color:#94a3b8;font-weight:700}
-.current-road-pill{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:22;background:#0284c7;color:#fff;padding:8px 18px;border-radius:20px;font-size:14px;font-weight:900;box-shadow:0 6px 16px rgba(0,0,0,.6);border:2px solid #fff;display:none;white-space:nowrap;max-width:80vw;overflow:hidden;text-overflow:ellipsis}body.nav-mode .current-road-pill{display:block}
-.speedometer-box{position:fixed;left:14px;bottom:90px;z-index:34;width:60px;height:60px;border-radius:50%;background:#04101c;border:3px solid #0284c7;display:none;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.7);transition:border-color .2s,background .2s}.speedometer-box.speed-alert{border-color:#ef4444;background:#450a0a;animation:pulseRed .6s infinite alternate}.speedometer-box b{font-size:18px;font-weight:900;color:#fff;line-height:1}.speedometer-box span{font-size:9px;color:#94a3b8;font-weight:800;text-transform:uppercase}body.nav-mode .speedometer-box{display:flex}@keyframes pulseRed{from{transform:scale(1)}to{transform:scale(1.08)}}
-.nav-recenter-left{position:fixed;left:14px;bottom:162px;z-index:34;width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;cursor:pointer}body.nav-mode .nav-recenter-left{display:flex}.nav-recenter-left svg{width:24px;height:24px;display:block}
-.nav-report-btn{position:fixed;right:14px;bottom:90px;z-index:34;width:56px;height:56px;border-radius:50%;border:3px solid #fff;background:#fc0;color:#000;display:none;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.6);cursor:pointer}body.nav-mode .nav-report-btn{display:flex}.nav-report-btn svg{width:28px;height:28px;fill:#000}
-.side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}body.nav-mode .side{top:118px}.side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,.6);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}.side button.locate{border-color:#38bdf8}.side button.active-sound{border-color:#34d399;color:#34d399}.side button.muted-sound{border-color:#f87171;color:#f87171}
-.waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#fff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.4);transition:transform .3s cubic-bezier(.1,.9,.2,1);transform:translateY(calc(100% - 75px));display:none}.waze-bottom-sheet.show{display:block}.waze-bottom-sheet.expanded{transform:translateY(0)}
-.sheet-handle{width:40px;height:5px;background:#cbd5e1;border-radius:99px;margin:8px auto 4px;cursor:pointer}.sheet-bar{display:flex;align-items:center;justify-content:space-between;padding:4px 18px 12px;cursor:pointer}.sheet-recenter{display:flex;align-items:center;gap:10px}.recenter-icon{width:44px;height:44px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center}.sheet-time-dist{display:flex;flex-direction:column}.sheet-time-dist b{font-size:18px;font-weight:900}.sheet-time-dist span{font-size:13px;color:#64748b;font-weight:700}.sheet-toggle-btn{padding:8px 14px;border-radius:99px;background:#f1f5f9;color:#0284c7;font-size:13px;font-weight:900;border:0}.sheet-content{padding:0 18px 20px;border-top:1px solid #f1f5f9;display:flex;flex-direction:column;gap:10px}.sheet-nav-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.btn-nav-radar{border:0;border-radius:14px;padding:14px;font-size:15px;font-weight:900;color:#fff;background:linear-gradient(135deg,#0284c7,#0369a1)}.btn-nav-stop{border:0;border-radius:14px;padding:12px;font-size:13px;font-weight:900;color:#fff;background:#dc2626}.sheet-external-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sheet-external-grid button{border:0;border-radius:14px;padding:14px 10px;font-size:13px;font-weight:900;color:#fff}.btn-waze{background:#00b7df}.btn-maps{background:#1a73e8}
-.user-marker-waze{width:52px;height:52px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="%230284c7" opacity=".25"/><circle cx="26" cy="26" r="18" fill="%230284c7" opacity=".45"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
-.finish-flag-marker{font-size:36px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
-.fuel-marker{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;cursor:pointer}.fuel-marker.verde{background:#22c55e}.fuel-marker.gnv{background:#16a34a}
-.hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;pointer-events:none}.hazard-marker svg{width:36px;height:36px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.9))}
-.bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px}.bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}.action{flex:1;border:0;border-radius:15px;padding:13px 7px;background:#000e;color:#fff;font-size:11px;font-weight:900}.action.danger{background:#991b1b}.action.anp{background:#166534}.action.chat{background:#7c3aed}
-.toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:11px 15px;border-radius:13px;font-size:12px;font-weight:700;max-width:90vw;text-align:center;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}.favela-sign.show{opacity:1;transform:translate(-50%,0)}body.nav-mode .favela-sign{top:132px}
-.danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.7);border:2px solid #fecaca}.danger-banner.show{display:flex}.danger-banner b{font-size:13px;line-height:1.35;font-weight:800}.danger-banner button{border:0;background:#ffffff33;color:#fff;width:30px;height:30px;border-radius:50%;font-weight:900}
-.modal-overlay{display:none;position:fixed;inset:0;z-index:90;background:#0009;align-items:center;justify-content:center}.modal-overlay.show{display:flex}.modal-card{background:#07131f;border-radius:20px;padding:24px;max-width:440px;width:90%;border:1px solid #334155;max-height:90vh;overflow-y:auto}.modal-card h2{font-size:18px;margin-bottom:12px;color:#38bdf8}.modal-card p{font-size:13px;color:#94a3b8;margin-bottom:16px;line-height:1.4}.modal-options{display:flex;flex-direction:column;gap:10px}.modal-options button{background:#0b1b2a;border:1px solid #334155;border-radius:14px;padding:14px;color:#fff;font-weight:800;font-size:14px;text-align:left;display:flex;align-items:center;gap:12px;cursor:pointer}.modal-options button .icon{font-size:24px;width:36px;text-align:center}.modal-close{width:100%;border:0;border-radius:12px;padding:12px;background:#1e293b;color:#fff;font-weight:900;margin-top:14px}
-.chat-messages{max-height:300px;overflow-y:auto;background:#040c14;border-radius:12px;padding:10px;margin-bottom:12px;font-size:13px}.chat-msg{margin-bottom:8px;padding:8px 12px;background:#0b1b2a;border-radius:8px;border-left:3px solid #38bdf8}.chat-msg .user{font-weight:900;color:#38bdf8}.chat-msg .time{font-size:10px;color:#64748b;margin-left:8px}.chat-input-row{display:flex;gap:8px}.chat-input-row input{flex:1;padding:10px;border-radius:10px;border:1px solid #334155;background:#040c14;color:#fff}.chat-input-row button{padding:10px 16px;border-radius:10px;border:0;background:#0284c7;color:#fff;font-weight:900}.chat-status{font-size:11px;color:#64748b;margin:-6px 0 10px}
-@media(min-width:700px){.topbar{left:20px;right:auto;width:460px}.waze-bottom-sheet{left:20px;right:auto;width:430px;border-radius:20px}.bottom-actions{left:auto;right:20px;width:430px}.danger-banner{left:20px;right:auto;width:430px}}
+.suggest.show{display:block}.suggest-item{padding:12px;border-bottom:1px solid #1e293b;font-size:12px;color:#e2e8f0;cursor:pointer}
+.chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer}
+.chip.active{background:#0284c7;border-color:#38bdf8}
+
+/* Modo Motorista HUD */
+.driver-mode-overlay{position:fixed;inset:0;z-index:100;background:#030a12;display:none;flex-direction:column;justify-content:space-between;padding:24px 20px}
+.driver-mode-overlay.show{display:flex}
+.driver-top{display:flex;justify-content:space-between;align-items:flex-start}
+.driver-speed-large{font-size:72px;font-weight:900;color:#22c55e;line-height:1}
+.driver-speed-large span{font-size:16px;color:#94a3b8;display:block}
+.driver-next-action{background:#0f172a;border:2px solid #38bdf8;border-radius:20px;padding:16px;margin:20px 0;display:flex;align-items:center;gap:16px}
+.driver-arrow{font-size:48px;color:#38bdf8}
+.driver-action-text b{font-size:22px;display:block;color:#fff}
+.driver-action-text span{font-size:16px;color:#94a3b8}
+.driver-alerts-stream{display:flex;flex-direction:column;gap:10px}
+.driver-alert-card{padding:12px 16px;border-radius:14px;font-size:15px;font-weight:800;display:flex;align-items:center;gap:10px}
+.driver-alert-card.danger{background:#450a0a;border:1px solid #ef4444;color:#fee2e2}
+.driver-alert-card.gas{background:#064e3b;border:1px solid #10b981;color:#d1fae5}
+.driver-exit-btn{padding:16px;background:#dc2626;color:#fff;border:0;border-radius:16px;font-size:16px;font-weight:900;cursor:pointer}
+
+/* Ficha do Posto */
+.station-card-modal{display:none;position:fixed;bottom:0;left:0;right:0;z-index:95;background:#07131f;border-top:2px solid #38bdf8;border-radius:24px 24px 0 0;padding:20px;box-shadow:0 -10px 30px rgba(0,0,0,.8)}
+.station-card-modal.show{display:block}
+.station-badge-row{display:flex;gap:8px;margin-bottom:10px}
+.badge{padding:4px 8px;border-radius:6px;font-size:10px;font-weight:900;text-transform:uppercase}
+.badge-official{background:#166534;color:#dcfce7}
+.badge-suspect{background:#991b1b;color:#fee2e2}
+.station-prices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.price-box{background:#0b1b2a;padding:8px;border-radius:10px;text-align:center;border:1px solid #334155}
+.price-box span{font-size:11px;color:#94a3b8;display:block}
+.price-box b{font-size:14px;color:#38bdf8}
+.btn-go-station{width:100%;padding:14px;background:#0284c7;color:#fff;border:0;border-radius:12px;font-weight:900;font-size:15px;cursor:pointer;margin-top:8px}
+
+/* Alertas com Confirmação */
+.event-confirm-box{position:fixed;bottom:90px;left:10px;right:10px;z-index:85;background:#0b1b2a;border:2px solid #f59e0b;padding:14px;border-radius:16px;display:none;box-shadow:0 8px 24px rgba(0,0,0,.8)}
+.event-confirm-box.show{display:block}
+.confirm-actions{display:flex;gap:10px;margin-top:10px}
+.btn-vote{flex:1;padding:10px;border:0;border-radius:10px;font-weight:900;font-size:13px;cursor:pointer}
+.btn-vote.yes{background:#16a34a;color:#fff}
+.btn-vote.no{background:#dc2626;color:#fff}
+
+.speedometer-box{position:fixed;left:14px;bottom:90px;z-index:34;width:60px;height:60px;border-radius:50%;background:#04101c;border:3px solid #0284c7;display:none;flex-direction:column;align-items:center;justify-content:center}
+body.nav-mode .speedometer-box{display:flex}
+.speedometer-box b{font-size:18px;font-weight:900;color:#fff;line-height:1}
+.speedometer-box span{font-size:9px;color:#94a3b8}
+.side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px}
+.side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px}
+.bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
+.action{flex:1;border:0;border-radius:15px;padding:13px 7px;background:#000e;color:#fff;font-size:11px;font-weight:900;cursor:pointer}
+.action.danger{background:#991b1b}.action.driver{background:#0284c7}.action.anp{background:#166534}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:99;background:#0009;align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal-card{background:#07131f;border-radius:20px;padding:24px;max-width:440px;width:90%;border:1px solid #334155}
+.modal-card h2{font-size:18px;margin-bottom:12px;color:#38bdf8}
+.modal-options{display:flex;flex-direction:column;gap:10px}
+.modal-options button{background:#0b1b2a;border:1px solid #334155;border-radius:14px;padding:12px;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.modal-close{width:100%;border:0;border-radius:12px;padding:12px;background:#1e293b;color:#fff;font-weight:900;margin-top:14px;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:10px 14px;border-radius:12px;font-size:12px;transition:.25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
 <div id="map"></div>
-<div class="topbar" id="mainTopbar"><div class="appbar"><div class="brand">🛡️ RADAR <span>SEGURO RJ PRO</span></div><span id="gpsBadge" style="background:#475569;border-radius:999px;padding:4px 8px;font-size:9px;font-weight:900">GPS...</span></div><div class="search"><input id="destInput" placeholder="Rua, número, bairro ou local..." autocomplete="off"><button class="clear" id="clearBtn">✕</button><button id="searchBtn">IR</button><div id="suggest" class="suggest"></div></div><div class="chips"><button class="chip active" id="fuelChip">⛽ Postos</button><button class="chip active" id="communityChip">🟥 Zonas de Risco</button><button class="chip" id="themeChip">🌓 Tema: Auto</button><button class="chip" id="satChip">🛰️ Satélite</button><button class="chip" id="chatChip">💬 Chat</button></div></div>
-<div class="waze-top-hud" id="wazeHud"><div class="waze-maneuver-row"><div class="waze-arrow" id="hudArrow">↰</div><div class="waze-meta"><div class="waze-dist" id="hudDist">110 m</div><div class="waze-street" id="hudStreet">Rua de Destino</div></div></div><div class="waze-sub-hud"><div>em seguida <span id="hudNextIcon">↰</span> <span class="next-name" id="hudNextStreet">Próxima via</span></div><div class="waze-danger-tag" id="hudDangerTag">⚠ ALERTA DE ÁREA</div></div></div>
-<div class="traffic-light-hud" id="trafficLightHud"><div class="traffic-light-visual"><div class="traffic-light-dot red" id="tlDotRed"></div><div class="traffic-light-dot yellow" id="tlDotYellow"></div><div class="traffic-light-dot green" id="tlDotGreen"></div></div><div class="traffic-light-info"><b id="tlStatusText">Semáforo à frente</b><span id="tlCountdownText">Aprox. 120m • estimativa de ciclo</span></div></div>
-<div class="current-road-pill" id="currentRoadPill">Via Atual</div><div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
-<button class="nav-recenter-left" id="navRecenterLeft">📍</button><button class="nav-report-btn" id="navReportBtn">⚠</button>
-<div class="side"><button class="locate" id="locateBtn">◎</button><button class="active-sound" id="soundBtn">🔊</button><button id="northBtn">N</button><button id="zoomIn">+</button><button id="zoomOut">−</button><button id="layersBtn">☷</button></div>
-<div class="waze-bottom-sheet" id="wazeSheet"><div class="sheet-handle" id="sheetHandle"></div><div class="sheet-bar"><div class="sheet-recenter" id="btnRecenter"><div class="recenter-icon">📍</div><div class="sheet-time-dist"><b id="sheetTime">-- min</b><span id="sheetDist">-- km • Chegada prevista</span></div></div><button class="sheet-toggle-btn" id="sheetToggleBtn">Opções ▴</button></div><div class="sheet-content"><div style="font-size:13px;font-weight:800">Escolha como navegar:</div><div class="sheet-nav-actions"><button class="btn-nav-radar" id="startRadarBtn">🛡️ Iniciar no Radar Seguro PRO</button></div><div class="sheet-external-grid"><button class="btn-waze" id="openWaze">Abrir no Waze</button><button class="btn-maps" id="openMaps">Google Maps</button></div><button class="btn-nav-stop" id="stopNavBtn">⏹ Cancelar Navegação</button></div></div>
-<div class="bottom-actions" id="mainBottomActions"><button class="action danger" id="reportBtn">🚨 Denunciar</button><button class="action anp" id="anpBtn">🏛️ ANP</button><button class="action chat" id="chatBottomBtn">💬 Chat</button></div>
-<div class="toast" id="toast"></div><div class="favela-sign" id="favelaSign"></div><div class="danger-banner" id="dangerBanner"><b id="dangerBannerText"></b><button id="dangerBannerClose">✕</button></div>
 
-<div class="modal-overlay" id="reportLiveModal"><div class="modal-card"><h2>⚠️ Central de Alertas e Ocorrências</h2><p>Selecione a ocorrência na sua posição atual.</p><div class="modal-options"><button onclick="sendLiveReport('tiroteio','🔴 Tiroteio / Conflito')"><span class="icon">🔴</span>Tiroteio / Conflito</button><button onclick="sendLiveReport('blitz','🚔 Blitz / Operação')"><span class="icon">🚔</span>Blitz / Operação</button><button onclick="sendLiveReport('bloqueio','🚧 Pista Bloqueada')"><span class="icon">🚧</span>Pista Bloqueada</button><button onclick="sendLiveReport('perigo','🚨 Perigo na Pista')"><span class="icon">🚨</span>Perigo na Pista</button><button onclick="openChatFromReport()"><span class="icon">💬</span>Abrir Chat Comunitário</button><button onclick="cancelMyLastReport()"><span class="icon">↩️</span>Desreportar meu alerta</button></div><button class="modal-close" id="closeReportLiveModal">Fechar</button></div></div>
-<div class="modal-overlay" id="themeSelectModal"><div class="modal-card"><h2>🌓 Tema do Mapa</h2><div class="modal-options"><button onclick="setMapThemeDirect('auto')">⚡ Automático</button><button onclick="setMapThemeDirect('light')">☀️ Modo Dia</button><button onclick="setMapThemeDirect('dark')">🌙 Modo Noite</button><button onclick="setMapThemeDirect('sat')">🛰️ Satélite</button></div><button class="modal-close" id="closeThemeSelectModal">Fechar</button></div></div>
-<div class="modal-overlay" id="transportModal"><div class="modal-card"><h2>🚗 Modo de transporte</h2><div class="modal-options"><button data-mode="driving">🚗 Carro</button><button data-mode="driving">🏍️ Moto</button><button data-mode="bike">🚲 Bicicleta</button><button data-mode="foot">🚶 A pé</button></div><button class="modal-close" id="closeTransportModal">Fechar</button></div></div>
-<div class="modal-overlay" id="chatModal"><div class="modal-card"><h2>💬 Chat Comunitário</h2><div class="chat-status" id="chatStatus">Conectando...</div><div class="chat-messages" id="chatMessages"></div><div class="chat-input-row"><input id="chatInput" placeholder="Digite sua mensagem..." maxlength="200"><button id="chatSendBtn">Enviar</button></div><button class="modal-close" id="closeChatModal">Fechar</button></div></div>
-<div class="modal-overlay" id="fuelFilterModal"><div class="modal-card"><h2>⛽ Filtro de Postos</h2><div class="modal-options"><button id="filterAll">⛽ Todos os postos</button><button id="filterRegular">🟢 Postos Regulares</button><button id="filterGNV">🟡 Postos com GNV</button><button id="filterNone">🚫 Ocultar postos</button></div><button class="modal-close" id="closeFuelFilter">Fechar</button></div></div>
-<div class="modal-overlay" id="reportModal"><div class="modal-card"><h2>🚨 Denunciar</h2><div class="modal-options"><button onclick="window.open('https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados','_blank')">🏛️ ANP</button><button onclick="window.open('https://www.procon.rj.gov.br/','_blank')">⚖️ Procon RJ</button><button onclick="window.open('https://www.mprj.mp.br/','_blank')">🏢 MP RJ</button></div><button class="modal-close" id="closeReportModal">Fechar</button></div></div>
-<div class="modal-overlay" id="layersModal"><div class="modal-card"><h2>Camadas e Serviços</h2><div class="modal-options"><button id="modalThemeOption">🌓 Alternar Tema</button><button id="modalTransport">🚗 Modo de Transporte</button><button id="modalSpeedSound">⚡ Alerta de Velocidade</button><button id="modalStreetView">🟡 Google Street View</button><button id="modalLocate">📍 Centralizar GPS</button></div><button class="modal-close" id="closeLayers">Fechar</button></div></div>
+<div class="topbar" id="mainTopbar">
+  <div class="appbar">
+    <div class="brand">🛡️ RADAR <span>SEGURO RJ PRO</span></div>
+    <span id="gpsBadge" style="background:#475569;border-radius:999px;padding:4px 8px;font-size:9px;font-weight:900">GPS...</span>
+  </div>
+  <div class="search">
+    <input id="destInput" placeholder="Rua, número, bairro ou destino..." autocomplete="off">
+    <button class="clear" id="clearBtn">✕</button>
+    <button id="searchBtn">IR</button>
+    <div id="suggest" class="suggest"></div>
+  </div>
+  <div class="chips">
+    <button class="chip active" id="chipDriverMode">🚗 Modo Motorista</button>
+    <button class="chip active" id="fuelChip">⛽ Postos Seguros</button>
+    <button class="chip active" id="communityChip">🟥 Zonas de Risco</button>
+  </div>
+</div>
+
+<div class="speedometer-box" id="speedometerBox"><b id="speedVal">0</b><span>km/h</span></div>
+
+<div class="side">
+  <button id="locateBtn">◎</button>
+  <button id="soundBtn">🔊</button>
+  <button id="northBtn">N</button>
+</div>
+
+<!-- Modo Motorista Interface -->
+<div class="driver-mode-overlay" id="driverModeOverlay">
+  <div class="driver-top">
+    <div class="driver-speed-large"><span id="driverSpeed">0</span><span>KM/H</span></div>
+    <div style="text-align:right">
+      <span style="font-size:12px;color:#38bdf8;font-weight:800">MODO MOTORISTA ATIVO</span>
+      <div id="driverClock" style="font-size:18px;font-weight:900">--:--</div>
+    </div>
+  </div>
+  <div class="driver-next-action">
+    <div class="driver-arrow" id="driverManeuverArrow">⬆</div>
+    <div class="driver-action-text">
+      <b id="driverManeuverDist">Siga em frente</b>
+      <span id="driverManeuverStreet">Aguardando rota...</span>
+    </div>
+  </div>
+  <div class="driver-alerts-stream">
+    <div class="driver-alert-card danger" id="driverDangerCard" style="display:none">
+      <span>⚠️</span> <span id="driverDangerText">Área de risco próxima</span>
+    </div>
+    <div class="driver-alert-card gas" id="driverGasCard" style="display:none">
+      <span>⛽</span> <span id="driverGasText">Posto regular a 800 m</span>
+    </div>
+  </div>
+  <button class="driver-exit-btn" id="exitDriverBtn">Sair do Modo Motorista</button>
+</div>
+
+<!-- Ficha de Detalhes do Posto -->
+<div class="station-card-modal" id="stationModal">
+  <div class="station-badge-row">
+    <span class="badge badge-official" id="stBadgeOfficial">🏛️ Fonte ANP</span>
+    <span class="badge" id="stStatusBadge">🟢 Regular</span>
+  </div>
+  <h3 id="stName" style="font-size:16px;margin-bottom:4px">Posto Ipiranga</h3>
+  <p id="stDist" style="font-size:12px;color:#94a3b8">📍 450m de distância</p>
+  <div class="station-prices">
+    <div class="price-box"><span>Gasolina</span><b id="stPriceGas">R$ 5,89</b></div>
+    <div class="price-box"><span>Etanol</span><b id="stPriceEta">R$ 3,99</b></div>
+    <div class="price-box"><span>GNV</span><b id="stPriceGnv">R$ 4,49</b></div>
+  </div>
+  <p id="stInspectionInfo" style="font-size:11px;color:#cbd5e1;margin-bottom:10px">Fiscalização regular sem inconformidades.</p>
+  <button class="btn-go-station" id="btnGoStation">🧭 IR PARA ESTE POSTO</button>
+  <button class="modal-close" style="margin-top:8px" onclick="document.getElementById('stationModal').classList.remove('show')">Fechar</button>
+</div>
+
+<!-- Confirmação de Alerta Comunitário -->
+<div class="event-confirm-box" id="confirmAlertBox">
+  <div style="font-size:12px;color:#f59e0b;font-weight:800">⚠️ ALERTA DA COMUNIDADE PRÓXIMO</div>
+  <b id="confirmAlertDesc" style="display:block;font-size:14px;margin:4px 0">Tiroteio / Operação relatada</b>
+  <span id="confirmTrustScore" style="font-size:11px;color:#94a3b8">Confiabilidade: 85% (5 confirmações)</span>
+  <div class="confirm-actions">
+    <button class="btn-vote yes" onclick="voteAlert(true)">👍 Confirmar</button>
+    <button class="btn-vote no" onclick="voteAlert(false)">❌ Não procede</button>
+  </div>
+</div>
+
+<div class="bottom-actions" id="mainBottomActions">
+  <button class="action danger" id="btnOpenReport">🚨 Reportar</button>
+  <button class="action driver" id="btnQuickDriver">🚗 Modo Foco</button>
+  <button class="action anp" onclick="window.open('https://anpcomvcpostos.anp.gov.br/','_blank')">🏛️ ANP Consulta</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Modal Reportar -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal-card">
+    <h2>🚨 Central de Denúncias e Alertas</h2>
+    <div class="modal-options">
+      <button onclick="submitReport('tiroteio','🔴 Tiroteio / Conflito')">🔴 Tiroteio / Conflito</button>
+      <button onclick="submitReport('blitz','🚔 Blitz / Operação')">🚔 Blitz Policial</button>
+      <button onclick="submitReport('bloqueio','🚧 Pista Bloqueada')">🚧 Pista Bloqueada</button>
+      <button onclick="submitReport('posto_suspeito','⚠️ Posto Suspeito / Adulteração')">⚠️ Posto Suspeito / Adulteração</button>
+    </div>
+    <button class="modal-close" onclick="document.getElementById('reportModal').classList.remove('show')">Voltar</button>
+  </div>
+</div>
 
 <script src="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.js"></script>
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 <script>
-const ANP_APP='https://anpcomvcpostos.anp.gov.br/';
-const ANP_REPORT='https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
-const RJ_CENTER=[-43.40,-22.90];
-const STYLE_DARK={version:8,sources:{dark:{type:'raster',tiles:['https://a.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}@2x.png','https://b.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}@2x.png'],tileSize:256,attribution:'© CARTO © OpenStreetMap'}},layers:[{id:'dark',type:'raster',source:'dark'}]};
-const STYLE_LIGHT='https://tiles.openfreemap.org/styles/liberty';
-function buildSatelliteStyle(){return{version:8,sources:{sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri'}},layers:[{id:'sat',type:'raster',source:'sat'}]}}
-function getStyleForTheme(mode){let t=mode;if(mode==='auto'){let h=new Date().getHours();t=h>=6&&h<18?'light':'dark'}if(t==='sat')return buildSatelliteStyle();if(t==='light')return STYLE_LIGHT;return STYLE_DARK}
-function makePerimeter(lon,lat,r=.30,points=48){let rl=r/111,ro=r/(111*Math.cos(lat*Math.PI/180)),c=[];for(let i=0;i<=points;i++){let a=i/points*2*Math.PI;c.push([lon+ro*Math.cos(a),lat+rl*Math.sin(a)])}return c}
+const STYLE_DARK={version:8,sources:{dark:{type:'raster',tiles:['https://a.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}@2x.png'],tileSize:256}},layers:[{id:'dark',type:'raster',source:'dark'}]};
 const rawAreas=[
-{name:'Cesarão',c:[-43.66027,-22.93587],r:.35,type:'conflito',major:true},
-{name:'Favela do Rodo / Rollas',c:[-43.6732,-22.9231],r:.35,type:'conflito',major:true},
-{name:'Favela de Antares',c:[-43.6644,-22.9275],r:.30,type:'conflito',major:true},
-{name:'Comunidade do Aço',c:[-43.6521,-22.9248],r:.30,type:'conflito',major:true},
-{name:'Pantanal (Santa Cruz)',c:[-43.6675,-22.9290],r:.25,type:'conflito'},
-{name:'Nova Sepetiba',c:[-43.6995,-22.9515],r:.35,type:'conflito',major:true},
-{name:'Carobinha (Complexo da Carobinha)',c:[-43.5353,-22.8687],r:.35,type:'conflito',major:true},
-{name:'Favela do Barbante (Nova Cidade / Inhoaíba)',c:[-43.5819,-22.9056],r:.40,type:'conflito',major:true},
-{name:'Vila Aliança (Miolo)',c:[-43.4847,-22.8642],r:.40,type:'conflito',major:true},
-{name:'Vila Vintém (Bangu)',c:[-43.4475,-22.8731],r:.40,type:'conflito',major:true},
-{name:'Vila Kennedy',c:[-43.4674,-22.8492],r:.45,type:'conflito',major:true},
-{name:'Complexo do Rio das Pedras',c:[-43.3405,-22.9902],r:.45,type:'conflito',major:true},
-{name:'Cidade de Deus (CDD)',c:[-43.3644,-22.9430],r:.45,type:'conflito',major:true},
-{name:'Rocinha',c:[-43.2471,-22.9881],r:.45,type:'conflito',major:true},
-{name:'Complexo do Alemão',c:[-43.2710,-22.8595],r:.45,type:'conflito',major:true},
-{name:'Complexo da Maré',c:[-43.2415,-22.8555],r:.45,type:'conflito',major:true}
+  {name:'Cesarão',c:[-43.6602,-22.9358],r:.4},
+  {name:'Rocinha',c:[-43.2471,-22.9881],r:.45},
+  {name:'Complexo do Alemão',c:[-43.2710,-22.8595],r:.5}
 ];
-const LOCAL_HAZARDS=[
-{type:'lombada',coords:[-43.6401,-22.9118]},{type:'lombada',coords:[-43.6403,-22.9102]},{type:'lombada',coords:[-43.6406,-22.9090]},{type:'lombada',coords:[-43.6410,-22.9075]},{type:'lombada',coords:[-43.6415,-22.9062]},{type:'lombada',coords:[-43.6420,-22.9048]},{type:'lombada',coords:[-43.6425,-22.9030]},{type:'lombada',coords:[-43.6432,-22.9012]},{type:'lombada',coords:[-43.6440,-22.8985]},{type:'radar',coords:[-43.6402,-22.9090]},{type:'radar',coords:[-43.6445,-22.8970]},{type:'semaforo',coords:[-43.6400,-22.9125]},{type:'semaforo',coords:[-43.6450,-22.8960]}];
-const communityData=rawAreas.map(a=>({name:a.name,type:a.type,major:!!a.major,coords:makePerimeter(a.c[0],a.c[1],a.r)}));
-let themeMode='auto',userPos=null,destPos=null,routeData=null,navActive=false,watchId=null,wakeLock=null,userMarker=null,destinationMarker=null,fuelVisible=true,communityVisible=true,satelliteVisible=false,geocodeTimer=null,geocodeAbort=null,lastGeocodeAt=0,toastTimer=null,currentStep=0,sheetExpanded=false,followMode=true,followResumeTimer=null,transportMode='driving',currentFuelFilter='all',isRerouting=false,soundEnabled=true,speedSoundEnabled=true,currentSpeedKmh=0,myLastReportId=null,offRouteCounter=0,routeAbortCtrl=null,currentBearing=0;
-function toast(msg,ms=3200){let e=document.getElementById('toast');e.textContent=msg;e.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),ms)}
-function safe(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function openExternal(u){window.open(u,'_blank','noopener,noreferrer')}
-function setGPS(ok,t){let b=document.getElementById('gpsBadge');b.textContent=t;b.style.background=ok?'#059669':'#475569'}
-function distanceKm(a,b){let R=6371,l1=a[1]*Math.PI/180,l2=b[1]*Math.PI/180,dl=(b[1]-a[1])*Math.PI/180,dn=(b[0]-a[0])*Math.PI/180,h=Math.sin(dl/2)**2+Math.cos(l1)*Math.cos(l2)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
-function calculateBearing(a,b){let l1=a[1]*Math.PI/180,l2=b[1]*Math.PI/180,d=(b[0]-a[0])*Math.PI/180,y=Math.sin(d)*Math.cos(l2),x=Math.cos(l1)*Math.sin(l2)-Math.sin(l1)*Math.cos(l2)*Math.cos(d);return(Math.atan2(y,x)*180/Math.PI+360)%360}
-function angleDiff(a,b){let d=Math.abs(a-b)%360;return d>180?360-d:d}
-let speechQueue=[],isSpeakingNow=false;
-function speak(text,priority=false){if(!soundEnabled||!('speechSynthesis'in window)||isRerouting)return;if(priority){speechSynthesis.cancel();speechQueue=[text]}else{if(speechQueue.includes(text))return;speechQueue.push(text)}processSpeechQueue()}
-function processSpeechQueue(){if(isSpeakingNow||!speechQueue.length)return;let text=speechQueue.shift(),u=new SpeechSynthesisUtterance(text);u.lang='pt-BR';u.rate=1.05;isSpeakingNow=true;u.onend=u.onerror=()=>{isSpeakingNow=false;setTimeout(processSpeechQueue,150)};speechSynthesis.speak(u)}
-function playBeep(){if(!speedSoundEnabled||!soundEnabled)return;try{let c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.value=.15;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.25)}catch(e){}}
-const map=new maplibregl.Map({container:'map',center:RJ_CENTER,zoom:11,pitch:0,bearing:0,attributionControl:false,style:getStyleForTheme('auto')});
-map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-left');
-function addCommunityLayers(){
-if(map.getLayer('community-fill'))map.removeLayer('community-fill');if(map.getLayer('community-outline'))map.removeLayer('community-outline');if(map.getLayer('community-labels'))map.removeLayer('community-labels');if(map.getSource('community-source'))map.removeSource('community-source');
-let geo={type:'FeatureCollection',features:communityData.map(c=>({type:'Feature',properties:{name:c.name,type:c.type,major:c.major},geometry:{type:'Polygon',coordinates:[c.coords]}}))};
-map.addSource('community-source',{type:'geojson',data:geo});
-map.addLayer({id:'community-fill',type:'fill',source:'community-source',minzoom:8,paint:{'fill-color':'#dc2626','fill-opacity':['interpolate',['linear'],['zoom'],8,.05,10,.09,12,.15,16,.24]}});
-map.addLayer({id:'community-outline',type:'line',source:'community-source',minzoom:8,paint:{'line-color':'#ef4444','line-width':['interpolate',['linear'],['zoom'],8,1,12,2,16,3],'line-opacity':.9}});
-try{map.addLayer({id:'community-labels',type:'symbol',source:'community-source',minzoom:9,layout:{'text-field':['concat','⚠ ',['get','name']],'text-size':['interpolate',['linear'],['zoom'],9,8,13,11,16,14],'text-allow-overlap':false},paint:{'text-color':'#fee2e2','text-halo-color':'#450a0a','text-halo-width':2}})}catch(e){}
-['community-fill','community-outline','community-labels'].forEach(id=>{if(map.getLayer(id))map.setLayoutProperty(id,'visibility',communityVisible?'visible':'none')})
-}
-map.on('style.load',()=>{addCommunityLayers();if(routeData)drawRoute(routeData)});
-map.once('load',()=>startGPSWatch());
-function updateUserMarker(c,h=0){if(!userMarker){let e=document.createElement('div');e.className='user-marker-waze';userMarker=new maplibregl.Marker({element:e,rotationAlignment:'map'}).setLngLat(c).addTo(map)}else{userMarker.setLngLat(c);userMarker.setRotation(h||0)}if(navActive&&followMode&&!isRerouting)map.easeTo({center:c,zoom:18,pitch:62,bearing:h||map.getBearing(),duration:350})}
-function pointToSegmentDetails(p,a,b){let cl=Math.cos(p[1]*Math.PI/180),P=[p[0]*cl,p[1]],A=[a[0]*cl,a[1]],B=[b[0]*cl,b[1]],dx=B[0]-A[0],dy=B[1]-A[1],l=dx*dx+dy*dy,t=l>0?((P[0]-A[0])*dx+(P[1]-A[1])*dy)/l:0;t=Math.max(0,Math.min(1,t));let x=A[0]+t*dx,y=A[1]+t*dy;return{dist:distanceKm(p,[x/cl,y]),bearing:calculateBearing(a,b),t}}
-function snapPointToRoute(p){if(!navActive||!routeData)return p;let c=routeData.geometry.coordinates,min=Infinity,b=p;for(let i=0;i<c.length-1;i++){let r=pointToSegmentDetails(p,c[i],c[i+1]);if(r.dist<min){min=r.dist;let cl=Math.cos(p[1]*Math.PI/180),A=[c[i][0]*cl,c[i][1]],B=[c[i+1][0]*cl,c[i+1][1]],x=A[0]+r.t*(B[0]-A[0]),y=A[1]+r.t*(B[1]-A[1]);b=[x/cl,y]}}return min*1000<=25?b:p}
-let lastValidPos=null;
-function startGPSWatch(){if(!navigator.geolocation){setGPS(false,'SEM GPS');return}if(watchId!==null)navigator.geolocation.clearWatch(watchId);watchId=navigator.geolocation.watchPosition(p=>{let first=!userPos,raw=[p.coords.longitude,p.coords.latitude],h=p.coords.heading;if((h==null||isNaN(h)||h===0)&&lastValidPos&&distanceKm(lastValidPos,raw)*1000>3)h=calculateBearing(lastValidPos,raw);if(h!=null&&!isNaN(h))currentBearing=h;lastValidPos=raw;userPos=raw;updateUserMarker(snapPointToRoute(userPos),currentBearing);setGPS(true,'GPS ATIVO');currentSpeedKmh=Math.round((p.coords.speed||0)*3.6);document.getElementById('speedVal').textContent=currentSpeedKmh;if(first){map.flyTo({center:userPos,zoom:15.5,duration:700});fetchFuelStations(userPos)}updateFuelVisibility();updateNavigation();checkProximityDanger();updateTrafficLightSimulation();checkOffRoute();checkSpeedLimits()},e=>{setGPS(false,e.code===1?'GPS BLOQ.':'GPS...');if(e.code===1)toast('Permita o acesso ao GPS.')},{enableHighAccuracy:true,maximumAge:800,timeout:4500})}
-let lastSpeedBeep=0,routeHazards=[],hazardMarkers=[];
-function checkSpeedLimits(){let b=document.getElementById('speedometerBox'),limit=80;if(routeHazards.some(h=>h.type==='radar'&&userPos&&distanceKm(userPos,h.coords)*1000<300))limit=60;if(currentSpeedKmh>limit){b.classList.add('speed-alert');if(Date.now()-lastSpeedBeep>3000){lastSpeedBeep=Date.now();playBeep()}}else b.classList.remove('speed-alert')}
-let allFuelStations=[],fuelMarkersMap={};
-function fuelKey(f){return`${f.lat.toFixed(4)},${f.lng.toFixed(4)}`}
-async function fetchFuelStations(center){try{center=center||userPos||RJ_CENTER;let q=`[out:json][timeout:15];(node["amenity"="fuel"](around:8000,${center[1]},${center[0]});way["amenity"="fuel"](around:8000,${center[1]},${center[0]}););out center tags;`,r=await fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(q));if(!r.ok)return;let d=await r.json();allFuelStations=(d.elements||[]).map(el=>{let lat=el.lat??el.center?.lat,lng=el.lon??el.center?.lon;if(lat==null||lng==null)return null;let t=el.tags||{},gnv=t['fuel:cng']==='yes'||t['fuel:gnv']==='yes'||t['fuel:lpg']==='yes';return{lat,lng,nome:t.name||t.brand||'Posto de combustível',gnv}}).filter(Boolean);updateFuelVisibility()}catch(e){}}
-function updateFuelVisibility(){if(!fuelVisible||currentFuelFilter==='none'){renderFuel([]);return}let c=userPos||map.getCenter().toArray(),v=[...allFuelStations];if(currentFuelFilter==='gnv')v=v.filter(f=>f.gnv);v.sort((a,b)=>distanceKm([a.lng,a.lat],c)-distanceKm([b.lng,b.lat],c));renderFuel(v.slice(0,45))}
-function renderFuel(items){let wanted=new Map(items.map(i=>[fuelKey(i),i]));Object.keys(fuelMarkersMap).forEach(k=>{if(!wanted.has(k)){fuelMarkersMap[k].remove();delete fuelMarkersMap[k]}});wanted.forEach((i,k)=>{if(!fuelMarkersMap[k]){let e=document.createElement('div');e.className='fuel-marker verde'+(i.gnv?' gnv':'');e.textContent=i.gnv?'G':'⛽';let pop=new maplibregl.Popup({offset:18}).setHTML(`<b>${safe(i.nome)}</b><br>${i.gnv?'✅ GNV disponível<br>':''}<a href="${ANP_APP}" target="_blank">Consultar ANP</a>`);fuelMarkersMap[k]=new maplibregl.Marker({element:e}).setLngLat([i.lng,i.lat]).setPopup(pop).addTo(map)}})}
-document.getElementById('fuelChip').onclick=()=>document.getElementById('fuelFilterModal').classList.add('show');
-document.getElementById('closeFuelFilter').onclick=()=>document.getElementById('fuelFilterModal').classList.remove('show');
-function setFuelFilter(f,l){currentFuelFilter=f;fuelVisible=f!=='none';document.getElementById('fuelChip').classList.toggle('active',fuelVisible);document.getElementById('fuelFilterModal').classList.remove('show');updateFuelVisibility();toast(l)}
-filterAll.onclick=()=>setFuelFilter('all','Mostrando todos os postos');filterRegular.onclick=()=>setFuelFilter('regular','Mostrando postos regulares');filterGNV.onclick=()=>setFuelFilter('gnv','Mostrando postos com GNV');filterNone.onclick=()=>setFuelFilter('none','Postos ocultados');
-function toggleCommunityVisibility(){communityVisible=!communityVisible;communityChip.classList.toggle('active',communityVisible);['community-fill','community-outline','community-labels'].forEach(id=>{if(map.getLayer(id))map.setLayoutProperty(id,'visibility',communityVisible?'visible':'none')})}
-communityChip.onclick=toggleCommunityVisibility;
-soundBtn.onclick=()=>{soundEnabled=!soundEnabled;soundBtn.textContent=soundEnabled?'🔊':'🔇';if(!soundEnabled)speechSynthesis.cancel();toast(soundEnabled?'Voz ativada':'Voz silenciada')};
-function setMapThemeDirect(mode){themeMode=mode;themeSelectModal.classList.remove('show');layersModal.classList.remove('show');satelliteVisible=mode==='sat';satChip.classList.toggle('active',satelliteVisible);map.setStyle(getStyleForTheme(mode));let l={auto:'Tema: Auto',light:'Tema: Claro',dark:'Tema: Escuro',sat:'Tema: Satélite'};themeChip.textContent='🌓 '+l[mode]}
-themeChip.onclick=()=>themeSelectModal.classList.add('show');closeThemeSelectModal.onclick=()=>themeSelectModal.classList.remove('show');satChip.onclick=()=>setMapThemeDirect(satelliteVisible?'auto':'sat');
-async function geocode(q){let wait=Math.max(0,1100-(Date.now()-lastGeocodeAt));if(wait)await new Promise(r=>setTimeout(r,wait));lastGeocodeAt=Date.now();if(geocodeAbort)geocodeAbort.abort();geocodeAbort=new AbortController();if(!/rio de janeiro|rj|brasil/i.test(q))q+=', RJ, Brasil';try{let p=new URLSearchParams({format:'jsonv2',addressdetails:'1',limit:'6',countrycodes:'br',bounded:'1',viewbox:'-44.85,-22.60,-43.00,-23.40',q}),r=await fetch('https://nominatim.openstreetmap.org/search?'+p,{headers:{'Accept-Language':'pt-BR'},signal:geocodeAbort.signal}),d=await r.json();return(d||[]).map(x=>({lat:x.lat,lon:x.lon,display_name:x.display_name}))}catch(e){return[]}}
-let input=document.getElementById('destInput');
-input.addEventListener('input',()=>{clearTimeout(geocodeTimer);destPos=null;let q=input.value.trim();if(q.length<3){suggest.classList.remove('show');return}geocodeTimer=setTimeout(async()=>{let rs=await geocode(q);suggest.innerHTML='';rs.forEach(r=>{let d=document.createElement('div');d.className='suggest-item';d.textContent=r.display_name;d.onclick=()=>{input.value=r.display_name;destPos=[+r.lon,+r.lat];suggest.classList.remove('show');openNavigationPanel()};suggest.appendChild(d)});suggest.classList.add('show')},700)});
-clearBtn.onclick=()=>{input.value='';destPos=null;suggest.classList.remove('show');clearRoute()};
-searchBtn.onclick=async()=>{let t=input.value.trim();if(!t)return toast('Digite um destino.');if(!destPos){let r=await geocode(t);if(!r[0])return toast('Local não encontrado.');destPos=[+r[0].lon,+r[0].lat];input.value=r[0].display_name}openNavigationPanel()};
-function openNavigationPanel(){wazeSheet.classList.add('show','expanded');sheetExpanded=true;if(userPos&&destPos)iniciarRotaInterna()}
-async function fetchRoute(a,b){if(routeAbortCtrl)routeAbortCtrl.abort();routeAbortCtrl=new AbortController();let profile=transportMode==='bike'?'cycling':transportMode==='foot'?'walking':'driving',u=`https://router.project-osrm.org/route/v1/${profile}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&steps=true`,r=await fetch(u,{signal:routeAbortCtrl.signal}),j=await r.json();if(j.code!=='Ok'||!j.routes?.length)throw Error();return j.routes[0]}
-async function iniciarRotaInterna(){if(!userPos)return toast('Aguardando GPS...');if(!destPos)return;try{routeData=await fetchRoute(userPos,destPos);showRoute();checkDestinationDanger()}catch(e){toast('Falha ao calcular rota.')}}
-function showRoute(){drawRoute(routeData);sheetTime.textContent=Math.max(1,Math.round(routeData.duration/60))+' min';sheetDist.textContent=(routeData.distance/1000).toFixed(1)+' km • Chegada prevista'}
-function drawRoute(r){if(map.getLayer('route-line'))map.removeLayer('route-line');if(map.getLayer('route-outline'))map.removeLayer('route-outline');if(map.getSource('route'))map.removeSource('route');map.addSource('route',{type:'geojson',data:{type:'Feature',geometry:r.geometry}});map.addLayer({id:'route-outline',type:'line',source:'route',paint:{'line-color':'#1e1b4b','line-width':10}});map.addLayer({id:'route-line',type:'line',source:'route',paint:{'line-color':'#a855f7','line-width':6}});let c=r.geometry.coordinates,b=c.reduce((x,p)=>x.extend(p),new maplibregl.LngLatBounds(c[0],c[0]));map.fitBounds(b,{padding:{top:130,bottom:140,left:30,right:30},maxZoom:17});fetchRouteHazards();renderDestinationFlag()}
-function renderDestinationFlag(){if(destinationMarker)destinationMarker.remove();if(!routeData)return;let c=routeData.geometry.coordinates,e=document.createElement('div');e.className='finish-flag-marker';e.textContent='🏁';destinationMarker=new maplibregl.Marker({element:e,anchor:'bottom'}).setLngLat(c[c.length-1]).addTo(map)}
-function checkDestinationDanger(){if(!destPos)return;for(let c of rawAreas)if(distanceKm(destPos,c.c)<=c.r+.3){dangerBannerText.textContent=`⚠ ATENÇÃO: Seu destino fica dentro ou próximo de ${c.name}.`;dangerBanner.classList.add('show');speak(`Atenção: o seu destino fica próximo à comunidade ${c.name}.`,true);break}}
-function checkOffRoute(){if(!navActive||!routeData||!userPos||isRerouting)return;let c=routeData.geometry.coordinates,min=Infinity;for(let i=0;i<c.length-1;i++)min=Math.min(min,pointToSegmentDetails(userPos,c[i],c[i+1]).dist);if(min*1000>45){offRouteCounter++;if(offRouteCounter>=2){offRouteCounter=0;recalculateRoute()}}else offRouteCounter=0}
-async function recalculateRoute(){if(!destPos||!userPos||isRerouting)return;isRerouting=true;toast('Recalculando rota...');try{routeData=await fetchRoute(userPos,destPos);drawRoute(routeData)}catch(e){}isRerouting=false}
-function allSteps(){return(routeData?.legs||[]).flatMap(l=>l.steps||[])}
-function stepIconArrow(s){let m=s.maneuver||{};if(m.type==='arrive')return'🏁';if(m.modifier?.includes('left'))return'↰';if(m.modifier?.includes('right'))return'↱';if(m.type==='roundabout')return'🔄';return'⬆'}
-function getManeuverText(s){let m=s.maneuver||{};if(m.type==='arrive')return'chegue ao seu destino';if(m.modifier?.includes('left'))return'vire à esquerda';if(m.modifier?.includes('right'))return'vire à direita';return'siga em frente'}
-let stepAnnounce={};
-function updateNavigation(){if(!navActive||!userPos||!routeData||isRerouting)return;let st=allSteps(),best=0,bd=Infinity;st.forEach((s,i)=>{let c=s.maneuver?.location;if(c){let d=distanceKm(userPos,c);if(d<bd){bd=d;best=i}}});currentStep=best;let s=st[best],n=st[best+1],dm=Math.round(bd*1000);hudDist.textContent=dm<1000?dm+' m':(dm/1000).toFixed(1)+' km';hudArrow.textContent=stepIconArrow(s);hudStreet.textContent=s.name||'Siga na via';currentRoadPill.textContent=s.name||'Siga pela via';if(n){hudNextIcon.textContent=stepIconArrow(n);hudNextStreet.textContent=n.name||'Próximo acesso'}if(!stepAnnounce[best])stepAnnounce[best]=new Set();[300,100,30].forEach(t=>{if(dm<=t&&!stepAnnounce[best].has(t)){stepAnnounce[best].add(t);speak(t<=30?'Agora, '+getManeuverText(s):`Em ${t} metros, ${getManeuverText(s)}`,t<=30)}});renderHazardsOnMap()}
-const SVG_LOMBADA=`<svg viewBox="0 0 54 54"><polygon points="27,3 51,27 27,51 3,27" fill="#fbbf24" stroke="#000" stroke-width="4"/><polyline points="15,28 27,16 39,28" fill="none" stroke="#000" stroke-width="5"/></svg>`;
-const SVG_RADAR=`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0284c7" stroke="#fff" stroke-width="3"/><rect x="15" y="15" width="18" height="18" rx="4" fill="#fff"/><circle cx="24" cy="24" r="5" fill="#0284c7"/></svg>`;
-const SVG_SEMAFORO=`<svg viewBox="0 0 48 48"><rect x="15" y="4" width="18" height="40" rx="6" fill="#0f172a" stroke="#fff" stroke-width="2"/><circle cx="24" cy="12" r="4" fill="#ef4444"/><circle cx="24" cy="24" r="4" fill="#eab308"/><circle cx="24" cy="36" r="4" fill="#22c55e"/></svg>`;
-async function fetchRouteHazards(){routeHazards=[];if(!routeData)return;let c=routeData.geometry.coordinates;LOCAL_HAZARDS.forEach(h=>{for(let i=0;i<c.length-1;i++){let r=pointToSegmentDetails(h.coords,c[i],c[i+1]);if(r.dist*1000<20){routeHazards.push({...h,segIndex:i,bearing:r.bearing});break}}});renderHazardsOnMap()}
-function renderHazardsOnMap(){hazardMarkers.forEach(m=>m.remove());hazardMarkers=[];routeHazards.forEach(h=>{let e=document.createElement('div');e.className='hazard-marker';e.innerHTML=h.type==='lombada'?SVG_LOMBADA:h.type==='radar'?SVG_RADAR:SVG_SEMAFORO;hazardMarkers.push(new maplibregl.Marker({element:e}).setLngLat(h.coords).addTo(map))})}
 
-/* ESTIMATIVA / ADIVINHAÇÃO DO CICLO DO SEMÁFORO */
-function updateTrafficLightSimulation(){
-let hud=document.getElementById('trafficLightHud');
-if(!navActive||!userPos||!routeData){hud.classList.remove('show');return}
-let near=null,dist=Infinity;
-routeHazards.forEach(h=>{if(h.type!=='semaforo')return;let d=distanceKm(userPos,h.coords)*1000;if(d<dist&&d>5){dist=d;near=h}});
-if(near&&dist<=220){
-hud.classList.add('show');
-let sec=Math.floor(Date.now()/1000%60);
-tlDotRed.className='traffic-light-dot red';
-tlDotYellow.className='traffic-light-dot yellow';
-tlDotGreen.className='traffic-light-dot green';
-if(sec<28){
-tlDotGreen.classList.add('active');
-tlStatusText.textContent='🟢 Estimativa: Semáforo Aberto';
-tlCountdownText.textContent=`A ${Math.round(dist)}m • pode fechar em ~${28-sec}s`;
-}else if(sec<33){
-tlDotYellow.classList.add('active');
-tlStatusText.textContent='🟡 Estimativa: Semáforo em Atenção';
-tlCountdownText.textContent=`A ${Math.round(dist)}m • pode fechar em ~${33-sec}s`;
-}else{
-tlDotRed.classList.add('active');
-tlStatusText.textContent='🔴 Estimativa: Semáforo Fechado';
-tlCountdownText.textContent=`A ${Math.round(dist)}m • pode abrir em ~${60-sec}s`;
+let userPos=null,destPos=null,routeData=null,currentSpeed=0,soundEnabled=true,selectedStation=null;
+let activeReports=[],currentConfirmingReport=null;
+
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+
+function speak(text){
+  if(!soundEnabled||!('speechSynthesis' in window))return;
+  let u=new SpeechSynthesisUtterance(text);
+  u.lang='pt-BR';
+  speechSynthesis.speak(u);
 }
-}else hud.classList.remove('show')
+
+const map=new maplibregl.Map({container:'map',center:[-43.40,-22.90],zoom:12,style:STYLE_DARK});
+
+// GPS Inteligente & Rastreamento
+navigator.geolocation.watchPosition(p=>{
+  userPos=[p.coords.longitude,p.coords.latitude];
+  currentSpeed=Math.round((p.coords.speed||0)*3.6);
+  document.getElementById('speedVal').textContent=currentSpeed;
+  document.getElementById('driverSpeed').textContent=currentSpeed;
+  document.getElementById('gpsBadge').textContent='GPS ATIVO';
+  document.getElementById('gpsBadge').style.background='#16a34a';
+
+  checkProximityAlerts();
+},e=>{
+  document.getElementById('gpsBadge').textContent='GPS OFF';
+},{enableHighAccuracy:true});
+
+// Alertas Inteligentes de Proximidade (Voz + HUD)
+let lastAlertSpoken=0;
+function checkProximityAlerts(){
+  if(!userPos)return;
+
+  // Comunidades
+  rawAreas.forEach(a=>{
+    let d=calcDist(userPos,a.c);
+    if(d<=a.r+0.3){
+      document.getElementById('driverDangerCard').style.display='flex';
+      document.getElementById('driverDangerText').textContent=`Área de Atenção: ${a.name} (${Math.round(d*1000)}m)`;
+      if(Date.now()-lastAlertSpoken>25000){
+        speak(`Atenção: aproximando-se da área de ${a.name}`);
+        lastAlertSpoken=Date.now();
+      }
+    }
+  });
+
+  // Alertas Comunitários
+  activeReports.forEach(rep=>{
+    let d=calcDist(userPos,rep.coords);
+    if(d<0.8&&!rep.voted){
+      currentConfirmingReport=rep;
+      document.getElementById('confirmAlertDesc').textContent=rep.label;
+      document.getElementById('confirmTrustScore').textContent=`Confiabilidade: ${rep.trust}% (${rep.confirmations} confirmações)`;
+      document.getElementById('confirmAlertBox').classList.add('show');
+    }
+  });
 }
-function startNav(){if(!routeData)return toast('Trace uma rota primeiro.');navActive=true;document.body.classList.add('nav-mode');wazeHud.classList.add('show');mainTopbar.classList.add('hide-nav');mainBottomActions.classList.add('hide-nav');followMode=true;toggleSheet(false);map.easeTo({center:userPos||RJ_CENTER,zoom:18,pitch:62,duration:700});updateNavigation()}
-function stopNav(){navActive=false;document.body.classList.remove('nav-mode');wazeHud.classList.remove('show');trafficLightHud.classList.remove('show');mainTopbar.classList.remove('hide-nav');mainBottomActions.classList.remove('hide-nav');speechSynthesis.cancel();map.easeTo({pitch:0,bearing:0,duration:500})}
-function toggleSheet(f=null){sheetExpanded=f!==null?f:!sheetExpanded;wazeSheet.classList.toggle('expanded',sheetExpanded);sheetToggleBtn.textContent=sheetExpanded?'Recolher ▾':'Opções ▴'}
-sheetHandle.onclick=()=>toggleSheet();sheetToggleBtn.onclick=()=>toggleSheet();startRadarBtn.onclick=startNav;stopNavBtn.onclick=()=>{stopNav();clearRoute()};
-function clearRoute(){if(map.getLayer('route-line'))map.removeLayer('route-line');if(map.getLayer('route-outline'))map.removeLayer('route-outline');if(map.getSource('route'))map.removeSource('route');hazardMarkers.forEach(m=>m.remove());hazardMarkers=[];routeHazards=[];if(destinationMarker)destinationMarker.remove();destinationMarker=null;routeData=null;destPos=null;wazeSheet.classList.remove('show')}
-openWaze.onclick=()=>destPos&&openExternal(`https://www.waze.com/ul?ll=${destPos[1]},${destPos[0]}&navigate=yes`);
-openMaps.onclick=()=>destPos&&openExternal(`https://www.google.com/maps/dir/?api=1&destination=${destPos[1]},${destPos[0]}`);
-let insideAlertGiven={};
-function checkProximityDanger(){if(!userPos)return;let near=null,nd=Infinity;rawAreas.forEach(c=>{let d=distanceKm(userPos,c.c);if(d<nd){nd=d;near=c}});if(near&&nd<=near.r+.3){favelaSign.textContent='⚠ Comunidade próxima: '+near.name;favelaSign.classList.add('show');hudDangerTag.textContent='⚠ ALERTA: '+near.name.toUpperCase();hudDangerTag.classList.add('active')}else{favelaSign.classList.remove('show');hudDangerTag.classList.remove('active')}if(near&&nd<=near.r&&!insideAlertGiven[near.name]){insideAlertGiven[near.name]=true;dangerBannerText.textContent=`⚠ Atenção! Você está entrando na área da comunidade ${near.name}.`;dangerBanner.classList.add('show');speak(`Atenção! Você está entrando na área da comunidade ${near.name}.`,true)}}
-function locate(){if(!userPos){startGPSWatch();return toast('Obtendo localização...')}followMode=true;map.flyTo({center:userPos,zoom:navActive?18:16.5,pitch:navActive?62:0,duration:700})}
-locateBtn.onclick=locate;btnRecenter.onclick=locate;navRecenterLeft.onclick=locate;zoomIn.onclick=()=>map.zoomIn();zoomOut.onclick=()=>map.zoomOut();northBtn.onclick=()=>map.easeTo({bearing:0,pitch:0});
-closeTransportModal.onclick=()=>transportModal.classList.remove('show');document.querySelectorAll('#transportModal button[data-mode]').forEach(b=>b.onclick=()=>{transportMode=b.dataset.mode;transportModal.classList.remove('show');if(destPos&&userPos)iniciarRotaInterna()});
-reportBtn.onclick=()=>reportModal.classList.add('show');closeReportModal.onclick=()=>reportModal.classList.remove('show');anpBtn.onclick=()=>openExternal(ANP_APP);layersBtn.onclick=()=>layersModal.classList.add('show');closeLayers.onclick=()=>layersModal.classList.remove('show');dangerBannerClose.onclick=()=>dangerBanner.classList.remove('show');
-modalThemeOption.onclick=()=>{layersModal.classList.remove('show');themeSelectModal.classList.add('show')};modalTransport.onclick=()=>{layersModal.classList.remove('show');transportModal.classList.add('show')};modalSpeedSound.onclick=()=>{speedSoundEnabled=!speedSoundEnabled;toast(speedSoundEnabled?'Alerta ativado':'Alerta desativado')};modalStreetView.onclick=()=>{let t=destPos||userPos||map.getCenter().toArray();openExternal(`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${t[1]},${t[0]}`)};modalLocate.onclick=locate;
-let communityEventMarkers={};
-navReportBtn.onclick=()=>reportLiveModal.classList.add('show');closeReportLiveModal.onclick=()=>reportLiveModal.classList.remove('show');
-function renderCommunityEventMarker(e){if(communityEventMarkers[e.id])return;let d=document.createElement('div');d.style.fontSize='28px';d.textContent={tiroteio:'🔴',blitz:'🚔',bloqueio:'🚧',perigo:'🚨'}[e.type]||'⚠️';communityEventMarkers[e.id]=new maplibregl.Marker({element:d}).setLngLat(e.coords).addTo(map);setTimeout(()=>{communityEventMarkers[e.id]?.remove();delete communityEventMarkers[e.id]},2700000)}
-function sendLiveReport(type,label){if(!userPos)return toast('Aguardando GPS...');let e={id:'evt-'+Math.random().toString(36).slice(2),type,label,coords:userPos,time:Date.now()};myLastReportId=e.id;if(mqttClient?.connected)mqttClient.publish('radarseguro-rj-pro/eventos/v1',JSON.stringify(e));renderCommunityEventMarker(e);reportLiveModal.classList.remove('show');toast('Ocorrência reportada!')}
-function cancelMyLastReport(){if(!myLastReportId)return toast('Nenhuma ocorrência recente.');communityEventMarkers[myLastReportId]?.remove();delete communityEventMarkers[myLastReportId];if(mqttClient?.connected)mqttClient.publish('radarseguro-rj-pro/eventos/cancel/v1',JSON.stringify({id:myLastReportId}));myLastReportId=null;reportLiveModal.classList.remove('show');toast('Ocorrência removida.')}
-function openChatFromReport(){reportLiveModal.classList.remove('show');chatModal.classList.add('show');renderChat()}
-let chatMessages=[];try{chatMessages=JSON.parse(localStorage.getItem('rs_chat_history')||'[]')}catch(e){}
-function renderChat(){chatMessages=document.querySelector?chatMessages:[];let b=document.getElementById('chatMessages');b.innerHTML='';chatMessages.slice(-50).forEach(m=>{let d=document.createElement('div');d.className='chat-msg';d.innerHTML=`<span class="user">${safe(m.user)}</span><span class="time">${safe(m.time)}</span><br>${safe(m.text)}`;b.appendChild(d)});b.scrollTop=b.scrollHeight}
-let mqttClient;
-try{
-mqttClient=mqtt.connect('wss://broker.emqx.io:8084/mqtt',{clientId:'rsrj-'+Math.random().toString(16).slice(2),clean:true});
-mqttClient.on('connect',()=>{mqttClient.subscribe('radarseguro-rj-pro/chat/v1');mqttClient.subscribe('radarseguro-rj-pro/eventos/v1');mqttClient.subscribe('radarseguro-rj-pro/eventos/cancel/v1');chatStatus.textContent='🟢 Conectado ao chat comunitário.'});
-mqttClient.on('message',(t,p)=>{try{let m=JSON.parse(p.toString());if(t==='radarseguro-rj-pro/eventos/cancel/v1'){communityEventMarkers[m.id]?.remove();delete communityEventMarkers[m.id]}else if(t==='radarseguro-rj-pro/eventos/v1')renderCommunityEventMarker(m);else{chatMessages.push(m);if(chatMessages.length>50)chatMessages.shift();localStorage.setItem('rs_chat_history',JSON.stringify(chatMessages));renderChat()}}catch(e){}})
-}catch(e){chatStatus.textContent='Chat offline.'}
-chatSendBtn.onclick=()=>{let i=chatInput;if(!i.value.trim()||!mqttClient?.connected)return;let m={user:'Motorista',text:i.value.trim(),time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})};mqttClient.publish('radarseguro-rj-pro/chat/v1',JSON.stringify(m));i.value=''};
-chatChip.onclick=chatBottomBtn.onclick=()=>{chatModal.classList.add('show');renderChat()};closeChatModal.onclick=()=>chatModal.classList.remove('show');
-toast('Radar Seguro RJ PRO - Pronto!',3000);
-window.addEventListener('pagehide',()=>{if(watchId!=null)navigator.geolocation.clearWatch(watchId);wakeLock?.release?.();mqttClient?.end?.()});
+
+function calcDist(a,b){
+  let R=6371,dLat=(b[1]-a[1])*Math.PI/180,dLon=(b[0]-a[0])*Math.PI/180;
+  let x=Math.sin(dLat/2)**2+Math.cos(a[1]*Math.PI/180)*Math.cos(b[1]*Math.PI/180)*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(x));
+}
+
+// Modo Motorista
+function toggleDriverMode(show){
+  document.getElementById('driverModeOverlay').classList.toggle('show',show);
+  if(show){
+    document.body.classList.add('nav-mode');
+    setInterval(()=>{
+      document.getElementById('driverClock').textContent=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    },1000);
+    speak("Modo motorista ativado.");
+  }else{
+    document.body.classList.remove('nav-mode');
+  }
+}
+document.getElementById('chipDriverMode').onclick=()=>toggleDriverMode(true);
+document.getElementById('btnQuickDriver').onclick=()=>toggleDriverMode(true);
+document.getElementById('exitDriverBtn').onclick=()=>toggleDriverMode(false);
+
+// Postos e Detalhes
+function openStationSheet(nome,gas,eta,gnv,status,official){
+  selectedStation={nome,gas,eta,gnv};
+  document.getElementById('stName').textContent=nome;
+  document.getElementById('stPriceGas').textContent='R$ '+gas;
+  document.getElementById('stPriceEta').textContent='R$ '+eta;
+  document.getElementById('stPriceGnv').textContent='R$ '+gnv;
+  document.getElementById('stStatusBadge').textContent=status==='regular'?'🟢 Regular':'⚠️ Suspeito';
+  document.getElementById('stStatusBadge').className='badge '+(status==='regular'?'badge-official':'badge-suspect');
+  document.getElementById('stationModal').classList.add('show');
+}
+document.getElementById('btnGoStation').onclick=()=>{
+  document.getElementById('stationModal').classList.remove('show');
+  toast('Traçando rota até o posto...');
+};
+
+// Conexão MQTT para Alertas em Tempo Real e Confirmações
+const mqttClient=mqtt.connect('wss://broker.emqx.io:8084/mqtt',{clientId:'rsrj-'+Math.random().toString(16).slice(2)});
+mqttClient.on('connect',()=>{
+  mqttClient.subscribe('radarseguro-rj-pro/reports/v2');
+});
+mqttClient.on('message',(t,p)=>{
+  try{
+    let rep=JSON.parse(p.toString());
+    activeReports.push(rep);
+    checkProximityAlerts();
+  }catch(e){}
+});
+
+function submitReport(type,label){
+  if(!userPos)return toast('Aguardando GPS...');
+  let rep={
+    id:'rep-'+Date.now(),
+    type,
+    label,
+    coords:userPos,
+    confirmations:1,
+    trust:70,
+    source:'comunidade',
+    voted:false
+  };
+  mqttClient.publish('radarseguro-rj-pro/reports/v2',JSON.stringify(rep));
+  document.getElementById('reportModal').classList.remove('show');
+  toast('Ocorrência reportada para a rede!');
+}
+
+function voteAlert(isTrue){
+  if(!currentConfirmingReport)return;
+  currentConfirmingReport.voted=true;
+  if(isTrue){
+    currentConfirmingReport.confirmations++;
+    currentConfirmingReport.trust=Math.min(99,currentConfirmingReport.trust+10);
+    toast('Obrigado pela confirmação!');
+  }else{
+    currentConfirmingReport.trust=Math.max(10,currentConfirmingReport.trust-20);
+    toast('Relato de alerta inconsistente registrado.');
+  }
+  document.getElementById('confirmAlertBox').classList.remove('show');
+}
+
+document.getElementById('btnOpenReport').onclick=()=>document.getElementById('reportModal').classList.add('show');
+document.getElementById('soundBtn').onclick=()=>{soundEnabled=!soundEnabled;toast(soundEnabled?'Voz ativada':'Voz desativada');};
+document.getElementById('locateBtn').onclick=()=>{if(userPos)map.flyTo({center:userPos,zoom:16});};
 </script>
 </body>
 </html>
