@@ -424,6 +424,17 @@ function buildSatelliteStyle() {
   };
 }
 
+function getStyleForTheme(mode) {
+  let target = mode;
+  if (mode === 'auto') {
+    const h = new Date().getHours();
+    target = (h >= 6 && h < 18) ? 'light' : 'dark';
+  }
+  if (target === 'sat' || target === 'satellite') return buildSatelliteStyle();
+  if (target === 'light') return STYLE_LIGHT;
+  return STYLE_DARK;
+}
+
 function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
   const rLat = rKm / 111.0;
   const rLon = rKm / (111.0 * Math.cos(lat * Math.PI / 180));
@@ -457,7 +468,6 @@ const rawAreas = [
   {name:'Complexo da Maré', c:[-43.2415,-22.8555], r:0.45, type:'conflito', major:true}
 ];
 
-// LISTA COMPLETA E EXATA DE LOMBADAS E RADARES NO CORREDOR DA RUA LÍDICE / TARUAÇU / URUCÂNIA / CESÁRIO DE MELO
 const LOCAL_HAZARDS = [
   { type: 'lombada', coords: [-43.6401, -22.9118] },
   { type: 'lombada', coords: [-43.6403, -22.9102] },
@@ -492,7 +502,7 @@ let fuelVisible = true, communityVisible = true, satelliteVisible = false;
 let geocodeTimer = null, geocodeAbort = null, lastGeocodeAt = 0, toastTimer = null;
 let currentStep = 0, sheetExpanded = false;
 let followMode = true, followResumeTimer = null;
-let currentBaseStyle = 'dark';
+let currentBaseStyle = (new Date().getHours() >= 6 && new Date().getHours() < 18) ? 'light' : 'dark';
 let transportMode = 'driving';
 let currentFuelFilter = 'all';
 let isRerouting = false;
@@ -553,7 +563,7 @@ const map = new maplibregl.Map({
   pitch: 0,
   bearing: 0,
   attributionControl: false,
-  style: STYLE_DARK
+  style: getStyleForTheme('auto')
 });
 map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
 
@@ -846,22 +856,12 @@ function setMapThemeDirect(mode) {
   satelliteVisible = mode === 'sat';
   document.getElementById('satChip').classList.toggle('active', satelliteVisible);
 
-  let desired = 'dark';
-  if (mode === 'sat') desired = 'satellite';
-  else if (mode === 'light') desired = 'light';
-  else if (mode === 'dark') desired = 'dark';
-  else {
-    const h = new Date().getHours();
-    desired = (h >= 18 || h < 6) ? 'dark' : 'light';
-  }
-
-  currentBaseStyle = desired;
-  const styleUrl = desired === 'satellite' ? buildSatelliteStyle() : (desired === 'dark' ? STYLE_DARK : STYLE_LIGHT);
-  map.setStyle(styleUrl);
+  const newStyle = getStyleForTheme(mode);
+  map.setStyle(newStyle);
   
   const labels = { auto: 'Tema: Auto', light: 'Tema: Claro', dark: 'Tema: Escuro', sat: 'Tema: Satélite' };
-  document.getElementById('themeChip').textContent = '🌓 ' + (labels[mode] || 'Tema');
-  toast('Tema atualizado: ' + mode.toUpperCase());
+  document.getElementById('themeChip').textContent = '🌓 ' + (labels[mode] || 'Tema: Auto');
+  toast('Tema atualizado: ' + (labels[mode] || mode).toUpperCase());
 }
 
 document.getElementById('themeChip').onclick = () => document.getElementById('themeSelectModal').classList.add('show');
@@ -872,7 +872,7 @@ document.getElementById('modalThemeOption').onclick = () => {
 document.getElementById('closeThemeSelectModal').onclick = () => document.getElementById('themeSelectModal').classList.remove('show');
 
 document.getElementById('satChip').onclick = () => {
-  setMapThemeDirect(satelliteVisible ? 'dark' : 'sat');
+  setMapThemeDirect(satelliteVisible ? 'auto' : 'sat');
 };
 
 // BUSCA E ROTAS
@@ -1109,9 +1109,6 @@ function updateNavigation() {
   });
 }
 
-// ================================================================
-// LOMBADAS E RADARES (APENAS ÍCONES NA PISTA)
-// ================================================================
 let routeHazards = [];
 let hazardMarkers = [];
 
@@ -1494,6 +1491,18 @@ document.getElementById('chatSendBtn').onclick = () => {
 document.getElementById('chatChip').onclick = () => { document.getElementById('chatModal').classList.add('show'); renderChat(); };
 document.getElementById('chatBottomBtn').onclick = () => { document.getElementById('chatModal').classList.add('show'); renderChat(); };
 document.getElementById('closeChatModal').onclick = () => document.getElementById('chatModal').classList.remove('show');
+
+setInterval(() => {
+  if (themeMode === 'auto') {
+    const desired = getStyleForTheme('auto');
+    const isDay = (new Date().getHours() >= 6 && new Date().getHours() < 18);
+    const expectedBase = isDay ? 'light' : 'dark';
+    if (currentBaseStyle !== expectedBase) {
+      currentBaseStyle = expectedBase;
+      map.setStyle(desired);
+    }
+  }
+}, 60000);
 
 toast('Radar Seguro RJ PRO - Pronto!', 3000);
 window.addEventListener('pagehide', () => { if (watchId != null) navigator.geolocation.clearWatch(watchId); wakeLock?.release?.(); if (mqttClient) mqttClient.end(); });
