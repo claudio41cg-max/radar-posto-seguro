@@ -47,7 +47,7 @@ button,input{font:inherit}
 .waze-danger-tag{color:#f87171;font-weight:900;display:none}
 .waze-danger-tag.active{display:inline}
 
-/* HUD DINÂMICO DE SEMÁFORO À FRENTE */
+/* HUD DINÂMICO DE SEMÁFORO */
 .traffic-light-hud{position:fixed;top:105px;left:14px;z-index:28;background:#0f172a;border:2px solid #38bdf8;color:#fff;padding:8px 14px;border-radius:16px;display:none;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
 .traffic-light-hud.show{display:flex}
 .traffic-light-visual{width:16px;height:36px;background:#020617;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:2px;border:1px solid #475569}
@@ -124,7 +124,7 @@ body.nav-mode .side{top:118px}
 
 /* ÍCONE DA LOMBADA ORIGINAL DO PRINT */
 .hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.9));pointer-events:none}
-.hazard-marker svg{width:30px;height:30px;display:block}
+.hazard-marker svg{width:32px;height:32px;display:block}
 
 .bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
 .bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
@@ -233,10 +233,12 @@ body.nav-mode .hazard-sign{top:174px}
 <div class="current-road-pill" id="currentRoadPill">Via Atual</div>
 <div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
 
+<!-- BOTÃO COM ALFINETE VERMELHO -->
 <button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar no veículo">
   <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ef4444"/><circle cx="12" cy="9" r="2.5" fill="#ffffff"/></svg>
 </button>
 
+<!-- BOTÃO REPORTAR VETORIAL (TRIÂNGULO COM R) -->
 <button class="nav-report-btn" id="navReportBtn" title="Reportar ocorrência">
   <svg viewBox="0 0 24 24"><polygon points="12 2 22 20 2 20" fill="none" stroke="#fef3c7" stroke-width="2.5"/><text x="12" y="17" font-size="11" font-weight="900" fill="#fef3c7" text-anchor="middle">R</text></svg>
 </button>
@@ -443,6 +445,7 @@ function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
   return coords;
 }
 
+// LISTA ATUALIZADA DE COMUNIDADES COM COORDENADAS PRECISAS
 const rawAreas = [
   // SANTA CRUZ
   {name:'Cesarão', c:[-43.66027,-22.93587], r:0.35, type:'conflito', major:true},
@@ -652,7 +655,7 @@ const rawAreas = [
   {name:'Morro do Agostinho Porto', c:[-43.4420,-22.7565], r:0.30, type:'conflito'},
   {name:'Garnier (Austin)', c:[-43.5185,-22.6880], r:0.30, type:'conflito'},
 
-  // REGIÃO DOS LAGOS (SAQUAREMA A BÚZIOS)
+  // REGIÃO DOS LAGOS
   {name:'Morro do Cruzeiro (Saquarema Centro)', c:[-42.4840,-22.9280], r:0.30, type:'conflito'},
   {name:'Sampaio Corrêa / Basileia (Saquarema)', c:[-42.5925,-22.8870], r:0.35, type:'conflito'},
   {name:'Morro dos Milagres (São Pedro da Aldeia)', c:[-42.0935,-22.8460], r:0.35, type:'conflito'},
@@ -663,6 +666,26 @@ const rawAreas = [
   {name:'Figueira / Monte Alto (Arraial do Cabo)', c:[-42.1585,-22.9360], r:0.40, type:'conflito'},
   {name:'Rasa / Cruzeiro da Rasa (Armação dos Búzios)', c:[-41.9540,-22.7595], r:0.40, type:'conflito', major:true},
   {name:'Cembra / Cemitério (Búzios)', c:[-41.9015,-22.7660], r:0.30, type:'conflito'}
+];
+
+// DADOS LOCAIS FIXOS DE LOMBADAS E RADARES (EIXO URUCÂNIA / CESÁRIO DE MELO / PACIÊNCIA / CAMPO GRANDE)
+const LOCAL_HAZARDS = [
+  { type: 'lombada', coords: [-43.6401, -22.9118] },
+  { type: 'lombada', coords: [-43.6403, -22.9102] },
+  { type: 'lombada', coords: [-43.6408, -22.9085] },
+  { type: 'lombada', coords: [-43.6415, -22.9062] },
+  { type: 'lombada', coords: [-43.6420, -22.9048] },
+  { type: 'lombada', coords: [-43.6425, -22.9030] },
+  { type: 'lombada', coords: [-43.6432, -22.9012] },
+  { type: 'lombada', coords: [-43.6440, -22.8985] },
+  { type: 'lombada', coords: [-43.6360, -22.9135] },
+  { type: 'lombada', coords: [-43.6375, -22.9130] },
+  { type: 'lombada', coords: [-43.6550, -22.9150] },
+  { type: 'lombada', coords: [-43.6580, -22.9180] },
+  { type: 'radar', coords: [-43.6402, -22.9090] },
+  { type: 'radar', coords: [-43.6445, -22.8970] },
+  { type: 'semaforo', coords: [-43.6400, -22.9125] },
+  { type: 'semaforo', coords: [-43.6450, -22.8960] }
 ];
 
 const communityData = rawAreas.map(a => ({
@@ -808,6 +831,7 @@ function restoreRouteLayer() {
 map.on('style.load', () => {
   addCommunityLayers();
   restoreRouteLayer();
+  if (routeData) renderHazardsOnMap();
 });
 
 map.once('load', () => {
@@ -1025,7 +1049,6 @@ document.getElementById('soundBtn').onclick = () => {
   toast(soundEnabled ? 'Voz ativada' : 'Voz silenciada');
 };
 
-// CONTROLE DE TEMAS
 function setMapThemeDirect(mode) {
   themeMode = mode;
   document.getElementById('themeSelectModal').classList.remove('show');
@@ -1147,7 +1170,6 @@ function openNavigationPanel() {
   }
 }
 
-// ROTA DIRETA E EFICIENTE
 async function fetchRoute(a, b) {
   const url = `https://router.project-osrm.org/route/v1/${transportMode}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&alternatives=false&steps=true`;
   const ctrl = new AbortController();
@@ -1168,7 +1190,6 @@ async function iniciarRotaInterna() {
   try {
     routeData = await fetchRoute(userPos, destPos);
     showRoute();
-    fetchRouteHazards();
     checkDestinationDanger();
   } catch (e) { toast('Falha ao calcular rota.'); }
 }
@@ -1202,6 +1223,9 @@ function drawRoute(r) {
   map.addLayer({ id: 'route-line', type: 'line', source: 'route', paint: { 'line-color': '#a855f7', 'line-width': 6 } });
   const c = r.geometry.coordinates, b = c.reduce((x, p) => x.extend(p), new maplibregl.LngLatBounds(c[0], c[0]));
   map.fitBounds(b, { padding: { top: 130, bottom: 140, left: 30, right: 30 }, duration: 700, maxZoom: 17 });
+  
+  // RENDERIZA OS OBSTÁCULOS NA ROTA INSTANTANEAMENTE
+  fetchRouteHazards();
 }
 
 function pointToSegmentKm(p, a, b) {
@@ -1236,7 +1260,6 @@ async function recalculateRoute() {
   try {
     routeData = await fetchRoute(userPos, destPos);
     drawRoute(routeData);
-    fetchRouteHazards();
     document.getElementById('sheetTime').textContent = Math.max(1, Math.round(routeData.duration / 60)) + ' min';
     document.getElementById('sheetDist').textContent = (routeData.distance / 1000).toFixed(1) + ' km • Chegada prevista';
   } catch (e) {
@@ -1299,12 +1322,12 @@ function updateNavigation() {
 }
 
 // ================================================================
-// LOMBADAS, RADARES E SEMÁFOROS (CALIBRAÇÃO E RESTAURAÇÃO EXATA DO PRINT)
+// LOMBADAS, RADARES E SEMÁFOROS (BASE LOCAL + BUSCA GARANTIDA)
 // ================================================================
 let routeHazards = [];
 let hazardMarkers = [];
 
-// ÍCONE DE LOMBADA FIEL AO SEU PRINT (LOSANGO AMARELO COM BORDA E CHEVRON PRETO)
+// ÍCONE DE LOMBADA FIEL AO SEU PRINT (LOSANGO AMARELO COM BORDA PRETA E O CHEVRON)
 const SVG_LOMBADA = `<svg viewBox="0 0 48 48">
   <polygon points="24,2 46,24 24,46 2,24" fill="#facc15" stroke="#000000" stroke-width="4"/>
   <path d="M12 28 C 17 21, 24 21, 24 21 C 24 21, 31 21, 36 28" fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round"/>
@@ -1318,15 +1341,35 @@ async function fetchRouteHazards() {
   hazardMarkers.forEach(m => { try { m.remove(); } catch (e) {} });
   hazardMarkers = [];
   if (!routeData) return;
+
+  const coords = routeData.geometry.coordinates;
+
+  // 1. CARREGA IMEDIATAMENTE DA BASE LOCAL FIXA
+  LOCAL_HAZARDS.forEach(lh => {
+    let onRoute = false;
+    for (let i = 0; i < coords.length - 1; i++) {
+      const d = pointToSegmentKm(lh.coords, coords[i], coords[i + 1]);
+      if (d * 1000 < 80) {
+        onRoute = true;
+        break;
+      }
+    }
+    if (onRoute && !routeHazards.some(h => distanceKm(h.coords, lh.coords) * 1000 < 15)) {
+      routeHazards.push({ type: lh.type, coords: lh.coords });
+    }
+  });
+
+  renderHazardsOnMap();
+
+  // 2. TENTA COMPLEMENTAR ONLINE VIA OVERPASS COM TIMEOUT CURTO
   try {
-    const coords = routeData.geometry.coordinates;
     let minLon = Infinity, minLat = Infinity, maxLon = -Infinity, maxLat = -Infinity;
     coords.forEach(([lon, lat]) => {
       minLon = Math.min(minLon, lon); maxLon = Math.max(maxLon, lon);
       minLat = Math.min(minLat, lat); maxLat = Math.max(maxLat, lat);
     });
     const bbox = `${minLat - 0.01},${minLon - 0.01},${maxLat + 0.01},${maxLon + 0.01}`;
-    const query = `[out:json][timeout:20];(node["traffic_calming"](${bbox});node["highway"="speed_camera"](${bbox});node["highway"="traffic_signals"](${bbox}););out body;`;
+    const query = `[out:json][timeout:10];(node["traffic_calming"](${bbox});node["highway"="speed_camera"](${bbox});node["highway"="traffic_signals"](${bbox}););out body;`;
     const r = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query));
     if (!r.ok) return;
     const data = await r.json();
@@ -1339,25 +1382,32 @@ async function fetchRouteHazards() {
       let onRoute = false;
       for (let i = 0; i < coords.length - 1; i++) {
         const d = pointToSegmentKm([el.lon, el.lat], coords[i], coords[i + 1]);
-        if (d * 1000 < 50) { // Tolerância calibrada para capturar os obstáculos na via
+        if (d * 1000 < 60) {
           onRoute = true;
           break;
         }
       }
       
-      if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 12)) {
+      if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 15)) {
         routeHazards.push({ type, coords: [el.lon, el.lat] });
       }
     });
 
-    routeHazards.forEach(h => {
-      const el = document.createElement('div');
-      el.className = 'hazard-marker';
-      el.innerHTML = h.type === 'lombada' ? SVG_LOMBADA : h.type === 'radar' ? SVG_RADAR : SVG_SEMAFORO;
-      const m = new maplibregl.Marker({ element: el }).setLngLat(h.coords).addTo(map);
-      hazardMarkers.push(m);
-    });
+    renderHazardsOnMap();
   } catch (e) {}
+}
+
+function renderHazardsOnMap() {
+  hazardMarkers.forEach(m => { try { m.remove(); } catch (e) {} });
+  hazardMarkers = [];
+
+  routeHazards.forEach(h => {
+    const el = document.createElement('div');
+    el.className = 'hazard-marker';
+    el.innerHTML = h.type === 'lombada' ? SVG_LOMBADA : h.type === 'radar' ? SVG_RADAR : SVG_SEMAFORO;
+    const m = new maplibregl.Marker({ element: el }).setLngLat(h.coords).addTo(map);
+    hazardMarkers.push(m);
+  });
 }
 
 function checkHazardsProximity() {
@@ -1518,6 +1568,7 @@ document.getElementById('closeTransportModal').onclick = () => document.getEleme
 document.querySelectorAll('#transportModal button[data-mode]').forEach(btn => {
   btn.onclick = () => {
     transportMode = btn.dataset.mode;
+    document.getElementById('transportBtn').textContent = transportMode === 'bike' ? '🚲' : transportMode === 'foot' ? '🚶' : '🚗';
     document.getElementById('transportModal').classList.remove('show');
     if (destPos && userPos) iniciarRotaInterna();
   };
