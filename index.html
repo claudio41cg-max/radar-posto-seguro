@@ -74,13 +74,12 @@ body.nav-mode .speedometer-box{display:flex}
   to{transform:scale(1.08)}
 }
 
-/* BOTÃO RECENTRALIZAR COM ALFINETE */
+/* BOTÕES AUXILIARES */
 .nav-recenter-left{position:fixed;left:14px;bottom:162px;z-index:34;width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;cursor:pointer}
 body.nav-mode .nav-recenter-left{display:flex}
 .nav-recenter-left svg{width:24px;height:24px;display:block}
 .nav-recenter-left:active{border-color:#ef4444;transform:scale(0.95)}
 
-/* BOTÃO REPORTAR VETORIAL */
 .nav-report-btn{position:fixed;right:14px;bottom:90px;z-index:34;width:52px;height:52px;border-radius:50%;border:2px solid #f59e0b;background:#78350fdd;color:#fef3c7;display:none;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,0.7);cursor:pointer}
 body.nav-mode .nav-report-btn{display:flex}
 .nav-report-btn svg{width:28px;height:28px;fill:#fde68a}
@@ -122,8 +121,8 @@ body.nav-mode .side{top:118px}
 .fuel-marker:hover{transform:scale(1.15)}
 .fuel-marker.verde{background:#22c55e}.fuel-marker.laranja{background:#f59e0b}.fuel-marker.vermelho{background:#dc2626}.fuel-marker.gnv{background:#16a34a}
 
-/* ÍCONES DE LOMBADAS NO MAPA (EXATO DO PRINT) */
-.hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;pointer-events:none;transform:translate(-50%,-50%);z-index:23}
+/* ÍCONES DIRECIONAIS DE LOMBADAS E RADARES */
+.hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;pointer-events:none;transform:translate(-50%,-50%);z-index:23;transition:opacity .3s}
 .hazard-marker svg{width:36px;height:36px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.9))}
 
 .bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
@@ -227,12 +226,10 @@ body.nav-mode .favela-sign{top:132px}
 <div class="current-road-pill" id="currentRoadPill">Via Atual</div>
 <div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
 
-<!-- BOTÃO COM ALFINETE VERMELHO -->
 <button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar no veículo">
   <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ef4444"/><circle cx="12" cy="9" r="2.5" fill="#ffffff"/></svg>
 </button>
 
-<!-- BOTÃO REPORTAR VETORIAL -->
 <button class="nav-report-btn" id="navReportBtn" title="Reportar ocorrência">
   <svg viewBox="0 0 24 24"><polygon points="12 2 22 20 2 20" fill="none" stroke="#fef3c7" stroke-width="2.5"/><text x="12" y="17" font-size="11" font-weight="900" fill="#fef3c7" text-anchor="middle">R</text></svg>
 </button>
@@ -511,6 +508,10 @@ let speedSoundEnabled = true;
 let currentSpeedKmh = 0;
 let myLastReportId = null;
 
+let offRouteCounter = 0;
+let routeAbortCtrl = null;
+let currentBearing = 0;
+
 function toast(msg, ms = 3200) {
   const e = document.getElementById('toast');
   if (!e) return;
@@ -527,11 +528,63 @@ function setGPS(ok, text) {
   b.textContent = text;
   b.style.background = ok ? '#059669' : '#475569';
 }
+
 function distanceKm(a, b) {
   const R = 6371, lat1 = a[1] * Math.PI / 180, lat2 = b[1] * Math.PI / 180;
   const dLat = (b[1] - a[1]) * Math.PI / 180, dLon = (b[0] - a[0]) * Math.PI / 180;
   const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+function calculateBearing(a, b) {
+  const lat1 = a[1] * Math.PI / 180, lat2 = b[1] * Math.PI / 180;
+  const dLon = (b[0] - a[0]) * Math.PI / 180;
+  const y = Math.sin(dLon) * Math.cos(lat2);
+  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+  return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+}
+
+function angleDiff(a, b) {
+  const d = Math.abs(a - b) % 360;
+  return d > 180 ? 360 - d : d;
+}
+
+// SISTEMA DE FILA DE VOZ COM SUPRESSÃO DE COLISÕES
+let speechQueue = [];
+let isSpeakingNow = false;
+
+function speak(text, priority = false) {
+  if (!soundEnabled || !('speechSynthesis' in window) || isRerouting) return;
+  if (priority) {
+    speechSynthesis.cancel();
+    speechQueue = [text];
+  } else {
+    if (speechQueue.includes(text)) return;
+    speechQueue.push(text);
+  }
+  processSpeechQueue();
+}
+
+function processSpeechQueue() {
+  if (isSpeakingNow || !speechQueue.length) return;
+  const text = speechQueue.shift();
+  try {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'pt-BR';
+    u.rate = 1.05;
+    isSpeakingNow = true;
+    u.onend = () => {
+      isSpeakingNow = false;
+      setTimeout(processSpeechQueue, 150);
+    };
+    u.onerror = () => {
+      isSpeakingNow = false;
+      setTimeout(processSpeechQueue, 100);
+    };
+    speechSynthesis.speak(u);
+  } catch (e) {
+    isSpeakingNow = false;
+  }
 }
 
 function playBeep() {
@@ -549,11 +602,6 @@ function playBeep() {
     osc.start();
     osc.stop(ctx.currentTime + 0.25);
   } catch(e) {}
-}
-
-function speak(text) {
-  if (!soundEnabled || !('speechSynthesis' in window) || isRerouting) return;
-  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'pt-BR'; speechSynthesis.speak(u); } catch (e) {}
 }
 
 const map = new maplibregl.Map({
@@ -670,15 +718,26 @@ function updateUserMarker(coords, heading = 0) {
   }
 }
 
+let lastValidPos = null;
 function startGPSWatch() {
   if (!navigator.geolocation) { setGPS(false, 'SEM GPS'); return; }
   if (watchId !== null) navigator.geolocation.clearWatch(watchId);
   watchId = navigator.geolocation.watchPosition(p => {
     const isFirst = !userPos;
-    userPos = [p.coords.longitude, p.coords.latitude];
-    const heading = p.coords.heading || 0;
+    const rawPos = [p.coords.longitude, p.coords.latitude];
     
-    updateUserMarker(userPos, heading);
+    let heading = p.coords.heading;
+    if (heading == null || Number.isNaN(heading) || heading === 0) {
+      if (lastValidPos) {
+        const d = distanceKm(lastValidPos, rawPos) * 1000;
+        if (d > 3) heading = calculateBearing(lastValidPos, rawPos);
+      }
+    }
+    if (heading != null && !Number.isNaN(heading)) currentBearing = heading;
+    lastValidPos = rawPos;
+
+    userPos = rawPos;
+    updateUserMarker(userPos, currentBearing);
     setGPS(true, 'GPS ATIVO');
 
     currentSpeedKmh = Math.round((p.coords.speed || 0) * 3.6);
@@ -699,7 +758,7 @@ function startGPSWatch() {
   }, e => {
     setGPS(false, e.code === 1 ? 'GPS BLOQ.' : 'GPS...');
     if (e.code === 1) toast('Permita o acesso ao GPS.');
-  }, { enableHighAccuracy: true, maximumAge: 1000, timeout: 8000 });
+  }, { enableHighAccuracy: true, maximumAge: 800, timeout: 4500 });
 }
 
 let lastSpeedBeep = 0;
@@ -845,6 +904,10 @@ document.getElementById('soundBtn').onclick = () => {
   btn.classList.toggle('active-sound', soundEnabled);
   btn.classList.toggle('muted-sound', !soundEnabled);
   btn.textContent = soundEnabled ? '🔊' : '🔇';
+  if (!soundEnabled && 'speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    speechQueue = [];
+  }
   toast(soundEnabled ? 'Voz ativada' : 'Voz silenciada');
 };
 
@@ -960,11 +1023,13 @@ function openNavigationPanel() {
 }
 
 async function fetchRoute(a, b) {
+  if (routeAbortCtrl) routeAbortCtrl.abort();
+  routeAbortCtrl = new AbortController();
+
   const url = `https://router.project-osrm.org/route/v1/${transportMode}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&alternatives=false&steps=true`;
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 6000);
+  const t = setTimeout(() => routeAbortCtrl.abort(), 3500);
   try {
-    const r = await fetch(url, { signal: ctrl.signal });
+    const r = await fetch(url, { signal: routeAbortCtrl.signal });
     const j = await r.json();
     if (j.code !== 'Ok' || !j.routes?.length) throw Error('ROTA');
     return j.routes[0];
@@ -980,7 +1045,9 @@ async function iniciarRotaInterna() {
     routeData = await fetchRoute(userPos, destPos);
     showRoute();
     checkDestinationDanger();
-  } catch (e) { toast('Falha ao calcular rota.'); }
+  } catch (e) { 
+    if (e.name !== 'AbortError') toast('Falha ao calcular rota.'); 
+  }
 }
 
 function checkDestinationDanger() {
@@ -990,7 +1057,7 @@ function checkDestinationDanger() {
     if (d <= c.r + 0.3) {
       document.getElementById('dangerBannerText').textContent = `⚠ ATENÇÃO: Seu destino fica dentro ou nas proximidades da ${c.name}. Redobre a atenção!`;
       document.getElementById('dangerBanner').classList.add('show');
-      speak(`Atenção: o seu destino fica próximo à comunidade ${c.name}.`);
+      speak(`Atenção: o seu destino fica próximo à comunidade ${c.name}.`, true);
       return;
     }
   }
@@ -1016,7 +1083,7 @@ function drawRoute(r) {
   fetchRouteHazards();
 }
 
-function pointToSegmentKm(p, a, b) {
+function pointToSegmentDetails(p, a, b) {
   const cosLat = Math.cos(p[1] * Math.PI / 180);
   const P = [p[0] * cosLat, p[1]], A = [a[0] * cosLat, a[1]], B = [b[0] * cosLat, b[1]];
   const dx = B[0] - A[0], dy = B[1] - A[1];
@@ -1024,32 +1091,65 @@ function pointToSegmentKm(p, a, b) {
   let t = len2 > 0 ? ((P[0] - A[0]) * dx + (P[1] - A[1]) * dy) / len2 : 0;
   t = Math.max(0, Math.min(1, t));
   const projX = A[0] + t * dx, projY = A[1] + t * dy;
-  return distanceKm(p, [projX / cosLat, projY]);
+  const dist = distanceKm(p, [projX / cosLat, projY]);
+  const bearing = calculateBearing(a, b);
+  return { dist, bearing, t };
 }
 
+// MOTOR DE FORA DE ROTA COM SNAP-TO-ROAD E PROJEÇÃO VETORIAL
 function checkOffRoute() {
   if (!navActive || !routeData || !userPos || isRerouting) return;
   const coords = routeData.geometry.coordinates;
   let min = Infinity;
+  let bestSegIndex = 0;
+  let bestBearing = 0;
+
   for (let i = 0; i < coords.length - 1; i++) {
-    const d = pointToSegmentKm(userPos, coords[i], coords[i + 1]);
-    if (d < min) min = d;
+    const res = pointToSegmentDetails(userPos, coords[i], coords[i + 1]);
+    if (res.dist < min) {
+      min = res.dist;
+      bestSegIndex = i;
+      bestBearing = res.bearing;
+    }
   }
-  if (min * 1000 > 35) {
-    recalculateRoute();
+
+  const distMeters = min * 1000;
+  const bearingDivergence = angleDiff(currentBearing, bestBearing);
+
+  // Se o veículo estiver a menos de 25 metros da rota e no mesmo sentido, mantém no traçado
+  if (distMeters <= 25 && bearingDivergence < 55) {
+    offRouteCounter = 0;
+    return;
+  }
+
+  // Se afastou mais de 45m ou virou na rua errada (divergência > 75°), dispara recálculo com debounce
+  if (distMeters > 45 || (distMeters > 20 && bearingDivergence > 75)) {
+    offRouteCounter++;
+    if (offRouteCounter >= 2) {
+      offRouteCounter = 0;
+      recalculateRoute();
+    }
+  } else {
+    offRouteCounter = 0;
   }
 }
 
 async function recalculateRoute() {
   if (!destPos || !userPos || isRerouting) return;
   isRerouting = true;
-  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    speechQueue = [];
+  }
   toast('Recalculando rota...');
   try {
-    routeData = await fetchRoute(userPos, destPos);
+    const newRoute = await fetchRoute(userPos, destPos);
+    routeData = newRoute;
     drawRoute(routeData);
+    stepAnnounce = {};
     document.getElementById('sheetTime').textContent = Math.max(1, Math.round(routeData.duration / 60)) + ' min';
     document.getElementById('sheetDist').textContent = (routeData.distance / 1000).toFixed(1) + ' km • Chegada prevista';
+    updateNavigation();
   } catch (e) {
   } finally {
     isRerouting = false;
@@ -1066,6 +1166,17 @@ function stepIconArrow(s) {
   if (m.modifier === 'slight right') return '↗';
   if (m.type === 'roundabout' || m.type === 'rotary') return '🔄';
   return '⬆';
+}
+
+function getManeuverText(s) {
+  const m = s.maneuver || {};
+  if (m.type === 'arrive') return 'chegar ao seu destino';
+  if (m.type === 'roundabout' || m.type === 'rotary') return 'entre na rotatória';
+  if (m.modifier === 'left' || m.modifier === 'sharp left') return 'vire à esquerda';
+  if (m.modifier === 'slight left') return 'mantenha-se à esquerda';
+  if (m.modifier === 'right' || m.modifier === 'sharp right') return 'vire à direita';
+  if (m.modifier === 'slight right') return 'mantenha-se à direita';
+  return 'siga em frente';
 }
 
 let stepAnnounce = {};
@@ -1097,18 +1208,36 @@ function updateNavigation() {
     document.getElementById('hudNextStreet').textContent = 'Destino final';
   }
 
+  // FUSÃO DE MANOBRAS E GESTÃO INTELIGENTE DE ÁUDIO
   if (!stepAnnounce[currentStep]) stepAnnounce[currentStep] = new Set();
   const done = stepAnnounce[currentStep];
-  [300, 100, 30].forEach(t => {
+
+  const triggers = [300, 100, 30];
+  triggers.forEach(t => {
     if (distMeters <= t && !done.has(t)) {
       done.add(t);
-      const m = s.maneuver || {};
-      let phrase = m.type === 'arrive' ? 'você está chegando ao destino' : m.modifier === 'left' ? 'vire à esquerda' : m.modifier === 'right' ? 'vire à direita' : 'siga em frente';
-      speak(t <= 30 ? `Agora, ${phrase}` : `Em ${t} metros, ${phrase}`);
+      
+      const currentPhrase = getManeuverText(s);
+      
+      // Fusão: se a próxima manobra estiver a menos de 80m da atual
+      if (next && next.distance < 80 && t <= 100) {
+        const nextPhrase = getManeuverText(next);
+        const fused = t <= 30 ? `Agora, ${currentPhrase} e, em seguida, ${nextPhrase}` : `Em ${t} metros, ${currentPhrase} e, em seguida, ${nextPhrase}`;
+        speak(fused, t <= 30);
+      } else {
+        const single = t <= 30 ? `Agora, ${currentPhrase}` : `Em ${t} metros, ${currentPhrase}`;
+        speak(single, t <= 30);
+      }
     }
   });
+
+  // Atualiza exibição dos obstáculos removendo os que já ficaram para trás
+  renderHazardsOnMap();
 }
 
+// ================================================================
+// LOMBADAS, RADARES E SEMÁFOROS NO SENTIDO DA VIAGEM
+// ================================================================
 let routeHazards = [];
 let hazardMarkers = [];
 
@@ -1129,17 +1258,16 @@ async function fetchRouteHazards() {
 
   const coords = routeData.geometry.coordinates;
 
+  // Filtra itens fixos locais verificando proximidade e alinhamento
   LOCAL_HAZARDS.forEach(lh => {
-    let onRoute = false;
     for (let i = 0; i < coords.length - 1; i++) {
-      const d = pointToSegmentKm(lh.coords, coords[i], coords[i + 1]);
-      if (d * 1000 < 150) {
-        onRoute = true;
+      const res = pointToSegmentDetails(lh.coords, coords[i], coords[i + 1]);
+      if (res.dist * 1000 < 18) {
+        if (!routeHazards.some(h => distanceKm(h.coords, lh.coords) * 1000 < 10)) {
+          routeHazards.push({ type: lh.type, coords: lh.coords, segIndex: i, bearing: res.bearing });
+        }
         break;
       }
-    }
-    if (onRoute && !routeHazards.some(h => distanceKm(h.coords, lh.coords) * 1000 < 15)) {
-      routeHazards.push({ type: lh.type, coords: lh.coords });
     }
   });
 
@@ -1151,8 +1279,8 @@ async function fetchRouteHazards() {
       minLon = Math.min(minLon, lon); maxLon = Math.max(maxLon, lon);
       minLat = Math.min(minLat, lat); maxLat = Math.max(maxLat, lat);
     });
-    const bbox = `${minLat - 0.02},${minLon - 0.02},${maxLat + 0.02},${maxLon + 0.02}`;
-    const query = `[out:json][timeout:10];(node["traffic_calming"](${bbox});node["highway"="speed_camera"](${bbox});node["highway"="traffic_signals"](${bbox}););out body;`;
+    const bbox = `${minLat - 0.008},${minLon - 0.008},${maxLat + 0.008},${maxLon + 0.008}`;
+    const query = `[out:json][timeout:8];(node["traffic_calming"](${bbox});node["highway"="speed_camera"](${bbox});node["highway"="traffic_signals"](${bbox}););out body;`;
     const r = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query));
     if (!r.ok) return;
     const data = await r.json();
@@ -1162,17 +1290,14 @@ async function fetchRouteHazards() {
       let type = tags.traffic_calming ? 'lombada' : tags.highway === 'speed_camera' ? 'radar' : tags.highway === 'traffic_signals' ? 'semaforo' : null;
       if (!type) return;
       
-      let onRoute = false;
       for (let i = 0; i < coords.length - 1; i++) {
-        const d = pointToSegmentKm([el.lon, el.lat], coords[i], coords[i + 1]);
-        if (d * 1000 < 100) {
-          onRoute = true;
+        const res = pointToSegmentDetails([el.lon, el.lat], coords[i], coords[i + 1]);
+        if (res.dist * 1000 < 18) {
+          if (!routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 10)) {
+            routeHazards.push({ type, coords: [el.lon, el.lat], segIndex: i, bearing: res.bearing });
+          }
           break;
         }
-      }
-      
-      if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 15)) {
-        routeHazards.push({ type, coords: [el.lon, el.lat] });
       }
     });
 
@@ -1184,7 +1309,22 @@ function renderHazardsOnMap() {
   hazardMarkers.forEach(m => { try { m.remove(); } catch (e) {} });
   hazardMarkers = [];
 
+  if (!routeData) return;
+  const coords = routeData.geometry.coordinates;
+
+  let currentSeg = 0;
+  if (userPos) {
+    let min = Infinity;
+    for (let i = 0; i < coords.length - 1; i++) {
+      const res = pointToSegmentDetails(userPos, coords[i], coords[i + 1]);
+      if (res.dist < min) { min = res.dist; currentSeg = i; }
+    }
+  }
+
+  // Renderiza apenas obstáculos à frente do ponto atual da corrida
   routeHazards.forEach(h => {
+    if (navActive && h.segIndex < currentSeg - 1) return;
+
     const el = document.createElement('div');
     el.className = 'hazard-marker';
     el.innerHTML = h.type === 'lombada' ? SVG_LOMBADA : h.type === 'radar' ? SVG_RADAR : SVG_SEMAFORO;
@@ -1195,16 +1335,22 @@ function renderHazardsOnMap() {
 
 function updateTrafficLightSimulation() {
   const hud = document.getElementById('trafficLightHud');
-  if (!navActive || !userPos) { hud.classList.remove('show'); return; }
+  if (!navActive || !userPos || !routeData) { hud.classList.remove('show'); return; }
 
   let nearestTl = null, nearestDist = Infinity;
   routeHazards.forEach(h => {
     if (h.type !== 'semaforo') return;
     const d = distanceKm(userPos, h.coords) * 1000;
-    if (d < nearestDist) { nearestDist = d; nearestTl = h; }
+    if (d < nearestDist && d > 5) {
+      const dirDiff = angleDiff(currentBearing, h.bearing);
+      if (dirDiff < 70) {
+        nearestDist = d; 
+        nearestTl = h;
+      }
+    }
   });
 
-  if (nearestTl && nearestDist <= 200) {
+  if (nearestTl && nearestDist <= 220) {
     hud.classList.add('show');
     const sec = Math.floor((Date.now() / 1000) % 60);
     const dRed = document.getElementById('tlDotRed');
@@ -1257,6 +1403,10 @@ function stopNav() {
   document.getElementById('mainTopbar').classList.remove('hide-nav');
   document.getElementById('mainBottomActions').classList.remove('hide-nav');
   if (wakeLock) { wakeLock.release?.(); wakeLock = null; }
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    speechQueue = [];
+  }
   map.easeTo({ pitch: 0, bearing: 0, duration: 500 });
 }
 
@@ -1278,8 +1428,13 @@ function clearRoute() {
   if (map.getLayer('route-line')) map.removeLayer('route-line');
   if (map.getLayer('route-outline')) map.removeLayer('route-outline');
   if (map.getSource('route')) map.removeSource('route');
-  hazardMarkers.forEach(m => m.remove());
-  routeData = null; destPos = null;
+  
+  hazardMarkers.forEach(m => { try { m.remove(); } catch (e) {} });
+  hazardMarkers = [];
+  routeHazards = [];
+  
+  routeData = null; 
+  destPos = null;
   document.getElementById('wazeSheet').classList.remove('show');
 }
 
@@ -1310,8 +1465,7 @@ function checkProximityDanger() {
     insideAlertGiven[nearest.name] = true;
     document.getElementById('dangerBannerText').textContent = `⚠ Atenção! Você está entrando na área da comunidade ${nearest.name}. Fique atento.`;
     document.getElementById('dangerBanner').classList.add('show');
-    speak(`Atenção! Você está entrando na área da comunidade ${nearest.name}.`);
-    setTimeout(() => { speak(`Atenção! Área da comunidade ${nearest.name}.`); }, 3800);
+    speak(`Atenção! Você está entrando na área da comunidade ${nearest.name}.`, true);
   }
 }
 
@@ -1333,7 +1487,6 @@ document.getElementById('closeTransportModal').onclick = () => document.getEleme
 document.querySelectorAll('#transportModal button[data-mode]').forEach(btn => {
   btn.onclick = () => {
     transportMode = btn.dataset.mode;
-    document.getElementById('transportBtn').textContent = transportMode === 'bike' ? '🚲' : transportMode === 'foot' ? '🚶' : '🚗';
     document.getElementById('transportModal').classList.remove('show');
     if (destPos && userPos) iniciarRotaInterna();
   };
@@ -1505,7 +1658,11 @@ setInterval(() => {
 }, 60000);
 
 toast('Radar Seguro RJ PRO - Pronto!', 3000);
-window.addEventListener('pagehide', () => { if (watchId != null) navigator.geolocation.clearWatch(watchId); wakeLock?.release?.(); if (mqttClient) mqttClient.end(); });
+window.addEventListener('pagehide', () => { 
+  if (watchId != null) navigator.geolocation.clearWatch(watchId); 
+  wakeLock?.release?.(); 
+  if (mqttClient) mqttClient.end(); 
+});
 </script>
 </body>
 </html>
