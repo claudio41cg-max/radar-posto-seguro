@@ -122,9 +122,9 @@ body.nav-mode .side{top:118px}
 .fuel-marker:hover{transform:scale(1.15)}
 .fuel-marker.verde{background:#22c55e}.fuel-marker.laranja{background:#f59e0b}.fuel-marker.vermelho{background:#dc2626}.fuel-marker.gnv{background:#16a34a}
 
-/* ÍCONES DE LOMBADAS E HAZARDS (EXATOS DO PRINT) */
+/* ÍCONES DE LOMBADAS NO MAPA (EXATO DO PRINT) */
 .hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;pointer-events:none;transform:translate(-50%,-50%);z-index:23}
-.hazard-marker svg{width:38px;height:38px;display:block;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.85))}
+.hazard-marker svg{width:36px;height:36px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.9))}
 
 .bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
 .bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
@@ -135,13 +135,6 @@ body.nav-mode .side{top:118px}
 .favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}
 .favela-sign.show{opacity:1;transform:translate(-50%,0)}
 body.nav-mode .favela-sign{top:132px}
-
-.hazard-sign{position:fixed;top:224px;left:14px;transform:translateX(-14px);z-index:24;color:#111827;padding:7px 13px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:60vw;overflow:hidden;text-overflow:ellipsis}
-.hazard-sign.show{opacity:1;transform:translateX(0)}
-.hazard-sign.lombada{background:#facc15;border:1px solid #a16207;color:#000}
-.hazard-sign.radar{background:#38bdf8;border:1px solid #0369a1;color:#07131f}
-.hazard-sign.semaforo{background:#22c55e;border:1px solid #15803d;color:#fff}
-body.nav-mode .hazard-sign{top:174px}
 
 .danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.7);border:2px solid #fecaca}
 .danger-banner.show{display:flex}
@@ -288,7 +281,6 @@ body.nav-mode .hazard-sign{top:174px}
 
 <div class="toast" id="toast"></div>
 <div class="favela-sign" id="favelaSign"></div>
-<div class="hazard-sign" id="hazardSign"></div>
 <div class="danger-banner" id="dangerBanner"><b id="dangerBannerText"></b><button id="dangerBannerClose">✕</button></div>
 
 <div class="modal-overlay" id="reportLiveModal">
@@ -446,7 +438,6 @@ function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
   return coords;
 }
 
-// LISTA DE COMUNIDADES
 const rawAreas = [
   {name:'Cesarão', c:[-43.66027,-22.93587], r:0.35, type:'conflito', major:true},
   {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.35, type:'conflito', major:true},
@@ -466,11 +457,12 @@ const rawAreas = [
   {name:'Complexo da Maré', c:[-43.2415,-22.8555], r:0.45, type:'conflito', major:true}
 ];
 
-// DADOS GEOGRÁFICOS DE LOMBADAS, RADARES E SEMÁFOROS NO EIXO PACIÊNCIA / SANTA CRUZ / CAMPO GRANDE
+// LISTA COMPLETA E EXATA DE LOMBADAS E RADARES NO CORREDOR DA RUA LÍDICE / TARUAÇU / URUCÂNIA / CESÁRIO DE MELO
 const LOCAL_HAZARDS = [
   { type: 'lombada', coords: [-43.6401, -22.9118] },
   { type: 'lombada', coords: [-43.6403, -22.9102] },
-  { type: 'lombada', coords: [-43.6408, -22.9085] },
+  { type: 'lombada', coords: [-43.6406, -22.9090] },
+  { type: 'lombada', coords: [-43.6410, -22.9075] },
   { type: 'lombada', coords: [-43.6415, -22.9062] },
   { type: 'lombada', coords: [-43.6420, -22.9048] },
   { type: 'lombada', coords: [-43.6425, -22.9030] },
@@ -692,7 +684,6 @@ function startGPSWatch() {
     updateFuelVisibility();
     updateNavigation();
     checkProximityDanger();
-    checkHazardsProximity();
     updateTrafficLightSimulation();
     checkOffRoute();
   }, e => {
@@ -1119,12 +1110,11 @@ function updateNavigation() {
 }
 
 // ================================================================
-// LOMBADAS, RADARES E SEMÁFOROS (PROXIMIDADE E RENDERIZAÇÃO)
+// LOMBADAS E RADARES (APENAS ÍCONES NA PISTA)
 // ================================================================
 let routeHazards = [];
 let hazardMarkers = [];
 
-// ÍCONE EXATO DE LOMBADA DO PRINT: LOSANGO AMARELO COM AS SETAS CHEVRON PRETAS
 const SVG_LOMBADA = `<svg viewBox="0 0 54 54">
   <polygon points="27,3 51,27 27,51 3,27" fill="#fbbf24" stroke="#000000" stroke-width="4.5" stroke-linejoin="round"/>
   <polyline points="15,28 27,16 39,28" fill="none" stroke="#000000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1142,31 +1132,29 @@ async function fetchRouteHazards() {
 
   const coords = routeData.geometry.coordinates;
 
-  // 1. CARREGA INSTANTANEAMENTE DA BASE LOCAL
   LOCAL_HAZARDS.forEach(lh => {
     let onRoute = false;
     for (let i = 0; i < coords.length - 1; i++) {
       const d = pointToSegmentKm(lh.coords, coords[i], coords[i + 1]);
-      if (d * 1000 < 120) {
+      if (d * 1000 < 150) {
         onRoute = true;
         break;
       }
     }
-    if (onRoute && !routeHazards.some(h => distanceKm(h.coords, lh.coords) * 1000 < 20)) {
+    if (onRoute && !routeHazards.some(h => distanceKm(h.coords, lh.coords) * 1000 < 15)) {
       routeHazards.push({ type: lh.type, coords: lh.coords });
     }
   });
 
   renderHazardsOnMap();
 
-  // 2. BUSCA ONLINE VIA OPENSTREETMAP / OVERPASS PARA EXPANDIR OUTRAS VIAS
   try {
     let minLon = Infinity, minLat = Infinity, maxLon = -Infinity, maxLat = -Infinity;
     coords.forEach(([lon, lat]) => {
       minLon = Math.min(minLon, lon); maxLon = Math.max(maxLon, lon);
       minLat = Math.min(minLat, lat); maxLat = Math.max(maxLat, lat);
     });
-    const bbox = `${minLat - 0.015},${minLon - 0.015},${maxLat + 0.015},${maxLon + 0.015}`;
+    const bbox = `${minLat - 0.02},${minLon - 0.02},${maxLat + 0.02},${maxLon + 0.02}`;
     const query = `[out:json][timeout:10];(node["traffic_calming"](${bbox});node["highway"="speed_camera"](${bbox});node["highway"="traffic_signals"](${bbox}););out body;`;
     const r = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query));
     if (!r.ok) return;
@@ -1180,13 +1168,13 @@ async function fetchRouteHazards() {
       let onRoute = false;
       for (let i = 0; i < coords.length - 1; i++) {
         const d = pointToSegmentKm([el.lon, el.lat], coords[i], coords[i + 1]);
-        if (d * 1000 < 80) {
+        if (d * 1000 < 100) {
           onRoute = true;
           break;
         }
       }
       
-      if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 20)) {
+      if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 15)) {
         routeHazards.push({ type, coords: [el.lon, el.lat] });
       }
     });
@@ -1208,23 +1196,6 @@ function renderHazardsOnMap() {
   });
 }
 
-function checkHazardsProximity() {
-  const sign = document.getElementById('hazardSign');
-  if (!navActive || !userPos) { sign.classList.remove('show'); return; }
-  let nearest = null, minDist = Infinity;
-  routeHazards.forEach(h => {
-    const d = distanceKm(userPos, h.coords) * 1000;
-    if (d < minDist) { minDist = d; nearest = h; }
-  });
-  if (nearest && minDist <= 160) {
-    sign.textContent = nearest.type === 'radar' ? `📷 Radar em ${Math.round(minDist)}m` : nearest.type === 'lombada' ? `🚧 Lombada a ${Math.round(minDist)}m` : `🚦 Semáforo à frente`;
-    sign.className = 'hazard-sign show ' + nearest.type;
-  } else {
-    sign.classList.remove('show');
-  }
-}
-
-// SIMULAÇÃO E DETECÇÃO DE SEMÁFORO À FRENTE
 function updateTrafficLightSimulation() {
   const hud = document.getElementById('trafficLightHud');
   if (!navActive || !userPos) { hud.classList.remove('show'); return; }
@@ -1288,7 +1259,6 @@ function stopNav() {
   document.getElementById('trafficLightHud').classList.remove('show');
   document.getElementById('mainTopbar').classList.remove('hide-nav');
   document.getElementById('mainBottomActions').classList.remove('hide-nav');
-  document.getElementById('hazardSign').classList.remove('show');
   if (wakeLock) { wakeLock.release?.(); wakeLock = null; }
   map.easeTo({ pitch: 0, bearing: 0, duration: 500 });
 }
