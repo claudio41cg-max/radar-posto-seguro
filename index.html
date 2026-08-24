@@ -47,6 +47,17 @@ button,input{font:inherit}
 .waze-danger-tag{color:#f87171;font-weight:900;display:none}
 .waze-danger-tag.active{display:inline}
 
+/* HUD DINÂMICO DE SEMÁFORO À FRENTE */
+.traffic-light-hud{position:fixed;top:105px;left:14px;z-index:28;background:#0f172a;border:2px solid #38bdf8;color:#fff;padding:8px 14px;border-radius:16px;display:none;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+.traffic-light-hud.show{display:flex}
+.traffic-light-visual{width:16px;height:36px;background:#020617;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:2px;border:1px solid #475569}
+.traffic-light-dot{width:8px;height:8px;border-radius:50%;background:#334155}
+.traffic-light-dot.red.active{background:#ef4444;box-shadow:0 0 8px #ef4444}
+.traffic-light-dot.yellow.active{background:#eab308;box-shadow:0 0 8px #eab308}
+.traffic-light-dot.green.active{background:#22c55e;box-shadow:0 0 8px #22c55e}
+.traffic-light-info b{font-size:13px;display:block;color:#f8fafc}
+.traffic-light-info span{font-size:11px;color:#94a3b8;font-weight:700}
+
 /* FLOATING ROAD PILL */
 .current-road-pill{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:22;background:#0284c7;color:#fff;padding:8px 18px;border-radius:20px;font-size:14px;font-weight:900;box-shadow:0 6px 16px rgba(0,0,0,0.6);border:2px solid #fff;display:none;white-space:nowrap;max-width:80vw;overflow:hidden;text-overflow:ellipsis}
 body.nav-mode .current-road-pill{display:block}
@@ -63,10 +74,11 @@ body.nav-mode .speedometer-box{display:flex}
   to{transform:scale(1.08)}
 }
 
-/* BOTÃO RECENTRALIZAR NO LADO ESQUERDO */
-.nav-recenter-left{position:fixed;left:14px;bottom:162px;z-index:34;width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;font-size:20px;cursor:pointer}
+/* BOTÃO RECENTRALIZAR COM ALFINETE VERMELHO */
+.nav-recenter-left{position:fixed;left:14px;bottom:162px;z-index:34;width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;cursor:pointer}
 body.nav-mode .nav-recenter-left{display:flex}
-.nav-recenter-left:active{border-color:#38bdf8;transform:scale(0.95)}
+.nav-recenter-left svg{width:24px;height:24px;display:block}
+.nav-recenter-left:active{border-color:#ef4444;transform:scale(0.95)}
 
 /* BOTÃO REPORTAR VETORIAL (TRIÂNGULO COM R) */
 .nav-report-btn{position:fixed;right:14px;bottom:90px;z-index:34;width:52px;height:52px;border-radius:50%;border:2px solid #f59e0b;background:#78350fdd;color:#fef3c7;display:none;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,0.7);cursor:pointer}
@@ -88,7 +100,8 @@ body.nav-mode .side{top:118px}
 .sheet-handle{width:40px;height:5px;background:#cbd5e1;border-radius:99px;margin:8px auto 4px;cursor:pointer}
 .sheet-bar{display:flex;align-items:center;justify-content:space-between;padding:4px 18px 12px;cursor:pointer}
 .sheet-recenter{display:flex;align-items:center;gap:10px}
-.recenter-icon{width:40px;height:40px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.recenter-icon{width:44px;height:44px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center}
+.recenter-icon svg{width:24px;height:24px;fill:#38bdf8}
 .sheet-time-dist{display:flex;flex-direction:column}
 .sheet-time-dist b{font-size:18px;font-weight:900;color:#0f172a}
 .sheet-time-dist span{font-size:13px;color:#64748b;font-weight:700}
@@ -205,9 +218,27 @@ body.nav-mode .hazard-sign{top:174px}
   </div>
 </div>
 
+<div class="traffic-light-hud" id="trafficLightHud">
+  <div class="traffic-light-visual">
+    <div class="traffic-light-dot red" id="tlDotRed"></div>
+    <div class="traffic-light-dot yellow" id="tlDotYellow"></div>
+    <div class="traffic-light-dot green" id="tlDotGreen"></div>
+  </div>
+  <div class="traffic-light-info">
+    <b id="tlStatusText">Semáforo à frente</b>
+    <span id="tlCountdownText">Aprox. 120m • calculando ciclo</span>
+  </div>
+</div>
+
 <div class="current-road-pill" id="currentRoadPill">Via Atual</div>
 <div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
-<button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar mapa">🎯</button>
+
+<!-- BOTÃO COM ALFINETE VERMELHO -->
+<button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar no veículo">
+  <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ef4444"/><circle cx="12" cy="9" r="2.5" fill="#ffffff"/></svg>
+</button>
+
+<!-- BOTÃO REPORTAR VETORIAL (TRIÂNGULO COM R) -->
 <button class="nav-report-btn" id="navReportBtn" title="Reportar ocorrência">
   <svg viewBox="0 0 24 24"><polygon points="12 2 22 20 2 20" fill="none" stroke="#fef3c7" stroke-width="2.5"/><text x="12" y="17" font-size="11" font-weight="900" fill="#fef3c7" text-anchor="middle">R</text></svg>
 </button>
@@ -225,7 +256,10 @@ body.nav-mode .hazard-sign{top:174px}
   <div class="sheet-handle" id="sheetHandle"></div>
   <div class="sheet-bar" id="sheetBar">
     <div class="sheet-recenter" id="btnRecenter">
-      <div class="recenter-icon">🎯</div>
+      <!-- BONEQUINHO ANDANDO NO PAINEL INFERIOR -->
+      <div class="recenter-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M14 8h-4l-1 5 3-1 1 7h2l-1-8 2-1z"/></svg>
+      </div>
       <div class="sheet-time-dist">
         <b id="sheetTime">-- min</b>
         <span id="sheetDist">-- km • Chegada prevista</span>
@@ -257,17 +291,35 @@ body.nav-mode .hazard-sign{top:174px}
 <div class="hazard-sign" id="hazardSign"></div>
 <div class="danger-banner" id="dangerBanner"><b id="dangerBannerText"></b><button id="dangerBannerClose">✕</button></div>
 
+<!-- MODAL REPORTAR EM TEMPO REAL -->
 <div class="modal-overlay" id="reportLiveModal">
   <div class="modal-card">
-    <h2>⚠️ Reportar em Tempo Real</h2>
-    <p>Selecione a ocorrência na sua posição atual para alertar os outros motoristas.</p>
+    <h2>⚠️ Central de Alertas e Ocorrências</h2>
+    <p>Selecione a ocorrência na sua posição atual ou acesse os serviços rápidos.</p>
     <div class="modal-options">
       <button onclick="sendLiveReport('tiroteio', '🔴 Tiroteio / Conflito')"><span class="icon">🔴</span> Tiroteio / Conflito</button>
       <button onclick="sendLiveReport('blitz', '🚔 Blitz / Operação')"><span class="icon">🚔</span> Blitz / Operação Policial</button>
       <button onclick="sendLiveReport('bloqueio', '🚧 Pista Bloqueada')"><span class="icon">🚧</span> Pista Bloqueada / Trânsito</button>
       <button onclick="sendLiveReport('perigo', '🚨 Perigo na Pista')"><span class="icon">🚨</span> Veículo Suspeito / Perigo</button>
+      <button onclick="openChatFromReport()" style="background:#2e1065;border-color:#a855f7"><span class="icon">💬</span> Abrir Chat Comunitário</button>
+      <button onclick="cancelMyLastReport()" style="background:#450a0a;border-color:#ef4444"><span class="icon">↩️</span> Desreportar / Cancelar Meu Alerta</button>
     </div>
-    <button class="modal-close" id="closeReportLiveModal">Cancelar</button>
+    <button class="modal-close" id="closeReportLiveModal">Fechar</button>
+  </div>
+</div>
+
+<!-- MODAL DE SELEÇÃO DE TEMA -->
+<div class="modal-overlay" id="themeSelectModal">
+  <div class="modal-card">
+    <h2>🌓 Selecionar Tema do Mapa</h2>
+    <p>Escolha o estilo de visualização do mapa:</p>
+    <div class="modal-options">
+      <button onclick="setMapThemeDirect('auto')"><span class="icon">⚡</span> Automático (Dia/Noite)</button>
+      <button onclick="setMapThemeDirect('light')"><span class="icon">☀️</span> Modo Dia (Claro)</button>
+      <button onclick="setMapThemeDirect('dark')"><span class="icon">🌙</span> Modo Noite (Escuro Nítido)</button>
+      <button onclick="setMapThemeDirect('sat')"><span class="icon">🛰️</span> Imagens de Satélite</button>
+    </div>
+    <button class="modal-close" id="closeThemeSelectModal">Fechar</button>
   </div>
 </div>
 
@@ -331,14 +383,13 @@ body.nav-mode .hazard-sign{top:174px}
     <h2>Camadas e Serviços</h2>
     <p>Acesse as opções adicionais e controles do aplicativo.</p>
     <div class="modal-options">
+      <button id="modalThemeOption"><span class="icon">🌓</span> Alternar Tema (Dia / Noite / Satélite / Auto)</button>
       <button id="modalTransport"><span class="icon">🚗</span> Modo de Transporte</button>
       <button id="modalSpeedSound"><span class="icon">⚡</span> Alerta Sonoro de Velocidade (ON/OFF)</button>
-      <button id="modalStreetView"><span class="icon">👁️</span> Google Street View</button>
-      <button id="modalCommunity"><span class="icon">🟥</span> Zonas de Risco</button>
-      <button id="modalFuel"><span class="icon">⛽</span> Postos de Combustível</button>
-      <button id="modalSatellite"><span class="icon">🛰️</span> Visualização Satélite</button>
+      <button id="modalStreetView">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="3" fill="#fbbf24"/><path d="M12 9.2c-3 0-5.4 2.1-5.4 4.8v1.6h2l.6 6.4h5.6l.6-6.4h2v-1.6c0-2.7-2.4-4.8-5.4-4.8z" fill="#fbbf24"/></svg></span> Google Street View
+      </button>
       <button id="modalLocate"><span class="icon">📍</span> Centralizar GPS</button>
-      <button id="modalTheme"><span class="icon">🌓</span> Alternar Tema</button>
     </div>
     <button class="modal-close" id="closeLayers">Fechar</button>
   </div>
@@ -399,7 +450,7 @@ function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
 }
 
 const rawAreas = [
-  // SANTA CRUZ (COORDENADAS PRECISAS E POLÍGONOS SUAVES)
+  // SANTA CRUZ (RAIOS CALIBRADOS DE 250m a 350m)
   {name:'Cesarão', c:[-43.66027,-22.93587], r:0.35, type:'conflito', major:true},
   {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.35, type:'conflito', major:true},
   {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.30, type:'conflito', major:true},
@@ -410,7 +461,6 @@ const rawAreas = [
   // DEMAIS ZONAS / EIXO AV. BRASIL
   {name:'Carobinha / Barbante', c:[-43.5419,-22.8631], r:0.35, type:'conflito'},
   {name:'Vila Nova (Cabuçu)', c:[-43.5283,-22.8725], r:0.30, type:'conflito'},
-  {name:'Pedregoso / Pai João', c:[-43.5600,-22.8950], r:0.30, type:'conflito'},
   {name:'Vila Aliança', c:[-43.4889,-22.8719], r:0.40, type:'conflito'},
   {name:'Vila Kennedy', c:[-43.4772,-22.8597], r:0.45, type:'conflito', major:true},
   {name:'Complexo da Coreia', c:[-43.4958,-22.8833], r:0.45, type:'conflito'},
@@ -518,6 +568,7 @@ let isRerouting = false;
 let soundEnabled = true;
 let speedSoundEnabled = true;
 let currentSpeedKmh = 0;
+let myLastReportId = null;
 
 function toast(msg, ms = 3200) {
   const e = document.getElementById('toast');
@@ -654,9 +705,7 @@ map.on('dragstart', (e) => { if (e.originalEvent) pauseFollow(); });
 map.on('zoomstart', (e) => { if (e.originalEvent) pauseFollow(); });
 map.on('rotatestart', (e) => { if (e.originalEvent) pauseFollow(); });
 
-// ================================================================
-// ATUALIZAÇÃO DIRETA DO GPS (SEM TRAVAMENTO DE THREAD)
-// ================================================================
+// ATUALIZAÇÃO DIRETA DO GPS
 function updateUserMarker(coords, heading = 0) {
   if (!userMarker) {
     const el = document.createElement('div');
@@ -705,6 +754,7 @@ function startGPSWatch() {
     updateNavigation();
     checkProximityDanger();
     checkHazardsProximity();
+    updateTrafficLightSimulation();
     checkOffRoute();
   }, e => {
     setGPS(false, e.code === 1 ? 'GPS BLOQ.' : 'GPS...');
@@ -733,9 +783,7 @@ function checkSpeedLimits() {
   }
 }
 
-// ================================================================
-// POSTOS DE COMBUSTÍVEL CENTRADOS NA POSIÇÃO DO MOTORISTA
-// ================================================================
+// POSTOS DE COMBUSTÍVEL CENTRADOS NO GPS
 let allFuelStations = [];
 let fuelMarkersMap = {};
 let openPopupKey = null;
@@ -773,7 +821,6 @@ function updateFuelVisibility() {
   let visible = [...allFuelStations];
   if (currentFuelFilter === 'gnv') visible = visible.filter(f => f.gnv);
   
-  // Ordena rigorosamente pelos postos mais próximos do veículo
   visible.sort((a, b) => distanceKm([a.lng, a.lat], currentCenter) - distanceKm([b.lng, b.lat], currentCenter));
   renderFuel(visible.slice(0, 45));
 }
@@ -861,29 +908,42 @@ document.getElementById('soundBtn').onclick = () => {
   toast(soundEnabled ? 'Voz ativada' : 'Voz silenciada');
 };
 
-function applyTheme() {
-  document.getElementById('themeChip').textContent = '🌓 ' + (themeMode === 'auto' ? 'Tema: Auto' : themeMode === 'dark' ? 'Tema: Escuro' : 'Tema: Claro');
-  const desired = (() => {
-    if (satelliteVisible) return 'satellite';
-    const isNight = () => { const h = new Date().getHours(); return (h >= 18 || h < 6); };
-    const activeDark = themeMode === 'dark' || (themeMode === 'auto' && isNight());
-    return activeDark ? 'dark' : 'light';
-  })();
-  if (desired === currentBaseStyle) return;
+// CONTROLE DE TEMAS
+function setMapThemeDirect(mode) {
+  themeMode = mode;
+  document.getElementById('themeSelectModal').classList.remove('show');
+  document.getElementById('layersModal').classList.remove('show');
+  
+  satelliteVisible = mode === 'sat';
+  document.getElementById('satChip').classList.toggle('active', satelliteVisible);
+
+  let desired = 'dark';
+  if (mode === 'sat') desired = 'satellite';
+  else if (mode === 'light') desired = 'light';
+  else if (mode === 'dark') desired = 'dark';
+  else {
+    const h = new Date().getHours();
+    desired = (h >= 18 || h < 6) ? 'dark' : 'light';
+  }
+
   currentBaseStyle = desired;
   const styleUrl = desired === 'satellite' ? buildSatelliteStyle() : (desired === 'dark' ? STYLE_DARK : STYLE_LIGHT);
   map.setStyle(styleUrl);
+  
+  const labels = { auto: 'Tema: Auto', light: 'Tema: Claro', dark: 'Tema: Escuro', sat: 'Tema: Satélite' };
+  document.getElementById('themeChip').textContent = '🌓 ' + (labels[mode] || 'Tema');
+  toast('Tema atualizado: ' + mode.toUpperCase());
 }
-function cycleTheme() {
-  themeMode = themeMode === 'auto' ? 'dark' : themeMode === 'dark' ? 'light' : 'auto';
-  applyTheme();
-  toast('Modo: ' + (themeMode === 'auto' ? 'Automático' : themeMode === 'dark' ? 'Escuro' : 'Claro'));
-}
-document.getElementById('themeChip').onclick = cycleTheme;
+
+document.getElementById('themeChip').onclick = () => document.getElementById('themeSelectModal').classList.add('show');
+document.getElementById('modalThemeOption').onclick = () => {
+  document.getElementById('layersModal').classList.remove('show');
+  document.getElementById('themeSelectModal').classList.add('show');
+};
+document.getElementById('closeThemeSelectModal').onclick = () => document.getElementById('themeSelectModal').classList.remove('show');
+
 document.getElementById('satChip').onclick = () => {
-  satelliteVisible = !satelliteVisible;
-  document.getElementById('satChip').classList.toggle('active', satelliteVisible);
-  applyTheme();
+  setMapThemeDirect(satelliteVisible ? 'dark' : 'sat');
 };
 
 // BUSCA E ROTAS
@@ -1121,7 +1181,7 @@ function updateNavigation() {
   });
 }
 
-// LOMBADAS, RADARES E SEMÁFOROS
+// LOMBADAS, RADARES E SEMÁFOROS (AGRUPADOS E SEM FUNDO)
 let routeHazards = [];
 let hazardMarkers = [];
 
@@ -1185,6 +1245,49 @@ function checkHazardsProximity() {
   }
 }
 
+// SIMULAÇÃO E DETECÇÃO DE SEMÁFORO À FRENTE
+function updateTrafficLightSimulation() {
+  const hud = document.getElementById('trafficLightHud');
+  if (!navActive || !userPos) { hud.classList.remove('show'); return; }
+
+  let nearestTl = null, nearestDist = Infinity;
+  routeHazards.forEach(h => {
+    if (h.type !== 'semaforo') return;
+    const d = distanceKm(userPos, h.coords) * 1000;
+    if (d < nearestDist) { nearestDist = d; nearestTl = h; }
+  });
+
+  if (nearestTl && nearestDist <= 180) {
+    hud.classList.add('show');
+    const sec = Math.floor((Date.now() / 1000) % 60);
+    const dRed = document.getElementById('tlDotRed');
+    const dYel = document.getElementById('tlDotYellow');
+    const dGrn = document.getElementById('tlDotGreen');
+    const txtStatus = document.getElementById('tlStatusText');
+    const txtCount = document.getElementById('tlCountdownText');
+
+    dRed.className = 'traffic-light-dot red';
+    dYel.className = 'traffic-light-dot yellow';
+    dGrn.className = 'traffic-light-dot green';
+
+    if (sec < 28) {
+      dGrn.classList.add('active');
+      txtStatus.textContent = '🟢 Semáforo Aberto';
+      txtCount.textContent = `A ${Math.round(nearestDist)}m • Fecha em ~${28 - sec}s`;
+    } else if (sec < 33) {
+      dYel.classList.add('active');
+      txtStatus.textContent = '🟡 Semáforo em Atenção';
+      txtCount.textContent = `A ${Math.round(nearestDist)}m • Fechando em ~${33 - sec}s`;
+    } else {
+      dRed.classList.add('active');
+      txtStatus.textContent = '🔴 Semáforo Fechado';
+      txtCount.textContent = `A ${Math.round(nearestDist)}m • Abre em ~${60 - sec}s`;
+    }
+  } else {
+    hud.classList.remove('show');
+  }
+}
+
 function startNav() {
   if (!routeData) { toast('Trace uma rota primeiro.'); return; }
   navActive = true;
@@ -1203,6 +1306,7 @@ function stopNav() {
   navActive = false;
   document.body.classList.remove('nav-mode');
   document.getElementById('wazeHud').classList.remove('show');
+  document.getElementById('trafficLightHud').classList.remove('show');
   document.getElementById('mainTopbar').classList.remove('hide-nav');
   document.getElementById('mainBottomActions').classList.remove('hide-nav');
   document.getElementById('hazardSign').classList.remove('show');
@@ -1309,16 +1413,7 @@ document.getElementById('modalStreetView').onclick = () => {
   openExternal(`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${target[1]},${target[0]}`);
   document.getElementById('layersModal').classList.remove('show');
 };
-document.getElementById('modalCommunity').onclick = () => { toggleCommunityVisibility(); document.getElementById('layersModal').classList.remove('show'); };
-document.getElementById('modalFuel').onclick = () => { document.getElementById('layersModal').classList.remove('show'); document.getElementById('fuelFilterModal').classList.add('show'); };
-document.getElementById('modalSatellite').onclick = () => {
-  satelliteVisible = !satelliteVisible;
-  document.getElementById('satChip').classList.toggle('active', satelliteVisible);
-  applyTheme();
-  document.getElementById('layersModal').classList.remove('show');
-};
 document.getElementById('modalLocate').onclick = () => { document.getElementById('layersModal').classList.remove('show'); locate(); };
-document.getElementById('modalTheme').onclick = () => { cycleTheme(); document.getElementById('layersModal').classList.remove('show'); };
 
 // REPORTES EM TEMPO REAL
 let communityEventMarkers = {};
@@ -1339,12 +1434,37 @@ function sendLiveReport(type, label) {
     coords: userPos,
     time: Date.now()
   };
+  myLastReportId = evt.id;
   if (mqttClient && mqttClient.connected) {
     mqttClient.publish('radarseguro-rj-pro/eventos/v1', JSON.stringify(evt));
   }
   renderCommunityEventMarker(evt);
   document.getElementById('reportLiveModal').classList.remove('show');
   toast('Ocorrência reportada para todos os motoristas!');
+}
+
+function cancelMyLastReport() {
+  if (!myLastReportId) {
+    toast('Você não reportou nenhuma ocorrência recente.');
+    document.getElementById('reportLiveModal').classList.remove('show');
+    return;
+  }
+  if (communityEventMarkers[myLastReportId]) {
+    communityEventMarkers[myLastReportId].remove();
+    delete communityEventMarkers[myLastReportId];
+  }
+  if (mqttClient && mqttClient.connected) {
+    mqttClient.publish('radarseguro-rj-pro/eventos/cancel/v1', JSON.stringify({ id: myLastReportId }));
+  }
+  myLastReportId = null;
+  document.getElementById('reportLiveModal').classList.remove('show');
+  toast('Ocorrência desfeita e removida do mapa.');
+}
+
+function openChatFromReport() {
+  document.getElementById('reportLiveModal').classList.remove('show');
+  document.getElementById('chatModal').classList.add('show');
+  renderChat();
 }
 
 function renderCommunityEventMarker(evt) {
@@ -1387,12 +1507,18 @@ const mqttClient = mqtt.connect('wss://broker.emqx.io:8084/mqtt', { clientId: 'r
 mqttClient.on('connect', () => {
   mqttClient.subscribe('radarseguro-rj-pro/chat/v1');
   mqttClient.subscribe('radarseguro-rj-pro/eventos/v1');
+  mqttClient.subscribe('radarseguro-rj-pro/eventos/cancel/v1');
   document.getElementById('chatStatus').textContent = '🟢 Conectado ao chat comunitário.';
 });
 mqttClient.on('message', (t, p) => {
   try {
     const msg = JSON.parse(p.toString());
-    if (t === 'radarseguro-rj-pro/eventos/v1') {
+    if (t === 'radarseguro-rj-pro/eventos/cancel/v1') {
+      if (communityEventMarkers[msg.id]) {
+        communityEventMarkers[msg.id].remove();
+        delete communityEventMarkers[msg.id];
+      }
+    } else if (t === 'radarseguro-rj-pro/eventos/v1') {
       renderCommunityEventMarker(msg);
       toast(`⚠️ Novo alerta: ${msg.label}`);
     } else {
