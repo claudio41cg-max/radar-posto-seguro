@@ -105,19 +105,13 @@ body.nav-mode .side{top:118px}
 
 .user-marker-waze{width:52px;height:52px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="%230284c7" opacity="0.25"/><circle cx="26" cy="26" r="18" fill="%230284c7" opacity="0.45"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5" stroke-linejoin="round"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;transform:translate(-50%,-50%);filter:drop-shadow(0 4px 10px rgba(0,0,0,0.6))}
 
-.fuel-marker{width:28px;height:28px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;cursor:pointer;transition:opacity .3s}
+.fuel-marker{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;cursor:pointer;transition:transform .2s}
+.fuel-marker:hover{transform:scale(1.15)}
 .fuel-marker.verde{background:#22c55e}.fuel-marker.laranja{background:#f59e0b}.fuel-marker.vermelho{background:#dc2626}.fuel-marker.gnv{background:#16a34a}
 
 /* ÍCONES VETORIAIS HD SEM FUNDO */
 .hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.85))}
 .hazard-marker svg{width:32px;height:32px}
-
-.community-event-marker{display:flex;align-items:center;justify-content:center;font-size:26px;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.85));cursor:pointer;animation:pulseEvent 1.5s infinite}
-@keyframes pulseEvent{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.18)}
-  100%{transform:scale(1)}
-}
 
 .bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
 .bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
@@ -263,7 +257,6 @@ body.nav-mode .hazard-sign{top:174px}
 <div class="hazard-sign" id="hazardSign"></div>
 <div class="danger-banner" id="dangerBanner"><b id="dangerBannerText"></b><button id="dangerBannerClose">✕</button></div>
 
-<!-- MODAL REPORTAR EM TEMPO REAL -->
 <div class="modal-overlay" id="reportLiveModal">
   <div class="modal-card">
     <h2>⚠️ Reportar em Tempo Real</h2>
@@ -406,7 +399,7 @@ function makePerimeter(lon, lat, rKm = 0.30, points = 48) {
 }
 
 const rawAreas = [
-  // SANTA CRUZ (RAIOS REDUZIDOS 250m a 350m)
+  // SANTA CRUZ (COORDENADAS PRECISAS E POLÍGONOS SUAVES)
   {name:'Cesarão', c:[-43.66027,-22.93587], r:0.35, type:'conflito', major:true},
   {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.35, type:'conflito', major:true},
   {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.30, type:'conflito', major:true},
@@ -513,8 +506,6 @@ const communityData = rawAreas.map(a => ({
 
 let themeMode = 'auto';
 let userPos = null, destPos = null, routeData = null;
-let currentInterpolatedPos = null, currentInterpolatedHeading = 0;
-let targetPos = null, targetHeading = 0;
 let navActive = false, watchId = null, wakeLock = null, userMarker = null;
 let fuelVisible = true, communityVisible = true, satelliteVisible = false;
 let geocodeTimer = null, geocodeAbort = null, lastGeocodeAt = 0, toastTimer = null;
@@ -652,8 +643,6 @@ map.on('style.load', () => {
 
 map.once('load', () => {
   startGPSWatch();
-  fetchFuelStations();
-  animateUserMarkerSmooth();
 });
 
 function pauseFollow() {
@@ -665,40 +654,29 @@ map.on('dragstart', (e) => { if (e.originalEvent) pauseFollow(); });
 map.on('zoomstart', (e) => { if (e.originalEvent) pauseFollow(); });
 map.on('rotatestart', (e) => { if (e.originalEvent) pauseFollow(); });
 
-// SUAVIZAÇÃO DO CURSOR
-function animateUserMarkerSmooth() {
-  if (userMarker && targetPos && currentInterpolatedPos) {
-    currentInterpolatedPos[0] += (targetPos[0] - currentInterpolatedPos[0]) * 0.15;
-    currentInterpolatedPos[1] += (targetPos[1] - currentInterpolatedPos[1]) * 0.15;
-    
-    let diffHeading = targetHeading - currentInterpolatedHeading;
-    while (diffHeading < -180) diffHeading += 360;
-    while (diffHeading > 180) diffHeading -= 360;
-    currentInterpolatedHeading += diffHeading * 0.15;
-
-    userMarker.setLngLat(currentInterpolatedPos);
-    userMarker.setRotation(currentInterpolatedHeading);
-
-    if (navActive && followMode && !isRerouting) {
-      map.easeTo({
-        center: currentInterpolatedPos,
-        bearing: currentInterpolatedHeading,
-        duration: 80
-      });
-    }
-  }
-  requestAnimationFrame(animateUserMarkerSmooth);
-}
-
+// ================================================================
+// ATUALIZAÇÃO DIRETA DO GPS (SEM TRAVAMENTO DE THREAD)
+// ================================================================
 function updateUserMarker(coords, heading = 0) {
-  targetPos = coords;
-  targetHeading = heading;
   if (!userMarker) {
-    currentInterpolatedPos = [...coords];
-    currentInterpolatedHeading = heading;
     const el = document.createElement('div');
     el.className = 'user-marker-waze';
     userMarker = new maplibregl.Marker({ element: el, rotationAlignment: 'map' }).setLngLat(coords).addTo(map);
+  } else {
+    userMarker.setLngLat(coords);
+    if (heading != null && !Number.isNaN(heading)) {
+      userMarker.setRotation(heading);
+    }
+  }
+
+  if (navActive && followMode && !isRerouting) {
+    map.easeTo({
+      center: coords,
+      zoom: 18,
+      pitch: 62,
+      bearing: (heading != null && !Number.isNaN(heading)) ? heading : map.getBearing(),
+      duration: 350
+    });
   }
 }
 
@@ -709,6 +687,7 @@ function startGPSWatch() {
     const isFirst = !userPos;
     userPos = [p.coords.longitude, p.coords.latitude];
     const heading = p.coords.heading || 0;
+    
     updateUserMarker(userPos, heading);
     setGPS(true, 'GPS ATIVO');
 
@@ -717,7 +696,11 @@ function startGPSWatch() {
 
     checkSpeedLimits();
 
-    if (isFirst) map.flyTo({ center: userPos, zoom: 15.5, duration: 700 });
+    if (isFirst) {
+      map.flyTo({ center: userPos, zoom: 15.5, duration: 700 });
+      fetchFuelStations(userPos);
+    }
+    
     updateFuelVisibility();
     updateNavigation();
     checkProximityDanger();
@@ -750,17 +733,19 @@ function checkSpeedLimits() {
   }
 }
 
-// POSTOS DE COMBUSTÍVEL
+// ================================================================
+// POSTOS DE COMBUSTÍVEL CENTRADOS NA POSIÇÃO DO MOTORISTA
+// ================================================================
 let allFuelStations = [];
 let fuelMarkersMap = {};
 let openPopupKey = null;
 
 function fuelKey(f) { return `${f.lat.toFixed(4)},${f.lng.toFixed(4)}`; }
 
-async function fetchFuelStations() {
+async function fetchFuelStations(customCenter) {
   try {
-    const center = userPos || RJ_CENTER;
-    const q = `[out:json][timeout:15];(node["amenity"="fuel"](around:7000,${center[1]},${center[0]});way["amenity"="fuel"](around:7000,${center[1]},${center[0]}););out center tags;`;
+    const center = customCenter || userPos || RJ_CENTER;
+    const q = `[out:json][timeout:15];(node["amenity"="fuel"](around:8000,${center[1]},${center[0]});way["amenity"="fuel"](around:8000,${center[1]},${center[0]}););out center tags;`;
     const r = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(q));
     if (!r.ok) return;
     const data = await r.json();
@@ -784,19 +769,16 @@ async function fetchFuelStations() {
 
 function updateFuelVisibility() {
   if (!fuelVisible || currentFuelFilter === 'none' || !allFuelStations.length) { renderFuel([]); return; }
-  const zoom = map.getZoom();
-  if (zoom < 11) { renderFuel([]); return; }
-  const bounds = map.getBounds();
-  const center = map.getCenter();
-  let visible = allFuelStations.filter(f => bounds.contains([f.lng, f.lat]));
+  const currentCenter = userPos || map.getCenter().toArray();
+  let visible = [...allFuelStations];
   if (currentFuelFilter === 'gnv') visible = visible.filter(f => f.gnv);
-  visible.sort((a, b) => distanceKm([a.lng, a.lat], [center.lng, center.lat]) - distanceKm([b.lng, b.lat], [center.lng, center.lat]));
-  visible = visible.slice(0, 50);
-  const opacity = Math.max(0, Math.min(1, (zoom - 11) / 3));
-  renderFuel(visible, opacity);
+  
+  // Ordena rigorosamente pelos postos mais próximos do veículo
+  visible.sort((a, b) => distanceKm([a.lng, a.lat], currentCenter) - distanceKm([b.lng, b.lat], currentCenter));
+  renderFuel(visible.slice(0, 45));
 }
 
-function renderFuel(items, opacity = 1) {
+function renderFuel(items) {
   const wanted = new Map(items.map(it => [fuelKey(it), it]));
   Object.keys(fuelMarkersMap).forEach(key => {
     if (!wanted.has(key) && key !== openPopupKey) {
@@ -805,27 +787,24 @@ function renderFuel(items, opacity = 1) {
     }
   });
   wanted.forEach((item, key) => {
-    if (fuelMarkersMap[key]) {
-      fuelMarkersMap[key].el.style.opacity = String(opacity);
-      return;
+    if (!fuelMarkersMap[key]) {
+      createFuelMarker(item);
     }
-    createFuelMarker(item, opacity);
   });
 }
 
-function createFuelMarker(item, opacity) {
+function createFuelMarker(item) {
   const key = fuelKey(item);
   const el = document.createElement('div');
   el.className = 'fuel-marker verde' + (item.gnv ? ' gnv' : '');
   el.textContent = item.gnv ? 'G' : '⛽';
-  el.style.opacity = String(opacity);
 
   const popupEl = document.createElement('div');
   popupEl.className = 'fuel-popup';
   popupEl.innerHTML = `
     <h3>${safe(item.nome)}</h3>
     ${item.bandeira ? `<div class="info"><b>Bandeira:</b> ${safe(item.bandeira)}</div>` : ''}
-    <span class="status verde">🟢 Posto Ativo</span>
+    <span class="status verde">🟢 Posto Regular</span>
     ${item.endereco ? `<div class="info"><b>Endereço:</b> ${safe(item.endereco)}</div>` : ''}
     ${item.gnv ? '<div class="info" style="color:#4ade80">✅ GNV disponível</div>' : ''}
     <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
@@ -842,8 +821,10 @@ function createFuelMarker(item, opacity) {
   fuelMarkersMap[key] = { marker, popup, el, item };
 }
 
-map.on('moveend', updateFuelVisibility);
-map.on('zoomend', updateFuelVisibility);
+map.on('moveend', () => {
+  if (userPos && allFuelStations.length === 0) fetchFuelStations(userPos);
+  updateFuelVisibility();
+});
 
 document.getElementById('fuelChip').onclick = () => {
   document.getElementById('fuelFilterModal').classList.add('show');
@@ -989,6 +970,7 @@ function openNavigationPanel() {
   }
 }
 
+// ROTA DIRETA E EFICIENTE
 async function fetchRoute(a, b) {
   const url = `https://router.project-osrm.org/route/v1/${transportMode}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&alternatives=false&steps=true`;
   const ctrl = new AbortController();
@@ -1139,7 +1121,7 @@ function updateNavigation() {
   });
 }
 
-// LOMBADAS, RADARES E SEMÁFOROS (AGRUPADOS E SEM FUNDO)
+// LOMBADAS, RADARES E SEMÁFOROS
 let routeHazards = [];
 let hazardMarkers = [];
 
@@ -1172,7 +1154,6 @@ async function fetchRouteHazards() {
         const d = pointToSegmentKm([el.lon, el.lat], coords[i], coords[i + 1]);
         if (d * 1000 < 15) { onRoute = true; break; }
       }
-      // Evita sobreposição de ícones duplicados no mesmo trecho
       if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 20)) {
         routeHazards.push({ type, coords: [el.lon, el.lat] });
       }
