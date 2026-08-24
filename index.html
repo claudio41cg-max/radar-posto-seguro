@@ -256,7 +256,6 @@ body.nav-mode .hazard-sign{top:174px}
   <div class="sheet-handle" id="sheetHandle"></div>
   <div class="sheet-bar" id="sheetBar">
     <div class="sheet-recenter" id="btnRecenter">
-      <!-- BONEQUINHO ANDANDO NO PAINEL INFERIOR -->
       <div class="recenter-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M14 8h-4l-1 5 3-1 1 7h2l-1-8 2-1z"/></svg>
       </div>
@@ -1308,7 +1307,9 @@ function updateNavigation() {
   });
 }
 
-// LOMBADAS, RADARES E SEMÁFOROS
+// ================================================================
+// LOMBADAS, RADARES E SEMÁFOROS (CALIBRAÇÃO DE PROXIMIDADE 35 METROS)
+// ================================================================
 let routeHazards = [];
 let hazardMarkers = [];
 
@@ -1324,8 +1325,11 @@ async function fetchRouteHazards() {
   try {
     const coords = routeData.geometry.coordinates;
     let minLon = Infinity, minLat = Infinity, maxLon = -Infinity, maxLat = -Infinity;
-    coords.forEach(([lon, lat]) => { minLon = Math.min(minLon, lon); maxLon = Math.max(maxLon, lon); minLat = Math.min(minLat, lat); maxLat = Math.max(maxLat, lat); });
-    const bbox = `${minLat - 0.005},${minLon - 0.005},${maxLat + 0.005},${maxLon + 0.005}`;
+    coords.forEach(([lon, lat]) => {
+      minLon = Math.min(minLon, lon); maxLon = Math.max(maxLon, lon);
+      minLat = Math.min(minLat, lat); maxLat = Math.max(maxLat, lat);
+    });
+    const bbox = `${minLat - 0.008},${minLon - 0.008},${maxLat + 0.008},${maxLon + 0.008}`;
     const query = `[out:json][timeout:15];(node["traffic_calming"](${bbox});node["highway"="speed_camera"](${bbox});node["highway"="traffic_signals"](${bbox}););out body;`;
     const r = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query));
     if (!r.ok) return;
@@ -1339,9 +1343,10 @@ async function fetchRouteHazards() {
       let onRoute = false;
       for (let i = 0; i < coords.length - 1; i++) {
         const d = pointToSegmentKm([el.lon, el.lat], coords[i], coords[i + 1]);
-        if (d * 1000 < 15) { onRoute = true; break; }
+        if (d * 1000 < 35) { onRoute = true; break; } // Calibrado para capturar obstáculos na via
       }
-      if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 20)) {
+      
+      if (onRoute && !routeHazards.some(h => distanceKm(h.coords, [el.lon, el.lat]) * 1000 < 15)) {
         routeHazards.push({ type, coords: [el.lon, el.lat] });
       }
     });
