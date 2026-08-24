@@ -80,9 +80,11 @@ body.nav-mode .nav-recenter-left{display:flex}
 .nav-recenter-left svg{width:24px;height:24px;display:block}
 .nav-recenter-left:active{border-color:#ef4444;transform:scale(0.95)}
 
-.nav-report-btn{position:fixed;right:14px;bottom:90px;z-index:34;width:52px;height:52px;border-radius:50%;border:2px solid #f59e0b;background:#78350fdd;color:#fef3c7;display:none;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,0.7);cursor:pointer}
+/* BOTÃO DE REPORTE ESTILO WAZE */
+.nav-report-btn{position:fixed;right:14px;bottom:90px;z-index:34;width:56px;height:56px;border-radius:50%;border:3px solid #ffffff;background:#ffcc00;color:#000;display:none;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,0.6);cursor:pointer;transition:transform 0.1s}
+.nav-report-btn:active{transform:scale(0.92)}
 body.nav-mode .nav-report-btn{display:flex}
-.nav-report-btn svg{width:28px;height:28px;fill:#fde68a}
+.nav-report-btn svg{width:28px;height:28px;fill:#000000}
 
 .side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}
 body.nav-mode .side{top:118px}
@@ -116,6 +118,9 @@ body.nav-mode .side{top:118px}
 .btn-maps{background:linear-gradient(135deg, #34a853, #1a73e8)}
 
 .user-marker-waze{width:52px;height:52px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="%230284c7" opacity="0.25"/><circle cx="26" cy="26" r="18" fill="%230284c7" opacity="0.45"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5" stroke-linejoin="round"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;transform:translate(-50%,-50%);filter:drop-shadow(0 4px 10px rgba(0,0,0,0.6))}
+
+/* BANDEIRA DE CHEGADA QUADRICULADA */
+.finish-flag-marker{font-size:36px;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.6));transform:translate(-50%,-100%);pointer-events:none}
 
 .fuel-marker{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;cursor:pointer;transition:transform .2s}
 .fuel-marker:hover{transform:scale(1.15)}
@@ -230,8 +235,9 @@ body.nav-mode .favela-sign{top:132px}
   <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ef4444"/><circle cx="12" cy="9" r="2.5" fill="#ffffff"/></svg>
 </button>
 
+<!-- Botão amarelo de reportar ocorrência estilo Waze -->
 <button class="nav-report-btn" id="navReportBtn" title="Reportar ocorrência">
-  <svg viewBox="0 0 24 24"><polygon points="12 2 22 20 2 20" fill="none" stroke="#fef3c7" stroke-width="2.5"/><text x="12" y="17" font-size="11" font-weight="900" fill="#fef3c7" text-anchor="middle">R</text></svg>
+  <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.5L20 19H4L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
 </button>
 
 <div class="side" id="sideControls">
@@ -494,7 +500,7 @@ const communityData = rawAreas.map(a => ({
 
 let themeMode = 'auto';
 let userPos = null, destPos = null, routeData = null;
-let navActive = false, watchId = null, wakeLock = null, userMarker = null;
+let navActive = false, watchId = null, wakeLock = null, userMarker = null, destinationMarker = null;
 let fuelVisible = true, communityVisible = true, satelliteVisible = false;
 let geocodeTimer = null, geocodeAbort = null, lastGeocodeAt = 0, toastTimer = null;
 let currentStep = 0, sheetExpanded = false;
@@ -679,7 +685,10 @@ function restoreRouteLayer() {
 map.on('style.load', () => {
   addCommunityLayers();
   restoreRouteLayer();
-  if (routeData) renderHazardsOnMap();
+  if (routeData) {
+    renderHazardsOnMap();
+    renderDestinationFlag();
+  }
 });
 
 map.once('load', () => {
@@ -718,6 +727,31 @@ function updateUserMarker(coords, heading = 0) {
   }
 }
 
+// SNAP TO ROAD / PROJEÇÃO CENTRALIZADA NA PISTA
+function snapPointToRoute(p) {
+  if (!navActive || !routeData) return p;
+  const coords = routeData.geometry.coordinates;
+  let min = Infinity;
+  let bestProj = p;
+
+  for (let i = 0; i < coords.length - 1; i++) {
+    const res = pointToSegmentDetails(p, coords[i], coords[i + 1]);
+    if (res.dist < min) {
+      min = res.dist;
+      const cosLat = Math.cos(p[1] * Math.PI / 180);
+      const A = [coords[i][0] * cosLat, coords[i][1]];
+      const B = [coords[i + 1][0] * cosLat, coords[i + 1][1]];
+      const dx = B[0] - A[0], dy = B[1] - A[1];
+      const projX = A[0] + res.t * dx;
+      const projY = A[1] + res.t * dy;
+      bestProj = [projX / cosLat, projY];
+    }
+  }
+
+  // Se o carro estiver a menos de 25 metros do eixo da rua, prende na via
+  return (min * 1000 <= 25) ? bestProj : p;
+}
+
 let lastValidPos = null;
 function startGPSWatch() {
   if (!navigator.geolocation) { setGPS(false, 'SEM GPS'); return; }
@@ -737,7 +771,10 @@ function startGPSWatch() {
     lastValidPos = rawPos;
 
     userPos = rawPos;
-    updateUserMarker(userPos, currentBearing);
+
+    // Aplica o Snap Centralizado na via para o marcador
+    const displayPos = snapPointToRoute(userPos);
+    updateUserMarker(displayPos, currentBearing);
     setGPS(true, 'GPS ATIVO');
 
     currentSpeedKmh = Math.round((p.coords.speed || 0) * 3.6);
@@ -1063,6 +1100,21 @@ function checkDestinationDanger() {
   }
 }
 
+function renderDestinationFlag() {
+  if (destinationMarker) { try { destinationMarker.remove(); } catch(e){} }
+  if (!routeData) return;
+  const coords = routeData.geometry.coordinates;
+  const finalPoint = coords[coords.length - 1];
+
+  const flagEl = document.createElement('div');
+  flagEl.className = 'finish-flag-marker';
+  flagEl.textContent = '🏁';
+
+  destinationMarker = new maplibregl.Marker({ element: flagEl, anchor: 'bottom' })
+    .setLngLat(finalPoint)
+    .addTo(map);
+}
+
 function showRoute() {
   drawRoute(routeData);
   document.getElementById('sheetTime').textContent = Math.max(1, Math.round(routeData.duration / 60)) + ' min';
@@ -1081,6 +1133,7 @@ function drawRoute(r) {
   map.fitBounds(b, { padding: { top: 130, bottom: 140, left: 30, right: 30 }, duration: 700, maxZoom: 17 });
   
   fetchRouteHazards();
+  renderDestinationFlag();
 }
 
 function pointToSegmentDetails(p, a, b) {
@@ -1096,19 +1149,17 @@ function pointToSegmentDetails(p, a, b) {
   return { dist, bearing, t };
 }
 
-// MOTOR DE FORA DE ROTA COM SNAP-TO-ROAD E PROJEÇÃO VETORIAL
+// MOTOR DE FORA DE ROTA
 function checkOffRoute() {
   if (!navActive || !routeData || !userPos || isRerouting) return;
   const coords = routeData.geometry.coordinates;
   let min = Infinity;
-  let bestSegIndex = 0;
   let bestBearing = 0;
 
   for (let i = 0; i < coords.length - 1; i++) {
     const res = pointToSegmentDetails(userPos, coords[i], coords[i + 1]);
     if (res.dist < min) {
       min = res.dist;
-      bestSegIndex = i;
       bestBearing = res.bearing;
     }
   }
@@ -1116,13 +1167,11 @@ function checkOffRoute() {
   const distMeters = min * 1000;
   const bearingDivergence = angleDiff(currentBearing, bestBearing);
 
-  // Se o veículo estiver a menos de 25 metros da rota e no mesmo sentido, mantém no traçado
   if (distMeters <= 25 && bearingDivergence < 55) {
     offRouteCounter = 0;
     return;
   }
 
-  // Se afastou mais de 45m ou virou na rua errada (divergência > 75°), dispara recálculo com debounce
   if (distMeters > 45 || (distMeters > 20 && bearingDivergence > 75)) {
     offRouteCounter++;
     if (offRouteCounter >= 2) {
@@ -1219,7 +1268,6 @@ function updateNavigation() {
       
       const currentPhrase = getManeuverText(s);
       
-      // Fusão: se a próxima manobra estiver a menos de 80m da atual
       if (next && next.distance < 80 && t <= 100) {
         const nextPhrase = getManeuverText(next);
         const fused = t <= 30 ? `Agora, ${currentPhrase} e, em seguida, ${nextPhrase}` : `Em ${t} metros, ${currentPhrase} e, em seguida, ${nextPhrase}`;
@@ -1231,13 +1279,10 @@ function updateNavigation() {
     }
   });
 
-  // Atualiza exibição dos obstáculos removendo os que já ficaram para trás
   renderHazardsOnMap();
 }
 
-// ================================================================
-// LOMBADAS, RADARES E SEMÁFOROS NO SENTIDO DA VIAGEM
-// ================================================================
+// LOMBADAS, RADARES E SEMÁFOROS
 let routeHazards = [];
 let hazardMarkers = [];
 
@@ -1258,7 +1303,6 @@ async function fetchRouteHazards() {
 
   const coords = routeData.geometry.coordinates;
 
-  // Filtra itens fixos locais verificando proximidade e alinhamento
   LOCAL_HAZARDS.forEach(lh => {
     for (let i = 0; i < coords.length - 1; i++) {
       const res = pointToSegmentDetails(lh.coords, coords[i], coords[i + 1]);
@@ -1321,7 +1365,6 @@ function renderHazardsOnMap() {
     }
   }
 
-  // Renderiza apenas obstáculos à frente do ponto atual da corrida
   routeHazards.forEach(h => {
     if (navActive && h.segIndex < currentSeg - 1) return;
 
@@ -1433,6 +1476,8 @@ function clearRoute() {
   hazardMarkers = [];
   routeHazards = [];
   
+  if (destinationMarker) { try { destinationMarker.remove(); } catch(e){} destinationMarker = null; }
+
   routeData = null; 
   destPos = null;
   document.getElementById('wazeSheet').classList.remove('show');
