@@ -523,7 +523,19 @@ const rawAreas = [
 
   // VARGEM GRANDE
   {name:'Novo Palmares', c:[-43.5042,-22.9961], r:0.35, type:'conflito'},
-  {name:'Favela do Cachorro Sentado', c:[-43.4920,-22.9835], r:0.25, type:'conflito'}
+  {name:'Favela do Cachorro Sentado', c:[-43.4920,-22.9835], r:0.25, type:'conflito'},
+
+  // REGIÃO DOS LAGOS (SAQUAREMA A BÚZIOS)
+  {name:'Morro do Cruzeiro (Saquarema Centro)', c:[-42.4840,-22.9280], r:0.30, type:'conflito'},
+  {name:'Sampaio Corrêa / Basileia (Saquarema)', c:[-42.5925,-22.8870], r:0.35, type:'conflito'},
+  {name:'Morro dos Milagres (São Pedro da Aldeia)', c:[-42.0935,-22.8460], r:0.35, type:'conflito'},
+  {name:'Campo do Redondo (São Pedro da Aldeia)', c:[-42.1150,-22.8390], r:0.30, type:'conflito'},
+  {name:'Jardim Esperança (Cabo Frio)', c:[-42.0620,-22.8645], r:0.45, type:'conflito', major:true},
+  {name:'Manoel Corrêa (Cabo Frio)', c:[-42.0460,-22.8980], r:0.35, type:'conflito', major:true},
+  {name:'Morro da Cabocla (Arraial do Cabo)', c:[-42.0255,-22.9640], r:0.30, type:'conflito'},
+  {name:'Figueira / Monte Alto (Arraial do Cabo)', c:[-42.1585,-22.9360], r:0.40, type:'conflito'},
+  {name:'Rasa / Cruzeiro da Rasa (Armação dos Búzios)', c:[-41.9540,-22.7595], r:0.40, type:'conflito', major:true},
+  {name:'Cembra / Cemitério (Búzios)', c:[-41.9015,-22.7660], r:0.30, type:'conflito'}
 ];
 
 const communityData = rawAreas.map(a => ({
@@ -762,7 +774,7 @@ function checkSpeedLimits() {
   }
 }
 
-// POSTOS DE COMBUSTÍVEL
+// POSTOS DE COMBUSTÍVEL CENTRADOS NO GPS
 let allFuelStations = [];
 let fuelMarkersMap = {};
 let openPopupKey = null;
