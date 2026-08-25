@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#003438">
+<meta name="theme-color" content="#002427">
 <title>Radar Seguro RJ PRO</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 <style>
@@ -34,7 +34,6 @@ button,input{font:inherit}
 .chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;flex-shrink:0}
 .chip.active{background:#0284c7;border-color:#38bdf8}
 
-/* HUD DE NAVEGAÇÃO AMPLIADO */
 .waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#003438;color:#fff;padding:14px 18px 10px;box-shadow:0 8px 24px rgba(0,0,0,0.8);display:none;flex-direction:column}
 .waze-top-hud.show{display:flex}
 .waze-maneuver-row{display:flex;align-items:center;gap:18px}
@@ -43,7 +42,6 @@ button,input{font:inherit}
 .waze-dist{font-size:32px;font-weight:900;letter-spacing:-1px;line-height:1.1}
 .waze-street{font-size:22px;font-weight:900;color:#38bdf8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* FAIXAS DE ROLAMENTO */
 .lane-guidance-box{display:flex;gap:8px;margin:8px 0 2px}
 .lane-box{width:32px;height:34px;border:2px solid rgba(56,189,248,0.5);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;background:#002427;color:#64748b}
 .lane-box.active-lane{background:#0284c7;color:#fff;border-color:#fff;box-shadow:0 0 10px #38bdf8}
@@ -79,7 +77,6 @@ body.nav-mode .current-road-pill{display:block}
 body.nav-mode .speedometer-box{display:flex}
 @keyframes pulseRed{from{transform:scale(1)}to{transform:scale(1.08)}}
 
-/* BOTÃO DE RECENTRALIZAÇÃO COM TEMPO REGRESSIVO */
 .nav-recenter-floating{position:fixed;bottom:155px;left:50%;transform:translateX(-50%);z-index:35;background:#0284c7;color:#fff;padding:12px 24px;border-radius:30px;font-size:14px;font-weight:900;border:2px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,0.8);cursor:pointer;display:none;align-items:center;gap:8px}
 .nav-recenter-floating.show{display:flex}
 
@@ -118,8 +115,6 @@ body.nav-mode .side{top:135px}
 .finish-flag-marker{font-size:36px;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.6))}
 .fuel-marker{width:32px;height:32px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;cursor:pointer}
 .fuel-marker.verde{background:#22c55e}.fuel-marker.gnv{background:#16a34a}
-
-/* ÍCONES DE PERIGO NO CHÃO */
 .hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;pointer-events:none}
 .hazard-marker svg{width:42px;height:42px;display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.9))}
 
@@ -201,7 +196,6 @@ body.nav-mode .side{top:135px}
 <div class="current-road-pill" id="currentRoadPill">Via Atual</div>
 <div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
 
-<!-- BOTÃO DE RECENTRALIZAR COM CONTAGEM REGRESSIVA -->
 <button class="nav-recenter-floating" id="navRecenterFloating">📍 Voltar ao Carro (<span id="recenterTimerCount">10</span>s)</button>
 
 <button class="nav-report-btn" id="navReportBtn" title="Reportar">
@@ -319,21 +313,21 @@ body.nav-mode .side{top:135px}
       let t = len2>0 ? ((P[0]-A[0])*dx + (P[1]-A[1])*dy)/len2 : 0;
       t = Math.max(0, Math.min(1, t));
       const projX=A[0]+t*dx, projY=A[1]+t*dy;
-      return { dist: Utils.distanceKm(p, [projX/cosLat, projY]), bearing: Utils.bearing(a, b), t };
+      return { dist: Utils.distanceKm(p, [projX/cosLat, projY]), bearing: Utils.bearing(a, b), t, projPoint: [projX/cosLat, projY], segIndex: 0 };
     },
-    snapToRoute(p, routeCoords) {
-      if(!routeCoords || !routeCoords.length) return p;
-      let min=Infinity, best=p;
+    snapToRouteStrict(p, routeCoords) {
+      if(!routeCoords || routeCoords.length < 2) return { point: p, index: 0, distance: 0, bearing: 0 };
+      let min=Infinity, best=p, bestIdx=0, bestBearing=0;
       for(let i=0; i<routeCoords.length-1; i++){
         const res = Utils.pointToSegment(p, routeCoords[i], routeCoords[i+1]);
         if(res.dist < min){
           min = res.dist;
-          const cosLat = Math.cos(p[1]*Math.PI/180);
-          const A=[routeCoords[i][0]*cosLat, routeCoords[i][1]], B=[routeCoords[i+1][0]*cosLat, routeCoords[i+1][1]];
-          best = [(A[0] + res.t*(B[0]-A[0]))/cosLat, A[1] + res.t*(B[1]-A[1])];
+          best = res.projPoint;
+          bestIdx = i;
+          bestBearing = res.bearing;
         }
       }
-      return (min*1000 <= 25) ? best : p;
+      return { point: (min*1000 <= 35) ? best : p, index: bestIdx, distance: min*1000, bearing: bestBearing };
     },
     sanitize(str) {
       const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};
@@ -345,8 +339,9 @@ body.nav-mode .side{top:135px}
     queue: [], speaking: false, enabled: true,
     speak(text, priority=false) {
       if(!this.enabled || !('speechSynthesis' in window) || window.App?.isRerouting) return;
-      if(priority){ speechSynthesis.cancel(); this.queue=[text]; }
-      else { if(this.queue.includes(text)) return; this.queue.push(text); }
+      if(priority){ speechSynthesis.cancel(); this.queue=[]; }
+      if(this.queue.includes(text)) return;
+      this.queue.push(text);
       this.process();
     },
     process() {
@@ -355,13 +350,36 @@ body.nav-mode .side{top:135px}
       try {
         const u = new SpeechSynthesisUtterance(text);
         u.lang = 'pt-BR'; u.rate = 1.05; this.speaking = true;
-        u.onend = u.onerror = () => { this.speaking = false; setTimeout(()=>this.process(), 150); };
+        u.onend = u.onerror = () => { this.speaking = false; setTimeout(()=>this.process(), 100); };
         speechSynthesis.speak(u);
       } catch(e){ this.speaking = false; }
     }
   };
 
+  // BASE COMPLETA RESTAURADA COM NOVA IGUAÇU, KM 32, KM 40 E SEROPÉDICA
   const rawAreas = [
+    // BAIXADA / NOVA IGUAÇU / SEROPÉDICA / KM 32 / KM 40
+    {name:'KM 32 (Nova Iguaçu / Seropédica)', c:[-43.5850,-22.7820], r:0.45},
+    {name:'KM 40 (Seropédica / Antiga Rio-SP)', c:[-43.6742,-22.7689], r:0.45},
+    {name:'Lagoinha (Nova Iguaçu / KM 32)', c:[-43.6083,-22.7911], r:0.40},
+    {name:'Marapicu (Nova Iguaçu)', c:[-43.5519,-22.7681], r:0.40},
+    {name:'Guandu (Nova Iguaçu / Seropédica)', c:[-43.6250,-22.7850], r:0.40},
+    {name:'Cabuçu (Nova Iguaçu)', c:[-43.5186,-22.7719], r:0.45},
+    {name:'Valverde (Nova Iguaçu)', c:[-43.5050,-22.7680], r:0.38},
+    {name:'Danon (Nova Iguaçu)', c:[-43.4536,-22.7561], r:0.40},
+    {name:'Dom Bosco (Nova Iguaçu)', c:[-43.4683,-22.7558], r:0.40},
+    {name:'Corumbá (Nova Iguaçu)', c:[-43.4800,-22.7480], r:0.40},
+    {name:'Carlos Sampaio (Nova Iguaçu)', c:[-43.5281,-22.7303], r:0.40},
+    {name:'Austin (Nova Iguaçu)', c:[-43.5210,-22.7210], r:0.40},
+    {name:'Ipiranga (Nova Iguaçu)', c:[-43.4410,-22.7610], r:0.35},
+    {name:'São Simão (Queimados)', c:[-43.5683,-22.7094], r:0.45},
+    {name:'Chatuba (Mesquita)', c:[-43.4183,-22.7817], r:0.40},
+    {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.45},
+    {name:'Guacha (Belford Roxo)', c:[-43.3867,-22.7364], r:0.40},
+    {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45},
+    {name:'Beira-Mar (Caxias)', c:[-43.2756,-22.7661], r:0.40},
+
+    // ZONA OESTE
     {name:'Cesarão (Santa Cruz)', c:[-43.66027,-22.93587], r:0.50},
     {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.45},
     {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.40},
@@ -377,11 +395,15 @@ body.nav-mode .side{top:135px}
     {name:'Complexo do Rio das Pedras', c:[-43.3405,-22.9902], r:0.60},
     {name:'Muzema', c:[-43.3128,-22.9908], r:0.40},
     {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.40},
+
+    // ZONA NORTE / CENTRO / ZONA SUL
     {name:'Complexo da Maré', c:[-43.2415,-22.8555], r:0.65},
     {name:'Complexo do Alemão', c:[-43.2710,-22.8595], r:0.65},
     {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.55},
     {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45},
     {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.45},
+    {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.60},
+    {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.60},
     {name:'Rocinha', c:[-43.2471,-22.9881], r:0.60},
     {name:'Vidigal', c:[-43.2356,-22.9939], r:0.40}
   ];
@@ -408,7 +430,6 @@ body.nav-mode .side{top:135px}
     { type:'lombada', coords:[-43.6406,-22.9090] },
     { type:'lombada', coords:[-43.6410,-22.9075] },
     { type:'lombada', coords:[-43.6415,-22.9062] },
-    { type:'lombada', coords:[-43.6420,-22.9048] },
     { type:'radar', coords:[-43.6402,-22.9090], speedLimit: 60 },
     { type:'radar', coords:[-43.6445,-22.8970], speedLimit: 70 },
     { type:'semaforo', coords:[-43.6400,-22.9125] },
@@ -418,9 +439,10 @@ body.nav-mode .side{top:135px}
   const App = {
     map: null, userPos: null, destPos: null, routeData: null, navActive: false,
     watchId: null, userMarker: null, destMarker: null, currentBearing: 0,
-    themeMode: 'auto', soundEnabled: true, followMode: true, isRerouting: false,
-    hazardMarkers: [], announcedRadars: new Set(), announcedSteps: new Set(),
+    followMode: true, isRerouting: false, hazardMarkers: [],
+    announcedRadars: new Set(), announcedSteps: new Set(),
     recenterTimer: null, recenterCountdown: null, offRouteCounter: 0,
+    routeAbortController: null,
 
     init() {
       this.map = new maplibregl.Map({
@@ -527,12 +549,14 @@ body.nav-mode .side{top:135px}
           if((heading==null || isNaN(heading) || heading===0) && this.lastPos && Utils.distanceKm(this.lastPos, raw)*1000>3){
             heading = Utils.bearing(this.lastPos, raw);
           }
-          if(heading!=null && !isNaN(heading)) this.currentBearing = heading;
-          this.lastPos = raw;
-          this.userPos = raw;
 
-          const displayPos = Utils.snapToRoute(this.userPos, this.routeData?.coords);
-          this.updateUserMarker(displayPos, this.currentBearing||0);
+          // SNAP RÍGIDO NO CENTRO DA RUA
+          const snapResult = Utils.snapToRouteStrict(raw, this.routeData?.coords);
+          this.userPos = snapResult.point;
+          this.currentBearing = (heading!=null && !isNaN(heading)) ? heading : snapResult.bearing;
+          this.lastPos = raw;
+
+          this.updateUserMarker(this.userPos, this.currentBearing);
 
           const badge = document.getElementById('gpsBadge');
           badge.textContent = 'GPS ATIVO';
@@ -545,17 +569,24 @@ body.nav-mode .side{top:135px}
             this._firstFix=true;
             this.map.flyTo({center:this.userPos, zoom:16, duration:600});
           }
+
+          // CORTE PROGRESSIVO DA LINHA DE ROTA CONFORME VOCÊ ANDA
+          if(this.navActive && this.routeData && snapResult.index > 0){
+            this.routeData.coords = this.routeData.coords.slice(snapResult.index);
+            this.updateRouteLineGeometry();
+          }
+
           this.updateNavigation();
           this.checkCommunitySignHUD();
           this.checkSpeedAndRadars(speedKmh);
-          this.checkOffRoute();
+          this.checkOffRoute(snapResult.distance);
         },
         ()=>{
           const badge = document.getElementById('gpsBadge');
           badge.textContent = 'GPS BLOQ.';
           badge.style.background = '#dc2626';
         },
-        { enableHighAccuracy: true, maximumAge: 1000, timeout: 6000 }
+        { enableHighAccuracy: true, maximumAge: 800, timeout: 5000 }
       );
     },
 
@@ -569,19 +600,14 @@ body.nav-mode .side{top:135px}
         if(heading!=null && !isNaN(heading)) this.userMarker.setRotation(heading);
       }
       if(this.navActive && this.followMode && !this.isRerouting){
-        this.map.easeTo({ center: coords, zoom: 18, pitch: 58, bearing: heading||0, duration: 400 });
+        this.map.easeTo({ center: coords, zoom: 18, pitch: 58, bearing: heading||0, duration: 350 });
       }
     },
 
-    // RECÁLCULO AUTOMÁTICO DE ROTA FORA DO TRAJETO
-    checkOffRoute() {
+    // RECÁLCULO RÁPIDO DE ROTA (18 METROS)
+    checkOffRoute(distanceFromLine) {
       if(!this.navActive || !this.routeData || !this.userPos || this.isRerouting) return;
-      const coords = this.routeData.coords;
-      let min = Infinity;
-      for(let i=0; i<coords.length-1; i++){
-        min = Math.min(min, Utils.pointToSegment(this.userPos, coords[i], coords[i+1]).dist);
-      }
-      if(min * 1000 > 40){
+      if(distanceFromLine > 18){
         this.offRouteCounter++;
         if(this.offRouteCounter >= 2){
           this.offRouteCounter = 0;
@@ -595,8 +621,8 @@ body.nav-mode .side{top:135px}
     async recalculateRoute() {
       if(!this.destPos || !this.userPos || this.isRerouting) return;
       this.isRerouting = true;
-      Voice.speak('Recalculando a rota.', true);
-      this.toast('Recalculando rota...');
+      Voice.speak('Recalculando rota.', true);
+      this.toast('Recalculando trajeto...');
       try {
         const newRoute = await this.fetchRoute(this.userPos, this.destPos);
         if(newRoute){
@@ -604,16 +630,19 @@ body.nav-mode .side{top:135px}
           this.drawRoute(this.routeData);
           this.fetchRouteHazards();
           this.announcedSteps.clear();
-          Voice.speak('Rota atualizada.');
+          Voice.speak('Nova rota calculada.');
         }
       } catch(e){}
       this.isRerouting = false;
     },
 
     async fetchRoute(a, b) {
+      if(this.routeAbortController) this.routeAbortController.abort();
+      this.routeAbortController = new AbortController();
+
       try {
         const u = `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=car&instructionsType=text&language=pt-BR`;
-        const r = await fetch(u);
+        const r = await fetch(u, { signal: this.routeAbortController.signal });
         const j = await r.json();
         if(j.routes && j.routes.length > 0){
           const route = j.routes[0];
@@ -635,15 +664,7 @@ body.nav-mode .side{top:135px}
           };
         }
       } catch(err){}
-      const u = `https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&steps=true`;
-      const r = await fetch(u);
-      const j = await r.json();
-      return {
-        coords: j.routes[0].geometry.coordinates,
-        duration: j.routes[0].duration,
-        distance: j.routes[0].distance,
-        steps: (j.routes[0].legs[0]?.steps || []).map(s => ({ name: s.name, maneuver: s.maneuver }))
-      };
+      return null;
     },
 
     async calculateRoute() {
@@ -657,7 +678,7 @@ body.nav-mode .side{top:135px}
         this.fetchRouteHazards();
         document.getElementById('sheetTime').textContent = Math.max(1, Math.round(this.routeData.duration/60)) + ' min';
         document.getElementById('sheetDist').textContent = (this.routeData.distance/1000).toFixed(1) + ' km • Previsto';
-      } catch(e){ this.toast('Erro ao calcular rota.'); }
+      } catch(e){ this.toast('Erro ao calcular trajeto.'); }
     },
 
     drawRoute(r) {
@@ -673,7 +694,7 @@ body.nav-mode .side{top:135px}
 
       map.addLayer({
         id: 'route-outline', type: 'line', source: 'route-src',
-        paint: { 'line-color': '#0f172a', 'line-width': 12 }
+        paint: { 'line-color': '#002427', 'line-width': 13 }
       });
 
       map.addLayer({
@@ -683,6 +704,13 @@ body.nav-mode .side{top:135px}
 
       const b = r.coords.reduce((x,p)=>x.extend(p), new maplibregl.LngLatBounds(r.coords[0], r.coords[0]));
       map.fitBounds(b, { padding: { top:140, bottom:140, left:30, right:30 }, maxZoom:17, duration:500 });
+    },
+
+    updateRouteLineGeometry() {
+      if(!this.routeData || !this.map.getSource('route-src')) return;
+      this.map.getSource('route-src').setData({
+        type: 'Feature', geometry: { type: 'LineString', coordinates: this.routeData.coords }
+      });
     },
 
     renderDestinationFlag() {
@@ -696,10 +724,7 @@ body.nav-mode .side{top:135px}
 
     startNav() {
       if(!this.routeData){ this.toast('Trace uma rota primeiro.'); return; }
-      
-      // DESTRAVAR ÁUDIO DE VOZ NO PRIMEIRO TOQUE
-      Voice.speak('Iniciando navegação.', true);
-
+      Voice.speak('Iniciando Radar Seguro.', true);
       this.navActive = true;
       document.body.classList.add('nav-mode');
       document.getElementById('wazeHud').classList.add('show');
@@ -710,8 +735,11 @@ body.nav-mode .side{top:135px}
       this.updateNavigation();
     },
 
+    // BOTÃO ENCERRAR TOTALMENTE FUNCIONAL
     stopNav() {
       this.navActive = false;
+      this.routeData = null;
+      this.destPos = null;
       document.body.classList.remove('nav-mode');
       document.getElementById('wazeHud').classList.remove('show');
       document.getElementById('favelaHighwaySign').classList.remove('show');
@@ -719,11 +747,21 @@ body.nav-mode .side{top:135px}
       document.getElementById('navRecenterFloating').classList.remove('show');
       document.getElementById('mainTopbar').classList.remove('hide-nav');
       document.getElementById('mainBottomActions').classList.remove('hide-nav');
+      document.getElementById('wazeSheet').classList.remove('show');
+      
+      if(this.map.getLayer('route-line')) this.map.removeLayer('route-line');
+      if(this.map.getLayer('route-outline')) this.map.removeLayer('route-outline');
+      if(this.map.getSource('route-src')) this.map.removeSource('route-src');
+      if(this.destMarker){ this.destMarker.remove(); this.destMarker = null; }
+      
+      this.hazardMarkers.forEach(m=>m.remove());
+      this.hazardMarkers = [];
       speechSynthesis.cancel();
-      this.map.easeTo({ pitch:0, bearing:0, duration:400 });
+      this.map.easeTo({ pitch:0, bearing:0, zoom: 15, duration:400 });
+      this.toast('Navegação encerrada.');
     },
 
-    // ATUALIZAÇÃO DO HUD E VOZ CURVA A CURVA
+    // VOZ INTELIGENTE ANTI-EMBOLO COM TRATAMENTO DE ROTATÓRIAS
     updateNavigation() {
       if(!this.navActive || !this.userPos || !this.routeData || this.isRerouting) return;
       const steps = this.routeData.steps || [];
@@ -746,14 +784,16 @@ body.nav-mode .side{top:135px}
 
       const isLeft = current.maneuver?.modifier?.includes('left');
       const isRight = current.maneuver?.modifier?.includes('right');
-      document.getElementById('hudArrow').textContent = isLeft ? '↰' : isRight ? '↱' : '↑';
+      const isRoundabout = current.maneuver?.type?.includes('roundabout');
+
+      document.getElementById('hudArrow').textContent = isRoundabout ? '🔄' : isLeft ? '↰' : isRight ? '↱' : '↑';
 
       if(next){
         document.getElementById('hudNextStreet').textContent = next.name || 'Próximo acesso';
         document.getElementById('hudNextIcon').textContent = next.maneuver?.modifier?.includes('left') ? '↰' : next.maneuver?.modifier?.includes('right') ? '↱' : '↑';
       }
 
-      // FAIXAS DE ROLAMENTO
+      // FAIXAS DA PISTA
       const laneBox = document.getElementById('laneGuidanceBox');
       laneBox.innerHTML = '';
       for(let i=0; i<3; i++){
@@ -766,19 +806,23 @@ body.nav-mode .side{top:135px}
         laneBox.appendChild(l);
       }
 
-      // DISPARO DE VOZ EM TEMPO REAL
-      const phrase = (isLeft ? 'vire à esquerda na ' : isRight ? 'vire à direita na ' : 'siga em frente na ') + (current.name || 'via');
-      [400, 150, 40].forEach(triggerDist => {
+      // LÓGICA DE ÁUDIO ANTI-EMBOLO
+      const actionText = isRoundabout ? 'entre na rotatória e pegue a saída' : isLeft ? 'vire à esquerda na ' : isRight ? 'vire à direita na ' : 'siga em frente na ';
+      const phrase = actionText + (current.name || 'via');
+
+      // Se o trecho for curto (menor que 120m), fala somente em cima (35m) para não embolar
+      const triggers = (current.distance && current.distance < 120) ? [35] : [350, 120, 35];
+
+      triggers.forEach(triggerDist => {
         const key = `${best}-${triggerDist}`;
         if(distM <= triggerDist && !this.announcedSteps.has(key)){
           this.announcedSteps.add(key);
-          if(triggerDist <= 40) Voice.speak(`Agora, ${phrase}.`, true);
+          if(triggerDist <= 35) Voice.speak(`Agora, ${phrase}.`, true);
           else Voice.speak(`Em ${triggerDist} metros, ${phrase}.`);
         }
       });
     },
 
-    // RENDERIZAÇÃO DE LOMBADAS, RADARES E SEMÁFOROS
     fetchRouteHazards() {
       this.hazardMarkers.forEach(m=>m.remove());
       this.hazardMarkers = [];
@@ -925,9 +969,17 @@ body.nav-mode .side{top:135px}
       doc.getElementById('northBtn').onclick = () => this.map.easeTo({ bearing:0, pitch:0 });
 
       doc.getElementById('soundBtn').onclick = () => {
-        this.soundEnabled = !this.soundEnabled;
-        doc.getElementById('soundBtn').textContent = this.soundEnabled ? '🔊' : '🔇';
-        this.toast(this.soundEnabled ? 'Voz ativada' : 'Voz silenciada');
+        Voice.toggle();
+        doc.getElementById('soundBtn').textContent = Voice.enabled ? '🔊' : '🔇';
+        this.toast(Voice.enabled ? 'Voz ativada' : 'Voz silenciada');
+      };
+
+      doc.getElementById('communityChip').onclick = () => {
+        this.communityVisible = !this.communityVisible;
+        doc.getElementById('communityChip').classList.toggle('active', this.communityVisible);
+        ['community-fill','community-outline','community-labels','community-points-layer'].forEach(id=>{
+          if(this.map.getLayer(id)) this.map.setLayoutProperty(id, 'visibility', this.communityVisible ? 'visible' : 'none');
+        });
       };
 
       doc.getElementById('sheetHandle').onclick = () => this.toggleSheet();
@@ -938,8 +990,8 @@ body.nav-mode .side{top:135px}
   };
 
   window.App = {
-    sendReport: (type, label) => {
-      App.toast('Ocorrência reportada com sucesso!');
+    sendReport: () => {
+      App.toast('Ocorrência reportada!');
       document.getElementById('reportLiveModal').classList.remove('show');
     }
   };
