@@ -727,43 +727,89 @@ body.nav-mode .favela-sign{top:132px}
       this.isRerouting = false;
     },
 
+    async fetchRouteTomTom(a, b, signal) {
+      const u = `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=car&instructionsType=text&language=pt-BR`;
+      const r = await fetch(u, { signal });
+      if(!r.ok){
+        let detail = '';
+        try { const errJson = await r.json(); detail = errJson?.detailedError?.message || errJson?.error?.description || ''; } catch(e){}
+        throw new Error(`TomTom HTTP ${r.status}${detail ? ' — ' + detail : ''}`);
+      }
+      const j = await r.json();
+      if(!j.routes || !j.routes.length) throw new Error('TomTom não retornou rotas para esse trajeto.');
+      const route = j.routes[0];
+      const coords = route.legs[0].points.map(p => [p.longitude, p.latitude]);
+      const steps = (route.guidance?.instructions || []).map(inst => ({
+        name: inst.street || 'Siga pela via',
+        distance: inst.routeOffsetInMeters || 100,
+        maneuver: {
+          type: inst.maneuver,
+          modifier: inst.maneuver.includes('LEFT') ? 'left' : inst.maneuver.includes('RIGHT') ? 'right' : 'straight',
+          location: [inst.point.longitude, inst.point.latitude]
+        }
+      }));
+      return { coords, duration: route.summary.travelTimeInSeconds, distance: route.summary.lengthInMeters, steps, engine: 'tomtom' };
+    },
+
+    // Fallback gratuito e sem chave — usado se a TomTom falhar (chave inválida, limite, rede)
+    async fetchRouteOSRM(a, b, signal) {
+      const u = `https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&steps=true&annotations=false`;
+      const r = await fetch(u, { signal });
+      if(!r.ok) throw new Error(`OSRM HTTP ${r.status}`);
+      const j = await r.json();
+      if(!j.routes || !j.routes.length) throw new Error('OSRM não retornou rotas para esse trajeto.');
+      const route = j.routes[0];
+      const coords = route.geometry.coordinates;
+      const steps = (route.legs?.[0]?.steps || []).map(s => ({
+        name: s.name || 'Siga pela via',
+        distance: s.distance || 100,
+        maneuver: {
+          type: s.maneuver?.type || 'straight',
+          modifier: s.maneuver?.modifier || 'straight',
+          location: s.maneuver?.location || coords[0]
+        }
+      }));
+      return { coords, duration: route.duration, distance: route.distance, steps, engine: 'osrm' };
+    },
+
     async fetchRoute(a, b) {
       if(this.routeAbortController) this.routeAbortController.abort();
       this.routeAbortController = new AbortController();
+      const signal = this.routeAbortController.signal;
 
       try {
-        const u = `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=car&instructionsType=text&language=pt-BR`;
-        const r = await fetch(u, { signal: this.routeAbortController.signal });
-        const j = await r.json();
-        if(j.routes && j.routes.length > 0){
-          const route = j.routes[0];
-          const coords = route.legs[0].points.map(p => [p.longitude, p.latitude]);
-          const steps = (route.guidance?.instructions || []).map(inst => ({
-            name: inst.street || 'Siga pela via',
-            distance: inst.routeOffsetInMeters || 100,
-            maneuver: {
-              type: inst.maneuver,
-              modifier: inst.maneuver.includes('LEFT') ? 'left' : inst.maneuver.includes('RIGHT') ? 'right' : 'straight',
-              location: [inst.point.longitude, inst.point.latitude]
-            }
-          }));
-          return { coords, duration: route.summary.travelTimeInSeconds, distance: route.summary.lengthInMeters, steps };
+        return await this.fetchRouteTomTom(a, b, signal);
+      } catch(errTomTom){
+        if(errTomTom.name === 'AbortError') throw errTomTom;
+        console.warn('[RadarSeguro] Falha na TomTom, tentando OSRM:', errTomTom.message);
+        try {
+          const osrmRoute = await this.fetchRouteOSRM(a, b, signal);
+          this.toast('Usando motor de rotas alternativo (TomTom indisponível).');
+          return osrmRoute;
+        } catch(errOSRM){
+          if(errOSRM.name === 'AbortError') throw errOSRM;
+          console.error('[RadarSeguro] Falha também no OSRM:', errOSRM.message);
+          throw new Error('Não foi possível calcular a rota (TomTom e OSRM falharam).');
         }
-      } catch(err){}
-      return null;
+      }
     },
 
     async calculateRoute() {
       if(!this.userPos){ this.startGPS(); this.toast('Obtendo sinal GPS...'); return; }
       if(!this.destPos) return;
+      this.toast('Calculando rota...');
       try {
         this.routeData = await this.fetchRoute(this.userPos, this.destPos);
-        if(!this.routeData) return;
         this.drawRoute(this.routeData);
         this.renderDestinationFlag();
         document.getElementById('sheetTime').textContent = Math.max(1, Math.round(this.routeData.duration/60)) + ' min';
         document.getElementById('sheetDist').textContent = (this.routeData.distance/1000).toFixed(1) + ' km • Chegada prevista';
-      } catch(e){ this.toast('Erro ao calcular trajeto.'); }
+      } catch(e){
+        this.routeData = null;
+        if(e.name === 'AbortError') return;
+        console.error('[RadarSeguro] Erro ao calcular rota:', e);
+        this.toast('Erro ao calcular trajeto: ' + e.message, 4500);
+      }
     },
 
     drawRoute(r) {
@@ -808,7 +854,7 @@ body.nav-mode .favela-sign{top:132px}
     },
 
     startNav() {
-      if(!this.routeData){ this.toast('Trace uma rota primeiro.'); return; }
+      if(!this.routeData){ this.toast('Nenhuma rota calculada ainda. Toque em IR e aguarde o trajeto aparecer no mapa.', 4000); return; }
       Voice.speak('Iniciando Radar Seguro.', true);
       this.navActive = true;
       document.body.classList.add('nav-mode');
