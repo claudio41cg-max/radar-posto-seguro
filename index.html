@@ -11,18 +11,19 @@
 html,body,#map{width:100%;height:100%;overflow:hidden}
 body{background:#07131f;color:#fff}
 button,input{font:inherit}
-#map{position:fixed;inset:0}
+#map{position:fixed;inset:0;z-index:1}
 .maplibregl-ctrl-attrib{font-size:9px;background:rgba(0,0,0,.55)!important;color:#ddd!important}
 .maplibregl-ctrl-attrib a{color:#ddd!important}
 
-.topbar{position:fixed;top:10px;left:10px;right:10px;z-index:20;display:flex;flex-direction:column;gap:8px;pointer-events:none;transition:.3s}
+/* CONTROLE RÍGIDO DE CLIQUES (POINTER-EVENTS) */
+.topbar{position:fixed;top:10px;left:10px;right:10px;z-index:20;display:flex;flex-direction:column;gap:8px;pointer-events:none;transition:transform .3s, opacity .3s}
 .topbar>*{pointer-events:auto}
-.topbar.hide-nav{transform:translateY(-120%);opacity:0;pointer-events:none}
+.topbar.hide-nav{transform:translateY(-130%);opacity:0;pointer-events:none}
 
-.appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:18px;background:rgba(7,19,31,.94);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px rgba(0,0,0,0.6);backdrop-filter:blur(14px)}
+.appbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:18px;background:rgba(7,19,31,.95);border:1px solid rgba(56,189,248,.25);box-shadow:0 8px 24px rgba(0,0,0,0.6);backdrop-filter:blur(14px)}
 .brand{font-size:13px;font-weight:900;letter-spacing:0.5px}.brand span{color:#38bdf8}
 
-.search{position:relative;display:flex;gap:4px;padding:5px;background:#07131ff5;border:1px solid #38bdf8;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.6)}
+.search{position:relative;display:flex;gap:4px;padding:5px;background:#07131ff5;border:1.5px solid #38bdf8;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.6)}
 .search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#fff;padding:10px 8px;font-size:14px}
 .search input::placeholder{color:#94a3b8}
 .search button{border:0;border-radius:12px;background:#0284c7;color:#fff;font-weight:900;padding:10px 14px;cursor:pointer}
@@ -34,8 +35,7 @@ button,input{font:inherit}
 .chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0}
 .chip.active{background:#0284c7;border-color:#38bdf8}
 
-/* WAZE TURN-BY-TURN HUD */
-.waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#004a4f;color:#fff;padding:12px 16px 8px;box-shadow:0 8px 24px rgba(0,0,0,0.7);display:none;flex-direction:column}
+.waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#004a4f;color:#fff;padding:12px 16px 8px;box-shadow:0 8px 24px rgba(0,0,0,0.7);display:none;flex-direction:column;pointer-events:none}
 .waze-top-hud.show{display:flex}
 .waze-maneuver-row{display:flex;align-items:center;gap:16px}
 .waze-arrow{font-size:44px;line-height:1;font-weight:900;color:#fff;transform:translateY(-2px)}
@@ -44,31 +44,21 @@ button,input{font:inherit}
 .waze-street{font-size:20px;font-weight:900;color:#38bdf8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .waze-sub-hud{background:#003438;margin:8px -16px -8px;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:#a7f3d0}
 .waze-sub-hud span.next-name{color:#fff}
-.waze-danger-tag{color:#f87171;font-weight:900;display:none}
-.waze-danger-tag.active{display:inline}
 
-.current-road-pill{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:22;background:#0284c7;color:#fff;padding:8px 18px;border-radius:20px;font-size:14px;font-weight:900;box-shadow:0 6px 16px rgba(0,0,0,0.6);border:2px solid #fff;display:none;white-space:nowrap;max-width:80vw;overflow:hidden;text-overflow:ellipsis}
+.current-road-pill{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:22;background:#0284c7;color:#fff;padding:8px 18px;border-radius:20px;font-size:14px;font-weight:900;box-shadow:0 6px 16px rgba(0,0,0,0.6);border:2px solid #fff;display:none;white-space:nowrap;max-width:80vw;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
 body.nav-mode .current-road-pill{display:block}
 
-.speedometer-box{position:fixed;left:14px;bottom:90px;z-index:34;width:60px;height:60px;border-radius:50%;background:#04101c;border:3px solid #0284c7;display:none;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.7);transition:border-color .2s, background .2s}
-.speedometer-box.speed-alert{border-color:#ef4444;background:#450a0a;animation:pulseRed 0.6s infinite alternate}
+.speedometer-box{position:fixed;left:14px;bottom:90px;z-index:34;width:60px;height:60px;border-radius:50%;background:#04101c;border:3px solid #0284c7;display:none;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.7);pointer-events:none}
 .speedometer-box b{font-size:18px;font-weight:900;color:#fff;line-height:1}
 .speedometer-box span{font-size:9px;color:#94a3b8;font-weight:800;text-transform:uppercase}
 body.nav-mode .speedometer-box{display:flex}
-@keyframes pulseRed{from{transform:scale(1)}to{transform:scale(1.08)}}
 
-.nav-recenter-left{position:fixed;left:14px;bottom:162px;z-index:34;width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;cursor:pointer}
-body.nav-mode .nav-recenter-left{display:flex}
-.nav-recenter-left svg{width:24px;height:24px;display:block}
-
-.side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}
+.side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;pointer-events:auto}
 body.nav-mode .side{top:118px}
 .side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,0.6);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .side button.locate{border-color:#38bdf8}
-.side button.active-sound{border-color:#34d399;color:#34d399}
-.side button.muted-sound{border-color:#f87171;color:#f87171}
 
-.waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#ffffff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,0.4);transition:transform .3s cubic-bezier(0.1,0.9,0.2,1);transform:translateY(calc(100% - 75px));display:none}
+.waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#ffffff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,0.4);transition:transform .3s cubic-bezier(0.1,0.9,0.2,1);transform:translateY(calc(100% - 75px));display:none;pointer-events:auto}
 .waze-bottom-sheet.show{display:block}
 .waze-bottom-sheet.expanded{transform:translateY(0)}
 .sheet-handle{width:40px;height:5px;background:#cbd5e1;border-radius:99px;margin:8px auto 4px;cursor:pointer}
@@ -95,28 +85,19 @@ body.nav-mode .side{top:118px}
 .fuel-marker{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;cursor:pointer}
 .fuel-marker.verde{background:#22c55e}.fuel-marker.gnv{background:#16a34a}
 
-.bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;transition:.3s}
+.bottom-actions{position:fixed;left:10px;right:10px;bottom:12px;z-index:20;display:flex;gap:7px;pointer-events:auto;transition:.3s}
 .bottom-actions.hide-nav{transform:translateY(150%);pointer-events:none}
 .action{flex:1;border:0;border-radius:15px;padding:13px 7px;background:#000e;color:#fff;font-size:11px;font-weight:900;box-shadow:0 8px 22px rgba(0,0,0,0.6);cursor:pointer}
 .action.danger{background:#991b1b}.action.anp{background:#166534}.action.chat{background:#7c3aed}
 
 .toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:11px 15px;border-radius:13px;font-size:12px;font-weight:700;max-width:90vw;text-align:center;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}
-.favela-sign.show{opacity:1;transform:translate(-50%,0)}
-body.nav-mode .favela-sign{top:132px}
 
-.danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.7);border:2px solid #fecaca}
-.danger-banner.show{display:flex}
-.danger-banner b{font-size:13px;line-height:1.35;font-weight:800}
-.danger-banner button{border:0;background:#ffffff33;color:#fff;width:30px;height:30px;border-radius:50%;font-weight:900;cursor:pointer}
-
-.modal-overlay{display:none;position:fixed;inset:0;z-index:90;background:#0009;align-items:center;justify-content:center}.modal-overlay.show{display:flex}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:90;background:#0009;align-items:center;justify-content:center;pointer-events:auto}
+.modal-overlay.show{display:flex}
 .modal-card{background:#07131f;border-radius:20px;padding:24px;max-width:440px;width:90%;border:1px solid #334155;max-height:90vh;overflow-y:auto}
 .modal-card h2{font-size:18px;margin-bottom:12px;color:#38bdf8}
-.modal-card p{font-size:13px;color:#94a3b8;margin-bottom:16px;line-height:1.4}
 .modal-options{display:flex;flex-direction:column;gap:10px}
 .modal-options button{background:#0b1b2a;border:1px solid #334155;border-radius:14px;padding:14px;color:#fff;font-weight:800;font-size:14px;text-align:left;display:flex;align-items:center;gap:12px;cursor:pointer}
-.modal-options button .icon{font-size:24px;width:36px;text-align:center}
 .modal-close{width:100%;border:0;border-radius:12px;padding:12px;background:#1e293b;color:#fff;font-weight:900;margin-top:14px;cursor:pointer}
 
 .chat-messages{max-height:300px;overflow-y:auto;background:#040c14;border-radius:12px;padding:10px;margin-bottom:12px;font-size:13px}
@@ -127,6 +108,8 @@ body.nav-mode .favela-sign{top:132px}
 .chat-input-row input{flex:1;padding:10px;border-radius:10px;border:1px solid #334155;background:#040c14;color:#fff}
 .chat-input-row button{padding:10px 16px;border-radius:10px;border:0;background:#0284c7;color:#fff;font-weight:900;cursor:pointer}
 .chat-status{font-size:11px;color:#64748b;margin:-6px 0 10px}
+
+@media(min-width:700px){.topbar{left:20px;right:auto;width:460px}.waze-bottom-sheet{left:20px;right:auto;width:430px;border-radius:20px}.bottom-actions{left:auto;right:20px;width:430px}}
 </style>
 </head>
 <body>
@@ -172,13 +155,9 @@ body.nav-mode .favela-sign{top:132px}
 <div class="current-road-pill" id="currentRoadPill">Via Atual</div>
 <div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
 
-<button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar no veículo">
-  <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ef4444"/><circle cx="12" cy="9" r="2.5" fill="#ffffff"/></svg>
-</button>
-
 <div class="side" id="sideControls">
   <button class="locate" id="locateBtn" title="Onde estou">◎</button>
-  <button class="active-sound" id="soundBtn" title="Áudio e Voz">🔊</button>
+  <button id="soundBtn" title="Áudio e Voz">🔊</button>
   <button id="northBtn" title="Norte">N</button>
   <button id="zoomIn">+</button>
   <button id="zoomOut">−</button>
@@ -217,19 +196,16 @@ body.nav-mode .favela-sign{top:132px}
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="favela-sign" id="favelaSign"></div>
-<div class="danger-banner" id="dangerBanner"><b id="dangerBannerText"></b><button id="dangerBannerClose">✕</button></div>
 
+<!-- MODAIS COMPLETOS -->
 <div class="modal-overlay" id="reportLiveModal">
   <div class="modal-card">
     <h2>⚠️ Central de Alertas</h2>
-    <p>Selecione a ocorrência na sua posição atual.</p>
     <div class="modal-options">
       <button onclick="window.App.sendReport('tiroteio','🔴 Tiroteio / Conflito')"><span class="icon">🔴</span> Tiroteio</button>
       <button onclick="window.App.sendReport('blitz','🚔 Blitz / Operação')"><span class="icon">🚔</span> Blitz</button>
       <button onclick="window.App.sendReport('bloqueio','🚧 Pista Bloqueada')"><span class="icon">🚧</span> Bloqueio</button>
       <button onclick="window.App.sendReport('perigo','🚨 Perigo na Pista')"><span class="icon">🚨</span> Perigo</button>
-      <button onclick="window.App.openChat()"><span class="icon">💬</span> Abrir Chat</button>
     </div>
     <button class="modal-close" id="closeReportLiveModal">Fechar</button>
   </div>
@@ -245,19 +221,6 @@ body.nav-mode .favela-sign{top:132px}
       <button onclick="window.App.setTheme('sat')"><span class="icon">🛰️</span> Satélite</button>
     </div>
     <button class="modal-close" id="closeThemeSelectModal">Fechar</button>
-  </div>
-</div>
-
-<div class="modal-overlay" id="transportModal">
-  <div class="modal-card">
-    <h2>🚗 Modo de Transporte</h2>
-    <div class="modal-options">
-      <button data-mode="driving"><span class="icon">🚗</span> Carro</button>
-      <button data-mode="driving"><span class="icon">🏍️</span> Moto</button>
-      <button data-mode="bike"><span class="icon">🚲</span> Bicicleta</button>
-      <button data-mode="foot"><span class="icon">🚶</span> A pé</button>
-    </div>
-    <button class="modal-close" id="closeTransportModal">Fechar</button>
   </div>
 </div>
 
@@ -304,9 +267,7 @@ body.nav-mode .favela-sign{top:132px}
     <h2>Camadas e Serviços</h2>
     <div class="modal-options">
       <button id="modalThemeOption"><span class="icon">🌓</span> Alternar Tema</button>
-      <button id="modalTransport"><span class="icon">🚗</span> Modo de Transporte</button>
       <button id="modalShareRide"><span class="icon">📲</span> Compartilhar Rota no WhatsApp</button>
-      <button id="modalSpeedSound"><span class="icon">⚡</span> Alerta de Velocidade (ON/OFF)</button>
       <button id="modalStreetView"><span class="icon">👁️</span> Google Street View</button>
       <button id="modalLocate"><span class="icon">📍</span> Centralizar GPS</button>
     </div>
@@ -405,15 +366,6 @@ body.nav-mode .favela-sign{top:132px}
     }
   };
 
-  const Prefs = {
-    get(key, def) {
-      try { const v = localStorage.getItem('rs_'+key); return v!==null ? JSON.parse(v) : def; } catch(e){ return def; }
-    },
-    set(key, val) {
-      try { localStorage.setItem('rs_'+key, JSON.stringify(val)); } catch(e){}
-    }
-  };
-
   const Voice = {
     queue: [], speaking: false, enabled: true,
     speak(text, priority=false) {
@@ -440,7 +392,7 @@ body.nav-mode .favela-sign{top:132px}
     }
   };
 
-  // BASE COMPLETA COM GRÃO PARÁ (RUA ÁGUA MARINHA) E DOM BOSCO (RUA AZUL)
+  // COORDENADAS EXATAS DE GRÃO PARÁ (RUA ÁGUA MARINHA) E DOM BOSCO (RUA AZUL)
   const rawAreas = [
     {name:'Comunidade Grão Pará', c:[-43.5118,-22.7472], r:0.45},
     {name:'Comunidade Dom Bosco', c:[-43.4682,-22.7562], r:0.45},
@@ -509,8 +461,7 @@ body.nav-mode .favela-sign{top:132px}
       { lat: -22.9025, lng: -43.5580, nome: 'Posto Shell - Campo Grande', gnv: true },
       { lat: -22.8965, lng: -43.5650, nome: 'Posto Ipiranga - Rio do A', gnv: true },
       { lat: -22.9080, lng: -43.6010, nome: 'Posto Shell - Paciência', gnv: true },
-      { lat: -22.9280, lng: -43.6780, nome: 'Posto Petrobras - Santa Cruz', gnv: true },
-      { lat: -22.8850, lng: -43.4650, nome: 'Posto Shell - Bangu', gnv: true }
+      { lat: -22.9280, lng: -43.6780, nome: 'Posto Petrobras - Santa Cruz', gnv: true }
     ],
     markers: {}, visible: true, filter: 'all',
     render(map) {
@@ -535,19 +486,14 @@ body.nav-mode .favela-sign{top:132px}
   const App = {
     map: null, userPos: null, destPos: null, routeData: null, navActive: false,
     watchId: null, userMarker: null, destMarker: null, currentBearing: 0,
-    themeMode: 'auto', soundEnabled: true, speedAlert: true, followMode: true,
-    isRerouting: false, announcedSteps: new Set(),
-    communityVisible: true, offRouteCounter: 0, routeAbortController: null,
+    themeMode: 'auto', soundEnabled: true, followMode: true, isRerouting: false,
+    announcedSteps: new Set(), communityVisible: true, offRouteCounter: 0,
     chatMessages: [], mqttClient: null,
 
     init() {
-      this.themeMode = Prefs.get('theme', 'auto');
-      this.soundEnabled = Prefs.get('sound', true);
-      this.speedAlert = Prefs.get('speedAlert', true);
-
       this.map = new maplibregl.Map({
         container: 'map', center: RJ_CENTER, zoom: 11, attributionControl: false,
-        style: this.getStyleForTheme(this.themeMode)
+        style: this.getStyleForTheme('auto')
       });
       this.map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
 
@@ -653,8 +599,6 @@ body.nav-mode .favela-sign{top:132px}
           }
 
           this.updateNavigation();
-          this.checkCommunityDanger();
-          this.checkOffRoute(snapResult.distance);
         },
         ()=>{
           const badge = document.getElementById('gpsBadge');
@@ -681,43 +625,10 @@ body.nav-mode .favela-sign{top:132px}
       }
     },
 
-    checkOffRoute(distanceFromLine) {
-      if(!this.navActive || !this.routeData || !this.userPos || this.isRerouting) return;
-      if(distanceFromLine > 20){
-        this.offRouteCounter++;
-        if(this.offRouteCounter >= 2){
-          this.offRouteCounter = 0;
-          this.recalculateRoute();
-        }
-      } else {
-        this.offRouteCounter = 0;
-      }
-    },
-
-    async recalculateRoute() {
-      if(!this.destPos || !this.userPos || this.isRerouting) return;
-      this.isRerouting = true;
-      Voice.speak('Recalculando rota.', true);
-      this.toast('Recalculando trajeto...');
-      try {
-        const newRoute = await this.fetchRoute(this.userPos, this.destPos);
-        if(newRoute){
-          this.routeData = newRoute;
-          this.drawRoute(this.routeData);
-          this.announcedSteps.clear();
-          Voice.speak('Nova rota calculada.');
-        }
-      } catch(e){}
-      this.isRerouting = false;
-    },
-
     async fetchRoute(a, b) {
-      if(this.routeAbortController) this.routeAbortController.abort();
-      this.routeAbortController = new AbortController();
-
       try {
         const u = `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=car&instructionsType=text&language=pt-BR`;
-        const r = await fetch(u, { signal: this.routeAbortController.signal });
+        const r = await fetch(u);
         const j = await r.json();
         if(j.routes && j.routes.length > 0){
           const route = j.routes[0];
@@ -826,14 +737,13 @@ body.nav-mode .favela-sign{top:132px}
       } catch(e){}
       
       if(this.destMarker){ this.destMarker.remove(); this.destMarker = null; }
-      
       if('speechSynthesis' in window) speechSynthesis.cancel();
       this.map.easeTo({ pitch:0, bearing:0, zoom: 15, duration:400 });
       this.toast('Navegação cancelada.');
     },
 
     updateNavigation() {
-      if(!this.navActive || !this.userPos || !this.routeData || this.isRerouting) return;
+      if(!this.navActive || !this.userPos || !this.routeData) return;
       const steps = this.routeData.steps || [];
       if(!steps.length) return;
       let best=0, bestDist=Infinity;
@@ -872,30 +782,6 @@ body.nav-mode .favela-sign{top:132px}
           else Voice.speak(`Em ${triggerDist} metros, ${phrase}.`);
         }
       });
-    },
-
-    checkCommunityDanger() {
-      if(!this.userPos) return;
-      const sign = document.getElementById('favelaSign');
-      const tag = document.getElementById('hudDangerTag');
-      let near = null, nd = Infinity;
-      rawAreas.forEach(c=>{
-        const d = Utils.distanceKm(this.userPos, c.c);
-        if(d < nd){ nd = d; near = c; }
-      });
-      if(near && nd <= near.r + 0.35){
-        if(sign){
-          sign.textContent = '⚠ Comunidade próxima: ' + near.name;
-          sign.classList.add('show');
-        }
-        if(tag){
-          tag.textContent = '⚠ ALERTA: ' + near.name.toUpperCase();
-          tag.classList.add('active');
-        }
-      } else {
-        if(sign) sign.classList.remove('show');
-        if(tag) tag.classList.remove('active');
-      }
     },
 
     shareRideWhatsApp() {
@@ -1016,7 +902,6 @@ body.nav-mode .favela-sign{top:132px}
       doc.getElementById('startRadarBtn').onclick = () => this.startNav();
       doc.getElementById('stopNavBtn').onclick = () => this.stopNav();
       doc.getElementById('locateBtn').onclick = () => { this.startGPS(); this.map.flyTo({ center: this.userPos || RJ_CENTER, zoom: 16 }); };
-      doc.getElementById('navRecenterLeft').onclick = () => { this.followMode = true; if(this.userPos) this.map.easeTo({ center: this.userPos, zoom: 18, pitch: 58 }); };
       doc.getElementById('btnRecenter').onclick = () => { this.followMode = true; if(this.userPos) this.map.easeTo({ center: this.userPos, zoom: 18, pitch: 58 }); };
       doc.getElementById('zoomIn').onclick = () => this.map.zoomIn();
       doc.getElementById('zoomOut').onclick = () => this.map.zoomOut();
@@ -1062,7 +947,6 @@ body.nav-mode .favela-sign{top:132px}
       };
 
       doc.getElementById('reportBtn').onclick = () => doc.getElementById('reportModal').classList.add('show');
-      doc.getElementById('navReportBtn').onclick = () => doc.getElementById('reportLiveModal').classList.add('show');
       doc.getElementById('chatBottomBtn').onclick = () => doc.getElementById('chatModal').classList.add('show');
       doc.getElementById('anpBtn').onclick = () => window.open(ANP_APP, '_blank');
 
@@ -1073,7 +957,6 @@ body.nav-mode .favela-sign{top:132px}
       doc.getElementById('closeFuelFilter').onclick = () => doc.getElementById('fuelFilterModal').classList.remove('show');
       doc.getElementById('closeReportModal').onclick = () => doc.getElementById('reportModal').classList.remove('show');
       doc.getElementById('closeLayers').onclick = () => doc.getElementById('layersModal').classList.remove('show');
-      doc.getElementById('dangerBannerClose').onclick = () => doc.getElementById('dangerBanner').classList.remove('show');
 
       doc.getElementById('chatSendBtn').onclick = () => this.sendChatMessage();
       doc.getElementById('chatInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter') this.sendChatMessage(); });
