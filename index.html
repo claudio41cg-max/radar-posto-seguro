@@ -34,6 +34,7 @@ button,input{font:inherit}
 .chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0}
 .chip.active{background:#0284c7;border-color:#38bdf8}
 
+/* WAZE TURN-BY-TURN + LANE GUIDANCE */
 .waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#004a4f;color:#fff;padding:12px 16px 8px;box-shadow:0 8px 24px rgba(0,0,0,0.7);display:none;flex-direction:column}
 .waze-top-hud.show{display:flex}
 .waze-maneuver-row{display:flex;align-items:center;gap:16px}
@@ -41,12 +42,24 @@ button,input{font:inherit}
 .waze-meta{flex:1}
 .waze-dist{font-size:26px;font-weight:900;letter-spacing:-0.5px}
 .waze-street{font-size:18px;font-weight:900;color:#38bdf8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* FAIXAS DA PISTA */
+.lane-guidance-box{display:flex;gap:6px;margin:6px 0 2px}
+.lane-box{width:22px;height:24px;border:1.5px solid #38bdf8;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;background:#003438;color:#94a3b8}
+.lane-box.active-lane{background:#0284c7;color:#fff;border-color:#fff;box-shadow:0 0 8px #38bdf8}
+
 .waze-sub-hud{background:#003438;margin:8px -16px -8px;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:#a7f3d0}
 .waze-sub-hud span.next-name{color:#fff}
 .waze-danger-tag{color:#f87171;font-weight:900;display:none}
 .waze-danger-tag.active{display:inline}
 
-.traffic-light-hud{position:fixed;top:105px;left:14px;z-index:28;background:#0f172a;border:2px solid #38bdf8;color:#fff;padding:8px 14px;border-radius:16px;display:none;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+.favela-highway-sign{position:fixed;top:125px;left:50%;transform:translateX(-50%);z-index:32;background:linear-gradient(180deg,#7f1d1d,#450a0a);color:#fff;padding:10px 18px;border-radius:14px;border:2px solid #ef4444;box-shadow:0 10px 25px rgba(0,0,0,0.8);display:none;align-items:center;gap:12px;max-width:92vw}
+.favela-highway-sign.show{display:flex}
+.favela-highway-sign .sign-badge{background:#ef4444;color:#fff;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:900;text-transform:uppercase}
+.favela-highway-sign .sign-title{font-size:14px;font-weight:900;color:#fecaca}
+.favela-highway-sign .sign-sub{font-size:11px;color:#cbd5e1}
+
+.traffic-light-hud{position:fixed;top:185px;left:14px;z-index:28;background:#0f172a;border:2px solid #38bdf8;color:#fff;padding:8px 14px;border-radius:16px;display:none;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
 .traffic-light-hud.show{display:flex}
 .traffic-light-visual{width:16px;height:36px;background:#020617;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:2px;border:1px solid #475569}
 .traffic-light-dot{width:8px;height:8px;border-radius:50%;background:#334155}
@@ -66,9 +79,8 @@ body.nav-mode .current-road-pill{display:block}
 body.nav-mode .speedometer-box{display:flex}
 @keyframes pulseRed{from{transform:scale(1)}to{transform:scale(1.08)}}
 
-.nav-recenter-left{position:fixed;left:14px;bottom:162px;z-index:34;width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;cursor:pointer}
-body.nav-mode .nav-recenter-left{display:flex}
-.nav-recenter-left svg{width:24px;height:24px;display:block}
+.nav-recenter-floating{position:fixed;bottom:155px;left:50%;transform:translateX(-50%);z-index:35;background:#0284c7;color:#fff;padding:10px 20px;border-radius:30px;font-size:13px;font-weight:900;border:2px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,0.8);cursor:pointer;display:none;align-items:center;gap:8px}
+.nav-recenter-floating.show{display:flex}
 
 .nav-report-btn{position:fixed;right:14px;bottom:90px;z-index:34;width:56px;height:56px;border-radius:50%;border:3px solid #ffffff;background:#ffcc00;color:#000;display:none;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,0.6);cursor:pointer}
 body.nav-mode .nav-report-btn{display:flex}
@@ -96,6 +108,7 @@ body.nav-mode .side{top:118px}
 .sheet-content{padding:0 18px 20px;border-top:1px solid #f1f5f9;display:flex;flex-direction:column;gap:10px}
 .sheet-nav-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
 .btn-nav-radar{border:0;border-radius:14px;padding:14px;font-size:15px;font-weight:900;color:#fff;background:linear-gradient(135deg, #0284c7, #0369a1);box-shadow:0 4px 12px rgba(2,132,199,0.35);cursor:pointer}
+.btn-share-ride{border:0;border-radius:14px;padding:12px;font-size:14px;font-weight:900;color:#fff;background:#25d366;box-shadow:0 4px 12px rgba(37,211,102,0.35);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-nav-stop{border:0;border-radius:14px;padding:12px;font-size:13px;font-weight:900;color:#fff;background:#dc2626;cursor:pointer;margin-top:4px}
 .sheet-external-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sheet-external-grid button{border:0;border-radius:14px;padding:14px 10px;font-size:13px;font-weight:900;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -115,10 +128,6 @@ body.nav-mode .side{top:118px}
 .action.danger{background:#991b1b}.action.anp{background:#166534}.action.chat{background:#7c3aed}
 
 .toast{position:fixed;left:50%;bottom:145px;transform:translate(-50%,20px);z-index:100;opacity:0;pointer-events:none;background:#111827;border:1px solid #38bdf8;color:#fff;padding:11px 15px;border-radius:13px;font-size:12px;font-weight:700;max-width:90vw;text-align:center;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.favela-sign{position:fixed;top:180px;left:50%;transform:translate(-50%,-8px);z-index:25;background:#7f1d1d;color:#fff;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:900;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;border:1px solid #f87171}
-.favela-sign.show{opacity:1;transform:translate(-50%,0)}
-body.nav-mode .favela-sign{top:132px}
-
 .danger-banner{position:fixed;top:14px;left:10px;right:10px;z-index:70;background:#b91c1c;color:#fff;border-radius:16px;padding:14px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.7);border:2px solid #fecaca}
 .danger-banner.show{display:flex}
 .danger-banner b{font-size:13px;line-height:1.35;font-weight:800}
@@ -149,35 +158,12 @@ body.nav-mode .favela-sign{top:132px}
 .fuel-popup-prices{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;background:#f8fafc;padding:6px;border-radius:6px;margin-bottom:8px;border:1px solid #e2e8f0}
 .fuel-popup-btn{display:block;width:100%;text-align:center;background:#0284c7;color:#fff;padding:8px 0;border-radius:8px;font-weight:900;font-size:12px;text-decoration:none;border:none;cursor:pointer}
 
-.tutorial-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
-.tutorial-overlay.show{display:flex}
-.tutorial-card{background:#0f172a;border:2px solid #38bdf8;border-radius:28px;padding:32px 28px;max-width:440px;width:100%}
-.tutorial-card h2{font-size:22px;color:#38bdf8;margin-bottom:8px}
-.tutorial-card p{color:#cbd5e1;font-size:14px;line-height:1.5;margin-bottom:18px}
-.tutorial-card .steps{display:flex;flex-direction:column;gap:10px;text-align:left;margin-bottom:20px}
-.tutorial-card .steps div{display:flex;align-items:center;gap:10px;color:#e2e8f0;font-size:13px}
-.tutorial-card .steps .num{background:#0284c7;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0}
-.tutorial-card button{background:#0284c7;border:0;border-radius:99px;padding:12px 32px;color:#fff;font-size:16px;font-weight:900;cursor:pointer;width:100%}
-
 @media(min-width:700px){.topbar{left:20px;right:auto;width:460px}.waze-bottom-sheet{left:20px;right:auto;width:430px;border-radius:20px}.bottom-actions{left:auto;right:20px;width:430px}.danger-banner{left:20px;right:auto;width:430px}}
 </style>
 </head>
 <body>
 
 <div id="map"></div>
-
-<div class="tutorial-overlay" id="tutorialOverlay">
-  <div class="tutorial-card">
-    <h2>🛡️ Radar Seguro RJ PRO</h2>
-    <p>Navegue com tráfego em tempo real e monitoramento de áreas de atenção no Rio de Janeiro.</p>
-    <div class="steps">
-      <div><span class="num">1</span> Ative o GPS tocando em <strong>◎</strong>.</div>
-      <div><span class="num">2</span> Busque seu destino na barra superior e toque em <strong>IR</strong>.</div>
-      <div><span class="num">3</span> Inicie no <strong>Radar Seguro PRO</strong> com voz curva a curva.</div>
-    </div>
-    <button id="tutorialBtn">Iniciar Aplicativo</button>
-  </div>
-</div>
 
 <div class="topbar" id="mainTopbar">
   <div class="appbar">
@@ -205,11 +191,20 @@ body.nav-mode .favela-sign{top:132px}
     <div class="waze-meta">
       <div class="waze-dist" id="hudDist">-- m</div>
       <div class="waze-street" id="hudStreet">Rua de Destino</div>
+      <div class="lane-guidance-box" id="laneGuidanceBox"></div>
     </div>
   </div>
   <div class="waze-sub-hud">
     <div>em seguida <span id="hudNextIcon">↰</span> <span class="next-name" id="hudNextStreet">Próxima via</span></div>
     <div class="waze-danger-tag" id="hudDangerTag">⚠ ALERTA DE ÁREA</div>
+  </div>
+</div>
+
+<div class="favela-highway-sign" id="favelaHighwaySign">
+  <span class="sign-badge">Área Restrita</span>
+  <div>
+    <div class="sign-title" id="favelaHighwayTitle">Comunidade à Frente</div>
+    <div class="sign-sub" id="favelaHighwaySub">Atenção redobrada na via</div>
   </div>
 </div>
 
@@ -228,9 +223,7 @@ body.nav-mode .favela-sign{top:132px}
 <div class="current-road-pill" id="currentRoadPill">Via Atual</div>
 <div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
 
-<button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar">
-  <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#ef4444"/><circle cx="12" cy="9" r="2.5" fill="#ffffff"/></svg>
-</button>
+<button class="nav-recenter-floating" id="navRecenterFloating">📍 Voltar ao Carro</button>
 
 <button class="nav-report-btn" id="navReportBtn" title="Reportar">
   <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.5L20 19H4L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
@@ -261,6 +254,7 @@ body.nav-mode .favela-sign{top:132px}
     <div style="font-size:13px;font-weight:800">Escolha como navegar:</div>
     <div class="sheet-nav-actions">
       <button class="btn-nav-radar" id="startRadarBtn">🛡️ Iniciar no Radar Seguro PRO</button>
+      <button class="btn-share-ride" id="shareRideBtn">📲 Compartilhar Rota no WhatsApp</button>
     </div>
     <div class="sheet-external-grid">
       <button class="btn-waze" id="openWaze">Abrir no Waze</button>
@@ -277,7 +271,6 @@ body.nav-mode .favela-sign{top:132px}
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="favela-sign" id="favelaSign"></div>
 <div class="danger-banner" id="dangerBanner"><b id="dangerBannerText"></b><button id="dangerBannerClose">✕</button></div>
 
 <div class="modal-overlay" id="reportLiveModal">
@@ -307,19 +300,6 @@ body.nav-mode .favela-sign{top:132px}
       <button onclick="window.App.setTheme('sat')"><span class="icon">🛰️</span> Satélite</button>
     </div>
     <button class="modal-close" id="closeThemeSelectModal">Fechar</button>
-  </div>
-</div>
-
-<div class="modal-overlay" id="transportModal">
-  <div class="modal-card">
-    <h2>🚗 Modo de Transporte</h2>
-    <div class="modal-options">
-      <button data-mode="driving"><span class="icon">🚗</span> Carro</button>
-      <button data-mode="driving"><span class="icon">🏍️</span> Moto</button>
-      <button data-mode="bike"><span class="icon">🚲</span> Bicicleta</button>
-      <button data-mode="foot"><span class="icon">🚶</span> A pé</button>
-    </div>
-    <button class="modal-close" id="closeTransportModal">Fechar</button>
   </div>
 </div>
 
@@ -366,7 +346,6 @@ body.nav-mode .favela-sign{top:132px}
     <h2>Camadas e Serviços</h2>
     <div class="modal-options">
       <button id="modalThemeOption"><span class="icon">🌓</span> Alternar Tema</button>
-      <button id="modalTransport"><span class="icon">🚗</span> Modo de Transporte</button>
       <button id="modalSpeedSound"><span class="icon">⚡</span> Alerta de Velocidade (ON/OFF)</button>
       <button id="modalStreetView"><span class="icon">👁️</span> Google Street View</button>
       <button id="modalLocate"><span class="icon">📍</span> Centralizar GPS</button>
@@ -378,6 +357,21 @@ body.nav-mode .favela-sign{top:132px}
 <script src="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.js"></script>
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 <script>
+// REGISTRO DE SERVICE WORKER PARA CACHE OFFLINE
+if('serviceWorker' in navigator){
+  const swCode = `
+    const CACHE_NAME = 'radar-seguro-v2';
+    self.addEventListener('install', e => {
+      e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['/'])));
+    });
+    self.addEventListener('fetch', e => {
+      e.respondWith(caches.match(e.request).then(res => res || fetch(e.request).catch(() => res)));
+    });
+  `;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+}
+
 (function(){
   'use strict';
 
@@ -415,8 +409,7 @@ body.nav-mode .favela-sign{top:132px}
       const x = Math.cos(lat1)*Math.sin(lat2) - Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
       return (Math.atan2(y,x)*180/Math.PI + 360) % 360;
     },
-    angleDiff(a,b) { const d=Math.abs(a-b)%360; return d>180?360-d:d; },
-    makePerimeter(lon, lat, rKm=0.45, points=36) {
+    makePerimeter(lon, lat, rKm=0.45, points=32) {
       const rLat = rKm/111.0, rLon = rKm/(111.0*Math.cos(lat*Math.PI/180)), coords = [];
       for(let i=0; i<points; i++){
         const ang = (i/points)*2*Math.PI;
@@ -451,8 +444,7 @@ body.nav-mode .favela-sign{top:132px}
     sanitize(str) {
       const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};
       return String(str||'').replace(/[&<>"']/g, m=>map[m]);
-    },
-    vibrate(ms=30) { if(navigator.vibrate) navigator.vibrate(ms); }
+    }
   };
 
   const Prefs = {
@@ -489,142 +481,112 @@ body.nav-mode .favela-sign{top:132px}
     }
   };
 
-  const INITIAL_FUEL = [
-    { lat: -22.9025, lng: -43.5580, nome: 'Posto Shell - Campo Grande Centro', gnv: true },
-    { lat: -22.8965, lng: -43.5650, nome: 'Posto Ipiranga - Estr. Rio do A', gnv: true },
-    { lat: -22.9150, lng: -43.5420, nome: 'Posto BR Petrobras - Estr. do Monteiro', gnv: false },
-    { lat: -22.9080, lng: -43.6010, nome: 'Posto Shell - Paciência Centro', gnv: true },
-    { lat: -22.9120, lng: -43.6150, nome: 'Posto Ipiranga - Av. Brasil / Paciência', gnv: true },
-    { lat: -22.9280, lng: -43.6780, nome: 'Posto Petrobras - Santa Cruz Centro', gnv: true },
-    { lat: -22.8850, lng: -43.4650, nome: 'Posto Shell - Bangu / Av. Brasil', gnv: true },
-    { lat: -22.8710, lng: -43.4350, nome: 'Posto Ipiranga - Padre Miguel', gnv: false },
-    { lat: -22.8620, lng: -43.3450, nome: 'Posto Shell - Madureira', gnv: true },
-    { lat: -22.9800, lng: -43.3650, nome: 'Posto BR - Barra / Linha Amarela', gnv: true }
+  const rawAreas = [
+    {name:'Cesarão (Santa Cruz)', c:[-43.66027,-22.93587], r:0.50, type:'conflito'},
+    {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.45, type:'conflito'},
+    {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.40, type:'conflito'},
+    {name:'Comunidade do Aço', c:[-43.6521,-22.9248], r:0.38, type:'conflito'},
+    {name:'Pantanal (Santa Cruz)', c:[-43.6675,-22.9290], r:0.35, type:'conflito'},
+    {name:'Nova Sepetiba', c:[-43.6995,-22.9515], r:0.50, type:'conflito'},
+    {name:'Carobinha (Campo Grande)', c:[-43.5353,-22.8687], r:0.45, type:'conflito'},
+    {name:'Barbante (Inhoaíba)', c:[-43.5819,-22.9056], r:0.40, type:'conflito'},
+    {name:'Vila Aliança (Bangu)', c:[-43.4847,-22.8642], r:0.50, type:'conflito'},
+    {name:'Vila Vintém (Padre Miguel)', c:[-43.4475,-22.8731], r:0.50, type:'conflito'},
+    {name:'Vila Kennedy', c:[-43.4674,-22.8492], r:0.55, type:'conflito'},
+    {name:'Cidade de Deus (CDD)', c:[-43.3644,-22.9430], r:0.55, type:'conflito'},
+    {name:'Complexo do Rio das Pedras', c:[-43.3405,-22.9902], r:0.60, type:'conflito'},
+    {name:'Muzema', c:[-43.3128,-22.9908], r:0.40, type:'conflito'},
+    {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.40, type:'conflito'},
+    {name:'Complexo da Maré', c:[-43.2415,-22.8555], r:0.65, type:'conflito'},
+    {name:'Complexo do Alemão', c:[-43.2710,-22.8595], r:0.65, type:'conflito'},
+    {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.55, type:'conflito'},
+    {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45, type:'conflito'},
+    {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.45, type:'conflito'},
+    {name:'Morro dos Macacos', c:[-43.2561,-22.9150], r:0.40, type:'conflito'},
+    {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.60, type:'conflito'},
+    {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.60, type:'conflito'},
+    {name:'Rocinha', c:[-43.2471,-22.9881], r:0.60, type:'conflito'},
+    {name:'Vidigal', c:[-43.2356,-22.9939], r:0.40, type:'conflito'},
+    {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45, type:'conflito'},
+    {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.45, type:'conflito'},
+    {name:'Chatuba (Mesquita)', c:[-43.4183,-22.7817], r:0.40, type:'conflito'},
+    {name:'Chaperó (Itaguaí)', c:[-43.7364,-22.8347], r:0.40, type:'conflito'},
+    {name:'Belém (Angra dos Reis)', c:[-44.2986,-22.9719], r:0.45, type:'conflito'},
+    {name:'Vila Suíça (Miguel Pereira)', c:[-43.4750,-22.4550], r:0.35, type:'conflito'},
+    {name:'Manoel Corrêa (Cabo Frio)', c:[-42.0380,-22.8890], r:0.45, type:'conflito'},
+    {name:'Rasa (Armação dos Búzios)', c:[-41.9580,-22.7650], r:0.40, type:'conflito'}
+  ];
+
+  const communityGeoJSON = {
+    type: 'FeatureCollection',
+    features: rawAreas.map(a => ({
+      type: 'Feature', properties: { name: a.name, type: a.type },
+      geometry: { type: 'Polygon', coordinates: [Utils.makePerimeter(a.c[0], a.c[1], a.r)] }
+    }))
+  };
+
+  const communityPointsGeoJSON = {
+    type: 'FeatureCollection',
+    features: rawAreas.map(a => ({
+      type: 'Feature', properties: { name: a.name },
+      geometry: { type: 'Point', coordinates: [a.c[0], a.c[1]] }
+    }))
+  };
+
+  const LOCAL_HAZARDS = [
+    { type:'lombada', coords:[-43.6401,-22.9118] }, { type:'lombada', coords:[-43.6403,-22.9102] },
+    { type:'lombada', coords:[-43.6406,-22.9090] }, { type:'lombada', coords:[-43.6410,-22.9075] },
+    { type:'lombada', coords:[-43.6415,-22.9062] },
+    { type:'radar', coords:[-43.6402,-22.9090], speedLimit: 60 },
+    { type:'radar', coords:[-43.6445,-22.8970], speedLimit: 70 },
+    { type:'semaforo', coords:[-43.6400,-22.9125] }, { type:'semaforo', coords:[-43.6450,-22.8960] }
   ];
 
   const FuelModule = {
-    stations: [...INITIAL_FUEL],
-    markers: {},
-    visible: true,
-    filter: 'all',
-    fetch(center, callback) {
-      if(!navigator.onLine){ callback&&callback(); return; }
-      const c = center || RJ_CENTER;
-      const q = `[out:json][timeout:10];node["amenity"="fuel"](around:7500,${c[1]},${c[0]});out center 45;`;
-      fetch('https://overpass-api.de/api/interpreter', {
-        method: 'POST',
-        body: q,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .then(r=>r.json())
-      .then(data=>{
-        const api = (data.elements||[]).map(el=>{
-          const lat=el.lat, lng=el.lon;
-          if(lat==null||lng==null) return null;
-          const tg=el.tags||{};
-          const gnv = tg['fuel:cng']==='yes'||tg['fuel:gnv']==='yes';
-          return { lat, lng, nome: tg.name||tg.brand||'Posto de Combustível', gnv };
-        }).filter(Boolean);
-        if(api.length > 0){
-          this.stations = [...INITIAL_FUEL, ...api];
-          callback&&callback();
-        }
-      })
-      .catch(()=>callback&&callback());
-    },
+    stations: [
+      { lat: -22.9025, lng: -43.5580, nome: 'Posto Shell - Campo Grande', gnv: true },
+      { lat: -22.8965, lng: -43.5650, nome: 'Posto Ipiranga - Rio do A', gnv: true },
+      { lat: -22.9080, lng: -43.6010, nome: 'Posto Shell - Paciência', gnv: true },
+      { lat: -22.9280, lng: -43.6780, nome: 'Posto Petrobras - Santa Cruz', gnv: true }
+    ],
+    markers: {}, visible: true, filter: 'all',
     render(map) {
-      Object.values(this.markers).forEach(m=>{ try{m.remove();}catch(e){} });
+      Object.values(this.markers).forEach(m=>m.remove());
       this.markers = {};
       if(!this.visible || this.filter==='none') return;
       let list = [...this.stations];
       if(this.filter==='gnv') list = list.filter(s=>s.gnv);
-      const center = window.App?.userPos || RJ_CENTER;
-      list.sort((a,b)=>Utils.distanceKm([a.lng,a.lat], center) - Utils.distanceKm([b.lng,b.lat], center));
-      list.slice(0, 50).forEach(s=>{
+      list.forEach(s=>{
         const el = document.createElement('div');
         el.className = 'fuel-marker verde' + (s.gnv ? ' gnv' : '');
         el.textContent = s.gnv ? 'G' : '⛽';
         const popHTML = `
           <div class="fuel-popup-card">
             <div class="fuel-popup-title">${Utils.sanitize(s.nome)}</div>
-            <span class="fuel-popup-badge ok">🟢 Regular • Oficial ANP</span>
-            <div class="fuel-popup-prices">
-              <div>⛽ Gas: R$ 5,89</div><div>⛽ Eta: R$ 3,99</div>
-              <div>🔥 GNV: ${s.gnv ? 'R$ 4,49' : 'Não possui'}</div>
-              <div>📍 ${window.App?.userPos ? (Utils.distanceKm(window.App.userPos, [s.lng, s.lat])*1000).toFixed(0)+'m' : '--'}</div>
-            </div>
+            <span class="fuel-popup-badge ok">🟢 Regular • ANP</span>
             <button class="fuel-popup-btn" onclick="window.App.navigateToCoord(${s.lng},${s.lat},'${Utils.sanitize(s.nome)}')">🧭 IR PARA ESTE POSTO</button>
           </div>
         `;
         const marker = new maplibregl.Marker({ element: el })
           .setLngLat([s.lng, s.lat])
-          .setPopup(new maplibregl.Popup({ offset:18, maxWidth:'280px' }).setHTML(popHTML))
+          .setPopup(new maplibregl.Popup({ offset:18 }).setHTML(popHTML))
           .addTo(map);
-        this.markers[`${s.lat.toFixed(4)},${s.lng.toFixed(4)}`] = marker;
+        this.markers[`${s.lat},${s.lng}`] = marker;
       });
     }
   };
 
-  const rawAreas = [
-    {name:'Rocinha', c:[-43.2471,-22.9881], r:0.60, type:'conflito', major:true},
-    {name:'Vidigal', c:[-43.2356,-22.9939], r:0.40, type:'conflito', major:true},
-    {name:'Pavão-Pavãozinho', c:[-43.1947,-22.9797], r:0.35, type:'conflito'},
-    {name:'Santa Marta', c:[-43.1931,-22.9472], r:0.35, type:'conflito', major:true},
-    {name:'Complexo do Alemão', c:[-43.2710,-22.8595], r:0.65, type:'conflito', major:true},
-    {name:'Complexo da Penha', c:[-43.2847,-22.8425], r:0.55, type:'conflito', major:true},
-    {name:'Complexo da Maré', c:[-43.2415,-22.8555], r:0.65, type:'conflito', major:true},
-    {name:'Manguinhos', c:[-43.2453,-22.8803], r:0.45, type:'conflito', major:true},
-    {name:'Jacarezinho', c:[-43.2558,-22.8886], r:0.45, type:'conflito', major:true},
-    {name:'Complexo do Chapadão', c:[-43.3769,-22.8272], r:0.60, type:'conflito', major:true},
-    {name:'Complexo da Pedreira', c:[-43.3614,-22.8369], r:0.60, type:'conflito'},
-    {name:'Cidade de Deus (CDD)', c:[-43.3644,-22.9430], r:0.55, type:'conflito', major:true},
-    {name:'Complexo do Rio das Pedras', c:[-43.3405,-22.9902], r:0.60, type:'conflito', major:true},
-    {name:'Muzema', c:[-43.3128,-22.9908], r:0.40, type:'conflito'},
-    {name:'Gardênia Azul', c:[-43.3486,-22.9614], r:0.40, type:'conflito'},
-    {name:'Cesarão (Santa Cruz)', c:[-43.66027,-22.93587], r:0.50, type:'conflito', major:true},
-    {name:'Favela do Rodo / Rollas', c:[-43.6732,-22.9231], r:0.45, type:'conflito', major:true},
-    {name:'Favela de Antares', c:[-43.6644,-22.9275], r:0.40, type:'conflito', major:true},
-    {name:'Comunidade do Aço', c:[-43.6521,-22.9248], r:0.38, type:'conflito', major:true},
-    {name:'Pantanal (Santa Cruz)', c:[-43.6675,-22.9290], r:0.35, type:'conflito'},
-    {name:'Nova Sepetiba', c:[-43.6995,-22.9515], r:0.50, type:'conflito', major:true},
-    {name:'Carobinha (Campo Grande)', c:[-43.5353,-22.8687], r:0.45, type:'conflito', major:true},
-    {name:'Barbante (Inhoaíba)', c:[-43.5819,-22.9056], r:0.40, type:'conflito', major:true},
-    {name:'Vila Aliança (Bangu)', c:[-43.4847,-22.8642], r:0.50, type:'conflito', major:true},
-    {name:'Vila Vintém (Padre Miguel)', c:[-43.4475,-22.8731], r:0.50, type:'conflito', major:true},
-    {name:'Vila Kennedy', c:[-43.4674,-22.8492], r:0.55, type:'conflito', major:true},
-    {name:'Complexo do Lixão (Caxias)', c:[-43.3108,-22.7844], r:0.45, type:'conflito', major:true},
-    {name:'Gogó da Ema (Belford Roxo)', c:[-43.4114,-22.7483], r:0.45, type:'conflito', major:true},
-    {name:'Chatuba (Mesquita)', c:[-43.4183,-22.7817], r:0.40, type:'conflito'}
-  ];
-
-  const communityData = rawAreas.map(a => ({
-    name: a.name, type: a.type, major: !!a.major,
-    coords: Utils.makePerimeter(a.c[0], a.c[1], a.r)
-  }));
-
-  const LOCAL_HAZARDS = [
-    { type:'lombada', coords:[-43.6401,-22.9118] }, { type:'lombada', coords:[-43.6403,-22.9102] },
-    { type:'lombada', coords:[-43.6406,-22.9090] }, { type:'lombada', coords:[-43.6410,-22.9075] },
-    { type:'lombada', coords:[-43.6415,-22.9062] }, { type:'radar', coords:[-43.6402,-22.9090] },
-    { type:'radar', coords:[-43.6445,-22.8970] }, { type:'semaforo', coords:[-43.6400,-22.9125] },
-    { type:'semaforo', coords:[-43.6450,-22.8960] }
-  ];
-
   const App = {
     map: null, userPos: null, destPos: null, routeData: null, navActive: false,
-    watchId: null, wakeLock: null, userMarker: null, destMarker: null,
-    transportMode: 'driving', themeMode: 'auto', soundEnabled: true, speedAlert: true,
-    followMode: true, offRouteCounter: 0, isRerouting: false, communityVisible: true,
-    routeHazards: [], hazardMarkers: [], myReportId: null, chatMessages: [], mqttClient: null,
-    currentBearing: 0, searchHistory: [],
+    watchId: null, userMarker: null, destMarker: null, currentBearing: 0,
+    themeMode: 'auto', soundEnabled: true, speedAlert: true, followMode: true,
+    routeHazards: [], hazardMarkers: [], tomtomIncidents: [], searchHistory: [],
+    announcedRadars: new Set(),
 
     init() {
       this.themeMode = Prefs.get('theme', 'auto');
       this.soundEnabled = Prefs.get('sound', true);
       this.speedAlert = Prefs.get('speedAlert', true);
-      this.transportMode = Prefs.get('transport', 'driving');
-      FuelModule.visible = Prefs.get('fuelVisible', true);
-      FuelModule.filter = Prefs.get('fuelFilter', 'all');
       this.searchHistory = Prefs.get('search_history', []);
 
       this.map = new maplibregl.Map({
@@ -633,9 +595,12 @@ body.nav-mode .favela-sign{top:132px}
       });
       this.map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
 
+      this.map.on('dragstart', (e)=>{ if(e.originalEvent) this.enableFreeExploration(); });
+      this.map.on('zoomstart', (e)=>{ if(e.originalEvent) this.enableFreeExploration(); });
+
       this.map.on('style.load', ()=>{
         this.addCommunityLayers();
-        if(this.routeData) this.drawRoute(this.routeData);
+        if(this.routeData) this.drawRouteGradient(this.routeData);
         FuelModule.render(this.map);
       });
 
@@ -643,22 +608,25 @@ body.nav-mode .favela-sign{top:132px}
         this.addCommunityLayers();
         FuelModule.render(this.map);
         this.startGPS();
-        FuelModule.fetch(RJ_CENTER, ()=>FuelModule.render(this.map));
-        if(!Prefs.get('tutorial_done', false)){
-          document.getElementById('tutorialOverlay').classList.add('show');
-        }
-        this.connectMQTT();
-        setInterval(()=>{ if(this.navActive) this.updateTrafficLight(); }, 1000);
+        this.fetchTomTomIncidents();
+        setInterval(()=>{ if(this.navActive) this.updateTrafficLightSimulation(); }, 1000);
       });
 
       this.bindEvents();
-      this.updateThemeChip();
-      document.getElementById('soundBtn').textContent = this.soundEnabled ? '🔊' : '🔇';
-      document.getElementById('soundBtn').className = this.soundEnabled ? 'active-sound' : 'muted-sound';
-      document.getElementById('fuelChip').classList.toggle('active', FuelModule.visible);
-      document.getElementById('communityChip').classList.toggle('active', this.communityVisible);
-      try{ this.chatMessages = JSON.parse(localStorage.getItem('rs_chat_history')||'[]'); }catch(e){}
-      this.renderChat();
+    },
+
+    enableFreeExploration() {
+      if(!this.navActive) return;
+      this.followMode = false;
+      document.getElementById('navRecenterFloating').classList.add('show');
+    },
+
+    resumeFollowCar() {
+      this.followMode = true;
+      document.getElementById('navRecenterFloating').classList.remove('show');
+      if(this.userPos){
+        this.map.easeTo({ center: this.userPos, zoom: 17.5, pitch: 45, bearing: this.currentBearing||0, duration: 500 });
+      }
     },
 
     getStyleForTheme(mode) {
@@ -672,46 +640,42 @@ body.nav-mode .favela-sign{top:132px}
         sources: { sat: { type: 'raster', tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'], tileSize: 256, attribution: 'Tiles © Esri' } },
         layers: [{ id: 'sat', type: 'raster', source: 'sat' }]
       };
-      if(target==='light') return STYLE_LIGHT;
-      return STYLE_DARK;
+      return target==='light' ? STYLE_LIGHT : STYLE_DARK;
     },
 
     addCommunityLayers() {
       try {
-        if(this.map.getLayer('community-fill')) this.map.removeLayer('community-fill');
-        if(this.map.getLayer('community-outline')) this.map.removeLayer('community-outline');
-        if(this.map.getLayer('community-labels')) this.map.removeLayer('community-labels');
+        ['community-fill','community-outline','community-labels','community-points-layer'].forEach(l=>{
+          if(this.map.getLayer(l)) this.map.removeLayer(l);
+        });
         if(this.map.getSource('community-source')) this.map.removeSource('community-source');
+        if(this.map.getSource('community-points-source')) this.map.removeSource('community-points-source');
 
-        const geo = {
-          type: 'FeatureCollection',
-          features: communityData.map(c => ({
-            type: 'Feature', properties: { name: c.name, type: c.type },
-            geometry: { type: 'Polygon', coordinates: [c.coords] }
-          }))
-        };
-        this.map.addSource('community-source', { type: 'geojson', data: geo, tolerance: 0, buffer: 0 });
+        this.map.addSource('community-source', { type: 'geojson', data: communityGeoJSON, tolerance: 0 });
         this.map.addLayer({
-          id: 'community-fill', type: 'fill', source: 'community-source',
+          id: 'community-fill', type: 'fill', source: 'community-source', minzoom: 12,
           paint: { 'fill-color': '#dc2626', 'fill-opacity': 0.38 }
         });
         this.map.addLayer({
-          id: 'community-outline', type: 'line', source: 'community-source',
+          id: 'community-outline', type: 'line', source: 'community-source', minzoom: 12,
           paint: { 'line-color': '#ef4444', 'line-width': 2.5 }
         });
         this.map.addLayer({
-          id: 'community-labels', type: 'symbol', source: 'community-source',
+          id: 'community-labels', type: 'symbol', source: 'community-source', minzoom: 13,
           layout: { 'text-field': ['concat', '⚠ ', ['get','name']], 'text-size': 12, 'text-allow-overlap': true },
           paint: { 'text-color': '#fee2e2', 'text-halo-color': '#450a0a', 'text-halo-width': 2 }
         });
-        ['community-fill','community-outline','community-labels'].forEach(id=>{
-          if(this.map.getLayer(id)) this.map.setLayoutProperty(id, 'visibility', this.communityVisible ? 'visible' : 'none');
+
+        this.map.addSource('community-points-source', { type: 'geojson', data: communityPointsGeoJSON });
+        this.map.addLayer({
+          id: 'community-points-layer', type: 'circle', source: 'community-points-source', maxzoom: 12,
+          paint: { 'circle-radius': 5, 'circle-color': '#ef4444', 'circle-stroke-width': 1.5, 'circle-stroke-color': '#ffffff' }
         });
       } catch(e){}
     },
 
     startGPS() {
-      if(!navigator.geolocation){ this.setGPSStatus(false,'SEM GPS'); return; }
+      if(!navigator.geolocation) return;
       if(this.watchId!==null) navigator.geolocation.clearWatch(this.watchId);
       this.watchId = navigator.geolocation.watchPosition(
         (p)=>{
@@ -724,28 +688,21 @@ body.nav-mode .favela-sign{top:132px}
           this.lastPos = raw;
           this.userPos = raw;
 
-          const displayPos = Utils.snapToRoute(this.userPos, this.routeData?.geometry?.coordinates);
+          const displayPos = Utils.snapToRoute(this.userPos, this.routeData?.coords);
           this.updateUserMarker(displayPos, this.currentBearing||0);
-          this.setGPSStatus(true,'GPS ATIVO');
 
           const speedKmh = Math.round((p.coords.speed||0)*3.6);
           document.getElementById('speedVal').textContent = speedKmh>0?speedKmh:'0';
-          this.checkSpeedLimits(speedKmh);
 
           if(!this._firstFix){
             this._firstFix=true;
             this.map.flyTo({center:this.userPos, zoom:15.5, duration:600});
-            FuelModule.fetch(this.userPos, ()=>FuelModule.render(this.map));
           }
           this.updateNavigation();
-          this.checkCommunityDanger();
-          this.updateTrafficLight();
-          this.checkOffRoute();
+          this.checkCommunitySignHUD();
+          this.checkSpeedAndRadars(speedKmh);
         },
-        (e)=>{
-          this.setGPSStatus(false, e.code===1?'GPS BLOQ.':'GPS...');
-          if(e.code===1) this.toast('Permita o acesso ao GPS.');
-        },
+        ()=>{},
         { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 }
       );
     },
@@ -759,120 +716,146 @@ body.nav-mode .favela-sign{top:132px}
         this.userMarker.setLngLat(coords);
         if(heading!=null && !isNaN(heading)) this.userMarker.setRotation(heading);
       }
-      if(this.navActive && this.followMode && !this.isRerouting){
+      if(this.navActive && this.followMode){
         this.map.easeTo({ center: coords, zoom: 17.5, pitch: 45, bearing: heading||0, duration: 400 });
       }
     },
 
-    setGPSStatus(ok, text) {
-      const b = document.getElementById('gpsBadge');
-      if(b){ b.textContent = text; b.style.background = ok ? '#059669' : '#475569'; }
-    },
-
-    checkSpeedLimits(speed) {
-      const box = document.getElementById('speedometerBox');
-      let limit = 80;
-      if(this.routeHazards.some(h=>h.type==='radar' && Utils.distanceKm(this.userPos, h.coords)*1000 < 300)) limit = 60;
-      if(speed > limit){
-        box.classList.add('speed-alert');
-        if(this.speedAlert && this.soundEnabled && Date.now() - (this._lastBeep||0) > 3000){
-          this._lastBeep = Date.now();
-          try {
-            const ctx = new (window.AudioContext||window.webkitAudioContext)();
-            const osc = ctx.createOscillator(), gain = ctx.createGain();
-            osc.frequency.value = 880; gain.gain.value = 0.15;
-            osc.connect(gain); gain.connect(ctx.destination);
-            osc.start(); osc.stop(ctx.currentTime+0.25);
-          } catch(e){}
+    // ALERTAS OFICIAIS TOMTOM TRAFFIC INCIDENTS
+    async fetchTomTomIncidents() {
+      try {
+        const bbox = '-44.85,-23.40,-41.50,-22.20';
+        const url = `https://api.tomtom.com/traffic/services/5/incidentDetails?key=${TOMTOM_KEY}&bbox=${bbox}&fields={incidents{type,geometry{type,coordinates},properties{iconCategory,magnitudeOfDelay,events{description}}}}&language=pt-BR`;
+        const r = await fetch(url);
+        const j = await r.json();
+        if(j.incidents){
+          j.incidents.forEach(inc => {
+            const coords = inc.geometry.type === 'Point' ? inc.geometry.coordinates : inc.geometry.coordinates[0];
+            const desc = inc.properties.events?.[0]?.description || 'Incidente oficial de trânsito';
+            const icon = inc.properties.iconCategory === 1 ? '🚧' : '💥';
+            const el = document.createElement('div');
+            el.style.fontSize = '24px';
+            el.textContent = icon;
+            new maplibregl.Marker({ element: el })
+              .setLngLat(coords)
+              .setPopup(new maplibregl.Popup().setHTML(`<b>${icon} TomTom Alerta</b><br>${Utils.sanitize(desc)}`))
+              .addTo(this.map);
+          });
         }
-      } else box.classList.remove('speed-alert');
+      } catch(e){}
     },
 
+    // ROTA TOMTOM COM GRADIENTE DE TRÁFEGO
     async fetchRoute(a, b) {
-      if(this._routeAbort) this._routeAbort.abort();
-      this._routeAbort = new AbortController();
+      try {
+        const u = `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=car&instructionsType=text&language=pt-BR&sectionType=traffic`;
+        const r = await fetch(u);
+        const j = await r.json();
+        if(j.routes && j.routes.length > 0){
+          const route = j.routes[0];
+          const coords = route.legs[0].points.map(p => [p.longitude, p.latitude]);
+          const steps = (route.guidance?.instructions || []).map(inst => ({
+            name: inst.street || 'Siga pela via',
+            maneuver: {
+              type: inst.maneuver,
+              modifier: inst.maneuver.includes('LEFT') ? 'left' : inst.maneuver.includes('RIGHT') ? 'right' : 'straight',
+              location: [inst.point.longitude, inst.point.latitude]
+            }
+          }));
 
-      if(TOMTOM_KEY && this.transportMode === 'driving'){
-        try {
-          const u = `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=car&instructionsType=text&language=pt-BR`;
-          const r = await fetch(u, { signal: this._routeAbort.signal });
-          const j = await r.json();
-          if(j.routes && j.routes.length > 0){
-            const route = j.routes[0];
-            const coords = route.legs[0].points.map(p => [p.longitude, p.latitude]);
-            const steps = (route.guidance?.instructions || []).map(inst => ({
-              name: inst.street || 'Siga pela via',
-              distance: inst.routeOffsetInMeters || 100,
-              maneuver: {
-                type: inst.maneuver,
-                modifier: inst.maneuver.includes('LEFT') ? 'left' : inst.maneuver.includes('RIGHT') ? 'right' : 'straight',
-                location: [inst.point.longitude, inst.point.latitude]
-              }
-            }));
-            return {
-              geometry: { type: 'LineString', coordinates: coords },
-              duration: route.summary.travelTimeInSeconds,
-              distance: route.summary.lengthInMeters,
-              legs: [{ steps: steps.length > 0 ? steps : [{ name: 'Destino', maneuver: { type: 'arrive' } }] }]
-            };
-          }
-        } catch(err){}
-      }
+          const sections = (route.sections || []).map(sec => ({
+            start: sec.startPointIndex,
+            end: sec.endPointIndex,
+            delay: sec.delayInSeconds || 0
+          }));
 
-      const profile = this.transportMode === 'bike' ? 'cycling' : this.transportMode === 'foot' ? 'walking' : 'driving';
-      const u = `https://router.project-osrm.org/route/v1/${profile}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&steps=true`;
-      const r = await fetch(u, { signal: this._routeAbort.signal });
-      const j = await r.json();
-      if(j.code !== 'Ok' || !j.routes?.length) throw Error('Erro Rota');
-      return j.routes[0];
+          return {
+            coords,
+            duration: route.summary.travelTimeInSeconds,
+            distance: route.summary.lengthInMeters,
+            steps,
+            sections
+          };
+        }
+      } catch(err){}
+      return null;
     },
 
     async calculateRoute() {
-      if(!this.userPos){ this.toast('Aguardando GPS...'); return; }
-      if(!this.destPos){ this.toast('Defina um destino.'); return; }
+      if(!this.userPos || !this.destPos) return;
       try {
         this.routeData = await this.fetchRoute(this.userPos, this.destPos);
-        this.drawRoute(this.routeData);
+        if(!this.routeData) return;
+        this.drawRouteGradient(this.routeData);
         this.renderDestinationFlag();
         this.fetchRouteHazards();
         document.getElementById('sheetTime').textContent = Math.max(1, Math.round(this.routeData.duration/60)) + ' min';
-        document.getElementById('sheetDist').textContent = (this.routeData.distance/1000).toFixed(1) + ' km • Chegada prevista';
-        this.checkDestinationDanger();
-      } catch(e){ this.toast('Falha ao calcular rota.'); }
+        document.getElementById('sheetDist').textContent = (this.routeData.distance/1000).toFixed(1) + ' km • Tráfego Real';
+      } catch(e){}
     },
 
-    drawRoute(r) {
+    // COLORIR LINHA DA ROTA CONFORME CONGESTIONAMENTO
+    drawRouteGradient(r) {
       const map = this.map;
-      if(map.getLayer('route-line')) map.removeLayer('route-line');
-      if(map.getLayer('route-outline')) map.removeLayer('route-outline');
-      if(map.getSource('route')) map.removeSource('route');
-      map.addSource('route', { type: 'geojson', data: { type: 'Feature', geometry: r.geometry } });
-      map.addLayer({ id: 'route-outline', type: 'line', source: 'route', paint: { 'line-color': '#1e1b4b', 'line-width': 10 } });
-      map.addLayer({ id: 'route-line', type: 'line', source: 'route', paint: { 'line-color': '#a855f7', 'line-width': 6 } });
-      const c = r.geometry.coordinates, b = c.reduce((x,p)=>x.extend(p), new maplibregl.LngLatBounds(c[0], c[0]));
+      ['route-outline','route-line-green','route-line-red'].forEach(l=>{ if(map.getLayer(l)) map.removeLayer(l); });
+      ['route-main-src','route-heavy-src'].forEach(s=>{ if(map.getSource(s)) map.removeSource(s); });
+
+      map.addSource('route-main-src', {
+        type: 'geojson',
+        data: { type: 'Feature', geometry: { type: 'LineString', coordinates: r.coords } }
+      });
+
+      map.addLayer({
+        id: 'route-outline', type: 'line', source: 'route-main-src',
+        paint: { 'line-color': '#0f172a', 'line-width': 11 }
+      });
+
+      map.addLayer({
+        id: 'route-line-green', type: 'line', source: 'route-main-src',
+        paint: { 'line-color': '#22c55e', 'line-width': 7 }
+      });
+
+      // Se houver trechos de tráfego intenso na TomTom, plota em vermelho
+      const heavyCoords = [];
+      (r.sections || []).forEach(sec => {
+        if(sec.delay > 60){
+          heavyCoords.push(...r.coords.slice(sec.start, sec.end + 1));
+        }
+      });
+
+      if(heavyCoords.length > 1){
+        map.addSource('route-heavy-src', {
+          type: 'geojson',
+          data: { type: 'Feature', geometry: { type: 'LineString', coordinates: heavyCoords } }
+        });
+        map.addLayer({
+          id: 'route-line-red', type: 'line', source: 'route-heavy-src',
+          paint: { 'line-color': '#ef4444', 'line-width': 7 }
+        });
+      }
+
+      const b = r.coords.reduce((x,p)=>x.extend(p), new maplibregl.LngLatBounds(r.coords[0], r.coords[0]));
       map.fitBounds(b, { padding: { top:130, bottom:140, left:30, right:30 }, maxZoom:16, duration:500 });
     },
 
     renderDestinationFlag() {
       if(this.destMarker) this.destMarker.remove();
       if(!this.routeData) return;
-      const final = this.routeData.geometry.coordinates.slice(-1)[0];
+      const final = this.routeData.coords.slice(-1)[0];
       const el = document.createElement('div');
       el.className = 'finish-flag-marker'; el.textContent = '🏁';
       this.destMarker = new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat(final).addTo(this.map);
     },
 
     startNav() {
-      if(!this.routeData){ this.toast('Calcule uma rota primeiro.'); return; }
+      if(!this.routeData) return;
       this.navActive = true;
       document.body.classList.add('nav-mode');
       document.getElementById('wazeHud').classList.add('show');
       document.getElementById('mainTopbar').classList.add('hide-nav');
       document.getElementById('mainBottomActions').classList.add('hide-nav');
-      this.followMode = true;
+      this.resumeFollowCar();
       this.toggleSheet(false);
-      if('wakeLock' in navigator) navigator.wakeLock.request('screen').then(w=>this.wakeLock=w).catch(()=>{});
-      this.map.easeTo({ center: this.userPos || RJ_CENTER, zoom: 17.5, pitch: 45, duration: 500 });
       this.updateNavigation();
     },
 
@@ -880,50 +863,19 @@ body.nav-mode .favela-sign{top:132px}
       this.navActive = false;
       document.body.classList.remove('nav-mode');
       document.getElementById('wazeHud').classList.remove('show');
+      document.getElementById('favelaHighwaySign').classList.remove('show');
       document.getElementById('trafficLightHud').classList.remove('show');
+      document.getElementById('navRecenterFloating').classList.remove('show');
       document.getElementById('mainTopbar').classList.remove('hide-nav');
       document.getElementById('mainBottomActions').classList.remove('hide-nav');
-      if(this.wakeLock){ this.wakeLock.release?.(); this.wakeLock=null; }
       speechSynthesis.cancel();
       this.map.easeTo({ pitch:0, bearing:0, duration:400 });
     },
 
-    clearRoute() {
-      const map = this.map;
-      if(map.getLayer('route-line')) map.removeLayer('route-line');
-      if(map.getLayer('route-outline')) map.removeLayer('route-outline');
-      if(map.getSource('route')) map.removeSource('route');
-      this.hazardMarkers.forEach(m=>m.remove());
-      this.hazardMarkers = [];
-      this.routeHazards = [];
-      if(this.destMarker){ this.destMarker.remove(); this.destMarker=null; }
-      this.routeData = null; this.destPos = null;
-      document.getElementById('wazeSheet').classList.remove('show');
-      this.stopNav();
-    },
-
-    allSteps() { return (this.routeData?.legs||[]).flatMap(l=>l.steps||[]); },
-
-    stepIcon(s) {
-      const m = s.maneuver||{};
-      if(m.type==='arrive') return '🏁';
-      if(m.modifier?.includes('left')) return '↰';
-      if(m.modifier?.includes('right')) return '↱';
-      if(m.type==='roundabout') return '🔄';
-      return '⬆';
-    },
-
-    maneuverText(s) {
-      const m = s.maneuver||{};
-      if(m.type==='arrive') return 'chegue ao seu destino';
-      if(m.modifier?.includes('left')) return 'vire à esquerda';
-      if(m.modifier?.includes('right')) return 'vire à direita';
-      return 'siga em frente';
-    },
-
+    // ORIENTAÇÃO DE FAIXAS (LANE GUIDANCE) NO HUD
     updateNavigation() {
-      if(!this.navActive || !this.userPos || !this.routeData || this.isRerouting) return;
-      const steps = this.allSteps();
+      if(!this.navActive || !this.userPos || !this.routeData) return;
+      const steps = this.routeData.steps || [];
       if(!steps.length) return;
       let best=0, bestDist=Infinity;
       steps.forEach((s,i)=>{
@@ -933,69 +885,65 @@ body.nav-mode .favela-sign{top:132px}
           if(d<bestDist){ bestDist=d; best=i; }
         }
       });
-      const current = steps[best] || { name: 'Siga na via' }, next = steps[best+1];
+      const current = steps[best] || { name: 'Siga na via' };
       const distM = Math.round(bestDist*1000);
       document.getElementById('hudDist').textContent = distM<1000 ? `${distM} m` : `${(distM/1000).toFixed(1)} km`;
-      document.getElementById('hudArrow').textContent = this.stepIcon(current);
       document.getElementById('hudStreet').textContent = current.name || 'Siga na via';
       document.getElementById('currentRoadPill').textContent = current.name || 'Via Atual';
-      if(next){
-        document.getElementById('hudNextIcon').textContent = this.stepIcon(next);
-        document.getElementById('hudNextStreet').textContent = next.name || 'Próximo acesso';
+
+      // Desenhar Setas 3D de faixas na pista
+      const laneBox = document.getElementById('laneGuidanceBox');
+      laneBox.innerHTML = '';
+      const isTurnLeft = current.maneuver?.modifier?.includes('left');
+      const isTurnRight = current.maneuver?.modifier?.includes('right');
+      for(let i=0; i<3; i++){
+        const l = document.createElement('div');
+        l.className = 'lane-box';
+        l.textContent = i===0 && isTurnLeft ? '↰' : i===2 && isTurnRight ? '↱' : '↑';
+        if((isTurnLeft && i===0) || (isTurnRight && i===2) || (!isTurnLeft && !isTurnRight && i===1)){
+          l.classList.add('active-lane');
+        }
+        laneBox.appendChild(l);
       }
-      if(!this._announced) this._announced = {};
-      if(!this._announced[best]) this._announced[best] = new Set();
-      const done = this._announced[best];
-      [300, 100, 30].forEach(t=>{
-        if(distM <= t && !done.has(t)){
-          done.add(t);
-          const phrase = this.maneuverText(current);
-          if(next && next.distance < 80 && t <= 100){
-            Voice.speak((t<=30?'Agora, ':`Em ${t} metros, `) + phrase + ' e em seguida ' + this.maneuverText(next), t<=30);
-          } else {
-            Voice.speak((t<=30?'Agora, ':`Em ${t} metros, `) + phrase, t<=30);
+    },
+
+    // ALERTA DE RADAR POR VOZ COM VELOCIDADE EXATA
+    checkSpeedAndRadars(speed) {
+      if(!this.userPos) return;
+      LOCAL_HAZARDS.forEach(h => {
+        if(h.type === 'radar'){
+          const d = Utils.distanceKm(this.userPos, h.coords) * 1000;
+          if(d <= 350 && !this.announcedRadars.has(h.coords.join(','))){
+            this.announcedRadars.add(h.coords.join(','));
+            Voice.speak(`Atenção: radar à frente, limite de ${h.speedLimit || 60} quilômetros por hora.`, true);
           }
         }
       });
-      this.renderHazards();
+      const box = document.getElementById('speedometerBox');
+      if(speed > 80) box.classList.add('speed-alert');
+      else box.classList.remove('speed-alert');
     },
 
-    fetchRouteHazards() {
-      this.routeHazards = [];
-      if(!this.routeData) return;
-      const coords = this.routeData.geometry.coordinates;
-      LOCAL_HAZARDS.forEach(h=>{
-        for(let i=0; i<coords.length-1; i++){
-          const res = Utils.pointToSegment(h.coords, coords[i], coords[i+1]);
-          if(res.dist*1000 < 20){
-            this.routeHazards.push({ ...h, segIndex: i, bearing: res.bearing });
-            break;
-          }
-        }
+    checkCommunitySignHUD() {
+      const sign = document.getElementById('favelaHighwaySign');
+      if(!this.navActive || !this.userPos){ sign.classList.remove('show'); return; }
+      let near = null, nd = Infinity;
+      rawAreas.forEach(c=>{
+        const d = Utils.distanceKm(this.userPos, c.c);
+        if(d < nd){ nd = d; near = c; }
       });
-      this.renderHazards();
+      if(near && nd <= near.r + 0.35){
+        document.getElementById('favelaHighwayTitle').textContent = `⚠ ${near.name.toUpperCase()}`;
+        document.getElementById('favelaHighwaySub').textContent = `Aprox. ${(nd*1000).toFixed(0)}m • Permaneça na via principal`;
+        sign.classList.add('show');
+      } else sign.classList.remove('show');
     },
 
-    renderHazards() {
-      this.hazardMarkers.forEach(m=>m.remove());
-      this.hazardMarkers = [];
-      const SVG_LOMBADA = `<svg viewBox="0 0 54 54"><polygon points="27,3 51,27 27,51 3,27" fill="#fbbf24" stroke="#000" stroke-width="4.5"/><polyline points="15,28 27,16 39,28" fill="none" stroke="#000" stroke-width="5"/></svg>`;
-      const SVG_RADAR = `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0284c7" stroke="#fff" stroke-width="3"/><rect x="15" y="15" width="18" height="18" rx="4" fill="#fff"/><circle cx="24" cy="24" r="5" fill="#0284c7"/></svg>`;
-      const SVG_SEMAFORO = `<svg viewBox="0 0 48 48"><rect x="15" y="4" width="18" height="40" rx="6" fill="#0f172a" stroke="#fff" stroke-width="2.5"/><circle cx="24" cy="12" r="4" fill="#ef4444"/><circle cx="24" cy="24" r="4" fill="#eab308"/><circle cx="24" cy="36" r="4" fill="#22c55e"/></svg>`;
-      this.routeHazards.forEach(h=>{
-        const el = document.createElement('div');
-        el.className = 'hazard-marker';
-        el.innerHTML = h.type==='lombada'?SVG_LOMBADA:h.type==='radar'?SVG_RADAR:SVG_SEMAFORO;
-        const m = new maplibregl.Marker({ element: el }).setLngLat(h.coords).addTo(this.map);
-        this.hazardMarkers.push(m);
-      });
-    },
-
-    updateTrafficLight() {
+    updateTrafficLightSimulation() {
       const hud = document.getElementById('trafficLightHud');
       if(!this.navActive || !this.userPos || !this.routeData){ hud.classList.remove('show'); return; }
       let near = null, dist = Infinity;
-      this.routeHazards.forEach(h=>{
+      LOCAL_HAZARDS.forEach(h=>{
         if(h.type !== 'semaforo') return;
         const d = Utils.distanceKm(this.userPos, h.coords)*1000;
         if(d < dist && d > 5){ dist = d; near = h; }
@@ -1003,224 +951,38 @@ body.nav-mode .favela-sign{top:132px}
       if(near && dist <= 220){
         hud.classList.add('show');
         const sec = Math.floor(Date.now()/1000 % 60);
-        const dRed=document.getElementById('tlDotRed'), dYel=document.getElementById('tlDotYellow'), dGrn=document.getElementById('tlDotGreen');
-        dRed.className='traffic-light-dot red'; dYel.className='traffic-light-dot yellow'; dGrn.className='traffic-light-dot green';
-        if(sec < 28){
-          dGrn.classList.add('active');
-          document.getElementById('tlStatusText').textContent = '🟢 Estimativa: Semáforo Aberto';
-          document.getElementById('tlCountdownText').textContent = `A ${Math.round(dist)}m • pode fechar em ~${28-sec}s`;
-        } else if(sec < 33){
-          dYel.classList.add('active');
-          document.getElementById('tlStatusText').textContent = '🟡 Estimativa: Semáforo em Atenção';
-          document.getElementById('tlCountdownText').textContent = `A ${Math.round(dist)}m • pode fechar em ~${33-sec}s`;
-        } else {
-          dRed.classList.add('active');
-          document.getElementById('tlStatusText').textContent = '🔴 Estimativa: Semáforo Fechado';
-          document.getElementById('tlCountdownText').textContent = `A ${Math.round(dist)}m • pode abrir em ~${60-sec}s`;
-        }
+        document.getElementById('tlDotRed').className = 'traffic-light-dot red' + (sec>=33?' active':'');
+        document.getElementById('tlDotYellow').className = 'traffic-light-dot yellow' + (sec>=28&&sec<33?' active':'');
+        document.getElementById('tlDotGreen').className = 'traffic-light-dot green' + (sec<28?' active':'');
+        document.getElementById('tlStatusText').textContent = sec<28?'🟢 Semáforo Aberto':sec<33?'🟡 Atenção':'🔴 Semáforo Fechado';
+        document.getElementById('tlCountdownText').textContent = `A ${Math.round(dist)}m • ciclo dinâmico`;
       } else hud.classList.remove('show');
     },
 
-    checkCommunityDanger() {
-      if(!this.userPos) return;
-      const sign = document.getElementById('favelaSign'), tag = document.getElementById('hudDangerTag');
-      let near = null, nd = Infinity;
-      rawAreas.forEach(c=>{
-        const d = Utils.distanceKm(this.userPos, c.c);
-        if(d < nd){ nd = d; near = c; }
-      });
-      if(near && nd <= near.r + 0.3){
-        sign.textContent = '⚠ Comunidade próxima: ' + near.name;
-        sign.classList.add('show');
-        tag.textContent = '⚠ ALERTA: ' + near.name.toUpperCase();
-        tag.classList.add('active');
-      } else {
-        sign.classList.remove('show');
-        tag.classList.remove('active');
-      }
-      if(near && nd <= near.r && !this._insideAlert?.[near.name]){
-        if(!this._insideAlert) this._insideAlert={};
-        this._insideAlert[near.name]=true;
-        document.getElementById('dangerBannerText').textContent = `⚠ Atenção! Você está entrando na área da comunidade ${near.name}.`;
-        document.getElementById('dangerBanner').classList.add('show');
-        Voice.speak(`Atenção! Você está entrando na área da comunidade ${near.name}.`, true);
-      }
-    },
-
-    checkDestinationDanger() {
-      if(!this.destPos) return;
-      rawAreas.forEach(c=>{
-        if(Utils.distanceKm(this.destPos, c.c) <= c.r + 0.3){
-          document.getElementById('dangerBannerText').textContent = `⚠ ATENÇÃO: Seu destino fica dentro ou próximo de ${c.name}.`;
-          document.getElementById('dangerBanner').classList.add('show');
-          Voice.speak(`Atenção: seu destino fica próximo à comunidade ${c.name}.`, true);
+    fetchRouteHazards() {
+      this.hazardMarkers.forEach(m=>m.remove());
+      this.hazardMarkers = [];
+      if(!this.routeData) return;
+      const coords = this.routeData.coords;
+      LOCAL_HAZARDS.forEach(h=>{
+        for(let i=0; i<coords.length-1; i++){
+          const res = Utils.pointToSegment(h.coords, coords[i], coords[i+1]);
+          if(res.dist*1000 < 20){
+            const el = document.createElement('div');
+            el.className = 'hazard-marker';
+            el.innerHTML = h.type==='lombada' ? `<svg viewBox="0 0 54 54"><polygon points="27,3 51,27 27,51 3,27" fill="#fbbf24" stroke="#000" stroke-width="4"/><polyline points="15,28 27,16 39,28" fill="none" stroke="#000" stroke-width="5"/></svg>` : `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0284c7" stroke="#fff" stroke-width="3"/><rect x="15" y="15" width="18" height="18" rx="4" fill="#fff"/></svg>`;
+            this.hazardMarkers.push(new maplibregl.Marker({ element: el }).setLngLat(h.coords).addTo(this.map));
+            break;
+          }
         }
       });
     },
 
-    checkOffRoute() {
-      if(!this.navActive || !this.routeData || !this.userPos || this.isRerouting) return;
-      const coords = this.routeData.geometry.coordinates;
-      let min = Infinity;
-      for(let i=0; i<coords.length-1; i++) min = Math.min(min, Utils.pointToSegment(this.userPos, coords[i], coords[i+1]).dist);
-      if(min*1000 > 45){
-        this.offRouteCounter++;
-        if(this.offRouteCounter >= 2){
-          this.offRouteCounter = 0;
-          this.recalculateRoute();
-        }
-      } else this.offRouteCounter = 0;
-    },
-
-    async recalculateRoute() {
-      if(!this.destPos || !this.userPos || this.isRerouting) return;
-      this.isRerouting = true;
-      this.toast('Recalculando rota...');
-      try {
-        this.routeData = await this.fetchRoute(this.userPos, this.destPos);
-        this.drawRoute(this.routeData);
-        Voice.speak('Rota recalculada.');
-      } catch(e){}
-      this.isRerouting = false;
-    },
-
-    saveSearchHistory(name, lon, lat) {
-      this.searchHistory = this.searchHistory.filter(h => h.name !== name);
-      this.searchHistory.unshift({ name, lon, lat });
-      if(this.searchHistory.length > 10) this.searchHistory.pop();
-      Prefs.set('search_history', this.searchHistory);
-    },
-
-    showHistoryDropdown() {
-      const suggest = document.getElementById('suggest');
-      if(this.searchHistory.length === 0) return;
-      suggest.innerHTML = '<div style="padding:8px 12px;font-size:11px;font-weight:900;color:#94a3b8;background:#0b1b2a">🕒 DESTINOS RECENTES</div>';
-      this.searchHistory.forEach(h => {
-        const d = document.createElement('div');
-        d.className = 'suggest-item';
-        d.innerHTML = `📍 <b>${Utils.sanitize(h.name)}</b>`;
-        d.onclick = () => {
-          document.getElementById('destInput').value = h.name;
-          this.destPos = [h.lon, h.lat];
-          suggest.classList.remove('show');
-          this.openNavSheet();
-        };
-        suggest.appendChild(d);
-      });
-      suggest.classList.add('show');
-    },
-
-    openNavSheet() {
-      document.getElementById('wazeSheet').classList.add('show', 'expanded');
-      this._sheetExpanded = true;
-      if(this.userPos && this.destPos) this.calculateRoute();
-    },
-
-    navigateToCoord(lng, lat, name) {
-      this.destPos = [lng, lat];
-      document.getElementById('destInput').value = name;
-      this.saveSearchHistory(name, lng, lat);
-      this.openNavSheet();
-    },
-
-    sendReport(type, label) {
-      if(!this.userPos){ this.toast('Aguardando GPS...'); return; }
-      const evt = { id:'evt-'+Math.random().toString(36).slice(2,9), type, label, coords:this.userPos, time:Date.now() };
-      this.myReportId = evt.id;
-      if(this.mqttClient?.connected) this.mqttClient.publish('radarseguro-rj-pro/eventos/v1', JSON.stringify(evt));
-      this._renderEventMarker(evt);
-      document.getElementById('reportLiveModal').classList.remove('show');
-      this.toast('Ocorrência reportada!');
-      Utils.vibrate(40);
-    },
-
-    cancelReport() {
-      if(!this.myReportId){ this.toast('Nenhum alerta recente.'); return; }
-      if(this._eventMarkers?.[this.myReportId]){
-        this._eventMarkers[this.myReportId].remove();
-        delete this._eventMarkers[this.myReportId];
-      }
-      if(this.mqttClient?.connected) this.mqttClient.publish('radarseguro-rj-pro/eventos/cancel/v1', JSON.stringify({ id:this.myReportId }));
-      this.myReportId = null;
-      document.getElementById('reportLiveModal').classList.remove('show');
-      this.toast('Alerta cancelado.');
-    },
-
-    _renderEventMarker(evt) {
-      if(!this._eventMarkers) this._eventMarkers={};
-      if(this._eventMarkers[evt.id]) return;
-      const icons = { tiroteio:'🔴', blitz:'🚔', bloqueio:'🚧', perigo:'🚨', posto_suspeito:'⚠️' };
-      const el = document.createElement('div');
-      el.style.fontSize = '26px';
-      el.textContent = icons[evt.type]||'⚠️';
-      const m = new maplibregl.Marker({ element: el }).setLngLat(evt.coords).addTo(this.map);
-      this._eventMarkers[evt.id]=m;
-      setTimeout(()=>{ if(this._eventMarkers[evt.id]){ this._eventMarkers[evt.id].remove(); delete this._eventMarkers[evt.id]; } }, 45*60*1000);
-    },
-
-    connectMQTT() {
-      try {
-        this.mqttClient = mqtt.connect('wss://broker.emqx.io:8084/mqtt', {
-          clientId: 'rsrj-'+Math.random().toString(16).slice(2,8), clean: true
-        });
-        this.mqttClient.on('connect', ()=>{
-          this.mqttClient.subscribe('radarseguro-rj-pro/chat/v1');
-          this.mqttClient.subscribe('radarseguro-rj-pro/eventos/v1');
-          this.mqttClient.subscribe('radarseguro-rj-pro/eventos/cancel/v1');
-          document.getElementById('chatStatus').textContent = '🟢 Conectado ao chat comunitário.';
-        });
-        this.mqttClient.on('message', (t, p)=>{
-          try {
-            const msg = JSON.parse(p.toString());
-            if(t === 'radarseguro-rj-pro/eventos/cancel/v1'){
-              if(this._eventMarkers?.[msg.id]){ this._eventMarkers[msg.id].remove(); delete this._eventMarkers[msg.id]; }
-            } else if(t === 'radarseguro-rj-pro/eventos/v1'){
-              this._renderEventMarker(msg);
-              this.toast(`⚠️ Novo alerta: ${msg.label}`);
-            } else {
-              this.chatMessages.push(msg);
-              if(this.chatMessages.length>50) this.chatMessages.shift();
-              localStorage.setItem('rs_chat_history', JSON.stringify(this.chatMessages));
-              this.renderChat();
-            }
-          } catch(e){}
-        });
-      } catch(e){ document.getElementById('chatStatus').textContent = '🔴 Falha no chat.'; }
-    },
-
-    sendChatMessage() {
-      const inp = document.getElementById('chatInput');
-      if(!inp.value.trim() || !this.mqttClient?.connected) return;
-      const msg = { user:'Motorista', text:inp.value.trim(), time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) };
-      this.mqttClient.publish('radarseguro-rj-pro/chat/v1', JSON.stringify(msg));
-      inp.value='';
-    },
-
-    renderChat() {
-      const box = document.getElementById('chatMessages');
-      if(!box) return;
-      box.innerHTML = '';
-      this.chatMessages.slice(-50).forEach(msg=>{
-        const d = document.createElement('div');
-        d.className = 'chat-msg';
-        d.innerHTML = `<span class="user">${Utils.sanitize(msg.user)}</span><span class="time">${Utils.sanitize(msg.time)}</span><br>${Utils.sanitize(msg.text)}`;
-        box.appendChild(d);
-      });
-      box.scrollTop = box.scrollHeight;
-    },
-
-    openChat() {
-      document.getElementById('reportLiveModal').classList.remove('show');
-      document.getElementById('chatModal').classList.add('show');
-      this.renderChat();
-    },
-
-    toast(msg, ms=3000) {
-      const e = document.getElementById('toast');
-      if(!e) return;
-      e.textContent = msg; e.classList.add('show');
-      clearTimeout(this._toastTimer);
-      this._toastTimer = setTimeout(()=>e.classList.remove('show'), ms);
+    // COMPARTILHAR CORRIDA NO WHATSAPP
+    shareRideWhatsApp() {
+      if(!this.destPos || !this.userPos) return;
+      const text = encodeURIComponent(`🛡️ Estou navegando com o Radar Seguro RJ PRO!\n📍 Destino: ${document.getElementById('destInput').value}\n🗺️ Acompanhe minha localização: https://www.google.com/maps?q=${this.userPos[1]},${this.userPos[0]}`);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
     },
 
     toggleSheet(force=null) {
@@ -1229,179 +991,64 @@ body.nav-mode .favela-sign{top:132px}
       document.getElementById('sheetToggleBtn').textContent = this._sheetExpanded ? 'Recolher ▾' : 'Opções ▴';
     },
 
-    updateThemeChip() {
-      const labels = { auto:'Tema: Auto', light:'Tema: Claro', dark:'Tema: Escuro', sat:'Tema: Satélite' };
-      document.getElementById('themeChip').textContent = '🌓 ' + (labels[this.themeMode] || 'Tema: Auto');
-    },
-
-    setTheme(mode) {
-      this.themeMode = mode;
-      Prefs.set('theme', mode);
-      this.updateThemeChip();
-      document.getElementById('themeSelectModal').classList.remove('show');
-      document.getElementById('layersModal').classList.remove('show');
-      this.map.setStyle(this.getStyleForTheme(mode));
-    },
-
-    locate() {
-      if(!this.userPos){ this.startGPS(); this.toast('Obtendo GPS...'); return; }
-      this.followMode = true;
-      this.map.flyTo({ center:this.userPos, zoom: this.navActive?17.5:16, pitch: this.navActive?45:0, duration:500 });
-    },
-
     bindEvents() {
       const doc = document;
       const inp = doc.getElementById('destInput');
-      inp.addEventListener('focus', () => { if(!inp.value.trim()) this.showHistoryDropdown(); });
       inp.addEventListener('input', () => {
         clearTimeout(this._geoTimer);
-        this.destPos = null;
         const q = inp.value.trim();
-        if(q.length<3){ this.showHistoryDropdown(); return; }
+        if(q.length<3) return;
         this._geoTimer = setTimeout(async ()=>{
-          const res = await this._geocode(q);
+          const r = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&countrycodes=br&q='+encodeURIComponent(q+', RJ'));
+          const d = await r.json();
           const box = doc.getElementById('suggest');
           box.innerHTML = '';
-          res.forEach(r=>{
-            const d = document.createElement('div');
-            d.className = 'suggest-item';
-            d.textContent = r.display_name;
-            d.onclick = () => {
-              inp.value = r.display_name;
-              this.destPos = [+r.lon, +r.lat];
-              this.saveSearchHistory(r.display_name, this.destPos[0], this.destPos[1]);
+          d.forEach(item=>{
+            const div = document.createElement('div');
+            div.className = 'suggest-item';
+            div.textContent = item.display_name;
+            div.onclick = () => {
+              inp.value = item.display_name;
+              this.destPos = [+item.lon, +item.lat];
               box.classList.remove('show');
-              this.openNavSheet();
+              doc.getElementById('wazeSheet').classList.add('show', 'expanded');
+              this.calculateRoute();
             };
-            box.appendChild(d);
+            box.appendChild(div);
           });
           box.classList.add('show');
         }, 650);
       });
 
-      doc.getElementById('clearBtn').onclick = () => { inp.value = ''; this.destPos = null; doc.getElementById('suggest').classList.remove('show'); this.clearRoute(); };
-      doc.getElementById('searchBtn').onclick = async () => {
-        const t = inp.value.trim();
-        if(!t) return this.toast('Digite um destino.');
-        if(!this.destPos){
-          const r = await this._geocode(t);
-          if(!r[0]) return this.toast('Local não encontrado.');
-          this.destPos = [+r[0].lon, +r[0].lat];
-          inp.value = r[0].display_name;
-          this.saveSearchHistory(r[0].display_name, this.destPos[0], this.destPos[1]);
-        }
-        this.openNavSheet();
-      };
+      doc.getElementById('clearBtn').onclick = () => { inp.value = ''; this.destPos = null; doc.getElementById('suggest').classList.remove('show'); };
+      doc.getElementById('startRadarBtn').onclick = () => this.startNav();
+      doc.getElementById('stopNavBtn').onclick = () => this.stopNav();
+      doc.getElementById('shareRideBtn').onclick = () => this.shareRideWhatsApp();
+      doc.getElementById('navRecenterFloating').onclick = () => this.resumeFollowCar();
+      doc.getElementById('locateBtn').onclick = () => this.resumeFollowCar();
+      doc.getElementById('btnRecenter').onclick = () => this.resumeFollowCar();
 
-      doc.getElementById('fuelChip').onclick = () => doc.getElementById('fuelFilterModal').classList.add('show');
-      doc.getElementById('communityChip').onclick = () => {
-        this.communityVisible = !this.communityVisible;
-        doc.getElementById('communityChip').classList.toggle('active', this.communityVisible);
-        ['community-fill','community-outline','community-labels'].forEach(id=>{
-          if(this.map.getLayer(id)) this.map.setLayoutProperty(id, 'visibility', this.communityVisible ? 'visible' : 'none');
-        });
-      };
-      doc.getElementById('themeChip').onclick = () => doc.getElementById('themeSelectModal').classList.add('show');
-      doc.getElementById('satChip').onclick = () => this.setTheme(this.themeMode==='sat' ? 'auto' : 'sat');
-      doc.getElementById('chatChip').onclick = () => { doc.getElementById('chatModal').classList.add('show'); this.renderChat(); };
-
-      const setFuelFilter = (f, l) => {
-        FuelModule.filter = f; FuelModule.visible = f !== 'none';
-        doc.getElementById('fuelChip').classList.toggle('active', FuelModule.visible);
-        Prefs.set('fuelFilter', f); Prefs.set('fuelVisible', FuelModule.visible);
-        doc.getElementById('fuelFilterModal').classList.remove('show');
-        FuelModule.render(this.map); this.toast(l);
-      };
-      doc.getElementById('filterAll').onclick = () => setFuelFilter('all', 'Mostrando todos os postos');
-      doc.getElementById('filterRegular').onclick = () => setFuelFilter('regular', 'Mostrando postos regulares');
-      doc.getElementById('filterGNV').onclick = () => setFuelFilter('gnv', 'Mostrando postos com GNV');
-      doc.getElementById('filterNone').onclick = () => setFuelFilter('none', 'Postos ocultados');
-      doc.getElementById('closeFuelFilter').onclick = () => doc.getElementById('fuelFilterModal').classList.remove('show');
-
-      doc.getElementById('locateBtn').onclick = () => { this.locate(); Utils.vibrate(20); };
-      doc.getElementById('btnRecenter').onclick = () => { this.locate(); Utils.vibrate(20); };
-      doc.getElementById('navRecenterLeft').onclick = () => { this.locate(); Utils.vibrate(20); };
-      doc.getElementById('zoomIn').onclick = () => this.map.zoomIn();
-      doc.getElementById('zoomOut').onclick = () => this.map.zoomOut();
-      doc.getElementById('northBtn').onclick = () => this.map.easeTo({ bearing:0, pitch:0 });
       doc.getElementById('soundBtn').onclick = () => {
         this.soundEnabled = Voice.toggle();
         Prefs.set('sound', this.soundEnabled);
         doc.getElementById('soundBtn').textContent = this.soundEnabled ? '🔊' : '🔇';
-        doc.getElementById('soundBtn').className = this.soundEnabled ? 'active-sound' : 'muted-sound';
-        this.toast(this.soundEnabled ? 'Voz ativada' : 'Voz silenciada');
       };
 
-      doc.getElementById('startRadarBtn').onclick = () => { this.startNav(); Utils.vibrate(30); };
-      doc.getElementById('stopNavBtn').onclick = () => { this.stopNav(); this.clearRoute(); };
-      doc.getElementById('openWaze').onclick = () => this.destPos && window.open(`https://www.waze.com/ul?ll=${this.destPos[1]},${this.destPos[0]}&navigate=yes`, '_blank');
-      doc.getElementById('openMaps').onclick = () => this.destPos && window.open(`https://www.google.com/maps/dir/?api=1&destination=${this.destPos[1]},${this.destPos[0]}`, '_blank');
       doc.getElementById('sheetHandle').onclick = () => this.toggleSheet();
       doc.getElementById('sheetToggleBtn').onclick = () => this.toggleSheet();
-
-      doc.getElementById('navReportBtn').onclick = () => doc.getElementById('reportLiveModal').classList.add('show');
-      doc.getElementById('reportBtn').onclick = () => doc.getElementById('reportModal').classList.add('show');
-      doc.getElementById('anpBtn').onclick = () => window.open(ANP_APP, '_blank');
-      doc.getElementById('chatBottomBtn').onclick = () => { doc.getElementById('chatModal').classList.add('show'); this.renderChat(); };
-      doc.getElementById('chatSendBtn').onclick = () => this.sendChatMessage();
-      doc.getElementById('chatInput').addEventListener('keydown', (e) => { if(e.key==='Enter') this.sendChatMessage(); });
-      doc.getElementById('dangerBannerClose').onclick = () => doc.getElementById('dangerBanner').classList.remove('show');
-
-      doc.getElementById('closeReportLiveModal').onclick = () => doc.getElementById('reportLiveModal').classList.remove('show');
-      doc.getElementById('closeThemeSelectModal').onclick = () => doc.getElementById('themeSelectModal').classList.remove('show');
-      doc.getElementById('closeTransportModal').onclick = () => doc.getElementById('transportModal').classList.remove('show');
-      doc.getElementById('closeChatModal').onclick = () => doc.getElementById('chatModal').classList.remove('show');
-      doc.getElementById('closeReportModal').onclick = () => doc.getElementById('reportModal').classList.remove('show');
-      doc.getElementById('closeLayers').onclick = () => doc.getElementById('layersModal').classList.remove('show');
-      doc.getElementById('layersBtn').onclick = () => doc.getElementById('layersModal').classList.add('show');
-
-      doc.getElementById('modalThemeOption').onclick = () => { doc.getElementById('layersModal').classList.remove('show'); doc.getElementById('themeSelectModal').classList.add('show'); };
-      doc.getElementById('modalTransport').onclick = () => { doc.getElementById('layersModal').classList.remove('show'); doc.getElementById('transportModal').classList.add('show'); };
-      doc.getElementById('modalSpeedSound').onclick = () => { this.speedAlert = !this.speedAlert; Prefs.set('speedAlert', this.speedAlert); this.toast(this.speedAlert ? 'Alerta ativado' : 'Alerta desativado'); };
-      doc.getElementById('modalStreetView').onclick = () => {
-        const t = this.destPos || this.userPos || this.map.getCenter().toArray();
-        window.open(`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${t[1]},${t[0]}`, '_blank');
-      };
-      doc.getElementById('modalLocate').onclick = () => { doc.getElementById('layersModal').classList.remove('show'); this.locate(); };
-
-      doc.querySelectorAll('#transportModal button[data-mode]').forEach(btn=>{
-        btn.onclick = () => {
-          this.transportMode = btn.dataset.mode;
-          Prefs.set('transport', this.transportMode);
-          doc.getElementById('transportModal').classList.remove('show');
-          if(this.destPos && this.userPos) this.calculateRoute();
-        };
-      });
-
-      doc.getElementById('tutorialBtn').onclick = () => {
-        doc.getElementById('tutorialOverlay').classList.remove('show');
-        Prefs.set('tutorial_done', true);
-      };
-    },
-
-    async _geocode(q) {
-      const wait = Math.max(0, 1100 - (Date.now() - (this._lastGeocode||0)));
-      if(wait) await new Promise(r=>setTimeout(r, wait));
-      this._lastGeocode = Date.now();
-      if(this._geoAbort) this._geoAbort.abort();
-      this._geoAbort = new AbortController();
-      if(!/rio de janeiro|rj|brasil/i.test(q)) q += ', RJ, Brasil';
-      try {
-        const p = new URLSearchParams({ format:'jsonv2', addressdetails:'1', limit:'6', countrycodes:'br', bounded:'1', viewbox:'-44.85,-22.60,-43.00,-23.40', q });
-        const r = await fetch('https://nominatim.openstreetmap.org/search?'+p, { headers:{'Accept-Language':'pt-BR'}, signal: this._geoAbort.signal });
-        const d = await r.json();
-        return (d||[]).map(x=>({ lat:x.lat, lon:x.lon, display_name:x.display_name }));
-      } catch(e){ return []; }
+      doc.getElementById('openWaze').onclick = () => this.destPos && window.open(`https://www.waze.com/ul?ll=${this.destPos[1]},${this.destPos[0]}&navigate=yes`, '_blank');
+      doc.getElementById('openMaps').onclick = () => this.destPos && window.open(`https://www.google.com/maps/dir/?api=1&destination=${this.destPos[1]},${this.destPos[0]}`, '_blank');
     }
   };
 
   window.App = {
-    sendReport: (t,l) => App.sendReport(t,l),
-    cancelReport: () => App.cancelReport(),
-    setTheme: (m) => App.setTheme(m),
-    openChat: () => App.openChat(),
-    navigateToCoord: (lng,lat,name) => App.navigateToCoord(lng,lat,name),
-    get userPos(){ return App.userPos; }
+    navigateToCoord: (lng,lat,name) => {
+      App.destPos = [lng,lat];
+      document.getElementById('destInput').value = name;
+      document.getElementById('wazeSheet').classList.add('show', 'expanded');
+      App.calculateRoute();
+    },
+    sendReport: () => {}, cancelReport: () => {}, setTheme: (m) => App.map.setStyle(App.getStyleForTheme(m)), openChat: () => {}
   };
 
   document.addEventListener('DOMContentLoaded', () => App.init());
