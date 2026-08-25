@@ -27,7 +27,7 @@ button,input{font:inherit}
 .chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}.chips::-webkit-scrollbar{display:none}
 .chip{white-space:nowrap;border:1px solid #334155;background:#04101ce8;color:#dbeafe;padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0}.chip.active{background:#0284c7;border-color:#38bdf8}
 .waze-top-hud{position:fixed;top:0;left:0;right:0;z-index:30;background:#004a4f;color:#fff;padding:12px 16px 8px;box-shadow:0 8px 24px rgba(0,0,0,.7);display:none;flex-direction:column}.waze-top-hud.show{display:flex}
-.waze-maneuver-row{display:flex;align-items:center;gap:16px}.waze-arrow{font-size:44px;line-height:1;font-weight:900;color:#fff;transform:translateY(-2px)}.waze-meta{flex:1}.waze-dist{font-size:26px;font-weight:900;letter-spacing:-.5px}.waze-street{font-size:20px;font-weight:900;color:#38bdf8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.waze-maneuver-row{display:flex;align-items:center;gap:16px}.waze-arrow{font-size:44px;line-height:1;font-weight:900;color:#fff;transform:translateY(-2px)}.waze-meta{flex:1}.waze-dist{font-size:26px;font-weight:900;letter-spacing:-.5px}.waze-street{font-size:18px;font-weight:900;color:#38bdf8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .waze-sub-hud{background:#003438;margin:8px -16px -8px;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:#a7f3d0}.waze-sub-hud span.next-name{color:#fff}.waze-danger-tag{color:#f87171;font-weight:900;display:none}.waze-danger-tag.active{display:inline}
 .traffic-light-hud{position:fixed;top:105px;left:14px;z-index:28;background:#0f172a;border:2px solid #38bdf8;color:#fff;padding:8px 14px;border-radius:16px;display:none;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,.6)}.traffic-light-hud.show{display:flex}
 .traffic-light-visual{width:16px;height:36px;background:#020617;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:2px;border:1px solid #475569}.traffic-light-dot{width:8px;height:8px;border-radius:50%;background:#334155}.traffic-light-dot.red.active{background:#ef4444;box-shadow:0 0 8px #ef4444}.traffic-light-dot.yellow.active{background:#eab308;box-shadow:0 0 8px #eab308}.traffic-light-dot.green.active{background:#22c55e;box-shadow:0 0 8px #22c55e}.traffic-light-info b{font-size:13px;display:block;color:#f8fafc}.traffic-light-info span{font-size:11px;color:#94a3b8;font-weight:700}
@@ -38,7 +38,7 @@ button,input{font:inherit}
 .side{position:fixed;right:12px;top:165px;z-index:20;display:flex;flex-direction:column;gap:9px;transition:.3s}body.nav-mode .side{top:118px}.side button{width:48px;height:48px;border-radius:50%;border:1px solid #334155;background:#000c;color:#fff;box-shadow:0 7px 18px rgba(0,0,0,.6);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}.side button.locate{border-color:#38bdf8}.side button.active-sound{border-color:#34d399;color:#34d399}.side button.muted-sound{border-color:#f87171;color:#f87171}
 .waze-bottom-sheet{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#fff;color:#0f172a;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.4);transition:transform .3s cubic-bezier(.1,.9,.2,1);transform:translateY(calc(100% - 75px));display:none}.waze-bottom-sheet.show{display:block}.waze-bottom-sheet.expanded{transform:translateY(0)}
 .sheet-handle{width:40px;height:5px;background:#cbd5e1;border-radius:99px;margin:8px auto 4px;cursor:pointer}.sheet-bar{display:flex;align-items:center;justify-content:space-between;padding:4px 18px 12px;cursor:pointer}.sheet-recenter{display:flex;align-items:center;gap:10px}.recenter-icon{width:44px;height:44px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center}.sheet-time-dist{display:flex;flex-direction:column}.sheet-time-dist b{font-size:18px;font-weight:900}.sheet-time-dist span{font-size:13px;color:#64748b;font-weight:700}.sheet-toggle-btn{padding:8px 14px;border-radius:99px;background:#f1f5f9;color:#0284c7;font-size:13px;font-weight:900;border:0;cursor:pointer}.sheet-content{padding:0 18px 20px;border-top:1px solid #f1f5f9;display:flex;flex-direction:column;gap:10px}.sheet-nav-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.btn-nav-radar{border:0;border-radius:14px;padding:14px;font-size:15px;font-weight:900;color:#fff;background:linear-gradient(135deg,#0284c7,#0369a1);cursor:pointer}.btn-nav-stop{border:0;border-radius:14px;padding:12px;font-size:13px;font-weight:900;color:#fff;background:#dc2626;cursor:pointer}.sheet-external-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sheet-external-grid button{border:0;border-radius:14px;padding:14px 10px;font-size:13px;font-weight:900;color:#fff;cursor:pointer}.btn-waze{background:#00b7df}.btn-maps{background:#1a73e8}
-.user-marker-waze{width:52px;height:52px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="%230284c7" opacity=".25"/><circle cx="26" cy="26" r="18" fill="%230284c7" opacity=".45"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.user-marker-waze{width:46px;height:46px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="%230284c7" opacity=".35"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
 .finish-flag-marker{font-size:36px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
 .fuel-marker{width:32px;height:32px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;cursor:pointer}.fuel-marker.verde{background:#22c55e}.fuel-marker.gnv{background:#16a34a}
 .hazard-marker{display:flex;align-items:center;justify-content:center;background:transparent;border:none;pointer-events:none}.hazard-marker svg{width:36px;height:36px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.9))}
@@ -60,7 +60,7 @@ button,input{font:inherit}
 <body>
 <div id="map"></div>
 <div class="topbar" id="mainTopbar"><div class="appbar"><div class="brand">🛡️ RADAR <span>SEGURO RJ PRO</span></div><span id="gpsBadge" style="background:#475569;border-radius:999px;padding:4px 8px;font-size:9px;font-weight:900">GPS...</span></div><div class="search"><input id="destInput" placeholder="Rua, número, bairro ou local..." autocomplete="off"><button class="clear" id="clearBtn">✕</button><button id="searchBtn">IR</button><div id="suggest" class="suggest"></div></div><div class="chips"><button class="chip active" id="fuelChip">⛽ Postos</button><button class="chip active" id="communityChip">🟥 Zonas de Risco</button><button class="chip" id="themeChip">🌓 Tema: Auto</button><button class="chip" id="satChip">🛰️ Satélite</button><button class="chip" id="chatChip">💬 Chat</button></div></div>
-<div class="waze-top-hud" id="wazeHud"><div class="waze-maneuver-row"><div class="waze-arrow" id="hudArrow">↰</div><div class="waze-meta"><div class="waze-dist" id="hudDist">110 m</div><div class="waze-street" id="hudStreet">Rua de Destino</div></div></div><div class="waze-sub-hud"><div>em seguida <span id="hudNextIcon">↰</span> <span class="next-name" id="hudNextStreet">Próxima via</span></div><div class="waze-danger-tag" id="hudDangerTag">⚠ ALERTA DE ÁREA</div></div></div>
+<div class="waze-top-hud" id="wazeHud"><div class="waze-maneuver-row"><div class="waze-arrow" id="hudArrow">↰</div><div class="waze-meta"><div class="waze-dist" id="hudDist">-- m</div><div class="waze-street" id="hudStreet">Rua de Destino</div></div></div><div class="waze-sub-hud"><div>em seguida <span id="hudNextIcon">↰</span> <span class="next-name" id="hudNextStreet">Próxima via</span></div><div class="waze-danger-tag" id="hudDangerTag">⚠ ALERTA DE ÁREA</div></div></div>
 <div class="traffic-light-hud" id="trafficLightHud"><div class="traffic-light-visual"><div class="traffic-light-dot red" id="tlDotRed"></div><div class="traffic-light-dot yellow" id="tlDotYellow"></div><div class="traffic-light-dot green" id="tlDotGreen"></div></div><div class="traffic-light-info"><b id="tlStatusText">Semáforo à frente</b><span id="tlCountdownText">Aprox. 120m • estimativa de ciclo</span></div></div>
 <div class="current-road-pill" id="currentRoadPill">Via Atual</div><div class="speedometer-box" id="speedometerBox"><b id="speedVal">--</b><span>km/h</span></div>
 <button class="nav-recenter-left" id="navRecenterLeft">📍</button><button class="nav-report-btn" id="navReportBtn">⚠</button>
@@ -128,32 +128,41 @@ function getStyleForTheme(mode) {
   return STYLE_DARK;
 }
 
-function makePerimeter(lon, lat, r = 0.35, points = 48) {
+function makePerimeter(lon, lat, r = 0.45, points = 36) {
   let rl = r / 111, ro = r / (111 * Math.cos(lat * Math.PI / 180)), c = [];
-  for (let i = 0; i <= points; i++) {
+  for (let i = 0; i < points; i++) {
     let a = i / points * 2 * Math.PI;
     c.push([lon + ro * Math.cos(a), lat + rl * Math.sin(a)]);
   }
+  c.push(c[0]);
   return c;
 }
 
 const rawAreas = [
-  { name: 'Cesarão', c: [-43.66027, -22.93587], r: 0.35, type: 'conflito', major: true },
-  { name: 'Favela do Rodo / Rollas', c: [-43.6732, -22.9231], r: 0.35, type: 'conflito', major: true },
-  { name: 'Favela de Antares', c: [-43.6644, -22.9275], r: 0.30, type: 'conflito', major: true },
-  { name: 'Comunidade do Aço', c: [-43.6521, -22.9248], r: 0.30, type: 'conflito', major: true },
-  { name: 'Pantanal (Santa Cruz)', c: [-43.6675, -22.9290], r: 0.25, type: 'conflito' },
-  { name: 'Nova Sepetiba', c: [-43.6995, -22.9515], r: 0.35, type: 'conflito', major: true },
-  { name: 'Carobinha (Complexo da Carobinha)', c: [-43.5353, -22.8687], r: 0.35, type: 'conflito', major: true },
-  { name: 'Favela do Barbante (Nova Cidade / Inhoaíba)', c: [-43.5819, -22.9056], r: 0.40, type: 'conflito', major: true },
-  { name: 'Vila Aliança (Miolo)', c: [-43.4847, -22.8642], r: 0.40, type: 'conflito', major: true },
-  { name: 'Vila Vintém (Bangu)', c: [-43.4475, -22.8731], r: 0.40, type: 'conflito', major: true },
-  { name: 'Vila Kennedy', c: [-43.4674, -22.8492], r: 0.45, type: 'conflito', major: true },
-  { name: 'Complexo do Rio das Pedras', c: [-43.3405, -22.9902], r: 0.45, type: 'conflito', major: true },
-  { name: 'Cidade de Deus (CDD)', c: [-43.3644, -22.9430], r: 0.45, type: 'conflito', major: true },
-  { name: 'Rocinha', c: [-43.2471, -22.9881], r: 0.45, type: 'conflito', major: true },
-  { name: 'Complexo do Alemão', c: [-43.2710, -22.8595], r: 0.45, type: 'conflito', major: true },
-  { name: 'Complexo da Maré', c: [-43.2415, -22.8555], r: 0.45, type: 'conflito', major: true }
+  { name: 'Cesarão (Santa Cruz)', c: [-43.66027, -22.93587], r: 0.50, type: 'conflito', major: true },
+  { name: 'Favela do Rodo / Rollas', c: [-43.6732, -22.9231], r: 0.45, type: 'conflito', major: true },
+  { name: 'Favela de Antares', c: [-43.6644, -22.9275], r: 0.40, type: 'conflito', major: true },
+  { name: 'Comunidade do Aço', c: [-43.6521, -22.9248], r: 0.38, type: 'conflito', major: true },
+  { name: 'Pantanal (Santa Cruz)', c: [-43.6675, -22.9290], r: 0.35, type: 'conflito' },
+  { name: 'Nova Sepetiba', c: [-43.6995, -22.9515], r: 0.50, type: 'conflito', major: true },
+  { name: 'Carobinha (Campo Grande)', c: [-43.5353, -22.8687], r: 0.45, type: 'conflito', major: true },
+  { name: 'Barbante (Inhoaíba)', c: [-43.5819, -22.9056], r: 0.40, type: 'conflito', major: true },
+  { name: 'Vila Aliança (Bangu)', c: [-43.4847, -22.8642], r: 0.50, type: 'conflito', major: true },
+  { name: 'Vila Vintém (Padre Miguel)', c: [-43.4475, -22.8731], r: 0.50, type: 'conflito', major: true },
+  { name: 'Vila Kennedy', c: [-43.4674, -22.8492], r: 0.55, type: 'conflito', major: true },
+  { name: 'Complexo da Maré', c: [-43.2415, -22.8555], r: 0.65, type: 'conflito', major: true },
+  { name: 'Complexo do Alemão', c: [-43.2710, -22.8595], r: 0.65, type: 'conflito', major: true },
+  { name: 'Cidade de Deus (CDD)', c: [-43.3644, -22.9430], r: 0.55, type: 'conflito', major: true },
+  { name: 'Rio das Pedras', c: [-43.3405, -22.9902], r: 0.60, type: 'conflito', major: true },
+  { name: 'Rocinha', c: [-43.2471, -22.9881], r: 0.60, type: 'conflito', major: true },
+  { name: 'Vidigal', c: [-43.2389, -22.9961], r: 0.40, type: 'conflito' },
+  { name: 'Jacarezinho', c: [-43.2568, -22.8885], r: 0.45, type: 'conflito', major: true },
+  { name: 'Manguinhos', c: [-43.2505, -22.8789], r: 0.45, type: 'conflito', major: true },
+  { name: 'Serrinha (Madureira)', c: [-43.3361, -22.8722], r: 0.45, type: 'conflito', major: true },
+  { name: 'Morro do Dendê (Ilha)', c: [-43.1878, -22.7981], r: 0.50, type: 'conflito', major: true },
+  { name: 'Complexo da Penha', c: [-43.2789, -22.8398], r: 0.55, type: 'conflito', major: true },
+  { name: 'Complexo do Chapadão', c: [-43.3755, -22.8250], r: 0.60, type: 'conflito', major: true },
+  { name: 'Complexo da Pedreira', c: [-43.3620, -22.8210], r: 0.60, type: 'conflito', major: true }
 ];
 
 const LOCAL_HAZARDS = [
@@ -163,13 +172,24 @@ const LOCAL_HAZARDS = [
   { type: 'lombada', coords: [-43.6410, -22.9075] },
   { type: 'lombada', coords: [-43.6415, -22.9062] },
   { type: 'lombada', coords: [-43.6420, -22.9048] },
-  { type: 'lombada', coords: [-43.6425, -22.9030] },
-  { type: 'lombada', coords: [-43.6432, -22.9012] },
-  { type: 'lombada', coords: [-43.6440, -22.8985] },
   { type: 'radar', coords: [-43.6402, -22.9090] },
   { type: 'radar', coords: [-43.6445, -22.8970] },
   { type: 'semaforo', coords: [-43.6400, -22.9125] },
   { type: 'semaforo', coords: [-43.6450, -22.8960] }
+];
+
+const INITIAL_FUEL_STATIONS = [
+  { lat: -22.9025, lng: -43.5580, nome: 'Posto Shell - Campo Grande Centro', gnv: true },
+  { lat: -22.8965, lng: -43.5650, nome: 'Posto Ipiranga - Estr. Rio do A', gnv: true },
+  { lat: -22.9150, lng: -43.5420, nome: 'Posto BR Petrobras - Estr. do Monteiro', gnv: false },
+  { lat: -22.9080, lng: -43.6010, nome: 'Posto Shell - Paciência Centro', gnv: true },
+  { lat: -22.9120, lng: -43.6150, nome: 'Posto Ipiranga - Av. Brasil / Paciência', gnv: true },
+  { lat: -22.9280, lng: -43.6780, nome: 'Posto Petrobras - Santa Cruz Centro', gnv: true },
+  { lat: -22.8850, lng: -43.4650, nome: 'Posto Shell - Bangu / Av. Brasil', gnv: true },
+  { lat: -22.8710, lng: -43.4350, nome: 'Posto Ipiranga - Padre Miguel', gnv: false },
+  { lat: -22.8620, lng: -43.3450, nome: 'Posto Shell - Madureira', gnv: true },
+  { lat: -22.9800, lng: -43.3650, nome: 'Posto BR - Barra / Linha Amarela', gnv: true },
+  { lat: -22.9550, lng: -43.1820, nome: 'Posto Ipiranga - Botafogo / Aterro', gnv: true }
 ];
 
 const communityData = rawAreas.map(a => ({
@@ -187,7 +207,7 @@ let speedSoundEnabled = true, currentSpeedKmh = 0, myLastReportId = null, offRou
 let currentBearing = 0;
 let searchHistory = JSON.parse(localStorage.getItem('rs_search_history') || '[]');
 
-function toast(msg, ms = 3200) {
+function toast(msg, ms = 3000) {
   let e = document.getElementById('toast');
   e.textContent = msg;
   e.classList.add('show');
@@ -215,7 +235,7 @@ function distanceKm(a, b) {
 
 function calculateBearing(a, b) {
   let l1 = a[1] * Math.PI / 180, l2 = b[1] * Math.PI / 180, d = (b[0] - a[0]) * Math.PI / 180;
-  let y = Math.sin(d) * Math.cos(l2), x = Math.cos(l1) * Math.sin(l2) - Math.sin(l1) * Math.cos(l2) * Math.cos(d);
+  let y = Math.sin(d) * Math.cos(l2), x = Math.cos(l1) * Math.sin(l2) - Math.sin(l1) * Math.cos(d);
   return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
 }
 
@@ -262,49 +282,54 @@ const map = new maplibregl.Map({
   container: 'map',
   center: RJ_CENTER,
   zoom: 11,
-  pitch: 0,
-  bearing: 0,
   attributionControl: false,
   style: getStyleForTheme('auto')
 });
 map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
 
 function addCommunityLayers() {
-  if (map.getLayer('community-fill')) map.removeLayer('community-fill');
-  if (map.getLayer('community-outline')) map.removeLayer('community-outline');
-  if (map.getLayer('community-labels')) map.removeLayer('community-labels');
-  if (map.getSource('community-source')) map.removeSource('community-source');
-
-  let geo = {
-    type: 'FeatureCollection',
-    features: communityData.map(c => ({
-      type: 'Feature',
-      properties: { name: c.name, type: c.type, major: c.major },
-      geometry: { type: 'Polygon', coordinates: [c.coords] }
-    }))
-  };
-
-  map.addSource('community-source', { type: 'geojson', data: geo });
-  map.addLayer({
-    id: 'community-fill',
-    type: 'fill',
-    source: 'community-source',
-    paint: {
-      'fill-color': '#dc2626',
-      'fill-opacity': 0.35
-    }
-  });
-  map.addLayer({
-    id: 'community-outline',
-    type: 'line',
-    source: 'community-source',
-    paint: {
-      'line-color': '#ef4444',
-      'line-width': 2.5
-    }
-  });
-
   try {
+    if (map.getLayer('community-fill')) map.removeLayer('community-fill');
+    if (map.getLayer('community-outline')) map.removeLayer('community-outline');
+    if (map.getLayer('community-labels')) map.removeLayer('community-labels');
+    if (map.getSource('community-source')) map.removeSource('community-source');
+
+    let geo = {
+      type: 'FeatureCollection',
+      features: communityData.map(c => ({
+        type: 'Feature',
+        properties: { name: c.name, type: c.type },
+        geometry: { type: 'Polygon', coordinates: [c.coords] }
+      }))
+    };
+
+    map.addSource('community-source', {
+      type: 'geojson',
+      data: geo,
+      tolerance: 0,
+      buffer: 0
+    });
+
+    map.addLayer({
+      id: 'community-fill',
+      type: 'fill',
+      source: 'community-source',
+      paint: {
+        'fill-color': '#dc2626',
+        'fill-opacity': 0.40
+      }
+    });
+
+    map.addLayer({
+      id: 'community-outline',
+      type: 'line',
+      source: 'community-source',
+      paint: {
+        'line-color': '#ef4444',
+        'line-width': 2.5
+      }
+    });
+
     map.addLayer({
       id: 'community-labels',
       type: 'symbol',
@@ -312,7 +337,8 @@ function addCommunityLayers() {
       layout: {
         'text-field': ['concat', '⚠ ', ['get', 'name']],
         'text-size': 12,
-        'text-allow-overlap': true
+        'text-allow-overlap': true,
+        'text-ignore-placement': true
       },
       paint: {
         'text-color': '#fee2e2',
@@ -320,20 +346,23 @@ function addCommunityLayers() {
         'text-halo-width': 2
       }
     });
-  } catch (e) {}
 
-  ['community-fill', 'community-outline', 'community-labels'].forEach(id => {
-    if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', communityVisible ? 'visible' : 'none');
-  });
+    ['community-fill', 'community-outline', 'community-labels'].forEach(id => {
+      if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', communityVisible ? 'visible' : 'none');
+    });
+  } catch (e) {}
 }
 
 map.on('style.load', () => {
   addCommunityLayers();
   if (routeData) drawRoute(routeData);
+  updateFuelVisibility();
 });
 
 map.once('load', () => {
   addCommunityLayers();
+  allFuelStations = [...INITIAL_FUEL_STATIONS];
+  updateFuelVisibility();
   fetchFuelStations(RJ_CENTER);
   startGPSWatch();
 });
@@ -348,7 +377,7 @@ function updateUserMarker(c, h = 0) {
     userMarker.setRotation(h || 0);
   }
   if (navActive && followMode && !isRerouting) {
-    map.easeTo({ center: c, zoom: 18, pitch: 62, bearing: h || map.getBearing(), duration: 350 });
+    map.easeTo({ center: c, zoom: 17.5, pitch: 45, bearing: h || 0, duration: 400 });
   }
 }
 
@@ -396,10 +425,9 @@ function startGPSWatch() {
     currentSpeedKmh = Math.round((p.coords.speed || 0) * 3.6);
     document.getElementById('speedVal').textContent = currentSpeedKmh;
     if (first) {
-      map.flyTo({ center: userPos, zoom: 15.5, duration: 700 });
+      map.flyTo({ center: userPos, zoom: 15.5, duration: 600 });
       fetchFuelStations(userPos);
     }
-    updateFuelVisibility();
     updateNavigation();
     checkProximityDanger();
     updateTrafficLightSimulation();
@@ -408,7 +436,7 @@ function startGPSWatch() {
   }, e => {
     setGPS(false, e.code === 1 ? 'GPS BLOQ.' : 'GPS...');
     if (e.code === 1) toast('Permita o acesso ao GPS.');
-  }, { enableHighAccuracy: true, maximumAge: 800, timeout: 4500 });
+  }, { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 });
 }
 
 let lastSpeedBeep = 0, routeHazards = [], hazardMarkers = [];
@@ -430,7 +458,7 @@ function fuelKey(f) { return `${f.lat.toFixed(4)},${f.lng.toFixed(4)}`; }
 async function fetchFuelStations(center) {
   try {
     center = center || userPos || RJ_CENTER;
-    let q = `[out:json][timeout:15];(node["amenity"="fuel"](around:8000,${center[1]},${center[0]});way["amenity"="fuel"](around:8000,${center[1]},${center[0]}););out center tags;`;
+    let q = `[out:json][timeout:10];node["amenity"="fuel"](around:7000,${center[1]},${center[0]});out center 40;`;
     let r = await fetch('https://overpass-api.de/api/interpreter', {
       method: 'POST',
       body: q,
@@ -438,13 +466,16 @@ async function fetchFuelStations(center) {
     });
     if (!r.ok) return;
     let d = await r.json();
-    allFuelStations = (d.elements || []).map(el => {
-      let lat = el.lat ?? el.center?.lat, lng = el.lon ?? el.center?.lon;
+    let apiStations = (d.elements || []).map(el => {
+      let lat = el.lat, lng = el.lon;
       if (lat == null || lng == null) return null;
-      let t = el.tags || {}, gnv = t['fuel:cng'] === 'yes' || t['fuel:gnv'] === 'yes' || t['fuel:lpg'] === 'yes';
+      let t = el.tags || {}, gnv = t['fuel:cng'] === 'yes' || t['fuel:gnv'] === 'yes';
       return { lat, lng, nome: t.name || t.brand || 'Posto de combustível', gnv };
     }).filter(Boolean);
-    updateFuelVisibility();
+    if (apiStations.length > 0) {
+      allFuelStations = [...INITIAL_FUEL_STATIONS, ...apiStations];
+      updateFuelVisibility();
+    }
   } catch (e) {}
 }
 
@@ -456,7 +487,7 @@ function updateFuelVisibility() {
   let c = userPos || map.getCenter().toArray(), v = [...allFuelStations];
   if (currentFuelFilter === 'gnv') v = v.filter(f => f.gnv);
   v.sort((a, b) => distanceKm([a.lng, a.lat], c) - distanceKm([b.lng, b.lat], c));
-  renderFuel(v.slice(0, 45));
+  renderFuel(v.slice(0, 50));
 }
 
 function navigateToCoord(lng, lat, name) {
@@ -652,7 +683,6 @@ async function fetchRoute(a, b) {
   if (routeAbortCtrl) routeAbortCtrl.abort();
   routeAbortCtrl = new AbortController();
 
-  // Integração com TomTom Routing API com tráfego real
   if (TOMTOM_KEY && transportMode === 'driving') {
     try {
       let u = `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=car&instructionsType=text&language=pt-BR`;
@@ -679,7 +709,6 @@ async function fetchRoute(a, b) {
     } catch (err) {}
   }
 
-  // Fallback OSRM
   let profile = transportMode === 'bike' ? 'cycling' : transportMode === 'foot' ? 'walking' : 'driving';
   let u = `https://router.project-osrm.org/route/v1/${profile}/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&steps=true`;
   let r = await fetch(u, { signal: routeAbortCtrl.signal });
@@ -712,7 +741,7 @@ function drawRoute(r) {
   map.addLayer({ id: 'route-outline', type: 'line', source: 'route', paint: { 'line-color': '#1e1b4b', 'line-width': 10 } });
   map.addLayer({ id: 'route-line', type: 'line', source: 'route', paint: { 'line-color': '#a855f7', 'line-width': 6 } });
   let c = r.geometry.coordinates, b = c.reduce((x, p) => x.extend(p), new maplibregl.LngLatBounds(c[0], c[0]));
-  map.fitBounds(b, { padding: { top: 130, bottom: 140, left: 30, right: 30 }, maxZoom: 17 });
+  map.fitBounds(b, { padding: { top: 130, bottom: 140, left: 30, right: 30 }, maxZoom: 16 });
   fetchRouteHazards();
   renderDestinationFlag();
 }
@@ -797,7 +826,7 @@ function updateNavigation() {
     }
   });
   currentStep = best;
-  let s = st[best], n = st[best + 1], dm = Math.round(bd * 1000);
+  let s = st[best] || { name: 'Siga pela rota' }, n = st[best + 1], dm = Math.round(bd * 1000);
   hudDist.textContent = dm < 1000 ? dm + ' m' : (dm / 1000).toFixed(1) + ' km';
   hudArrow.textContent = stepIconArrow(s);
   hudStreet.textContent = s.name || 'Siga na via';
@@ -893,7 +922,7 @@ function startNav() {
   mainBottomActions.classList.add('hide-nav');
   followMode = true;
   toggleSheet(false);
-  map.easeTo({ center: userPos || RJ_CENTER, zoom: 18, pitch: 62, duration: 700 });
+  map.easeTo({ center: userPos || RJ_CENTER, zoom: 17.5, pitch: 45, duration: 500 });
   updateNavigation();
 }
 
@@ -905,7 +934,7 @@ function stopNav() {
   mainTopbar.classList.remove('hide-nav');
   mainBottomActions.classList.remove('hide-nav');
   speechSynthesis.cancel();
-  map.easeTo({ pitch: 0, bearing: 0, duration: 500 });
+  map.easeTo({ pitch: 0, bearing: 0, duration: 400 });
 }
 
 function toggleSheet(f = null) {
@@ -968,7 +997,7 @@ function locate() {
     return toast('Obtendo localização...');
   }
   followMode = true;
-  map.flyTo({ center: userPos, zoom: navActive ? 18 : 16.5, pitch: navActive ? 62 : 0, duration: 700 });
+  map.flyTo({ center: userPos, zoom: navActive ? 17.5 : 16, pitch: navActive ? 45 : 0, duration: 500 });
 }
 locateBtn.onclick = locate;
 btnRecenter.onclick = locate;
@@ -1008,7 +1037,7 @@ function renderCommunityEventMarker(e) {
   d.style.fontSize = '28px';
   d.textContent = { tiroteio: '🔴', blitz: '🚔', bloqueio: '🚧', perigo: '🚨', posto_suspeito: '⚠️' }[e.type] || '⚠️';
   let pop = new maplibregl.Popup({ offset: 10 }).setHTML(`<b>${safe(e.label)}</b><br><small>Fonte: Comunidade (${e.trust || 85}% confiável)</small>`);
-  communityEventMarkers[e.id] = new maplibregl.Marker({ element: d }).setLngLat(e.coords).setPopup(pop).addTo(map);
+  communityEventMarkers[e.id] = new maplibregl.Marker({ element: e }).setLngLat(e.coords).setPopup(pop).addTo(map);
   setTimeout(() => {
     communityEventMarkers[e.id]?.remove();
     delete communityEventMarkers[e.id];
