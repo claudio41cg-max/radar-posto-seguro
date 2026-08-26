@@ -40,9 +40,13 @@ button{
   inset:0
 }
 
+.maplibregl-canvas{
+  outline:none
+}
+
 .maplibregl-ctrl-attrib{
   font-size:9px;
-  background:rgba(0,0,0,.58)!important;
+  background:rgba(0,0,0,.52)!important;
   color:#ddd!important
 }
 
@@ -200,7 +204,7 @@ button{
 
 
 /* =========================================================
-   BOTÕES DO TOPO
+   CHIPS
 ========================================================= */
 
 .chips{
@@ -242,7 +246,7 @@ button{
   left:0;
   right:0;
   z-index:40;
-  background:linear-gradient(135deg,#00484e,#00656d);
+  background:linear-gradient(135deg,#005b61,#006a72);
   color:#fff;
   padding:12px 16px 8px;
   box-shadow:0 8px 24px rgba(0,0,0,.7);
@@ -281,14 +285,14 @@ button{
 .waze-street{
   font-size:19px;
   font-weight:900;
-  color:#7dd3fc;
+  color:#67e8f9;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis
 }
 
 .waze-sub-hud{
-  background:rgba(0,0,0,.28);
+  background:rgba(0,0,0,.30);
   margin:8px -16px -8px;
   padding:8px 16px;
   display:flex;
@@ -297,7 +301,7 @@ button{
   gap:8px;
   font-size:11px;
   font-weight:800;
-  color:#a7f3d0
+  color:#bbf7d0
 }
 
 .next-name{
@@ -317,7 +321,7 @@ button{
 
 
 /* =========================================================
-   SEMÁFORO ESTIMADO
+   SEMÁFORO
 ========================================================= */
 
 .traffic-light-hud{
@@ -325,7 +329,7 @@ button{
   top:112px;
   left:14px;
   z-index:39;
-  background:#0f172a;
+  background:rgba(15,23,42,.96);
   border:2px solid #38bdf8;
   color:#fff;
   padding:8px 12px;
@@ -334,7 +338,7 @@ button{
   align-items:center;
   gap:10px;
   box-shadow:0 6px 18px rgba(0,0,0,.65);
-  max-width:250px
+  max-width:265px
 }
 
 .traffic-light-hud.show{
@@ -342,8 +346,8 @@ button{
 }
 
 .traffic-light-visual{
-  width:18px;
-  height:42px;
+  width:20px;
+  height:45px;
   background:#020617;
   border-radius:9px;
   display:flex;
@@ -356,25 +360,22 @@ button{
 }
 
 .traffic-light-dot{
-  width:8px;
-  height:8px;
+  width:9px;
+  height:9px;
   border-radius:50%;
   background:#334155
 }
 
-.traffic-light-dot.red.active{
-  background:#ef4444;
-  box-shadow:0 0 8px #ef4444
+.traffic-light-dot.red{
+  background:#7f1d1d
 }
 
-.traffic-light-dot.yellow.active{
-  background:#eab308;
-  box-shadow:0 0 8px #eab308
+.traffic-light-dot.yellow{
+  background:#713f12
 }
 
-.traffic-light-dot.green.active{
-  background:#22c55e;
-  box-shadow:0 0 8px #22c55e
+.traffic-light-dot.green{
+  background:#14532d
 }
 
 .traffic-light-info b{
@@ -386,7 +387,7 @@ button{
   display:block;
   margin-top:3px;
   font-size:10px;
-  color:#94a3b8;
+  color:#cbd5e1;
   line-height:1.25
 }
 
@@ -471,7 +472,7 @@ body.nav-mode .speedometer-box{
 
 
 /* =========================================================
-   BOTÃO RECENTRALIZAR
+   RECENTRALIZAR
 ========================================================= */
 
 .nav-recenter-left{
@@ -483,7 +484,7 @@ body.nav-mode .speedometer-box{
   height:50px;
   border-radius:50%;
   border:2px solid #fff;
-  background:#0284c7;
+  background:#0f172a;
   color:#fff;
   box-shadow:0 7px 18px rgba(0,0,0,.6);
   display:none;
@@ -554,7 +555,7 @@ body.nav-mode .side{
   height:48px;
   border-radius:50%;
   border:1px solid #334155;
-  background:rgba(0,0,0,.78);
+  background:rgba(0,0,0,.80);
   color:#fff;
   box-shadow:0 7px 18px rgba(0,0,0,.6);
   font-size:18px;
@@ -726,7 +727,7 @@ body.nav-mode .side{
 
 
 /* =========================================================
-   MARCADOR DO USUÁRIO
+   MARCADOR USUÁRIO
 ========================================================= */
 
 .user-marker-waze{
@@ -735,11 +736,6 @@ body.nav-mode .side{
   background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="%230284c7" opacity=".20"/><circle cx="26" cy="26" r="17" fill="%230284c7" opacity=".35"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5" stroke-linejoin="round"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;
   filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))
 }
-
-
-/* =========================================================
-   BANDEIRA FINAL
-========================================================= */
 
 .finish-flag-marker{
   font-size:38px;
@@ -773,7 +769,7 @@ body.nav-mode .side{
 
 
 /* =========================================================
-   LOMBADAS / RADARES / SEMÁFOROS
+   HAZARDS
 ========================================================= */
 
 .hazard-marker{
@@ -793,7 +789,7 @@ body.nav-mode .side{
 
 
 /* =========================================================
-   MINI OUTDOOR DA COMUNIDADE
+   OUTDOOR COMUNIDADE
 ========================================================= */
 
 .community-billboard{
@@ -1127,10 +1123,6 @@ body.nav-mode .favela-sign{
 }
 
 
-/* =========================================================
-   DESKTOP
-========================================================= */
-
 @media(min-width:700px){
   .topbar{
     left:20px;
@@ -1164,11 +1156,6 @@ body.nav-mode .favela-sign{
 
 <div id="map"></div>
 
-
-<!-- =======================================================
-     TOPO
-======================================================= -->
-
 <div class="topbar" id="mainTopbar">
 
   <div class="appbar">
@@ -1179,15 +1166,9 @@ body.nav-mode .favela-sign{
   </div>
 
   <div class="search">
-    <input
-      id="destInput"
-      type="text"
-      placeholder="Rua, número, bairro ou local..."
-      autocomplete="off"
-    >
+    <input id="destInput" type="text" placeholder="Rua, número, bairro ou local..." autocomplete="off">
     <button class="clear" id="clearBtn">✕</button>
     <button id="searchBtn">IR</button>
-
     <div id="suggest" class="suggest"></div>
   </div>
 
@@ -1198,10 +1179,6 @@ body.nav-mode .favela-sign{
 
 </div>
 
-
-<!-- =======================================================
-     HUD NAVEGAÇÃO
-======================================================= -->
 
 <div class="waze-top-hud" id="wazeHud">
 
@@ -1233,21 +1210,17 @@ body.nav-mode .favela-sign{
 </div>
 
 
-<!-- =======================================================
-     SEMÁFORO ESTIMADO
-======================================================= -->
-
 <div class="traffic-light-hud" id="trafficLightHud">
 
   <div class="traffic-light-visual">
-    <div class="traffic-light-dot red" id="tlRed"></div>
-    <div class="traffic-light-dot yellow" id="tlYellow"></div>
-    <div class="traffic-light-dot green" id="tlGreen"></div>
+    <div class="traffic-light-dot red"></div>
+    <div class="traffic-light-dot yellow"></div>
+    <div class="traffic-light-dot green"></div>
   </div>
 
   <div class="traffic-light-info">
-    <b id="tlTitle">Semáforo à frente</b>
-    <span id="tlInfo">Estimativa de ciclo</span>
+    <b id="tlTitle">🚦 Semáforo à frente</b>
+    <span id="tlInfo">Estado do sinal não disponível</span>
   </div>
 
 </div>
@@ -1257,43 +1230,25 @@ body.nav-mode .favela-sign{
   Via atual
 </div>
 
-
 <div class="speedometer-box" id="speedometerBox">
   <b id="speedVal">0</b>
   <span>km/h</span>
 </div>
 
-
-<button
-  class="nav-recenter-left"
-  id="navRecenterLeft"
-  title="Recentralizar">
+<button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar">
   🎯
 </button>
 
-
-<button
-  class="nav-report-btn"
-  id="navReportBtn"
-  title="Alertar ocorrência">
+<button class="nav-report-btn" id="navReportBtn" title="Alertar ocorrência">
   ⚠
 </button>
 
-
-<!-- =======================================================
-     CONTROLES
-======================================================= -->
 
 <div class="side">
 
   <button class="locate" id="locateBtn" title="Onde estou">◎</button>
 
-  <button
-    class="active-sound"
-    id="soundBtn"
-    title="Voz">
-    🔊
-  </button>
+  <button class="active-sound" id="soundBtn" title="Voz">🔊</button>
 
   <button id="northBtn" title="Norte">N</button>
 
@@ -1305,10 +1260,6 @@ body.nav-mode .favela-sign{
 
 </div>
 
-
-<!-- =======================================================
-     PAINEL ROTA
-======================================================= -->
 
 <div class="waze-bottom-sheet" id="wazeSheet">
 
@@ -1329,48 +1280,35 @@ body.nav-mode .favela-sign{
 
     </div>
 
-    <button
-      class="sheet-toggle-btn"
-      id="sheetToggleBtn">
+    <button class="sheet-toggle-btn" id="sheetToggleBtn">
       Opções ▴
     </button>
 
   </div>
 
-
   <div class="sheet-content">
 
     <div class="sheet-nav-actions">
 
-      <button
-        class="btn-nav-radar"
-        id="startRadarBtn">
+      <button class="btn-nav-radar" id="startRadarBtn">
         🛡️ Iniciar Radar Seguro PRO
       </button>
 
     </div>
 
-
     <div class="sheet-external-grid">
 
-      <button
-        class="btn-waze"
-        id="openWaze">
+      <button class="btn-waze" id="openWaze">
         Abrir no Waze
       </button>
 
-      <button
-        class="btn-maps"
-        id="openMaps">
+      <button class="btn-maps" id="openMaps">
         Google Maps
       </button>
 
     </div>
 
-
-    <button
-      class="btn-nav-stop"
-      id="stopNavBtn">
+    <button class="btn-nav-stop" id="stopNavBtn">
       ⏹ Cancelar Navegação
     </button>
 
@@ -1379,21 +1317,13 @@ body.nav-mode .favela-sign{
 </div>
 
 
-<!-- =======================================================
-     BOTÕES INFERIORES
-======================================================= -->
-
 <div class="bottom-actions" id="mainBottomActions">
 
-  <button
-    class="action danger"
-    id="reportBtn">
+  <button class="action danger" id="reportBtn">
     🚨 Denunciar
   </button>
 
-  <button
-    class="action chat"
-    id="chatBottomBtn">
+  <button class="action chat" id="chatBottomBtn">
     💬 Chat
   </button>
 
@@ -1401,7 +1331,6 @@ body.nav-mode .favela-sign{
 
 
 <div class="toast" id="toast"></div>
-
 <div class="favela-sign" id="favelaSign"></div>
 
 <div class="danger-banner" id="dangerBanner">
@@ -1409,10 +1338,6 @@ body.nav-mode .favela-sign{
   <button id="dangerBannerClose">✕</button>
 </div>
 
-
-<!-- =======================================================
-     ALERTA COMUNITÁRIO
-======================================================= -->
 
 <div class="modal-overlay" id="reportLiveModal">
 
@@ -1446,9 +1371,7 @@ body.nav-mode .favela-sign{
 
     </div>
 
-    <button
-      class="modal-close"
-      id="closeReportLiveModal">
+    <button class="modal-close" id="closeReportLiveModal">
       Fechar
     </button>
 
@@ -1456,10 +1379,6 @@ body.nav-mode .favela-sign{
 
 </div>
 
-
-<!-- =======================================================
-     DENÚNCIA OFICIAL
-======================================================= -->
 
 <div class="modal-overlay" id="reportModal">
 
@@ -1488,9 +1407,7 @@ body.nav-mode .favela-sign{
 
     </div>
 
-    <button
-      class="modal-close"
-      id="closeReportModal">
+    <button class="modal-close" id="closeReportModal">
       Fechar
     </button>
 
@@ -1498,10 +1415,6 @@ body.nav-mode .favela-sign{
 
 </div>
 
-
-<!-- =======================================================
-     FILTRO POSTOS
-======================================================= -->
 
 <div class="modal-overlay" id="fuelFilterModal">
 
@@ -1528,9 +1441,7 @@ body.nav-mode .favela-sign{
 
     </div>
 
-    <button
-      class="modal-close"
-      id="closeFuelFilter">
+    <button class="modal-close" id="closeFuelFilter">
       Fechar
     </button>
 
@@ -1538,10 +1449,6 @@ body.nav-mode .favela-sign{
 
 </div>
 
-
-<!-- =======================================================
-     CAMADAS
-======================================================= -->
 
 <div class="modal-overlay" id="layersModal">
 
@@ -1558,12 +1465,7 @@ body.nav-mode .favela-sign{
 
       <button id="themeLight">
         <span class="icon">☀️</span>
-        Mapa Claro Vetorial
-      </button>
-
-      <button id="themeDark">
-        <span class="icon">🌙</span>
-        Mapa Escuro Vetorial
+        Mapa Vetorial
       </button>
 
       <button id="themeSatellite">
@@ -1593,9 +1495,7 @@ body.nav-mode .favela-sign{
 
     </div>
 
-    <button
-      class="modal-close"
-      id="closeLayers">
+    <button class="modal-close" id="closeLayers">
       Fechar
     </button>
 
@@ -1603,10 +1503,6 @@ body.nav-mode .favela-sign{
 
 </div>
 
-
-<!-- =======================================================
-     TRANSPORTE
-======================================================= -->
 
 <div class="modal-overlay" id="transportModal">
 
@@ -1628,9 +1524,7 @@ body.nav-mode .favela-sign{
 
     </div>
 
-    <button
-      class="modal-close"
-      id="closeTransportModal">
+    <button class="modal-close" id="closeTransportModal">
       Fechar
     </button>
 
@@ -1639,33 +1533,21 @@ body.nav-mode .favela-sign{
 </div>
 
 
-<!-- =======================================================
-     CHAT
-======================================================= -->
-
 <div class="modal-overlay" id="chatModal">
 
   <div class="modal-card">
 
     <h2>💬 Chat Comunitário</h2>
 
-    <div
-      class="chat-status"
-      id="chatStatus">
+    <div class="chat-status" id="chatStatus">
       Conectando...
     </div>
 
-    <div
-      class="chat-messages"
-      id="chatMessages">
-    </div>
+    <div class="chat-messages" id="chatMessages"></div>
 
     <div class="chat-input-row">
 
-      <input
-        id="chatInput"
-        maxlength="200"
-        placeholder="Digite sua mensagem...">
+      <input id="chatInput" maxlength="200" placeholder="Digite sua mensagem...">
 
       <button id="chatSendBtn">
         Enviar
@@ -1673,9 +1555,7 @@ body.nav-mode .favela-sign{
 
     </div>
 
-    <button
-      class="modal-close"
-      id="closeChatModal">
+    <button class="modal-close" id="closeChatModal">
       Fechar
     </button>
 
@@ -1686,7 +1566,6 @@ body.nav-mode .favela-sign{
 
 <script src="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.js"></script>
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-
 
 <script>
 (function(){
@@ -1708,11 +1587,14 @@ const ANP_REPORT =
 
 const RJ_CENTER = [-43.40,-22.90];
 
-const STYLE_LIGHT =
-'https://tiles.openfreemap.org/styles/liberty';
+/*
+  MAPA VETORIAL.
 
-const STYLE_DARK =
-'https://tiles.openfreemap.org/styles/dark';
+  O modo principal passa a utilizar mapa vetorial,
+  mais nítido do que tiles raster ampliados.
+*/
+const STYLE_VECTOR =
+'https://tiles.openfreemap.org/styles/liberty';
 
 
 function satelliteStyle(){
@@ -1855,11 +1737,7 @@ const Utils = {
         )
       );
 
-    for(
-      let i=0;
-      i<=points;
-      i++
-    ){
+    for(let i=0;i<=points;i++){
 
       const ang =
         i/points *
@@ -1917,7 +1795,7 @@ const Utils = {
       dx*dx + dy*dy;
 
     let t =
-      len2 > 0
+      len2>0
       ?
       (
         (P[0]-A[0])*dx +
@@ -1949,7 +1827,7 @@ const Utils = {
         Utils.distanceKm(
           p,
           point
-        ) * 1000,
+        )*1000,
 
       point,
 
@@ -1960,6 +1838,16 @@ const Utils = {
 
     };
 
+  },
+
+
+  interpolatePoint(a,b,t){
+
+    return [
+      a[0]+(b[0]-a[0])*t,
+      a[1]+(b[1]-a[1])*t
+    ];
+
   }
 
 };
@@ -1968,12 +1856,6 @@ const Utils = {
 /* =========================================================
    COMUNIDADES
 ========================================================= */
-
-/*
-   IMPORTANTE:
-   O raio visual e de alerta é automaticamente
-   reduzido em 50 metros pela função riskRadius().
-*/
 
 const rawAreas = [
 
@@ -2089,19 +1971,18 @@ const rawAreas = [
 ];
 
 
+/*
+  DIMINUI 50 METROS DO RAIO.
+*/
 function riskRadius(area){
 
   return Math.max(
     .18,
-    area.r - .05
+    area.r-.05
   );
 
 }
 
-
-/* =========================================================
-   GEOJSON COMUNIDADES
-========================================================= */
 
 function communitiesPolygonGeoJSON(){
 
@@ -2208,16 +2089,19 @@ const Voice = {
     )
       return;
 
+
     if(priority){
 
       this.clear();
 
     }
 
+
     if(
       this.queue.includes(text)
     )
       return;
+
 
     this.queue.push(text);
 
@@ -2234,11 +2118,14 @@ const Voice = {
     )
       return;
 
-    const text =
+
+    const text=
       this.queue.shift();
 
-    const u =
+
+    const u=
       new SpeechSynthesisUtterance(text);
+
 
     u.lang='pt-BR';
 
@@ -2246,8 +2133,9 @@ const Voice = {
 
     this.speaking=true;
 
-    u.onend =
-    u.onerror =
+
+    u.onend=
+    u.onerror=
       ()=>{
 
         this.speaking=false;
@@ -2258,6 +2146,7 @@ const Voice = {
         );
 
       };
+
 
     speechSynthesis.speak(u);
 
@@ -2306,14 +2195,16 @@ const FuelModule = {
     )
       return;
 
+
     if(
       this.lastCenter &&
       Utils.distanceKm(
         center,
         this.lastCenter
-      ) < 3
+      )<3
     )
       return;
+
 
     this.loading=true;
 
@@ -2322,9 +2213,10 @@ const FuelModule = {
       center[1]
     ];
 
+
     try{
 
-      const query =
+      const query=
 `[out:json][timeout:14];
 (
 node["amenity"="fuel"](around:7000,${center[1]},${center[0]});
@@ -2332,38 +2224,45 @@ way["amenity"="fuel"](around:7000,${center[1]},${center[0]});
 );
 out center tags;`;
 
-      const r =
+
+      const r=
         await fetch(
-          'https://overpass-api.de/api/interpreter?data=' +
+          'https://overpass-api.de/api/interpreter?data='+
           encodeURIComponent(query)
         );
+
 
       if(!r.ok)
         throw new Error('Overpass');
 
-      const data =
+
+      const data=
         await r.json();
 
-      this.stations =
-        (data.elements || [])
+
+      this.stations=
+        (data.elements||[])
         .map(el=>{
 
-          const lat =
+          const lat=
             el.lat ??
             el.center?.lat;
 
-          const lng =
+          const lng=
             el.lon ??
             el.center?.lon;
 
+
           if(
-            lat == null ||
-            lng == null
+            lat==null ||
+            lng==null
           )
             return null;
 
-          const t =
-            el.tags || {};
+
+          const t=
+            el.tags||{};
+
 
           return {
 
@@ -2397,6 +2296,7 @@ out center tags;`;
         })
         .filter(Boolean);
 
+
       this.render(App.map);
 
     }catch(e){
@@ -2419,28 +2319,33 @@ out center tags;`;
 
     this.clear();
 
+
     if(
       !this.visible ||
       this.filter==='none'
     )
       return;
 
+
     let list=[
       ...this.stations
     ];
+
 
     if(
       this.filter==='gnv'
     ){
 
-      list =
+      list=
         list.filter(s=>s.gnv);
 
     }
 
-    const center =
+
+    const center=
       App.userPos ||
       map.getCenter().toArray();
+
 
     list.sort(
       (a,b)=>
@@ -2455,21 +2360,25 @@ out center tags;`;
         )
     );
 
+
     list
     .slice(0,45)
     .forEach(s=>{
 
-      const el =
+      const el=
         document.createElement('div');
 
-      el.className =
-        'fuel-marker' +
-        (s.gnv ? ' gnv' : '');
 
-      el.textContent =
-        s.gnv ? 'G' : '⛽';
+      el.className=
+        'fuel-marker'+
+        (s.gnv?' gnv':'');
 
-      const html =
+
+      el.textContent=
+        s.gnv?'G':'⛽';
+
+
+      const html=
 `
 <div style="color:#0f172a;font-size:12px;line-height:1.45">
   <b style="font-size:14px">${Utils.sanitize(s.name)}</b><br>
@@ -2481,7 +2390,8 @@ out center tags;`;
 </div>
 `;
 
-      const marker =
+
+      const marker=
         new maplibregl.Marker({
           element:el
         })
@@ -2496,6 +2406,7 @@ out center tags;`;
           .setHTML(html)
         )
         .addTo(map);
+
 
       this.markers.push(marker);
 
@@ -2532,6 +2443,8 @@ const App = {
 
   routeProgressIndex:0,
 
+  routeProgressMeters:0,
+
   routeStepIndex:0,
 
   navActive:false,
@@ -2549,8 +2462,6 @@ const App = {
   manualFollowTimer:null,
 
   lastCameraUpdate:0,
-
-  lastMeaningfulMove:0,
 
   lastRerouteAt:0,
 
@@ -2578,8 +2489,6 @@ const App = {
 
   geocodeAbort:null,
 
-  routeAbort:null,
-
   sheetExpanded:false,
 
   speedAlertEnabled:true,
@@ -2587,10 +2496,6 @@ const App = {
   hazardMarkers:[],
 
   routeHazards:[],
-
-  hazardAbort:null,
-
-  trafficTimer:null,
 
   chatMessages:[],
 
@@ -2602,9 +2507,13 @@ const App = {
 
   lastArrivalAnnounced:false,
 
+  activeGuidanceStep:-1,
+
+  lastGuidanceStep:-1,
+
 
 /* =========================================================
-   INICIALIZAÇÃO
+   INIT
 ========================================================= */
 
   init(){
@@ -2624,46 +2533,27 @@ const App = {
 
   getThemeStyle(mode){
 
-    let target=mode;
-
     if(
-      mode==='auto'
-    ){
-
-      const h =
-        new Date().getHours();
-
-      target =
-        (
-          h>=6 &&
-          h<18
-        )
-        ?
-        'light'
-        :
-        'dark';
-
-    }
-
-    if(
-      target==='sat'
+      mode==='sat'
     )
       return satelliteStyle();
 
-    return (
-      target==='dark'
-      ?
-      STYLE_DARK
-      :
-      STYLE_LIGHT
-    );
+
+    /*
+      Auto e Vetorial usam a base vetorial nítida.
+    */
+    return STYLE_VECTOR;
 
   },
 
 
+/* =========================================================
+   MAPA
+========================================================= */
+
   createMap(){
 
-    this.map =
+    this.map=
       new maplibregl.Map({
 
         container:'map',
@@ -2676,14 +2566,21 @@ const App = {
 
         bearing:0,
 
+        maxPitch:70,
+
         attributionControl:false,
 
         style:
           this.getThemeStyle(
             this.themeMode
-          )
+          ),
+
+        antialias:true,
+
+        renderWorldCopies:false
 
       });
+
 
     this.map.addControl(
       new maplibregl.AttributionControl({
@@ -2697,9 +2594,12 @@ const App = {
       'style.load',
       ()=>{
 
+        this.improveVectorMap();
+
         this.add3DBuildings();
 
         this.addCommunityLayers();
+
 
         if(
           this.route
@@ -2726,20 +2626,23 @@ const App = {
     );
 
 
-    const pause=()=>{
+    const pauseFollow=()=>{
 
       if(
         !this.navActive
       )
         return;
 
+
       this.followMode=false;
+
 
       clearTimeout(
         this.manualFollowTimer
       );
 
-      this.manualFollowTimer =
+
+      this.manualFollowTimer=
         setTimeout(
           ()=>{
 
@@ -2756,25 +2659,83 @@ const App = {
       'dragstart',
       e=>{
         if(e.originalEvent)
-          pause();
+          pauseFollow();
       }
     );
+
 
     this.map.on(
       'zoomstart',
       e=>{
         if(e.originalEvent)
-          pause();
+          pauseFollow();
       }
     );
+
 
     this.map.on(
       'rotatestart',
       e=>{
         if(e.originalEvent)
-          pause();
+          pauseFollow();
       }
     );
+
+  },
+
+
+/*
+  MELHORA VISUAL DO MAPA SEM TROCAR
+  A ESTRUTURA DO APLICATIVO.
+*/
+  improveVectorMap(){
+
+    try{
+
+      const style=
+        this.map.getStyle();
+
+
+      for(
+        const layer
+        of style.layers||[]
+      ){
+
+        /*
+          Aumenta levemente o contraste dos nomes.
+        */
+        if(
+          layer.type==='symbol'
+        ){
+
+          try{
+
+            if(
+              layer.layout &&
+              layer.layout['text-field']
+            ){
+
+              this.map.setPaintProperty(
+                layer.id,
+                'text-halo-width',
+                1.25
+              );
+
+              this.map.setPaintProperty(
+                layer.id,
+                'text-halo-blur',
+                .4
+              );
+
+            }
+
+          }catch(e){}
+
+        }
+
+      }
+
+    }catch(e){}
 
   },
 
@@ -2787,29 +2748,33 @@ const App = {
 
     try{
 
-      const style =
-        this.map.getStyle();
-
-      const vectorSource =
-        Object.entries(
-          style.sources || {}
-        )
-        .find(
-          ([id,s])=>
-            s.type==='vector'
-        );
-
-      if(
-        !vectorSource
-      )
-        return;
-
       if(
         this.map.getLayer(
           'radar-3d-buildings'
         )
       )
         return;
+
+
+      const style=
+        this.map.getStyle();
+
+
+      const vectorSource=
+        Object.entries(
+          style.sources||{}
+        )
+        .find(
+          ([id,s])=>
+            s.type==='vector'
+        );
+
+
+      if(
+        !vectorSource
+      )
+        return;
+
 
       this.map.addLayer({
 
@@ -2823,12 +2788,19 @@ const App = {
 
         type:'fill-extrusion',
 
-        minzoom:15,
+        minzoom:15.2,
 
         paint:{
 
-          'fill-extrusion-color':
-            '#94a3b8',
+          'fill-extrusion-color':[
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            15.2,
+            '#d6d3d1',
+            18,
+            '#a8a29e'
+          ],
 
           'fill-extrusion-height':[
             'coalesce',
@@ -2844,7 +2816,8 @@ const App = {
             0
           ],
 
-          'fill-extrusion-opacity':.45
+          'fill-extrusion-opacity':
+            .62
 
         }
 
@@ -2853,7 +2826,7 @@ const App = {
     }catch(e){
 
       console.warn(
-        '3D não disponível neste estilo.'
+        'Prédios 3D não disponíveis nesta região.'
       );
 
     }
@@ -2976,11 +2949,6 @@ const App = {
       );
 
 
-      /*
-         O PONTINHO VERMELHO NÃO DESAPARECE
-         QUANDO O MAPA ESTÁ AFASTADO.
-      */
-
       this.map.addLayer({
 
         id:'community-dot',
@@ -3015,10 +2983,6 @@ const App = {
 
       });
 
-
-      /*
-         NOMES DAS COMUNIDADES
-      */
 
       this.map.addLayer({
 
@@ -3089,6 +3053,7 @@ const App = {
 
     this.communityVisible=show;
 
+
     [
       'community-fill',
       'community-outline',
@@ -3119,7 +3084,7 @@ const App = {
 
 
 /* =========================================================
-   GPS PROFISSIONALIZADO
+   GPS
 ========================================================= */
 
   startGPS(){
@@ -3139,7 +3104,7 @@ const App = {
 
 
     if(
-      this.GPSWatch != null
+      this.GPSWatch!=null
     ){
 
       navigator.geolocation
@@ -3150,21 +3115,21 @@ const App = {
     }
 
 
-    this.GPSWatch =
+    this.GPSWatch=
       navigator.geolocation
       .watchPosition(
 
-        position=>
-          this.handleGPS(position),
+        p=>
+          this.handleGPS(p),
 
-        error=>
-          this.handleGPSError(error),
+        e=>
+          this.handleGPSError(e),
 
         {
 
           enableHighAccuracy:true,
 
-          maximumAge:1200,
+          maximumAge:900,
 
           timeout:12000
 
@@ -3177,16 +3142,13 @@ const App = {
 
   handleGPSError(error){
 
-    let text='GPS...';
-
-    if(
-      error.code===1
-    )
-      text='GPS BLOQ.';
-
     this.setGPSStatus(
       false,
-      text
+      error.code===1
+      ?
+      'GPS BLOQ.'
+      :
+      'GPS...'
     );
 
   },
@@ -3194,80 +3156,72 @@ const App = {
 
   handleGPS(position){
 
-    const c =
+    const c=
       position.coords;
+
 
     const raw=[
       c.longitude,
       c.latitude
     ];
 
-    this.currentAccuracy =
-      c.accuracy || 999;
 
-    let speedKmh =
+    this.currentAccuracy=
+      c.accuracy||999;
+
+
+    let speedKmh=
       (
-        c.speed != null &&
+        c.speed!=null &&
         !Number.isNaN(c.speed)
       )
       ?
-      c.speed * 3.6
+      c.speed*3.6
       :
       0;
 
 
-    /*
-       FILTRA FIXES MUITO RUINS
-    */
-
     if(
-      this.currentAccuracy > 120 &&
+      this.currentAccuracy>120 &&
       this.userPos
     )
       return;
 
 
-    /*
-       CALCULA MOVIMENTO REAL
-    */
-
     let movedMeters=0;
+
 
     if(
       this.lastRawPos
     ){
 
-      movedMeters =
+      movedMeters=
         Utils.distanceKm(
           this.lastRawPos,
           raw
-        ) * 1000;
+        )*1000;
 
     }
 
 
     /*
-       IGNORA SALTO IMPOSSÍVEL
+      IGNORA SALTOS ABSURDOS DO GPS.
     */
-
     if(
       this.lastRawPos &&
-      movedMeters > 180 &&
-      speedKmh < 25
-    ){
-
+      movedMeters>180 &&
+      speedKmh<25
+    )
       return;
-
-    }
 
 
     /*
-       PARADO = NÃO DEIXA MAPA DANÇAR
+      PARADO: NÃO MOVE MARCADOR NEM CÂMERA
+      POR PEQUENA OSCILAÇÃO DE GPS.
     */
-
-    const stationary =
-      speedKmh < 2.2 &&
-      movedMeters < 6;
+    const stationary=
+      speedKmh<2.2 &&
+      movedMeters<6;
 
 
     if(
@@ -3276,6 +3230,8 @@ const App = {
     ){
 
       this.rawUserPos=raw;
+
+      this.lastRawPos=raw;
 
       this.currentSpeed=0;
 
@@ -3286,15 +3242,16 @@ const App = {
         'GPS ATIVO'
       );
 
+      this.checkCommunityDanger();
+
       return;
 
     }
 
 
     /*
-       SUAVIZA POSIÇÃO
+      FILTRO SUAVE DA POSIÇÃO.
     */
-
     if(
       !this.filteredPos
     ){
@@ -3308,53 +3265,52 @@ const App = {
 
       let alpha=.42;
 
-      if(
-        speedKmh > 45
-      )
-        alpha=.60;
 
       if(
-        this.currentAccuracy > 35
+        speedKmh>50
       )
-        alpha=.25;
+        alpha=.62;
+
+
+      if(
+        this.currentAccuracy>35
+      )
+        alpha=.26;
+
 
       this.filteredPos=[
 
-        this.filteredPos[0] +
+        this.filteredPos[0]+
         (
-          raw[0] -
+          raw[0]-
           this.filteredPos[0]
-        ) * alpha,
+        )*alpha,
 
-        this.filteredPos[1] +
+        this.filteredPos[1]+
         (
-          raw[1] -
+          raw[1]-
           this.filteredPos[1]
-        ) * alpha
+        )*alpha
 
       ];
 
     }
 
 
-    /*
-       HEADING
-    */
-
-    let heading =
+    let heading=
       c.heading;
 
 
     if(
       (
-        heading == null ||
+        heading==null ||
         Number.isNaN(heading)
       ) &&
       this.lastRawPos &&
-      movedMeters > 5
+      movedMeters>5
     ){
 
-      heading =
+      heading=
         Utils.bearing(
           this.lastRawPos,
           raw
@@ -3363,45 +3319,35 @@ const App = {
     }
 
 
+    /*
+      DIREÇÃO SÓ É ALTERADA QUANDO
+      O CARRO ESTÁ REALMENTE SE MOVENDO.
+    */
     if(
-      heading != null &&
+      heading!=null &&
       !Number.isNaN(heading) &&
-      speedKmh > 4
+      speedKmh>4
     ){
 
-      const diff =
-        Utils.angleDiff(
-          this.currentBearing,
-          heading
-        );
-
-      if(
-        diff > 4
-      ){
-
-        /*
-           SUAVIZA GIRO
-        */
-
-        const turnAlpha=.38;
-
-        let delta =
+      let delta=
+        (
           (
-            (
-              heading -
-              this.currentBearing +
-              540
-            ) % 360
-          ) - 180;
+            heading-
+            this.currentBearing+
+            540
+          )%360
+        )-180;
 
-        this.currentBearing =
-          (
-            this.currentBearing +
-            delta * turnAlpha +
-            360
-          ) % 360;
 
-      }
+      /*
+        SUAVIZA A ROTAÇÃO.
+      */
+      this.currentBearing=
+        (
+          this.currentBearing+
+          delta*.34+
+          360
+        )%360;
 
     }
 
@@ -3410,29 +3356,37 @@ const App = {
 
     this.lastRawPos=raw;
 
-    this.currentSpeed =
-      speedKmh;
+    this.currentSpeed=speedKmh;
 
 
-    /*
-       MAP MATCHING
-    */
-
-    const match =
+    const match=
       this.matchPositionToRoute(
         this.filteredPos
       );
 
 
-    this.userPos =
+    this.userPos=
       match.point;
 
 
-    this.routeProgressIndex =
-      Math.max(
-        this.routeProgressIndex,
-        match.index
-      );
+    if(
+      this.route
+    ){
+
+      this.routeProgressIndex=
+        Math.max(
+          this.routeProgressIndex,
+          match.index
+        );
+
+
+      this.routeProgressMeters=
+        this.calculateProgressMeters(
+          match.index,
+          match.point
+        );
+
+    }
 
 
     this.updateUserMarker();
@@ -3451,6 +3405,7 @@ const App = {
 
       this._firstGPS=true;
 
+
       this.map.flyTo({
 
         center:this.userPos,
@@ -3460,6 +3415,7 @@ const App = {
         duration:700
 
       });
+
 
       FuelModule.load(
         this.userPos
@@ -3478,19 +3434,23 @@ const App = {
 
     this.updateTrafficLightHUD();
 
+    this.renderHazards();
+
   },
 
 
   setGPSStatus(ok,text){
 
-    const e =
+    const e=
       document.getElementById(
         'gpsBadge'
       );
 
+
     e.textContent=text;
 
-    e.style.background =
+
+    e.style.background=
       ok
       ?
       '#059669'
@@ -3500,12 +3460,16 @@ const App = {
   },
 
 
+/* =========================================================
+   MAP MATCHING
+========================================================= */
+
   matchPositionToRoute(point){
 
     if(
       !this.route ||
       !this.route.coords ||
-      this.route.coords.length < 2
+      this.route.coords.length<2
     ){
 
       return {
@@ -3518,25 +3482,21 @@ const App = {
     }
 
 
-    const coords =
+    const coords=
       this.route.coords;
 
 
-    /*
-       PROCURA APENAS PRÓXIMO DO PROGRESSO ATUAL
-       PARA NÃO GRUDAR EM RUA PARALELA OU TRECHO ATRÁS.
-    */
-
-    const start =
+    const start=
       Math.max(
         0,
-        this.routeProgressIndex - 25
+        this.routeProgressIndex-20
       );
 
-    const end =
+
+    const end=
       Math.min(
-        coords.length - 2,
-        this.routeProgressIndex + 220
+        coords.length-2,
+        this.routeProgressIndex+260
       );
 
 
@@ -3551,7 +3511,7 @@ const App = {
       i++
     ){
 
-      const r =
+      const r=
         Utils.pointToSegment(
           point,
           coords[i],
@@ -3559,50 +3519,47 @@ const App = {
         );
 
 
-      const headingPenalty =
+      const headingPenalty=
         (
-          this.currentSpeed > 5
+          this.currentSpeed>5
         )
         ?
         Utils.angleDiff(
           this.currentBearing,
           r.bearing
-        ) * .35
+        )*.32
         :
         0;
 
 
-      /*
-         PENALIZA VOLTAR PARA TRÁS
-      */
-
-      const backwardPenalty =
+      const backwardPenalty=
         (
-          i <
+          i<
           this.routeProgressIndex-4
         )
         ?
-        80
+        90
         :
         0;
 
 
-      const score =
-        r.distanceMeters +
-        headingPenalty +
+      const score=
+        r.distanceMeters+
+        headingPenalty+
         backwardPenalty;
 
 
       if(
-        score < bestScore
+        score<bestScore
       ){
 
         bestScore=score;
 
+
         best={
 
           point:
-            r.distanceMeters <= 32
+            r.distanceMeters<=34
             ?
             r.point
             :
@@ -3623,7 +3580,7 @@ const App = {
     }
 
 
-    return best || {
+    return best||{
 
       point,
 
@@ -3640,6 +3597,295 @@ const App = {
   },
 
 
+/* =========================================================
+   DISTÂNCIA ACUMULADA DA ROTA
+========================================================= */
+
+  prepareRouteGeometry(route){
+
+    route.cumulative=[0];
+
+
+    let total=0;
+
+
+    for(
+      let i=1;
+      i<route.coords.length;
+      i++
+    ){
+
+      total+=
+        Utils.distanceKm(
+          route.coords[i-1],
+          route.coords[i]
+        )*1000;
+
+
+      route.cumulative[i]=total;
+
+    }
+
+
+    /*
+      LIGA CADA INSTRUÇÃO AO PONTO CORRETO
+      DA GEOMETRIA DA ROTA.
+    */
+    let searchStart=0;
+
+
+    for(
+      const step
+      of route.steps||[]
+    ){
+
+      if(
+        step.routeOffsetMeters!=null &&
+        Number.isFinite(
+          step.routeOffsetMeters
+        )
+      ){
+
+        let idx=
+          this.findIndexForOffset(
+            route,
+            step.routeOffsetMeters
+          );
+
+
+        step.routeIndex=
+          Math.max(
+            searchStart,
+            idx
+          );
+
+
+        searchStart=
+          step.routeIndex;
+
+
+        continue;
+
+      }
+
+
+      const loc=
+        step.maneuver?.location;
+
+
+      if(!loc){
+
+        step.routeIndex=
+          searchStart;
+
+        continue;
+
+      }
+
+
+      let bestIndex=
+        searchStart;
+
+      let bestDist=
+        Infinity;
+
+
+      for(
+        let i=searchStart;
+        i<route.coords.length-1;
+        i++
+      ){
+
+        const res=
+          Utils.pointToSegment(
+            loc,
+            route.coords[i],
+            route.coords[i+1]
+          );
+
+
+        if(
+          res.distanceMeters<
+          bestDist
+        ){
+
+          bestDist=
+            res.distanceMeters;
+
+          bestIndex=i;
+
+        }
+
+
+        if(
+          bestDist<8 &&
+          i>bestIndex+15
+        )
+          break;
+
+      }
+
+
+      step.routeIndex=
+        bestIndex;
+
+
+      step.routeOffsetMeters=
+        route.cumulative[
+          bestIndex
+        ]||0;
+
+
+      searchStart=
+        bestIndex;
+
+    }
+
+  },
+
+
+  findIndexForOffset(route,offset){
+
+    const arr=
+      route.cumulative||[];
+
+
+    let low=0;
+
+    let high=
+      arr.length-1;
+
+
+    while(low<high){
+
+      const mid=
+        Math.floor(
+          (low+high)/2
+        );
+
+
+      if(
+        arr[mid]<
+        offset
+      )
+        low=mid+1;
+
+      else
+        high=mid;
+
+    }
+
+
+    return Math.max(
+      0,
+      low-1
+    );
+
+  },
+
+
+  calculateProgressMeters(index,point){
+
+    if(
+      !this.route?.cumulative?.length
+    )
+      return 0;
+
+
+    const base=
+      this.route.cumulative[index]||0;
+
+
+    const segmentStart=
+      this.route.coords[index];
+
+
+    return base+
+      Utils.distanceKm(
+        segmentStart,
+        point
+      )*1000;
+
+  },
+
+
+/* =========================================================
+   CÂMERA PROFISSIONAL / OLHA À FRENTE
+========================================================= */
+
+  pointAhead(distanceMeters){
+
+    if(
+      !this.route?.coords?.length ||
+      !this.route.cumulative?.length
+    )
+      return this.userPos;
+
+
+    const target=
+      this.routeProgressMeters+
+      distanceMeters;
+
+
+    const idx=
+      this.findIndexForOffset(
+        this.route,
+        target
+      );
+
+
+    const a=
+      this.route.coords[idx];
+
+
+    const b=
+      this.route.coords[
+        Math.min(
+          idx+1,
+          this.route.coords.length-1
+        )
+      ];
+
+
+    const aDist=
+      this.route.cumulative[idx]||0;
+
+
+    const bDist=
+      this.route.cumulative[
+        Math.min(
+          idx+1,
+          this.route.cumulative.length-1
+        )
+      ]||aDist;
+
+
+    const span=
+      Math.max(
+        1,
+        bDist-aDist
+      );
+
+
+    const t=
+      Math.max(
+        0,
+        Math.min(
+          1,
+          (target-aDist)/span
+        )
+      );
+
+
+    return Utils.interpolatePoint(
+      a,
+      b,
+      t
+    );
+
+  },
+
+
   updateUserMarker(){
 
     if(
@@ -3652,14 +3898,15 @@ const App = {
       !this.userMarker
     ){
 
-      const el =
+      const el=
         document.createElement('div');
+
 
       el.className=
         'user-marker-waze';
 
 
-      this.userMarker =
+      this.userMarker=
         new maplibregl.Marker({
 
           element:el,
@@ -3684,12 +3931,8 @@ const App = {
     }
 
 
-    /*
-       NÃO GIRA SE ESTIVER PARADO
-    */
-
     if(
-      this.currentSpeed > 4
+      this.currentSpeed>4
     ){
 
       this.userMarker
@@ -3721,8 +3964,8 @@ const App = {
 
 
     if(
-      now -
-      this.lastCameraUpdate <
+      now-
+      this.lastCameraUpdate<
       650
     )
       return;
@@ -3731,51 +3974,109 @@ const App = {
     this.lastCameraUpdate=now;
 
 
-    /*
-       ZOOM DE ACORDO COM VELOCIDADE
-    */
+    let zoom=18.3;
 
-    let zoom=18.1;
+    let lookAhead=65;
+
 
     if(
-      this.currentSpeed > 65
-    )
-      zoom=16.8;
+      this.currentSpeed>70
+    ){
+
+      zoom=16.7;
+      lookAhead=220;
+
+    }
 
     else if(
-      this.currentSpeed > 40
-    )
-      zoom=17.2;
+      this.currentSpeed>45
+    ){
+
+      zoom=17.15;
+      lookAhead=160;
+
+    }
 
     else if(
-      this.currentSpeed > 20
-    )
-      zoom=17.7;
+      this.currentSpeed>25
+    ){
+
+      zoom=17.65;
+      lookAhead=110;
+
+    }
+
+
+    let center=
+      this.userPos;
+
+
+    let targetBearing=
+      this.currentBearing;
+
+
+    if(
+      this.route &&
+      this.currentSpeed>4
+    ){
+
+      const ahead=
+        this.pointAhead(
+          lookAhead
+        );
+
+
+      if(ahead){
+
+        /*
+          CENTRO UM POUCO À FRENTE.
+          ISSO DEIXA O CARRO MAIS PARA BAIXO
+          NA TELA, COMO GPS PROFISSIONAL.
+        */
+        center=
+          Utils.interpolatePoint(
+            this.userPos,
+            ahead,
+            .34
+          );
+
+
+        targetBearing=
+          Utils.bearing(
+            this.userPos,
+            ahead
+          );
+
+      }
+
+    }
 
 
     /*
-       SÓ MUDA BEARING EM MOVIMENTO
+      NÃO GIRA PARADO.
     */
+    if(
+      this.currentSpeed<5
+    ){
 
-    const bearing =
-      this.currentSpeed > 5
-      ?
-      this.currentBearing
-      :
-      this.map.getBearing();
+      targetBearing=
+        this.map.getBearing();
+
+    }
 
 
     this.map.easeTo({
 
-      center:this.userPos,
+      center,
 
       zoom,
 
-      pitch:60,
+      pitch:62,
 
-      bearing,
+      bearing:
+        targetBearing,
 
-      duration:450,
+      duration:460,
 
       essential:true
 
@@ -3794,6 +4095,7 @@ const App = {
         )
       );
 
+
     document
     .getElementById(
       'speedVal'
@@ -3809,7 +4111,7 @@ const App = {
     .toggle(
       'speed-alert',
       this.speedAlertEnabled &&
-      val > 80
+      val>80
     );
 
   },
@@ -3831,10 +4133,11 @@ const App = {
       .test(q)
     ){
 
-      q +=
+      q+=
         ', Rio de Janeiro, RJ, Brasil';
 
     }
+
 
     return q;
 
@@ -3843,7 +4146,7 @@ const App = {
 
   async geocodeNominatim(q,signal){
 
-    const params =
+    const params=
       new URLSearchParams({
 
         format:'jsonv2',
@@ -3859,10 +4162,10 @@ const App = {
       });
 
 
-    const r =
+    const r=
       await fetch(
 
-        'https://nominatim.openstreetmap.org/search?' +
+        'https://nominatim.openstreetmap.org/search?'+
         params,
 
         {
@@ -3910,13 +4213,13 @@ const App = {
 
   async geocodePhoton(q,signal){
 
-    const center =
+    const center=
       this.userPos ||
       this.map.getCenter().toArray();
 
 
-    const url =
-      'https://photon.komoot.io/api/?' +
+    const url=
+      'https://photon.komoot.io/api/?'+
       new URLSearchParams({
 
         q:q,
@@ -3932,7 +4235,7 @@ const App = {
       });
 
 
-    const r =
+    const r=
       await fetch(
         url,
         {signal}
@@ -3950,12 +4253,13 @@ const App = {
 
 
     return (
-      j.features || []
+      j.features||[]
     )
     .map(f=>{
 
       const p=
-        f.properties || {};
+        f.properties||{};
+
 
       return {
 
@@ -3998,11 +4302,11 @@ const App = {
       this.geocodeAbort.abort();
 
 
-    this.geocodeAbort =
+    this.geocodeAbort=
       new AbortController();
 
 
-    const q =
+    const q=
       this.normalizeSearch(
         text
       );
@@ -4010,7 +4314,7 @@ const App = {
 
     try{
 
-      const a =
+      const a=
         await this.geocodeNominatim(
           q,
           this.geocodeAbort.signal
@@ -4043,7 +4347,7 @@ const App = {
 
   renderSuggestions(results){
 
-    const box =
+    const box=
       document.getElementById(
         'suggest'
       );
@@ -4059,9 +4363,11 @@ const App = {
       box.innerHTML=
         '<div class="suggest-item">Local não encontrado.</div>';
 
+
       box.classList.add(
         'show'
       );
+
 
       return;
 
@@ -4072,8 +4378,9 @@ const App = {
     .slice(0,7)
     .forEach(item=>{
 
-      const div =
+      const div=
         document.createElement('div');
+
 
       div.className=
         'suggest-item';
@@ -4082,10 +4389,10 @@ const App = {
       div.innerHTML=
 `
 <div class="suggest-primary">
-  ${Utils.sanitize(item.name)}
+${Utils.sanitize(item.name)}
 </div>
 <div class="suggest-secondary">
-  ${Utils.sanitize(item.display)}
+${Utils.sanitize(item.display)}
 </div>
 `;
 
@@ -4131,13 +4438,13 @@ const App = {
 
 
 /* =========================================================
-   ROTEAMENTO
+   TOMTOM
 ========================================================= */
 
   async fetchTomTomRoute(a,b){
 
-    const mode =
-      this.transportMode ===
+    const mode=
+      this.transportMode===
       'motorcycle'
       ?
       'motorcycle'
@@ -4145,9 +4452,9 @@ const App = {
       'car';
 
 
-    const headingParam =
+    const headingParam=
       (
-        this.currentSpeed > 5
+        this.currentSpeed>5
       )
       ?
       `&vehicleHeading=${Math.round(this.currentBearing)}`
@@ -4155,7 +4462,7 @@ const App = {
       '';
 
 
-    const url =
+    const url=
 `https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=${mode}&instructionsType=text&language=pt-BR&routeType=fastest${headingParam}`;
 
 
@@ -4166,13 +4473,13 @@ const App = {
     const timeout=
       setTimeout(
         ()=>controller.abort(),
-        4200
+        4500
       );
 
 
     try{
 
-      const r =
+      const r=
         await fetch(
           url,
           {
@@ -4184,7 +4491,7 @@ const App = {
 
       if(!r.ok)
         throw new Error(
-          'TomTom HTTP ' +
+          'TomTom HTTP '+
           r.status
         );
 
@@ -4205,7 +4512,7 @@ const App = {
         j.routes[0];
 
 
-      const coords =
+      const coords=
         rt.legs
         .flatMap(
           leg=>
@@ -4219,7 +4526,7 @@ const App = {
         );
 
 
-      const steps =
+      const steps=
         (
           rt.guidance
           ?.instructions
@@ -4232,14 +4539,6 @@ const App = {
             i.street ||
             i.roadNumbers?.[0] ||
             'Siga pela via',
-
-          distance:
-            i.routeOffsetInMeters ||
-            0,
-
-          travelTime:
-            i.travelTimeInSeconds ||
-            0,
 
           maneuver:{
 
@@ -4257,12 +4556,17 @@ const App = {
               i.point.latitude
             ]
 
-          }
+          },
+
+          routeOffsetMeters:
+            Number(
+              i.routeOffsetInMeters
+            )||0
 
         }));
 
 
-      return {
+      const route={
 
         coords,
 
@@ -4281,6 +4585,14 @@ const App = {
       };
 
 
+      this.prepareRouteGeometry(
+        route
+      );
+
+
+      return route;
+
+
     }finally{
 
       clearTimeout(
@@ -4294,8 +4606,8 @@ const App = {
 
   tomTomModifier(type){
 
-    const t =
-      String(type || '')
+    const t=
+      String(type||'')
       .toUpperCase();
 
 
@@ -4328,9 +4640,13 @@ const App = {
   },
 
 
+/* =========================================================
+   OSRM FALLBACK
+========================================================= */
+
   async fetchOSRMRoute(a,b){
 
-    const controller =
+    const controller=
       new AbortController();
 
 
@@ -4343,11 +4659,11 @@ const App = {
 
     try{
 
-      const url =
+      const url=
 `https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson&steps=true&alternatives=false`;
 
 
-      const r =
+      const r=
         await fetch(
           url,
           {
@@ -4379,22 +4695,19 @@ const App = {
         j.routes[0];
 
 
-      const steps =
+      const steps=
         (
-          rt.legs || []
+          rt.legs||[]
         )
         .flatMap(
           leg=>
-            leg.steps || []
+            leg.steps||[]
         )
         .map(s=>({
 
           name:
             s.name ||
             'Siga pela via',
-
-          distance:
-            s.distance,
 
           maneuver:{
 
@@ -4415,7 +4728,7 @@ const App = {
         }));
 
 
-      return {
+      const route={
 
         coords:
           rt.geometry.coordinates,
@@ -4431,6 +4744,14 @@ const App = {
         engine:'osrm'
 
       };
+
+
+      this.prepareRouteGeometry(
+        route
+      );
+
+
+      return route;
 
 
     }finally{
@@ -4471,6 +4792,10 @@ const App = {
   },
 
 
+/* =========================================================
+   CALCULAR ROTA
+========================================================= */
+
   async calculateRoute(){
 
     if(
@@ -4499,7 +4824,7 @@ const App = {
 
     try{
 
-      const route =
+      const route=
         await this.getRoute(
           this.userPos,
           this.destination
@@ -4510,14 +4835,22 @@ const App = {
 
       this.routeProgressIndex=0;
 
+      this.routeProgressMeters=0;
+
       this.routeStepIndex=0;
 
+      this.activeGuidanceStep=-1;
+
+      this.lastGuidanceStep=-1;
+
       this.announced={};
+
 
       this.drawRoute(
         route,
         true
       );
+
 
       this.renderDestinationFlag();
 
@@ -4529,6 +4862,7 @@ const App = {
 
       console.error(e);
 
+
       this.toast(
         'Não foi possível calcular a rota.'
       );
@@ -4537,6 +4871,10 @@ const App = {
 
   },
 
+
+/* =========================================================
+   DESENHO ROTA
+========================================================= */
 
   drawRoute(route,fit=true){
 
@@ -4620,9 +4958,19 @@ const App = {
         paint:{
 
           'line-color':
-            '#1e1b4b',
+            '#312e81',
 
-          'line-width':10
+          'line-width':[
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            12,6,
+            15,10,
+            18,14
+          ],
+
+          'line-opacity':
+            .95
 
         }
 
@@ -4648,9 +4996,16 @@ const App = {
         paint:{
 
           'line-color':
-            '#a855f7',
+            '#9333ea',
 
-          'line-width':6
+          'line-width':[
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            12,3,
+            15,6,
+            18,9
+          ]
 
         }
 
@@ -4662,7 +5017,7 @@ const App = {
         route.coords.length
       ){
 
-        const bounds =
+        const bounds=
           route.coords.reduce(
 
             (b,p)=>
@@ -4721,13 +5076,13 @@ const App = {
     .getElementById(
       'sheetTime'
     )
-    .textContent =
+    .textContent=
       Math.max(
         1,
         Math.round(
           this.route.duration/60
         )
-      ) +
+      )+
       ' min';
 
 
@@ -4735,11 +5090,11 @@ const App = {
     .getElementById(
       'sheetDist'
     )
-    .textContent =
+    .textContent=
       (
         this.route.distance/1000
       )
-      .toFixed(1) +
+      .toFixed(1)+
       ' km • chegada prevista';
 
   },
@@ -4765,24 +5120,26 @@ const App = {
       return;
 
 
-    const final =
+    const final=
       this.route.coords[
         this.route.coords.length-1
       ];
 
 
-    const el =
+    const el=
       document.createElement(
         'div'
       );
 
-    el.className =
+
+    el.className=
       'finish-flag-marker';
+
 
     el.textContent='🏁';
 
 
-    this.destinationMarker =
+    this.destinationMarker=
       new maplibregl.Marker({
 
         element:el,
@@ -4797,148 +5154,26 @@ const App = {
 
 
 /* =========================================================
-   DETECÇÃO FORA DA ROTA
+   FORA DA ROTA
 ========================================================= */
 
-  currentStep(){
+  isRoundaboutSoon(){
 
-    const steps=
-      this.route?.steps || [];
-
-
-    if(
-      !steps.length
-    )
-      return null;
-
-
-    let bestIndex=
-      this.routeStepIndex;
-
-    let bestDist=
-      Infinity;
-
-
-    const start =
-      Math.max(
-        0,
-        this.routeStepIndex-1
-      );
-
-
-    const end =
-      Math.min(
-        steps.length-1,
-        this.routeStepIndex+8
-      );
-
-
-    for(
-      let i=start;
-      i<=end;
-      i++
-    ){
-
-      const loc =
-        steps[i]
-        .maneuver
-        ?.location;
-
-
-      if(!loc)
-        continue;
-
-
-      const d =
-        Utils.distanceKm(
-          this.userPos,
-          loc
-        ) * 1000;
-
-
-      if(
-        d < bestDist
-      ){
-
-        bestDist=d;
-
-        bestIndex=i;
-
-      }
-
-    }
+    const guidance=
+      this.getUpcomingGuidance();
 
 
     if(
-      bestIndex >
-      this.routeStepIndex
-    )
-      this.routeStepIndex=
-        bestIndex;
-
-
-    return {
-
-      index:
-        this.routeStepIndex,
-
-      step:
-        steps[
-          this.routeStepIndex
-        ],
-
-      distance:
-        bestDist
-
-    };
-
-  },
-
-
-  isRoundaboutContext(){
-
-    const info=
-      this.currentStep();
-
-
-    if(
-      !info?.step
+      !guidance?.step
     )
       return false;
 
 
-    const t =
-      String(
-        info.step
-        .maneuver?.type ||
-        ''
-      )
-      .toLowerCase();
-
-
-    const m =
-      String(
-        info.step
-        .maneuver?.modifier ||
-        ''
-      )
-      .toLowerCase();
-
-
-    if(
-      t.includes('roundabout') ||
-      t.includes('rotary') ||
-      m.includes('roundabout')
-    )
-      return true;
-
-
     return (
-      info.distance < 150 &&
-      (
-        t.includes('roundabout') ||
-        t.includes('rotary')
-      )
+      this.isRoundaboutStep(
+        guidance.step
+      ) &&
+      guidance.distance<=180
     );
 
   },
@@ -4956,11 +5191,10 @@ const App = {
 
 
     /*
-       PARADO NÃO RECALCULA
+      PARADO NÃO RECALCULA.
     */
-
     if(
-      this.currentSpeed < 4
+      this.currentSpeed<4
     ){
 
       this.offRouteHits=0;
@@ -4971,29 +5205,30 @@ const App = {
 
 
     /*
-       GPS RUIM NÃO RECALCULA
+      GPS COM PRECISÃO RUIM NÃO GERA
+      RECÁLCULO SOZINHO.
     */
-
     if(
-      this.currentAccuracy > 45
+      this.currentAccuracy>45
     )
       return;
 
 
-    /*
-       ROTATÓRIA RECEBE MAIS TOLERÂNCIA
-    */
+    let threshold=40;
 
-    const threshold =
-      this.isRoundaboutContext()
-      ?
-      75
-      :
-      42;
+
+    /*
+      ROTATÓRIA E CURVAS FECHADAS
+      GANHAM MAIS TOLERÂNCIA.
+    */
+    if(
+      this.isRoundaboutSoon()
+    )
+      threshold=70;
 
 
     if(
-      match.distance >
+      match.distance>
       threshold
     ){
 
@@ -5012,25 +5247,21 @@ const App = {
       Date.now();
 
 
-    /*
-       COOLDOWN PARA NÃO FICAR RECALCULANDO
-    */
-
     if(
-      now -
-      this.lastRerouteAt <
-      8000
+      now-
+      this.lastRerouteAt<
+      6500
     )
       return;
 
 
     /*
-       DESVIO GRANDE = RECALCULA RÁPIDO
+      SE O CARRO ESTÁ REALMENTE LONGE DA ROTA,
+      RECALCULA LOGO.
     */
-
     if(
-      match.distance > 70 ||
-      this.offRouteHits >= 2
+      match.distance>68 ||
+      this.offRouteHits>=2
     ){
 
       this.offRouteHits=0;
@@ -5058,10 +5289,6 @@ const App = {
       Date.now();
 
 
-    /*
-       PARA AS FALAS DE MANOBRA
-    */
-
     Voice.clear();
 
 
@@ -5072,20 +5299,26 @@ const App = {
 
     try{
 
-      const newRoute =
+      const newRoute=
         await this.getRoute(
           this.userPos,
           this.destination
         );
 
 
-      this.route =
+      this.route=
         newRoute;
 
 
       this.routeProgressIndex=0;
 
+      this.routeProgressMeters=0;
+
       this.routeStepIndex=0;
+
+      this.activeGuidanceStep=-1;
+
+      this.lastGuidanceStep=-1;
 
       this.announced={};
 
@@ -5098,17 +5331,10 @@ const App = {
 
       this.updateRouteSummary();
 
-
       this.renderDestinationFlag();
-
 
       this.fetchHazardsAlongRoute();
 
-
-      /*
-         NÃO FALA "RECALCULANDO" O TEMPO TODO.
-         SÓ CONFIRMA UMA VEZ.
-      */
 
       this.toast(
         'Rota atualizada.'
@@ -5117,7 +5343,7 @@ const App = {
 
       setTimeout(
         ()=>this.updateNavigation(),
-        450
+        350
       );
 
     }catch(e){
@@ -5126,6 +5352,7 @@ const App = {
         'Falha no recálculo',
         e
       );
+
 
       this.toast(
         'Não foi possível atualizar a rota.'
@@ -5141,25 +5368,25 @@ const App = {
 
 
 /* =========================================================
-   NAVEGAÇÃO / VOZ
+   MANOBRAS
 ========================================================= */
 
   maneuverIcon(step){
 
-    const m =
-      step?.maneuver || {};
+    const m=
+      step?.maneuver||{};
 
 
-    const type =
+    const type=
       String(
-        m.type || ''
+        m.type||''
       )
       .toLowerCase();
 
 
-    const mod =
+    const mod=
       String(
-        m.modifier || ''
+        m.modifier||''
       )
       .toLowerCase();
 
@@ -5171,9 +5398,7 @@ const App = {
 
 
     if(
-      type.includes('roundabout') ||
-      type.includes('rotary') ||
-      mod.includes('roundabout')
+      this.isRoundaboutStep(step)
     )
       return '↻';
 
@@ -5203,20 +5428,20 @@ const App = {
 
   maneuverText(step){
 
-    const m =
-      step?.maneuver || {};
+    const m=
+      step?.maneuver||{};
 
 
-    const type =
+    const type=
       String(
-        m.type || ''
+        m.type||''
       )
       .toLowerCase();
 
 
-    const mod =
+    const mod=
       String(
-        m.modifier || ''
+        m.modifier||''
       )
       .toLowerCase();
 
@@ -5224,39 +5449,326 @@ const App = {
     if(
       type.includes('arrive')
     )
-      return 'você chegou ao destino';
+      return 'Você chegou ao destino';
 
 
     if(
-      type.includes('roundabout') ||
-      type.includes('rotary') ||
-      mod.includes('roundabout')
+      this.isRoundaboutStep(step)
     )
-      return 'entre na rotatória';
+      return 'Entre na rotatória';
 
 
     if(
       mod.includes('left')
     )
-      return 'vire à esquerda';
+      return 'Vire à esquerda';
 
 
     if(
       mod.includes('right')
     )
-      return 'vire à direita';
+      return 'Vire à direita';
 
 
     if(
       mod.includes('uturn')
     )
-      return 'faça o retorno';
+      return 'Faça o retorno';
 
 
-    return 'siga em frente';
+    return 'Siga em frente';
 
   },
 
+
+  isRoundaboutStep(step){
+
+    const type=
+      String(
+        step?.maneuver?.type||''
+      )
+      .toLowerCase();
+
+
+    const mod=
+      String(
+        step?.maneuver?.modifier||''
+      )
+      .toLowerCase();
+
+
+    return (
+      type.includes('roundabout') ||
+      type.includes('rotary') ||
+      mod.includes('roundabout')
+    );
+
+  },
+
+
+  isTurnStep(step){
+
+    if(!step)
+      return false;
+
+
+    const type=
+      String(
+        step.maneuver?.type||''
+      )
+      .toLowerCase();
+
+
+    const mod=
+      String(
+        step.maneuver?.modifier||''
+      )
+      .toLowerCase();
+
+
+    if(
+      this.isRoundaboutStep(step)
+    )
+      return true;
+
+
+    if(
+      type.includes('arrive')
+    )
+      return true;
+
+
+    return (
+      mod.includes('left') ||
+      mod.includes('right') ||
+      mod.includes('uturn') ||
+      type.includes('turn') ||
+      type.includes('fork') ||
+      type.includes('exit') ||
+      type.includes('ramp')
+    );
+
+  },
+
+
+/*
+  DESCOBRE QUAL É A PRÓXIMA MANOBRA
+  USANDO O PROGRESSO AO LONGO DA ROTA,
+  NÃO A DISTÂNCIA EM LINHA RETA.
+*/
+  getUpcomingGuidance(){
+
+    if(
+      !this.route?.steps?.length
+    )
+      return null;
+
+
+    const steps=
+      this.route.steps;
+
+
+    let chosen=-1;
+
+
+    for(
+      let i=
+        Math.max(
+          0,
+          this.routeStepIndex-1
+        );
+      i<steps.length;
+      i++
+    ){
+
+      const offset=
+        steps[i]
+        .routeOffsetMeters||0;
+
+
+      /*
+        MANOBRA JÁ FICOU PARA TRÁS.
+      */
+      if(
+        offset<
+        this.routeProgressMeters-22
+      ){
+
+        continue;
+
+      }
+
+
+      /*
+        PRIORIZA MANOBRAS REAIS.
+      */
+      if(
+        this.isTurnStep(
+          steps[i]
+        )
+      ){
+
+        chosen=i;
+
+        break;
+
+      }
+
+    }
+
+
+    /*
+      SE NÃO HOUVER MANOBRA ESPECIAL,
+      PEGA A PRÓXIMA INSTRUÇÃO.
+    */
+    if(
+      chosen<0
+    ){
+
+      for(
+        let i=0;
+        i<steps.length;
+        i++
+      ){
+
+        if(
+          (
+            steps[i]
+            .routeOffsetMeters||0
+          )>=
+          this.routeProgressMeters-15
+        ){
+
+          chosen=i;
+
+          break;
+
+        }
+
+      }
+
+    }
+
+
+    if(
+      chosen<0
+    )
+      chosen=
+        steps.length-1;
+
+
+    this.routeStepIndex=
+      Math.max(
+        this.routeStepIndex,
+        chosen
+      );
+
+
+    const step=
+      steps[chosen];
+
+
+    const distance=
+      Math.max(
+        0,
+        (
+          step.routeOffsetMeters||0
+        )-
+        this.routeProgressMeters
+      );
+
+
+    let next=null;
+
+
+    for(
+      let i=chosen+1;
+      i<steps.length;
+      i++
+    ){
+
+      if(
+        this.isTurnStep(
+          steps[i]
+        )
+      ){
+
+        next=steps[i];
+
+        break;
+
+      }
+
+    }
+
+
+    return {
+
+      index:chosen,
+
+      step,
+
+      distance,
+
+      next
+
+    };
+
+  },
+
+
+/*
+  VERIFICA SE EXISTEM DUAS MANOBRAS
+  MUITO PRÓXIMAS. NESTE CASO,
+  PARA DE FALAR "A 200/300 METROS".
+*/
+  isComplexManeuverArea(guidance){
+
+    if(
+      !guidance?.step
+    )
+      return false;
+
+
+    if(
+      this.isRoundaboutStep(
+        guidance.step
+      )
+    )
+      return true;
+
+
+    if(
+      !guidance.next
+    )
+      return false;
+
+
+    const currentOffset=
+      guidance.step
+      .routeOffsetMeters||0;
+
+
+    const nextOffset=
+      guidance.next
+      .routeOffsetMeters||0;
+
+
+    const between=
+      nextOffset-currentOffset;
+
+
+    return (
+      between>0 &&
+      between<260
+    );
+
+  },
+
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
 
   updateNavigation(){
 
@@ -5269,48 +5781,47 @@ const App = {
       return;
 
 
-    const info =
-      this.currentStep();
+    const guidance=
+      this.getUpcomingGuidance();
 
 
     if(
-      !info?.step
+      !guidance?.step
     )
       return;
 
 
-    const step =
-      info.step;
+    const step=
+      guidance.step;
 
 
-    const next =
-      this.route.steps[
-        info.index + 1
-      ];
+    const next=
+      guidance.next;
 
 
-    const distM =
-      Math.max(
-        0,
-        Math.round(
-          info.distance
-        )
+    const distM=
+      Math.round(
+        guidance.distance
       );
+
+
+    this.activeGuidanceStep=
+      guidance.index;
 
 
     document
     .getElementById(
       'hudDist'
     )
-    .textContent =
-      distM < 1000
+    .textContent=
+      distM<1000
       ?
-      distM + ' m'
+      distM+' m'
       :
       (
         distM/1000
       )
-      .toFixed(1) +
+      .toFixed(1)+
       ' km';
 
 
@@ -5318,8 +5829,8 @@ const App = {
     .getElementById(
       'hudStreet'
     )
-    .textContent =
-      step.name ||
+    .textContent=
+      step.name||
       'Siga pela via';
 
 
@@ -5327,7 +5838,7 @@ const App = {
     .getElementById(
       'hudArrow'
     )
-    .textContent =
+    .textContent=
       this.maneuverIcon(
         step
       );
@@ -5337,8 +5848,8 @@ const App = {
     .getElementById(
       'currentRoadPill'
     )
-    .textContent =
-      step.name ||
+    .textContent=
+      step.name||
       'Via atual';
 
 
@@ -5348,7 +5859,7 @@ const App = {
       .getElementById(
         'hudNextIcon'
       )
-      .textContent =
+      .textContent=
         this.maneuverIcon(
           next
         );
@@ -5358,124 +5869,206 @@ const App = {
       .getElementById(
         'hudNextStreet'
       )
-      .textContent =
-        next.name ||
+      .textContent=
+        next.name||
         'próximo acesso';
+
+    }else{
+
+      document
+      .getElementById(
+        'hudNextStreet'
+      )
+      .textContent=
+        'Destino';
 
     }
 
 
     /*
-       VOZ NÃO FALA SE ESTIVER PARADO
+      NÃO FALA PARADO.
     */
-
     if(
-      this.currentSpeed < 4.5
+      this.currentSpeed<4.5
     )
       return;
 
 
-    const phrase =
+    const phrase=
       this.maneuverText(
         step
       );
 
 
-    const street =
-      step.name
+    const street=
+      (
+        step.name &&
+        !String(
+          step.name
+        )
+        .toLowerCase()
+        .includes(
+          'siga pela via'
+        )
+      )
       ?
-      ' na ' + step.name
+      ' na '+
+      step.name
       :
       '';
 
 
-    const thresholds =
-      [
-        400,
-        150,
-        45
-      ];
+    const complex=
+      this.isComplexManeuverArea(
+        guidance
+      );
 
 
-    for(
-      const t
-      of thresholds
-    ){
+    /*
+      ================================================
+      NOVA LÓGICA DE VOZ
+      ================================================
 
-      const key =
-        info.index +
-        '-' +
-        t;
+      ÁREA NORMAL:
+      350 m
+      120 m
+      35 m
+
+      CURVA PRÓXIMA / ROTATÓRIA /
+      VÁRIAS MANOBRAS JUNTAS:
+      NÃO FALA 350 / 200 / 120.
+      ESPERA CHEGAR PERTO E FALA A MANOBRA.
+    */
 
 
+    if(complex){
+
+      const key=
+        'complex-'+
+        guidance.index;
+
+
+      /*
+        FALA UMA ÚNICA VEZ,
+        PERTO DA MANOBRA.
+      */
       if(
-        distM <= t &&
+        distM<=75 &&
         !this.announced[key]
       ){
-
-        /*
-           NÃO ANUNCIA 400M SE JÁ ESTÁ MUITO PERTO
-        */
-
-        if(
-          t===400 &&
-          distM < 220
-        ){
-
-          this.announced[key]=true;
-
-          continue;
-
-        }
-
-
-        /*
-           BLOQUEIA REPETIÇÃO MUITO RÁPIDA
-        */
 
         const now=
           Date.now();
 
 
         if(
-          now -
-          this.lastStepVoiceAt <
-          2600
-        )
-          break;
-
-
-        this.announced[key]=true;
-
-        this.lastStepVoiceAt=now;
-
-
-        if(
-          t===45
+          now-
+          this.lastStepVoiceAt>
+          2200
         ){
 
+          this.announced[key]=true;
+
+          this.lastStepVoiceAt=now;
+
+
           Voice.speak(
-            'Agora, ' +
-            phrase +
-            street +
+            phrase+
+            street+
             '.',
             true
           );
 
-        }else{
-
-          Voice.speak(
-            'Em ' +
-            t +
-            ' metros, ' +
-            phrase +
-            street +
-            '.'
-          );
-
         }
 
-        break;
+      }
+
+    }else{
+
+      const thresholds=[
+        350,
+        120,
+        35
+      ];
+
+
+      for(
+        const t
+        of thresholds
+      ){
+
+        const key=
+          guidance.index+
+          '-'+
+          t;
+
+
+        if(
+          distM<=t &&
+          !this.announced[key]
+        ){
+
+          /*
+            NÃO ANUNCIA 350 SE O GPS
+            COMEÇOU A NAVEGAÇÃO JÁ PERTO.
+          */
+          if(
+            t===350 &&
+            distM<220
+          ){
+
+            this.announced[key]=true;
+
+            continue;
+
+          }
+
+
+          const now=
+            Date.now();
+
+
+          if(
+            now-
+            this.lastStepVoiceAt<
+            2400
+          )
+            break;
+
+
+          this.announced[key]=true;
+
+          this.lastStepVoiceAt=now;
+
+
+          if(
+            t===35
+          ){
+
+            Voice.speak(
+              phrase+
+              street+
+              '.',
+              true
+            );
+
+          }else{
+
+            Voice.speak(
+              'Em '+
+              t+
+              ' metros, '+
+              phrase.toLowerCase()+
+              street+
+              '.'
+            );
+
+          }
+
+
+          break;
+
+        }
 
       }
 
@@ -5483,32 +6076,33 @@ const App = {
 
 
     /*
-       CHEGADA INTELIGENTE
+      CHEGADA.
     */
-
     if(
       this.destination
     ){
 
-      const destinationDistance =
+      const destinationDistance=
         Utils.distanceKm(
           this.userPos,
           this.destination
-        ) * 1000;
+        )*1000;
 
 
       if(
-        destinationDistance < 28 &&
-        this.currentSpeed < 12 &&
+        destinationDistance<28 &&
+        this.currentSpeed<12 &&
         !this.lastArrivalAnnounced
       ){
 
         this.lastArrivalAnnounced=true;
 
+
         Voice.speak(
           'Você chegou ao seu destino.',
           true
         );
+
 
         this.toast(
           '🏁 Você chegou ao destino.'
@@ -5522,7 +6116,7 @@ const App = {
 
 
 /* =========================================================
-   COMUNIDADE PRÓXIMA / ENTRADA
+   COMUNIDADE
 ========================================================= */
 
   routeNearCommunity(area){
@@ -5533,16 +6127,15 @@ const App = {
       return false;
 
 
-    const limit =
-      riskRadius(area) +
-      .08;
+    const limit=
+      riskRadius(area)+.08;
 
 
-    const start =
+    const start=
       this.routeProgressIndex;
 
 
-    const end =
+    const end=
       Math.min(
         this.route.coords.length-1,
         start+500
@@ -5555,7 +6148,7 @@ const App = {
       i+=5
     ){
 
-      const d =
+      const d=
         Utils.distanceKm(
           this.route.coords[i],
           area.c
@@ -5563,7 +6156,7 @@ const App = {
 
 
       if(
-        d <= limit
+        d<=limit
       )
         return true;
 
@@ -5591,7 +6184,7 @@ const App = {
 
     rawAreas.forEach(area=>{
 
-      const d =
+      const d=
         Utils.distanceKm(
           this.userPos,
           area.c
@@ -5599,7 +6192,7 @@ const App = {
 
 
       if(
-        d < nearestDistance
+        d<nearestDistance
       ){
 
         nearestDistance=d;
@@ -5609,7 +6202,7 @@ const App = {
       }
 
 
-      const previous =
+      const previous=
         this.lastCommunityDistance[
           area.name
         ];
@@ -5621,14 +6214,12 @@ const App = {
 
 
       /*
-         APÓS PASSAR PELA COMUNIDADE
-         LIMPA O ESTADO
+        JÁ PASSOU E ESTÁ SE AFASTANDO.
       */
-
       if(
-        previous != null &&
-        d > previous &&
-        d >
+        previous!=null &&
+        d>previous &&
+        d>
         riskRadius(area)+.35
       ){
 
@@ -5636,6 +6227,7 @@ const App = {
           this.nearbyCommunityAlerted[
             area.name
           ];
+
 
         delete
           this.insideCommunityAlerted[
@@ -5653,38 +6245,36 @@ const App = {
       return;
 
 
-    const radius =
+    const radius=
       riskRadius(nearest);
 
 
-    const sign =
+    const sign=
       document.getElementById(
         'favelaSign'
       );
 
 
-    const tag =
+    const tag=
       document.getElementById(
         'hudDangerTag'
       );
 
 
+    const nearLimit=
+      radius+.22;
+
+
     /*
-       PASSANDO PERTO:
-       AVISO CURTO E SOME
+      PASSANDO PERTO.
     */
-
-    const nearLimit =
-      radius + .22;
-
-
     if(
-      nearestDistance <= nearLimit &&
-      nearestDistance > radius
+      nearestDistance<=nearLimit &&
+      nearestDistance>radius
     ){
 
-      tag.textContent =
-        '⚠ ' +
+      tag.textContent=
+        '⚠ '+
         nearest.name.toUpperCase();
 
 
@@ -5704,8 +6294,8 @@ const App = {
         ]=true;
 
 
-        sign.textContent =
-          '⚠ Comunidade próxima: ' +
+        sign.textContent=
+          '⚠ Comunidade próxima: '+
           nearest.name;
 
 
@@ -5726,18 +6316,14 @@ const App = {
         );
 
 
-        /*
-           SOMENTE UM AVISO CURTO
-        */
-
         if(
           this.navActive &&
-          this.currentSpeed > 5
+          this.currentSpeed>5
         ){
 
           Voice.speak(
-            'Atenção. Comunidade próxima: ' +
-            nearest.name +
+            'Atenção. Comunidade próxima: '+
+            nearest.name+
             '.'
           );
 
@@ -5755,11 +6341,10 @@ const App = {
 
 
     /*
-       ENTROU DE FATO NO PERÍMETRO
+      ENTROU NO PERÍMETRO.
     */
-
     if(
-      nearestDistance <= radius &&
+      nearestDistance<=radius &&
       !this.insideCommunityAlerted[
         nearest.name
       ]
@@ -5770,7 +6355,7 @@ const App = {
       ]=true;
 
 
-      const banner =
+      const banner=
         document.getElementById(
           'dangerBanner'
         );
@@ -5780,9 +6365,9 @@ const App = {
       .getElementById(
         'dangerBannerText'
       )
-      .textContent =
-        '⚠ Você entrou na área marcada de ' +
-        nearest.name +
+      .textContent=
+        '⚠ Você entrou na área marcada de '+
+        nearest.name+
         '. Fique atento.';
 
 
@@ -5796,18 +6381,14 @@ const App = {
       ){
 
         Voice.speak(
-          'Atenção. Você entrou na área marcada de ' +
-          nearest.name +
+          'Atenção. Você entrou na área marcada de '+
+          nearest.name+
           '.',
           true
         );
 
       }
 
-
-      /*
-         O BANNER NÃO FICA PRESO
-      */
 
       setTimeout(
         ()=>{
@@ -5838,7 +6419,7 @@ const App = {
       of rawAreas
     ){
 
-      const d =
+      const d=
         Utils.distanceKm(
           this.destination,
           area.c
@@ -5846,16 +6427,17 @@ const App = {
 
 
       if(
-        d <=
+        d<=
         riskRadius(area)+.08
       ){
 
         this.toast(
-          '⚠ Destino próximo de ' +
-          area.name +
+          '⚠ Destino próximo de '+
+          area.name+
           '.',
           5000
         );
+
 
         return;
 
@@ -5867,7 +6449,7 @@ const App = {
 
 
 /* =========================================================
-   MINI OUTDOOR
+   OUTDOOR
 ========================================================= */
 
   updateCommunityBillboard(){
@@ -5886,7 +6468,7 @@ const App = {
 
     let best=null;
 
-    let bestDist=
+    let bestScore=
       Infinity;
 
 
@@ -5895,37 +6477,27 @@ const App = {
       of rawAreas
     ){
 
-      const d =
+      const d=
         Utils.distanceKm(
           this.userPos,
           area.c
         );
 
 
-      /*
-         SÓ MOSTRA COMUNIDADE
-         ATÉ CERCA DE 1 KM
-      */
-
       if(
-        d > 1.0
+        d>1
       )
         continue;
 
 
-      /*
-         PRIORIZA AS QUE ESTÃO
-         PRÓXIMAS DA ROTA
-      */
-
-      const onRoute =
+      const onRoute=
         this.routeNearCommunity(
           area
         );
 
 
-      const score =
-        d -
+      const score=
+        d-
         (
           onRoute
           ?
@@ -5936,12 +6508,12 @@ const App = {
 
 
       if(
-        score < bestDist
+        score<bestScore
       ){
 
         best=area;
 
-        bestDist=score;
+        bestScore=score;
 
       }
 
@@ -5960,7 +6532,7 @@ const App = {
 
 
     if(
-      this.nearestCommunityName ===
+      this.nearestCommunityName===
       best.name &&
       this.communityBillboardMarker
     )
@@ -5970,22 +6542,22 @@ const App = {
     this.removeCommunityBillboard();
 
 
-    const outer =
+    const outer=
       document.createElement(
         'div'
       );
 
 
-    outer.innerHTML =
+    outer.innerHTML=
 `
 <div class="community-billboard">
-  <small>⚠ ATENÇÃO</small>
-  ${Utils.sanitize(best.name)}
+<small>⚠ ATENÇÃO</small>
+${Utils.sanitize(best.name)}
 </div>
 `;
 
 
-    this.communityBillboardMarker =
+    this.communityBillboardMarker=
       new maplibregl.Marker({
 
         element:outer,
@@ -6033,7 +6605,7 @@ const App = {
 
 
 /* =========================================================
-   HAZARDS NA ROTA
+   HAZARDS
 ========================================================= */
 
   clearHazards(){
@@ -6069,10 +6641,6 @@ const App = {
     this.clearHazards();
 
 
-    /*
-       SÓ FUNCIONA DURANTE NAVEGAÇÃO
-    */
-
     if(
       !this.navActive ||
       !this.route?.coords?.length
@@ -6080,7 +6648,7 @@ const App = {
       return;
 
 
-    const coords =
+    const coords=
       this.route.coords;
 
 
@@ -6097,15 +6665,18 @@ const App = {
           minLon,p[0]
         );
 
+
       maxLon=
         Math.max(
           maxLon,p[0]
         );
 
+
       minLat=
         Math.min(
           minLat,p[1]
         );
+
 
       maxLat=
         Math.max(
@@ -6115,18 +6686,14 @@ const App = {
     });
 
 
-    /*
-       LIMITA O TAMANHO DE CONSULTA
-    */
-
     const margin=.004;
 
 
-    const bbox =
+    const bbox=
 `${minLat-margin},${minLon-margin},${maxLat+margin},${maxLon+margin}`;
 
 
-    const query =
+    const query=
 `[out:json][timeout:10];
 (
 node["traffic_calming"](${bbox});
@@ -6138,9 +6705,9 @@ out body;`;
 
     try{
 
-      const r =
+      const r=
         await fetch(
-          'https://overpass-api.de/api/interpreter?data=' +
+          'https://overpass-api.de/api/interpreter?data='+
           encodeURIComponent(query)
         );
 
@@ -6157,12 +6724,12 @@ out body;`;
 
       for(
         const el
-        of data.elements || []
+        of data.elements||[]
       ){
 
         if(
-          el.lat == null ||
-          el.lon == null
+          el.lat==null ||
+          el.lon==null
         )
           continue;
 
@@ -6177,14 +6744,14 @@ out body;`;
 
 
         else if(
-          el.tags?.highway ===
+          el.tags?.highway===
           'speed_camera'
         )
           type='radar';
 
 
         else if(
-          el.tags?.highway ===
+          el.tags?.highway===
           'traffic_signals'
         )
           type='semaforo';
@@ -6208,17 +6775,13 @@ out body;`;
         let routeBearing=0;
 
 
-        /*
-           PROCURA O PONTO DA ROTA MAIS PRÓXIMO
-        */
-
         for(
           let i=0;
           i<coords.length-1;
           i+=2
         ){
 
-          const res =
+          const res=
             Utils.pointToSegment(
               point,
               coords[i],
@@ -6227,11 +6790,11 @@ out body;`;
 
 
           if(
-            res.distanceMeters <
+            res.distanceMeters<
             nearestDist
           ){
 
-            nearestDist =
+            nearestDist=
               res.distanceMeters;
 
             routeIndex=i;
@@ -6245,12 +6808,11 @@ out body;`;
 
 
         /*
-           SOMENTE ELEMENTOS REALMENTE
-           PRÓXIMOS DA ROTA
+          APENAS HAZARD QUE ESTÁ
+          MUITO PRÓXIMO DA ROTA.
         */
-
         if(
-          nearestDist <= 25
+          nearestDist<=22
         ){
 
           this.routeHazards.push({
@@ -6276,7 +6838,7 @@ out body;`;
     }catch(e){
 
       console.warn(
-        'Falha ao obter radares/lombadas/semáforos',
+        'Falha ao obter elementos da rota.',
         e
       );
 
@@ -6367,34 +6929,30 @@ fill="#22c55e"/>
     this.routeHazards
     .forEach(h=>{
 
-      /*
-         NÃO MOSTRA O QUE JÁ FICOU PARA TRÁS
-      */
-
       if(
-        h.routeIndex <
+        h.routeIndex<
         this.routeProgressIndex-5
       )
         return;
 
 
-      const el =
+      const el=
         document.createElement(
           'div'
         );
 
 
-      el.className =
+      el.className=
         'hazard-marker';
 
 
-      el.innerHTML =
+      el.innerHTML=
         this.hazardSVG(
           h.type
         );
 
 
-      const marker =
+      const marker=
         new maplibregl.Marker({
 
           element:el,
@@ -6419,12 +6977,12 @@ fill="#22c55e"/>
 
 
 /* =========================================================
-   SEMÁFORO ESTIMADO
+   SEMÁFORO
 ========================================================= */
 
   updateTrafficLightHUD(){
 
-    const hud =
+    const hud=
       document.getElementById(
         'trafficLightHud'
       );
@@ -6456,29 +7014,29 @@ fill="#22c55e"/>
     ){
 
       if(
-        h.type !==
+        h.type!==
         'semaforo'
       )
         continue;
 
 
       if(
-        h.routeIndex <
+        h.routeIndex<
         this.routeProgressIndex-3
       )
         continue;
 
 
-      const d =
+      const d=
         Utils.distanceKm(
           this.userPos,
           h.coords
-        ) * 1000;
+        )*1000;
 
 
       if(
-        d < bestDist &&
-        d <= 220
+        d<bestDist &&
+        d<=240
       ){
 
         best=h;
@@ -6501,113 +7059,41 @@ fill="#22c55e"/>
     }
 
 
+    /*
+      NÃO INVENTA MAIS A COR REAL DO SEMÁFORO.
+
+      SEM ACESSO AO CONTROLADOR DO SINAL,
+      NÃO HÁ COMO SABER SE ELE ESTÁ
+      VERDE OU VERMELHO COM SEGURANÇA.
+
+      AGORA O APP INDICA A EXISTÊNCIA
+      DO SEMÁFORO E A DISTÂNCIA REAL.
+    */
     hud.classList.add(
       'show'
     );
 
 
-    const second =
-      Math.floor(
-        Date.now()/1000
-      ) % 60;
+    document
+    .getElementById(
+      'tlTitle'
+    )
+    .textContent=
+      '🚦 Semáforo à frente';
 
 
-    const red =
-      document.getElementById(
-        'tlRed'
-      );
-
-    const yellow =
-      document.getElementById(
-        'tlYellow'
-      );
-
-    const green =
-      document.getElementById(
-        'tlGreen'
-      );
-
-
-    red.className=
-      'traffic-light-dot red';
-
-    yellow.className=
-      'traffic-light-dot yellow';
-
-    green.className=
-      'traffic-light-dot green';
-
-
-    const title =
-      document.getElementById(
-        'tlTitle'
-      );
-
-    const info =
-      document.getElementById(
-        'tlInfo'
-      );
-
-
-    /*
-       A "ADIVINHAÇÃO" DO SEMÁFORO
-       FOI MANTIDA.
-
-       É UMA ESTIMATIVA VISUAL,
-       NÃO INFORMAÇÃO REAL DO CONTROLADOR.
-    */
-
-    if(
-      second < 27
-    ){
-
-      green.classList.add(
-        'active'
-      );
-
-      title.textContent=
-        '🟢 Semáforo estimado aberto';
-
-      info.textContent=
-        `${Math.round(bestDist)} m • estimativa: fecha em ${27-second}s`;
-
-    }
-
-    else if(
-      second < 32
-    ){
-
-      yellow.classList.add(
-        'active'
-      );
-
-      title.textContent=
-        '🟡 Atenção no semáforo';
-
-      info.textContent=
-        `${Math.round(bestDist)} m • estimativa de ciclo`;
-
-    }
-
-    else{
-
-      red.classList.add(
-        'active'
-      );
-
-      title.textContent=
-        '🔴 Semáforo estimado fechado';
-
-      info.textContent=
-        `${Math.round(bestDist)} m • estimativa: abre em ${60-second}s`;
-
-    }
+    document
+    .getElementById(
+      'tlInfo'
+    )
+    .textContent=
+      `A aproximadamente ${Math.round(bestDist)} m`;
 
   },
 
 
 /* =========================================================
-   START / STOP NAV
+   START NAV
 ========================================================= */
 
   startNavigation(){
@@ -6631,7 +7117,13 @@ fill="#22c55e"/>
 
     this.routeProgressIndex=0;
 
+    this.routeProgressMeters=0;
+
     this.routeStepIndex=0;
+
+    this.activeGuidanceStep=-1;
+
+    this.lastGuidanceStep=-1;
 
     this.announced={};
 
@@ -6685,7 +7177,6 @@ fill="#22c55e"/>
 
     this.recenter();
 
-
     this.updateNavigation();
 
   },
@@ -6700,6 +7191,7 @@ fill="#22c55e"/>
     this.offRouteHits=0;
 
     this.rerouting=false;
+
 
     this.removeCommunityBillboard();
 
@@ -6811,6 +7303,8 @@ fill="#22c55e"/>
 
     this.routeProgressIndex=0;
 
+    this.routeProgressMeters=0;
+
     this.routeStepIndex=0;
 
 
@@ -6844,14 +7338,31 @@ fill="#22c55e"/>
 
     this.followMode=true;
 
+
     clearTimeout(
       this.manualFollowTimer
     );
 
 
+    const center=
+      (
+        this.navActive &&
+        this.route
+      )
+      ?
+      Utils.interpolatePoint(
+        this.userPos,
+        this.pointAhead(80)||
+        this.userPos,
+        .30
+      )
+      :
+      this.userPos;
+
+
     this.map.easeTo({
 
-      center:this.userPos,
+      center,
 
       zoom:
         this.navActive
@@ -6863,14 +7374,14 @@ fill="#22c55e"/>
       pitch:
         this.navActive
         ?
-        60
+        62
         :
         0,
 
       bearing:
         (
           this.navActive &&
-          this.currentSpeed > 5
+          this.currentSpeed>5
         )
         ?
         this.currentBearing
@@ -6890,7 +7401,7 @@ fill="#22c55e"/>
 
   showRoutePanel(){
 
-    const sheet =
+    const sheet=
       document.getElementById(
         'wazeSheet'
       );
@@ -6900,9 +7411,11 @@ fill="#22c55e"/>
       'show'
     );
 
+
     sheet.classList.add(
       'expanded'
     );
+
 
     this.sheetExpanded=true;
 
@@ -6919,8 +7432,8 @@ fill="#22c55e"/>
 
   toggleSheet(force=null){
 
-    this.sheetExpanded =
-      force !== null
+    this.sheetExpanded=
+      force!==null
       ?
       force
       :
@@ -6941,7 +7454,7 @@ fill="#22c55e"/>
     .getElementById(
       'sheetToggleBtn'
     )
-    .textContent =
+    .textContent=
       this.sheetExpanded
       ?
       'Recolher ▾'
@@ -6953,7 +7466,7 @@ fill="#22c55e"/>
 
   toast(text,time=3200){
 
-    const e =
+    const e=
       document.getElementById(
         'toast'
       );
@@ -6971,7 +7484,7 @@ fill="#22c55e"/>
     );
 
 
-    this._toastTimer =
+    this._toastTimer=
       setTimeout(
         ()=>{
 
@@ -6989,6 +7502,7 @@ fill="#22c55e"/>
   setTheme(mode){
 
     this.themeMode=mode;
+
 
     this.map.setStyle(
       this.getThemeStyle(
@@ -7027,7 +7541,7 @@ fill="#22c55e"/>
     }
 
 
-    const destinationText =
+    const destinationText=
       document
       .getElementById(
         'destInput'
@@ -7035,7 +7549,7 @@ fill="#22c55e"/>
       .value;
 
 
-    const text =
+    const text=
       encodeURIComponent(
 `🛡️ Radar Seguro RJ PRO
 Destino: ${destinationText}
@@ -7044,7 +7558,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
 
 
     window.open(
-      'https://api.whatsapp.com/send?text=' +
+      'https://api.whatsapp.com/send?text='+
       text,
       '_blank'
     );
@@ -7053,20 +7567,20 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
 
 
 /* =========================================================
-   CHAT MQTT
+   MQTT
 ========================================================= */
 
   startMQTT(){
 
     try{
 
-      this.mqttClient =
+      this.mqttClient=
         mqtt.connect(
           'wss://broker.emqx.io:8084/mqtt',
           {
 
             clientId:
-              'rsrj-' +
+              'rsrj-'+
               Math.random()
               .toString(16)
               .slice(2,10),
@@ -7095,7 +7609,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
           .getElementById(
             'chatStatus'
           )
-          .textContent =
+          .textContent=
             '🟢 Chat conectado';
 
         }
@@ -7108,7 +7622,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
 
           try{
 
-            const data =
+            const data=
               JSON.parse(
                 payload.toString()
               );
@@ -7125,7 +7639,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
 
 
               if(
-                this.chatMessages.length >
+                this.chatMessages.length>
                 50
               )
                 this.chatMessages.shift();
@@ -7146,7 +7660,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
               ){
 
                 this.toast(
-                  '⚠ ' +
+                  '⚠ '+
                   data.label,
                   4000
                 );
@@ -7169,7 +7683,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
           .getElementById(
             'chatStatus'
           )
-          .textContent =
+          .textContent=
             '🔴 Chat temporariamente indisponível';
 
         }
@@ -7226,7 +7740,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
 
 
     this.toast(
-      label +
+      label+
       ' registrado.'
     );
 
@@ -7244,19 +7758,17 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
 
   sendChat(){
 
-    const input =
+    const input=
       document.getElementById(
         'chatInput'
       );
 
 
-    const text =
+    const text=
       input.value.trim();
 
 
-    if(
-      !text
-    )
+    if(!text)
       return;
 
 
@@ -7305,7 +7817,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
 
   renderChat(){
 
-    const box =
+    const box=
       document.getElementById(
         'chatMessages'
       );
@@ -7318,7 +7830,7 @@ Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destina
     .slice(-50)
     .forEach(msg=>{
 
-      const d =
+      const d=
         document.createElement(
           'div'
         );
@@ -7358,13 +7870,14 @@ ${Utils.sanitize(msg.text)}
 
   bindEvents(){
 
-    const on =
+    const on=
       (id,event,fn)=>{
 
-        const el =
+        const el=
           document.getElementById(
             id
           );
+
 
         if(el)
           el.addEventListener(
@@ -7375,7 +7888,7 @@ ${Utils.sanitize(msg.text)}
       };
 
 
-    const input =
+    const input=
       document.getElementById(
         'destInput'
       );
@@ -7393,12 +7906,12 @@ ${Utils.sanitize(msg.text)}
         this.destination=null;
 
 
-        const q =
+        const q=
           input.value.trim();
 
 
         if(
-          q.length < 3
+          q.length<3
         ){
 
           document
@@ -7409,21 +7922,23 @@ ${Utils.sanitize(msg.text)}
             'show'
           );
 
+
           return;
 
         }
 
 
-        this.geocodeTimer =
+        this.geocodeTimer=
           setTimeout(
             async ()=>{
 
               try{
 
-                const r =
+                const r=
                   await this.searchAddress(
                     q
                   );
+
 
                 this.renderSuggestions(
                   r
@@ -7432,7 +7947,7 @@ ${Utils.sanitize(msg.text)}
               }catch(e){
 
                 if(
-                  e.name !==
+                  e.name!==
                   'AbortError'
                 ){
 
@@ -7495,7 +8010,7 @@ ${Utils.sanitize(msg.text)}
 
           try{
 
-            const r =
+            const r=
               await this.searchAddress(
                 text
               );
@@ -7547,6 +8062,7 @@ ${Utils.sanitize(msg.text)}
 
         input.value='';
 
+
         document
         .getElementById(
           'suggest'
@@ -7554,6 +8070,7 @@ ${Utils.sanitize(msg.text)}
         .classList.remove(
           'show'
         );
+
 
         this.clearRoute();
 
@@ -7603,6 +8120,7 @@ ${Utils.sanitize(msg.text)}
 
         this.followMode=false;
 
+
         this.map.easeTo({
 
           bearing:0,
@@ -7640,13 +8158,13 @@ ${Utils.sanitize(msg.text)}
           !Voice.enabled;
 
 
-        const b =
+        const b=
           document.getElementById(
             'soundBtn'
           );
 
 
-        b.textContent =
+        b.textContent=
           Voice.enabled
           ?
           '🔊'
@@ -7689,7 +8207,7 @@ ${Utils.sanitize(msg.text)}
       'click',
       ()=>{
 
-        this.communityVisible =
+        this.communityVisible=
           !this.communityVisible;
 
 
@@ -7876,15 +8394,6 @@ ${Utils.sanitize(msg.text)}
 
 
     on(
-      'themeDark',
-      'click',
-      ()=>this.setTheme(
-        'dark'
-      )
-    );
-
-
-    on(
       'themeSatellite',
       'click',
       ()=>this.setTheme(
@@ -7929,7 +8438,7 @@ ${Utils.sanitize(msg.text)}
         'click',
         ()=>{
 
-          this.transportMode =
+          this.transportMode=
             btn.dataset.transport;
 
 
@@ -7943,7 +8452,7 @@ ${Utils.sanitize(msg.text)}
 
 
           this.toast(
-            this.transportMode ===
+            this.transportMode===
             'motorcycle'
             ?
             'Modo moto'
@@ -7986,7 +8495,7 @@ ${Utils.sanitize(msg.text)}
       'click',
       ()=>{
 
-        const t =
+        const t=
           this.destination ||
           this.userPos ||
           this.map
@@ -8015,7 +8524,7 @@ ${Utils.sanitize(msg.text)}
       'click',
       ()=>{
 
-        this.speedAlertEnabled =
+        this.speedAlertEnabled=
           !this.speedAlertEnabled;
 
 
@@ -8290,7 +8799,7 @@ ${Utils.sanitize(msg.text)}
       ()=>{
 
         if(
-          this.GPSWatch != null
+          this.GPSWatch!=null
         ){
 
           navigator
@@ -8316,10 +8825,6 @@ ${Utils.sanitize(msg.text)}
 };
 
 
-/* =========================================================
-   FUNÇÕES EXPOSTAS
-========================================================= */
-
 window.RadarApp={
 
   sendReport:
@@ -8330,10 +8835,6 @@ window.RadarApp={
 
 };
 
-
-/* =========================================================
-   INICIAR
-========================================================= */
 
 document.addEventListener(
   'DOMContentLoaded',
