@@ -363,7 +363,12 @@ button{
   width:9px;
   height:9px;
   border-radius:50%;
-  background:#334155
+  display:none
+}
+
+.traffic-light-dot.active{
+  display:block;
+  box-shadow:0 0 10px currentColor
 }
 
 .traffic-light-dot.red{
@@ -1213,9 +1218,9 @@ body.nav-mode .favela-sign{
 <div class="traffic-light-hud" id="trafficLightHud">
 
   <div class="traffic-light-visual">
-    <div class="traffic-light-dot red"></div>
-    <div class="traffic-light-dot yellow"></div>
-    <div class="traffic-light-dot green"></div>
+    <div class="traffic-light-dot red" id="tlRed"></div>
+    <div class="traffic-light-dot yellow" id="tlYellow"></div>
+    <div class="traffic-light-dot green" id="tlGreen"></div>
   </div>
 
   <div class="traffic-light-info">
@@ -2511,6 +2516,12 @@ const App = {
 
   lastGuidanceStep:-1,
 
+  trafficFlowCache:{},
+
+  trafficFlowBusy:false,
+
+  trafficStopSince:0,
+
 
 /* =========================================================
    INIT
@@ -2597,6 +2608,8 @@ const App = {
         this.improveVectorMap();
 
         this.add3DBuildings();
+
+        this.addTomTomTrafficLayer();
 
         this.addCommunityLayers();
 
@@ -2736,6 +2749,78 @@ const App = {
       }
 
     }catch(e){}
+
+  },
+
+
+/* =========================================================
+   TRÂNSITO TOMTOM SOBRE O MAPA ATUAL
+========================================================= */
+
+  addTomTomTrafficLayer(){
+
+    try{
+
+      if(
+        this.map.getSource(
+          'tomtom-traffic'
+        )
+      )
+        return;
+
+
+      this.map.addSource(
+        'tomtom-traffic',
+        {
+
+          type:'raster',
+
+          tiles:[
+            'https://api.tomtom.com/traffic/map/4/tile/flow/relative/{z}/{x}/{y}.png?tileSize=256&key='+
+            TOMTOM_KEY
+          ],
+
+          tileSize:256,
+
+          minzoom:0,
+
+          maxzoom:22
+
+        }
+      );
+
+
+      this.map.addLayer({
+
+        id:'tomtom-traffic-flow',
+
+        type:'raster',
+
+        source:'tomtom-traffic',
+
+        paint:{
+
+          'raster-opacity':.72,
+
+          'raster-fade-duration':250
+
+        }
+
+      });
+
+
+    }catch(e){
+
+      /*
+        SE A TOMTOM FALHAR,
+        O MAPA PRINCIPAL CONTINUA FUNCIONANDO.
+      */
+      console.warn(
+        'Camada de trânsito TomTom indisponível.',
+        e
+      );
+
+    }
 
   },
 
@@ -3243,6 +3328,8 @@ const App = {
       );
 
       this.checkCommunityDanger();
+
+      this.updateTrafficLightHUD();
 
       return;
 
@@ -4144,6 +4231,58 @@ const App = {
   },
 
 
+  async geocodeTomTom(q,signal){
+
+    const center=
+      this.userPos ||
+      this.map.getCenter().toArray();
+
+    const params=
+      new URLSearchParams({
+        key:TOMTOM_KEY,
+        limit:'8',
+        countrySet:'BR',
+        language:'pt-BR',
+        lat:center[1],
+        lon:center[0]
+      });
+
+    const r=
+      await fetch(
+        'https://api.tomtom.com/search/2/search/'+
+        encodeURIComponent(q)+
+        '.json?'+params,
+        {signal}
+      );
+
+    if(!r.ok)
+      throw new Error('TomTom Search');
+
+    const j=await r.json();
+
+    return (j.results||[])
+    .map(x=>({
+      lat:x.position?.lat,
+      lon:x.position?.lon,
+      name:
+        x.poi?.name ||
+        x.address?.streetName ||
+        x.address?.municipalitySubdivision ||
+        'Destino',
+      display:
+        x.address?.freeformAddress ||
+        x.poi?.name ||
+        'Destino'
+    }))
+    .filter(
+      x=>
+        Number.isFinite(x.lat) &&
+        Number.isFinite(x.lon)
+    );
+
+  },
+
+
   async geocodeNominatim(q,signal){
 
     const params=
@@ -4310,6 +4449,25 @@ const App = {
       this.normalizeSearch(
         text
       );
+
+
+    try{
+
+      const t=
+        await this.geocodeTomTom(
+          q,
+          this.geocodeAbort.signal
+        );
+
+      if(t.length)
+        return t;
+
+    }catch(e){
+
+      if(e.name==='AbortError')
+        throw e;
+
+    }
 
 
     try{
@@ -6980,6 +7138,141 @@ fill="#22c55e"/>
    SEMÁFORO
 ========================================================= */
 
+  trafficFlowKey(point){
+
+    return point[1].toFixed(5)+
+      ','+
+      point[0].toFixed(5);
+
+  },
+
+
+  clearTrafficLights(){
+
+    ['tlRed','tlYellow','tlGreen']
+    .forEach(id=>
+      document
+      .getElementById(id)
+      ?.classList.remove('active')
+    );
+
+  },
+
+
+  async refreshTrafficFlow(hazard){
+
+    if(this.trafficFlowBusy)
+      return;
+
+    const key=
+      this.trafficFlowKey(
+        hazard.coords
+      );
+
+    const cached=
+      this.trafficFlowCache[key];
+
+    if(
+      cached &&
+      Date.now()-cached.time<30000
+    )
+      return;
+
+    this.trafficFlowBusy=true;
+
+    try{
+
+      const url=
+        'https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?'+
+        new URLSearchParams({
+          point:
+            hazard.coords[1]+
+            ','+
+            hazard.coords[0],
+          unit:'KMPH',
+          openLr:'false',
+          key:TOMTOM_KEY
+        });
+
+      const r=await fetch(url);
+
+      if(!r.ok)
+        throw new Error(
+          'TomTom Traffic '+
+          r.status
+        );
+
+      const j=await r.json();
+      const f=j.flowSegmentData||{};
+      const current=
+        Number(f.currentSpeed);
+      const free=
+        Number(f.freeFlowSpeed);
+      const confidence=
+        Number(f.confidence);
+
+      let state='moderate';
+
+      if(
+        f.roadClosure ||
+        (
+          current<=8 &&
+          free>=18
+        ) ||
+        (
+          free>0 &&
+          current/free<=.22
+        )
+      ){
+
+        state='stopped';
+
+      }else if(
+        free>0 &&
+        current/free>=.72 &&
+        current>=16
+      ){
+
+        state='free';
+
+      }
+
+      this.trafficFlowCache[key]={
+        time:Date.now(),
+        state,
+        current:
+          Number.isFinite(current)
+          ?Math.round(current)
+          :null,
+        free:
+          Number.isFinite(free)
+          ?Math.round(free)
+          :null,
+        confidence:
+          Number.isFinite(confidence)
+          ?confidence
+          :0,
+        roadClosure:!!f.roadClosure
+      };
+
+      this.updateTrafficLightHUD();
+
+    }catch(e){
+
+      console.warn(
+        'Fluxo TomTom indisponível.',
+        e
+      );
+
+    }finally{
+
+      this.trafficFlowBusy=false;
+
+    }
+
+  },
+
+
   updateTrafficLightHUD(){
 
     const hud=
@@ -6987,38 +7280,26 @@ fill="#22c55e"/>
         'trafficLightHud'
       );
 
+    this.clearTrafficLights();
 
     if(
       !this.navActive ||
       !this.userPos
     ){
 
-      hud.classList.remove(
-        'show'
-      );
-
+      hud.classList.remove('show');
+      this.trafficStopSince=0;
       return;
 
     }
 
-
     let best=null;
+    let bestDist=Infinity;
 
-    let bestDist=
-      Infinity;
+    for(const h of this.routeHazards){
 
-
-    for(
-      const h
-      of this.routeHazards
-    ){
-
-      if(
-        h.type!==
-        'semaforo'
-      )
+      if(h.type!=='semaforo')
         continue;
-
 
       if(
         h.routeIndex<
@@ -7026,13 +7307,11 @@ fill="#22c55e"/>
       )
         continue;
 
-
       const d=
         Utils.distanceKm(
           this.userPos,
           h.coords
         )*1000;
-
 
       if(
         d<bestDist &&
@@ -7040,54 +7319,114 @@ fill="#22c55e"/>
       ){
 
         best=h;
-
         bestDist=d;
 
       }
 
     }
 
-
     if(!best){
 
-      hud.classList.remove(
-        'show'
-      );
-
+      hud.classList.remove('show');
+      this.trafficStopSince=0;
       return;
 
     }
 
-
-    /*
-      NÃO INVENTA MAIS A COR REAL DO SEMÁFORO.
-
-      SEM ACESSO AO CONTROLADOR DO SINAL,
-      NÃO HÁ COMO SABER SE ELE ESTÁ
-      VERDE OU VERMELHO COM SEGURANÇA.
-
-      AGORA O APP INDICA A EXISTÊNCIA
-      DO SEMÁFORO E A DISTÂNCIA REAL.
-    */
-    hud.classList.add(
-      'show'
-    );
-
+    hud.classList.add('show');
 
     document
-    .getElementById(
-      'tlTitle'
-    )
+    .getElementById('tlTitle')
     .textContent=
       '🚦 Semáforo à frente';
 
+    const nearSignal=
+      bestDist>=6 &&
+      bestDist<=58;
 
-    document
-    .getElementById(
-      'tlInfo'
+    if(
+      nearSignal &&
+      this.currentSpeed<2.2
+    ){
+
+      if(!this.trafficStopSince)
+        this.trafficStopSince=
+          Date.now();
+
+    }else{
+
+      this.trafficStopSince=0;
+
+    }
+
+    this.refreshTrafficFlow(best);
+
+    const key=
+      this.trafficFlowKey(
+        best.coords
+      );
+
+    const flow=
+      this.trafficFlowCache[key];
+
+    let state=
+      flow?.state||
+      'unknown';
+
+    if(
+      this.trafficStopSince &&
+      Date.now()-
+      this.trafficStopSince>3000
     )
-    .textContent=
-      `A aproximadamente ${Math.round(bestDist)} m`;
+      state='stopped';
+
+    const info=
+      document.getElementById(
+        'tlInfo'
+      );
+
+    if(state==='stopped'){
+
+      document
+      .getElementById('tlRed')
+      .classList.add('active');
+
+      info.textContent=
+        flow?.roadClosure
+        ?
+        `Trecho bloqueado • ${Math.round(bestDist)} m`
+        :
+        `Possível retenção • ${Math.round(bestDist)} m`;
+
+    }else if(state==='free'){
+
+      document
+      .getElementById('tlGreen')
+      .classList.add('active');
+
+      info.textContent=
+        `Fluxo livre • ${Math.round(bestDist)} m`;
+
+    }else if(state==='moderate'){
+
+      document
+      .getElementById('tlYellow')
+      .classList.add('active');
+
+      info.textContent=
+        `Fluxo moderado • ${Math.round(bestDist)} m`;
+
+    }else{
+
+      /*
+        SEM DADO CONFIÁVEL:
+        NÃO MOSTRA LUZ BRANCA
+        NEM INVENTA UMA COR.
+      */
+      info.textContent=
+        `Analisando o fluxo • ${Math.round(bestDist)} m`;
+
+    }
 
   },
 
@@ -8846,3 +9185,4 @@ document.addEventListener(
 
 </body>
 </html>
+
