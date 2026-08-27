@@ -3640,6 +3640,84 @@ const App = {
       });
 
 
+      if(this._communityClickHandler){
+        try{
+          this.map.off('click','community-fill',this._communityClickHandler);
+        }catch(e){}
+      }
+
+      this._communityClickHandler=e=>{
+        const feature=e.features?.[0];
+        const name=feature?.properties?.name;
+        if(!name) return;
+
+        const info=this.communityOccurrenceInfo?.[name] || {
+          status:'normal',
+          last7:0,
+          month:0,
+          year:0,
+          recent:[]
+        };
+        const statusText=
+          info.status==='today'
+          ? 'Ocorrência de hoje'
+          : info.status==='recent'
+            ? 'Ocorrência recente'
+            : 'Sem ocorrência recente cadastrada';
+        const statusColor=
+          info.status==='today'
+          ? '#dc2626'
+          : info.status==='recent'
+            ? '#f97316'
+            : '#334155';
+        const recentHTML=info.recent.length
+          ? info.recent.slice(0,8).map(item=>{
+              const date=new Date(item.date);
+              const when=Number.isNaN(date.getTime())
+                ? 'Data não informada'
+                : date.toLocaleString('pt-BR',{
+                    timeZone:'America/Sao_Paulo',
+                    day:'2-digit',
+                    month:'2-digit',
+                    year:'numeric',
+                    hour:'2-digit',
+                    minute:'2-digit'
+                  });
+              return '<div style="padding:7px 0;border-top:1px solid #e2e8f0">'+
+                '<b>'+Utils.sanitize(when)+'</b><br>'+
+                Utils.sanitize(item.reason||'Motivo não informado')+
+                '</div>';
+            }).join('')
+          : '<div style="margin-top:8px;color:#64748b">Nenhuma ocorrência recente registrada.</div>';
+
+        new maplibregl.Popup({
+          closeButton:true,
+          maxWidth:'330px'
+        })
+          .setLngLat(e.lngLat)
+          .setHTML(
+            '<div style="color:#0f172a;font-family:Arial,sans-serif;line-height:1.35">'+
+              '<strong style="font-size:16px">'+Utils.sanitize(name)+'</strong>'+
+              '<div style="margin:7px 0;color:'+statusColor+';font-weight:800">'+
+                Utils.sanitize(statusText)+
+              '</div>'+
+              '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;text-align:center">'+
+                '<div style="padding:7px 3px;background:#f1f5f9;border-radius:8px"><b>'+info.last7+'</b><br><small>7 dias</small></div>'+
+                '<div style="padding:7px 3px;background:#f1f5f9;border-radius:8px"><b>'+info.month+'</b><br><small>no mês</small></div>'+
+                '<div style="padding:7px 3px;background:#f1f5f9;border-radius:8px"><b>'+info.year+'</b><br><small>no ano</small></div>'+
+              '</div>'+
+              '<div style="margin-top:9px;font-weight:700">Ocorrências recentes</div>'+
+              recentHTML+
+              '<div style="margin-top:8px;font-size:11px;color:#64748b">'+
+                'Fonte: Instituto Fogo Cruzado. Histórico acumulado pelo aplicativo desde a ativação.'+
+              '</div>'+
+            '</div>'
+          )
+          .addTo(this.map);
+      };
+
+      this.map.on('click','community-fill',this._communityClickHandler);
+
       this.setCommunityVisibility(
         this.communityVisible
       );
@@ -9808,7 +9886,18 @@ document.addEventListener(
         if(!response.ok) return;
 
         const feed=await response.json();
-        const occurrences=feed.occurrences||[];
+        let historyFeed=null;
+        try{
+          const historyResponse=await fetch(
+            './data/fogo-cruzado-history.json?ts='+Date.now(),
+            {cache:'no-store'}
+          );
+          if(historyResponse.ok)
+            historyFeed=await historyResponse.json();
+        }catch(e){}
+
+        const recentOccurrences=feed.occurrences||[];
+        const allOccurrences=historyFeed?.occurrences||recentOccurrences;
         const rioDateKey=value=>{
           const date=new Date(value);
           if(Number.isNaN(date.getTime())) return null;
@@ -9820,10 +9909,25 @@ document.addEventListener(
           }).format(date);
         };
         const todayKey=rioDateKey(new Date());
+        const monthKey=todayKey?.slice(0,7);
+        const yearKey=todayKey?.slice(0,4);
         const todayStart=new Date(todayKey+'T00:00:00-03:00').getTime();
         const occurrenceStatusByName={};
+        const communityOccurrenceInfo={};
 
-        occurrences.forEach(item=>{
+        rawAreas.forEach(area=>{
+          if(!officialCommunityGeometries[area.name]) return;
+          communityOccurrenceInfo[area.name]={
+            status:'normal',
+            last7:0,
+            month:0,
+            year:0,
+            recent:[],
+            days3:new Set()
+          };
+        });
+
+        allOccurrences.forEach(item=>{
           const date=new Date(item.date);
           if(
             Number.isNaN(date.getTime()) ||
@@ -9831,23 +9935,39 @@ document.addEventListener(
             !Number.isFinite(item.latitude)
           ) return;
 
+          const dateKey=rioDateKey(item.date);
           const ageDays=(todayStart-date.getTime())/86400000;
-          if(ageDays>7) return;
-
-          const status=rioDateKey(item.date)===todayKey
-            ? 'today'
-            : 'recent';
 
           rawAreas.forEach(area=>{
             if(!officialCommunityGeometries[area.name]) return;
             if(distanceToCommunityKm([item.longitude,item.latitude],area)>.18) return;
-            if(
-              status==='today' ||
-              occurrenceStatusByName[area.name]!=='today'
-            )
-              occurrenceStatusByName[area.name]=status;
+
+            const info=communityOccurrenceInfo[area.name];
+            if(ageDays<=7){
+              info.last7++;
+              info.recent.push(item);
+            }
+            if(dateKey?.slice(0,7)===monthKey) info.month++;
+            if(dateKey?.slice(0,4)===yearKey) info.year++;
+            if(ageDays<=3) info.days3.add(dateKey);
           });
         });
+
+        Object.entries(communityOccurrenceInfo).forEach(([name,info])=>{
+          info.recent.sort((a,b)=>new Date(b.date)-new Date(a.date));
+          const hasToday=info.days3.has(todayKey);
+          const repeatedRecentDays=info.days3.size>=2;
+          info.status=
+            hasToday || repeatedRecentDays
+            ? 'today'
+            : info.last7>0
+              ? 'recent'
+              : 'normal';
+          occurrenceStatusByName[name]=info.status;
+          delete info.days3;
+        });
+
+        App.communityOccurrenceInfo=communityOccurrenceInfo;
 
         const communitiesSource=App.map.getSource('communities');
         if(communitiesSource)
@@ -9855,7 +9975,7 @@ document.addEventListener(
             communitiesPolygonGeoJSON(occurrenceStatusByName)
           );
 
-        occurrences
+        allOccurrences
           .filter(item=>rioDateKey(item.date)===todayKey)
           .forEach(item=>{
           if(!Number.isFinite(item.longitude)||!Number.isFinite(item.latitude))
@@ -9863,8 +9983,8 @@ document.addEventListener(
 
           const marker=document.createElement('button');
           marker.type='button';
-          marker.setAttribute('aria-label','Ocorrência recente informada pelo Fogo Cruzado');
-          marker.title='Ocorrência recente • Fogo Cruzado';
+          marker.setAttribute('aria-label','Ocorrência de hoje informada pelo Fogo Cruzado');
+          marker.title='Ocorrência de hoje • Fogo Cruzado';
           marker.style.cssText=[
             'width:30px',
             'height:30px',
@@ -9898,7 +10018,7 @@ document.addEventListener(
             maxWidth:'310px'
           }).setHTML(
             '<div style="color:#101828;font-family:Arial,sans-serif;line-height:1.35">'+
-              '<strong style="font-size:15px">⚠️ Ocorrência recente</strong><br>'+
+              '<strong style="font-size:15px">⚠️ Ocorrência de hoje</strong><br>'+
               '<b>Data e hora:</b> '+escapeFogoText(when)+'<br>'+
               '<b>Bairro:</b> '+escapeFogoText(item.neighborhood||'Não informado')+'<br>'+
               '<b>Local:</b> '+escapeFogoText(item.locality||item.address||'Não informado')+'<br>'+
