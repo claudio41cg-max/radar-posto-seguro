@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const API = "https://api-service.fogocruzado.org.br/api/v2";
 const email = process.env.FOGO_EMAIL?.trim();
@@ -45,7 +45,7 @@ const ymd = date => date.toISOString().slice(0, 10);
 const query = new URLSearchParams({
   order: "ASC",
   page: "1",
-  take: "20",
+  take: "100",
   initialdate: ymd(initialDate),
   finaldate: ymd(finalDate)
 });
@@ -92,4 +92,49 @@ const output = {
 
 await mkdir("data", { recursive: true });
 await writeFile("data/fogo-cruzado.json", JSON.stringify(output, null, 2) + "\n");
-console.log(`${occurrences.length} ocorrências recentes salvas.`);
+
+const readJson = async path => {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return null;
+  }
+};
+
+const previousHistory = await readJson("data/fogo-cruzado-history.json");
+const previousFeed = await readJson("data/fogo-cruzado.json");
+const merged = [
+  ...(previousHistory?.occurrences || []),
+  ...(previousFeed?.occurrences || []),
+  ...occurrences
+];
+const unique = new Map();
+merged.forEach(item => {
+  const key = item.id || [
+    item.date,
+    item.latitude,
+    item.longitude,
+    item.locality
+  ].join("|");
+  unique.set(key, item);
+});
+const historyOccurrences = [...unique.values()]
+  .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+const history = {
+  generatedAt: new Date().toISOString(),
+  source: output.source,
+  scope: {
+    city: "Rio de Janeiro",
+    state: "Rio de Janeiro",
+    retention: "Histórico acumulado desde a ativação"
+  },
+  count: historyOccurrences.length,
+  occurrences: historyOccurrences
+};
+
+await writeFile(
+  "data/fogo-cruzado-history.json",
+  JSON.stringify(history, null, 2) + "\n"
+);
+console.log(`${occurrences.length} ocorrências recentes e ${historyOccurrences.length} ocorrências históricas salvas.`);
