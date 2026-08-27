@@ -802,8 +802,8 @@ body.nav-mode .side{
   max-width:165px;
   padding:6px 9px 7px;
   border-radius:5px;
-  background:linear-gradient(180deg,#2b0707,#160303);
-  border:2px solid #ef4444;
+  background:linear-gradient(180deg,#102a43,#071827);
+  border:2px solid #fbbf24;
   color:#fff;
   box-shadow:
     0 7px 14px rgba(0,0,0,.65),
@@ -830,7 +830,7 @@ body.nav-mode .side{
 .community-billboard small{
   display:block;
   margin-bottom:2px;
-  color:#fca5a5;
+  color:#fde68a;
   font-size:8px;
   letter-spacing:.5px
 }
@@ -906,7 +906,7 @@ body.nav-mode .side{
   transform:translate(-50%,0)
 }
 
-.favela-sign{
+.community-sign{
   position:fixed;
   top:180px;
   left:50%;
@@ -929,13 +929,38 @@ body.nav-mode .side{
   border:1px solid #f87171
 }
 
-.favela-sign.show{
+.community-sign.show{
   opacity:1;
   transform:translate(-50%,0)
 }
 
-body.nav-mode .favela-sign{
+body.nav-mode .community-sign{
   top:132px
+}
+
+.source-note{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  background:#0b1b2a;
+  border:1px solid #334155;
+  color:#cbd5e1;
+  font-size:11px;
+  line-height:1.45
+}
+
+.source-link{
+  display:block;
+  width:100%;
+  margin-top:8px;
+  padding:11px 12px;
+  border-radius:12px;
+  border:1px solid #38bdf8;
+  background:#082f49;
+  color:#fff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:900
 }
 
 .danger-banner{
@@ -1336,7 +1361,7 @@ body.nav-mode .favela-sign{
 
 
 <div class="toast" id="toast"></div>
-<div class="favela-sign" id="favelaSign"></div>
+<div class="community-sign" id="communitySign"></div>
 
 <div class="danger-banner" id="dangerBanner">
   <b id="dangerBannerText"></b>
@@ -1372,6 +1397,11 @@ body.nav-mode .favela-sign{
       <button onclick="window.RadarApp.sendReport('perigo','🚨 Perigo na Pista')">
         <span class="icon">🚨</span>
         Perigo na pista
+      </button>
+
+      <button id="alertSourcesBtn">
+        <span class="icon">ℹ️</span>
+        Fontes e informações
       </button>
 
     </div>
@@ -1459,23 +1489,13 @@ body.nav-mode .favela-sign{
 
   <div class="modal-card">
 
-    <h2>Camadas e Serviços</h2>
+    <h2>Menu do mapa</h2>
 
     <div class="modal-options">
 
-      <button id="themeAuto">
-        <span class="icon">⚡</span>
-        Tema Automático
-      </button>
-
-      <button id="themeLight">
-        <span class="icon">☀️</span>
-        Mapa Vetorial
-      </button>
-
-      <button id="themeSatellite">
-        <span class="icon">🛰️</span>
-        Satélite
+      <button id="mapAppearanceBtn">
+        <span class="icon">🎨</span>
+        Aparência do mapa
       </button>
 
       <button id="transportBtn">
@@ -1484,8 +1504,13 @@ body.nav-mode .favela-sign{
       </button>
 
       <button id="streetViewBtn">
-        <span class="icon">👁️</span>
+        <span class="icon">🚶</span>
         Google Street View
+      </button>
+
+      <button id="chatMenuBtn">
+        <span class="icon">💬</span>
+        Chat e mensagens
       </button>
 
       <button id="shareRideBtn">
@@ -1506,6 +1531,40 @@ body.nav-mode .favela-sign{
 
   </div>
 
+</div>
+
+<div class="modal-overlay" id="mapAppearanceModal">
+  <div class="modal-card">
+    <h2>🎨 Aparência do mapa</h2>
+    <p>O automático usa claro das 6h às 18h e escuro das 18h às 6h.</p>
+    <div class="modal-options">
+      <button id="themeAuto"><span class="icon">🕒</span>Automático dia e noite</button>
+      <button id="themeLight"><span class="icon">☀️</span>Claro</button>
+      <button id="themeDark"><span class="icon">🌙</span>Escuro</button>
+      <button id="themeSatellite"><span class="icon">🛰️</span>Satélite</button>
+    </div>
+    <button class="modal-close" id="closeMapAppearance">Fechar</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="sourcesModal">
+  <div class="modal-card">
+    <h2>ℹ️ Fontes e informações</h2>
+    <p>Veja de onde vêm os avisos mostrados ao motorista.</p>
+    <div class="source-note">
+      <b>Relatos comunitários</b><br>
+      Informações enviadas pelo chat e pela Central de Alertas. São relatos de usuários e podem ainda não ter confirmação oficial.
+    </div>
+    <div class="source-note">
+      <b>Notícias e fontes oficiais</b><br>
+      O aplicativo mostra a fonte, o link, a data da publicação e o horário da consulta. Notícia antiga não será apresentada como ocorrência atual.
+    </div>
+    <a class="source-link" href="https://cor.rio/ultimas-noticias/" target="_blank" rel="noopener">Centro de Operações Rio</a>
+    <a class="source-link" href="https://prefeitura.rio/todas-as-noticias/" target="_blank" rel="noopener">Notícias da Prefeitura do Rio</a>
+    <a class="source-link" href="https://news.google.com/search?q=Carobinha%20OR%20Barbante%20Rio%20de%20Janeiro&hl=pt-BR&gl=BR&ceid=BR%3Apt-419" target="_blank" rel="noopener">Notícias sobre Carobinha e Barbante</a>
+    <div class="source-note" id="sourcesCheckedAt"></div>
+    <button class="modal-close" id="closeSourcesModal">Fechar</button>
+  </div>
 </div>
 
 
@@ -1629,6 +1688,28 @@ function satelliteStyle(){
       }
     ]
 
+  };
+
+}
+
+function darkStyle(){
+
+  return {
+    version:8,
+    sources:{
+      dark:{
+        type:'raster',
+        tiles:[
+          'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+          'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        ],
+        tileSize:256,
+        attribution:'© OpenStreetMap © CARTO'
+      }
+    },
+    layers:[
+      {id:'dark',type:'raster',source:'dark'}
+    ]
   };
 
 }
@@ -1909,11 +1990,11 @@ const rawAreas = [
 
 {name:'Cesarão - Rua Felipe de Sousa',c:[-43.68155,-22.92034],r:.35},
 
-{name:'Favela do Rola - Travessa São José',c:[-43.66761,-22.93132],r:.33},
+{name:'Comunidade do Rola - Travessa São José',c:[-43.66761,-22.93132],r:.33},
 
-{name:'Favela do Rola - Rua Edmo Campo',c:[-43.68843,-22.94414],r:.33},
+{name:'Comunidade do Rola - Rua Edmo Campo',c:[-43.68843,-22.94414],r:.33},
 
-{name:'Favela de Antares - Travessa Quinze',c:[-43.65569,-22.92140],r:.30},
+{name:'Comunidade de Antares - Travessa Quinze',c:[-43.65569,-22.92140],r:.30},
 
 {name:'Comunidade do Aço',c:[-43.6521,-22.9248],r:.30},
 
@@ -1978,7 +2059,7 @@ const rawAreas = [
 
 /*
   LIMITES OFICIAIS (IPP/SMH, Prefeitura do Rio).
-  Base: Limites de Favelas, fotointerpretação de ortofotos de 2019.
+  Base: limites oficiais de comunidades, com fotointerpretação de ortofotos de 2019.
   Nomes locais: Carobinha = Jardim Nossa Senhora das Graças;
   Barbante = Nova Cidade.
 */
@@ -2062,7 +2143,20 @@ function communitiesPointGeoJSON(){
 
     features:
       rawAreas.map(
-        (a,index)=>({
+        (a,index)=>{
+
+          const featured=
+            a.name==='Carobinha (Campo Grande)' ||
+            a.name==='Barbante (Inhoaíba)';
+
+          const labelCoordinates=
+            a.name==='Carobinha (Campo Grande)'
+            ? [-43.5351,-22.8592]
+            : a.name==='Barbante (Inhoaíba)'
+              ? [-43.5860,-22.9030]
+              : a.c;
+
+          return {
 
           type:'Feature',
 
@@ -2074,18 +2168,56 @@ function communitiesPointGeoJSON(){
                 officialCommunityGeometries[
                   a.name
                 ]
-              )
+              ),
+            featured,
+            displayName:
+              featured
+              ? 'COMUNIDADE '+a.name.toUpperCase()
+              : a.name
           },
 
           geometry:{
             type:'Point',
-            coordinates:a.c
+            coordinates:labelCoordinates
           }
 
-        })
+        };
+
+        }
       )
 
   };
+
+}
+
+function communityBridgesGeoJSON(){
+
+  const geometry=
+    officialCommunityGeometries['Carobinha (Campo Grande)'];
+
+  const centers=(geometry.coordinates||[]).map(polygon=>{
+    const ring=polygon[0]||[];
+    const sum=ring.reduce((acc,p)=>[acc[0]+p[0],acc[1]+p[1]],[0,0]);
+    return ring.length
+      ? [sum[0]/ring.length,sum[1]/ring.length]
+      : null;
+  }).filter(Boolean);
+
+  const features=[];
+
+  centers.forEach((a,i)=>{
+    centers.slice(i+1).forEach(b=>{
+      if(Utils.distanceKm(a,b)<=.32){
+        features.push({
+          type:'Feature',
+          properties:{name:'Carobinha (Campo Grande)'},
+          geometry:{type:'LineString',coordinates:[a,b]}
+        });
+      }
+    });
+  });
+
+  return {type:'FeatureCollection',features};
 
 }
 
@@ -2513,6 +2645,10 @@ const App = {
 
   themeMode:'auto',
 
+  appliedTheme:null,
+
+  autoThemeTimer:null,
+
   communityVisible:true,
 
   communityBillboardMarker:null,
@@ -2570,6 +2706,11 @@ const App = {
 
     this.startMQTT();
 
+    this.autoThemeTimer=setInterval(
+      ()=>this.refreshAutomaticTheme(),
+      60000
+    );
+
     this.toast(
       'Radar Seguro RJ PRO pronto.'
     );
@@ -2584,11 +2725,55 @@ const App = {
     )
       return satelliteStyle();
 
+    if(
+      mode==='dark' ||
+      (
+        mode==='auto' &&
+        this.automaticThemeNow()==='dark'
+      )
+    )
+      return darkStyle();
+
 
     /*
       Auto e Vetorial usam a base vetorial nítida.
     */
     return STYLE_VECTOR;
+
+  },
+
+  automaticThemeNow(){
+
+    const hour=new Date().getHours();
+
+    return hour>=6 && hour<18
+      ? 'light'
+      : 'dark';
+
+  },
+
+  refreshAutomaticTheme(){
+
+    if(this.themeMode!=='auto')
+      return;
+
+    const wanted=this.automaticThemeNow();
+
+    if(this.appliedTheme!==wanted)
+      this.applyThemeStyle();
+
+  },
+
+  applyThemeStyle(){
+
+    this.appliedTheme=
+      this.themeMode==='auto'
+      ? this.automaticThemeNow()
+      : this.themeMode;
+
+    this.map.setStyle(
+      this.getThemeStyle(this.themeMode)
+    );
 
   },
 
@@ -2598,6 +2783,11 @@ const App = {
 ========================================================= */
 
   createMap(){
+
+    this.appliedTheme=
+      this.themeMode==='auto'
+      ? this.automaticThemeNow()
+      : this.themeMode;
 
     this.map=
       new maplibregl.Map({
@@ -2963,10 +3153,13 @@ const App = {
     try{
 
       [
+        'community-pointer',
         'community-label',
         'community-dot',
         'community-outline',
-        'community-fill'
+        'community-fill',
+        'community-bridge-outline',
+        'community-bridge'
       ]
       .forEach(id=>{
 
@@ -2979,6 +3172,7 @@ const App = {
 
 
       [
+        'community-bridges',
         'community-points',
         'communities'
       ]
@@ -2991,6 +3185,46 @@ const App = {
 
       });
 
+
+      this.map.addSource(
+        'community-bridges',
+        {
+          type:'geojson',
+          data:communityBridgesGeoJSON()
+        }
+      );
+
+      this.map.addLayer({
+        id:'community-bridge',
+        type:'line',
+        source:'community-bridges',
+        minzoom:11.7,
+        layout:{'line-cap':'round','line-join':'round'},
+        paint:{
+          'line-color':
+            (this.appliedTheme==='dark'||this.appliedTheme==='sat')
+            ? '#fbbf24'
+            : '#111827',
+          'line-width':['interpolate',['linear'],['zoom'],11.7,5,16,18],
+          'line-opacity':.16
+        }
+      });
+
+      this.map.addLayer({
+        id:'community-bridge-outline',
+        type:'line',
+        source:'community-bridges',
+        minzoom:11.7,
+        layout:{'line-cap':'round','line-join':'round'},
+        paint:{
+          'line-color':
+            (this.appliedTheme==='dark'||this.appliedTheme==='sat')
+            ? '#fbbf24'
+            : '#020617',
+          'line-width':['interpolate',['linear'],['zoom'],11.7,1,16,2.5],
+          'line-opacity':.8
+        }
+      });
 
       this.map.addSource(
         'communities',
@@ -3017,7 +3251,12 @@ const App = {
           'fill-color':[
             'case',
             ['get','officialBoundary'],
-            '#111827',
+            (
+              this.appliedTheme==='dark' ||
+              this.appliedTheme==='sat'
+            )
+            ? '#fbbf24'
+            : '#111827',
             '#dc2626'
           ],
 
@@ -3050,7 +3289,12 @@ const App = {
           'line-color':[
             'case',
             ['get','officialBoundary'],
-            '#020617',
+            (
+              this.appliedTheme==='dark' ||
+              this.appliedTheme==='sat'
+            )
+            ? '#fbbf24'
+            : '#020617',
             '#ef4444'
           ],
 
@@ -3075,6 +3319,35 @@ const App = {
             communitiesPointGeoJSON()
         }
       );
+
+
+      this.map.addLayer({
+
+        id:'community-pointer',
+
+        type:'symbol',
+
+        source:'community-points',
+
+        filter:['==',['get','featured'],true],
+
+        minzoom:11.8,
+
+        layout:{
+          'text-field':'▼',
+          'text-size':18,
+          'text-anchor':'bottom',
+          'text-offset':[0,-.15],
+          'text-allow-overlap':true
+        },
+
+        paint:{
+          'text-color':'#fbbf24',
+          'text-halo-color':'#020617',
+          'text-halo-width':2
+        }
+
+      });
 
 
       this.map.addLayer({
@@ -3131,15 +3404,15 @@ const App = {
         layout:{
 
           'text-field':
-            ['get','name'],
+            ['get','displayName'],
 
           'text-size':[
             'interpolate',
             ['linear'],
             ['zoom'],
-            11.8,9,
-            14,11,
-            17,13
+            11.8,10,
+            14,12,
+            17,14
           ],
 
           'text-anchor':'top',
@@ -3198,8 +3471,11 @@ const App = {
 
     [
       'community-fill',
+      'community-bridge',
+      'community-bridge-outline',
       'community-outline',
       'community-dot',
+      'community-pointer',
       'community-label'
     ]
     .forEach(id=>{
@@ -6466,7 +6742,7 @@ ${Utils.sanitize(item.display)}
 
     const sign=
       document.getElementById(
-        'favelaSign'
+        'communitySign'
       );
 
 
@@ -6634,6 +6910,12 @@ ${Utils.sanitize(item.display)}
       of rawAreas
     ){
 
+      if(
+        area.name!=='Carobinha (Campo Grande)' &&
+        area.name!=='Barbante (Inhoaíba)'
+      )
+        continue;
+
       const d=
         Utils.distanceKm(
           this.destination,
@@ -6766,8 +7048,8 @@ ${Utils.sanitize(item.display)}
     outer.innerHTML=
 `
 <div class="community-billboard">
-<small>⚠ ATENÇÃO</small>
-${Utils.sanitize(best.name)}
+<small>COMUNIDADE AO LADO</small>
+${Utils.sanitize('COMUNIDADE '+best.name)}
 </div>
 `;
 
@@ -7899,17 +8181,12 @@ fill="#22c55e"/>
 
     this.themeMode=mode;
 
-
-    this.map.setStyle(
-      this.getThemeStyle(
-        mode
-      )
-    );
+    this.applyThemeStyle();
 
 
     document
     .getElementById(
-      'layersModal'
+      'mapAppearanceModal'
     )
     .classList.remove(
       'show'
@@ -8770,6 +9047,21 @@ ${Utils.sanitize(msg.text)}
       }
     );
 
+    on(
+      'mapAppearanceBtn',
+      'click',
+      ()=>{
+        document.getElementById('layersModal').classList.remove('show');
+        document.getElementById('mapAppearanceModal').classList.add('show');
+      }
+    );
+
+    on(
+      'closeMapAppearance',
+      'click',
+      ()=>document.getElementById('mapAppearanceModal').classList.remove('show')
+    );
+
 
     on(
       'themeAuto',
@@ -8785,6 +9077,14 @@ ${Utils.sanitize(msg.text)}
       'click',
       ()=>this.setTheme(
         'light'
+      )
+    );
+
+    on(
+      'themeDark',
+      'click',
+      ()=>this.setTheme(
+        'dark'
       )
     );
 
@@ -8904,6 +9204,16 @@ ${Utils.sanitize(msg.text)}
           '_blank'
         );
 
+      }
+    );
+
+    on(
+      'chatMenuBtn',
+      'click',
+      ()=>{
+        document.getElementById('layersModal').classList.remove('show');
+        document.getElementById('chatModal').classList.add('show');
+        this.renderChat();
       }
     );
 
@@ -9068,6 +9378,24 @@ ${Utils.sanitize(msg.text)}
         );
 
       }
+    );
+
+    on(
+      'alertSourcesBtn',
+      'click',
+      ()=>{
+        document.getElementById('reportLiveModal').classList.remove('show');
+        document.getElementById('sourcesCheckedAt').textContent=
+          'Última consulta aberta pelo motorista: '+
+          new Date().toLocaleString('pt-BR')+'.';
+        document.getElementById('sourcesModal').classList.add('show');
+      }
+    );
+
+    on(
+      'closeSourcesModal',
+      'click',
+      ()=>document.getElementById('sourcesModal').classList.remove('show')
     );
 
 
@@ -9242,4 +9570,3 @@ document.addEventListener(
 
 </body>
 </html>
-
