@@ -1,0 +1,43 @@
+name: Atualizar dados do Fogo Cruzado
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-fogo-cruzado
+  cancel-in-progress: true
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Consultar ocorrências do Rio de Janeiro
+        env:
+          FOGO_EMAIL: ${{ secrets.FOGO_CRUZADO_EMAIL }}
+          FOGO_PASSWORD: ${{ secrets.PASS123 }}
+        run: node scripts/update-fogo-cruzado.mjs
+
+      - name: Publicar dados atualizados
+        run: |
+          if git diff --quiet -- data/fogo-cruzado.json && git diff --cached --quiet; then
+            echo "Nenhuma alteração."
+            exit 0
+          fi
+          git config user.name "Radar Seguro Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/fogo-cruzado.json
+          git commit -m "Atualiza dados do Fogo Cruzado"
+          git push
