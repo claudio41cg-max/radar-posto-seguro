@@ -32,7 +32,7 @@ jobs:
 
       - name: Publicar dados atualizados
         run: |
-          if git diff --quiet -- data/fogo-cruzado.json && git diff --cached --quiet; then
+          if [ -z "$(git status --porcelain -- data/fogo-cruzado.json)" ]; then
             echo "Nenhuma alteração."
             exit 0
           fi
