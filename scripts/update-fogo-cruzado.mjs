@@ -40,12 +40,13 @@ initialDate.setDate(initialDate.getDate() - 7);
 const ymd = date => date.toISOString().slice(0, 10);
 
 const query = new URLSearchParams({
-  order: "DESC",
+  order: "ASC",
   page: "1",
-  take: "100",
+  take: "20",
   initialdate: ymd(initialDate),
   finaldate: ymd(finalDate)
 });
+if (city.state?.id) query.set("idState", city.state.id);
 query.append("idCities", city.id);
 
 const result = await api(`/occurrences?${query}`, { headers });
@@ -66,7 +67,8 @@ const occurrences = (result.body?.data || []).map(item => ({
     situation: victim.situation || "",
     personType: victim.personType || ""
   }))
-})).filter(item => Number.isFinite(item.latitude) && Number.isFinite(item.longitude));
+})).filter(item => Number.isFinite(item.latitude) && Number.isFinite(item.longitude))
+  .sort((a, b) => new Date(b.date) - new Date(a.date));
 
 const output = {
   generatedAt: new Date().toISOString(),
