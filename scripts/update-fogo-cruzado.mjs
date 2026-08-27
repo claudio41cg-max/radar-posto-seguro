@@ -27,6 +27,9 @@ const token = login.body?.data?.accessToken;
 if (!token) throw new Error("A API não retornou o token de acesso.");
 
 const headers = { authorization: `Bearer ${token}` };
+const communityText = value => String(value || "")
+  .replace(/\\bfavelas\\b/gi, "Comunidades")
+  .replace(/\\bfavela\\b/gi, "Comunidade");
 const cities = await api("/cities?cityName=RIO%20DE%20JANEIRO", { headers });
 const city = cities.body?.data?.find(
   item => String(item.name || "").toUpperCase() === "RIO DE JANEIRO"
@@ -54,10 +57,10 @@ const occurrences = (result.body?.data || []).map(item => ({
   id: item.id,
   documentNumber: item.documentNumber ?? null,
   date: item.date,
-  address: item.address || "",
+  address: communityText(item.address),
   neighborhood: item.neighborhood?.name || "",
   subNeighborhood: item.subNeighborhood?.name || "",
-  locality: item.locality?.name || item.locality || "",
+  locality: communityText(item.locality?.name || item.locality),
   latitude: Number(item.latitude),
   longitude: Number(item.longitude),
   reason: item.contextInfo?.mainReason?.name || "Não informado",
