@@ -2227,7 +2227,7 @@ function distanceToCommunityKm(point,area){
 }
 
 
-function communitiesPolygonGeoJSON(){
+function communitiesPolygonGeoJSON(occurrenceStatusByName={}){
 
   return {
 
@@ -2252,6 +2252,8 @@ function communitiesPolygonGeoJSON(){
               name:a.name,
               officialBoundary:
                 Boolean(officialGeometry),
+              occurrenceStatus:
+                occurrenceStatusByName[a.name] || 'normal',
               boundarySource:
                 officialGeometry
                 ?
@@ -3368,7 +3370,7 @@ const App = {
         id:'community-bridge',
         type:'line',
         source:'community-bridges',
-        minzoom:9.4,
+        minzoom:8.8,
         layout:{'line-cap':'round','line-join':'round'},
         paint:{
           'line-color':
@@ -3384,7 +3386,7 @@ const App = {
         id:'community-bridge-outline',
         type:'line',
         source:'community-bridges',
-        minzoom:9.4,
+        minzoom:8.8,
         layout:{'line-cap':'round','line-join':'round'},
         paint:{
           'line-color':
@@ -3414,27 +3416,34 @@ const App = {
 
         source:'communities',
 
-        minzoom:9.4,
+        minzoom:8.8,
 
         paint:{
 
           'fill-color':[
-            'case',
-            ['get','officialBoundary'],
-            (
-              this.appliedTheme==='dark' ||
-              this.appliedTheme==='sat'
-            )
-            ? '#fbbf24'
-            : '#111827',
-            '#dc2626'
+            'match',
+            ['get','occurrenceStatus'],
+            'today','#dc2626',
+            'recent','#f97316',
+            [
+              'case',
+              ['get','officialBoundary'],
+              (
+                this.appliedTheme==='dark' ||
+                this.appliedTheme==='sat'
+              )
+              ? '#fbbf24'
+              : '#111827',
+              '#dc2626'
+            ]
           ],
 
           'fill-opacity':[
             'interpolate',
             ['linear'],
             ['zoom'],
-            9.4,.015,
+            8.8,.006,
+            9.8,.018,
             10.5,.04,
             11.7,.08,
             14,.16,
@@ -3454,27 +3463,34 @@ const App = {
 
         source:'communities',
 
-        minzoom:9.4,
+        minzoom:8.8,
 
         paint:{
 
           'line-color':[
-            'case',
-            ['get','officialBoundary'],
-            (
-              this.appliedTheme==='dark' ||
-              this.appliedTheme==='sat'
-            )
-            ? '#fbbf24'
-            : '#020617',
-            '#ef4444'
+            'match',
+            ['get','occurrenceStatus'],
+            'today','#ef4444',
+            'recent','#fb923c',
+            [
+              'case',
+              ['get','officialBoundary'],
+              (
+                this.appliedTheme==='dark' ||
+                this.appliedTheme==='sat'
+              )
+              ? '#fbbf24'
+              : '#020617',
+              '#ef4444'
+            ]
           ],
 
           'line-width':[
             'interpolate',
             ['linear'],
             ['zoom'],
-            9.4,.35,
+            8.8,.2,
+            9.8,.45,
             11.7,1,
             16,2.5
           ]
@@ -3504,11 +3520,11 @@ const App = {
 
         filter:['==',['get','featured'],true],
 
-        minzoom:9.3,
+        minzoom:8.8,
 
         layout:{
           'text-field':'▼',
-          'text-size':['interpolate',['linear'],['zoom'],9.3,8,11.8,14,16,18],
+          'text-size':['interpolate',['linear'],['zoom'],8.8,6,10,9,11.8,14,16,18],
           'text-anchor':'bottom',
           'text-offset':[0,-.15],
           'text-allow-overlap':true
@@ -3572,7 +3588,7 @@ const App = {
 
         source:'community-points',
 
-        minzoom:9.3,
+        minzoom:8.8,
 
         layout:{
 
@@ -3583,7 +3599,8 @@ const App = {
             'interpolate',
             ['linear'],
             ['zoom'],
-            9.3,7,
+            8.8,5.5,
+            9.8,6.5,
             10.5,8,
             11.8,10,
             14,12,
@@ -9791,7 +9808,56 @@ document.addEventListener(
         if(!response.ok) return;
 
         const feed=await response.json();
-        (feed.occurrences||[]).forEach(item=>{
+        const occurrences=feed.occurrences||[];
+        const rioDateKey=value=>{
+          const date=new Date(value);
+          if(Number.isNaN(date.getTime())) return null;
+          return new Intl.DateTimeFormat('en-CA',{
+            timeZone:'America/Sao_Paulo',
+            year:'numeric',
+            month:'2-digit',
+            day:'2-digit'
+          }).format(date);
+        };
+        const todayKey=rioDateKey(new Date());
+        const todayStart=new Date(todayKey+'T00:00:00-03:00').getTime();
+        const occurrenceStatusByName={};
+
+        occurrences.forEach(item=>{
+          const date=new Date(item.date);
+          if(
+            Number.isNaN(date.getTime()) ||
+            !Number.isFinite(item.longitude) ||
+            !Number.isFinite(item.latitude)
+          ) return;
+
+          const ageDays=(todayStart-date.getTime())/86400000;
+          if(ageDays>7) return;
+
+          const status=rioDateKey(item.date)===todayKey
+            ? 'today'
+            : 'recent';
+
+          rawAreas.forEach(area=>{
+            if(!officialCommunityGeometries[area.name]) return;
+            if(distanceToCommunityKm([item.longitude,item.latitude],area)>.18) return;
+            if(
+              status==='today' ||
+              occurrenceStatusByName[area.name]!=='today'
+            )
+              occurrenceStatusByName[area.name]=status;
+          });
+        });
+
+        const communitiesSource=App.map.getSource('communities');
+        if(communitiesSource)
+          communitiesSource.setData(
+            communitiesPolygonGeoJSON(occurrenceStatusByName)
+          );
+
+        occurrences
+          .filter(item=>rioDateKey(item.date)===todayKey)
+          .forEach(item=>{
           if(!Number.isFinite(item.longitude)||!Number.isFinite(item.latitude))
             return;
 
