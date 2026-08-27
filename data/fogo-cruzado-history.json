@@ -1,0 +1,350 @@
+{
+  "generatedAt": "2026-08-27T22:31:46.853Z",
+  "source": {
+    "name": "Instituto Fogo Cruzado",
+    "url": "https://fogocruzado.org.br/",
+    "api": "https://api.fogocruzado.org.br/"
+  },
+  "scope": {
+    "city": "Rio de Janeiro",
+    "state": "Rio de Janeiro",
+    "retention": "Histórico acumulado desde a ativação"
+  },
+  "count": 20,
+  "occurrences": [
+    {
+      "id": "e0d16fee-6ca3-4643-8206-d807278d8764",
+      "documentNumber": 78716,
+      "date": "2026-08-23T21:00:00.000Z",
+      "address": "Comunidade de Vigário Geral (Complexo de Israel) - Rua Bulhões Marcial - Vigário Geral, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8081825,
+      "longitude": -43.3036695,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a06d0d2a-6e8a-4341-8497-c384a1db3082",
+      "documentNumber": 78715,
+      "date": "2026-08-23T15:34:00.000Z",
+      "address": "Av. Brasil - Irajá, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.822788,
+      "longitude": -43.3270625,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e01b36f1-5514-4f2f-80e3-b4ff8a134d5e",
+      "documentNumber": 78713,
+      "date": "2026-08-23T13:15:00.000Z",
+      "address": "Baixa do Sapateiro - Maré, Rio de Janeiro - RJ, 21042-450, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "BAIXA DO SAPATEIRO (COMPLEXO DA MARE)",
+      "latitude": -22.86007183,
+      "longitude": -43.24258995,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7727c019-135e-41a9-a030-a1367e911bdb",
+      "documentNumber": 78711,
+      "date": "2026-08-23T03:00:00.000Z",
+      "address": "Comunidade Vila Taboinha - Vargem Grande, Rio de Janeiro - RJ, 22785-230, Brasil",
+      "neighborhood": "VARGEM GRANDE",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE VILA TABOINHA",
+      "latitude": -23.0130556,
+      "longitude": -43.511502,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "b8b12cb9-2f6d-4e11-9369-a0f490de8116",
+      "documentNumber": 78720,
+      "date": "2026-08-22T15:00:00.000Z",
+      "address": "Rua Sabóia Lima - Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9341535,
+      "longitude": -43.234511,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "594b457a-ca5b-4ddd-87ca-c0adf1ccea89",
+      "documentNumber": 78707,
+      "date": "2026-08-22T14:13:00.000Z",
+      "address": "Comunidade Terra Nostra (Complexo da Pedreira) - Barros Filho, Rio de Janeiro - RJ, 21650-100, Brasil",
+      "neighborhood": "BARROS FILHO",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DA TERRA NOSTRA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.830962755327786,
+      "longitude": -43.36949804841683,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "453bb452-327f-4a43-819f-f4f0d0530496",
+      "documentNumber": 78706,
+      "date": "2026-08-22T11:00:00.000Z",
+      "address": "Complexo do Chapadão - Estrada do Camboatá - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.8343623,
+      "longitude": -43.3797552,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4f7ca11a-c51d-4bac-86d4-d39f96e8e725",
+      "documentNumber": 78703,
+      "date": "2026-08-22T08:59:00.000Z",
+      "address": "Morro da Patolinha (Complexo da Serrinha) - Engenheiro Leal, Rio de Janeiro - RJ, 21370-060, Brasil",
+      "neighborhood": "ENGENHEIRO LEAL",
+      "subNeighborhood": "",
+      "locality": "MORRO DA PATOLINHA (COMPLEXO DA SERRINHA)",
+      "latitude": -22.87390389,
+      "longitude": -43.32973778,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "9f93cfa8-e90c-49e2-a02b-fab43d997a07",
+      "documentNumber": 78777,
+      "date": "2026-08-21T22:00:00.000Z",
+      "address": "Catiri - Bangu, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "CATIRI",
+      "latitude": -22.8534451,
+      "longitude": -43.4694182,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "e488d927-ae1f-4b89-a255-f3068971d92f",
+      "documentNumber": 78704,
+      "date": "2026-08-21T21:00:00.000Z",
+      "address": "Rua Aníbal de Mendonça - Ipanema, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "IPANEMA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9830969,
+      "longitude": -43.2112714,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "27b31e54-6e4e-4fbe-a554-8b506a52b2c3",
+      "documentNumber": 78691,
+      "date": "2026-08-21T12:04:00.000Z",
+      "address": "R. Padre Artola - Vidigal, Rio de Janeiro - RJ, 22452-550, Brasil",
+      "neighborhood": "VIDIGAL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.998851594142913,
+      "longitude": -43.2421875,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "f74a2930-34cd-495c-8e11-711b8377f662",
+      "documentNumber": 78690,
+      "date": "2026-08-21T11:50:00.000Z",
+      "address": "Cidade Alta (Complexo de Israel) - Cordovil, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8147224,
+      "longitude": -43.29297469999999,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "81d5e1ce-f454-486a-9616-93e6653753ba",
+      "documentNumber": 78689,
+      "date": "2026-08-21T07:47:00.000Z",
+      "address": "Morro da Covanca - Jacarepaguá, Rio de Janeiro - RJ, 22735-020, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "MORRO DA COVANCA",
+      "latitude": -22.91525671,
+      "longitude": -43.3460376,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "cc77707d-f8b3-4ce9-8527-6fc221b3d39b",
+      "documentNumber": 78685,
+      "date": "2026-08-21T05:07:00.000Z",
+      "address": "Cidade Alta (Complexo de Israel) - Rua Serra do Navio - Cordovil, Rio de Janeiro - RJ, 21010-300, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8177471,
+      "longitude": -43.2929294,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "ce1b2f20-d38d-454b-99d7-d21f6fdd8481",
+      "documentNumber": 78688,
+      "date": "2026-08-21T03:00:00.000Z",
+      "address": "Cidade Alta (Complexo de Israel) - Cordovil, Rio de Janeiro - RJ, 21010-640, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
+      "latitude": -22.82007088,
+      "longitude": -43.29432515,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "85790230-9720-4bee-9fbe-7c446e86a799",
+      "documentNumber": 78684,
+      "date": "2026-08-21T00:35:00.000Z",
+      "address": "Rua Oliveira Melo - Cordovil, Rio de Janeiro - RJ, 21250-540, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8256182,
+      "longitude": -43.3033031,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "b2391137-3573-4775-ac91-0c0b2c54c636",
+      "documentNumber": 78697,
+      "date": "2026-08-20T22:00:00.000Z",
+      "address": "Estrada Almirante Pena Boto - Vista Alegre, São Gonçalo - RJ, Brasil",
+      "neighborhood": "VISTA ALEGRE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8090068,
+      "longitude": -42.9572671,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "93808d99-f1c8-471f-b934-a5dc4c4d68fd",
+      "documentNumber": 78676,
+      "date": "2026-08-20T04:30:00.000Z",
+      "address": "Comunidade da Tirol - Jacarepaguá, Rio de Janeiro - RJ, 22750-002, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DA TIROL",
+      "latitude": -22.939522513022624,
+      "longitude": -43.32406392578123,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "081d9129-bb48-404a-94f2-f96ba537d057",
+      "documentNumber": 78677,
+      "date": "2026-08-20T04:13:00.000Z",
+      "address": "Rua Alcobaça - Anchieta, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANCHIETA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8224337,
+      "longitude": -43.3918594,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "a1bd37e3-7e75-4a46-8531-60956ff0d7ec",
+      "documentNumber": 78678,
+      "date": "2026-08-20T00:00:00.000Z",
+      "address": "Morro do Campinho (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21320-300, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CAMPINHO (COMPLEXO DO FUBA)",
+      "latitude": -22.8850951874697,
+      "longitude": -43.337939003183074,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    }
+  ]
+}
