@@ -1,8 +1,8 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
 const API = "https://api-service.fogocruzado.org.br/api/v2";
-const email = process.env.FOGO_EMAIL;
-const password = process.env.FOGO_PASSWORD;
+const email = process.env.FOGO_EMAIL?.trim();
+const password = process.env.FOGO_PASSWORD?.trim();
 
 if (!email || !password) {
   throw new Error("Segredos FOGO_CRUZADO_EMAIL e PASS123 não configurados.");
