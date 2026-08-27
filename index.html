@@ -1694,23 +1694,7 @@ function satelliteStyle(){
 
 function darkStyle(){
 
-  return {
-    version:8,
-    sources:{
-      dark:{
-        type:'raster',
-        tiles:[
-          'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-          'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-        ],
-        tileSize:256,
-        attribution:'© OpenStreetMap © CARTO'
-      }
-    },
-    layers:[
-      {id:'dark',type:'raster',source:'dark'}
-    ]
-  };
+  return 'https://tiles.openfreemap.org/styles/dark';
 
 }
 
