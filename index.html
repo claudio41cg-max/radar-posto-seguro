@@ -265,9 +265,9 @@ button{
 }
 
 .waze-arrow{
-  width:62px;
+  width:76px;
   text-align:center;
-  font-size:48px;
+  font-size:62px;
   line-height:1;
   font-weight:900
 }
@@ -294,12 +294,12 @@ button{
 .waze-sub-hud{
   background:rgba(0,0,0,.30);
   margin:8px -16px -8px;
-  padding:8px 16px;
+  padding:10px 16px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:8px;
-  font-size:11px;
+  font-size:15px;
   font-weight:800;
   color:#bbf7d0
 }
@@ -326,7 +326,7 @@ button{
 
 .traffic-light-hud{
   position:fixed;
-  top:112px;
+  top:138px;
   left:14px;
   z-index:39;
   background:rgba(15,23,42,.96);
@@ -436,8 +436,8 @@ body.nav-mode .current-road-pill{
   left:14px;
   bottom:92px;
   z-index:35;
-  width:62px;
-  height:62px;
+  width:76px;
+  height:76px;
   border-radius:50%;
   background:#04101c;
   border:3px solid #0284c7;
@@ -453,13 +453,13 @@ body.nav-mode .speedometer-box{
 }
 
 .speedometer-box b{
-  font-size:19px;
+  font-size:24px;
   line-height:1
 }
 
 .speedometer-box span{
   margin-top:2px;
-  font-size:9px;
+  font-size:11px;
   color:#94a3b8;
   font-weight:800
 }
@@ -483,20 +483,32 @@ body.nav-mode .speedometer-box{
 .nav-recenter-left{
   position:fixed;
   left:14px;
-  bottom:166px;
+  bottom:181px;
   z-index:35;
-  width:50px;
-  height:50px;
+  width:54px;
+  height:54px;
   border-radius:50%;
-  border:2px solid #fff;
-  background:#0f172a;
+  border:2px solid #38bdf8;
+  background:linear-gradient(180deg,#111827,#030712);
   color:#fff;
-  box-shadow:0 7px 18px rgba(0,0,0,.6);
+  box-shadow:0 8px 22px rgba(0,0,0,.68),inset 0 0 0 1px rgba(255,255,255,.08);
   display:none;
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  font-size:21px
+  font-size:0
+}
+
+.recenter-crosshair{
+  width:25px;
+  height:25px;
+  border:2px solid #67e8f9;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#fff 0 3px,transparent 4px),
+    linear-gradient(#67e8f9,#67e8f9) center/2px 100% no-repeat,
+    linear-gradient(90deg,#67e8f9,#67e8f9) center/100% 2px no-repeat;
+  filter:drop-shadow(0 0 4px rgba(56,189,248,.65))
 }
 
 body.nav-mode .nav-recenter-left{
@@ -655,9 +667,10 @@ body.nav-mode .side{
 }
 
 .sheet-time-dist span{
-  font-size:12px;
+  font-size:15px;
   color:#64748b;
-  font-weight:700
+  font-weight:800;
+  line-height:1.25
 }
 
 .sheet-toggle-btn{
@@ -837,7 +850,7 @@ body.nav-mode .side{
 
 .community-billboard-hud{
   position:fixed;
-  top:145px;
+  top:165px;
   left:12px;
   z-index:55;
   display:none;
@@ -969,7 +982,7 @@ body.nav-mode .side{
 }
 
 body.nav-mode .community-sign{
-  top:132px
+  top:152px
 }
 
 .source-note{
@@ -1300,7 +1313,7 @@ body.nav-mode .community-sign{
 </div>
 
 <button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar">
-  🎯
+  <span class="recenter-crosshair" aria-hidden="true"></span>
 </button>
 
 <button class="nav-report-btn" id="navReportBtn" title="Alertar ocorrência">
@@ -3659,6 +3672,24 @@ const App = {
         }
 
       );
+
+  },
+
+  resumeGPS(){
+
+    clearTimeout(this._gpsResumeTimer);
+
+    this._gpsResumeTimer=setTimeout(
+      ()=>{
+        if(
+          document.visibilityState==='visible' &&
+          navigator.geolocation
+        ){
+          this.startGPS();
+        }
+      },
+      350
+    );
 
   },
 
@@ -9639,6 +9670,8 @@ ${Utils.sanitize(msg.text)}
             this.GPSWatch
           );
 
+          this.GPSWatch=null;
+
         }
 
 
@@ -9648,6 +9681,19 @@ ${Utils.sanitize(msg.text)}
 
         }catch(e){}
 
+      }
+    );
+
+    window.addEventListener(
+      'pageshow',
+      ()=>this.resumeGPS()
+    );
+
+    document.addEventListener(
+      'visibilitychange',
+      ()=>{
+        if(document.visibilityState==='visible')
+          this.resumeGPS();
       }
     );
 
