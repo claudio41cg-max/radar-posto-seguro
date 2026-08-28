@@ -1,0 +1,72 @@
+name: Atualizar dados da ANP
+
+on:
+  schedule:
+    # Sábado às 10:15 UTC (07:15 no horário de Brasília).
+    # A ANP normalmente publica a pesquisa semanal na sexta-feira.
+    - cron: "15 10 * * 6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados-anp
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install pandas openpyxl requests beautifulsoup4
+
+      - name: Atualizar cadastro e preços oficiais
+        run: python scripts/update-anp-data.py
+
+      - name: Validar arquivo gerado
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("data/postos-anp-rio.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+
+          if len(data) < 400:
+              raise SystemExit("Arquivo recusado: quantidade de postos abaixo do esperado")
+
+          required = {"cnpj", "legalName", "address", "brand", "prices"}
+          for index, item in enumerate(data):
+              missing = required.difference(item)
+              if missing:
+                  raise SystemExit(
+                      f"Arquivo recusado: registro {index} sem {sorted(missing)}"
+                  )
+
+          print(f"Arquivo validado com {len(data)} postos")
+          PY
+
+      - name: Publicar somente se houver mudança
+        run: |
+          if git diff --quiet -- data/postos-anp-rio.json; then
+            echo "A ANP não publicou alterações nos dados."
+            exit 0
+          fi
+
+          git config user.name "radar-seguro-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/postos-anp-rio.json
+          git commit -m "Atualiza cadastro e preços semanais da ANP"
+          git push
