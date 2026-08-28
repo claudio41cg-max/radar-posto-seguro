@@ -1738,6 +1738,11 @@ const VERIFIED_FUEL_INCIDENTS = [];
 const VERIFIED_FUEL_URL =
 './data/postos-oficiais.json';
 
+const ANP_STATIONS = [];
+
+const ANP_STATIONS_URL =
+'./data/postos-anp-rio.json';
+
 const RJ_CENTER = [-43.40,-22.90];
 
 /*
@@ -2618,22 +2623,31 @@ const FuelModule = {
 
     try{
 
-      const response=
-        await fetch(
-          VERIFIED_FUEL_URL,
-          {cache:'no-store'}
-        );
+      const responses=
+        await Promise.all([
+          fetch(VERIFIED_FUEL_URL,{cache:'no-store'}),
+          fetch(ANP_STATIONS_URL,{cache:'no-store'})
+        ]);
 
-      if(!response.ok)
+      if(!responses[0].ok || !responses[1].ok)
         throw new Error('Base oficial indisponível');
 
       const items=
-        await response.json();
+        await responses[0].json();
+
+      const anpItems=
+        await responses[1].json();
 
       VERIFIED_FUEL_INCIDENTS.splice(
         0,
         VERIFIED_FUEL_INCIDENTS.length,
         ...(Array.isArray(items)?items:[])
+      );
+
+      ANP_STATIONS.splice(
+        0,
+        ANP_STATIONS.length,
+        ...(Array.isArray(anpItems)?anpItems:[])
       );
 
     }catch(e){
@@ -2659,6 +2673,130 @@ const FuelModule = {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g,' ')
       .trim();
+
+  },
+
+
+  houseNumber(value){
+
+    const match=
+      String(value||'').match(/\d[\d.]*/);
+
+    return match
+      ? match[0].replace(/\D/g,'')
+      : '';
+
+  },
+
+
+  anpDetails(station){
+
+    const stationAddress=this.normalize(station.address);
+    const stationName=this.normalize(station.name);
+    const stationNumber=this.houseNumber(station.address);
+    const ignored=new Set([
+      'rua','r','avenida','av','estrada','est','rodovia',
+      'de','da','do','das','dos','numero','n'
+    ]);
+
+    const tokens=
+      stationAddress.split(' ')
+      .filter(token=>
+        token.length>2 &&
+        !ignored.has(token) &&
+        !/^\d+$/.test(token)
+      );
+
+    let best=null;
+    let bestScore=0;
+
+    ANP_STATIONS.forEach(item=>{
+
+      const officialAddress=this.normalize(item.address);
+      const officialName=this.normalize(item.legalName);
+      const officialNumber=this.houseNumber(item.address);
+
+      if(
+        stationNumber &&
+        officialNumber &&
+        stationNumber!==officialNumber
+      )
+        return;
+
+      const overlap=
+        tokens.filter(token=>
+          officialAddress.includes(token)
+        ).length;
+
+      const nameMatch=
+        stationName.length>5 &&
+        (
+          officialName.includes(stationName) ||
+          stationName.includes(officialName)
+        );
+
+      const score=
+        overlap+
+        (stationNumber && stationNumber===officialNumber ? 3 : 0)+
+        (nameMatch ? 4 : 0);
+
+      if(score>bestScore){
+
+        best=item;
+        bestScore=score;
+
+      }
+
+    });
+
+    return bestScore>=5
+      ? best
+      : null;
+
+  },
+
+
+  priceHtml(details){
+
+    const prices=
+      details?.prices||{};
+
+    const entries=
+      Object.entries(prices);
+
+    if(!entries.length)
+      return '<b>Preços ANP:</b> Preço não disponível';
+
+    return '<b>Últimos preços pesquisados pela ANP:</b><br>'+
+      entries.map(([product,info])=>{
+
+        const value=
+          Number(info.value);
+
+        const formatted=
+          Number.isFinite(value)
+          ? value.toLocaleString(
+              'pt-BR',
+              {
+                style:'currency',
+                currency:'BRL',
+                minimumFractionDigits:2,
+                maximumFractionDigits:3
+              }
+            )
+          : info.value;
+
+        const date=
+          String(info.date||'')
+          .split('-')
+          .reverse()
+          .join('/');
+
+        return Utils.sanitize(product)+
+          ': <b>'+Utils.sanitize(formatted)+'</b>'+
+          ' <small>(coleta '+Utils.sanitize(date)+')</small>';
+
+      }).join('<br>');
 
   },
 
@@ -2810,6 +2948,22 @@ out center tags;`;
         .filter(Boolean);
 
 
+      this.stations.forEach(station=>{
+
+        station.anp=
+          this.anpDetails(station);
+
+        if(station.anp){
+
+          station.brand=
+            station.anp.brand ||
+            station.brand;
+
+        }
+
+      });
+
+
       VERIFIED_FUEL_INCIDENTS
       .forEach(item=>{
 
@@ -2835,6 +2989,15 @@ out center tags;`;
           });
 
         }
+
+      });
+
+
+      this.stations.forEach(station=>{
+
+        if(!station.anp)
+          station.anp=
+            this.anpDetails(station);
 
       });
 
@@ -2930,6 +3093,28 @@ out center tags;`;
         s.official?'!':(s.gnv?'G':'⛽');
 
       const incident=s.official;
+      const details=s.anp;
+
+      const cnpj=details?.cnpj
+        ? details.cnpj.replace(
+            /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+            '$1.$2.$3/$4-$5'
+          )
+        : 'Não identificado na base oficial para este ponto';
+
+      const registryHtml=`
+  <br><b>Razão social:</b> ${Utils.sanitize(details?.legalName||'Não identificada')}
+  <br><b>CNPJ:</b> ${Utils.sanitize(cnpj)}
+  <br><b>Bandeira:</b> ${Utils.sanitize(details?.brand||s.brand||'Não informada')}
+  <br><b>Local:</b> ${Utils.sanitize(
+    details
+      ? [details.address,details.complement,details.district,details.zip]
+          .filter(Boolean)
+          .join(', ')
+      : (s.address||'Endereço não informado')
+  )}
+  <br>${this.priceHtml(details)}
+  `;
 
       const officialHtml=incident ? `
   <hr style="margin:10px 0;border:0;border-top:1px solid #cbd5e1">
@@ -2950,9 +3135,8 @@ out center tags;`;
 `
 <div style="color:#0f172a;font-size:12px;line-height:1.45">
   <b style="font-size:14px">${Utils.sanitize(s.name)}</b><br>
-  Bandeira: ${Utils.sanitize(s.brand)}
-  ${s.address ? `<br>${Utils.sanitize(s.address)}` : ''}
-  ${s.gnv ? '<br><b style="color:#15803d">GNV disponível</b>' : ''}
+  ${registryHtml}
+  ${s.gnv ? '<br><b style="color:#15803d">Também oferece GNV</b>' : ''}
   ${officialHtml}
   <br><br>
   <a href="${ANP_APP}" target="_blank">Consultar ANP</a>
