@@ -313,6 +313,14 @@ body.nav-mode .nav-map-chips{
   border-color:#34d399
 }
 
+.nav-map-chip.assistant.hands-free{
+  background:#15803d;
+  border-color:#86efac;
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.45),
+    0 0 0 2px rgba(134,239,172,.28)
+}
+
 .waze-maneuver-row{
   display:flex;
   align-items:center;
@@ -2634,6 +2642,13 @@ const Voice = {
       return;
 
 
+    if(
+      typeof VoiceAssistant!==
+      'undefined'
+    )
+      VoiceAssistant.pauseForSpeech();
+
+
     if(priority){
 
       this.clear();
@@ -2713,9 +2728,15 @@ const VoiceAssistant = {
 
   lastError:null,
 
+  handsFree:false,
+
+  restartTimer:null,
+
   homeKey:'radarSeguroRJ_homeAddress',
 
   occurrenceOffset:0,
+
+  weatherCache:{},
 
 
   init(){
@@ -2757,10 +2778,11 @@ const VoiceAssistant = {
 
       this.updateButtons(true);
 
-      App.toast(
-        '🎙️ Estou ouvindo. Fale agora...',
-        10000
-      );
+      if(!this.handsFree)
+        App.toast(
+          '🎙️ Estou ouvindo. Fale agora...',
+          10000
+        );
 
     };
 
@@ -2819,9 +2841,32 @@ const VoiceAssistant = {
 
     this.recognition.onerror=event=>{
 
-      this.lastError=
+      const error=
         event.error||
         'unknown';
+
+
+      this.lastError=error;
+
+
+      if(
+        error===
+        'aborted'
+      )
+        return;
+
+
+      if(
+        this.handsFree &&
+        error===
+        'no-speech'
+      ){
+
+        this.lastError=null;
+
+        return;
+
+      }
 
 
       const messages={
@@ -2833,8 +2878,21 @@ const VoiceAssistant = {
       };
 
 
+      if(
+        [
+          'not-allowed',
+          'service-not-allowed',
+          'audio-capture'
+        ]
+        .includes(
+          error
+        )
+      )
+        this.stopHandsFree(false);
+
+
       App.toast(
-        messages[this.lastError]||
+        messages[error]||
         'Não consegui entender. Tente novamente.',
         5000
       );
@@ -2853,10 +2911,49 @@ const VoiceAssistant = {
         this.transcript.trim();
 
 
+      const error=
+        this.lastError;
+
+
       this.transcript='';
 
+      this.lastError=null;
 
-      if(text && !this.lastError)
+
+      if(this.handsFree){
+
+        if(
+          text &&
+          !error &&
+          this.hasWakeWord(text)
+        ){
+
+          Promise
+          .resolve(
+            this.handle(text)
+          )
+          .catch(()=>
+            this.reply(
+              'Não consegui concluir esse pedido agora.'
+            )
+          )
+          .finally(()=>
+            this.scheduleHandsFree()
+          );
+
+        }else{
+
+          this.scheduleHandsFree();
+
+        }
+
+
+        return;
+
+      }
+
+
+      if(text && !error)
         this.handle(text);
 
     };
@@ -2887,28 +2984,62 @@ const VoiceAssistant = {
       );
 
 
-    [main,nav]
-    .filter(Boolean)
-    .forEach(button=>{
+    if(main){
 
-      button.classList.toggle(
+      main.classList.toggle(
         'listening',
-        Boolean(active)
+        Boolean(
+          active &&
+          !this.handsFree
+        )
       );
 
-      button.setAttribute(
+      main.setAttribute(
         'aria-pressed',
-        active?'true':'false'
+        active &&
+        !this.handsFree
+        ? 'true'
+        : 'false'
       );
 
-      button.title=
+      main.title=
         supported
-        ? active
+        ? active &&
+          !this.handsFree
           ? 'Parar de ouvir'
           : 'Falar com o Radar'
         : 'Voz não disponível neste navegador';
 
-    });
+    }
+
+
+    if(nav){
+
+      nav.classList.toggle(
+        'listening',
+        Boolean(active)
+      );
+
+      nav.classList.toggle(
+        'hands-free',
+        this.handsFree
+      );
+
+      nav.setAttribute(
+        'aria-pressed',
+        this.handsFree
+        ? 'true'
+        : 'false'
+      );
+
+      nav.title=
+        supported
+        ? this.handsFree
+          ? 'Desligar modo mãos livres'
+          : 'Ligar modo mãos livres'
+        : 'Voz não disponível neste navegador';
+
+    }
 
 
     if(main)
@@ -2920,7 +3051,9 @@ const VoiceAssistant = {
       nav.textContent=
         active
         ? '⏹️ Ouvindo'
-        : '🎙️ Radar';
+        : this.handsFree
+          ? '🟢 Radar'
+          : '🎙️ Radar';
 
   },
 
@@ -2933,6 +3066,15 @@ const VoiceAssistant = {
         'A voz não está disponível neste navegador. Abra o app no Chrome.',
         5000
       );
+
+      return;
+
+    }
+
+
+    if(this.handsFree){
+
+      this.stopHandsFree(false);
 
       return;
 
@@ -2962,6 +3104,275 @@ const VoiceAssistant = {
       );
 
     }
+
+  },
+
+
+  hasWakeWord(text){
+
+    return /^\s*(?:(?:oi|ol[áa]|ei|por favor)\s+)?radar\b/i
+      .test(
+        String(text||'')
+      );
+
+  },
+
+
+  pauseForSpeech(){
+
+    if(
+      !this.handsFree ||
+      !this.listening ||
+      !this.recognition
+    )
+      return;
+
+
+    this.transcript='';
+
+    this.lastError='aborted';
+
+    this.listening=false;
+
+    this.updateButtons(false);
+
+
+    try{
+
+      this.recognition.abort();
+
+    }catch(e){}
+
+  },
+
+
+  scheduleHandsFree(delay=700){
+
+    clearTimeout(
+      this.restartTimer
+    );
+
+
+    this.restartTimer=null;
+
+
+    if(
+      !this.handsFree ||
+      !this.recognition
+    )
+      return;
+
+
+    this.restartTimer=
+      setTimeout(
+        ()=>{
+
+          this.restartTimer=null;
+
+
+          if(
+            !this.handsFree ||
+            document.visibilityState===
+            'hidden'
+          )
+            return;
+
+
+          if(
+            Voice.speaking ||
+            Voice.queue.length
+          ){
+
+            this.scheduleHandsFree(
+              450
+            );
+
+            return;
+
+          }
+
+
+          if(this.listening)
+            return;
+
+
+          this.transcript='';
+
+          this.lastError=null;
+
+
+          try{
+
+            this.recognition.start();
+
+          }catch(e){
+
+            this.scheduleHandsFree(
+              1200
+            );
+
+          }
+
+        },
+        delay
+      );
+
+  },
+
+
+  toggleHandsFree(){
+
+    if(!this.recognition){
+
+      App.toast(
+        'A voz não está disponível neste navegador. Abra o app no Chrome.',
+        5000
+      );
+
+      return;
+
+    }
+
+
+    if(this.handsFree){
+
+      this.stopHandsFree(true);
+
+      return;
+
+    }
+
+
+    if(!App.navActive){
+
+      this.reply(
+        'Inicie uma navegação para ligar o modo mãos livres.'
+      );
+
+      return;
+
+    }
+
+
+    Voice.clear();
+
+    this.handsFree=true;
+
+    this.updateButtons(false);
+
+    this.reply(
+      'Modo mãos livres ativo. Para cada pedido, comece dizendo Radar. Para desligar, diga: Radar, parar de ouvir.'
+    );
+
+    this.scheduleHandsFree(
+      500
+    );
+
+  },
+
+
+  stopHandsFree(announce=true){
+
+    const wasActive=
+      this.handsFree;
+
+
+    this.handsFree=false;
+
+    clearTimeout(
+      this.restartTimer
+    );
+
+    this.restartTimer=null;
+
+
+    const wasListening=
+      this.listening;
+
+
+    this.listening=false;
+
+
+    if(
+      wasListening &&
+      this.recognition
+    ){
+
+      this.transcript='';
+
+      this.lastError='aborted';
+
+
+      try{
+
+        this.recognition.abort();
+
+      }catch(e){}
+
+    }
+
+
+    this.updateButtons(false);
+
+
+    if(
+      announce &&
+      wasActive
+    )
+      this.reply(
+        'Modo mãos livres desligado.'
+      );
+
+  },
+
+
+  suspendHandsFree(){
+
+    if(!this.handsFree)
+      return;
+
+
+    clearTimeout(
+      this.restartTimer
+    );
+
+    this.restartTimer=null;
+
+
+    const wasListening=
+      this.listening;
+
+
+    this.listening=false;
+
+
+    if(
+      wasListening &&
+      this.recognition
+    ){
+
+      this.transcript='';
+
+      this.lastError='aborted';
+
+
+      try{
+
+        this.recognition.abort();
+
+      }catch(e){}
+
+    }
+
+  },
+
+
+  resumeHandsFree(){
+
+    if(this.handsFree)
+      this.scheduleHandsFree(
+        350
+      );
 
   },
 
@@ -3120,7 +3531,7 @@ const VoiceAssistant = {
         ' '
       )
       .replace(
-        /^[\s,.:;-]+|[\s,.:;-]+$/g,
+        /^[\s,.:;?!-]+|[\s,.:;?!-]+$/g,
         ''
       )
       .trim();
@@ -3709,6 +4120,484 @@ const VoiceAssistant = {
   },
 
 
+  weatherCodeText(code){
+
+    const value=
+      Number(code);
+
+
+    if(value===0)
+      return 'céu limpo';
+
+    if(value===1)
+      return 'tempo predominantemente aberto';
+
+    if(value===2)
+      return 'céu parcialmente nublado';
+
+    if(value===3)
+      return 'céu encoberto';
+
+    if(
+      value===45 ||
+      value===48
+    )
+      return 'nevoeiro';
+
+    if(
+      value>=51 &&
+      value<=57
+    )
+      return 'garoa';
+
+    if(
+      value>=61 &&
+      value<=67
+    )
+      return 'chuva';
+
+    if(
+      value>=71 &&
+      value<=77
+    )
+      return 'neve';
+
+    if(
+      value>=80 &&
+      value<=82
+    )
+      return 'pancadas de chuva';
+
+    if(
+      value===85 ||
+      value===86
+    )
+      return 'pancadas de neve';
+
+    if(
+      value===95 ||
+      value===96 ||
+      value===99
+    )
+      return 'trovoadas';
+
+
+    return 'condição variável';
+
+  },
+
+
+  weatherDayOffset(text){
+
+    const normalized=
+      this.normalize(text);
+
+
+    if(
+      normalized.includes(
+        'depois de amanha'
+      )
+    )
+      return 2;
+
+
+    if(
+      normalized.includes(
+        'amanha'
+      )
+    )
+      return 1;
+
+
+    return 0;
+
+  },
+
+
+  extractWeatherPlace(text){
+
+    const command=
+      this.trimPoliteWords(
+        text
+      );
+
+
+    const match=
+      command.match(
+        /\b(?:em|no|na)\s+(.+)$/i
+      );
+
+
+    if(!match?.[1])
+      return '';
+
+
+    const place=
+      match[1]
+      .replace(
+        /\b(?:hoje|amanh[ãa]|depois\s+de\s+amanh[ãa])\b.*$/i,
+        ''
+      )
+      .replace(
+        /[?.!,;:]+$/g,
+        ''
+      )
+      .trim();
+
+
+    if(
+      this.containsAny(
+        place,
+        [
+          'minha localização',
+          'minha localizacao',
+          'localização atual',
+          'localizacao atual',
+          'onde estou'
+        ]
+      ) ||
+      /^(?:aqui|agora)$/.test(
+        this.normalize(place)
+      )
+    )
+      return '';
+
+
+    return place;
+
+  },
+
+
+  async fetchWeather(lat,lon){
+
+    const key=
+      Number(lat).toFixed(2)+
+      ','+
+      Number(lon).toFixed(2);
+
+
+    const cached=
+      this.weatherCache[key];
+
+
+    if(
+      cached &&
+      Date.now()-cached.savedAt<
+      10*60*1000
+    )
+      return cached.data;
+
+
+    const params=
+      new URLSearchParams({
+        latitude:String(lat),
+        longitude:String(lon),
+        current:[
+          'temperature_2m',
+          'apparent_temperature',
+          'weather_code',
+          'precipitation',
+          'rain',
+          'wind_speed_10m'
+        ].join(','),
+        daily:[
+          'weather_code',
+          'temperature_2m_max',
+          'temperature_2m_min',
+          'precipitation_probability_max'
+        ].join(','),
+        timezone:'America/Sao_Paulo',
+        forecast_days:'3'
+      });
+
+
+    const response=
+      await fetch(
+        'https://api.open-meteo.com/v1/forecast?'+
+        params.toString(),
+        {
+          cache:'no-store'
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error(
+        'Previsão indisponível'
+      );
+
+
+    const data=
+      await response.json();
+
+
+    if(
+      !data?.daily?.time?.length
+    )
+      throw new Error(
+        'Previsão incompleta'
+      );
+
+
+    this.weatherCache[key]={
+      data,
+      savedAt:Date.now()
+    };
+
+
+    return data;
+
+  },
+
+
+  async reportWeather(command){
+
+    const offset=
+      this.weatherDayOffset(
+        command
+      );
+
+
+    const placeQuery=
+      this.extractWeatherPlace(
+        command
+      );
+
+
+    let lon;
+
+    let lat;
+
+    let placeLabel;
+
+
+    if(placeQuery){
+
+      App.toast(
+        'Consultando o clima em '+
+        placeQuery+'...',
+        5000
+      );
+
+
+      const results=
+        await App.searchAddress(
+          placeQuery
+        );
+
+
+      if(!results.length){
+
+        this.reply(
+          'Não encontrei esse lugar para consultar o clima.'
+        );
+
+        return;
+
+      }
+
+
+      lon=Number(
+        results[0].lon
+      );
+
+      lat=Number(
+        results[0].lat
+      );
+
+      placeLabel=
+        results[0].name||
+        placeQuery;
+
+    }else if(
+      Array.isArray(
+        App.userPos
+      ) &&
+      App.userPos.length>=2
+    ){
+
+      lon=Number(
+        App.userPos[0]
+      );
+
+      lat=Number(
+        App.userPos[1]
+      );
+
+      placeLabel=
+        'sua localização atual';
+
+    }else{
+
+      lon=-43.1729;
+
+      lat=-22.9068;
+
+      placeLabel=
+        'Rio de Janeiro, usado porque o GPS ainda não informou sua posição';
+
+    }
+
+
+    App.toast(
+      'Atualizando a previsão do tempo...',
+      5000
+    );
+
+
+    try{
+
+      const data=
+        await this.fetchWeather(
+          lat,
+          lon
+        );
+
+
+      const daily=
+        data.daily||{};
+
+
+      const maximum=
+        Number(
+          daily
+          .temperature_2m_max
+          ?.[offset]
+        );
+
+
+      const minimum=
+        Number(
+          daily
+          .temperature_2m_min
+          ?.[offset]
+        );
+
+
+      const rainChance=
+        Number(
+          daily
+          .precipitation_probability_max
+          ?.[offset]
+        );
+
+
+      const description=
+        this.weatherCodeText(
+          daily
+          .weather_code
+          ?.[offset]
+        );
+
+
+      const dayText=
+        offset===2
+        ? 'depois de amanhã'
+        : offset===1
+          ? 'amanhã'
+          : 'hoje';
+
+
+      const parts=[];
+
+
+      if(
+        offset===0 &&
+        Number.isFinite(
+          Number(
+            data.current
+            ?.temperature_2m
+          )
+        )
+      ){
+
+        const current=
+          Math.round(
+            Number(
+              data.current
+              .temperature_2m
+            )
+          );
+
+
+        const apparent=
+          Number(
+            data.current
+            ?.apparent_temperature
+          );
+
+
+        parts.push(
+          'Em '+
+          placeLabel+
+          ', agora faz '+
+          current+
+          ' graus'+
+          (
+            Number.isFinite(
+              apparent
+            )
+            ? ', com sensação de '+
+              Math.round(apparent)+
+              ' graus'
+            : ''
+          )+
+          '.'
+        );
+
+      }
+
+
+      parts.push(
+        'A previsão para '+
+        dayText+
+        ' é de '+
+        description+
+        (
+          Number.isFinite(minimum) &&
+          Number.isFinite(maximum)
+          ? ', mínima de '+
+            Math.round(minimum)+
+            ' e máxima de '+
+            Math.round(maximum)+
+            ' graus'
+          : ''
+        )+
+        (
+          Number.isFinite(
+            rainChance
+          )
+          ? ', com até '+
+            Math.round(
+              rainChance
+            )+
+            ' por cento de chance de chuva'
+          : ''
+        )+
+        '.'
+      );
+
+
+      parts.push(
+        'Fonte: Open Meteo.'
+      );
+
+
+      this.reply(
+        parts.join(' ')
+      );
+
+    }catch(e){
+
+      this.reply(
+        'Não consegui atualizar o clima agora. Verifique a internet e tente novamente.'
+      );
+
+    }
+
+  },
+
+
   async reportRioOccurrences(more=false){
 
     if(!more){
@@ -3977,6 +4866,191 @@ const VoiceAssistant = {
       );
 
 
+    if(
+      this.handsFree &&
+      this.containsAny(
+        normalized,
+        [
+          'parar de ouvir',
+          'pare de ouvir',
+          'desligar o microfone',
+          'desligue o microfone',
+          'desativar modo maos livres',
+          'desligar modo maos livres'
+        ]
+      )
+    ){
+
+      this.stopHandsFree(false);
+
+      this.reply(
+        'Modo mãos livres desligado.'
+      );
+
+      return true;
+
+    }
+
+
+    const weatherIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'clima',
+          'chuva',
+          'chover',
+          'chovendo',
+          'temperatura'
+        ],
+        2
+      ) ||
+      this.containsAny(
+        normalized,
+        [
+          'previsao do tempo',
+          'previsao para hoje',
+          'previsao para amanha',
+          'como esta o tempo',
+          'como vai ficar o tempo',
+          'tempo hoje',
+          'tempo amanha',
+          'tempo depois de amanha'
+        ]
+      );
+
+
+    if(weatherIntent){
+
+      await this.reportWeather(
+        command
+      );
+
+      return true;
+
+    }
+
+
+    if(
+      this.containsAny(
+        normalized,
+        [
+          'que horas sao',
+          'qual e a hora',
+          'qual a hora',
+          'me diga a hora',
+          'informe a hora'
+        ]
+      )
+    ){
+
+      this.reply(
+        'Agora são '+
+        new Date()
+        .toLocaleTimeString(
+          'pt-BR',
+          {
+            timeZone:'America/Sao_Paulo',
+            hour:'2-digit',
+            minute:'2-digit'
+          }
+        )+
+        '.'
+      );
+
+      return true;
+
+    }
+
+
+    if(
+      this.containsAny(
+        normalized,
+        [
+          'que dia e hoje',
+          'qual a data de hoje',
+          'qual e a data',
+          'me diga a data'
+        ]
+      )
+    ){
+
+      this.reply(
+        'Hoje é '+
+        new Date()
+        .toLocaleDateString(
+          'pt-BR',
+          {
+            timeZone:'America/Sao_Paulo',
+            weekday:'long',
+            day:'numeric',
+            month:'long',
+            year:'numeric'
+          }
+        )+
+        '.'
+      );
+
+      return true;
+
+    }
+
+
+    if(
+      this.containsAny(
+        normalized,
+        [
+          'quem e voce',
+          'qual e o seu nome',
+          'qual seu nome',
+          'quem e o radar'
+        ]
+      )
+    ){
+
+      this.reply(
+        'Eu sou o assistente do Radar Seguro RJ Pro. Posso ajudar com clima, rotas, lugares, ocorrências e camadas do mapa.'
+      );
+
+      return true;
+
+    }
+
+
+    if(
+      this.containsAny(
+        normalized,
+        [
+          'esta me ouvindo',
+          'voce me ouve',
+          'consegue me ouvir'
+        ]
+      )
+    ){
+
+      this.reply(
+        'Sim, estou ouvindo.'
+      );
+
+      return true;
+
+    }
+
+
+    if(
+      /^(?:obrigado|obrigada|valeu|muito obrigado|muito obrigada)$/.test(
+        normalized
+      )
+    ){
+
+      this.reply(
+        'Por nada. Dirija com atenção.'
+      );
+
+      return true;
+
+    }
+
+
     const occurrenceIntent=
       this.hasNearWord(
         normalized,
@@ -4201,8 +5275,11 @@ const VoiceAssistant = {
         [
           'ocultar',
           'esconder',
+          'esconda',
           'desligar',
+          'desligue',
           'tirar',
+          'tire',
           'retirar',
           'remover'
         ],
@@ -4223,9 +5300,15 @@ const VoiceAssistant = {
         normalized,
         [
           'mostrar',
+          'mostre',
+          'mostra',
           'exibir',
+          'exiba',
+          'exibe',
           'ligar',
+          'ligue',
           'colocar',
+          'coloque',
           'aparecer'
         ],
         1
@@ -4458,7 +5541,7 @@ const VoiceAssistant = {
     ){
 
       this.reply(
-        'Você pode pedir uma rota, perguntar onde fica um lugar, ouvir as ocorrências do Rio de Janeiro, repetir a orientação, mostrar ou ocultar postos e comunidades, ou salvar sua casa neste aparelho.'
+        'Você pode pedir o clima de hoje ou amanhã, uma rota, a localização de um lugar, as ocorrências do Rio de Janeiro, repetir a orientação, consultar hora e data, mostrar ou ocultar postos e comunidades, ou salvar sua casa neste aparelho. Durante a navegação, toque uma vez no botão Radar para ligar o modo mãos livres e comece cada pedido dizendo Radar.'
       );
 
       return;
@@ -10930,6 +12013,9 @@ fill="#22c55e"/>
 
     this.clearHazards();
 
+    VoiceAssistant
+    .stopHandsFree(false);
+
     Voice.clear();
 
 
@@ -11816,7 +12902,7 @@ ${Utils.sanitize(msg.text)}
     on(
       'navAssistantMicBtn',
       'click',
-      ()=>VoiceAssistant.toggle()
+      ()=>VoiceAssistant.toggleHandsFree()
     );
 
 
@@ -12684,8 +13770,19 @@ ${Utils.sanitize(msg.text)}
     document.addEventListener(
       'visibilitychange',
       ()=>{
-        if(document.visibilityState==='visible')
+        if(document.visibilityState==='visible'){
+
           this.resumeGPS();
+
+          VoiceAssistant
+          .resumeHandsFree();
+
+        }else{
+
+          VoiceAssistant
+          .suspendHandsFree();
+
+        }
       }
     );
 
