@@ -2979,11 +2979,256 @@ const VoiceAssistant = {
   },
 
 
+  wordDistance(a,b){
+
+    a=this.normalize(a);
+
+    b=this.normalize(b);
+
+
+    if(a===b)
+      return 0;
+
+
+    if(!a.length)
+      return b.length;
+
+
+    if(!b.length)
+      return a.length;
+
+
+    let previous=
+      Array.from(
+        {
+          length:b.length+1
+        },
+        (_,index)=>index
+      );
+
+
+    for(
+      let i=1;
+      i<=a.length;
+      i++
+    ){
+
+      const current=[i];
+
+
+      for(
+        let j=1;
+        j<=b.length;
+        j++
+      ){
+
+        current[j]=
+          Math.min(
+            current[j-1]+1,
+            previous[j]+1,
+            previous[j-1]+
+            (
+              a[i-1]===b[j-1]
+              ? 0
+              : 1
+            )
+          );
+
+      }
+
+
+      previous=current;
+
+    }
+
+
+    return previous[b.length];
+
+  },
+
+
+  hasNearWord(text,targets,maxDistance=1){
+
+    const words=
+      this.normalize(text)
+      .split(' ')
+      .filter(Boolean);
+
+
+    return (
+      targets||[]
+    )
+    .map(target=>
+      this.normalize(target)
+    )
+    .some(target=>
+      words.some(word=>{
+
+        if(word===target)
+          return true;
+
+
+        if(
+          word.length<4 ||
+          target.length<4 ||
+          Math.abs(
+            word.length-
+            target.length
+          )>maxDistance
+        )
+          return false;
+
+
+        return this.wordDistance(
+          word,
+          target
+        )<=maxDistance;
+
+      })
+    );
+
+  },
+
+
+  containsAny(text,phrases){
+
+    const normalized=
+      this.normalize(text);
+
+
+    return (
+      phrases||[]
+    )
+    .some(phrase=>
+      normalized.includes(
+        this.normalize(phrase)
+      )
+    );
+
+  },
+
+
+  trimPoliteWords(text){
+
+    return String(text||'')
+      .replace(
+        /\b(?:por favor|pra mim|para mim|se puder|se possível|se possivel)\b/gi,
+        ' '
+      )
+      .replace(
+        /\s+/g,
+        ' '
+      )
+      .replace(
+        /^[\s,.:;-]+|[\s,.:;-]+$/g,
+        ''
+      )
+      .trim();
+
+  },
+
+
+  extractRouteDestination(text){
+
+    const command=
+      this.trimPoliteWords(
+        text
+      );
+
+
+    const patterns=[
+      /(?:^|\b)(?:(?:você|voce)\s+)?(?:(?:pode|poderia|consegue)\s+)?(?:me\s+)?(?:levar|leve|leva|navegar|navegue)(?:\s+agora)?\s+(?:para|pra|pro|até|ate|na|no|ao|à|a|em)\s+(.+)$/i,
+      /(?:^|\b)(?:eu\s+)?(?:quero|queria|gostaria|preciso)(?:\s+de)?\s+(?:ir|chegar)(?:\s+lá|\s+la)?(?:\s+(?:para|pra|pro|até|ate|na|no|ao|à|a|em))?\s+(.+)$/i,
+      /(?:^|\b)(?:troque|trocar|mude|mudar|altere|alterar)(?:\s+(?:a|o|minha|meu))?\s+(?:rota|destino)(?:\s+(?:para|pra|pro|até|ate|na|no|ao|à|a|em))?\s+(.+)$/i,
+      /(?:^|\b)(?:faça|faca|calcule|trace|abra)(?:\s+uma)?\s+(?:rota|caminho)(?:\s+(?:para|pra|pro|até|ate|na|no|ao|à|a|em))?\s+(.+)$/i,
+      /(?:^|\b)(?:vá|va|vai)(?:\s+(?:para|pra|pro|até|ate|na|no|ao|à|a|em))\s+(.+)$/i,
+      /(?:^|\b)(?:rota|caminho|destino)\s+(?:para|pra|pro|até|ate|na|no|ao|à|a|em)\s+(.+)$/i
+    ];
+
+
+    for(const pattern of patterns){
+
+      const match=
+        command.match(
+          pattern
+        );
+
+
+      if(!match)
+        continue;
+
+
+      let destination=
+        this.trimPoliteWords(
+          match[1]
+        )
+        .replace(
+          /^(?:lá|la)\s+(?:para|pra|em)\s+/i,
+          ''
+        )
+        .trim();
+
+
+      if(
+        /^(?:casa|minha casa)$/i.test(
+          destination
+        )
+      )
+        destination='minha casa';
+
+
+      if(destination)
+        return destination;
+
+    }
+
+
+    return '';
+
+  },
+
+
+  extractPlaceQuery(text){
+
+    const command=
+      this.trimPoliteWords(
+        text
+      );
+
+
+    const patterns=[
+      /(?:^|\b)(?:(?:me\s+)?(?:diga|fala|fale|informe)\s+)?(?:onde|aonde)\s+(?:é|e|fica|está|esta)\s+(?:(?:o|a)\s+)?(.+)$/i,
+      /(?:^|\b)(?:qual|mostre|mostrar)\s+(?:é|e)?\s*(?:a\s+)?localização\s+(?:do|da|de)\s+(.+)$/i,
+      /(?:^|\b)(?:cadê|cade|procure|encontre)\s+(?:(?:o|a)\s+)?(.+)$/i
+    ];
+
+
+    for(const pattern of patterns){
+
+      const match=
+        command.match(
+          pattern
+        );
+
+
+      if(match?.[1])
+        return this.trimPoliteWords(
+          match[1]
+        );
+
+    }
+
+
+    return '';
+
+  },
+
+
   removeWakeWord(text){
 
     return String(text||'')
       .replace(
-        /^\s*(?:oi\s+|ol[áa]\s+)?radar[\s,.:;!-]*/i,
+        /^\s*(?:(?:oi|ol[áa]|ei|por favor)\s+)?radar[\s,.:;!-]*/i,
         ''
       )
       .trim();
@@ -3723,6 +3968,440 @@ const VoiceAssistant = {
   },
 
 
+  async handleFlexibleIntent(command,normalized){
+
+    const compact=
+      normalized.replace(
+        /\s+/g,
+        ''
+      );
+
+
+    const occurrenceIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'ocorrencia',
+          'ocorrencias'
+        ],
+        2
+      ) ||
+      this.containsAny(
+        normalized,
+        [
+          'tiroteio',
+          'tiroteios',
+          'confronto',
+          'confrontos',
+          'violencia',
+          'aconteceu hoje',
+          'acontecendo no rio',
+          'problemas de seguranca'
+        ]
+      );
+
+
+    if(occurrenceIntent){
+
+      const wantsMore=
+        this.hasNearWord(
+          normalized,
+          [
+            'mais',
+            'proximas',
+            'restantes',
+            'outras'
+          ],
+          1
+        ) ||
+        this.containsAny(
+          normalized,
+          [
+            'continue',
+            'continuar'
+          ]
+        );
+
+
+      await this.reportRioOccurrences(
+        wantsMore
+      );
+
+      return true;
+
+    }
+
+
+    const routeContext=
+      this.hasNearWord(
+        normalized,
+        [
+          'rota',
+          'navegacao',
+          'viagem',
+          'trajeto',
+          'caminho'
+        ],
+        2
+      );
+
+
+    const stopIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'parar',
+          'pare',
+          'cancelar',
+          'cancele',
+          'encerrar',
+          'encerre',
+          'terminar',
+          'finalizar',
+          'sair'
+        ],
+        1
+      ) ||
+      this.containsAny(
+        normalized,
+        [
+          'nao quero mais',
+          'pode parar'
+        ]
+      );
+
+
+    if(
+      routeContext &&
+      stopIntent
+    ){
+
+      App.clearRoute();
+
+      this.reply(
+        'Navegação encerrada.'
+      );
+
+      return true;
+
+    }
+
+
+    const startIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'iniciar',
+          'inicie',
+          'comecar',
+          'comece',
+          'continuar',
+          'continue'
+        ],
+        1
+      );
+
+
+    if(
+      routeContext &&
+      startIntent
+    ){
+
+      if(App.route){
+
+        App.startNavigation();
+
+        this.reply(
+          'Navegação iniciada.'
+        );
+
+      }else{
+
+        this.reply(
+          'Escolha primeiro um destino.'
+        );
+
+      }
+
+
+      return true;
+
+    }
+
+
+    const repeatIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'repetir',
+          'repita'
+        ],
+        1
+      ) ||
+      this.containsAny(
+        normalized,
+        [
+          'fale de novo',
+          'fala de novo',
+          'diga de novo',
+          'novamente a orientacao',
+          'nao entendi a orientacao'
+        ]
+      );
+
+
+    if(repeatIntent){
+
+      this.repeatGuidance();
+
+      return true;
+
+    }
+
+
+    const speedIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'velocidade'
+        ],
+        2
+      ) ||
+      this.containsAny(
+        normalized,
+        [
+          'quantos por hora',
+          'quilometros por hora',
+          'km por hora'
+        ]
+      );
+
+
+    if(speedIntent){
+
+      this.reply(
+        'Velocidade atual: '+
+        Math.max(
+          0,
+          Math.round(
+            App.currentSpeed
+          )
+        )+
+        ' quilômetros por hora.'
+      );
+
+      return true;
+
+    }
+
+
+    const hideIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'ocultar',
+          'esconder',
+          'desligar',
+          'tirar',
+          'retirar',
+          'remover'
+        ],
+        1
+      ) ||
+      this.containsAny(
+        normalized,
+        [
+          'nao quero ver',
+          'nao mostrar',
+          'tira do mapa'
+        ]
+      );
+
+
+    const showIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'mostrar',
+          'exibir',
+          'ligar',
+          'colocar',
+          'aparecer'
+        ],
+        1
+      ) ||
+      this.containsAny(
+        normalized,
+        [
+          'quero ver',
+          'deixar visivel',
+          'deixe visivel',
+          'mostra no mapa'
+        ]
+      );
+
+
+    const fuelIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'posto',
+          'postos'
+        ],
+        1
+      );
+
+
+    const gnvIntent=
+      compact.includes('gnv') ||
+      normalized.includes('g n v') ||
+      normalized.includes('gas natural');
+
+
+    const irregularIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'irregular',
+          'irregularidade',
+          'irregularidades',
+          'problema',
+          'problemas'
+        ],
+        2
+      );
+
+
+    if(
+      gnvIntent &&
+      (
+        fuelIntent ||
+        showIntent ||
+        normalized.includes('so gnv')
+      )
+    ){
+
+      this.setFuel('gnv');
+
+      return true;
+
+    }
+
+
+    if(
+      fuelIntent &&
+      irregularIntent
+    ){
+
+      this.setFuel('official');
+
+      return true;
+
+    }
+
+
+    if(
+      fuelIntent &&
+      hideIntent
+    ){
+
+      this.setFuel('none');
+
+      return true;
+
+    }
+
+
+    if(
+      fuelIntent &&
+      showIntent
+    ){
+
+      this.setFuel('all');
+
+      return true;
+
+    }
+
+
+    const communityIntent=
+      this.hasNearWord(
+        normalized,
+        [
+          'comunidade',
+          'comunidades'
+        ],
+        2
+      );
+
+
+    if(
+      communityIntent &&
+      hideIntent
+    ){
+
+      this.setCommunities(
+        false
+      );
+
+      return true;
+
+    }
+
+
+    if(
+      communityIntent &&
+      showIntent
+    ){
+
+      this.setCommunities(
+        true
+      );
+
+      return true;
+
+    }
+
+
+    const place=
+      this.extractPlaceQuery(
+        command
+      );
+
+
+    if(place){
+
+      await this.findPlace(
+        place
+      );
+
+      return true;
+
+    }
+
+
+    const destination=
+      this.extractRouteDestination(
+        command
+      );
+
+
+    if(destination){
+
+      await this.routeTo(
+        destination
+      );
+
+      return true;
+
+    }
+
+
+    return false;
+
+  },
+
+
   async handle(rawText){
 
     const command=
@@ -3746,6 +4425,15 @@ const VoiceAssistant = {
       return;
 
     }
+
+
+    if(
+      await this.handleFlexibleIntent(
+        command,
+        normalized
+      )
+    )
+      return;
 
 
     if(
@@ -4085,7 +4773,7 @@ const VoiceAssistant = {
 
 
     this.reply(
-      'Ainda não aprendi essa pergunta. Por enquanto, peça rotas, lugares, postos, comunidades ou orientações de navegação.'
+      'Não entendi completamente. Você não precisa repetir uma frase exata. Fale do seu jeito dizendo o assunto e o que deseja fazer, como: quero ir para Bangu, ou: o que aconteceu hoje no Rio.'
     );
 
   }
