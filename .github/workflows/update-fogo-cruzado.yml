@@ -2,6 +2,11 @@ name: Atualizar dados do Fogo Cruzado
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update-fogo-cruzado.mjs"
+      - ".github/workflows/update-fogo-cruzado.yml"
   schedule:
     - cron: "7,22,37,52 * * * *"
 
