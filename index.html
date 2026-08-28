@@ -785,6 +785,21 @@ body.nav-mode .side{
   background:#16a34a
 }
 
+.fuel-marker.official-current{
+  background:#dc2626;
+  border-color:#fee2e2
+}
+
+.fuel-marker.official-pending{
+  background:#f59e0b;
+  border-color:#fef3c7
+}
+
+.fuel-marker.official-history{
+  background:#2563eb;
+  border-color:#dbeafe
+}
+
 
 /* =========================================================
    HAZARDS
@@ -1517,6 +1532,11 @@ body.nav-mode .community-sign{
         Somente GNV
       </button>
 
+      <button id="filterOfficial">
+        <span class="icon">🛡️</span>
+        Ocorrências oficiais
+      </button>
+
       <button id="filterNone">
         <span class="icon">🚫</span>
         Ocultar postos
@@ -1704,6 +1724,16 @@ const ANP_APP =
 
 const ANP_REPORT =
 'https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
+
+/*
+  Somente inclua um posto nesta lista quando uma fonte oficial identificar
+  de forma inequívoca o estabelecimento e registrar combustível fora da
+  especificação ou volume fornecido menor que o indicado na bomba.
+
+  status: "current" (medida ativa), "pending" (processo/resultado pendente)
+  ou "history" (ocorrência passada, já regularizada/desinterditada).
+*/
+const VERIFIED_FUEL_INCIDENTS = [];
 
 const RJ_CENTER = [-43.40,-22.90];
 
@@ -2576,6 +2606,35 @@ const FuelModule = {
 
   loading:false,
 
+  normalize(value){
+
+    return String(value||'')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g,' ')
+      .trim();
+
+  },
+
+
+  officialIncident(station){
+
+    const name=this.normalize(station.name);
+    const address=this.normalize(station.address);
+
+    return VERIFIED_FUEL_INCIDENTS.find(item=>{
+
+      const officialName=this.normalize(item.name);
+      const officialAddress=this.normalize(item.address);
+
+      return officialName && officialAddress &&
+        name===officialName && address.includes(officialAddress);
+
+    }) || null;
+
+  },
+
 
   clear(){
 
@@ -2667,7 +2726,7 @@ out center tags;`;
             el.tags||{};
 
 
-          return {
+          const station={
 
             lat,
             lng,
@@ -2695,6 +2754,10 @@ out center tags;`;
               .join(', ')
 
           };
+
+          station.official=this.officialIncident(station);
+
+          return station;
 
         })
         .filter(Boolean);
@@ -2744,6 +2807,15 @@ out center tags;`;
 
     }
 
+    if(
+      this.filter==='official'
+    ){
+
+      list=
+        list.filter(s=>s.official);
+
+    }
+
 
     const center=
       App.userPos ||
@@ -2774,11 +2846,28 @@ out center tags;`;
 
       el.className=
         'fuel-marker'+
-        (s.gnv?' gnv':'');
+        (s.gnv?' gnv':'')+
+        (s.official ? ' official-'+s.official.status : '');
 
 
       el.textContent=
-        s.gnv?'G':'⛽';
+        s.official?'!':(s.gnv?'G':'⛽');
+
+      const incident=s.official;
+
+      const officialHtml=incident ? `
+  <hr style="margin:10px 0;border:0;border-top:1px solid #cbd5e1">
+  <b style="color:${incident.status==='current'?'#b91c1c':incident.status==='pending'?'#b45309':'#1d4ed8'}">
+    ${incident.status==='current'?'Medida oficial atual':incident.status==='pending'?'Ocorrência oficial em apuração':'Ocorrência oficial no histórico'}
+  </b><br>
+  Tipo: ${Utils.sanitize(incident.type)}<br>
+  Ação informada: ${Utils.sanitize(incident.action)}<br>
+  Data: ${Utils.sanitize(incident.date)}<br>
+  Órgão: ${Utils.sanitize(incident.agency)}<br>
+  Situação: ${Utils.sanitize(incident.situation)}<br>
+  <small>Informação pública para orientação. Não representa julgamento definitivo.</small><br>
+  <a href="${Utils.sanitize(incident.source)}" target="_blank" rel="noopener noreferrer">Ver fonte oficial</a>
+  ` : '';
 
 
       const html=
@@ -2788,6 +2877,7 @@ out center tags;`;
   Bandeira: ${Utils.sanitize(s.brand)}
   ${s.address ? `<br>${Utils.sanitize(s.address)}` : ''}
   ${s.gnv ? '<br><b style="color:#15803d">GNV disponível</b>' : ''}
+  ${officialHtml}
   <br><br>
   <a href="${ANP_APP}" target="_blank">Consultar ANP</a>
 </div>
@@ -9307,6 +9397,37 @@ ${Utils.sanitize(msg.text)}
           this.map
         );
 
+
+        document
+        .getElementById(
+          'fuelFilterModal'
+        )
+        .classList.remove(
+          'show'
+        );
+
+      }
+    );
+
+
+    on(
+      'filterOfficial',
+      'click',
+      ()=>{
+
+        FuelModule.visible=true;
+
+        FuelModule.filter='official';
+
+        FuelModule.render(
+          this.map
+        );
+
+        const count=FuelModule.stations.filter(s=>s.official).length;
+
+        if(!count){
+          this.toast('Nenhum posto desta área possui ocorrência oficial identificada com segurança.');
+        }
 
         document
         .getElementById(
