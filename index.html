@@ -159,6 +159,25 @@ button{
   font-size:16px
 }
 
+.search .assistant-mic-btn{
+  min-width:42px;
+  padding:10px 11px;
+  background:#047857;
+  font-size:17px
+}
+
+.assistant-mic-btn.listening,
+.nav-map-chip.listening{
+  background:#b91c1c!important;
+  border-color:#fca5a5!important;
+  animation:assistantPulse 1s infinite
+}
+
+@keyframes assistantPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(248,113,113,.55)}
+  50%{box-shadow:0 0 0 8px rgba(248,113,113,0)}
+}
+
 .suggest{
   display:none;
   position:absolute;
@@ -287,6 +306,11 @@ body.nav-mode .nav-map-chips{
 
 .nav-map-chip.active{
   background:#0284c7
+}
+
+.nav-map-chip.assistant{
+  background:#047857;
+  border-color:#34d399
 }
 
 .waze-maneuver-row{
@@ -1318,6 +1342,7 @@ body.nav-mode .community-sign{
   <div class="search">
     <input id="destInput" type="text" placeholder="Rua, número, bairro ou local..." autocomplete="off">
     <button class="clear" id="clearBtn">✕</button>
+    <button class="assistant-mic-btn" id="assistantMicBtn" title="Falar com o Radar" aria-label="Falar com o Radar">🎙️</button>
     <button id="searchBtn">IR</button>
     <div id="suggest" class="suggest"></div>
   </div>
@@ -1363,6 +1388,7 @@ body.nav-mode .community-sign{
 <div class="nav-map-chips" aria-label="Camadas do mapa durante a navegação">
   <button class="nav-map-chip active" id="navFuelChip">⛽ Postos</button>
   <button class="nav-map-chip active" id="navCommunityChip">🔴 Comunidades</button>
+  <button class="nav-map-chip assistant" id="navAssistantMicBtn" title="Falar com o Radar">🎙️ Radar</button>
 </div>
 
 
@@ -2674,6 +2700,1068 @@ const Voice = {
 
 
 /* =========================================================
+   ASSISTENTE DE VOZ LOCAL E GRATUITA
+========================================================= */
+
+const VoiceAssistant = {
+
+  recognition:null,
+
+  listening:false,
+
+  transcript:'',
+
+  lastError:null,
+
+  homeKey:'radarSeguroRJ_homeAddress',
+
+
+  init(){
+
+    const Recognition=
+      window.SpeechRecognition ||
+      window.webkitSpeechRecognition;
+
+
+    if(!Recognition){
+
+      this.updateButtons(false);
+
+      return;
+
+    }
+
+
+    this.recognition=
+      new Recognition();
+
+
+    this.recognition.lang='pt-BR';
+
+    this.recognition.continuous=false;
+
+    this.recognition.interimResults=true;
+
+    this.recognition.maxAlternatives=1;
+
+
+    this.recognition.onstart=()=>{
+
+      this.listening=true;
+
+      this.transcript='';
+
+      this.lastError=null;
+
+      this.updateButtons(true);
+
+      App.toast(
+        '🎙️ Estou ouvindo. Fale agora...',
+        10000
+      );
+
+    };
+
+
+    this.recognition.onresult=event=>{
+
+      let finalText='';
+
+      let interimText='';
+
+
+      for(
+        let i=event.resultIndex;
+        i<event.results.length;
+        i++
+      ){
+
+        const text=
+          event.results[i][0]
+          ?.transcript||'';
+
+
+        if(event.results[i].isFinal)
+          finalText+=text;
+        else
+          interimText+=text;
+
+      }
+
+
+      if(finalText.trim()){
+
+        this.transcript=
+          finalText.trim();
+
+        App.toast(
+          'Você disse: '+
+          this.transcript,
+          2600
+        );
+
+        this.recognition.stop();
+
+      }else if(interimText.trim()){
+
+        App.toast(
+          'Ouvindo: '+
+          interimText.trim(),
+          2400
+        );
+
+      }
+
+    };
+
+
+    this.recognition.onerror=event=>{
+
+      this.lastError=
+        event.error||
+        'unknown';
+
+
+      const messages={
+        'not-allowed':'Permita o uso do microfone no Chrome.',
+        'service-not-allowed':'O reconhecimento de voz está bloqueado no navegador.',
+        'audio-capture':'Microfone não encontrado.',
+        'network':'A voz precisa de internet neste aparelho.',
+        'no-speech':'Não consegui ouvir. Toque no microfone e tente novamente.'
+      };
+
+
+      App.toast(
+        messages[this.lastError]||
+        'Não consegui entender. Tente novamente.',
+        5000
+      );
+
+    };
+
+
+    this.recognition.onend=()=>{
+
+      this.listening=false;
+
+      this.updateButtons(false);
+
+
+      const text=
+        this.transcript.trim();
+
+
+      this.transcript='';
+
+
+      if(text && !this.lastError)
+        this.handle(text);
+
+    };
+
+
+    this.updateButtons(false);
+
+  },
+
+
+  updateButtons(active){
+
+    const supported=
+      Boolean(
+        this.recognition
+      );
+
+
+    const main=
+      document.getElementById(
+        'assistantMicBtn'
+      );
+
+
+    const nav=
+      document.getElementById(
+        'navAssistantMicBtn'
+      );
+
+
+    [main,nav]
+    .filter(Boolean)
+    .forEach(button=>{
+
+      button.classList.toggle(
+        'listening',
+        Boolean(active)
+      );
+
+      button.setAttribute(
+        'aria-pressed',
+        active?'true':'false'
+      );
+
+      button.title=
+        supported
+        ? active
+          ? 'Parar de ouvir'
+          : 'Falar com o Radar'
+        : 'Voz não disponível neste navegador';
+
+    });
+
+
+    if(main)
+      main.textContent=
+        active?'⏹️':'🎙️';
+
+
+    if(nav)
+      nav.textContent=
+        active
+        ? '⏹️ Ouvindo'
+        : '🎙️ Radar';
+
+  },
+
+
+  toggle(){
+
+    if(!this.recognition){
+
+      App.toast(
+        'A voz não está disponível neste navegador. Abra o app no Chrome.',
+        5000
+      );
+
+      return;
+
+    }
+
+
+    if(this.listening){
+
+      this.recognition.abort();
+
+      return;
+
+    }
+
+
+    Voice.clear();
+
+
+    try{
+
+      this.recognition.start();
+
+    }catch(e){
+
+      App.toast(
+        'Aguarde um instante e tente falar novamente.'
+      );
+
+    }
+
+  },
+
+
+  normalize(text){
+
+    return String(text||'')
+      .toLocaleLowerCase('pt-BR')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9\s]/g,' ')
+      .replace(/\s+/g,' ')
+      .trim();
+
+  },
+
+
+  removeWakeWord(text){
+
+    return String(text||'')
+      .replace(
+        /^\s*(?:oi\s+|ol[áa]\s+)?radar[\s,.:;!-]*/i,
+        ''
+      )
+      .trim();
+
+  },
+
+
+  reply(text,priority=true){
+
+    App.toast(
+      text,
+      5200
+    );
+
+    Voice.speak(
+      text,
+      priority
+    );
+
+  },
+
+
+  getHome(){
+
+    try{
+
+      return localStorage
+        .getItem(
+          this.homeKey
+        )||'';
+
+    }catch(e){
+
+      return '';
+
+    }
+
+  },
+
+
+  saveHome(address){
+
+    try{
+
+      localStorage.setItem(
+        this.homeKey,
+        address
+      );
+
+      return true;
+
+    }catch(e){
+
+      return false;
+
+    }
+
+  },
+
+
+  cleanDestination(text){
+
+    return String(text||'')
+      .replace(
+        /^\s*(?:me\s+leve|leve(?:-|\s)?me)\s+(?:para|at[ée])\s+/i,
+        ''
+      )
+      .replace(
+        /^\s*(?:para|at[ée]|em)\s+/i,
+        ''
+      )
+      .trim();
+
+  },
+
+
+  setCommunities(visible){
+
+    App.communityVisible=
+      visible;
+
+
+    [
+      'communityChip',
+      'navCommunityChip'
+    ].forEach(id=>
+      document
+      .getElementById(id)
+      ?.classList.toggle(
+        'active',
+        visible
+      )
+    );
+
+
+    App.setCommunityVisibility(
+      visible
+    );
+
+
+    this.reply(
+      visible
+      ? 'Comunidades exibidas no mapa.'
+      : 'Comunidades ocultadas do mapa.'
+    );
+
+  },
+
+
+  setFuel(filter){
+
+    const visible=
+      filter!=='none';
+
+
+    FuelModule.visible=
+      visible;
+
+    FuelModule.filter=
+      filter;
+
+    FuelModule.render(
+      App.map
+    );
+
+
+    [
+      'fuelChip',
+      'navFuelChip'
+    ].forEach(id=>
+      document
+      .getElementById(id)
+      ?.classList.toggle(
+        'active',
+        visible
+      )
+    );
+
+
+    const text={
+      all:'Mostrando todos os postos.',
+      gnv:'Mostrando postos que também oferecem GNV.',
+      official:'Mostrando postos com registro oficial de irregularidade.',
+      none:'Postos ocultados do mapa.'
+    }[filter];
+
+
+    this.reply(
+      text||
+      'Filtro de postos atualizado.'
+    );
+
+  },
+
+
+  repeatGuidance(){
+
+    if(!App.route){
+
+      this.reply(
+        'Não existe uma rota ativa.'
+      );
+
+      return;
+
+    }
+
+
+    const guidance=
+      App.getUpcomingGuidance();
+
+
+    if(!guidance?.step){
+
+      this.reply(
+        'A próxima orientação ainda não está disponível.'
+      );
+
+      return;
+
+    }
+
+
+    const street=
+      guidance.step.name
+      ? ' na '+guidance.step.name
+      : '';
+
+
+    const phrase=
+      App.maneuverText(
+        guidance.step
+      )+
+      street;
+
+
+    if(
+      guidance.distance>180 &&
+      !App.isComplexManeuverArea(
+        guidance
+      )
+    ){
+
+      this.reply(
+        'Em '+
+        Math.round(
+          guidance.distance/10
+        )*10+
+        ' metros, '+
+        phrase.toLocaleLowerCase('pt-BR')+'.'
+      );
+
+    }else{
+
+      this.reply(
+        phrase+'.'
+      );
+
+    }
+
+  },
+
+
+  async findPlace(query){
+
+    const place=
+      this.cleanDestination(
+        query
+      );
+
+
+    if(!place){
+
+      this.reply(
+        'Diga o nome do lugar que você procura.'
+      );
+
+      return;
+
+    }
+
+
+    App.toast(
+      'Procurando '+place+'...'
+    );
+
+
+    try{
+
+      const results=
+        await App.searchAddress(
+          place
+        );
+
+
+      if(!results.length){
+
+        this.reply(
+          'Não encontrei esse lugar com segurança.'
+        );
+
+        return;
+
+      }
+
+
+      const result=
+        results[0];
+
+
+      document
+      .getElementById(
+        'destInput'
+      )
+      .value=
+        result.display;
+
+
+      App.map.easeTo({
+        center:[
+          result.lon,
+          result.lat
+        ],
+        zoom:16,
+        duration:700
+      });
+
+
+      this.reply(
+        (result.name||place)+
+        ' fica em '+
+        result.display+
+        '. Para navegar, diga: me leve para '+
+        (result.name||place)+'.'
+      );
+
+    }catch(e){
+
+      if(e.name!=='AbortError')
+        this.reply(
+          'A busca de lugares está temporariamente indisponível.'
+        );
+
+    }
+
+  },
+
+
+  async routeTo(query){
+
+    let destination=
+      this.cleanDestination(
+        query
+      );
+
+
+    if(
+      this.normalize(destination)===
+      'minha casa'
+    ){
+
+      destination=
+        this.getHome();
+
+
+      if(!destination){
+
+        this.reply(
+          'Sua casa ainda não foi salva. Pesquise o endereço e diga: Radar, salve como minha casa.'
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    if(!destination){
+
+      this.reply(
+        'Diga para onde você quer ir.'
+      );
+
+      return;
+
+    }
+
+
+    App.toast(
+      'Procurando rota para '+
+      destination+'...',
+      6000
+    );
+
+
+    try{
+
+      const results=
+        await App.searchAddress(
+          destination
+        );
+
+
+      if(!results.length){
+
+        this.reply(
+          'Não encontrei esse destino com segurança.'
+        );
+
+        return;
+
+      }
+
+
+      const result=
+        results[0];
+
+
+      App.destination=[
+        result.lon,
+        result.lat
+      ];
+
+
+      document
+      .getElementById(
+        'destInput'
+      )
+      .value=
+        result.display;
+
+
+      document
+      .getElementById(
+        'suggest'
+      )
+      .classList.remove(
+        'show'
+      );
+
+
+      if(!App.userPos){
+
+        App.startGPS();
+
+        this.reply(
+          'Destino encontrado. Estou aguardando o GPS para calcular a rota.'
+        );
+
+        return;
+
+      }
+
+
+      App.showRoutePanel();
+
+      await App.calculateRoute();
+
+
+      if(App.route){
+
+        App.startNavigation();
+
+        this.reply(
+          'Rota para '+
+          (result.name||destination)+
+          ' iniciada.'
+        );
+
+      }
+
+    }catch(e){
+
+      if(e.name!=='AbortError')
+        this.reply(
+          'Não foi possível calcular essa rota agora.'
+        );
+
+    }
+
+  },
+
+
+  async handle(rawText){
+
+    const command=
+      this.removeWakeWord(
+        rawText
+      );
+
+
+    const normalized=
+      this.normalize(
+        command
+      );
+
+
+    if(!normalized){
+
+      this.reply(
+        'Não consegui entender. Tente novamente.'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      /^(oi|ola|bom dia|boa tarde|boa noite)$/.test(
+        normalized
+      )
+    ){
+
+      this.reply(
+        'Olá. Estou pronta para ajudar na sua viagem.'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      normalized.includes('o que voce faz') ||
+      normalized==='ajuda' ||
+      normalized==='comandos'
+    ){
+
+      this.reply(
+        'Você pode pedir uma rota, perguntar onde fica um lugar, repetir a orientação, mostrar ou ocultar postos e comunidades, ou salvar sua casa neste aparelho.'
+      );
+
+      return;
+
+    }
+
+
+    const homeWithAddress=
+      command.match(
+        /^(?:minha casa\s+(?:é|e|fica\s+em)|(?:salve|guarde|cadastre|defina|coloque)\s+(?:o\s+endereço\s+da\s+)?minha casa(?:\s+(?:como|em))?)\s*[:,-]?\s+(.{5,})$/i
+      );
+
+
+    if(homeWithAddress){
+
+      const address=
+        homeWithAddress[1]
+        .trim();
+
+
+      if(this.saveHome(address)){
+
+        this.reply(
+          'Endereço de casa salvo somente neste aparelho.'
+        );
+
+      }else{
+
+        this.reply(
+          'Não consegui salvar o endereço neste aparelho.'
+        );
+
+      }
+
+
+      if(
+        /^(?:defina|coloque)/i.test(
+          command
+        )
+      )
+        await this.routeTo(address);
+
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:salve|salvar|guarde|guardar|cadastre|cadastrar)(?:\s+(?:este|esse|o))?(?:\s+(?:destino|endereço))?(?:\s+como)?\s+minha casa$/i.test(
+        command
+      )
+    ){
+
+      const address=
+        document
+        .getElementById(
+          'destInput'
+        )
+        .value
+        .trim();
+
+
+      if(!address){
+
+        this.reply(
+          'Pesquise primeiro o endereço da sua casa.'
+        );
+
+      }else if(this.saveHome(address)){
+
+        this.reply(
+          'Endereço de casa salvo somente neste aparelho.'
+        );
+
+      }else{
+
+        this.reply(
+          'Não consegui salvar o endereço neste aparelho.'
+        );
+
+      }
+
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:cancelar|cancele|parar|pare|encerrar|encerre)(?:\s+(?:a|esta))?\s+(?:rota|navegação|navegacao)$/.test(
+        normalized
+      )
+    ){
+
+      App.clearRoute();
+
+      this.reply(
+        'Navegação encerrada.'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:iniciar|inicie|comecar|comece)(?:\s+a)?\s+(?:rota|navegacao)$/.test(
+        normalized
+      )
+    ){
+
+      if(App.route){
+
+        App.startNavigation();
+
+        this.reply(
+          'Navegação iniciada.'
+        );
+
+      }else{
+
+        this.reply(
+          'Escolha primeiro um destino.'
+        );
+
+      }
+
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:repita|repetir|qual e a proxima orientacao|proxima orientacao)$/.test(
+        normalized
+      )
+    ){
+
+      this.repeatGuidance();
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:ocultar|esconder|desligar)\s+(?:os\s+)?postos$/.test(
+        normalized
+      )
+    ){
+
+      this.setFuel('none');
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:mostrar|exibir|ligar)\s+(?:os\s+)?postos(?:\s+normais)?$/.test(
+        normalized
+      )
+    ){
+
+      this.setFuel('all');
+
+      return;
+
+    }
+
+
+    if(
+      normalized.includes('postos com gnv') ||
+      normalized.includes('posto com gnv')
+    ){
+
+      this.setFuel('gnv');
+
+      return;
+
+    }
+
+
+    if(
+      normalized.includes('postos com irregularidades') ||
+      normalized.includes('postos com irregularidade')
+    ){
+
+      this.setFuel('official');
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:ocultar|esconder|desligar)\s+(?:as\s+)?comunidades$/.test(
+        normalized
+      )
+    ){
+
+      this.setCommunities(false);
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:mostrar|exibir|ligar)\s+(?:as\s+)?comunidades$/.test(
+        normalized
+      )
+    ){
+
+      this.setCommunities(true);
+
+      return;
+
+    }
+
+
+    if(
+      normalized.includes('qual a velocidade') ||
+      normalized.includes('minha velocidade')
+    ){
+
+      this.reply(
+        'Velocidade atual: '+
+        Math.max(
+          0,
+          Math.round(
+            App.currentSpeed
+          )
+        )+
+        ' quilômetros por hora.'
+      );
+
+      return;
+
+    }
+
+
+    const whereMatch=
+      command.match(
+        /^onde\s+fica\s+(.+)$/i
+      );
+
+
+    if(whereMatch){
+
+      await this.findPlace(
+        whereMatch[1]
+      );
+
+      return;
+
+    }
+
+
+    const routeMatch=
+      command.match(
+        /^(?:(?:agora\s+)?(?:me\s+leve|leve(?:-|\s)?me|navegue|quero\s+ir|ir|vá|va|trace(?:\s+uma)?\s+rota|troque(?:\s+a)?\s+rota|mude(?:\s+a)?\s+rota))(?:\s+me\s+leve)?(?:\s+(?:para|até|ate|em))?\s+(.+)$/i
+      );
+
+
+    if(routeMatch){
+
+      await this.routeTo(
+        routeMatch[1]
+      );
+
+      return;
+
+    }
+
+
+    this.reply(
+      'Ainda não aprendi essa pergunta. Por enquanto, peça rotas, lugares, postos, comunidades ou orientações de navegação.'
+    );
+
+  }
+
+};
+
+
+/* =========================================================
    POSTOS
 ========================================================= */
 
@@ -3361,6 +4449,8 @@ const App = {
     this.createMap();
 
     this.bindEvents();
+
+    VoiceAssistant.init();
 
     this.startMQTT();
 
@@ -9685,6 +10775,20 @@ ${Utils.sanitize(msg.text)}
         this.clearRoute();
 
       }
+    );
+
+
+    on(
+      'assistantMicBtn',
+      'click',
+      ()=>VoiceAssistant.toggle()
+    );
+
+
+    on(
+      'navAssistantMicBtn',
+      'click',
+      ()=>VoiceAssistant.toggle()
     );
 
 
