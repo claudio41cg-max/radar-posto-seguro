@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v13';
+const CACHE_NAME = 'radar-seguro-rj-v14';
 const APP_SHELL = [
   './',
   './index.html',

@@ -2715,6 +2715,8 @@ const VoiceAssistant = {
 
   homeKey:'radarSeguroRJ_homeAddress',
 
+  occurrenceOffset:0,
+
 
   init(){
 
@@ -2999,6 +3001,42 @@ const VoiceAssistant = {
     Voice.speak(
       text,
       priority
+    );
+
+  },
+
+
+  speakSequence(parts,visibleText=''){
+
+    const messages=
+      (parts||[])
+      .filter(Boolean);
+
+
+    if(!messages.length)
+      return;
+
+
+    App.toast(
+      visibleText||
+      messages.join(' '),
+      12000
+    );
+
+
+    if(!Voice.enabled)
+      return;
+
+
+    Voice.clear();
+
+
+    messages.forEach(
+      (message,index)=>
+        Voice.speak(
+          message,
+          index===0
+        )
     );
 
   },
@@ -3426,6 +3464,265 @@ const VoiceAssistant = {
   },
 
 
+  async reportRioOccurrences(more=false){
+
+    if(!more){
+
+      this.occurrenceOffset=0;
+
+      App.toast(
+        'Atualizando ocorrências do Rio de Janeiro...',
+        5000
+      );
+
+
+      try{
+
+        const refresh=
+          window.RadarApp
+          ?.refreshFogoCruzado;
+
+
+        if(typeof refresh==='function')
+          await refresh();
+
+      }catch(e){}
+
+    }
+
+
+    const items=
+      (
+        App.fogoRecentOccurrences||[]
+      )
+      .slice()
+      .sort(
+        (a,b)=>
+          new Date(b.date)-
+          new Date(a.date)
+      );
+
+
+    if(
+      !App.fogoFeedLoaded &&
+      !items.length
+    ){
+
+      this.reply(
+        'Não consegui consultar o Instituto Fogo Cruzado agora. Verifique sua internet e tente novamente.'
+      );
+
+      return;
+
+    }
+
+
+    const updatedDate=
+      App.fogoFeedUpdatedAt
+      ? new Date(
+          App.fogoFeedUpdatedAt
+        )
+      : null;
+
+
+    const updatedText=
+      updatedDate &&
+      !Number.isNaN(
+        updatedDate.getTime()
+      )
+      ? updatedDate.toLocaleString(
+          'pt-BR',
+          {
+            timeZone:'America/Sao_Paulo',
+            day:'2-digit',
+            month:'2-digit',
+            hour:'2-digit',
+            minute:'2-digit'
+          }
+        )
+      : 'horário não informado';
+
+
+    if(!items.length){
+
+      this.reply(
+        'Na consulta atualizada em '+
+        updatedText+
+        ', o Instituto Fogo Cruzado não apresenta registros das últimas 24 horas no estado do Rio de Janeiro. Isso não garante ausência de risco.'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      more &&
+      this.occurrenceOffset>=
+      items.length
+    ){
+
+      this.occurrenceOffset=0;
+
+      this.reply(
+        'Não há mais ocorrências nessa consulta. Para ouvir novamente, peça as ocorrências do Rio de Janeiro.'
+      );
+
+      return;
+
+    }
+
+
+    const start=
+      more
+      ? this.occurrenceOffset
+      : 0;
+
+
+    const page=
+      items.slice(
+        start,
+        start+5
+      );
+
+
+    this.occurrenceOffset=
+      start+
+      page.length;
+
+
+    const details=
+      page.map(item=>{
+
+        const neighborhood=
+          String(
+            item.neighborhood||''
+          )
+          .trim();
+
+
+        const locality=
+          String(
+            item.locality||''
+          )
+          .trim();
+
+
+        const differentPlaces=
+          locality &&
+          neighborhood &&
+          this.normalize(locality)!==
+          this.normalize(neighborhood);
+
+
+        const place=
+          differentPlaces
+          ? locality+
+            ', no bairro '+
+            neighborhood
+          : locality ||
+            neighborhood ||
+            'local não informado';
+
+
+        const date=
+          new Date(
+            item.date
+          );
+
+
+        const when=
+          Number.isNaN(
+            date.getTime()
+          )
+          ? 'horário não informado'
+          : date.toLocaleString(
+              'pt-BR',
+              {
+                timeZone:'America/Sao_Paulo',
+                day:'2-digit',
+                month:'2-digit',
+                hour:'2-digit',
+                minute:'2-digit'
+              }
+            );
+
+
+        const reason=
+          String(
+            item.reason||''
+          )
+          .trim();
+
+
+        const reasonText=
+          !reason ||
+          this.normalize(reason)===
+          'nao identificado'
+          ? 'motivo ainda não identificado'
+          : 'motivo informado: '+
+            reason;
+
+
+        const policeText=
+          item.policeAction &&
+          !this.normalize(reason)
+          .includes('policial')
+          ? ', com registro de ação policial'
+          : '';
+
+
+        return (
+          'Em '+
+          place+
+          ', no dia e horário '+
+          when+
+          ', '+
+          reasonText+
+          policeText+
+          '.'
+        );
+
+      });
+
+
+    const remaining=
+      Math.max(
+        0,
+        items.length-
+        this.occurrenceOffset
+      );
+
+
+    const intro=
+      more
+      ? 'Continuando as ocorrências das últimas 24 horas.'
+      : 'Segundo os dados do Instituto Fogo Cruzado, atualizados em '+
+        updatedText+
+        ', existem '+
+        items.length+
+        ' ocorrências registradas nas últimas 24 horas no estado do Rio de Janeiro. Vou informar até cinco por vez.';
+
+
+    const ending=
+      remaining>0
+      ? 'Ainda existem '+
+        remaining+
+        '. Para continuar, diga: Radar, mais ocorrências.'
+      : 'Esses são todos os registros disponíveis das últimas 24 horas. Use as informações apenas como orientação.';
+
+
+    this.speakSequence(
+      [
+        intro,
+        ...details,
+        ending
+      ]
+    );
+
+  },
+
+
   async handle(rawText){
 
     const command=
@@ -3473,7 +3770,42 @@ const VoiceAssistant = {
     ){
 
       this.reply(
-        'Você pode pedir uma rota, perguntar onde fica um lugar, repetir a orientação, mostrar ou ocultar postos e comunidades, ou salvar sua casa neste aparelho.'
+        'Você pode pedir uma rota, perguntar onde fica um lugar, ouvir as ocorrências do Rio de Janeiro, repetir a orientação, mostrar ou ocultar postos e comunidades, ou salvar sua casa neste aparelho.'
+      );
+
+      return;
+
+    }
+
+
+    if(
+      /^(?:mais|próximas|proximas|continue(?:\s+as)?)\s+ocorrências?$/.test(
+        command.toLocaleLowerCase('pt-BR')
+      )
+    ){
+
+      await this.reportRioOccurrences(
+        true
+      );
+
+      return;
+
+    }
+
+
+    if(
+      normalized.includes('ocorrencias') &&
+      (
+        normalized.includes('me informe') ||
+        normalized.includes('informe') ||
+        normalized.includes('quais') ||
+        normalized.includes('de hoje') ||
+        normalized.includes('rio de janeiro')
+      )
+    ){
+
+      await this.reportRioOccurrences(
+        false
       );
 
       return;
@@ -4420,6 +4752,14 @@ const App = {
   routeHazards:[],
 
   chatMessages:[],
+
+  fogoRecentOccurrences:[],
+
+  fogoFeedLoaded:false,
+
+  fogoFeedError:false,
+
+  fogoFeedUpdatedAt:null,
 
   mqttClient:null,
 
@@ -11695,7 +12035,8 @@ document.addEventListener(
           './data/fogo-cruzado.json?ts='+Date.now(),
           {cache:'no-store'}
         );
-        if(!response.ok) return;
+        if(!response.ok)
+          throw new Error('Feed Fogo Cruzado indisponível');
 
         const feed=await response.json();
         let historyFeed=null;
@@ -11792,13 +12133,29 @@ document.addEventListener(
 
         const nowMs=Date.now();
 
-        recentOccurrences
+        const occurrencesLast24h=
+          recentOccurrences
           .filter(item=>{
             const time=new Date(item.date).getTime();
             if(!Number.isFinite(time)) return false;
             const ageHours=(nowMs-time)/3600000;
             return ageHours>=0 && ageHours<=24;
           })
+          .sort((a,b)=>new Date(b.date)-new Date(a.date));
+
+        App.fogoRecentOccurrences=
+          occurrencesLast24h;
+
+        App.fogoFeedLoaded=true;
+
+        App.fogoFeedError=false;
+
+        App.fogoFeedUpdatedAt=
+          feed.generatedAt ||
+          feed.lastUpdate ||
+          new Date().toISOString();
+
+        occurrencesLast24h
           .forEach(item=>{
           if(!Number.isFinite(item.longitude)||!Number.isFinite(item.latitude))
             return;
@@ -11849,15 +12206,22 @@ document.addEventListener(
         });
 
         window.RadarApp.fogoCruzado={
-          count:Number(feed.count||0),
+          count:occurrencesLast24h.length,
           generatedAt:feed.generatedAt||null,
           lastUpdate:feed.lastUpdate||null,
           source:feed.source||null
         };
+
+        return true;
       }catch(error){
+        App.fogoFeedError=true;
         console.warn('Fogo Cruzado indisponível no momento.',error);
+        return false;
       }
     };
+
+    window.RadarApp.refreshFogoCruzado=
+      loadFogoCruzado;
 
     if(App.map?.loaded())
       loadFogoCruzado();
