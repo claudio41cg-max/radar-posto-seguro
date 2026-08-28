@@ -1735,6 +1735,9 @@ const ANP_REPORT =
 */
 const VERIFIED_FUEL_INCIDENTS = [];
 
+const VERIFIED_FUEL_URL =
+'./data/postos-oficiais.json';
+
 const RJ_CENTER = [-43.40,-22.90];
 
 /*
@@ -2606,6 +2609,48 @@ const FuelModule = {
 
   loading:false,
 
+  officialLoaded:false,
+
+  async loadOfficial(){
+
+    if(this.officialLoaded)
+      return;
+
+    try{
+
+      const response=
+        await fetch(
+          VERIFIED_FUEL_URL,
+          {cache:'no-store'}
+        );
+
+      if(!response.ok)
+        throw new Error('Base oficial indisponível');
+
+      const items=
+        await response.json();
+
+      VERIFIED_FUEL_INCIDENTS.splice(
+        0,
+        VERIFIED_FUEL_INCIDENTS.length,
+        ...(Array.isArray(items)?items:[])
+      );
+
+    }catch(e){
+
+      console.warn(
+        'Falha ao carregar ocorrências oficiais:',
+        e
+      );
+
+    }finally{
+
+      this.officialLoaded=true;
+
+    }
+
+  },
+
   normalize(value){
 
     return String(value||'')
@@ -2669,6 +2714,8 @@ const FuelModule = {
 
 
     this.loading=true;
+
+    await this.loadOfficial();
 
     this.lastCenter=[
       center[0],
@@ -2761,6 +2808,41 @@ out center tags;`;
 
         })
         .filter(Boolean);
+
+
+      VERIFIED_FUEL_INCIDENTS
+      .filter(item=>
+        Utils.distanceKm(
+          [item.lng,item.lat],
+          center
+        )<=7.5
+      )
+      .forEach(item=>{
+
+        const duplicate=
+          this.stations.find(station=>
+            Utils.distanceKm(
+              [station.lng,station.lat],
+              [item.lng,item.lat]
+            )<0.08
+          );
+
+        if(duplicate){
+
+          duplicate.name=item.name;
+          duplicate.address=item.address;
+          duplicate.official=item;
+
+        }else{
+
+          this.stations.push({
+            ...item,
+            official:item
+          });
+
+        }
+
+      });
 
 
       this.render(App.map);
