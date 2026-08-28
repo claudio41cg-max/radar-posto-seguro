@@ -1,10 +1,10 @@
-const CACHE_NAME = 'radar-seguro-rj-v1';
+const CACHE_NAME = 'radar-seguro-rj-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
-  './icon-192.png',
-  './icon-512.png'
+  './icon-192-1.png',
+  './icon-512-1.png'
 ];
 
 self.addEventListener('install', (event) => {
