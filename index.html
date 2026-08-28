@@ -5642,18 +5642,8 @@ ${Utils.sanitize(item.display)}
       'car';
 
 
-    const headingParam=
-      (
-        this.currentSpeed>5
-      )
-      ?
-      `&vehicleHeading=${Math.round(this.currentBearing)}`
-      :
-      '';
-
-
     const url=
-`https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=${mode}&instructionsType=text&language=pt-BR&routeType=fastest${headingParam}`;
+`https://api.tomtom.com/routing/1/calculateRoute/${a[1]},${a[0]}:${b[1]},${b[0]}/json?key=${TOMTOM_KEY}&traffic=true&travelMode=${mode}&instructionsType=text&language=pt-BR&routeType=fastest&avoid=unpavedRoads`;
 
 
     const controller=
@@ -5663,7 +5653,7 @@ ${Utils.sanitize(item.display)}
     const timeout=
       setTimeout(
         ()=>controller.abort(),
-        4500
+        7000
       );
 
 
@@ -6404,7 +6394,7 @@ ${Utils.sanitize(item.display)}
       return;
 
 
-    let threshold=40;
+    let threshold=30;
 
 
     /*
@@ -6414,7 +6404,7 @@ ${Utils.sanitize(item.display)}
     if(
       this.isRoundaboutSoon()
     )
-      threshold=70;
+      threshold=55;
 
 
     if(
@@ -6440,7 +6430,7 @@ ${Utils.sanitize(item.display)}
     if(
       now-
       this.lastRerouteAt<
-      6500
+      2500
     )
       return;
 
@@ -6450,7 +6440,7 @@ ${Utils.sanitize(item.display)}
       RECALCULA LOGO.
     */
     if(
-      match.distance>68 ||
+      match.distance>52 ||
       this.offRouteHits>=2
     ){
 
@@ -6489,9 +6479,15 @@ ${Utils.sanitize(item.display)}
 
     try{
 
+      const routeOrigin=
+        this.filteredPos ||
+        this.rawUserPos ||
+        this.userPos;
+
+
       const newRoute=
         await this.getRoute(
-          this.userPos,
+          routeOrigin,
           this.destination
         );
 
@@ -6928,6 +6924,19 @@ ${Utils.sanitize(item.display)}
       return true;
 
 
+    /*
+      CURVA JÁ PRÓXIMA: FALA SOMENTE
+      A MANOBRA, SEM CONTAGEM LONGA.
+    */
+    if(
+      this.isTurnStep(
+        guidance.step
+      ) &&
+      guidance.distance<=180
+    )
+      return true;
+
+
     if(
       !guidance.next
     )
@@ -7244,9 +7253,17 @@ ${Utils.sanitize(item.display)}
 
           }else{
 
+            const spokenDistance=
+              Math.max(
+                50,
+                Math.round(
+                  distM/50
+                )*50
+              );
+
             Voice.speak(
               'Em '+
-              t+
+              spokenDistance+
               ' metros, '+
               phrase.toLowerCase()+
               street+
