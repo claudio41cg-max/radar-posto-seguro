@@ -3448,13 +3448,6 @@ const App = {
 
 
     const pauseFollow=()=>{
-
-      if(
-        !this.navActive
-      )
-        return;
-
-
       this.followMode=false;
 
 
@@ -3469,8 +3462,10 @@ const App = {
 
             this.followMode=true;
 
+            this.updateCamera();
+
           },
-          12000
+          10000
         );
 
     };
@@ -4505,6 +4500,9 @@ const App = {
           match.point
         );
 
+
+      this.updateRemainingRouteLine();
+
     }
 
 
@@ -5070,10 +5068,8 @@ const App = {
   updateCamera(){
 
     if(
-      !this.navActive ||
       !this.followMode ||
-      !this.userPos ||
-      this.rerouting
+      !this.userPos
     )
       return;
 
@@ -5093,7 +5089,42 @@ const App = {
     this.lastCameraUpdate=now;
 
 
-    let zoom=18.3;
+    /*
+      FORA DA NAVEGAÇÃO, O MAPA CONTINUA
+      ACOMPANHANDO O CARRO SEM ALTERAR
+      O ZOOM ESCOLHIDO PELO MOTORISTA.
+    */
+    if(
+      !this.navActive
+    ){
+
+      this.map.easeTo({
+
+        center:this.userPos,
+
+        zoom:this.map.getZoom(),
+
+        pitch:0,
+
+        bearing:0,
+
+        duration:520,
+
+        essential:true
+
+      });
+
+
+      return;
+
+    }
+
+
+    if(this.rerouting)
+      return;
+
+
+    let zoom=18.15;
 
     let lookAhead=65;
 
@@ -5102,26 +5133,78 @@ const App = {
       this.currentSpeed>70
     ){
 
-      zoom=16.7;
+      zoom=15.9;
+      lookAhead=300;
+
+    }
+
+    else if(
+      this.currentSpeed>52
+    ){
+
+      zoom=16.35;
       lookAhead=220;
 
     }
 
     else if(
-      this.currentSpeed>45
+      this.currentSpeed>32
     ){
 
-      zoom=17.15;
-      lookAhead=160;
+      zoom=16.95;
+      lookAhead=150;
 
     }
 
     else if(
-      this.currentSpeed>25
+      this.currentSpeed>18
     ){
 
-      zoom=17.65;
-      lookAhead=110;
+      zoom=17.5;
+      lookAhead=95;
+
+    }
+
+
+    const guidance=
+      this.getUpcomingGuidance();
+
+
+    const roadName=
+      String(
+        guidance?.step?.name||''
+      );
+
+
+    const majorRoad=
+      /(avenida|estrada|rodovia|linha|br-|presidente|expressa)/i
+      .test(roadName);
+
+
+    if(
+      majorRoad &&
+      this.currentSpeed>28
+    )
+      zoom-=.25;
+
+
+    /*
+      APROXIMA PROGRESSIVAMENTE ANTES
+      DE CURVAS, SAÍDAS E ROTATÓRIAS.
+    */
+    if(
+      guidance &&
+      this.isTurnStep(guidance.step)
+    ){
+
+      if(guidance.distance<350)
+        zoom=Math.max(zoom,17.15);
+
+      if(guidance.distance<170)
+        zoom=Math.max(zoom,17.65);
+
+      if(guidance.distance<75)
+        zoom=Math.max(zoom,18.05);
 
     }
 
@@ -6055,6 +6138,67 @@ ${Utils.sanitize(item.display)}
 /* =========================================================
    DESENHO ROTA
 ========================================================= */
+
+  updateRemainingRouteLine(){
+
+    if(
+      !this.route?.coords?.length ||
+      !this.map
+    )
+      return;
+
+
+    const source=
+      this.map.getSource(
+        'route'
+      );
+
+
+    if(!source)
+      return;
+
+
+    const start=
+      Math.max(
+        0,
+        Math.min(
+          this.routeProgressIndex+1,
+          this.route.coords.length-1
+        )
+      );
+
+
+    const remaining=[
+
+      this.userPos,
+
+      ...this.route.coords.slice(
+        start
+      )
+
+    ];
+
+
+    if(remaining.length<2)
+      return;
+
+
+    source.setData({
+
+      type:'Feature',
+
+      geometry:{
+
+        type:'LineString',
+
+        coordinates:remaining
+
+      }
+
+    });
+
+  },
+
 
   drawRoute(route,fit=true){
 
