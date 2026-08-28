@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v6';
+const CACHE_NAME = 'radar-seguro-rj-v7';
 const APP_SHELL = [
   './',
   './index.html',
@@ -32,6 +32,23 @@ self.addEventListener('fetch', (event) => {
   const isAppShell = url.origin === self.location.origin;
 
   if (!isAppShell) return; // deixa passar direto pra rede
+
+  // Dados oficiais mudam sem que o código do app precise mudar.
+  // Busca primeiro na internet e usa o cache somente se estiver offline.
+  if (url.pathname.includes('/data/')) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then((resp) => {
+          const respClone = resp.clone();
+          caches.open(CACHE_NAME).then((cache) =>
+            cache.put(event.request, respClone)
+          );
+          return resp;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cached) => {
