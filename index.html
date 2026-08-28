@@ -475,6 +475,33 @@ body.nav-mode .speedometer-box{
   to{transform:scale(1.07)}
 }
 
+.fogo-live-marker{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  border:3px solid #fff;
+  background:#ef2929;
+  box-shadow:0 0 0 5px rgba(239,41,41,.28),0 4px 12px rgba(0,0,0,.55);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:17px;
+  font-weight:900;
+  cursor:pointer;
+  animation:fogoLivePulse .8s infinite alternate
+}
+
+@keyframes fogoLivePulse{
+  from{
+    transform:scale(.92);
+    box-shadow:0 0 0 3px rgba(239,41,41,.25),0 4px 12px rgba(0,0,0,.5)
+  }
+  to{
+    transform:scale(1.12);
+    box-shadow:0 0 0 10px rgba(239,41,41,.08),0 5px 16px rgba(0,0,0,.6)
+  }
+}
+
 
 /* =========================================================
    RECENTRALIZAR
@@ -10578,29 +10605,27 @@ document.addEventListener(
             communitiesPolygonGeoJSON(occurrenceStatusByName)
           );
 
-        allOccurrences
-          .filter(item=>rioDateKey(item.date)===todayKey)
+        (App.fogoMarkers||[]).forEach(marker=>marker.remove());
+        App.fogoMarkers=[];
+
+        const nowMs=Date.now();
+
+        recentOccurrences
+          .filter(item=>{
+            const time=new Date(item.date).getTime();
+            if(!Number.isFinite(time)) return false;
+            const ageHours=(nowMs-time)/3600000;
+            return ageHours>=0 && ageHours<=24;
+          })
           .forEach(item=>{
           if(!Number.isFinite(item.longitude)||!Number.isFinite(item.latitude))
             return;
 
           const marker=document.createElement('button');
           marker.type='button';
-          marker.setAttribute('aria-label','Ocorrência de hoje informada pelo Fogo Cruzado');
-          marker.title='Ocorrência de hoje • Fogo Cruzado';
-          marker.style.cssText=[
-            'width:30px',
-            'height:30px',
-            'border-radius:50%',
-            'border:3px solid #fff',
-            'background:#ff5722',
-            'box-shadow:0 0 0 5px rgba(255,87,34,.25),0 4px 12px rgba(0,0,0,.5)',
-            'color:#fff',
-            'display:grid',
-            'place-items:center',
-            'font-size:16px',
-            'cursor:pointer'
-          ].join(';');
+          marker.className='fogo-live-marker';
+          marker.setAttribute('aria-label','Ocorrência das últimas 24 horas informada pelo Fogo Cruzado');
+          marker.title='Ocorrência recente • Fogo Cruzado';
           marker.textContent='!';
 
           const date=new Date(item.date);
@@ -10621,7 +10646,7 @@ document.addEventListener(
             maxWidth:'310px'
           }).setHTML(
             '<div style="color:#101828;font-family:Arial,sans-serif;line-height:1.35">'+
-              '<strong style="font-size:15px">⚠️ Ocorrência de hoje</strong><br>'+
+              '<strong style="font-size:15px">⚠️ Ocorrência das últimas 24 horas</strong><br>'+
               '<b>Data e hora:</b> '+escapeFogoText(when)+'<br>'+
               '<b>Bairro:</b> '+escapeFogoText(item.neighborhood||'Não informado')+'<br>'+
               '<b>Local:</b> '+escapeFogoText(item.locality||item.address||'Não informado')+'<br>'+
@@ -10633,10 +10658,12 @@ document.addEventListener(
             '</div>'
           );
 
-          new maplibregl.Marker({element:marker,anchor:'center'})
+          const mapMarker=new maplibregl.Marker({element:marker,anchor:'center'})
             .setLngLat([item.longitude,item.latitude])
             .setPopup(popup)
             .addTo(App.map);
+
+          App.fogoMarkers.push(mapMarker);
         });
 
         window.RadarApp.fogoCruzado={
@@ -10654,6 +10681,11 @@ document.addEventListener(
       loadFogoCruzado();
     else
       App.map?.once('load',loadFogoCruzado);
+
+    setInterval(
+      loadFogoCruzado,
+      5*60*1000
+    );
   }
 );
 
