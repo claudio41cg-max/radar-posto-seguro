@@ -50,7 +50,6 @@ const query = new URLSearchParams({
   finaldate: ymd(finalDate)
 });
 if (city.state?.id) query.set("idState", city.state.id);
-query.append("idCities", city.id);
 
 const result = await api(`/occurrences?${query}`, { headers });
 const occurrences = (result.body?.data || []).map(item => ({
@@ -81,17 +80,14 @@ const output = {
     api: "https://api.fogocruzado.org.br/"
   },
   scope: {
-    city: "Rio de Janeiro",
     state: "Rio de Janeiro",
+    coverage: "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     days: 7
   },
   count: occurrences.length,
   lastUpdate: result.headers.get("x-last-update"),
   occurrences
 };
-
-await mkdir("data", { recursive: true });
-await writeFile("data/fogo-cruzado.json", JSON.stringify(output, null, 2) + "\n");
 
 const readJson = async path => {
   try {
@@ -103,6 +99,9 @@ const readJson = async path => {
 
 const previousHistory = await readJson("data/fogo-cruzado-history.json");
 const previousFeed = await readJson("data/fogo-cruzado.json");
+
+await mkdir("data", { recursive: true });
+await writeFile("data/fogo-cruzado.json", JSON.stringify(output, null, 2) + "\n");
 const merged = [
   ...(previousHistory?.occurrences || []),
   ...(previousFeed?.occurrences || []),
