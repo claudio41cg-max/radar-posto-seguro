@@ -2811,12 +2811,6 @@ out center tags;`;
 
 
       VERIFIED_FUEL_INCIDENTS
-      .filter(item=>
-        Utils.distanceKm(
-          [item.lng,item.lat],
-          center
-        )<=7.5
-      )
       .forEach(item=>{
 
         const duplicate=
