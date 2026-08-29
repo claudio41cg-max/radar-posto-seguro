@@ -538,7 +538,11 @@ Object.assign(officialCommunityGeometries,${JSON.stringify(officialGeometries)})
   const appStartAfter = html.indexOf('const App = {');
   const appEndAfter = html.indexOf('\n};\n\n\nwindow.RadarApp={', appStartAfter);
   const protectedAppAfter = html.slice(appStartAfter, appEndAfter + 4);
-  if (protectedAppBefore !== protectedAppAfter)
+  const protectedAppWithAuthorizedLabel = protectedAppBefore.replace(
+    "            ? 'Ocorrência recente'",
+    "            ? 'Ocorrência de ontem'"
+  );
+  if (protectedAppWithAuthorizedLabel !== protectedAppAfter)
     throw new Error('Proteção falhou: a navegação foi alterada.');
 
   const rawStart = html.indexOf('const rawAreas = [');
