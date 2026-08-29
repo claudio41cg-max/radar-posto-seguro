@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T12:39:44.792Z",
+  "generatedAt": "2026-08-29T12:54:34.243Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-08-29T09:38:17-03:00",
+  "count": 56,
+  "lastUpdate": "2026-08-29T09:40:45-03:00",
   "occurrences": [
+    {
+      "id": "3194db92-df63-44be-94bd-a5e487f8af99",
+      "documentNumber": 78825,
+      "date": "2026-08-29T04:04:00.000Z",
+      "address": "Corte Oito, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.774734,
+      "longitude": -43.3047139,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "4c798514-09f7-4557-8b8e-4a8945f52612",
       "documentNumber": 78817,
@@ -74,21 +89,6 @@
       "victims": []
     },
     {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -107,6 +107,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
+      "documentNumber": 78810,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8727268,
+      "longitude": -43.4949441,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "676a5c31-6dc0-4aee-b1c5-067180f6379f",
@@ -246,12 +261,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
@@ -385,11 +400,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -500,26 +515,6 @@
       "victims": []
     },
     {
-      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
-      "documentNumber": 78816,
-      "date": "2026-08-26T00:00:00.000Z",
-      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
-      "neighborhood": "COLUBANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8415893,
-      "longitude": -43.0095728,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "bdca0f2b-7edd-4983-9866-b0d2c8c4e164",
       "documentNumber": 78815,
       "date": "2026-08-26T00:00:00.000Z",
@@ -537,6 +532,26 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
+      "documentNumber": 78816,
+      "date": "2026-08-26T00:00:00.000Z",
+      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
+      "neighborhood": "COLUBANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8415893,
+      "longitude": -43.0095728,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -564,21 +579,6 @@
       ]
     },
     {
-      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
-      "documentNumber": 78750,
-      "date": "2026-08-25T15:00:00.000Z",
-      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9218834,
-      "longitude": -43.2215127,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "8ebd83ba-67e5-4519-be52-2f00e3a1da0e",
       "documentNumber": 78758,
       "date": "2026-08-25T15:00:00.000Z",
@@ -597,6 +597,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
+      "documentNumber": 78750,
+      "date": "2026-08-25T15:00:00.000Z",
+      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9218834,
+      "longitude": -43.2215127,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "71f19c9e-10ce-4945-8ec1-3bc931876e74",
