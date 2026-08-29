@@ -1,0 +1,26 @@
+name: Limpar arquivos temporarios do refinamento visual
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/temp-limpar-refinamento-visual.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  limpar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remover somente os arquivos temporarios desta correção
+        shell: bash
+        run: |
+          git config user.name "Radar Seguro Bot"
+          git config user.email "actions@users.noreply.github.com"
+          rm -f             .github/scripts/temp-refine-marker-polygons.js             .github/workflows/temp-refinar-alvos-poligonos.yml             .github/workflows/temp-limpar-refinamento-visual.yml
+          git add -A
+          git commit -m "Remover rotinas temporárias do refinamento visual"
+          git push
