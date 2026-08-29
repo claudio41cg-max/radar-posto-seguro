@@ -6650,6 +6650,20 @@ const App = {
 
   currentAccuracy:999,
 
+  lastGPSAt:0,
+
+  lastRawAt:0,
+
+  gpsKalman:null,
+
+  gpsContinuityTimer:null,
+
+  lastTrustedProgressMeters:0,
+
+  lastTrustedSpeed:0,
+
+  matchConfidence:0,
+
   followMode:true,
 
   manualFollowTimer:null,
@@ -7631,9 +7645,7 @@ const App = {
 
   startGPS(){
 
-    if(
-      !navigator.geolocation
-    ){
+    if(!navigator.geolocation){
 
       this.setGPSStatus(
         false,
@@ -7645,14 +7657,23 @@ const App = {
     }
 
 
-    if(
-      this.GPSWatch!=null
-    ){
+    if(this.GPSWatch!=null){
 
       navigator.geolocation
       .clearWatch(
         this.GPSWatch
       );
+
+    }
+
+
+    if(!this.gpsContinuityTimer){
+
+      this.gpsContinuityTimer=
+        setInterval(
+          ()=>this.continueDuringGPSGap(),
+          1000
+        );
 
     }
 
@@ -7671,9 +7692,9 @@ const App = {
 
           enableHighAccuracy:true,
 
-          maximumAge:900,
+          maximumAge:500,
 
-          timeout:12000
+          timeout:10000
 
         }
 
@@ -7702,6 +7723,24 @@ const App = {
 
   handleGPSError(error){
 
+    const gap=
+      Date.now()-
+      this.lastGPSAt;
+
+
+    if(
+      this.navActive &&
+      gap<8000 &&
+      this.currentSpeed>6
+    ){
+
+      this.continueDuringGPSGap();
+
+      return;
+
+    }
+
+
     this.setGPSStatus(
       false,
       error.code===1
@@ -7714,10 +7753,339 @@ const App = {
   },
 
 
+  filterGPSPosition(
+    raw,
+    accuracy,
+    speedKmh,
+    timestamp
+  ){
+
+    const measurementAccuracy=
+      Math.max(
+        5,
+        Math.min(
+          100,
+          accuracy||100
+        )
+      );
+
+
+    if(
+      !this.gpsKalman ||
+      !Number.isFinite(
+        this.gpsKalman.timestamp
+      ) ||
+      timestamp-
+      this.gpsKalman.timestamp>
+      15000
+    ){
+
+      this.gpsKalman={
+
+        point:[
+          raw[0],
+          raw[1]
+        ],
+
+        variance:
+          measurementAccuracy*
+          measurementAccuracy,
+
+        timestamp
+
+      };
+
+
+      return [
+        raw[0],
+        raw[1]
+      ];
+
+    }
+
+
+    const dt=
+      Math.max(
+        .2,
+        Math.min(
+          5,
+          (
+            timestamp-
+            this.gpsKalman.timestamp
+          )/1000
+        )
+      );
+
+
+    /*
+      FILTRO DE KALMAN ADAPTATIVO:
+      reage mais rápido quando o carro anda
+      e confia menos em leituras imprecisas.
+    */
+    const processSigma=
+      2.5+
+      Math.max(
+        0,
+        speedKmh
+      )/7.2;
+
+
+    this.gpsKalman.variance+=
+      processSigma*
+      processSigma*
+      dt;
+
+
+    const measurementVariance=
+      measurementAccuracy*
+      measurementAccuracy;
+
+
+    const minimumGain=
+      speedKmh>60
+      ?
+      .28
+      :
+      speedKmh>25
+      ?
+      .20
+      :
+      .10;
+
+
+    const gain=
+      Math.max(
+        minimumGain,
+        Math.min(
+          .86,
+          this.gpsKalman.variance/
+          (
+            this.gpsKalman.variance+
+            measurementVariance
+          )
+        )
+      );
+
+
+    this.gpsKalman.point=[
+
+      this.gpsKalman.point[0]+
+      (
+        raw[0]-
+        this.gpsKalman.point[0]
+      )*gain,
+
+      this.gpsKalman.point[1]+
+      (
+        raw[1]-
+        this.gpsKalman.point[1]
+      )*gain
+
+    ];
+
+
+    this.gpsKalman.variance=
+      Math.max(
+        4,
+        (
+          1-gain
+        )*
+        this.gpsKalman.variance
+      );
+
+
+    this.gpsKalman.timestamp=
+      timestamp;
+
+
+    return [
+      this.gpsKalman.point[0],
+      this.gpsKalman.point[1]
+    ];
+
+  },
+
+
+  continueDuringGPSGap(){
+
+    if(
+      !this.navActive ||
+      !this.route?.cumulative?.length ||
+      !this.lastGPSAt ||
+      this.rerouting
+    )
+      return;
+
+
+    const gapMs=
+      Date.now()-
+      this.lastGPSAt;
+
+
+    if(gapMs<=2200)
+      return;
+
+
+    if(
+      gapMs>8000 ||
+      this.lastTrustedSpeed<6 ||
+      this.currentAccuracy>50
+    ){
+
+      if(gapMs>8000)
+        this.setGPSStatus(
+          false,
+          'GPS...'
+        );
+
+      return;
+
+    }
+
+
+    const speedMps=
+      this.lastTrustedSpeed/
+      3.6;
+
+
+    /*
+      CONTINUIDADE CURTA E CONSERVADORA:
+      projeta no máximo 45 m e somente
+      sobre a rota já calculada.
+    */
+    const advance=
+      Math.min(
+        45,
+        speedMps*
+        (
+          gapMs/1000
+        )
+      );
+
+
+    const total=
+      this.route.cumulative[
+        this.route.cumulative.length-1
+      ]||0;
+
+
+    const target=
+      Math.min(
+        total,
+        this.lastTrustedProgressMeters+
+        advance
+      );
+
+
+    if(
+      target<=
+      this.routeProgressMeters+.5
+    )
+      return;
+
+
+    const index=
+      this.findIndexForOffset(
+        this.route,
+        target
+      );
+
+
+    const a=
+      this.route.coords[index];
+
+
+    const nextIndex=
+      Math.min(
+        index+1,
+        this.route.coords.length-1
+      );
+
+
+    const b=
+      this.route.coords[nextIndex];
+
+
+    const aDistance=
+      this.route.cumulative[index]||0;
+
+
+    const bDistance=
+      this.route.cumulative[nextIndex]||
+      aDistance;
+
+
+    const t=
+      Math.max(
+        0,
+        Math.min(
+          1,
+          (
+            target-
+            aDistance
+          )/
+          Math.max(
+            1,
+            bDistance-
+            aDistance
+          )
+        )
+      );
+
+
+    this.userPos=
+      Utils.interpolatePoint(
+        a,
+        b,
+        t
+      );
+
+
+    this.routeProgressIndex=
+      Math.max(
+        this.routeProgressIndex,
+        index
+      );
+
+
+    this.routeProgressMeters=
+      target;
+
+
+    this.currentBearing=
+      Utils.bearing(
+        a,
+        b
+      );
+
+
+    this.updateRemainingRouteLine();
+
+    this.updateUserMarker();
+
+    this.updateNavigation();
+
+    this.setGPSStatus(
+      true,
+      'GPS EST.'
+    );
+
+  },
+
   handleGPS(position){
 
     const c=
       position.coords;
+
+
+    const timestamp=
+      Number.isFinite(
+        position.timestamp
+      )
+      ?
+      position.timestamp
+      :
+      Date.now();
 
 
     const raw=[
@@ -7730,30 +8098,10 @@ const App = {
       c.accuracy||999;
 
 
-    let speedKmh=
-      (
-        c.speed!=null &&
-        !Number.isNaN(c.speed)
-      )
-      ?
-      c.speed*3.6
-      :
-      0;
-
-
-    if(
-      this.currentAccuracy>120 &&
-      this.userPos
-    )
-      return;
-
-
     let movedMeters=0;
 
 
-    if(
-      this.lastRawPos
-    ){
+    if(this.lastRawPos){
 
       movedMeters=
         Utils.distanceKm(
@@ -7764,24 +8112,118 @@ const App = {
     }
 
 
-    /*
-      IGNORA SALTOS ABSURDOS DO GPS.
-    */
-    if(
+    const sampleSeconds=
+      this.lastRawAt
+      ?
+      Math.max(
+        .25,
+        Math.min(
+          12,
+          (
+            timestamp-
+            this.lastRawAt
+          )/1000
+        )
+      )
+      :
+      1;
+
+
+    const derivedSpeed=
       this.lastRawPos &&
-      movedMeters>180 &&
-      speedKmh<25
+      sampleSeconds<10
+      ?
+      movedMeters/
+      sampleSeconds*
+      3.6
+      :
+      0;
+
+
+    let speedKmh=
+      (
+        c.speed!=null &&
+        !Number.isNaN(c.speed) &&
+        c.speed>=0
+      )
+      ?
+      c.speed*3.6
+      :
+      derivedSpeed;
+
+
+    if(
+      speedKmh<2 &&
+      derivedSpeed>4 &&
+      this.currentAccuracy<45
+    )
+      speedKmh=derivedSpeed;
+
+
+    speedKmh=
+      Math.max(
+        0,
+        Math.min(
+          180,
+          speedKmh
+        )
+      );
+
+
+    if(
+      this.currentAccuracy>100 &&
+      this.userPos
     )
       return;
 
 
     /*
-      PARADO: NÃO MOVE MARCADOR NEM CÂMERA
-      POR PEQUENA OSCILAÇÃO DE GPS.
+      REJEITA SALTOS IMPOSSÍVEIS USANDO
+      PRECISÃO, VELOCIDADE E TEMPO.
     */
+    if(this.lastRawPos){
+
+      const allowedJump=
+        Math.max(
+          85,
+          this.currentAccuracy*3.2,
+          (
+            Math.max(
+              speedKmh,
+              this.currentSpeed,
+              10
+            )/3.6
+          )*
+          sampleSeconds*
+          3+
+          35
+        );
+
+
+      if(
+        movedMeters>
+        allowedJump &&
+        sampleSeconds<12
+      )
+        return;
+
+    }
+
+
+    this.lastGPSAt=
+      Date.now();
+
+
     const stationary=
       speedKmh<2.2 &&
-      movedMeters<6;
+      movedMeters<
+      Math.max(
+        5,
+        Math.min(
+          9,
+          this.currentAccuracy*.22
+        )
+      );
 
 
     if(
@@ -7793,7 +8235,11 @@ const App = {
 
       this.lastRawPos=raw;
 
+      this.lastRawAt=timestamp;
+
       this.currentSpeed=0;
+
+      this.lastTrustedSpeed=0;
 
       this.updateSpeedUI();
 
@@ -7811,52 +8257,13 @@ const App = {
     }
 
 
-    /*
-      FILTRO SUAVE DA POSIÇÃO.
-    */
-    if(
-      !this.filteredPos
-    ){
-
-      this.filteredPos=[
-        raw[0],
-        raw[1]
-      ];
-
-    }else{
-
-      let alpha=.42;
-
-
-      if(
-        speedKmh>50
-      )
-        alpha=.62;
-
-
-      if(
-        this.currentAccuracy>35
-      )
-        alpha=.26;
-
-
-      this.filteredPos=[
-
-        this.filteredPos[0]+
-        (
-          raw[0]-
-          this.filteredPos[0]
-        )*alpha,
-
-        this.filteredPos[1]+
-        (
-          raw[1]-
-          this.filteredPos[1]
-        )*alpha
-
-      ];
-
-    }
+    this.filteredPos=
+      this.filterGPSPosition(
+        raw,
+        this.currentAccuracy,
+        speedKmh,
+        timestamp
+      );
 
 
     let heading=
@@ -7881,17 +8288,13 @@ const App = {
     }
 
 
-    /*
-      DIREÇÃO SÓ É ALTERADA QUANDO
-      O CARRO ESTÁ REALMENTE SE MOVENDO.
-    */
     if(
       heading!=null &&
       !Number.isNaN(heading) &&
       speedKmh>4
     ){
 
-      let delta=
+      const delta=
         (
           (
             heading-
@@ -7901,13 +8304,19 @@ const App = {
         )-180;
 
 
-      /*
-        SUAVIZA A ROTAÇÃO.
-      */
+      const headingGain=
+        speedKmh>45
+        ?
+        .46
+        :
+        .34;
+
+
       this.currentBearing=
         (
           this.currentBearing+
-          delta*.34+
+          delta*
+          headingGain+
           360
         )%360;
 
@@ -7918,12 +8327,22 @@ const App = {
 
     this.lastRawPos=raw;
 
-    this.currentSpeed=speedKmh;
+    this.lastRawAt=timestamp;
+
+
+    this.currentSpeed=
+      this.currentSpeed>0
+      ?
+      this.currentSpeed*.56+
+      speedKmh*.44
+      :
+      speedKmh;
 
 
     const match=
       this.matchPositionToRoute(
-        this.filteredPos
+        this.filteredPos,
+        sampleSeconds
       );
 
 
@@ -7931,8 +8350,13 @@ const App = {
       match.point;
 
 
+    this.matchConfidence=
+      match.confidence||0;
+
+
     if(
-      this.route
+      this.route &&
+      match.snapped
     ){
 
       this.routeProgressIndex=
@@ -7943,10 +8367,18 @@ const App = {
 
 
       this.routeProgressMeters=
-        this.calculateProgressMeters(
-          match.index,
-          match.point
+        Math.max(
+          this.routeProgressMeters,
+          match.progress
         );
+
+
+      this.lastTrustedProgressMeters=
+        this.routeProgressMeters;
+
+
+      this.lastTrustedSpeed=
+        this.currentSpeed;
 
 
       this.updateRemainingRouteLine();
@@ -7964,9 +8396,7 @@ const App = {
     );
 
 
-    if(
-      !this._firstGPS
-    ){
+    if(!this._firstGPS){
 
       this._firstGPS=true;
 
@@ -8003,7 +8433,6 @@ const App = {
 
   },
 
-
   setGPSStatus(ok,text){
 
     const e=
@@ -8029,7 +8458,10 @@ const App = {
    MAP MATCHING
 ========================================================= */
 
-  matchPositionToRoute(point){
+  matchPositionToRoute(
+    point,
+    sampleSeconds=1
+  ){
 
     if(
       !this.route ||
@@ -8041,7 +8473,10 @@ const App = {
         point,
         index:0,
         distance:0,
-        bearing:this.currentBearing
+        bearing:this.currentBearing,
+        progress:0,
+        snapped:false,
+        confidence:1
       };
 
     }
@@ -8054,14 +8489,53 @@ const App = {
     const start=
       Math.max(
         0,
-        this.routeProgressIndex-20
+        this.routeProgressIndex-35
       );
 
 
     const end=
       Math.min(
         coords.length-2,
-        this.routeProgressIndex+260
+        this.routeProgressIndex+420
+      );
+
+
+    const speedMps=
+      Math.max(
+        0,
+        this.currentSpeed
+      )/3.6;
+
+
+    const expectedProgress=
+      this.routeProgressMeters+
+      speedMps*
+      Math.max(
+        .5,
+        Math.min(
+          5,
+          sampleSeconds
+        )
+      );
+
+
+    const backwardTolerance=
+      Math.max(
+        16,
+        speedMps*1.4
+      );
+
+
+    const forwardAllowance=
+      Math.max(
+        55,
+        speedMps*
+        Math.max(
+          1,
+          sampleSeconds
+        )*
+        3+
+        30
       );
 
 
@@ -8084,51 +8558,110 @@ const App = {
         );
 
 
-      const headingPenalty=
+      const segmentLength=
+        Math.max(
+          0,
+          (
+            this.route.cumulative?.[
+              i+1
+            ]||0
+          )-
+          (
+            this.route.cumulative?.[
+              i
+            ]||0
+          )
+        );
+
+
+      const progress=
         (
-          this.currentSpeed>5
-        )
-        ?
+          this.route.cumulative?.[i]||
+          0
+        )+
+        segmentLength*
+        r.t;
+
+
+      const headingDifference=
         Utils.angleDiff(
           this.currentBearing,
           r.bearing
-        )*.32
-        :
-        0;
+        );
 
 
-      const backwardPenalty=
-        (
-          i<
-          this.routeProgressIndex-4
-        )
+      const headingPenalty=
+        this.currentSpeed>7
         ?
-        90
+        headingDifference*
+        (
+          this.currentSpeed>38
+          ?
+          .52
+          :
+          .34
+        )
         :
         0;
+
+
+      let continuityPenalty=0;
+
+
+      if(
+        progress<
+        this.routeProgressMeters-
+        backwardTolerance
+      ){
+
+        continuityPenalty+=
+          120+
+          (
+            this.routeProgressMeters-
+            backwardTolerance-
+            progress
+          )*2.4;
+
+      }
+
+
+      if(
+        progress>
+        expectedProgress+
+        forwardAllowance
+      ){
+
+        continuityPenalty+=
+          (
+            progress-
+            expectedProgress-
+            forwardAllowance
+          )*.58;
+
+      }
+
+
+      if(
+        this.currentSpeed>12 &&
+        headingDifference>105
+      )
+        continuityPenalty+=85;
 
 
       const score=
         r.distanceMeters+
         headingPenalty+
-        backwardPenalty;
+        continuityPenalty;
 
 
-      if(
-        score<bestScore
-      ){
+      if(score<bestScore){
 
         bestScore=score;
 
 
         best={
 
-          point:
-            r.distanceMeters<=34
-            ?
-            r.point
-            :
-            point,
+          rawPoint:r.point,
 
           index:i,
 
@@ -8136,7 +8669,11 @@ const App = {
             r.distanceMeters,
 
           bearing:
-            r.bearing
+            r.bearing,
+
+          headingDifference,
+
+          progress
 
         };
 
@@ -8145,22 +8682,139 @@ const App = {
     }
 
 
-    return best||{
+    if(!best){
 
-      point,
+      return {
+        point,
+        index:
+          this.routeProgressIndex,
+        distance:999,
+        bearing:
+          this.currentBearing,
+        progress:
+          this.routeProgressMeters,
+        snapped:false,
+        confidence:0
+      };
+
+    }
+
+
+    const accuracy=
+      Math.max(
+        5,
+        Math.min(
+          80,
+          this.currentAccuracy||80
+        )
+      );
+
+
+    const snapLimit=
+      Math.min(
+        64,
+        Math.max(
+          25,
+          17+
+          accuracy*.78+
+          (
+            this.currentSpeed>60
+            ?
+            7
+            :
+            0
+          )
+        )
+      );
+
+
+    const directionOK=
+      this.currentSpeed<8 ||
+      best.headingDifference<=82 ||
+      best.distance<=12;
+
+
+    const progressOK=
+      best.progress>=
+      this.routeProgressMeters-
+      backwardTolerance &&
+      best.progress<=
+      expectedProgress+
+      forwardAllowance*
+      1.8;
+
+
+    const snapped=
+      best.distance<=
+      snapLimit &&
+      directionOK &&
+      progressOK;
+
+
+    const distanceConfidence=
+      Math.max(
+        0,
+        1-
+        best.distance/
+        snapLimit
+      );
+
+
+    const headingConfidence=
+      this.currentSpeed<8
+      ?
+      1
+      :
+      Math.max(
+        0,
+        1-
+        best.headingDifference/
+        120
+      );
+
+
+    return {
+
+      point:
+        snapped
+        ?
+        best.rawPoint
+        :
+        point,
 
       index:
+        snapped
+        ?
+        best.index
+        :
         this.routeProgressIndex,
 
-      distance:999,
+      distance:
+        best.distance,
 
       bearing:
-        this.currentBearing
+        best.bearing,
+
+      progress:
+        snapped
+        ?
+        best.progress
+        :
+        this.routeProgressMeters,
+
+      snapped,
+
+      confidence:
+        snapped
+        ?
+        distanceConfidence*.72+
+        headingConfidence*.28
+        :
+        0
 
     };
 
   },
-
 
 /* =========================================================
    DISTÂNCIA ACUMULADA DA ROTA
@@ -9548,6 +10202,10 @@ ${Utils.sanitize(item.display)}
 
       this.routeProgressMeters=0;
 
+      this.lastTrustedProgressMeters=0;
+
+      this.lastTrustedSpeed=0;
+
       this.routeStepIndex=0;
 
       this.activeGuidanceStep=-1;
@@ -9962,12 +10620,7 @@ ${Utils.sanitize(item.display)}
       return;
 
 
-    /*
-      PARADO NÃO RECALCULA.
-    */
-    if(
-      this.currentSpeed<4
-    ){
+    if(this.currentSpeed<4){
 
       this.offRouteHits=0;
 
@@ -9977,32 +10630,29 @@ ${Utils.sanitize(item.display)}
 
 
     /*
-      GPS COM PRECISÃO RUIM NÃO GERA
-      RECÁLCULO SOZINHO.
+      UMA LEITURA RUIM NÃO PODE
+      FORÇAR RECÁLCULO.
     */
-    if(
-      this.currentAccuracy>45
-    )
+    if(this.currentAccuracy>55)
       return;
 
 
-    let threshold=30;
+    let threshold=
+      Math.max(
+        28,
+        Math.min(
+          48,
+          24+
+          this.currentAccuracy*.38
+        )
+      );
 
 
-    /*
-      ROTATÓRIA E CURVAS FECHADAS
-      GANHAM MAIS TOLERÂNCIA.
-    */
-    if(
-      this.isRoundaboutSoon()
-    )
-      threshold=55;
+    if(this.isRoundaboutSoon())
+      threshold=60;
 
 
-    if(
-      match.distance>
-      threshold
-    ){
+    if(match.distance>threshold){
 
       this.offRouteHits++;
 
@@ -10027,13 +10677,27 @@ ${Utils.sanitize(item.display)}
       return;
 
 
-    /*
-      SE O CARRO ESTÁ REALMENTE LONGE DA ROTA,
-      RECALCULA LOGO.
-    */
+    const requiredHits=
+      this.currentAccuracy<=20
+      ?
+      2
+      :
+      3;
+
+
+    const clearlyAway=
+      match.distance>
+      Math.max(
+        75,
+        this.currentAccuracy*2+
+        30
+      );
+
+
     if(
-      match.distance>52 ||
-      this.offRouteHits>=2
+      clearlyAway ||
+      this.offRouteHits>=
+      requiredHits
     ){
 
       this.offRouteHits=0;
@@ -10043,7 +10707,6 @@ ${Utils.sanitize(item.display)}
     }
 
   },
-
 
   async recalculateRoute(){
 
@@ -10091,6 +10754,10 @@ ${Utils.sanitize(item.display)}
       this.routeProgressIndex=0;
 
       this.routeProgressMeters=0;
+
+      this.lastTrustedProgressMeters=0;
+
+      this.lastTrustedSpeed=0;
 
       this.routeStepIndex=0;
 
@@ -12107,6 +12774,10 @@ fill="#22c55e"/>
 
     this.routeProgressMeters=0;
 
+    this.lastTrustedProgressMeters=0;
+
+    this.lastTrustedSpeed=0;
+
     this.routeStepIndex=0;
 
     this.activeGuidanceStep=-1;
@@ -12295,6 +12966,10 @@ fill="#22c55e"/>
     this.routeProgressIndex=0;
 
     this.routeProgressMeters=0;
+
+    this.lastTrustedProgressMeters=0;
+
+    this.lastTrustedSpeed=0;
 
     this.routeStepIndex=0;
 
@@ -13921,6 +14596,17 @@ ${Utils.sanitize(msg.text)}
           );
 
           this.GPSWatch=null;
+
+        }
+
+
+        if(this.gpsContinuityTimer){
+
+          clearInterval(
+            this.gpsContinuityTimer
+          );
+
+          this.gpsContinuityTimer=null;
 
         }
 
