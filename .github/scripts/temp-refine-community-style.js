@@ -24,8 +24,8 @@ function replaceRange(start, end, replacement, label) {
   html = html.slice(0, start) + replacement + '\n\n' + html.slice(end);
 }
 
-const removalOld = `        'community-dot',\n+        'community-outline',`;
-const removalNew = `        'community-dot',\n+        'community-inner-shadow',\n+        'community-inner-glow',\n+        'community-outline',`;
+const removalOld = `        'community-dot',\n        'community-outline',`;
+const removalNew = `        'community-dot',\n        'community-inner-shadow',\n        'community-inner-glow',\n        'community-outline',`;
 if (!html.includes(removalOld)) throw new Error('Lista de remoção das camadas não encontrada');
 html = html.replace(removalOld, removalNew);
 
