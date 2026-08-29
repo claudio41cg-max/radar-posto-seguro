@@ -150,11 +150,11 @@ async function main() {
 
   const definitions = [
     {
-      appName: 'Cidade de Deus (CDD)', preferred: [-43.3644, -22.9430],
+      appName: 'Vidigal', preferred: [-43.2356, -22.9939],
       match(p) {
         const name = normalize(p.nome), complex = normalize(p.complexo);
-        return complex === 'cidade de deus' ||
-          complex.includes('complexo cidade de deus') || name === 'cidade de deus';
+        return complex === 'vidigal' || complex === 'complexo do vidigal' ||
+          name === 'vidigal';
       }
     },
     {
@@ -193,16 +193,20 @@ async function main() {
       seed = nearest.feature;
       const seedComplex = normalize((seed.properties || {}).complexo);
       const seedName = normalize((seed.properties || {}).nome);
+      if (!seedName)
+        throw new Error('Feição oficial sem nome próxima de ' + definition.appName);
       matches = sabren.features.filter(feature => {
         if (!feature.geometry) return false;
         const properties = feature.properties || {};
-        return seedComplex
+        return seedComplex && seedComplex !== 'isolada'
           ? normalize(properties.complexo) === seedComplex
           : normalize(properties.nome) === seedName;
       });
     }
     if (!matches.length)
       throw new Error('Agrupamento SABREN vazio para ' + definition.appName);
+    if (matches.length > 80)
+      throw new Error('Agrupamento SABREN amplo demais para ' + definition.appName);
     const polygons = [];
     for (const feature of matches) {
       if (feature.geometry.type === 'Polygon')
@@ -240,7 +244,7 @@ async function main() {
   }
 
   fs.mkdirSync('data', { recursive: true });
-  fs.writeFileSync('data/sabren-cdd-mare-rocinha.geojson', JSON.stringify({
+  fs.writeFileSync('data/sabren-mare-rocinha-vidigal.geojson', JSON.stringify({
     type: 'FeatureCollection',
     source: 'SABREN 2022 - Instituto Pereira Passos / Prefeitura do Rio',
     sourceUrl: service,
@@ -259,7 +263,7 @@ async function main() {
   if (definitions.some(definition => originalHtml.includes('"' + definition.appName + '":{')))
     throw new Error('Uma das três comunidades já possui geometria oficial.');
   const officialBlock = `/*
-  Limites oficiais SABREN 2022 — Cidade de Deus, Complexo da Maré e Rocinha.
+  Limites oficiais SABREN 2022 — Complexo da Maré, Rocinha e Vidigal.
   Instituto Pereira Passos / Prefeitura do Rio. Geometrias generalizadas em cerca de 1,3 m.
 */
 Object.assign(officialCommunityGeometries,${JSON.stringify(officialGeometries)});
@@ -267,7 +271,7 @@ Object.assign(officialCommunityGeometries,${JSON.stringify(officialGeometries)})
 `;
   html = replaceOne(html, setAnchor, officialBlock + setAnchor, 'geometrias oficiais');
   html = replaceOne(html, setAnchor, setAnchor + `
-  'Cidade de Deus (CDD)',
+  'Vidigal',
   'Complexo da Maré',
   'Rocinha',`, 'nomes oficiais');
 
