@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T01:39:20.447Z",
+  "generatedAt": "2026-08-29T01:54:29.554Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -124,21 +124,6 @@
       "victims": []
     },
     {
-      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
-      "documentNumber": 78800,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "de84687d-b385-4a46-aefc-35b6d562f268",
       "documentNumber": 78801,
       "date": "2026-08-28T06:27:00.000Z",
@@ -154,6 +139,21 @@
       "victims": []
     },
     {
+      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
+      "documentNumber": 78800,
+      "date": "2026-08-28T06:27:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "58ff618e-c412-4288-a97d-fec017bf64ac",
       "documentNumber": 78803,
       "date": "2026-08-27T21:46:00.000Z",
@@ -166,7 +166,20 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "8bc1aa47-6257-4758-a27d-50cbce55b3f2",
@@ -237,20 +250,20 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
@@ -372,11 +385,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
