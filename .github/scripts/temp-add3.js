@@ -103,6 +103,33 @@ function validateGeometry(geometry, name) {
   return vertices;
 }
 
+function pointToSegmentDistance(point, start, end) {
+  const latitudeScale = Math.cos(point[1] * Math.PI / 180);
+  const px = point[0] * latitudeScale, py = point[1];
+  const ax = start[0] * latitudeScale, ay = start[1];
+  const bx = end[0] * latitudeScale, by = end[1];
+  const dx = bx - ax, dy = by - ay;
+  const lengthSquared = dx * dx + dy * dy;
+  const amount = lengthSquared
+    ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / lengthSquared))
+    : 0;
+  const x = ax + amount * dx, y = ay + amount * dy;
+  return Math.hypot(px - x, py - y) * 111.32;
+}
+
+function distanceToGeometryKm(point, geometry) {
+  if (pointInGeometry(point, geometry)) return 0;
+  let minimum = Infinity;
+  for (const polygon of geometryPolygons(geometry)) {
+    for (const ring of polygon) {
+      for (let index = 1; index < ring.length; index++)
+        minimum = Math.min(minimum,
+          pointToSegmentDistance(point, ring[index - 1], ring[index]));
+    }
+  }
+  return minimum;
+}
+
 async function main() {
   const service = 'https://pgeo3.rio.rj.gov.br/arcgis/rest/services/' +
     'SABREN/Limites_de_Favelas/FeatureServer/13/query';
@@ -150,10 +177,32 @@ async function main() {
 
   const sourceFeatures = [], officialGeometries = {}, centers = {}, audit = [];
   for (const definition of definitions) {
-    const matches = sabren.features.filter(feature =>
+    let matches = sabren.features.filter(feature =>
       feature.geometry && definition.match(feature.properties || {}));
+    let seed = null;
+    if (!matches.length) {
+      const nearest = sabren.features
+        .filter(feature => feature.geometry)
+        .map(feature => ({
+          feature,
+          distance: distanceToGeometryKm(definition.preferred, feature.geometry)
+        }))
+        .sort((a, b) => a.distance - b.distance)[0];
+      if (!nearest || nearest.distance > 1.5)
+        throw new Error('Nenhuma feição SABREN próxima de ' + definition.appName);
+      seed = nearest.feature;
+      const seedComplex = normalize((seed.properties || {}).complexo);
+      const seedName = normalize((seed.properties || {}).nome);
+      matches = sabren.features.filter(feature => {
+        if (!feature.geometry) return false;
+        const properties = feature.properties || {};
+        return seedComplex
+          ? normalize(properties.complexo) === seedComplex
+          : normalize(properties.nome) === seedName;
+      });
+    }
     if (!matches.length)
-      throw new Error('Nenhuma feição SABREN encontrada para ' + definition.appName);
+      throw new Error('Agrupamento SABREN vazio para ' + definition.appName);
     const polygons = [];
     for (const feature of matches) {
       if (feature.geometry.type === 'Polygon')
@@ -184,7 +233,9 @@ async function main() {
       vertices,
       center,
       sourceNames: [...new Set(matches.map(feature =>
-        (feature.properties || {}).nome).filter(Boolean))]
+        (feature.properties || {}).nome).filter(Boolean))],
+      detectedComplex: seed ? (seed.properties || {}).complexo || null : null,
+      detectedSeedName: seed ? (seed.properties || {}).nome || null : null
     });
   }
 
