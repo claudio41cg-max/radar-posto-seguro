@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T23:54:11.278Z",
+  "generatedAt": "2026-08-29T00:09:36.468Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 66,
+  "count": 55,
   "lastUpdate": "2026-08-28T19:26:21-03:00",
   "occurrences": [
     {
@@ -124,21 +124,6 @@
       "victims": []
     },
     {
-      "id": "de84687d-b385-4a46-aefc-35b6d562f268",
-      "documentNumber": 78801,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Morro do Tuiuti - Imperial de São Cristóvão, Rio de Janeiro - RJ, 20920-000, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO TUIUTI",
-      "latitude": -22.8975895,
-      "longitude": -43.2321904,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
       "documentNumber": 78800,
       "date": "2026-08-28T06:27:00.000Z",
@@ -151,6 +136,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "de84687d-b385-4a46-aefc-35b6d562f268",
+      "documentNumber": 78801,
+      "date": "2026-08-28T06:27:00.000Z",
+      "address": "Morro do Tuiuti - Imperial de São Cristóvão, Rio de Janeiro - RJ, 20920-000, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO TUIUTI",
+      "latitude": -22.8975895,
+      "longitude": -43.2321904,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -237,20 +237,20 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
@@ -487,6 +487,26 @@
       "victims": []
     },
     {
+      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
+      "documentNumber": 78816,
+      "date": "2026-08-26T00:00:00.000Z",
+      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
+      "neighborhood": "COLUBANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8415893,
+      "longitude": -43.0095728,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "bdca0f2b-7edd-4983-9866-b0d2c8c4e164",
       "documentNumber": 78815,
       "date": "2026-08-26T00:00:00.000Z",
@@ -504,26 +524,6 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
-      "documentNumber": 78816,
-      "date": "2026-08-26T00:00:00.000Z",
-      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
-      "neighborhood": "COLUBANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8415893,
-      "longitude": -43.0095728,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -551,6 +551,21 @@
       ]
     },
     {
+      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
+      "documentNumber": 78750,
+      "date": "2026-08-25T15:00:00.000Z",
+      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9218834,
+      "longitude": -43.2215127,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "8ebd83ba-67e5-4519-be52-2f00e3a1da0e",
       "documentNumber": 78758,
       "date": "2026-08-25T15:00:00.000Z",
@@ -569,21 +584,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
-      "documentNumber": 78750,
-      "date": "2026-08-25T15:00:00.000Z",
-      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9218834,
-      "longitude": -43.2215127,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "71f19c9e-10ce-4945-8ec1-3bc931876e74",
@@ -967,200 +967,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "9f93cfa8-e90c-49e2-a02b-fab43d997a07",
-      "documentNumber": 78777,
-      "date": "2026-08-21T22:00:00.000Z",
-      "address": "Catiri - Bangu, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "CATIRI",
-      "latitude": -22.8534451,
-      "longitude": -43.4694182,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "e488d927-ae1f-4b89-a255-f3068971d92f",
-      "documentNumber": 78704,
-      "date": "2026-08-21T21:00:00.000Z",
-      "address": "Rua Aníbal de Mendonça - Ipanema, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "IPANEMA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9830969,
-      "longitude": -43.2112714,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "1486750f-68c5-4312-8e37-b8651bf26264",
-      "documentNumber": 78698,
-      "date": "2026-08-21T17:00:00.000Z",
-      "address": "Favela da Lagoa - Lagoa - Novo Mundo, Magé - RJ, 25900-970, Brasil",
-      "neighborhood": "NOVO MUNDO",
-      "subNeighborhood": "LAGOA",
-      "locality": "FAVELA DA LAGOA",
-      "latitude": -22.64690905,
-      "longitude": -43.0425929,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "3d900310-2dc8-45e8-be56-cb234e4410cc",
-      "documentNumber": 78693,
-      "date": "2026-08-21T15:00:00.000Z",
-      "address": "Corte 8 - Vila Centenario, Duque de Caxias - RJ, 25030-050, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.77095968425896,
-      "longitude": -43.30980255,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "df06ca47-16e5-4f01-9568-3701768c7577",
-      "documentNumber": 78692,
-      "date": "2026-08-21T14:34:00.000Z",
-      "address": "Grão Pará e Guacha - Jardim Paraíso, Nova Iguaçu - RJ, 26297-318, Brasil",
-      "neighborhood": "PARAISO",
-      "subNeighborhood": "JARDIM PARAISO",
-      "locality": "FAVELA GRAO PARA E GUACHA",
-      "latitude": -22.81933063,
-      "longitude": -43.59348334,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "27b31e54-6e4e-4fbe-a554-8b506a52b2c3",
-      "documentNumber": 78691,
-      "date": "2026-08-21T12:04:00.000Z",
-      "address": "R. Padre Artola - Vidigal, Rio de Janeiro - RJ, 22452-550, Brasil",
-      "neighborhood": "VIDIGAL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.998851594142913,
-      "longitude": -43.2421875,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "f74a2930-34cd-495c-8e11-711b8377f662",
-      "documentNumber": 78690,
-      "date": "2026-08-21T11:50:00.000Z",
-      "address": "Cidade Alta (Complexo de Israel) - Cordovil, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8147224,
-      "longitude": -43.29297469999999,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "81d5e1ce-f454-486a-9616-93e6653753ba",
-      "documentNumber": 78689,
-      "date": "2026-08-21T07:47:00.000Z",
-      "address": "Morro da Covanca - Jacarepaguá, Rio de Janeiro - RJ, 22735-020, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "MORRO DA COVANCA",
-      "latitude": -22.91525671,
-      "longitude": -43.3460376,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "cc77707d-f8b3-4ce9-8527-6fc221b3d39b",
-      "documentNumber": 78685,
-      "date": "2026-08-21T05:07:00.000Z",
-      "address": "Cidade Alta (Complexo de Israel) - Rua Serra do Navio - Cordovil, Rio de Janeiro - RJ, 21010-300, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8177471,
-      "longitude": -43.2929294,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "ce1b2f20-d38d-454b-99d7-d21f6fdd8481",
-      "documentNumber": 78688,
-      "date": "2026-08-21T03:00:00.000Z",
-      "address": "Cidade Alta (Complexo de Israel) - Cordovil, Rio de Janeiro - RJ, 21010-640, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
-      "latitude": -22.82007088,
-      "longitude": -43.29432515,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "85790230-9720-4bee-9fbe-7c446e86a799",
-      "documentNumber": 78684,
-      "date": "2026-08-21T00:35:00.000Z",
-      "address": "Rua Oliveira Melo - Cordovil, Rio de Janeiro - RJ, 21250-540, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8256182,
-      "longitude": -43.3033031,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }
