@@ -1,0 +1,58 @@
+name: Buscar três limites SABREN da Barra
+
+on:
+  push:
+    paths:
+      - ".github/workflows/buscar-sabren-barra-tres.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Baixar limites oficiais do IPP
+        shell: bash
+        run: |
+          node <<'NODE'
+          (async () => {
+            const fs = require("fs");
+            const endpoint = "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN/Limites_de_Favelas/FeatureServer/13/query";
+            const params = new URLSearchParams({
+              where: "UPPER(nome) LIKE '%MUZEMA%' OR UPPER(nome) LIKE '%GARD%NIA%' OR UPPER(nome) LIKE '%RIO DAS PEDRAS%' OR UPPER(complexo) LIKE '%RIO DAS PEDRAS%'",
+              outFields: "objectid,cod_favela,nome,bairro,complexo",
+              returnGeometry: "true",
+              outSR: "4326",
+              f: "geojson"
+            });
+            const response = await fetch(endpoint + "?" + params);
+            if (!response.ok) throw new Error("SABREN HTTP " + response.status);
+            const data = await response.json();
+            if (!Array.isArray(data.features) || data.features.length < 3) {
+              throw new Error("SABREN retornou menos de 3 limites: " + JSON.stringify(data));
+            }
+            fs.mkdirSync("data", { recursive: true });
+            fs.writeFileSync(
+              "data/sabren-barra-tres.geojson",
+              JSON.stringify(data, null, 2) + "\n"
+            );
+            console.log(data.features.map(f =>
+              [f.properties.nome, f.properties.complexo, f.properties.bairro].join(" | ")
+            ).join("\n"));
+          })().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Salvar resultado
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/sabren-barra-tres.geojson
+          git diff --cached --quiet || git commit -m "Baixa limites SABREN de comunidades da Barra"
+          git push
