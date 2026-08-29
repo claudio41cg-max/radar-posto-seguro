@@ -1,4 +1,5 @@
 name: Refinar visual dos polígonos
+# Segunda execução após validação do script.
 
 on:
   push:
