@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T23:24:30.485Z",
+  "generatedAt": "2026-08-29T23:39:22.750Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -17,15 +17,15 @@
       "id": "31019102-ccae-4688-a401-ad45305e20af",
       "documentNumber": 78827,
       "date": "2026-08-29T11:40:00.000Z",
-      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
-      "neighborhood": "ANDARAI",
+      "address": "Chacará do Céu - Tijuca, Rio de Janeiro - RJ, 20530-390, Brasil",
+      "neighborhood": "TIJUCA",
       "subNeighborhood": "",
-      "locality": "MORRO DO CRUZ",
-      "latitude": -22.930738,
-      "longitude": -43.251766,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
+      "locality": "CHACARA DO CEU (TIJUCA)",
+      "latitude": -22.9353782,
+      "longitude": -43.2531083,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
