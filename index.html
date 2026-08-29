@@ -544,24 +544,61 @@ body.nav-mode .speedometer-box{
   border-radius:50%;
   border:3px solid #fff;
   background:#ef2929;
-  box-shadow:0 0 0 5px rgba(239,41,41,.28),0 4px 12px rgba(0,0,0,.55);
+  box-shadow:0 0 0 4px rgba(239,41,41,.24),0 4px 12px rgba(0,0,0,.55);
   color:#fff;
   display:grid;
   place-items:center;
+  padding:0;
+  margin:0;
+  line-height:1;
   font-size:17px;
   font-weight:900;
   cursor:pointer;
-  animation:fogoLivePulse .8s infinite alternate
+  appearance:none;
+  -webkit-appearance:none;
+  overflow:visible
+}
+
+.fogo-live-marker::after{
+  content:'';
+  position:absolute;
+  inset:-7px;
+  border:3px solid rgba(239,41,41,.62);
+  border-radius:50%;
+  pointer-events:none;
+  animation:fogoLivePulse 1.15s infinite ease-out
+}
+
+.fogo-live-marker.fogo-previous{
+  background:#f59e0b;
+  box-shadow:0 0 0 4px rgba(245,158,11,.22),0 4px 12px rgba(0,0,0,.5);
+  font-size:19px
+}
+
+.fogo-live-marker.fogo-previous::after{
+  border-color:rgba(245,158,11,.48);
+  animation:fogoRecentPulse 1.8s infinite ease-out
 }
 
 @keyframes fogoLivePulse{
   from{
-    transform:scale(.92);
-    box-shadow:0 0 0 3px rgba(239,41,41,.25),0 4px 12px rgba(0,0,0,.5)
+    transform:scale(.72);
+    opacity:.9
   }
   to{
-    transform:scale(1.12);
-    box-shadow:0 0 0 10px rgba(239,41,41,.08),0 5px 16px rgba(0,0,0,.6)
+    transform:scale(1.35);
+    opacity:0
+  }
+}
+
+@keyframes fogoRecentPulse{
+  from{
+    transform:scale(.82);
+    opacity:.58
+  }
+  to{
+    transform:scale(1.2);
+    opacity:0
   }
 }
 
@@ -14043,18 +14080,78 @@ document.addEventListener(
 
         const nowMs=Date.now();
 
-        const occurrencesLast24h=
-          recentOccurrences
-          .filter(item=>{
+        const occurrenceDateKeys=new Set();
+        for(let dayOffset=0;dayOffset<7;dayOffset++){
+          occurrenceDateKeys.add(
+            rioDateKey(
+              new Date(nowMs-dayOffset*86400000)
+            )
+          );
+        }
+
+        const visibleOccurrences=[];
+        const seenOccurrences=new Set();
+
+        allOccurrences
+          .slice()
+          .sort((a,b)=>new Date(b.date)-new Date(a.date))
+          .forEach(item=>{
             const time=new Date(item.date).getTime();
-            if(!Number.isFinite(time)) return false;
-            const ageHours=(nowMs-time)/3600000;
-            return ageHours>=0 && ageHours<=24;
-          })
-          .sort((a,b)=>new Date(b.date)-new Date(a.date));
+            const longitude=Number(item.longitude);
+            const latitude=Number(item.latitude);
+            const dateKey=rioDateKey(item.date);
+
+            if(
+              !Number.isFinite(time) ||
+              !Number.isFinite(longitude) ||
+              !Number.isFinite(latitude) ||
+              longitude<-46 ||
+              longitude>-40 ||
+              latitude<-24 ||
+              latitude>-20 ||
+              time>nowMs+5*60000 ||
+              !dateKey ||
+              !occurrenceDateKeys.has(dateKey)
+            ) return;
+
+            const occurrenceKey=String(
+              item.id ||
+              item.documentNumber ||
+              [time,latitude.toFixed(6),longitude.toFixed(6)].join('|')
+            );
+
+            if(seenOccurrences.has(occurrenceKey)) return;
+            seenOccurrences.add(occurrenceKey);
+
+            visibleOccurrences.push({
+              ...item,
+              longitude,
+              latitude,
+              _time:time,
+              _dateKey:dateKey
+            });
+          });
+
+        const occurrencesToday=
+          visibleOccurrences.filter(
+            item=>item._dateKey===todayKey
+          );
+
+        const occurrencesLast24h=
+          visibleOccurrences.filter(
+            item=>{
+              const ageHours=(nowMs-item._time)/3600000;
+              return ageHours>=0 && ageHours<=24;
+            }
+          );
 
         App.fogoRecentOccurrences=
-          occurrencesLast24h;
+          occurrencesLast24h.map(item=>{
+            const cleanItem={...item};
+            delete cleanItem._time;
+            delete cleanItem._dateKey;
+            return cleanItem;
+          });
 
         App.fogoFeedLoaded=true;
 
@@ -14065,17 +14162,33 @@ document.addEventListener(
           feed.lastUpdate ||
           new Date().toISOString();
 
-        occurrencesLast24h
-          .forEach(item=>{
-          if(!Number.isFinite(item.longitude)||!Number.isFinite(item.latitude))
-            return;
+        const feedUpdatedTime=
+          new Date(App.fogoFeedUpdatedAt).getTime();
 
+        App.fogoFeedStale=
+          Number.isFinite(feedUpdatedTime)
+            ? nowMs-feedUpdatedTime>90*60000
+            : true;
+
+        visibleOccurrences
+          .forEach(item=>{
+          const isToday=item._dateKey===todayKey;
           const marker=document.createElement('button');
           marker.type='button';
-          marker.className='fogo-live-marker';
-          marker.setAttribute('aria-label','Ocorrência das últimas 24 horas informada pelo Fogo Cruzado');
-          marker.title='Ocorrência recente • Fogo Cruzado';
-          marker.textContent='!';
+          marker.className=
+            'fogo-live-marker'+
+            (isToday?' fogo-today':' fogo-previous');
+          marker.setAttribute(
+            'aria-label',
+            isToday
+              ? 'Ocorrência de hoje informada pelo Fogo Cruzado'
+              : 'Ocorrência dos últimos sete dias informada pelo Fogo Cruzado'
+          );
+          marker.title=
+            isToday
+              ? 'Ocorrência de hoje • Fogo Cruzado'
+              : 'Ocorrência recente • Fogo Cruzado';
+          marker.textContent=isToday?'!':'•';
 
           const date=new Date(item.date);
           const when=Number.isNaN(date.getTime())
@@ -14089,25 +14202,34 @@ document.addEventListener(
                 minute:'2-digit'
               });
 
+          const statusTitle=
+            isToday
+              ? '🔴 Ocorrência de hoje'
+              : '🟠 Ocorrência dos últimos 7 dias';
+
           const popup=new maplibregl.Popup({
             offset:22,
             closeButton:true,
             maxWidth:'310px'
           }).setHTML(
             '<div style="color:#101828;font-family:Arial,sans-serif;line-height:1.35">'+
-              '<strong style="font-size:15px">⚠️ Ocorrência das últimas 24 horas</strong><br>'+
+              '<strong style="font-size:15px">'+statusTitle+'</strong><br>'+
               '<b>Data e hora:</b> '+escapeFogoText(when)+'<br>'+
               '<b>Bairro:</b> '+escapeFogoText(item.neighborhood||'Não informado')+'<br>'+
               '<b>Local:</b> '+escapeFogoText(item.locality||item.address||'Não informado')+'<br>'+
               '<b>Motivo:</b> '+escapeFogoText(item.reason||'Não informado')+'<br>'+
               '<span style="display:block;margin-top:7px;font-size:12px;color:#475467">'+
                 'Fonte oficial: Instituto Fogo Cruzado<br>'+
+                'Vermelho: hoje • Laranja: dias anteriores<br>'+
                 'Atualização automática a cada 15 minutos'+
               '</span>'+
             '</div>'
           );
 
-          const mapMarker=new maplibregl.Marker({element:marker,anchor:'center'})
+          const mapMarker=new maplibregl.Marker({
+            element:marker,
+            anchor:'center'
+          })
             .setLngLat([item.longitude,item.latitude])
             .setPopup(popup)
             .addTo(App.map);
@@ -14117,6 +14239,9 @@ document.addEventListener(
 
         window.RadarApp.fogoCruzado={
           count:occurrencesLast24h.length,
+          todayCount:occurrencesToday.length,
+          visibleCount:visibleOccurrences.length,
+          stale:App.fogoFeedStale,
           generatedAt:feed.generatedAt||null,
           lastUpdate:feed.lastUpdate||null,
           source:feed.source||null
