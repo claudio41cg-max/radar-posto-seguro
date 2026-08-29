@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T16:39:31.200Z",
+  "generatedAt": "2026-08-29T16:54:35.163Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 72,
+  "count": 73,
   "occurrences": [
     {
       "id": "31019102-ccae-4688-a401-ad45305e20af",
@@ -26,6 +26,38 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "23ec4b11-0689-4cb5-b2c0-fcb5b6b2e700",
+      "documentNumber": 78828,
+      "date": "2026-08-29T05:00:00.000Z",
+      "address": "Gogó de São João  - Centro, São João de Meriti - RJ, 25515-220, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "GOGO DE SAO JOAO",
+      "latitude": -22.7981649,
+      "longitude": -43.3639608,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "3194db92-df63-44be-94bd-a5e487f8af99",
@@ -201,11 +233,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -275,12 +307,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
