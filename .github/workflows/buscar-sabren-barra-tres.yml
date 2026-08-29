@@ -22,7 +22,7 @@ jobs:
             const fs = require("fs");
             const endpoint = "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN/Limites_de_Favelas/FeatureServer/13/query";
             const params = new URLSearchParams({
-              where: "UPPER(nome) LIKE '%MUZEMA%' OR UPPER(nome) LIKE '%GARD%NIA%' OR UPPER(nome) LIKE '%RIO DAS PEDRAS%' OR UPPER(complexo) LIKE '%RIO DAS PEDRAS%'",
+              where: "UPPER(nome) LIKE '%MUZEMA%' OR UPPER(nome) LIKE '%GARD%' OR UPPER(complexo) LIKE '%GARD%' OR UPPER(bairro) LIKE '%GARD%' OR UPPER(nome) LIKE '%RIO DAS PEDRAS%' OR UPPER(complexo) LIKE '%RIO DAS PEDRAS%'",
               outFields: "objectid,cod_favela,nome,bairro,complexo",
               returnGeometry: "true",
               outSR: "4326",
