@@ -1,0 +1,51 @@
+name: Buscar limites SABREN para comunidades
+
+on:
+  push:
+    paths:
+      - ".github/workflows/buscar-sabren-terreirao-taboinha.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Baixar limites oficiais do IPP
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+          const endpoint = "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN/Limites_de_Favelas/FeatureServer/13/query";
+          const params = new URLSearchParams({
+            where: "UPPER(nome) LIKE '%TERREIR%' OR UPPER(nome) LIKE '%TABOIN%'",
+            outFields: "objectid,cod_favela,nome,bairro,complexo",
+            returnGeometry: "true",
+            outSR: "4326",
+            f: "geojson"
+          });
+          const response = await fetch(endpoint + "?" + params);
+          if (!response.ok) throw new Error("SABREN HTTP " + response.status);
+          const data = await response.json();
+          if (!Array.isArray(data.features) || data.features.length < 2) {
+            throw new Error("SABREN retornou menos de 2 polígonos: " + JSON.stringify(data));
+          }
+          fs.mkdirSync("data", { recursive: true });
+          fs.writeFileSync(
+            "data/sabren-terreirao-taboinha.geojson",
+            JSON.stringify(data, null, 2) + "\n"
+          );
+          console.log(data.features.map(f => f.properties.nome).join("\n"));
+          NODE
+
+      - name: Salvar resultado no repositório
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/sabren-terreirao-taboinha.geojson
+          git diff --cached --quiet || git commit -m "Baixa limites oficiais de Terreirão e Vila Taboinha"
+          git push
