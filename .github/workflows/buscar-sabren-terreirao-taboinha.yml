@@ -22,7 +22,7 @@ jobs:
           const fs = require("fs");
           const endpoint = "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN/Limites_de_Favelas/FeatureServer/13/query";
           const params = new URLSearchParams({
-            where: "UPPER(nome) LIKE '%TERREIR%' OR UPPER(nome) LIKE '%TABOIN%'",
+            where: "UPPER(nome) LIKE '%TABOIN%' OR UPPER(bairro) IN ('RECREIO DOS BANDEIRANTES','VARGEM PEQUENA','VARGEM GRANDE')",
             outFields: "objectid,cod_favela,nome,bairro,complexo",
             returnGeometry: "true",
             outSR: "4326",
