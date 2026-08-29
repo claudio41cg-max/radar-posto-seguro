@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T14:39:33.523Z",
+  "generatedAt": "2026-08-29T14:54:41.847Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 56,
-  "lastUpdate": "2026-08-29T10:58:08-03:00",
+  "count": 57,
+  "lastUpdate": "2026-08-29T11:53:38-03:00",
   "occurrences": [
+    {
+      "id": "31019102-ccae-4688-a401-ad45305e20af",
+      "documentNumber": 78827,
+      "date": "2026-08-29T11:40:00.000Z",
+      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.9352778,
+      "longitude": -43.2563889,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "3194db92-df63-44be-94bd-a5e487f8af99",
       "documentNumber": 78825,
@@ -74,15 +89,15 @@
       "victims": []
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
+      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
+      "documentNumber": 78810,
       "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
+      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8727268,
+      "longitude": -43.4949441,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -109,15 +124,15 @@
       ]
     },
     {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
       "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -183,15 +198,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -261,12 +276,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         },
         {
           "situation": "Wounded",
@@ -515,6 +530,26 @@
       "victims": []
     },
     {
+      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
+      "documentNumber": 78816,
+      "date": "2026-08-26T00:00:00.000Z",
+      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
+      "neighborhood": "COLUBANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8415893,
+      "longitude": -43.0095728,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "bdca0f2b-7edd-4983-9866-b0d2c8c4e164",
       "documentNumber": 78815,
       "date": "2026-08-26T00:00:00.000Z",
@@ -532,26 +567,6 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
-      "documentNumber": 78816,
-      "date": "2026-08-26T00:00:00.000Z",
-      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
-      "neighborhood": "COLUBANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8415893,
-      "longitude": -43.0095728,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"

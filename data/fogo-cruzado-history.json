@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T14:39:33.526Z",
+  "generatedAt": "2026-08-29T14:54:41.850Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 71,
+  "count": 72,
   "occurrences": [
+    {
+      "id": "31019102-ccae-4688-a401-ad45305e20af",
+      "documentNumber": 78827,
+      "date": "2026-08-29T11:40:00.000Z",
+      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.9352778,
+      "longitude": -43.2563889,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "3194db92-df63-44be-94bd-a5e487f8af99",
       "documentNumber": 78825,
@@ -182,15 +197,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -260,12 +275,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         },
         {
           "situation": "Wounded",
