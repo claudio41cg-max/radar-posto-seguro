@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T17:39:17.124Z",
+  "generatedAt": "2026-08-29T17:54:23.041Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,20 +10,20 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 58,
-  "lastUpdate": "2026-08-29T13:51:26-03:00",
+  "count": 59,
+  "lastUpdate": "2026-08-29T14:50:34-03:00",
   "occurrences": [
     {
       "id": "31019102-ccae-4688-a401-ad45305e20af",
       "documentNumber": 78827,
       "date": "2026-08-29T11:40:00.000Z",
-      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
       "neighborhood": "ANDARAI",
       "subNeighborhood": "",
-      "locality": "MORRO DO ANDARAI",
-      "latitude": -22.9352778,
-      "longitude": -43.2563889,
-      "reason": "Não identificado",
+      "locality": "MORRO DO CRUZ",
+      "latitude": -22.930738,
+      "longitude": -43.251766,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -76,6 +76,21 @@
       "victims": []
     },
     {
+      "id": "8c71883f-5dcd-41f9-a0b7-878b2acbaa0a",
+      "documentNumber": 78829,
+      "date": "2026-08-29T03:00:00.000Z",
+      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CRUZ",
+      "latitude": -22.930738,
+      "longitude": -43.251766,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "4c798514-09f7-4557-8b8e-4a8945f52612",
       "documentNumber": 78817,
       "date": "2026-08-28T15:00:00.000Z",
@@ -121,21 +136,6 @@
       "victims": []
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -154,6 +154,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
@@ -308,24 +323,24 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
@@ -447,11 +462,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -562,6 +577,26 @@
       "victims": []
     },
     {
+      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
+      "documentNumber": 78816,
+      "date": "2026-08-26T00:00:00.000Z",
+      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
+      "neighborhood": "COLUBANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8415893,
+      "longitude": -43.0095728,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "bdca0f2b-7edd-4983-9866-b0d2c8c4e164",
       "documentNumber": 78815,
       "date": "2026-08-26T00:00:00.000Z",
@@ -579,26 +614,6 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
-      "documentNumber": 78816,
-      "date": "2026-08-26T00:00:00.000Z",
-      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
-      "neighborhood": "COLUBANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8415893,
-      "longitude": -43.0095728,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"

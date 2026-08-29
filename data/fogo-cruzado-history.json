@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T17:39:17.129Z",
+  "generatedAt": "2026-08-29T17:54:23.044Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,19 +10,19 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 73,
+  "count": 74,
   "occurrences": [
     {
       "id": "31019102-ccae-4688-a401-ad45305e20af",
       "documentNumber": 78827,
       "date": "2026-08-29T11:40:00.000Z",
-      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
       "neighborhood": "ANDARAI",
       "subNeighborhood": "",
-      "locality": "MORRO DO ANDARAI",
-      "latitude": -22.9352778,
-      "longitude": -43.2563889,
-      "reason": "Não identificado",
+      "locality": "MORRO DO CRUZ",
+      "latitude": -22.930738,
+      "longitude": -43.251766,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -70,6 +70,21 @@
       "latitude": -22.774734,
       "longitude": -43.3047139,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "8c71883f-5dcd-41f9-a0b7-878b2acbaa0a",
+      "documentNumber": 78829,
+      "date": "2026-08-29T03:00:00.000Z",
+      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CRUZ",
+      "latitude": -22.930738,
+      "longitude": -43.251766,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -307,24 +322,24 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
@@ -446,11 +461,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
