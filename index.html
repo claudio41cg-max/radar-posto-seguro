@@ -539,53 +539,94 @@ body.nav-mode .speedometer-box{
 }
 
 .fogo-live-marker{
-  position:relative;
-  width:38px;
-  height:38px;
+  --fogo-color:#ef2929;
+  --fogo-size:22px;
+  width:var(--fogo-size);
+  height:var(--fogo-size);
+  box-sizing:border-box;
   border-radius:50%;
-  border:3px solid #fff;
-  background:radial-gradient(circle,#ef2929 0 3px,#fff 3.5px 6px,#ef2929 6.5px 9px,#fff 9.5px 12px,#ef2929 12.5px 15px,#fff 15.5px 17px,#ef2929 17.5px 19px);
-  box-shadow:0 0 0 4px rgba(239,41,41,.2),0 5px 14px rgba(0,0,0,.62);
+  border:1.5px solid rgba(255,255,255,.96);
+  background:radial-gradient(circle,
+    var(--fogo-color) 0 13%,
+    #fff 14% 27%,
+    var(--fogo-color) 28% 42%,
+    #fff 43% 56%,
+    var(--fogo-color) 57% 72%,
+    #fff 73% 85%,
+    var(--fogo-color) 86% 100%);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.45),
+    0 3px 9px rgba(0,0,0,.52);
   color:transparent;
-  display:grid;
-  place-items:center;
+  display:block;
   padding:0;
   margin:0;
   font-size:0;
   cursor:pointer;
   appearance:none;
   -webkit-appearance:none;
-  overflow:visible
+  overflow:visible;
+  transform-origin:center center;
+  isolation:isolate
 }
 
+.fogo-live-marker::before,
 .fogo-live-marker::after{
   content:'';
   position:absolute;
-  inset:-8px;
-  border:3px solid rgba(239,41,41,.62);
+  left:50%;
+  top:50%;
+  width:42%;
+  height:42%;
+  box-sizing:border-box;
+  border:1.5px solid var(--fogo-color);
   border-radius:50%;
   pointer-events:none;
-  animation:fogoLivePulse 1.15s infinite ease-out
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.15);
+  animation:fogoRadarPulse 1.65s infinite cubic-bezier(.18,.62,.36,1)
+}
+
+.fogo-live-marker::after{
+  animation-delay:-.825s
 }
 
 .fogo-live-marker.fogo-previous{
-  background:radial-gradient(circle,#f59e0b 0 3px,#fff 3.5px 6px,#f59e0b 6.5px 9px,#fff 9.5px 12px,#f59e0b 12.5px 15px,#fff 15.5px 17px,#f59e0b 17.5px 19px);
-  box-shadow:0 0 0 4px rgba(245,158,11,.2),0 5px 14px rgba(0,0,0,.58)
+  --fogo-color:#f59e0b;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.42),
+    0 3px 8px rgba(0,0,0,.48)
+}
+
+.fogo-live-marker.fogo-previous::before,
+.fogo-live-marker.fogo-previous::after{
+  animation-duration:2s
 }
 
 .fogo-live-marker.fogo-previous::after{
-  border-color:rgba(245,158,11,.5);
-  animation:fogoRecentPulse 1.8s infinite ease-out
+  animation-delay:-1s
 }
 
-@keyframes fogoLivePulse{
-  from{transform:scale(.72);opacity:.9}
-  to{transform:scale(1.35);opacity:0}
+@keyframes fogoRadarPulse{
+  0%{
+    transform:translate(-50%,-50%) scale(.15);
+    opacity:.9
+  }
+  72%{
+    opacity:.28
+  }
+  100%{
+    transform:translate(-50%,-50%) scale(3.25);
+    opacity:0
+  }
 }
 
-@keyframes fogoRecentPulse{
-  from{transform:scale(.82);opacity:.58}
-  to{transform:scale(1.2);opacity:0}
+@media (prefers-reduced-motion:reduce){
+  .fogo-live-marker::before,
+  .fogo-live-marker::after{
+    animation:none;
+    display:none
+  }
 }
 
 /* =========================================================
@@ -7309,11 +7350,88 @@ const App = {
           'fill-opacity':[
             'case',
             ['==',['get','occurrenceStatus'],'today'],
-            ['interpolate',['linear'],['zoom'],8.8,.10,11.7,.26,14,.38,17,.46],
+            ['interpolate',['linear'],['zoom'],8.8,.13,11.7,.30,14,.42,17,.50],
             ['==',['get','occurrenceStatus'],'recent'],
-            ['interpolate',['linear'],['zoom'],8.8,.07,11.7,.20,14,.30,17,.38],
-            ['interpolate',['linear'],['zoom'],
-              8.8,.006,9.8,.018,10.5,.04,11.7,.08,14,.16,17,.22]
+            ['interpolate',['linear'],['zoom'],8.8,.10,11.7,.24,14,.34,17,.42],
+            ['case',
+              ['get','officialBoundary'],
+              ['interpolate',['linear'],['zoom'],8.8,.035,9.8,.06,10.5,.09,11.7,.13,14,.20,17,.28],
+              ['interpolate',['linear'],['zoom'],8.8,.025,9.8,.05,10.5,.08,11.7,.12,14,.19,17,.27]
+            ]
+          ]
+
+        }
+
+      });
+
+
+      this.map.addLayer({
+
+        id:'community-inner-glow',
+
+        type:'line',
+
+        source:'communities',
+
+        minzoom:8.8,
+
+        layout:{
+          'line-cap':'round',
+          'line-join':'round'
+        },
+
+        paint:{
+
+          'line-color':[
+            'match',
+            ['get','occurrenceStatus'],
+            'today','#ef4444',
+            'recent','#fb923c',
+            [
+              'case',
+              ['get','officialBoundary'],
+              (
+                this.appliedTheme==='dark' ||
+                this.appliedTheme==='sat'
+              )
+              ? '#fbbf24'
+              : '#334155',
+              '#ef4444'
+            ]
+          ],
+
+          'line-width':[
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8.8,2,
+            10.5,4,
+            11.7,7,
+            14,13,
+            17,22
+          ],
+
+          'line-blur':[
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8.8,1,
+            11.7,2.8,
+            14,5.5,
+            17,9
+          ],
+
+          'line-opacity':[
+            'match',
+            ['get','occurrenceStatus'],
+            'today',.48,
+            'recent',.38,
+            [
+              'case',
+              ['get','officialBoundary'],
+              .24,
+              .30
+            ]
           ]
 
         }
@@ -14819,6 +14937,27 @@ document.addEventListener(
         (App.fogoMarkers||[]).forEach(marker=>marker.remove());
         App.fogoMarkers=[];
 
+        if(!App.fogoMarkerZoomHandler){
+          App.fogoMarkerZoomHandler=()=>{
+            const zoom=App.map?.getZoom?.() ?? 12;
+            const size=
+              zoom<7 ? 12 :
+              zoom<9 ? 15 :
+              zoom<11 ? 18 :
+              zoom<13 ? 21 :
+              24;
+            document.documentElement.style.setProperty(
+              '--fogo-marker-size',
+              size+'px'
+            );
+            document.querySelectorAll('.fogo-live-marker').forEach(element=>{
+              element.style.setProperty('--fogo-size',size+'px');
+            });
+          };
+          App.map.on('zoom',App.fogoMarkerZoomHandler);
+        }
+        App.fogoMarkerZoomHandler();
+
         const nowMs=Date.now();
 
         const occurrenceDateKeys=new Set([todayKey,yesterdayKey]);
@@ -14921,6 +15060,14 @@ document.addEventListener(
           marker.className=
             'fogo-live-marker'+
             (isToday?' fogo-today':' fogo-previous');
+          const markerZoom=App.map?.getZoom?.() ?? 12;
+          const markerSize=
+            markerZoom<7 ? 12 :
+            markerZoom<9 ? 15 :
+            markerZoom<11 ? 18 :
+            markerZoom<13 ? 21 :
+            24;
+          marker.style.setProperty('--fogo-size',markerSize+'px');
           marker.setAttribute(
             'aria-label',
             isToday
