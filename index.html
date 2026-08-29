@@ -2738,6 +2738,10 @@ const VoiceAssistant = {
 
   weatherCache:{},
 
+  aiEndpoint:'https://radar-seguro-ia-rj.claudio41cg.workers.dev',
+
+  aiBusy:false,
+
 
   init(){
 
@@ -3658,6 +3662,127 @@ const VoiceAssistant = {
       text,
       priority
     );
+
+  },
+
+
+  async askAI(question){
+
+    const text=
+      String(question||'')
+      .trim();
+
+
+    if(!text)
+      return false;
+
+
+    if(this.aiBusy){
+
+      this.reply(
+        'Ainda estou concluindo a pergunta anterior.'
+      );
+
+      return true;
+
+    }
+
+
+    this.aiBusy=true;
+
+
+    App.toast(
+      'Consultando a inteligência...',
+      4500
+    );
+
+
+    const controller=
+      new AbortController();
+
+
+    const timeout=
+      setTimeout(
+        ()=>controller.abort(),
+        25000
+      );
+
+
+    try{
+
+      const response=
+        await fetch(
+          this.aiEndpoint,
+          {
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+              pergunta:text
+            }),
+            signal:controller.signal
+          }
+        );
+
+
+      let data={};
+
+
+      try{
+
+        data=await response.json();
+
+      }catch(e){}
+
+
+      if(!response.ok)
+        throw new Error(
+          data.erro||
+          'Falha na consulta da inteligência.'
+        );
+
+
+      const answer=
+        String(
+          data.resposta||''
+        )
+        .trim();
+
+
+      if(!answer)
+        throw new Error(
+          'A inteligência não enviou uma resposta.'
+        );
+
+
+      this.reply(answer);
+
+      return true;
+
+    }catch(error){
+
+      console.warn(
+        'Radar Seguro IA:',
+        error
+      );
+
+
+      this.reply(
+        navigator.onLine
+        ? 'A inteligência está temporariamente indisponível. Tente novamente em instantes.'
+        : 'Estou sem conexão com a internet. Tente novamente quando o sinal voltar.'
+      );
+
+      return true;
+
+    }finally{
+
+      clearTimeout(timeout);
+
+      this.aiBusy=false;
+
+    }
 
   },
 
@@ -5541,7 +5666,7 @@ const VoiceAssistant = {
     ){
 
       this.reply(
-        'Você pode pedir o clima de hoje ou amanhã, uma rota, a localização de um lugar, as ocorrências do Rio de Janeiro, repetir a orientação, consultar hora e data, mostrar ou ocultar postos e comunidades, ou salvar sua casa neste aparelho. Durante a navegação, toque uma vez no botão Radar para ligar o modo mãos livres e comece cada pedido dizendo Radar.'
+        'Você pode pedir o clima de hoje ou amanhã, uma rota, a localização de um lugar, as ocorrências do Rio de Janeiro, repetir a orientação, consultar hora e data, mostrar ou ocultar postos e comunidades, salvar sua casa neste aparelho ou fazer perguntas gerais. Durante a navegação, toque uma vez no botão Radar para ligar o modo mãos livres e comece cada pedido dizendo Radar.'
       );
 
       return;
@@ -5855,9 +5980,9 @@ const VoiceAssistant = {
     }
 
 
-    this.reply(
-      'Não entendi completamente. Você não precisa repetir uma frase exata. Fale do seu jeito dizendo o assunto e o que deseja fazer, como: quero ir para Bangu, ou: o que aconteceu hoje no Rio.'
-    );
+    await this.askAI(command);
+
+    return;
 
   }
 
