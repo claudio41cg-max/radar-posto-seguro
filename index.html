@@ -7237,6 +7237,8 @@ const App = {
         'community-pointer',
         'community-label',
         'community-dot',
+        'community-inner-shadow',
+        'community-inner-glow',
         'community-outline',
         'community-fill',
         'community-bridge-outline',
@@ -7285,9 +7287,10 @@ const App = {
           'line-color':
             (this.appliedTheme==='dark'||this.appliedTheme==='sat')
             ? '#fbbf24'
-            : '#111827',
-          'line-width':['interpolate',['linear'],['zoom'],11.7,5,16,18],
-          'line-opacity':.16
+            : '#94a3b8',
+          'line-width':['interpolate',['linear'],['zoom'],11.7,1.5,16,5],
+          'line-blur':['interpolate',['linear'],['zoom'],11.7,.4,16,1.2],
+          'line-opacity':.08
         }
       });
 
@@ -7301,9 +7304,10 @@ const App = {
           'line-color':
             (this.appliedTheme==='dark'||this.appliedTheme==='sat')
             ? '#fbbf24'
-            : '#020617',
-          'line-width':['interpolate',['linear'],['zoom'],11.7,1,16,2.5],
-          'line-opacity':.8
+            : '#64748b',
+          'line-width':['interpolate',['linear'],['zoom'],11.7,.55,16,1.25],
+          'line-dasharray':[1.1,.7],
+          'line-opacity':.48
         }
       });
 
@@ -7342,21 +7346,21 @@ const App = {
                 this.appliedTheme==='sat'
               )
               ? '#fbbf24'
-              : '#111827',
-              '#dc2626'
+              : '#64748b',
+              '#ef4444'
             ]
           ],
 
           'fill-opacity':[
             'case',
             ['==',['get','occurrenceStatus'],'today'],
-            ['interpolate',['linear'],['zoom'],8.8,.13,11.7,.30,14,.42,17,.50],
+            ['interpolate',['linear'],['zoom'],8.8,.07,11.7,.13,14,.19,17,.25],
             ['==',['get','occurrenceStatus'],'recent'],
-            ['interpolate',['linear'],['zoom'],8.8,.10,11.7,.24,14,.34,17,.42],
+            ['interpolate',['linear'],['zoom'],8.8,.05,11.7,.10,14,.15,17,.20],
             ['case',
               ['get','officialBoundary'],
-              ['interpolate',['linear'],['zoom'],8.8,.035,9.8,.06,10.5,.09,11.7,.13,14,.20,17,.28],
-              ['interpolate',['linear'],['zoom'],8.8,.025,9.8,.05,10.5,.08,11.7,.12,14,.19,17,.27]
+              ['interpolate',['linear'],['zoom'],8.8,.018,9.8,.025,11.7,.045,14,.075,17,.11],
+              ['interpolate',['linear'],['zoom'],8.8,.015,9.8,.022,11.7,.04,14,.07,17,.105]
             ]
           ]
 
@@ -7367,7 +7371,7 @@ const App = {
 
       this.map.addLayer({
 
-        id:'community-inner-glow',
+        id:'community-inner-shadow',
 
         type:'line',
 
@@ -7385,8 +7389,8 @@ const App = {
           'line-color':[
             'match',
             ['get','occurrenceStatus'],
-            'today','#ef4444',
-            'recent','#fb923c',
+            'today','#f87171',
+            'recent','#fdba74',
             [
               'case',
               ['get','officialBoundary'],
@@ -7395,8 +7399,8 @@ const App = {
                 this.appliedTheme==='sat'
               )
               ? '#fbbf24'
-              : '#334155',
-              '#ef4444'
+              : '#94a3b8',
+              '#fca5a5'
             ]
           ],
 
@@ -7404,33 +7408,32 @@ const App = {
             'interpolate',
             ['linear'],
             ['zoom'],
-            8.8,2,
-            10.5,4,
-            11.7,7,
-            14,13,
-            17,22
+            8.8,1,
+            11.7,2.4,
+            14,4.5,
+            17,7
           ],
 
           'line-blur':[
             'interpolate',
             ['linear'],
             ['zoom'],
-            8.8,1,
-            11.7,2.8,
-            14,5.5,
-            17,9
+            8.8,.3,
+            11.7,.8,
+            14,1.4,
+            17,2.2
           ],
 
           'line-opacity':[
             'match',
             ['get','occurrenceStatus'],
-            'today',.48,
-            'recent',.38,
+            'today',.18,
+            'recent',.15,
             [
               'case',
               ['get','officialBoundary'],
-              .24,
-              .30
+              .11,
+              .13
             ]
           ]
 
@@ -7449,13 +7452,18 @@ const App = {
 
         minzoom:8.8,
 
+        layout:{
+          'line-cap':'round',
+          'line-join':'round'
+        },
+
         paint:{
 
           'line-color':[
             'match',
             ['get','occurrenceStatus'],
-            'today','#ef4444',
-            'recent','#fb923c',
+            'today','#dc2626',
+            'recent','#f97316',
             [
               'case',
               ['get','officialBoundary'],
@@ -7464,8 +7472,8 @@ const App = {
                 this.appliedTheme==='sat'
               )
               ? '#fbbf24'
-              : '#020617',
-              '#ef4444'
+              : '#64748b',
+              '#dc2626'
             ]
           ],
 
@@ -7473,16 +7481,31 @@ const App = {
             'interpolate',
             ['linear'],
             ['zoom'],
-            8.8,.2,
-            9.8,.45,
-            11.7,1,
-            16,2.5
+            8.8,.3,
+            9.8,.5,
+            11.7,.8,
+            14,1.15,
+            17,1.65
+          ],
+
+          'line-dasharray':[1.1,.7],
+
+          'line-opacity':[
+            'match',
+            ['get','occurrenceStatus'],
+            'today',.90,
+            'recent',.84,
+            [
+              'case',
+              ['get','officialBoundary'],
+              .64,
+              .72
+            ]
           ]
 
         }
 
       });
-
 
       this.map.addSource(
         'community-points',
@@ -7572,7 +7595,7 @@ const App = {
 
         source:'community-points',
 
-        minzoom:8.8,
+        minzoom:14.2,
 
         layout:{
 
@@ -7583,17 +7606,18 @@ const App = {
             'interpolate',
             ['linear'],
             ['zoom'],
-            8.8,5.5,
-            9.8,6.5,
-            10.5,8,
-            11.8,10,
-            14,12,
-            17,14
+            14.2,7.5,
+            15.5,8.5,
+            17,10
           ],
 
           'text-anchor':'top',
 
-          'text-offset':[0,1],
+          'text-offset':[0,.9],
+
+          'text-max-width':12,
+
+          'text-letter-spacing':.01,
 
           'text-allow-overlap':
             false
@@ -7605,24 +7629,25 @@ const App = {
           'text-color':[
             'case',
             ['get','officialBoundary'],
-            '#ffffff',
+            '#f8fafc',
             '#fee2e2'
           ],
 
           'text-halo-color':[
             'case',
             ['get','officialBoundary'],
-            '#020617',
-            '#450a0a'
+            '#475569',
+            '#7f1d1d'
           ],
 
           'text-halo-width':
-            2
+            1.2,
+
+          'text-opacity':.88
 
         }
 
       });
-
 
       if(this._communityClickHandler){
         try{
