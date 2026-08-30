@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v24';
+const CACHE_NAME = 'radar-seguro-rj-v25';
 const APP_SHELL = [
   './',
   './index.html',
@@ -33,10 +33,10 @@ async function injectAppModules(response) {
   let html = await response.text();
   const scripts = [];
   if (!html.includes('nav-enhancements.js')) {
-    scripts.push('<script src="./nav-enhancements.js?v=24"></script>');
+    scripts.push('<script src="./nav-enhancements.js?v=25"></script>');
   }
   if (!html.includes('runtime-stability.js')) {
-    scripts.push('<script src="./runtime-stability.js?v=24"></script>');
+    scripts.push('<script src="./runtime-stability.js?v=25"></script>');
   }
   if (scripts.length) {
     html = html.replace('</body>', `${scripts.join('\n')}\n</body>`);
@@ -44,7 +44,7 @@ async function injectAppModules(response) {
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
-  headers.set('x-radar-build', '24');
+  headers.set('x-radar-build', '25');
   return new Response(html, {
     status: response.status,
     statusText: response.statusText,
