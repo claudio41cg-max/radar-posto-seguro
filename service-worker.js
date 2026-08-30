@@ -1,11 +1,12 @@
-const CACHE_NAME = 'radar-seguro-rj-v23';
+const CACHE_NAME = 'radar-seguro-rj-v24';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
   './icon-192-1.png',
   './icon-512-1.png',
-  './nav-enhancements.js'
+  './nav-enhancements.js',
+  './runtime-stability.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -24,22 +25,26 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-async function injectNavigationEnhancements(response) {
+async function injectAppModules(response) {
   if (!response || !response.ok) return response;
   const type = response.headers.get('content-type') || '';
   if (!type.includes('text/html')) return response;
 
   let html = await response.text();
+  const scripts = [];
   if (!html.includes('nav-enhancements.js')) {
-    html = html.replace(
-      '</body>',
-      '<script src="./nav-enhancements.js?v=23"></script>\n</body>'
-    );
+    scripts.push('<script src="./nav-enhancements.js?v=24"></script>');
+  }
+  if (!html.includes('runtime-stability.js')) {
+    scripts.push('<script src="./runtime-stability.js?v=24"></script>');
+  }
+  if (scripts.length) {
+    html = html.replace('</body>', `${scripts.join('\n')}\n</body>`);
   }
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
-  headers.set('x-radar-build', '23');
+  headers.set('x-radar-build', '24');
   return new Response(html, {
     status: response.status,
     statusText: response.statusText,
@@ -77,17 +82,15 @@ self.addEventListener('fetch', (event) => {
         const network = await fetch(event.request, { cache: 'no-store' });
         const cacheCopy = network.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put('./index.html', cacheCopy));
-        return injectNavigationEnhancements(network);
+        return injectAppModules(network);
       } catch (e) {
         const cached = await caches.match('./index.html');
-        return injectNavigationEnhancements(cached);
+        return injectAppModules(cached);
       }
     })());
     return;
   }
 
-  // Arquivos de código locais usam rede primeiro para que correções pequenas
-  // cheguem ao motorista sem ficarem presas em uma versão antiga do cache.
   if (url.pathname.endsWith('.js') || url.pathname.endsWith('.json')) {
     event.respondWith(
       fetch(event.request, { cache: 'no-store' })
