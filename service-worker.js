@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v21';
+const CACHE_NAME = 'radar-seguro-rj-v22';
 const APP_SHELL = [
   './',
   './index.html',
@@ -26,22 +26,20 @@ self.addEventListener('activate', (event) => {
 
 async function injectNavigationEnhancements(response) {
   if (!response || !response.ok) return response;
-
-  const contentType = response.headers.get('content-type') || '';
-  if (!contentType.includes('text/html')) return response;
+  const type = response.headers.get('content-type') || '';
+  if (!type.includes('text/html')) return response;
 
   let html = await response.text();
-  const scriptTag = '<script src="./nav-enhancements.js?v=21"></script>';
-
   if (!html.includes('nav-enhancements.js')) {
-    html = html.includes('</body>')
-      ? html.replace('</body>', `${scriptTag}\n</body>`)
-      : `${html}\n${scriptTag}`;
+    html = html.replace(
+      '</body>',
+      '<script src="./nav-enhancements.js?v=22"></script>\n</body>'
+    );
   }
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
-
+  headers.set('x-radar-build', '22');
   return new Response(html, {
     status: response.status,
     statusText: response.statusText,
@@ -60,9 +58,7 @@ self.addEventListener('fetch', (event) => {
       fetch(event.request, { cache: 'no-store' })
         .then((resp) => {
           const respClone = resp.clone();
-          caches.open(CACHE_NAME).then((cache) =>
-            cache.put(event.request, respClone)
-          );
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, respClone));
           return resp;
         })
         .catch(() => caches.match(event.request))
@@ -70,24 +66,23 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  const isNavigation =
+  const isNavigationHtml =
     event.request.mode === 'navigate' ||
     url.pathname.endsWith('/') ||
     url.pathname.endsWith('/index.html');
 
-  if (isNavigation) {
-    event.respondWith(
-      fetch(event.request, { cache: 'no-store' })
-        .then(async (resp) => {
-          const cacheCopy = resp.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cacheCopy));
-          return injectNavigationEnhancements(resp);
-        })
-        .catch(async () => {
-          const cached = await caches.match(event.request) || await caches.match('./index.html');
-          return injectNavigationEnhancements(cached);
-        })
-    );
+  if (isNavigationHtml) {
+    event.respondWith((async () => {
+      try {
+        const network = await fetch(event.request, { cache: 'no-store' });
+        const cacheCopy = network.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put('./index.html', cacheCopy));
+        return injectNavigationEnhancements(network);
+      } catch (e) {
+        const cached = await caches.match('./index.html');
+        return injectNavigationEnhancements(cached);
+      }
+    })());
     return;
   }
 
