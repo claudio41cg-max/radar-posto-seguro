@@ -1,1 +1,0 @@
-Backup lógico: antes da ativação do proxy TomTom, o frontend ainda usa a chave diretamente. O corte para o proxy só deve ocorrer após TOMTOM_API_KEY estar cadastrado como secret no Cloudflare Worker.
