@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
 
+<script src="./tomtom-proxy-client.js?v=26"></script>
+
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 
 <style>
@@ -1878,7 +1880,7 @@ body.nav-mode .community-sign{
    CONFIGURAÇÕES
 ========================================================= */
 
-const TOMTOM_KEY = 'K8Xf2UEzNNGXEmaMT9TmPvBmIFNRcqhq';
+const TOMTOM_KEY = '';
 
 const ANP_APP =
 'https://anpcomvcpostos.anp.gov.br/';
@@ -7120,8 +7122,7 @@ const App = {
           type:'raster',
 
           tiles:[
-            'https://api.tomtom.com/traffic/map/4/tile/flow/relative/{z}/{x}/{y}.png?tileSize=256&key='+
-            TOMTOM_KEY
+            'https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path=/traffic/map/4/tile/flow/relative/{z}/{x}/{y}.png%3FtileSize%3D256'
           ],
 
           tileSize:256,
