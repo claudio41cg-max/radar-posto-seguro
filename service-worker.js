@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v22';
+const CACHE_NAME = 'radar-seguro-rj-v23';
 const APP_SHELL = [
   './',
   './index.html',
@@ -33,13 +33,13 @@ async function injectNavigationEnhancements(response) {
   if (!html.includes('nav-enhancements.js')) {
     html = html.replace(
       '</body>',
-      '<script src="./nav-enhancements.js?v=22"></script>\n</body>'
+      '<script src="./nav-enhancements.js?v=23"></script>\n</body>'
     );
   }
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
-  headers.set('x-radar-build', '22');
+  headers.set('x-radar-build', '23');
   return new Response(html, {
     status: response.status,
     statusText: response.statusText,
@@ -83,6 +83,21 @@ self.addEventListener('fetch', (event) => {
         return injectNavigationEnhancements(cached);
       }
     })());
+    return;
+  }
+
+  // Arquivos de código locais usam rede primeiro para que correções pequenas
+  // cheguem ao motorista sem ficarem presas em uma versão antiga do cache.
+  if (url.pathname.endsWith('.js') || url.pathname.endsWith('.json')) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then((resp) => {
+          const respClone = resp.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, respClone));
+          return resp;
+        })
+        .catch(() => caches.match(event.request))
+    );
     return;
   }
 
