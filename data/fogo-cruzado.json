@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T15:24:35.196Z",
+  "generatedAt": "2026-08-30T15:39:33.055Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-08-30T11:56:39-03:00",
+  "count": 56,
+  "lastUpdate": "2026-08-30T12:24:54-03:00",
   "occurrences": [
     {
       "id": "c93eb5ce-fcad-42ad-8fa1-49259a93728a",
@@ -27,6 +27,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "6efd6ea1-5a26-4e2b-917c-6b8447258373",
+      "documentNumber": 78834,
+      "date": "2026-08-30T02:00:00.000Z",
+      "address": "Muzema - Itanhangá, Rio de Janeiro - RJ, 22753-073, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "MORRO DA MUZEMA",
+      "latitude": -22.9891,
+      "longitude": -43.3212,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "31019102-ccae-4688-a401-ad45305e20af",
@@ -342,12 +362,12 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         },
         {
           "situation": "Wounded",
@@ -477,11 +497,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
