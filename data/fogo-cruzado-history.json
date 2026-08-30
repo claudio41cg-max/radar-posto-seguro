@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T21:09:42.109Z",
+  "generatedAt": "2026-08-30T21:24:31.457Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 77,
+  "count": 78,
   "occurrences": [
     {
       "id": "c93eb5ce-fcad-42ad-8fa1-49259a93728a",
@@ -69,6 +69,26 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c93c29fa-4385-41be-935f-1ea22270f162",
+      "documentNumber": 78836,
+      "date": "2026-08-29T22:00:00.000Z",
+      "address": "Estrada do Guerenguê - Taquara, Rio de Janeiro - RJ, 22713-001, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.940077751307967,
+      "longitude": -43.38434160213013,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -311,11 +331,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -524,11 +544,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
