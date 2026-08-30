@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T14:54:29.323Z",
+  "generatedAt": "2026-08-30T15:09:38.832Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 54,
-  "lastUpdate": "2026-08-29T16:27:51-03:00",
+  "count": 55,
+  "lastUpdate": "2026-08-30T11:56:39-03:00",
   "occurrences": [
+    {
+      "id": "c93eb5ce-fcad-42ad-8fa1-49259a93728a",
+      "documentNumber": 78833,
+      "date": "2026-08-30T04:00:00.000Z",
+      "address": " Morro da Caixa d'Água - Centro, Queimados - RJ, 26383-971, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "VILA DAS MANGUEIRAS",
+      "locality": "MORRO DA CAIXA D'AGUA",
+      "latitude": -22.714731,
+      "longitude": -43.552579,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "31019102-ccae-4688-a401-ad45305e20af",
       "documentNumber": 78827,
@@ -327,24 +342,24 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
