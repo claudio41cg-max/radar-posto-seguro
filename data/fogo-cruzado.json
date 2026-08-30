@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T20:54:20.616Z",
+  "generatedAt": "2026-08-30T21:09:42.107Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 56,
-  "lastUpdate": "2026-08-30T12:24:54-03:00",
+  "count": 57,
+  "lastUpdate": "2026-08-30T18:03:11-03:00",
   "occurrences": [
     {
       "id": "c93eb5ce-fcad-42ad-8fa1-49259a93728a",
@@ -44,6 +44,34 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "7df91566-4e81-4292-b22c-553f13abd3dc",
+      "documentNumber": 78835,
+      "date": "2026-08-29T23:00:00.000Z",
+      "address": "R. Sd. Bruno Estrifíca - Curicica, Rio de Janeiro - RJ, 22780-600, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.958897360131534,
+      "longitude": -43.385976533868416,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -284,11 +312,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -366,20 +394,20 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
         }
       ]
     },
@@ -676,6 +704,21 @@
       ]
     },
     {
+      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
+      "documentNumber": 78750,
+      "date": "2026-08-25T15:00:00.000Z",
+      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9218834,
+      "longitude": -43.2215127,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "8ebd83ba-67e5-4519-be52-2f00e3a1da0e",
       "documentNumber": 78758,
       "date": "2026-08-25T15:00:00.000Z",
@@ -694,21 +737,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
-      "documentNumber": 78750,
-      "date": "2026-08-25T15:00:00.000Z",
-      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9218834,
-      "longitude": -43.2215127,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "71f19c9e-10ce-4945-8ec1-3bc931876e74",
