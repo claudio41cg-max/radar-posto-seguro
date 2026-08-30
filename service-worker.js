@@ -1,10 +1,12 @@
-const CACHE_NAME = 'radar-seguro-rj-v25';
+const CACHE_NAME = 'radar-seguro-rj-v26';
+const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
   './icon-192-1.png',
   './icon-512-1.png',
+  './tomtom-proxy-client.js',
   './nav-enhancements.js',
   './runtime-stability.js'
 ];
@@ -32,11 +34,14 @@ async function injectAppModules(response) {
 
   let html = await response.text();
   const scripts = [];
+  if (!html.includes('tomtom-proxy-client.js')) {
+    scripts.push('<script src="./tomtom-proxy-client.js?v=26"></script>');
+  }
   if (!html.includes('nav-enhancements.js')) {
-    scripts.push('<script src="./nav-enhancements.js?v=25"></script>');
+    scripts.push('<script src="./nav-enhancements.js?v=26"></script>');
   }
   if (!html.includes('runtime-stability.js')) {
-    scripts.push('<script src="./runtime-stability.js?v=25"></script>');
+    scripts.push('<script src="./runtime-stability.js?v=26"></script>');
   }
   if (scripts.length) {
     html = html.replace('</body>', `${scripts.join('\n')}\n</body>`);
@@ -44,7 +49,7 @@ async function injectAppModules(response) {
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
-  headers.set('x-radar-build', '25');
+  headers.set('x-radar-build', '26');
   return new Response(html, {
     status: response.status,
     statusText: response.statusText,
@@ -52,10 +57,31 @@ async function injectAppModules(response) {
   });
 }
 
+function tomTomProxyRequest(request) {
+  const source = new URL(request.url);
+  source.searchParams.delete('key');
+  const path = source.pathname + (source.search || '');
+  const proxyUrl = `${TOMTOM_WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`;
+  return fetch(proxyUrl, {
+    method: 'GET',
+    headers: {
+      'Accept': request.headers.get('Accept') || '*/*'
+    },
+    cache: 'no-store'
+  });
+}
+
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
-  const isAppShell = url.origin === self.location.origin;
 
+  // Recursos TomTom, inclusive tiles de trânsito carregados pelo MapLibre,
+  // passam pelo Worker. A chave da página é removida antes da chamada externa.
+  if (url.hostname === 'api.tomtom.com') {
+    event.respondWith(tomTomProxyRequest(event.request));
+    return;
+  }
+
+  const isAppShell = url.origin === self.location.origin;
   if (!isAppShell) return;
 
   if (url.pathname.includes('/data/')) {
