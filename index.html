@@ -7862,6 +7862,41 @@ const App = {
   },
 
 
+  suspendIdleGPS(){
+
+    /*
+      ECONOMIA SEGURA:
+      quando o aplicativo fica oculto e não há rota ativa,
+      interrompe GPS e temporizador até o usuário voltar.
+      Durante a navegação, a precisão permanece inalterada.
+    */
+    if(this.navActive)
+      return;
+
+    if(this.GPSWatch!=null){
+
+      navigator.geolocation
+      .clearWatch(
+        this.GPSWatch
+      );
+
+      this.GPSWatch=null;
+
+    }
+
+    if(this.gpsContinuityTimer){
+
+      clearInterval(
+        this.gpsContinuityTimer
+      );
+
+      this.gpsContinuityTimer=null;
+
+    }
+
+  },
+
+
   handleGPSError(error){
 
     const gap=
@@ -8213,6 +8248,45 @@ const App = {
 
   },
 
+  runAdaptiveGPSTasks(force=false){
+
+    const now=Date.now();
+
+    const moving=
+      this.currentSpeed>=3;
+
+    /*
+      Mantém as tarefas críticas da navegação em tempo real,
+      mas reduz repetições de alertas, perigos e camadas quando
+      o veículo está parado ou fora do modo de navegação.
+    */
+    const interval=
+      this.navActive
+      ?
+      (moving ? 1200 : 4000)
+      :
+      (moving ? 2500 : 7000);
+
+    if(
+      !force &&
+      this._lastGPSAuxAt &&
+      now-this._lastGPSAuxAt<interval
+    )
+      return;
+
+    this._lastGPSAuxAt=now;
+
+    this.checkCommunityDanger();
+
+    this.updateCommunityBillboard();
+
+    this.updateTrafficLightHUD();
+
+    this.renderHazards();
+
+  },
+
+
   handleGPS(position){
 
     const c=
@@ -8389,9 +8463,7 @@ const App = {
         'GPS ATIVO'
       );
 
-      this.checkCommunityDanger();
-
-      this.updateTrafficLightHUD();
+      this.runAdaptiveGPSTasks();
 
       return;
 
@@ -8564,13 +8636,7 @@ const App = {
 
     this.checkOffRoute(match);
 
-    this.checkCommunityDanger();
-
-    this.updateCommunityBillboard();
-
-    this.updateTrafficLightHUD();
-
-    this.renderHazards();
+    this.runAdaptiveGPSTasks();
 
   },
 
@@ -14780,6 +14846,8 @@ ${Utils.sanitize(msg.text)}
 
           VoiceAssistant
           .suspendHandsFree();
+
+          this.suspendIdleGPS();
 
         }
       }
