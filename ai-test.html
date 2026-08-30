@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teste IA Radar</title>
+<style>
+body{font-family:Arial,sans-serif;background:#07131f;color:#fff;padding:24px}button{font-size:20px;padding:14px 18px;border:0;border-radius:12px;background:#0284c7;color:#fff;font-weight:700}pre{white-space:pre-wrap;background:#111827;padding:16px;border-radius:12px;margin-top:18px;font-size:16px}
+</style>
+</head>
+<body>
+<h2>Teste direto da inteligência</h2>
+<p>Toque no botão abaixo.</p>
+<button id="testar">Testar 5 + 5</button>
+<pre id="saida">Aguardando teste...</pre>
+<script>
+document.getElementById('testar').onclick=async()=>{
+ const out=document.getElementById('saida');
+ out.textContent='Testando...';
+ try{
+  const r=await fetch('https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/chat',{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({message:'Quanto é 5 mais 5?',history:[]})
+  });
+  const txt=await r.text();
+  out.textContent='Status HTTP: '+r.status+'\n\n'+txt;
+ }catch(e){
+  out.textContent='ERRO DE REDE/CORS\n\n'+String(e);
+ }
+};
+</script>
+</body>
+</html>
