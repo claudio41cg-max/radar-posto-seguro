@@ -1,0 +1,38 @@
+name: Restaurar polígonos naturais
+
+on:
+  push:
+    paths:
+      - .github/workflows/temp-restore-natural-polygons.yml
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validar script
+        run: node --check .github/scripts/temp-restore-natural-polygons.js
+
+      - name: Restaurar visual natural
+        run: node .github/scripts/temp-restore-natural-polygons.js
+
+      - name: Confirmar escopo e publicar
+        run: |
+          test -n "$(git status --short index.html)"
+          test -z "$(git status --short -- data/fogo-cruzado.json)"
+          git config user.name "Radar Seguro Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git commit -m "Restaura visual natural dos polígonos"
+          git pull --rebase origin main
+          git push origin HEAD:main
