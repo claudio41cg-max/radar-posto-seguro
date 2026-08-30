@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v28';
+const CACHE_NAME = 'radar-seguro-rj-v29';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const APP_SHELL = [
   './',
@@ -35,13 +35,13 @@ async function injectAppModules(response) {
   let html = await response.text();
   const scripts = [];
   if (!html.includes('tomtom-proxy-client.js')) {
-    scripts.push('<script src="./tomtom-proxy-client.js?v=28"></script>');
+    scripts.push('<script src="./tomtom-proxy-client.js?v=29"></script>');
   }
   if (!html.includes('nav-enhancements.js')) {
-    scripts.push('<script src="./nav-enhancements.js?v=28"></script>');
+    scripts.push('<script src="./nav-enhancements.js?v=29"></script>');
   }
   if (!html.includes('runtime-stability.js')) {
-    scripts.push('<script src="./runtime-stability.js?v=28"></script>');
+    scripts.push('<script src="./runtime-stability.js?v=29"></script>');
   }
   if (scripts.length) {
     html = html.replace('</body>', `${scripts.join('\n')}\n</body>`);
@@ -49,7 +49,7 @@ async function injectAppModules(response) {
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
-  headers.set('x-radar-build', '28');
+  headers.set('x-radar-build', '29');
   return new Response(html, {
     status: response.status,
     statusText: response.statusText,
@@ -72,7 +72,21 @@ function tomTomProxyRequest(request) {
 }
 
 async function aiChatProxyRequest(request) {
-  const body = await request.clone().text();
+  const rawBody = await request.clone().text();
+  let body = rawBody;
+
+  try {
+    const payload = JSON.parse(rawBody || '{}');
+    if (!payload.message && typeof payload.pergunta === 'string') {
+      payload.message = payload.pergunta;
+      delete payload.pergunta;
+    }
+    if (!Array.isArray(payload.history)) payload.history = [];
+    body = JSON.stringify(payload);
+  } catch (_) {
+    body = rawBody;
+  }
+
   return fetch(`${TOMTOM_WORKER}/v1/chat`, {
     method: 'POST',
     headers: {
@@ -88,7 +102,7 @@ self.addEventListener('fetch', (event) => {
 
   if (
     url.origin === TOMTOM_WORKER &&
-    url.pathname === '/' &&
+    (url.pathname === '/' || url.pathname === '/v1/chat') &&
     event.request.method === 'POST'
   ) {
     event.respondWith(aiChatProxyRequest(event.request));
