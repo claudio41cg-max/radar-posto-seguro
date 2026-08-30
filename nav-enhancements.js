@@ -1,6 +1,6 @@
 /* Radar Seguro RJ PRO — melhorias modulares de navegação
-   Mantém semáforos apenas como pontos no mapa, adiciona avisos de radar
-   e mensagens de voz no recálculo sem alterar o núcleo do index.html. */
+   Mantém semáforos apenas como pontos no mapa, adiciona avisos de radar,
+   mensagens de recálculo e instruções mais naturais em saídas/bifurcações. */
 (() => {
   'use strict';
 
@@ -10,14 +10,43 @@
 
   App.radarVoiceAnnounced = Object.create(null);
 
-  // Semáforos continuam desenhados no mapa, mas não tentamos adivinhar
-  // vermelho, amarelo ou verde pelo fluxo do trânsito.
   App.refreshTrafficFlow = async function () {};
   App.updateTrafficLightHUD = function () {
     this.trafficStopSince = 0;
     const hud = document.getElementById('trafficLightHud');
     if (hud) hud.classList.remove('show');
     if (typeof this.clearTrafficLights === 'function') this.clearTrafficLights();
+  };
+
+  // Mantemos o mecanismo original de distância/tempo das falas e melhoramos
+  // somente o texto dos tipos de manobra que antes ficavam genéricos.
+  const originalManeuverText = typeof App.maneuverText === 'function'
+    ? App.maneuverText.bind(App)
+    : null;
+
+  App.maneuverText = function (step) {
+    if (!step) return originalManeuverText ? originalManeuverText(step) : 'Siga em frente';
+
+    const maneuver = step.maneuver || {};
+    const type = String(maneuver.type || step.type || '').toLowerCase();
+    const modifier = String(maneuver.modifier || step.modifier || '').toLowerCase();
+    const name = String(step.name || step.streetName || '').trim();
+    const left = modifier.includes('left') || modifier.includes('esquer');
+    const right = modifier.includes('right') || modifier.includes('direit');
+    const road = name ? ` para entrar na ${name}` : '';
+
+    if (type.includes('fork')) {
+      if (left) return `Mantenha-se à esquerda${road}`;
+      if (right) return `Mantenha-se à direita${road}`;
+    }
+
+    if (type.includes('exit') || type.includes('ramp')) {
+      if (left) return `Pegue a saída à esquerda${road}`;
+      if (right) return `Pegue a saída à direita${road}`;
+      return name ? `Pegue a saída para ${name}` : 'Pegue a saída à frente';
+    }
+
+    return originalManeuverText ? originalManeuverText(step) : 'Siga em frente';
   };
 
   App.checkRadarVoice = function () {
