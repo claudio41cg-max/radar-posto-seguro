@@ -1,10 +1,11 @@
-const CACHE_NAME = 'radar-seguro-rj-v20';
+const CACHE_NAME = 'radar-seguro-rj-v21';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
   './icon-192-1.png',
-  './icon-512-1.png'
+  './icon-512-1.png',
+  './nav-enhancements.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -23,18 +24,37 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Estratégia: para o "app shell" (arquivos locais), tenta cache primeiro,
-// depois rede. Para tudo externo (mapa, rotas, busca de endereço), sempre
-// usa a rede — esses precisam de internet mesmo, não dá pra funcionar
-// offline (senão o mapa e as rotas ficariam desatualizados ou quebrados).
+async function injectNavigationEnhancements(response) {
+  if (!response || !response.ok) return response;
+
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('text/html')) return response;
+
+  let html = await response.text();
+  const scriptTag = '<script src="./nav-enhancements.js?v=21"></script>';
+
+  if (!html.includes('nav-enhancements.js')) {
+    html = html.includes('</body>')
+      ? html.replace('</body>', `${scriptTag}\n</body>`)
+      : `${html}\n${scriptTag}`;
+  }
+
+  const headers = new Headers(response.headers);
+  headers.delete('content-length');
+
+  return new Response(html, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   const isAppShell = url.origin === self.location.origin;
 
-  if (!isAppShell) return; // deixa passar direto pra rede
+  if (!isAppShell) return;
 
-  // Dados oficiais mudam sem que o código do app precise mudar.
-  // Busca primeiro na internet e usa o cache somente se estiver offline.
   if (url.pathname.includes('/data/')) {
     event.respondWith(
       fetch(event.request, { cache: 'no-store' })
@@ -46,6 +66,27 @@ self.addEventListener('fetch', (event) => {
           return resp;
         })
         .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  const isNavigation =
+    event.request.mode === 'navigate' ||
+    url.pathname.endsWith('/') ||
+    url.pathname.endsWith('/index.html');
+
+  if (isNavigation) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then(async (resp) => {
+          const cacheCopy = resp.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cacheCopy));
+          return injectNavigationEnhancements(resp);
+        })
+        .catch(async () => {
+          const cached = await caches.match(event.request) || await caches.match('./index.html');
+          return injectNavigationEnhancements(cached);
+        })
     );
     return;
   }
