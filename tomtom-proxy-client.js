@@ -26,11 +26,11 @@
     return Boolean(url && url.hostname === 'api.tomtom.com');
   }
 
-  function isWorkerRoot(value) {
+  function isWorkerAI(value) {
     const url = toUrl(value);
     if (!url) return false;
     const base = new URL(WORKER_BASE);
-    return url.origin === base.origin && (url.pathname === '/' || url.pathname === '');
+    return url.origin === base.origin && (url.pathname === '/' || url.pathname === '' || url.pathname === '/v1/chat');
   }
 
   function buildProxyUrl(value) {
@@ -51,15 +51,32 @@
     };
   }
 
+  function normalizeAIBody(body) {
+    if (typeof body !== 'string') return body;
+    try {
+      const payload = JSON.parse(body || '{}');
+      if (!payload.message && typeof payload.pergunta === 'string') {
+        payload.message = payload.pergunta;
+        delete payload.pergunta;
+      }
+      if (!Array.isArray(payload.history)) payload.history = [];
+      return JSON.stringify(payload);
+    } catch (_) {
+      return body;
+    }
+  }
+
   window.fetch = function radarProtectedFetch(input, init) {
     const method = String(init?.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
 
-    // O index legado envia perguntas gerais para a raiz do Worker.
-    // O serviço atual recebe IA em /v1/chat. A ponte abaixo funciona tanto
-    // para fetch(url, init) quanto para fetch(new Request(...)).
-    if (method === 'POST' && isWorkerRoot(input)) {
+    // Corrige a integração legada da IA diretamente antes da requisição sair
+    // do navegador: "pergunta" -> "message" e garante history como array.
+    if (method === 'POST' && isWorkerAI(input)) {
       const nextInit = cloneInitFromRequest(input, init);
       nextInit.method = 'POST';
+      nextInit.headers = new Headers(nextInit.headers || {});
+      nextInit.headers.set('Content-Type', 'application/json');
+      nextInit.body = normalizeAIBody(nextInit.body);
       return nativeFetch(AI_CHAT, nextInit);
     }
 
@@ -98,9 +115,6 @@
 
     if (originalHasWakeWord) {
       assistant.hasWakeWord = function enhancedWakeWord(text) {
-        // Durante uma conversa recém-iniciada, permite a continuação natural
-        // sem repetir "Radar" a cada frase. Fora dessa janela, exige a palavra
-        // de ativação, evitando que rádio/conversas virem comandos.
         return originalHasWakeWord(text) || (this.handsFree && Date.now() < this.conversationUntil);
       };
     }
@@ -118,8 +132,6 @@
     return true;
   }
 
-  // VoiceAssistant é criado pelo index depois deste arquivo.
-  // Tentamos instalar a melhoria assim que estiver disponível.
   let attempts = 0;
   const installTimer = setInterval(() => {
     attempts += 1;
