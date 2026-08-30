@@ -9,6 +9,7 @@
   App.__navEnhancementsInstalled = true;
 
   App.radarVoiceAnnounced = Object.create(null);
+  App.exitPrepAnnounced = Object.create(null);
 
   App.refreshTrafficFlow = async function () {};
   App.updateTrafficLightHUD = function () {
@@ -18,8 +19,6 @@
     if (typeof this.clearTrafficLights === 'function') this.clearTrafficLights();
   };
 
-  // Mantemos o mecanismo original de distância/tempo das falas e melhoramos
-  // somente o texto dos tipos de manobra que antes ficavam genéricos.
   const originalManeuverText = typeof App.maneuverText === 'function'
     ? App.maneuverText.bind(App)
     : null;
@@ -33,7 +32,7 @@
     const name = String(step.name || step.streetName || '').trim();
     const left = modifier.includes('left') || modifier.includes('esquer');
     const right = modifier.includes('right') || modifier.includes('direit');
-    const road = name ? ` para entrar na ${name}` : '';
+    const road = name && !/siga pela via/i.test(name) ? ` para ${name}` : '';
 
     if (type.includes('fork')) {
       if (left) return `Mantenha-se à esquerda${road}`;
@@ -43,10 +42,43 @@
     if (type.includes('exit') || type.includes('ramp')) {
       if (left) return `Pegue a saída à esquerda${road}`;
       if (right) return `Pegue a saída à direita${road}`;
-      return name ? `Pegue a saída para ${name}` : 'Pegue a saída à frente';
+      return road ? `Pegue a saída${road}` : 'Pegue a saída à frente';
     }
 
     return originalManeuverText ? originalManeuverText(step) : 'Siga em frente';
+  };
+
+  App.isExitLikeStep = function (step) {
+    const type = String(step?.maneuver?.type || '').toLowerCase();
+    return type.includes('exit') || type.includes('ramp') || type.includes('fork');
+  };
+
+  // Aviso antecipado exclusivo para saídas/bifurcações. Não é usado em curvas
+  // comuns nem rotatórias, preservando a navegação mais silenciosa já aprovada.
+  App.checkExitPreparationVoice = function () {
+    if (!this.navActive || !this.route || !this.userPos || this.currentSpeed < 18) return;
+
+    const guidance = this.getUpcomingGuidance?.();
+    if (!guidance?.step || !this.isExitLikeStep(guidance.step)) return;
+
+    const distance = Number(guidance.distance) || 0;
+    if (distance < 420 || distance > 900) return;
+
+    const key = `exit-prep-${guidance.index}`;
+    if (this.exitPrepAnnounced[key]) return;
+
+    const now = Date.now();
+    if (now - this.lastStepVoiceAt < 4500) return;
+    if (Voice.speaking || Voice.queue?.length) return;
+
+    const mod = String(guidance.step.maneuver?.modifier || '').toLowerCase();
+    const side = mod.includes('left') ? ' à esquerda' : mod.includes('right') ? ' à direita' : '';
+    const name = String(guidance.step.name || '').trim();
+    const destination = name && !/siga pela via/i.test(name) ? ` para ${name}` : '';
+
+    this.exitPrepAnnounced[key] = true;
+    this.lastStepVoiceAt = now;
+    Voice.speak(`Prepare-se para pegar a saída${side}${destination}.`);
   };
 
   App.checkRadarVoice = function () {
@@ -94,18 +126,24 @@
   const originalUpdateNavigation = App.updateNavigation.bind(App);
   App.updateNavigation = function () {
     originalUpdateNavigation();
+    this.checkExitPreparationVoice();
     this.checkRadarVoice();
+  };
+
+  const resetVoiceState = function () {
+    this.radarVoiceAnnounced = Object.create(null);
+    this.exitPrepAnnounced = Object.create(null);
   };
 
   const originalStartNavigation = App.startNavigation.bind(App);
   App.startNavigation = function () {
-    this.radarVoiceAnnounced = Object.create(null);
+    resetVoiceState.call(this);
     return originalStartNavigation();
   };
 
   const originalClearRoute = App.clearRoute.bind(App);
   App.clearRoute = function () {
-    this.radarVoiceAnnounced = Object.create(null);
+    resetVoiceState.call(this);
     return originalClearRoute();
   };
 
@@ -127,7 +165,7 @@
     }
 
     if (this.route && this.route !== previousRoute) {
-      this.radarVoiceAnnounced = Object.create(null);
+      resetVoiceState.call(this);
       setTimeout(() => {
         if (this.navActive) {
           Voice.speak('Nova rota calculada. Siga as novas orientações.', true);
