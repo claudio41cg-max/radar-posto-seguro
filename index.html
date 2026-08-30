@@ -1419,7 +1419,7 @@ body.nav-mode .community-sign{
   </div>
 
   <div class="chips">
-    <button class="chip active" id="fuelChip">⛽ Postos</button>
+    <button class="chip" id="fuelChip">⛽ Postos</button>
     <button class="chip active" id="communityChip">🔴 Comunidades</button>
   </div>
 
@@ -1457,7 +1457,7 @@ body.nav-mode .community-sign{
 
 
 <div class="nav-map-chips" aria-label="Camadas do mapa durante a navegação">
-  <button class="nav-map-chip active" id="navFuelChip">⛽ Postos</button>
+  <button class="nav-map-chip" id="navFuelChip">⛽ Postos</button>
   <button class="nav-map-chip active" id="navCommunityChip">🔴 Comunidades</button>
   <button class="nav-map-chip assistant" id="navAssistantMicBtn" title="Falar com o Radar">🎙️ Radar</button>
 </div>
@@ -6083,9 +6083,9 @@ const VoiceAssistant = {
 
 const FuelModule = {
 
-  visible:true,
+  visible:false,
 
-  filter:'all',
+  filter:'none',
 
   stations:[],
 
@@ -6890,6 +6890,8 @@ const App = {
 
         maxPitch:70,
 
+        maxZoom:18,
+
         attributionControl:false,
 
         style:
@@ -7345,21 +7347,21 @@ const App = {
                 this.appliedTheme==='sat'
               )
               ? '#fbbf24'
-              : '#475569',
-              '#ef4444'
+              : '#111827',
+              '#dc2626'
             ]
           ],
 
           'fill-opacity':[
             'case',
             ['==',['get','occurrenceStatus'],'today'],
-            ['interpolate',['linear'],['zoom'],8.8,.10,11.7,.18,14,.24,17,.30],
+            ['interpolate',['linear'],['zoom'],8.8,.13,11.7,.30,14,.42,17,.50],
             ['==',['get','occurrenceStatus'],'recent'],
-            ['interpolate',['linear'],['zoom'],8.8,.08,11.7,.14,14,.20,17,.25],
+            ['interpolate',['linear'],['zoom'],8.8,.10,11.7,.24,14,.34,17,.42],
             ['case',
               ['get','officialBoundary'],
-              ['interpolate',['linear'],['zoom'],8.8,.035,9.8,.055,11.7,.09,14,.13,17,.17],
-              ['interpolate',['linear'],['zoom'],8.8,.025,9.8,.045,11.7,.075,14,.115,17,.155]
+              ['interpolate',['linear'],['zoom'],8.8,.035,9.8,.06,10.5,.09,11.7,.13,14,.20,17,.28],
+              ['interpolate',['linear'],['zoom'],8.8,.025,9.8,.05,10.5,.08,11.7,.12,14,.19,17,.27]
             ]
           ]
 
@@ -7388,8 +7390,8 @@ const App = {
           'line-color':[
             'match',
             ['get','occurrenceStatus'],
-            'today','#dc2626',
-            'recent','#f97316',
+            'today','#ef4444',
+            'recent','#fb923c',
             [
               'case',
               ['get','officialBoundary'],
@@ -7398,8 +7400,8 @@ const App = {
                 this.appliedTheme==='sat'
               )
               ? '#fbbf24'
-              : '#111827',
-              '#b91c1c'
+              : '#020617',
+              '#ef4444'
             ]
           ],
 
@@ -7407,29 +7409,16 @@ const App = {
             'interpolate',
             ['linear'],
             ['zoom'],
-            8.8,.25,
+            8.8,.2,
             9.8,.45,
-            11.7,.75,
-            14,1.15,
-            17,1.65
-          ],
-
-          'line-opacity':[
-            'match',
-            ['get','occurrenceStatus'],
-            'today',.92,
-            'recent',.88,
-            [
-              'case',
-              ['get','officialBoundary'],
-              .82,
-              .78
-            ]
+            11.7,1,
+            16,2.5
           ]
 
         }
 
       });
+
 
       this.map.addSource(
         'community-points',
@@ -7439,35 +7428,6 @@ const App = {
             communitiesPointGeoJSON()
         }
       );
-
-
-      this.map.addLayer({
-
-        id:'community-pointer',
-
-        type:'symbol',
-
-        source:'community-points',
-
-        filter:['==',['get','featured'],true],
-
-        minzoom:8.8,
-
-        layout:{
-          'text-field':'▼',
-          'text-size':['interpolate',['linear'],['zoom'],8.8,6,10,9,11.8,14,16,18],
-          'text-anchor':'bottom',
-          'text-offset':[0,-.15],
-          'text-allow-overlap':true
-        },
-
-        paint:{
-          'text-color':'#fbbf24',
-          'text-halo-color':'#020617',
-          'text-halo-width':2
-        }
-
-      });
 
 
       this.map.addLayer({
@@ -7519,7 +7479,7 @@ const App = {
 
         source:'community-points',
 
-        minzoom:12.8,
+        minzoom:13.4,
 
         layout:{
 
@@ -14091,6 +14051,10 @@ ${Utils.sanitize(msg.text)}
 
         FuelModule.filter='all';
 
+        ['fuelChip','navFuelChip'].forEach(id=>
+          document.getElementById(id)?.classList.add('active')
+        );
+
         FuelModule.render(
           this.map
         );
@@ -14117,6 +14081,10 @@ ${Utils.sanitize(msg.text)}
 
         FuelModule.filter='gnv';
 
+        ['fuelChip','navFuelChip'].forEach(id=>
+          document.getElementById(id)?.classList.add('active')
+        );
+
         FuelModule.render(
           this.map
         );
@@ -14142,6 +14110,10 @@ ${Utils.sanitize(msg.text)}
         FuelModule.visible=true;
 
         FuelModule.filter='official';
+
+        ['fuelChip','navFuelChip'].forEach(id=>
+          document.getElementById(id)?.classList.add('active')
+        );
 
         FuelModule.render(
           this.map
@@ -14173,6 +14145,10 @@ ${Utils.sanitize(msg.text)}
         FuelModule.visible=false;
 
         FuelModule.filter='none';
+
+        ['fuelChip','navFuelChip'].forEach(id=>
+          document.getElementById(id)?.classList.remove('active')
+        );
 
         FuelModule.render(
           this.map
