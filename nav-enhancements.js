@@ -1,6 +1,6 @@
 /* Radar Seguro RJ PRO — melhorias modulares de navegação
    Mantém semáforos apenas como pontos no mapa, adiciona avisos de radar,
-   mensagens de recálculo e instruções mais naturais em saídas/bifurcações. */
+   mensagens de recálculo, chegada automática e instruções naturais. */
 (() => {
   'use strict';
 
@@ -10,6 +10,8 @@
 
   App.radarVoiceAnnounced = Object.create(null);
   App.exitPrepAnnounced = Object.create(null);
+  App.autoArrivalSince = 0;
+  App.autoArrivalDone = false;
 
   App.refreshTrafficFlow = async function () {};
   App.updateTrafficLightHUD = function () {
@@ -53,8 +55,6 @@
     return type.includes('exit') || type.includes('ramp') || type.includes('fork');
   };
 
-  // Aviso antecipado exclusivo para saídas/bifurcações. Não é usado em curvas
-  // comuns nem rotatórias, preservando a navegação mais silenciosa já aprovada.
   App.checkExitPreparationVoice = function () {
     if (!this.navActive || !this.route || !this.userPos || this.currentSpeed < 18) return;
 
@@ -123,16 +123,72 @@
     }
   };
 
+  // Confirma a chegada antes de encerrar. Isso evita terminar a navegação
+  // por um salto isolado do GPS quando o carro apenas passa perto do destino.
+  App.checkAutomaticArrival = function () {
+    if (!this.navActive || !this.route || !this.userPos || !this.destination || this.autoArrivalDone) return;
+
+    const destination = Array.isArray(this.destination)
+      ? this.destination
+      : (this.destination.coords || this.destination.coordinates || null);
+    if (!Array.isArray(destination) || destination.length < 2) return;
+
+    let distanceKm = Infinity;
+    try {
+      if (typeof Utils !== 'undefined' && typeof Utils.distanceKm === 'function') {
+        distanceKm = Utils.distanceKm(this.userPos[0], this.userPos[1], Number(destination[0]), Number(destination[1]));
+      }
+    } catch (error) {}
+
+    if (!Number.isFinite(distanceKm)) return;
+
+    const distanceMeters = distanceKm * 1000;
+    const speed = Number(this.currentSpeed) || 0;
+    const now = Date.now();
+
+    // Precisa estar realmente muito perto e devagar/parado por alguns segundos.
+    if (distanceMeters <= 24 && speed <= 14) {
+      if (!this.autoArrivalSince) this.autoArrivalSince = now;
+      if (now - this.autoArrivalSince < 5500) return;
+
+      this.autoArrivalDone = true;
+      this.autoArrivalSince = 0;
+
+      // A voz principal já pode ter anunciado a chegada; não interrompemos
+      // uma fala em andamento. Apenas encerramos o modo de navegação.
+      setTimeout(() => {
+        if (!this.navActive) return;
+        try {
+          if (typeof this.stopNavigation === 'function') {
+            this.stopNavigation();
+          } else if (typeof this.clearRoute === 'function') {
+            this.clearRoute();
+          }
+        } catch (error) {
+          console.warn('Radar Seguro: não foi possível encerrar a navegação automaticamente.', error);
+          this.autoArrivalDone = false;
+        }
+      }, 900);
+      return;
+    }
+
+    // Saiu novamente da área do destino: exige uma nova confirmação completa.
+    if (distanceMeters > 38 || speed > 18) this.autoArrivalSince = 0;
+  };
+
   const originalUpdateNavigation = App.updateNavigation.bind(App);
   App.updateNavigation = function () {
     originalUpdateNavigation();
     this.checkExitPreparationVoice();
     this.checkRadarVoice();
+    this.checkAutomaticArrival();
   };
 
   const resetVoiceState = function () {
     this.radarVoiceAnnounced = Object.create(null);
     this.exitPrepAnnounced = Object.create(null);
+    this.autoArrivalSince = 0;
+    this.autoArrivalDone = false;
   };
 
   const originalStartNavigation = App.startNavigation.bind(App);
