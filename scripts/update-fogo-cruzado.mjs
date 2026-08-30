@@ -17,6 +17,19 @@ async function api(path, options = {}) {
   return { body, headers: response.headers };
 }
 
+const readJson = async path => {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return null;
+  }
+};
+
+// Lemos primeiro o último estado válido. Assim uma falha momentânea da API
+// nunca apaga do aplicativo dados que já estavam publicados corretamente.
+const previousHistory = await readJson("data/fogo-cruzado-history.json");
+const previousFeed = await readJson("data/fogo-cruzado.json");
+
 const login = await api("/auth/login", {
   method: "POST",
   headers: { "content-type": "application/json" },
@@ -28,8 +41,8 @@ if (!token) throw new Error("A API não retornou o token de acesso.");
 
 const headers = { authorization: `Bearer ${token}` };
 const communityText = value => String(value || "")
-  .replace(/\\bfavelas\\b/gi, "Comunidades")
-  .replace(/\\bfavela\\b/gi, "Comunidade");
+  .replace(/\bfavelas\b/gi, "Comunidades")
+  .replace(/\bfavela\b/gi, "Comunidade");
 const cities = await api("/cities?cityName=RIO%20DE%20JANEIRO", { headers });
 const city = cities.body?.data?.find(
   item => String(item.name || "").toUpperCase() === "RIO DE JANEIRO"
@@ -52,7 +65,11 @@ const query = new URLSearchParams({
 if (city.state?.id) query.set("idState", city.state.id);
 
 const result = await api(`/occurrences?${query}`, { headers });
-const occurrences = (result.body?.data || []).map(item => ({
+if (!Array.isArray(result.body?.data)) {
+  throw new Error("Resposta de ocorrências inválida. Mantendo o último feed válido.");
+}
+
+const occurrences = result.body.data.map(item => ({
   id: item.id,
   documentNumber: item.documentNumber ?? null,
   date: item.date,
@@ -72,6 +89,21 @@ const occurrences = (result.body?.data || []).map(item => ({
 })).filter(item => Number.isFinite(item.latitude) && Number.isFinite(item.longitude))
   .sort((a, b) => new Date(b.date) - new Date(a.date));
 
+// Zero ocorrências pode ser legítimo, mas também pode ser uma resposta parcial
+// da fonte. Quando o feed anterior tinha ocorrências ainda dentro da janela de
+// sete dias, não substituímos tudo por vazio sem confirmação em execução futura.
+const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+const previousRecent = (previousFeed?.occurrences || []).filter(item => {
+  const time = new Date(item.date).getTime();
+  return Number.isFinite(time) && time >= sevenDaysAgo;
+});
+
+if (occurrences.length === 0 && previousRecent.length > 0) {
+  throw new Error(
+    `A API retornou zero ocorrências enquanto existem ${previousRecent.length} registros recentes no último feed. Mantendo dados anteriores.`
+  );
+}
+
 const output = {
   generatedAt: new Date().toISOString(),
   source: {
@@ -89,19 +121,9 @@ const output = {
   occurrences
 };
 
-const readJson = async path => {
-  try {
-    return JSON.parse(await readFile(path, "utf8"));
-  } catch {
-    return null;
-  }
-};
-
-const previousHistory = await readJson("data/fogo-cruzado-history.json");
-const previousFeed = await readJson("data/fogo-cruzado.json");
-
 await mkdir("data", { recursive: true });
 await writeFile("data/fogo-cruzado.json", JSON.stringify(output, null, 2) + "\n");
+
 const merged = [
   ...(previousHistory?.occurrences || []),
   ...(previousFeed?.occurrences || []),
