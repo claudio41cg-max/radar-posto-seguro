@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T23:54:25.807Z",
+  "generatedAt": "2026-08-30T00:11:21.286Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 59,
+  "count": 54,
   "lastUpdate": "2026-08-29T16:27:51-03:00",
   "occurrences": [
     {
@@ -136,6 +136,21 @@
       "victims": []
     },
     {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -154,21 +169,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
@@ -249,11 +249,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -339,12 +339,12 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -462,11 +462,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -577,26 +577,6 @@
       "victims": []
     },
     {
-      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
-      "documentNumber": 78816,
-      "date": "2026-08-26T00:00:00.000Z",
-      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
-      "neighborhood": "COLUBANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8415893,
-      "longitude": -43.0095728,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "bdca0f2b-7edd-4983-9866-b0d2c8c4e164",
       "documentNumber": 78815,
       "date": "2026-08-26T00:00:00.000Z",
@@ -614,6 +594,26 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
+      "documentNumber": 78816,
+      "date": "2026-08-26T00:00:00.000Z",
+      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
+      "neighborhood": "COLUBANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8415893,
+      "longitude": -43.0095728,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -982,81 +982,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "b8b12cb9-2f6d-4e11-9369-a0f490de8116",
-      "documentNumber": 78720,
-      "date": "2026-08-22T15:00:00.000Z",
-      "address": "Rua Sabóia Lima - Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9341535,
-      "longitude": -43.234511,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "594b457a-ca5b-4ddd-87ca-c0adf1ccea89",
-      "documentNumber": 78707,
-      "date": "2026-08-22T14:13:00.000Z",
-      "address": "Favela Terra Nostra (Complexo da Pedreira) - Barros Filho, Rio de Janeiro - RJ, 21650-100, Brasil",
-      "neighborhood": "BARROS FILHO",
-      "subNeighborhood": "",
-      "locality": "FAVELA DA TERRA NOSTRA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.830962755327786,
-      "longitude": -43.36949804841683,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "f680331c-28e3-45a1-a4d7-c91e648d2859",
-      "documentNumber": 78708,
-      "date": "2026-08-22T12:45:00.000Z",
-      "address": "Corte 8 (Complexo da Mangueirinha) - Vila Centenario, Duque de Caxias - RJ, 25030-050, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.77095968425896,
-      "longitude": -43.30980255,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "453bb452-327f-4a43-819f-f4f0d0530496",
-      "documentNumber": 78706,
-      "date": "2026-08-22T11:00:00.000Z",
-      "address": "Complexo do Chapadão - Estrada do Camboatá - Guadalupe, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GUADALUPE",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.8343623,
-      "longitude": -43.3797552,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4f7ca11a-c51d-4bac-86d4-d39f96e8e725",
-      "documentNumber": 78703,
-      "date": "2026-08-22T08:59:00.000Z",
-      "address": "Morro da Patolinha (Complexo da Serrinha) - Engenheiro Leal, Rio de Janeiro - RJ, 21370-060, Brasil",
-      "neighborhood": "ENGENHEIRO LEAL",
-      "subNeighborhood": "",
-      "locality": "MORRO DA PATOLINHA (COMPLEXO DA SERRINHA)",
-      "latitude": -22.87390389,
-      "longitude": -43.32973778,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
