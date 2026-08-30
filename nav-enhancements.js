@@ -12,6 +12,7 @@
   App.exitPrepAnnounced = Object.create(null);
   App.autoArrivalSince = 0;
   App.autoArrivalDone = false;
+  App.lastForcedRerouteVoiceAt = 0;
 
   App.refreshTrafficFlow = async function () {};
   App.updateTrafficLightHUD = function () {
@@ -123,8 +124,54 @@
     }
   };
 
-  // Confirma a chegada antes de encerrar. Isso evita terminar a navegação
-  // por um salto isolado do GPS quando o carro apenas passa perto do destino.
+  App.routeHasSharpBendSoon = function () {
+    if (!this.route) return false;
+
+    const coords = this.route.coords || this.route.coordinates || this.route.geometry?.coordinates || [];
+    const cumulative = this.route.cumulative || [];
+    const start = Math.max(0, Number(this.routeProgressIndex) || 0);
+    if (!Array.isArray(coords) || coords.length < start + 3) return false;
+
+    const bearing = (a, b) => {
+      const toRad = Math.PI / 180;
+      const lat1 = Number(a[1]) * toRad;
+      const lat2 = Number(b[1]) * toRad;
+      const dLon = (Number(b[0]) - Number(a[0])) * toRad;
+      const y = Math.sin(dLon) * Math.cos(lat2);
+      const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+      return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+    };
+    const angleDiff = (a, b) => {
+      let d = Math.abs(a - b) % 360;
+      return d > 180 ? 360 - d : d;
+    };
+
+    const baseProgress = Number(this.routeProgressMeters) || Number(cumulative[start]) || 0;
+    let previousBearing = null;
+
+    for (let i = start; i < Math.min(coords.length - 1, start + 18); i++) {
+      const routeMeters = Number(cumulative[i]);
+      if (Number.isFinite(routeMeters) && routeMeters - baseProgress > 75) break;
+
+      const a = coords[i];
+      const b = coords[i + 1];
+      if (!Array.isArray(a) || !Array.isArray(b)) continue;
+
+      const currentBearing = bearing(a, b);
+      if (previousBearing !== null && angleDiff(previousBearing, currentBearing) >= 28) return true;
+      previousBearing = currentBearing;
+    }
+    return false;
+  };
+
+  App.shouldSuppressLongVoiceNearBend = function (text) {
+    if (!this.navActive || !this.routeHasSharpBendSoon?.()) return false;
+    const match = String(text || '').match(/\b(\d{2,4})\s*(?:m|metro|metros)\b/i);
+    if (!match) return false;
+    const meters = Number(match[1]);
+    return Number.isFinite(meters) && meters >= 100;
+  };
+
   App.checkAutomaticArrival = function () {
     if (!this.navActive || !this.route || !this.userPos || !this.destination || this.autoArrivalDone) return;
 
@@ -146,7 +193,6 @@
     const speed = Number(this.currentSpeed) || 0;
     const now = Date.now();
 
-    // Precisa estar realmente muito perto e devagar/parado por alguns segundos.
     if (distanceMeters <= 24 && speed <= 14) {
       if (!this.autoArrivalSince) this.autoArrivalSince = now;
       if (now - this.autoArrivalSince < 5500) return;
@@ -154,8 +200,6 @@
       this.autoArrivalDone = true;
       this.autoArrivalSince = 0;
 
-      // A voz principal já pode ter anunciado a chegada; não interrompemos
-      // uma fala em andamento. Apenas encerramos o modo de navegação.
       setTimeout(() => {
         if (!this.navActive) return;
         try {
@@ -172,13 +216,23 @@
       return;
     }
 
-    // Saiu novamente da área do destino: exige uma nova confirmação completa.
     if (distanceMeters > 38 || speed > 18) this.autoArrivalSince = 0;
   };
 
   const originalUpdateNavigation = App.updateNavigation.bind(App);
   App.updateNavigation = function () {
-    originalUpdateNavigation();
+    const originalSpeak = Voice.speak.bind(Voice);
+    Voice.speak = (text, force) => {
+      if (this.shouldSuppressLongVoiceNearBend(text)) return;
+      return originalSpeak(text, force);
+    };
+
+    try {
+      originalUpdateNavigation();
+    } finally {
+      Voice.speak = originalSpeak;
+    }
+
     this.checkExitPreparationVoice();
     this.checkRadarVoice();
     this.checkAutomaticArrival();
@@ -208,25 +262,25 @@
     if (!this.destination || !this.userPos || this.rerouting) return;
 
     const previousRoute = this.route;
-    const announceTimer = setTimeout(() => {
-      if (this.rerouting) {
-        Voice.speak('Você saiu da rota. Recalculando o melhor caminho.', true);
-      }
-    }, 180);
+    const now = Date.now();
+    if (this.navActive && now - this.lastForcedRerouteVoiceAt > 3500) {
+      this.lastForcedRerouteVoiceAt = now;
+      Voice.speak('Você saiu da rota. Recalculando o melhor caminho.', true);
+    }
 
     try {
       await originalRecalculateRoute();
-    } finally {
-      clearTimeout(announceTimer);
+    } catch (error) {
+      throw error;
     }
 
     if (this.route && this.route !== previousRoute) {
       resetVoiceState.call(this);
       setTimeout(() => {
         if (this.navActive) {
-          Voice.speak('Nova rota calculada. Siga as novas orientações.', true);
+          Voice.speak('Nova rota calculada. Siga as novas orientações.');
         }
-      }, 450);
+      }, 900);
     }
   };
 })();
