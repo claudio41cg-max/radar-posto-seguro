@@ -1,3 +1,5 @@
+import {handleTomTomProxy} from './tomtom-proxy.js';
+
 const DEFAULT_MODEL='gemini-2.5-flash-lite';
 const DEFAULT_ORIGIN='https://claudio41cg-max.github.io';
 const MAX_MESSAGE_LENGTH=600;
@@ -55,18 +57,11 @@ function corsHeaders(origin,env){
 }
 
 function json(data,status,origin,env){
-  return new Response(
-    JSON.stringify(data),
-    {
-      status,
-      headers:corsHeaders(origin,env)
-    }
-  );
+  return new Response(JSON.stringify(data),{status,headers:corsHeaders(origin,env)});
 }
 
 function normalizeHistory(value){
-  if(!Array.isArray(value))
-    return [];
+  if(!Array.isArray(value)) return [];
 
   return value
     .slice(-MAX_HISTORY_ITEMS)
@@ -75,26 +70,14 @@ function normalizeHistory(value){
       text:cleanText(item?.text,400)
     }))
     .filter(item=>item.text)
-    .map(item=>({
-      role:item.role,
-      parts:[{text:item.text}]
-    }));
+    .map(item=>({role:item.role,parts:[{text:item.text}]}));
 }
 
 function clientKey(request){
-  const client=cleanText(
-    request.headers.get('X-Radar-Client'),
-    80
-  );
+  const client=cleanText(request.headers.get('X-Radar-Client'),80);
+  if(/^[a-zA-Z0-9_-]{16,80}$/.test(client)) return `client:${client}`;
 
-  if(/^[a-zA-Z0-9_-]{16,80}$/.test(client))
-    return `client:${client}`;
-
-  const ip=cleanText(
-    request.headers.get('CF-Connecting-IP'),
-    64
-  );
-
+  const ip=cleanText(request.headers.get('CF-Connecting-IP'),64);
   return `ip:${ip||'unknown'}`;
 }
 
@@ -111,8 +94,7 @@ function fallbackRateLimit(key){
 
   if(memoryLimits.size>500){
     for(const [storedKey,bucket] of memoryLimits){
-      if(now-bucket.startedAt>=60000)
-        memoryLimits.delete(storedKey);
+      if(now-bucket.startedAt>=60000) memoryLimits.delete(storedKey);
     }
   }
 
@@ -131,39 +113,27 @@ async function withinRateLimit(request,env){
 }
 
 function needsCurrentSearch(message){
-  return /\b(agora|atual|hoje|ontem|amanh[ãa]|not[ií]cia|placar|jogo|jogou|ganhou|perdeu|resultado|tempo|clima|chuva)\b/i
-    .test(message);
+  return /\b(agora|atual|hoje|ontem|amanh[ãa]|not[ií]cia|placar|jogo|jogou|ganhou|perdeu|resultado|tempo|clima|chuva)\b/i.test(message);
 }
 
 function extractAnswer(data){
   const parts=data?.candidates?.[0]?.content?.parts||[];
-
-  return cleanText(
-    parts
-      .map(part=>part?.text||'')
-      .join(' '),
-    900
-  );
+  return cleanText(parts.map(part=>part?.text||'').join(' '),900);
 }
 
 function extractSources(data){
-  const chunks=data?.candidates?.[0]
-    ?.groundingMetadata?.groundingChunks||[];
+  const chunks=data?.candidates?.[0]?.groundingMetadata?.groundingChunks||[];
   const seen=new Set();
   const sources=[];
 
   for(const chunk of chunks){
     const uri=cleanText(chunk?.web?.uri,1000);
     const title=cleanText(chunk?.web?.title,160);
-
-    if(!uri || seen.has(uri))
-      continue;
+    if(!uri || seen.has(uri)) continue;
 
     seen.add(uri);
     sources.push({title:title||'Fonte consultada',url:uri});
-
-    if(sources.length===3)
-      break;
+    if(sources.length===3) break;
   }
 
   return sources;
@@ -173,25 +143,16 @@ async function askGemini(message,history,env){
   const model=cleanText(env.GEMINI_MODEL||DEFAULT_MODEL,80);
   const contents=[
     ...normalizeHistory(history),
-    {
-      role:'user',
-      parts:[{text:message}]
-    }
+    {role:'user',parts:[{text:message}]}
   ];
 
   const body={
-    systemInstruction:{
-      parts:[{text:SYSTEM_INSTRUCTION}]
-    },
+    systemInstruction:{parts:[{text:SYSTEM_INSTRUCTION}]},
     contents,
-    generationConfig:{
-      temperature:0.35,
-      maxOutputTokens:220
-    }
+    generationConfig:{temperature:0.35,maxOutputTokens:220}
   };
 
-  if(needsCurrentSearch(message))
-    body.tools=[{google_search:{}}];
+  if(needsCurrentSearch(message)) body.tools=[{google_search:{}}];
 
   const response=await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
@@ -206,10 +167,7 @@ async function askGemini(message,history,env){
   );
 
   let data={};
-
-  try{
-    data=await response.json();
-  }catch(error){}
+  try{ data=await response.json(); }catch(error){}
 
   if(!response.ok){
     const upstreamError=new Error('Gemini indisponível');
@@ -218,15 +176,9 @@ async function askGemini(message,history,env){
   }
 
   const reply=extractAnswer(data);
+  if(!reply) throw new Error('Resposta vazia');
 
-  if(!reply)
-    throw new Error('Resposta vazia');
-
-  return {
-    reply,
-    sources:extractSources(data),
-    model
-  };
+  return {reply,sources:extractSources(data),model};
 }
 
 export default {
@@ -239,10 +191,7 @@ export default {
       if(!originAllowed)
         return json({ok:false,error:'Origem não autorizada.'},403,origin,env);
 
-      return new Response(null,{
-        status:204,
-        headers:corsHeaders(origin,env)
-      });
+      return new Response(null,{status:204,headers:corsHeaders(origin,env)});
     }
 
     if(request.method==='GET' && url.pathname==='/health'){
@@ -251,12 +200,27 @@ export default {
           ok:true,
           service:'radar-seguro-rj-ai',
           configured:Boolean(env.GEMINI_API_KEY),
+          tomtomConfigured:Boolean(env.TOMTOM_API_KEY),
           model:cleanText(env.GEMINI_MODEL||DEFAULT_MODEL,80)
         },
         200,
         originAllowed?origin:'',
         env
       );
+    }
+
+    if(url.pathname==='/v1/tomtom'){
+      if(!originAllowed)
+        return json({ok:false,error:'Origem não autorizada.'},403,origin,env);
+
+      if(!await withinRateLimit(request,env))
+        return json({ok:false,error:'Muitas consultas em pouco tempo.'},429,origin,env);
+
+      try{
+        return await handleTomTomProxy(request,env,origin);
+      }catch(error){
+        return json({ok:false,error:'Serviço TomTom temporariamente indisponível.'},502,origin,env);
+      }
     }
 
     if(url.pathname!=='/v1/chat' || request.method!=='POST')
@@ -269,51 +233,31 @@ export default {
       return json({ok:false,error:'Inteligência ainda não configurada.'},503,origin,env);
 
     if(!await withinRateLimit(request,env))
-      return json(
-        {ok:false,error:'Muitas perguntas em pouco tempo. Aguarde um minuto.'},
-        429,
-        origin,
-        env
-      );
+      return json({ok:false,error:'Muitas perguntas em pouco tempo. Aguarde um minuto.'},429,origin,env);
 
-    const declaredLength=Number(
-      request.headers.get('Content-Length')||0
-    );
-
-    if(
-      Number.isFinite(declaredLength) &&
-      declaredLength>MAX_REQUEST_LENGTH
-    )
+    const declaredLength=Number(request.headers.get('Content-Length')||0);
+    if(Number.isFinite(declaredLength) && declaredLength>MAX_REQUEST_LENGTH)
       return json({ok:false,error:'Pedido muito grande.'},413,origin,env);
 
     let payload;
 
     try{
       const rawBody=await request.text();
-
       if(rawBody.length>MAX_REQUEST_LENGTH)
         return json({ok:false,error:'Pedido muito grande.'},413,origin,env);
-
       payload=JSON.parse(rawBody);
     }catch(error){
       return json({ok:false,error:'Pedido inválido.'},400,origin,env);
     }
 
     const message=cleanText(payload?.message);
-
     if(message.length<2)
       return json({ok:false,error:'Faça uma pergunta para o Radar.'},400,origin,env);
 
     try{
       const result=await askGemini(message,payload?.history,env);
-
       return json(
-        {
-          ok:true,
-          reply:result.reply,
-          sources:result.sources,
-          model:result.model
-        },
+        {ok:true,reply:result.reply,sources:result.sources,model:result.model},
         200,
         origin,
         env
