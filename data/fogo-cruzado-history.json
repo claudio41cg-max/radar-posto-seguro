@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T20:24:36.540Z",
+  "generatedAt": "2026-08-31T20:54:18.267Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 83,
+  "count": 85,
   "occurrences": [
+    {
+      "id": "c3c94dbc-1d83-434f-9dca-71e602519cee",
+      "documentNumber": 78851,
+      "date": "2026-08-31T14:00:00.000Z",
+      "address": "Tv. União - Rocinha, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ROCINHA",
+      "subNeighborhood": "",
+      "locality": "ROCINHA",
+      "latitude": -22.9902679,
+      "longitude": -43.2513999,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "95dd731c-9111-435b-b920-587f9aea1b87",
       "documentNumber": 78840,
@@ -41,6 +61,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "3bd0d936-baa1-41f7-a56a-bba3cfcf7fec",
+      "documentNumber": 78852,
+      "date": "2026-08-30T20:00:00.000Z",
+      "address": "Estrada dos Sete Riachos - Santíssimo, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SANTISSIMO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8655308,
+      "longitude": -43.5190594,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "7cb4e61b-3216-4500-840b-0a4f2fc6e8d0",
@@ -619,11 +659,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

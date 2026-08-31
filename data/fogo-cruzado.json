@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T20:24:36.538Z",
+  "generatedAt": "2026-08-31T20:54:18.266Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 58,
-  "lastUpdate": "2026-08-31T17:22:57-03:00",
+  "count": 60,
+  "lastUpdate": "2026-08-31T17:32:50-03:00",
   "occurrences": [
+    {
+      "id": "c3c94dbc-1d83-434f-9dca-71e602519cee",
+      "documentNumber": 78851,
+      "date": "2026-08-31T14:00:00.000Z",
+      "address": "Tv. União - Rocinha, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ROCINHA",
+      "subNeighborhood": "",
+      "locality": "ROCINHA",
+      "latitude": -22.9902679,
+      "longitude": -43.2513999,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "95dd731c-9111-435b-b920-587f9aea1b87",
       "documentNumber": 78840,
@@ -42,6 +62,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "3bd0d936-baa1-41f7-a56a-bba3cfcf7fec",
+      "documentNumber": 78852,
+      "date": "2026-08-30T20:00:00.000Z",
+      "address": "Estrada dos Sete Riachos - Santíssimo, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SANTISSIMO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8655308,
+      "longitude": -43.5190594,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "7cb4e61b-3216-4500-840b-0a4f2fc6e8d0",
@@ -344,21 +384,6 @@
       "victims": []
     },
     {
-      "id": "de84687d-b385-4a46-aefc-35b6d562f268",
-      "documentNumber": 78801,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Morro do Tuiuti - Imperial de São Cristóvão, Rio de Janeiro - RJ, 20920-000, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO TUIUTI",
-      "latitude": -22.8975895,
-      "longitude": -43.2321904,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
       "documentNumber": 78800,
       "date": "2026-08-28T06:27:00.000Z",
@@ -371,6 +396,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "de84687d-b385-4a46-aefc-35b6d562f268",
+      "documentNumber": 78801,
+      "date": "2026-08-28T06:27:00.000Z",
+      "address": "Morro do Tuiuti - Imperial de São Cristóvão, Rio de Janeiro - RJ, 20920-000, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO TUIUTI",
+      "latitude": -22.8975895,
+      "longitude": -43.2321904,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -620,11 +660,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -799,21 +839,6 @@
       ]
     },
     {
-      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
-      "documentNumber": 78750,
-      "date": "2026-08-25T15:00:00.000Z",
-      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9218834,
-      "longitude": -43.2215127,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "8ebd83ba-67e5-4519-be52-2f00e3a1da0e",
       "documentNumber": 78758,
       "date": "2026-08-25T15:00:00.000Z",
@@ -832,6 +857,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
+      "documentNumber": 78750,
+      "date": "2026-08-25T15:00:00.000Z",
+      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9218834,
+      "longitude": -43.2215127,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "71f19c9e-10ce-4945-8ec1-3bc931876e74",
