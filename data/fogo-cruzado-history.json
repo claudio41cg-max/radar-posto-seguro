@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T09:39:34.121Z",
+  "generatedAt": "2026-08-31T09:54:39.229Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 81,
+  "count": 83,
   "occurrences": [
+    {
+      "id": "95dd731c-9111-435b-b920-587f9aea1b87",
+      "documentNumber": 78840,
+      "date": "2026-08-31T00:05:00.000Z",
+      "address": "Morro da Serrinha (Complexo da Serrinha) - Madureira, Rio de Janeiro, RJ, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
+      "latitude": -22.86538627717719,
+      "longitude": -43.32327681669067,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e1305d34-b1d8-40bb-8bb7-2a74a08d6900",
+      "documentNumber": 78841,
+      "date": "2026-08-31T00:00:00.000Z",
+      "address": "Morro do Campinho (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21320-300, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CAMPINHO (COMPLEXO DO FUBA)",
+      "latitude": -22.8850951874697,
+      "longitude": -43.337939003183074,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "7cb4e61b-3216-4500-840b-0a4f2fc6e8d0",
       "documentNumber": 78837,
