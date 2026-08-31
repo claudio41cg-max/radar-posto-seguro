@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T00:39:35.950Z",
+  "generatedAt": "2026-08-31T00:54:43.701Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 53,
-  "lastUpdate": "2026-08-30T18:10:24-03:00",
+  "count": 55,
+  "lastUpdate": "2026-08-30T21:48:05-03:00",
   "occurrences": [
+    {
+      "id": "7cb4e61b-3216-4500-840b-0a4f2fc6e8d0",
+      "documentNumber": 78837,
+      "date": "2026-08-30T18:00:00.000Z",
+      "address": "RJ-104, Morro do Céu - Caramujo, Niterói - RJ, 24140-500, Brasil",
+      "neighborhood": "CARAMUJO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CEU",
+      "latitude": -22.88195907813139,
+      "longitude": -43.07481479527588,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "fae6ea6c-df84-46aa-a792-609c3957ef45",
+      "documentNumber": 78838,
+      "date": "2026-08-30T12:00:00.000Z",
+      "address": "Comunidade do Pombal - Porto Novo, São Gonçalo - RJ, 24435-835, Brasil",
+      "neighborhood": "PORTO NOVO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO POMBAL",
+      "latitude": -22.8210705,
+      "longitude": -43.07790591,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "c93eb5ce-fcad-42ad-8fa1-49259a93728a",
       "documentNumber": 78833,
@@ -219,36 +249,6 @@
       "victims": []
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -269,6 +269,36 @@
       ]
     },
     {
+      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
+      "documentNumber": 78810,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8727268,
+      "longitude": -43.4949441,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "676a5c31-6dc0-4aee-b1c5-067180f6379f",
       "documentNumber": 78802,
       "date": "2026-08-28T06:36:00.000Z",
@@ -278,21 +308,6 @@
       "locality": "",
       "latitude": -22.988804658616857,
       "longitude": -43.32998553957767,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
-      "documentNumber": 78800,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -314,6 +329,21 @@
       "victims": []
     },
     {
+      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
+      "documentNumber": 78800,
+      "date": "2026-08-28T06:27:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "58ff618e-c412-4288-a97d-fec017bf64ac",
       "documentNumber": 78803,
       "date": "2026-08-27T21:46:00.000Z",
@@ -332,11 +362,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -418,16 +448,16 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
         }
       ]
     },

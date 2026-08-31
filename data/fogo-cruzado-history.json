@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T00:39:35.951Z",
+  "generatedAt": "2026-08-31T00:54:43.702Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 78,
+  "count": 80,
   "occurrences": [
+    {
+      "id": "7cb4e61b-3216-4500-840b-0a4f2fc6e8d0",
+      "documentNumber": 78837,
+      "date": "2026-08-30T18:00:00.000Z",
+      "address": "RJ-104, Morro do Céu - Caramujo, Niterói - RJ, 24140-500, Brasil",
+      "neighborhood": "CARAMUJO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CEU",
+      "latitude": -22.88195907813139,
+      "longitude": -43.07481479527588,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "fae6ea6c-df84-46aa-a792-609c3957ef45",
+      "documentNumber": 78838,
+      "date": "2026-08-30T12:00:00.000Z",
+      "address": "Comunidade do Pombal - Porto Novo, São Gonçalo - RJ, 24435-835, Brasil",
+      "neighborhood": "PORTO NOVO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO POMBAL",
+      "latitude": -22.8210705,
+      "longitude": -43.07790591,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "c93eb5ce-fcad-42ad-8fa1-49259a93728a",
       "documentNumber": 78833,
@@ -331,11 +361,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -417,16 +447,16 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
         }
       ]
     },
