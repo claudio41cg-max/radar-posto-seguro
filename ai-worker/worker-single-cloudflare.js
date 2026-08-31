@@ -1,6 +1,7 @@
-const DEFAULT_MODEL = 'gemini-2.5-flash-lite';
+const DEFAULT_MODEL = 'llama-3.3-70b-versatile';
 const DEFAULT_ORIGIN = 'https://claudio41cg-max.github.io';
 const TOMTOM_HOST = 'https://api.tomtom.com';
+const GROQ_CHAT_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const MAX_MESSAGE_LENGTH = 600;
 const MAX_HISTORY_ITEMS = 6;
 const MAX_REQUEST_LENGTH = 12000;
@@ -68,11 +69,10 @@ function normalizeHistory(value) {
   return value
     .slice(-MAX_HISTORY_ITEMS)
     .map((item) => ({
-      role: item?.role === 'model' ? 'model' : 'user',
-      text: cleanText(item?.text, 400)
+      role: item?.role === 'model' || item?.role === 'assistant' ? 'assistant' : 'user',
+      content: cleanText(item?.text ?? item?.content, 400)
     }))
-    .filter((item) => item.text)
-    .map((item) => ({ role: item.role, parts: [{ text: item.text }] }));
+    .filter((item) => item.content);
 }
 
 function clientKey(request) {
@@ -115,55 +115,40 @@ function needsCurrentSearch(message) {
   return /\b(agora|atual|hoje|ontem|amanh[ãa]|not[ií]cia|placar|jogo|jogou|ganhou|perdeu|resultado|tempo|clima|chuva)\b/i.test(message);
 }
 
-function extractAnswer(data) {
-  const parts = data?.candidates?.[0]?.content?.parts || [];
-  return cleanText(parts.map((p) => p?.text || '').join(' '), 900);
+function currentInfoGuard(message) {
+  if (!needsCurrentSearch(message)) return '';
+  return 'Se esta pergunta depender de informação em tempo real e ela não estiver presente na conversa, deixe claro que você não consegue confirmar dados atuais por esta chamada de IA. Não invente.';
 }
 
-function extractSources(data) {
-  const chunks = data?.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
-  const seen = new Set();
-  const sources = [];
-
-  for (const chunk of chunks) {
-    const uri = cleanText(chunk?.web?.uri, 1000);
-    const title = cleanText(chunk?.web?.title, 160);
-    if (!uri || seen.has(uri)) continue;
-    seen.add(uri);
-    sources.push({ title: title || 'Fonte consultada', url: uri });
-    if (sources.length === 3) break;
-  }
-
-  return sources;
+function extractGroqAnswer(data) {
+  return cleanText(data?.choices?.[0]?.message?.content, 900);
 }
 
-async function askGemini(message, history, env) {
-  const model = cleanText(env.GEMINI_MODEL || DEFAULT_MODEL, 80);
-  const body = {
-    systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
-    contents: [
-      ...normalizeHistory(history),
-      { role: 'user', parts: [{ text: message }] }
-    ],
-    generationConfig: {
+async function askGroq(message, history, env) {
+  const model = cleanText(env.GROQ_MODEL || DEFAULT_MODEL, 100);
+  const messages = [
+    { role: 'system', content: SYSTEM_INSTRUCTION },
+    ...normalizeHistory(history)
+  ];
+
+  const guard = currentInfoGuard(message);
+  if (guard) messages.push({ role: 'system', content: guard });
+  messages.push({ role: 'user', content: message });
+
+  const response = await fetch(GROQ_CHAT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${env.GROQ_API_KEY}`
+    },
+    body: JSON.stringify({
+      model,
+      messages,
       temperature: 0.35,
-      maxOutputTokens: 220
-    }
-  };
-
-  if (needsCurrentSearch(message)) body.tools = [{ google_search: {} }];
-
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-goog-api-key': env.GEMINI_API_KEY
-      },
-      body: JSON.stringify(body)
-    }
-  );
+      max_completion_tokens: 220,
+      stream: false
+    })
+  });
 
   let data = {};
   try {
@@ -171,8 +156,8 @@ async function askGemini(message, history, env) {
   } catch (_) {}
 
   if (!response.ok) {
-    const upstreamMessage = cleanText(data?.error?.message, 500) || `Gemini HTTP ${response.status}`;
-    console.error('Gemini upstream error', {
+    const upstreamMessage = cleanText(data?.error?.message, 500) || `Groq HTTP ${response.status}`;
+    console.error('Groq upstream error', {
       status: response.status,
       message: upstreamMessage,
       model
@@ -182,9 +167,9 @@ async function askGemini(message, history, env) {
     throw error;
   }
 
-  const reply = extractAnswer(data);
+  const reply = extractGroqAnswer(data);
   if (!reply) throw new Error('Resposta vazia');
-  return { reply, sources: extractSources(data), model };
+  return { reply, sources: [], model };
 }
 
 const ALLOWED_TOMTOM_PREFIXES = ['/routing/', '/search/', '/traffic/'];
@@ -285,9 +270,10 @@ export default {
         {
           ok: true,
           service: 'radar-seguro-rj-ai',
-          configured: Boolean(env.GEMINI_API_KEY),
+          provider: 'groq',
+          configured: Boolean(env.GROQ_API_KEY),
           tomtomConfigured: Boolean(env.TOMTOM_API_KEY),
-          model: cleanText(env.GEMINI_MODEL || DEFAULT_MODEL, 80)
+          model: cleanText(env.GROQ_MODEL || DEFAULT_MODEL, 100)
         },
         200,
         originAllowed ? origin : '',
@@ -315,7 +301,7 @@ export default {
       return json({ ok: false, error: 'Origem não autorizada.' }, 403, origin, env);
     }
 
-    if (!env.GEMINI_API_KEY) {
+    if (!env.GROQ_API_KEY) {
       return json({ ok: false, error: 'Inteligência ainda não configurada.' }, 503, origin, env);
     }
 
@@ -345,13 +331,14 @@ export default {
     }
 
     try {
-      const result = await askGemini(message, payload?.history, env);
+      const result = await askGroq(message, payload?.history, env);
       return json(
         {
           ok: true,
           reply: result.reply,
           sources: result.sources,
-          model: result.model
+          model: result.model,
+          provider: 'groq'
         },
         200,
         origin,
