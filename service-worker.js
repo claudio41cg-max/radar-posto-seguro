@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v29';
+const CACHE_NAME = 'radar-seguro-rj-v30';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const APP_SHELL = [
   './',
@@ -7,6 +7,7 @@ const APP_SHELL = [
   './icon-192-1.png',
   './icon-512-1.png',
   './tomtom-proxy-client.js',
+  './assistant-context-v1.js',
   './nav-enhancements.js',
   './runtime-stability.js'
 ];
@@ -35,13 +36,16 @@ async function injectAppModules(response) {
   let html = await response.text();
   const scripts = [];
   if (!html.includes('tomtom-proxy-client.js')) {
-    scripts.push('<script src="./tomtom-proxy-client.js?v=29"></script>');
+    scripts.push('<script src="./tomtom-proxy-client.js?v=30"></script>');
+  }
+  if (!html.includes('assistant-context-v1.js')) {
+    scripts.push('<script src="./assistant-context-v1.js?v=1"></script>');
   }
   if (!html.includes('nav-enhancements.js')) {
-    scripts.push('<script src="./nav-enhancements.js?v=29"></script>');
+    scripts.push('<script src="./nav-enhancements.js?v=30"></script>');
   }
   if (!html.includes('runtime-stability.js')) {
-    scripts.push('<script src="./runtime-stability.js?v=29"></script>');
+    scripts.push('<script src="./runtime-stability.js?v=30"></script>');
   }
   if (scripts.length) {
     html = html.replace('</body>', `${scripts.join('\n')}\n</body>`);
@@ -49,7 +53,7 @@ async function injectAppModules(response) {
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
-  headers.set('x-radar-build', '29');
+  headers.set('x-radar-build', '30');
   return new Response(html, {
     status: response.status,
     statusText: response.statusText,
