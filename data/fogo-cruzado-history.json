@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T00:54:43.702Z",
+  "generatedAt": "2026-08-31T01:09:25.217Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 80,
+  "count": 81,
   "occurrences": [
     {
       "id": "7cb4e61b-3216-4500-840b-0a4f2fc6e8d0",
@@ -343,6 +343,21 @@
       "victims": []
     },
     {
+      "id": "cc422c6f-fd7d-4380-bf5f-10dcdf3c593f",
+      "documentNumber": 78839,
+      "date": "2026-08-27T22:00:00.000Z",
+      "address": "Vila Heliopolis, Belford Roxo - RJ, Brasil",
+      "neighborhood": "HELIOPOLIS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7330662,
+      "longitude": -43.4054565,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "58ff618e-c412-4288-a97d-fec017bf64ac",
       "documentNumber": 78803,
       "date": "2026-08-27T21:46:00.000Z",
@@ -357,11 +372,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
