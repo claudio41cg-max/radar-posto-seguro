@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T23:54:42.095Z",
+  "generatedAt": "2026-08-31T00:12:06.358Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 58,
+  "count": 53,
   "lastUpdate": "2026-08-30T18:10:24-03:00",
   "occurrences": [
     {
@@ -219,6 +219,36 @@
       "victims": []
     },
     {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
+      "documentNumber": 78810,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8727268,
+      "longitude": -43.4949441,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -239,36 +269,6 @@
       ]
     },
     {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "676a5c31-6dc0-4aee-b1c5-067180f6379f",
       "documentNumber": 78802,
       "date": "2026-08-28T06:36:00.000Z",
@@ -278,6 +278,21 @@
       "locality": "",
       "latitude": -22.988804658616857,
       "longitude": -43.32998553957767,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
+      "documentNumber": 78800,
+      "date": "2026-08-28T06:27:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -296,21 +311,6 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
-      "documentNumber": 78800,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
       "victims": []
     },
     {
@@ -418,16 +418,16 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -545,11 +545,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -983,86 +983,6 @@
         {
           "situation": "Wounded",
           "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "e0d16fee-6ca3-4643-8206-d807278d8764",
-      "documentNumber": 78716,
-      "date": "2026-08-23T21:00:00.000Z",
-      "address": "Comunidade de Vigário Geral (Complexo de Israel) - Rua Bulhões Marcial - Vigário Geral, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8081825,
-      "longitude": -43.3036695,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "d45ae01d-b77a-493a-a0d3-bf52b9ae57e2",
-      "documentNumber": 78723,
-      "date": "2026-08-23T18:30:00.000Z",
-      "address": "Mundel - Rua Altair Neves - Pacheco, São Gonçalo - RJ, Brasil",
-      "neighborhood": "PACHECO I",
-      "subNeighborhood": "",
-      "locality": "MUNDEL",
-      "latitude": -22.8188045,
-      "longitude": -42.9562533,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "a06d0d2a-6e8a-4341-8497-c384a1db3082",
-      "documentNumber": 78715,
-      "date": "2026-08-23T15:34:00.000Z",
-      "address": "Av. Brasil - Irajá, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "IRAJA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.822788,
-      "longitude": -43.3270625,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "e01b36f1-5514-4f2f-80e3-b4ff8a134d5e",
-      "documentNumber": 78713,
-      "date": "2026-08-23T13:15:00.000Z",
-      "address": "Baixa do Sapateiro - Maré, Rio de Janeiro - RJ, 21042-450, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "BAIXA DO SAPATEIRO (COMPLEXO DA MARE)",
-      "latitude": -22.86007183,
-      "longitude": -43.24258995,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "7727c019-135e-41a9-a030-a1367e911bdb",
-      "documentNumber": 78711,
-      "date": "2026-08-23T03:00:00.000Z",
-      "address": "Comunidade Vila Taboinha - Vargem Grande, Rio de Janeiro - RJ, 22785-230, Brasil",
-      "neighborhood": "VARGEM GRANDE",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA TABOINHA",
-      "latitude": -23.0130556,
-      "longitude": -43.511502,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
         }
       ]
     }
