@@ -66,18 +66,46 @@
     }
   }
 
+  async function normalizeAIResponse(response) {
+    try {
+      const data = await response.clone().json();
+      const normalized = { ...data };
+
+      // Compatibilidade com o assistente legado do index.html.
+      // O Worker Groq responde { reply, error }; o app antigo espera
+      // { resposta, erro }.
+      if (typeof normalized.resposta !== 'string' && typeof normalized.reply === 'string') {
+        normalized.resposta = normalized.reply;
+      }
+      if (typeof normalized.erro !== 'string' && typeof normalized.error === 'string') {
+        normalized.erro = normalized.error;
+      }
+
+      return new Response(JSON.stringify(normalized), {
+        status: response.status,
+        statusText: response.statusText,
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        }
+      });
+    } catch (_) {
+      return response;
+    }
+  }
+
   window.fetch = function radarProtectedFetch(input, init) {
     const method = String(init?.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
 
     // Corrige a integração legada da IA diretamente antes da requisição sair
-    // do navegador: "pergunta" -> "message" e garante history como array.
+    // do navegador: "pergunta" -> "message", garante history como array e
+    // adapta a resposta Groq para o formato esperado pelo assistente antigo.
     if (method === 'POST' && isWorkerAI(input)) {
       const nextInit = cloneInitFromRequest(input, init);
       nextInit.method = 'POST';
       nextInit.headers = new Headers(nextInit.headers || {});
       nextInit.headers.set('Content-Type', 'application/json');
       nextInit.body = normalizeAIBody(nextInit.body);
-      return nativeFetch(AI_CHAT, nextInit);
+      return nativeFetch(AI_CHAT, nextInit).then(normalizeAIResponse);
     }
 
     if (!isTomTomUrl(input)) return nativeFetch(input, init);
