@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="35-voice-session">
+<meta name="radar-build" content="36-voice-ui-location">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -1404,6 +1404,20 @@ body.nav-mode .community-sign{
 #assistantMicBtn::before{content:'🎙';font-size:21px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
 #assistantMicBtn.listening,#assistantMicBtn[aria-pressed="true"]{background:linear-gradient(145deg,#0f172a,#24324a)!important;box-shadow:0 4px 12px rgba(0,0,0,.28),0 0 0 2px rgba(56,189,248,.24)!important}
 #navAssistantMicBtn.listening{animation:none!important}
+</style>
+
+<style id="radar-voice-v36-style">
+#assistantMicBtn{position:relative!important;overflow:hidden!important;border-radius:50%!important;width:46px!important;height:46px!important;min-width:46px!important;padding:0!important;display:inline-grid!important;place-items:center!important;color:#fff!important;background:radial-gradient(circle at 50% 38%,#7d86ff 0%,#6776ff 28%,#22273f 72%,#11131c 100%)!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:0 6px 18px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.22)!important;transition:transform .18s ease,box-shadow .25s ease!important}
+#assistantMicBtn .radar-voice-svg{position:relative;z-index:2;width:25px;height:25px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+#assistantMicBtn .radar-voice-orb{position:absolute;inset:-16%;border-radius:50%;background:radial-gradient(circle at 55% 35%,rgba(255,255,255,.72),rgba(164,178,255,.5) 22%,rgba(95,111,255,.55) 50%,rgba(18,22,42,.2) 73%,transparent 74%);opacity:.34;transform:scale(.8);transition:opacity .25s ease}
+#assistantMicBtn.radar-handsfree .radar-voice-orb{opacity:.72;animation:radarVoiceBreath 3.6s ease-in-out infinite}
+#assistantMicBtn.listening .radar-voice-orb{opacity:.95;animation:radarVoiceListen 1.15s ease-in-out infinite}
+#assistantMicBtn.listening,#assistantMicBtn[aria-pressed="true"]{background:radial-gradient(circle at 50% 38%,#8b95ff 0%,#6776ff 34%,#22273f 76%,#11131c 100%)!important;box-shadow:0 6px 18px rgba(0,0,0,.34),0 0 0 3px rgba(106,125,255,.18)!important}
+#assistantMicBtn:active{transform:scale(.94)}
+#navAssistantMicBtn.listening{animation:none!important}
+@keyframes radarVoiceBreath{0%,100%{transform:scale(.78) rotate(0deg)}50%{transform:scale(1.04) rotate(4deg)}}
+@keyframes radarVoiceListen{0%,100%{transform:scale(.82)}50%{transform:scale(1.16)}}
+@media (prefers-reduced-motion:reduce){#assistantMicBtn .radar-voice-orb{animation:none!important}}
 </style>
 </head>
 
@@ -3175,8 +3189,10 @@ const VoiceAssistant = {
     }
 
 
-    if(main)
-      main.textContent='🎙️';
+    if(main){
+      main.classList.toggle('radar-handsfree',this.handsFree);
+      main.innerHTML='<span class="radar-voice-orb" aria-hidden="true"></span><svg class="radar-voice-svg" viewBox="0 0 48 48" aria-hidden="true"><rect x="18" y="8" width="12" height="22" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M13 24c0 6.1 4.9 11 11 11s11-4.9 11-11M24 35v7M18 42h12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+    }
 
 
     if(nav)
@@ -3248,6 +3264,21 @@ const VoiceAssistant = {
   },
 
   conversationUntil:0,
+  micKeepAliveStream:null,
+
+  async holdMicrophone(){
+    if(this.micKeepAliveStream || !navigator.mediaDevices?.getUserMedia) return;
+    try{
+      this.micKeepAliveStream=await navigator.mediaDevices.getUserMedia({audio:true});
+    }catch(e){}
+  },
+
+  releaseMicrophone(){
+    try{
+      this.micKeepAliveStream?.getTracks()?.forEach(t=>t.stop());
+    }catch(e){}
+    this.micKeepAliveStream=null;
+  },
 
   conversationOpen(){
     return Date.now()<Number(this.conversationUntil||0);
@@ -3286,7 +3317,7 @@ const VoiceAssistant = {
   },
 
 
-  scheduleHandsFree(delay=700){
+  scheduleHandsFree(delay=1800){
 
     clearTimeout(
       this.restartTimer
@@ -3348,7 +3379,7 @@ const VoiceAssistant = {
           }catch(e){
 
             this.scheduleHandsFree(
-              1200
+              4000
             );
 
           }
@@ -3386,6 +3417,7 @@ const VoiceAssistant = {
     Voice.clear();
 
     this.handsFree=true;
+    this.holdMicrophone();
 
     this.updateButtons(false);
 
@@ -3408,6 +3440,7 @@ const VoiceAssistant = {
 
     this.handsFree=false;
     this.conversationUntil=0;
+    this.releaseMicrophone();
 
     clearTimeout(
       this.restartTimer
@@ -3845,7 +3878,14 @@ const VoiceAssistant = {
               'Content-Type':'application/json'
             },
             body:JSON.stringify({
-              pergunta:text
+              pergunta:(()=>{
+                const n=this.normalize(text);
+                const needsLocation=['perto','proximo','proxima','aqui','onde estou','minha localizacao','tempo','clima'].some(k=>n.includes(k));
+                if(needsLocation && Array.isArray(App.userPos) && App.userPos.length>=2){
+                  return text+'\n\nContexto do Radar: localização GPS atual latitude '+Number(App.userPos[1]).toFixed(5)+', longitude '+Number(App.userPos[0]).toFixed(5)+'. Use esse contexto apenas se for relevante.';
+                }
+                return text;
+              })()
             }),
             signal:controller.signal
           }
@@ -4230,6 +4270,71 @@ const VoiceAssistant = {
           'A busca de lugares está temporariamente indisponível.'
         );
 
+    }
+
+  },
+
+
+  async findNearbyPlace(query,useHome=false){
+
+    let lon;
+    let lat;
+    let originLabel='sua localização atual';
+
+    if(useHome && this.getHome()){
+      try{
+        const h=await App.searchAddress(this.getHome());
+        if(h?.length){
+          lon=Number(h[0].lon);
+          lat=Number(h[0].lat);
+          originLabel='sua casa';
+        }
+      }catch(e){}
+    }
+
+    if(!Number.isFinite(lon) || !Number.isFinite(lat)){
+      if(Array.isArray(App.userPos) && App.userPos.length>=2){
+        lon=Number(App.userPos[0]);
+        lat=Number(App.userPos[1]);
+      }
+    }
+
+    if(!Number.isFinite(lon) || !Number.isFinite(lat)){
+      this.reply('O GPS ainda não informou sua posição. Aguarde alguns segundos e tente novamente.');
+      return true;
+    }
+
+    const q=String(query||'').trim();
+    if(!q){
+      this.reply('Diga o nome do lugar que você quer procurar.');
+      return true;
+    }
+
+    try{
+      const path='/search/2/search/'+encodeURIComponent(q)+'.json?limit=5&language=pt-BR&lat='+lat+'&lon='+lon+'&radius=30000';
+      const r=await fetch('https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
+      const d=r.ok?await r.json():null;
+      const item=d?.results?.[0];
+      if(!item){
+        this.reply('Não encontrei '+q+' perto de '+originLabel+'.');
+        return true;
+      }
+      const name=item.poi?.name || q;
+      const address=item.address?.freeformAddress || [item.address?.streetName,item.address?.municipalitySubdivision,item.address?.municipality].filter(Boolean).join(', ');
+      const plat=Number(item.position?.lat), plon=Number(item.position?.lon);
+      let dist='';
+      if(Number.isFinite(plat) && Number.isFinite(plon)){
+        const toRad=x=>x*Math.PI/180;
+        const a1=toRad(lat), a2=toRad(plat), dp=toRad(plat-lat), dl=toRad(plon-lon);
+        const h=Math.sin(dp/2)**2+Math.cos(a1)*Math.cos(a2)*Math.sin(dl/2)**2;
+        const meters=6371000*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));
+        dist=meters<1000 ? Math.round(meters/10)*10+' metros' : (meters/1000).toFixed(meters<10000?1:0).replace('.',',')+' quilômetros';
+      }
+      this.reply(name+' é uma das opções mais próximas de '+originLabel+(dist?' a aproximadamente '+dist:'')+(address?'. Endereço: '+address+'.':'.'));
+      return true;
+    }catch(e){
+      this.reply('Não consegui pesquisar lugares próximos agora.');
+      return true;
     }
 
   },
@@ -5770,7 +5875,12 @@ const VoiceAssistant = {
       normalized.includes('em que rua estou') ||
       normalized.includes('qual e essa rua') ||
       normalized.includes('nessa latitude') ||
-      normalized.includes('nessa longitude');
+      normalized.includes('nessa longitude') ||
+      normalized.includes('qual e a minha rua') ||
+      normalized.includes('qual minha rua') ||
+      normalized.includes('qual bairro eu estou') ||
+      normalized.includes('em que bairro estou') ||
+      normalized.includes('onde eu me encontro');
 
     if(asksCurrentPlace){
       if(Array.isArray(App.userPos) && App.userPos.length>=2){
@@ -5793,6 +5903,15 @@ const VoiceAssistant = {
         }
       }else this.reply('O GPS ainda está adquirindo sua posição. Aguarde alguns segundos.');
       return;
+    }
+
+    const nearbyMatch = command.match(/(?:qual(?: e)?|onde(?: fica| tem)?|ache|encontre|procure)?\s*(?:o|a|um|uma)?\s*(.+?)\s+(?:mais\s+)?(?:perto|proximo|proxima)(?:\s+(?:de|da|do))?\s*(mim|minha localizacao|onde estou|minha casa|aqui)?$/i);
+    if(nearbyMatch && nearbyMatch[1]){
+      let q=this.trimPoliteWords(nearbyMatch[1]).replace(/^(?:qual(?: e)?|onde(?: fica| tem)?|ache|encontre|procure)\s+/i,'').trim();
+      if(q && !/^(?:tempo|distancia|rota)$/i.test(q)){
+        await this.findNearbyPlace(q, /minha casa/i.test(command));
+        return;
+      }
     }
 
     const asksRouteTime = normalized.includes('quanto tempo falta') || normalized.includes('falta quanto tempo') || normalized.includes('quanto falta para chegar') || normalized.includes('quanto falta pra chegar') || normalized.includes('hora de chegada');
