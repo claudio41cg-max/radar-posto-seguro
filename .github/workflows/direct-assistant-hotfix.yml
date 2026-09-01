@@ -10,13 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply v46 patch
-        run: python scripts/patch_bottom_panel_tomtom_v46.py
-      - name: Commit v46
+      - name: Apply v47 patch
+        run: python scripts/patch_recenter_v47.py
+      - name: Commit v47
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Restaura painel de rota e remove modal separado v46" || exit 0
+          git commit -m "Troca ícone de recentralizar e marca diagnóstico TomTom v47" || exit 0
           git push
-# retry-v46
