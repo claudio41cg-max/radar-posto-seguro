@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply v35 patch
-        run: python scripts/patch_voice_v35.py
-      - name: Commit v35
+      - name: Apply v36 patch
+        run: python scripts/patch_voice_v36.py
+      - name: Commit v36
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Melhora mãos livres endereço e distância v35" || exit 0
+          git commit -m "Melhora assistente voz localizacao e proximidade v36" || exit 0
           git push
