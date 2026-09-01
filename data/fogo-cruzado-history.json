@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T00:27:41.406Z",
+  "generatedAt": "2026-09-01T00:49:23.945Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 85,
+  "count": 86,
   "occurrences": [
+    {
+      "id": "84123707-5524-4143-84ab-956370bb3783",
+      "documentNumber": 78856,
+      "date": "2026-08-31T19:00:00.000Z",
+      "address": "Rua Arari - Bangu, Rio de Janeiro - RJ, 21875-260, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "CONJUNTO HABITACIONAL DOM JAIME CAMARA (CONJUNTAO)",
+      "latitude": -22.8658963,
+      "longitude": -43.4533225,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "c3c94dbc-1d83-434f-9dca-71e602519cee",
       "documentNumber": 78851,
