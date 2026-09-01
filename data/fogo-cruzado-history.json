@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T11:17:11.361Z",
+  "generatedAt": "2026-09-01T11:28:54.217Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 86,
+  "count": 87,
   "occurrences": [
     {
       "id": "84123707-5524-4143-84ab-956370bb3783",
@@ -46,6 +46,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "30afdb37-eb06-434e-8f32-8de35b046d79",
+      "documentNumber": 78862,
+      "date": "2026-08-31T01:00:00.000Z",
+      "address": "Outeiro das Pedras, Itaboraí - RJ, Brasil",
+      "neighborhood": "OUTEIRO DAS PEDRAS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.749148,
+      "longitude": -42.8755389,
+      "reason": "Outro",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "95dd731c-9111-435b-b920-587f9aea1b87",
@@ -457,11 +472,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -674,11 +689,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
