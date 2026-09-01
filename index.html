@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="44-route-choice-guard">
+<meta name="radar-build" content="45-route-ui-tomtom">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -15261,7 +15261,7 @@ const TrafficAssistantV40={
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),12000);
     try{
-      const response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});
+      const response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal}).then(async r=>{if(r.ok)return r;const r2=await fetch(this.worker+'/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});return r2});
       if(!response.ok) throw new Error('TomTom traffic '+response.status);
       const data=await response.json();
       const route=data?.routes?.[0];
@@ -15355,7 +15355,7 @@ const TrafficAssistantV40={
       const timeout=setTimeout(()=>controller.abort(),12000);
       let response;
       try{
-        response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});
+        response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal}).then(async r=>{if(r.ok)return r;const r2=await fetch(this.worker+'/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});return r2});
       }finally{ clearTimeout(timeout); }
       if(!response.ok) throw new Error('TomTom traffic '+response.status);
       const data=await response.json();
@@ -15525,16 +15525,27 @@ const RouteChoiceGuardV44={
     el=document.createElement('div');
     el.id='routeChoiceV44';
     el.style.cssText='display:none;position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.55);align-items:flex-end;justify-content:center;padding:14px;box-sizing:border-box';
-    el.innerHTML='<div style="width:min(620px,100%);max-height:76vh;overflow:auto;background:#07131f;color:white;border-radius:24px;padding:18px;box-shadow:0 14px 50px #000"><div style="font-size:22px;font-weight:800;margin-bottom:6px">Escolha a rota</div><div style="font-size:14px;opacity:.82;margin-bottom:14px">Confira o destino antes de iniciar. O Radar não abrirá Waze ou Maps sozinho.</div><div id="routeChoiceV44List"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button id="routeChoiceV44Close" style="flex:1;min-width:100px;padding:13px;border-radius:16px;border:0;font-weight:800">Cancelar</button></div></div>';
+    el.innerHTML='<div style="width:min(620px,100%);max-height:76vh;overflow:auto;background:#07131f;color:white;border-radius:24px;padding:18px;box-shadow:0 14px 50px #000"><div style="font-size:22px;font-weight:800;margin-bottom:6px">Escolha a rota</div><div style="font-size:14px;opacity:.82;margin-bottom:14px">Confira o destino antes de iniciar. O Radar não abrirá Waze ou Maps sozinho.</div><div id="routeChoiceV44List"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button id="routeChoiceV45Start" disabled style="flex:1;min-width:150px;padding:13px;border-radius:16px;border:0;background:#10a8df;color:white;font-weight:800">Iniciar no Radar</button><button id="routeChoiceV44Close" style="flex:1;min-width:100px;padding:13px;border-radius:16px;border:0;font-weight:800">Cancelar</button></div></div>';
     document.body.appendChild(el);
     el.querySelector('#routeChoiceV44Close').onclick=()=>this.hide();
+    el.querySelector('#routeChoiceV45Start').onclick=()=>{
+      const routes=(Array.isArray(App.routeAlternatives)&&App.routeAlternatives.length?App.routeAlternatives:[App.route]).filter(Boolean).slice(0,3);
+      const r=routes[Number.isInteger(this.selectedIndex)?this.selectedIndex:0];
+      if(!r) return;
+      App.route=r; this.allowStartUntil=Date.now()+3000; this.hide();
+      if(this.originalStart) this.originalStart();
+    };
     return el;
   },
   show(){
     const routes=(Array.isArray(App.routeAlternatives)&&App.routeAlternatives.length?App.routeAlternatives:[App.route]).filter(Boolean).slice(0,3);
     if(!routes.length) return false;
     const el=this.ensureModal(), list=el.querySelector('#routeChoiceV44List');
-    list.innerHTML='';
+    list.innerHTML=''; this.selectedIndex=null;
+    try{ App.drawRouteAlternatives?.(routes); }catch(e){}
+    try{ App.showRouteAlternatives?.(routes); }catch(e){}
+    try{ App.fitRoute?.(routes[0]); }catch(e){}
+    try{ App.fitRouteBounds?.(routes[0]); }catch(e){}
     routes.forEach((r,i)=>{
       const x=this.routeSummary(r);
       const b=document.createElement('button');
@@ -15542,9 +15553,12 @@ const RouteChoiceGuardV44={
       b.textContent='Opção '+(i+1)+(x.min?' • '+x.min+' min':'')+(x.km?' • '+x.km+' km':'')+(i===0?' • recomendada':'');
       b.onclick=()=>{
         App.route=r;
-        this.allowStartUntil=Date.now()+3000;
-        this.hide();
-        if(this.originalStart) this.originalStart();
+        this.selectedIndex=i;
+        list.querySelectorAll('button').forEach((x,j)=>{x.style.outline=j===i?'3px solid #22c7ff':'none';});
+        try{ App.drawRoute?.(r); }catch(e){}
+        try{ App.fitRoute?.(r); }catch(e){}
+        try{ App.fitRouteBounds?.(r); }catch(e){}
+        const start=el.querySelector('#routeChoiceV45Start'); if(start) start.disabled=false;
       };
       list.appendChild(b);
     });
@@ -15996,3 +16010,15 @@ document.addEventListener(
 
 </body>
 </html>
+
+<style id="v45-ui-tweaks">
+/* Apenas o painel/cartão flutuante de semáforo; marcadores do mapa permanecem. */
+#trafficLightPanel,#traffic-light-panel,#semaforoPanel,#semaforo-panel,.traffic-light-panel,.semaforo-panel,.traffic-light-card,.semaforo-card{display:none!important}
+/* Prévia não bloqueia o mapa inteiro. */
+#routeChoiceV44{pointer-events:none!important;background:transparent!important;align-items:flex-end!important;padding:0 10px 12px!important}
+#routeChoiceV44>div{pointer-events:auto!important;max-height:42vh!important;border-radius:22px!important;padding:14px!important;background:rgba(7,19,31,.96)!important}
+/* Recentrar: borda mais limpa e pin vermelho pequeno. */
+#recenterBtn,#recenter,#btnRecenter,.recenter-btn,.recenterButton,[aria-label*="ecentralizar"]{border:2px solid rgba(25,185,255,.92)!important;box-shadow:0 5px 18px rgba(0,0,0,.42),inset 0 0 0 2px rgba(255,255,255,.06)!important}
+#recenterBtn::after,#recenter::after,#btnRecenter::after,.recenter-btn::after,.recenterButton::after,[aria-label*="ecentralizar"]::after{content:'📍';font-size:25px;line-height:1;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+#recenterBtn>*,#recenter>*,#btnRecenter>*,.recenter-btn>*,.recenterButton>*{opacity:0!important}
+</style>
