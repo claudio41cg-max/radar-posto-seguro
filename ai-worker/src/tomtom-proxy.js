@@ -59,25 +59,8 @@ export async function handleTomTomProxy(request,env,origin){
   }
 
   const incoming=new URL(request.url);
-  const encodedPath=incoming.searchParams.get('path')||'';
-
-  let targetPath;
-  try{
-    targetPath=decodeURIComponent(encodedPath);
-  }catch(error){
-    return new Response(
-      JSON.stringify({ok:false,error:'Caminho TomTom inválido.'}),
-      {
-        status:400,
-        headers:{
-          'Content-Type':'application/json; charset=utf-8',
-          'Cache-Control':'no-store',
-          'Access-Control-Allow-Origin':origin,
-          'Vary':'Origin'
-        }
-      }
-    );
-  }
+  // URLSearchParams.get() já devolve o valor decodificado. Não decodificar uma segunda vez.
+  const targetPath=incoming.searchParams.get('path')||'';
 
   if(!targetPath.startsWith('/') || !isAllowedPath(targetPath)){
     return new Response(
@@ -94,7 +77,23 @@ export async function handleTomTomProxy(request,env,origin){
     );
   }
 
-  const target=new URL(TOMTOM_HOST+targetPath);
+  let target;
+  try{
+    target=new URL(TOMTOM_HOST+targetPath);
+  }catch(error){
+    return new Response(
+      JSON.stringify({ok:false,error:'Caminho TomTom inválido.'}),
+      {
+        status:400,
+        headers:{
+          'Content-Type':'application/json; charset=utf-8',
+          'Cache-Control':'no-store',
+          'Access-Control-Allow-Origin':origin,
+          'Vary':'Origin'
+        }
+      }
+    );
+  }
 
   // A chave nunca é aceita do navegador; qualquer key existente é removida
   // e substituída exclusivamente pelo segredo configurado no Worker.
@@ -107,9 +106,7 @@ export async function handleTomTomProxy(request,env,origin){
       'Accept':request.headers.get('Accept')||'*/*',
       'User-Agent':'Radar-Seguro-RJ-Pro/1.0'
     },
-    cf:{
-      cacheEverything:false
-    }
+    cf:{cacheEverything:false}
   });
 
   return new Response(response.body,{
