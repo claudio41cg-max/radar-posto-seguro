@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply v43 patch
-        run: python scripts/patch_route_preview_traffic_v43.py
-      - name: Commit v43
+      - name: Apply v44 patch
+        run: python scripts/patch_route_choice_guard_v44.py
+      - name: Commit v44
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Corrige TomTom e adiciona prévia de rotas v43" || exit 0
+          git commit -m "Exige escolha de rota antes de navegar v44" || exit 0
           git push
