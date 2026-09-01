@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="39-news-conversation">
+<meta name="radar-build" content="40-traffic-followup">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -2852,16 +2852,20 @@ const Voice = {
 
 
     u.onend=
+      ()=>{
+        this.speaking=false;
+        const noMoreSpeech=!this.queue.length;
+        if(noMoreSpeech && typeof VoiceAssistant!=='undefined'){
+          VoiceAssistant.onAssistantSpeechEnded(text);
+        }
+        setTimeout(()=>this.process(),120);
+      };
+
     u.onerror=
       ()=>{
-
         this.speaking=false;
-
-        setTimeout(
-          ()=>this.process(),
-          120
-        );
-
+        if(typeof VoiceAssistant!=='undefined') VoiceAssistant.cancelFollowUpWindow();
+        setTimeout(()=>this.process(),120);
       };
 
 
@@ -2903,6 +2907,9 @@ const VoiceAssistant = {
   lastNewsItems:[],
   lastNewsIndex:0,
   lastNewsUpdatedAt:0,
+  followUpMode:false,
+  followUpTimer:null,
+  followUpRequested:false,
 
 
   init(){
@@ -2944,7 +2951,7 @@ const VoiceAssistant = {
 
       this.updateButtons(true);
 
-      if(!this.handsFree)
+      if(!this.handsFree && !this.followUpMode)
         App.toast(
           '🎙️ Estou ouvindo. Fale agora...',
           10000
@@ -3021,6 +3028,11 @@ const VoiceAssistant = {
       )
         return;
 
+      if(this.followUpMode && error==='no-speech'){
+        this.lastError='aborted';
+        return;
+      }
+
 
       if(
         this.handsFree &&
@@ -3080,6 +3092,9 @@ const VoiceAssistant = {
       const error=
         this.lastError;
 
+      clearTimeout(this.followUpTimer);
+      this.followUpTimer=null;
+      this.followUpMode=false;
 
       this.transcript='';
 
@@ -3185,6 +3200,8 @@ const VoiceAssistant = {
 
 
   toggle(){
+
+    this.cancelFollowUpWindow();
 
     if(!this.recognition){
       App.toast('A voz não está disponível neste navegador. Abra o app no Chrome.',5000);
@@ -3426,6 +3443,46 @@ const VoiceAssistant = {
 
   },
 
+
+  cancelFollowUpWindow(){
+    clearTimeout(this.followUpTimer);
+    this.followUpTimer=null;
+    if(this.followUpMode && this.listening && this.recognition){
+      this.transcript='';
+      this.lastError='aborted';
+      try{ this.recognition.abort(); }catch(e){}
+    }
+    this.followUpMode=false;
+  },
+
+  onAssistantSpeechEnded(spokenText){
+    if(!this.followUpRequested) return;
+    this.followUpRequested=false;
+    if(!this.recognition || this.listening || document.visibilityState!=='visible') return;
+    if(!/\?\s*$/.test(String(spokenText||'').trim())) return;
+
+    // Janela única de resposta: máximo 5 segundos e depois o microfone encerra.
+    this.followUpMode=true;
+    this.transcript='';
+    this.lastError=null;
+    setTimeout(()=>{
+      if(!this.followUpMode || this.listening || document.visibilityState!=='visible') return;
+      try{
+        this.recognition.start();
+        clearTimeout(this.followUpTimer);
+        this.followUpTimer=setTimeout(()=>{
+          if(!this.followUpMode) return;
+          this.transcript='';
+          this.lastError='aborted';
+          try{ this.recognition.abort(); }catch(e){}
+          this.followUpMode=false;
+          this.updateButtons(false);
+        },5000);
+      }catch(e){
+        this.followUpMode=false;
+      }
+    },280);
+  },
 
   normalize(text){
 
@@ -3699,13 +3756,16 @@ const VoiceAssistant = {
 
   reply(text,priority=true){
 
+    const spoken=String(text||'').trim();
+    this.followUpRequested=/\?\s*$/.test(spoken) || /\b(?:quer|deseja|posso)\b[^.?!]*\?/.test(this.normalize(spoken));
+
     App.toast(
-      text,
+      spoken,
       5200
     );
 
     Voice.speak(
-      text,
+      spoken,
       priority
     );
 
@@ -5907,6 +5967,17 @@ const VoiceAssistant = {
         command
       );
 
+    if(typeof TrafficAssistantV40!=='undefined' && TrafficAssistantV40.hasPending()){
+      if(/^(?:sim|pode|pode sim|troca|trocar|troque|muda|mudar|mude)(?: a rota)?$/.test(normalized)){
+        await TrafficAssistantV40.accept();
+        return;
+      }
+      if(/^(?:nao|não|deixa|deixe|mantem|mantenha|continua|continue)$/.test(normalized)){
+        TrafficAssistantV40.decline();
+        this.reply('Mantendo a rota atual.');
+        return;
+      }
+    }
 
     if(!normalized){
 
@@ -15041,6 +15112,128 @@ ${Utils.sanitize(msg.text)}
 };
 
 
+const TrafficAssistantV40={
+  timer:null,
+  checking:false,
+  pending:null,
+  lastAnnouncedAt:0,
+  worker:'https://radar-seguro-ia-rj.claudio41cg.workers.dev',
+
+  remainingSeconds(){
+    if(!App.route) return NaN;
+    const totalM=Number(App.route.distance ?? App.route.summary?.lengthInMeters);
+    const progressM=Math.max(0,Number(App.routeProgressMeters||0));
+    const remainingM=Number.isFinite(totalM)?Math.max(0,totalM-progressM):NaN;
+    const totalSec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);
+    if(!Number.isFinite(totalSec)) return NaN;
+    if(Number.isFinite(totalM) && totalM>0 && Number.isFinite(remainingM)) return totalSec*(remainingM/totalM);
+    return totalSec;
+  },
+
+  schedule(delay=60000){
+    clearTimeout(this.timer);
+    this.timer=setTimeout(()=>this.check(),delay);
+  },
+
+  async check(){
+    clearTimeout(this.timer);
+    this.timer=null;
+    if(this.checking || !App.navActive || !App.route || !App.destination || !Array.isArray(App.userPos)){
+      if(App.navActive) this.schedule(90000);
+      return;
+    }
+    if(document.visibilityState!=='visible'){
+      this.schedule(90000);
+      return;
+    }
+
+    this.checking=true;
+    try{
+      const [lon,lat]=App.userPos;
+      const [dlon,dlat]=App.destination;
+      const locations=lat+','+lon+':'+dlat+','+dlon;
+      const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=1';
+      const controller=new AbortController();
+      const timeout=setTimeout(()=>controller.abort(),12000);
+      let response;
+      try{
+        response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});
+      }finally{ clearTimeout(timeout); }
+      if(!response.ok) throw new Error('TomTom traffic '+response.status);
+      const data=await response.json();
+      const route=data?.routes?.[0];
+      const freshSec=Number(route?.summary?.travelTimeInSeconds);
+      const trafficDelay=Number(route?.summary?.trafficDelayInSeconds||0);
+      const currentSec=this.remainingSeconds();
+      if(!Number.isFinite(freshSec) || !Number.isFinite(currentSec) || currentSec<180) return;
+
+      const saving=currentSec-freshSec;
+      const minimum=Math.max(120,currentSec*.10);
+      const now=Date.now();
+      if(saving>=minimum && now-this.lastAnnouncedAt>5*60*1000){
+        this.pending={createdAt:now,savingSec:saving,trafficDelay};
+        this.lastAnnouncedAt=now;
+        const minutes=Math.max(2,Math.round(saving/60));
+        const congestion=trafficDelay>=180 ? 'Há retenção no trajeto atual. ' : '';
+        Voice.speak(congestion+'Encontrei uma rota cerca de '+minutes+' minutos mais rápida. Toque no Radar e diga sim para recalcular.',true);
+        App.toast('🚦 Rota mais rápida disponível: cerca de '+minutes+' min de economia.',7000);
+      }
+    }catch(e){
+      console.warn('Radar tráfego:',e);
+    }finally{
+      this.checking=false;
+      if(App.navActive) this.schedule(90000);
+    }
+  },
+
+  hasPending(){
+    return Boolean(this.pending && Date.now()-this.pending.createdAt<60000);
+  },
+
+  decline(){
+    this.pending=null;
+  },
+
+  async accept(){
+    if(!this.hasPending()) return false;
+    this.pending=null;
+    VoiceAssistant.reply('Recalculando pela opção mais rápida.');
+    try{
+      if(typeof App.recalculateRoute==='function') await App.recalculateRoute();
+      else await App.calculateRoute();
+      return true;
+    }catch(e){
+      VoiceAssistant.reply('Não consegui trocar a rota agora. Vou manter o trajeto atual.');
+      return true;
+    }
+  },
+
+  init(){
+    const originalStart=App.startNavigation;
+    if(typeof originalStart==='function' && !originalStart.__trafficV40){
+      const wrapped=function(...args){
+        const result=originalStart.apply(this,args);
+        TrafficAssistantV40.schedule(35000);
+        return result;
+      };
+      wrapped.__trafficV40=true;
+      App.startNavigation=wrapped;
+    }
+    const originalClear=App.clearRoute;
+    if(typeof originalClear==='function' && !originalClear.__trafficV40){
+      const wrappedClear=function(...args){
+        clearTimeout(TrafficAssistantV40.timer);
+        TrafficAssistantV40.timer=null;
+        TrafficAssistantV40.pending=null;
+        return originalClear.apply(this,args);
+      };
+      wrappedClear.__trafficV40=true;
+      App.clearRoute=wrappedClear;
+    }
+    if(App.navActive) this.schedule(35000);
+  }
+};
+
 window.RadarApp={
 
   sendReport:
@@ -15056,6 +15249,7 @@ document.addEventListener(
   'DOMContentLoaded',
   ()=>{
     App.init();
+    setTimeout(()=>TrafficAssistantV40.init(),1200);
 
     const escapeFogoText=value=>String(value??'')
       .replace(/&/g,'&amp;')
