@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="45-route-ui-tomtom">
+<meta name="radar-build" content="46-bottom-panel-tomtom">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -15261,7 +15261,7 @@ const TrafficAssistantV40={
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),12000);
     try{
-      const response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal}).then(async r=>{if(r.ok)return r;const r2=await fetch(this.worker+'/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});return r2});
+      const response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});
       if(!response.ok) throw new Error('TomTom traffic '+response.status);
       const data=await response.json();
       const route=data?.routes?.[0];
@@ -15355,7 +15355,7 @@ const TrafficAssistantV40={
       const timeout=setTimeout(()=>controller.abort(),12000);
       let response;
       try{
-        response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal}).then(async r=>{if(r.ok)return r;const r2=await fetch(this.worker+'/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});return r2});
+        response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});
       }finally{ clearTimeout(timeout); }
       if(!response.ok) throw new Error('TomTom traffic '+response.status);
       const data=await response.json();
@@ -15540,29 +15540,16 @@ const RouteChoiceGuardV44={
   show(){
     const routes=(Array.isArray(App.routeAlternatives)&&App.routeAlternatives.length?App.routeAlternatives:[App.route]).filter(Boolean).slice(0,3);
     if(!routes.length) return false;
-    const el=this.ensureModal(), list=el.querySelector('#routeChoiceV44List');
-    list.innerHTML=''; this.selectedIndex=null;
-    try{ App.drawRouteAlternatives?.(routes); }catch(e){}
-    try{ App.showRouteAlternatives?.(routes); }catch(e){}
-    try{ App.fitRoute?.(routes[0]); }catch(e){}
-    try{ App.fitRouteBounds?.(routes[0]); }catch(e){}
-    routes.forEach((r,i)=>{
-      const x=this.routeSummary(r);
-      const b=document.createElement('button');
-      b.style.cssText='width:100%;text-align:left;margin:7px 0;padding:15px;border-radius:18px;border:1px solid #2b85a7;background:#0d2333;color:white;font-size:17px;font-weight:750';
-      b.textContent='Opção '+(i+1)+(x.min?' • '+x.min+' min':'')+(x.km?' • '+x.km+' km':'')+(i===0?' • recomendada':'');
-      b.onclick=()=>{
-        App.route=r;
-        this.selectedIndex=i;
-        list.querySelectorAll('button').forEach((x,j)=>{x.style.outline=j===i?'3px solid #22c7ff':'none';});
-        try{ App.drawRoute?.(r); }catch(e){}
-        try{ App.fitRoute?.(r); }catch(e){}
-        try{ App.fitRouteBounds?.(r); }catch(e){}
-        const start=el.querySelector('#routeChoiceV45Start'); if(start) start.disabled=false;
-      };
-      list.appendChild(b);
-    });
-    el.style.display='flex';
+    App.route=routes[0];
+    try{
+      const all=[...document.querySelectorAll('button,a,[role="button"]')];
+      const recolher=all.find(el=>/^\s*recolher\b/i.test(String(el.innerText||el.textContent||'')));
+      if(!recolher){
+        const opcoes=all.find(el=>/^\s*op[cç][oõ]es\b/i.test(String(el.innerText||el.textContent||'')));
+        opcoes?.click?.();
+      }
+      App.toast?.('Rota pronta. Confira tempo e distância e escolha Radar, Waze ou Maps.');
+    }catch(e){}
     return true;
   },
   hide(){const el=document.getElementById('routeChoiceV44');if(el) el.style.display='none';},
@@ -16011,14 +15998,8 @@ document.addEventListener(
 </body>
 </html>
 
-<style id="v45-ui-tweaks">
-/* Apenas o painel/cartão flutuante de semáforo; marcadores do mapa permanecem. */
+
+<style id="v46-ui-fix">
 #trafficLightPanel,#traffic-light-panel,#semaforoPanel,#semaforo-panel,.traffic-light-panel,.semaforo-panel,.traffic-light-card,.semaforo-card{display:none!important}
-/* Prévia não bloqueia o mapa inteiro. */
-#routeChoiceV44{pointer-events:none!important;background:transparent!important;align-items:flex-end!important;padding:0 10px 12px!important}
-#routeChoiceV44>div{pointer-events:auto!important;max-height:42vh!important;border-radius:22px!important;padding:14px!important;background:rgba(7,19,31,.96)!important}
-/* Recentrar: borda mais limpa e pin vermelho pequeno. */
-#recenterBtn,#recenter,#btnRecenter,.recenter-btn,.recenterButton,[aria-label*="ecentralizar"]{border:2px solid rgba(25,185,255,.92)!important;box-shadow:0 5px 18px rgba(0,0,0,.42),inset 0 0 0 2px rgba(255,255,255,.06)!important}
-#recenterBtn::after,#recenter::after,#btnRecenter::after,.recenter-btn::after,.recenterButton::after,[aria-label*="ecentralizar"]::after{content:'📍';font-size:25px;line-height:1;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-#recenterBtn>*,#recenter>*,#btnRecenter>*,.recenter-btn>*,.recenterButton>*{opacity:0!important}
+#routeChoiceV44{display:none!important}
 </style>
