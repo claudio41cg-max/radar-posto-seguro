@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply v51 patch
-        run: python scripts/patch_tomtom_unify_v51.py
-      - name: Commit v51
+      - name: Apply v54 patch
+        run: python scripts/patch_orbis_commands_v54.py
+      - name: Commit v54
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Unifica TomTom pelo Worker e melhora trânsito v51" || exit 0
+          git commit -m "Integra TomTom Orbis e comandos de trânsito v54" || exit 0
           git push
