@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="41-route-questions-voices">
+<meta name="radar-build" content="42-route-traffic-colors">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -15141,6 +15141,112 @@ const TrafficAssistantV40={
     return totalSec;
   },
 
+  trafficSourceId:'radar-route-traffic-v42',
+  trafficLayerOrange:'radar-route-traffic-orange-v42',
+  trafficLayerRed:'radar-route-traffic-red-v42',
+
+  routeTrafficPoints(route){
+    const out=[];
+    const legs=Array.isArray(route?.legs)?route.legs:[];
+    for(const leg of legs){
+      for(const pt of (leg?.points||[])){
+        const lat=Number(pt?.latitude ?? pt?.lat);
+        const lon=Number(pt?.longitude ?? pt?.lon ?? pt?.lng);
+        if(Number.isFinite(lat)&&Number.isFinite(lon)) out.push([lon,lat]);
+      }
+    }
+    if(!out.length){
+      for(const pt of (route?.points||[])){
+        const lat=Number(pt?.latitude ?? pt?.lat ?? pt?.[1]);
+        const lon=Number(pt?.longitude ?? pt?.lon ?? pt?.lng ?? pt?.[0]);
+        if(Number.isFinite(lat)&&Number.isFinite(lon)) out.push([lon,lat]);
+      }
+    }
+    return out;
+  },
+
+  trafficSections(route){
+    const all=[];
+    if(Array.isArray(route?.sections)) all.push(...route.sections);
+    for(const leg of (route?.legs||[])) if(Array.isArray(leg?.sections)) all.push(...leg.sections);
+    return all.filter(sec=>String(sec?.sectionType||'').toUpperCase()==='TRAFFIC' || sec?.simpleCategory || Number(sec?.delayInSeconds)>0);
+  },
+
+  trafficFeatureCollection(route){
+    const points=this.routeTrafficPoints(route);
+    const sections=this.trafficSections(route);
+    const features=[];
+    if(points.length<2) return {type:'FeatureCollection',features};
+    for(const sec of sections){
+      const a=Math.max(0,Number(sec?.startPointIndex)||0);
+      const b=Math.min(points.length-1,Number(sec?.endPointIndex));
+      if(!Number.isFinite(b)||b<=a) continue;
+      const coords=points.slice(a,b+1);
+      if(coords.length<2) continue;
+      const mag=Number(sec?.magnitudeOfDelay);
+      const delay=Number(sec?.delayInSeconds||0);
+      const cat=String(sec?.simpleCategory||'').toUpperCase();
+      let level='orange';
+      if(cat==='ROAD_CLOSURE' || cat==='JAM' && (mag>=3 || delay>=300) || mag>=3) level='red';
+      else if((Number.isFinite(mag)&&mag<=0) && delay<60) continue;
+      features.push({
+        type:'Feature',
+        properties:{level,delaySeconds:delay,category:cat},
+        geometry:{type:'LineString',coordinates:coords}
+      });
+    }
+    return {type:'FeatureCollection',features};
+  },
+
+  ensureTrafficLayers(){
+    const map=App.map;
+    if(!map || !map.getStyle || !map.isStyleLoaded?.()) return false;
+    try{
+      if(!map.getSource(this.trafficSourceId)){
+        map.addSource(this.trafficSourceId,{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+      }
+      if(!map.getLayer(this.trafficLayerOrange)){
+        map.addLayer({
+          id:this.trafficLayerOrange,
+          type:'line',
+          source:this.trafficSourceId,
+          filter:['==',['get','level'],'orange'],
+          paint:{'line-color':'#f59e0b','line-width':8,'line-opacity':0.95},
+          layout:{'line-cap':'round','line-join':'round'}
+        });
+      }
+      if(!map.getLayer(this.trafficLayerRed)){
+        map.addLayer({
+          id:this.trafficLayerRed,
+          type:'line',
+          source:this.trafficSourceId,
+          filter:['==',['get','level'],'red'],
+          paint:{'line-color':'#ef4444','line-width':9,'line-opacity':0.98},
+          layout:{'line-cap':'round','line-join':'round'}
+        });
+      }
+      return true;
+    }catch(e){
+      console.warn('Radar camada de trânsito:',e);
+      return false;
+    }
+  },
+
+  drawTrafficOverlay(route){
+    try{
+      if(!this.ensureTrafficLayers()) return;
+      const src=App.map?.getSource(this.trafficSourceId);
+      if(src?.setData) src.setData(this.trafficFeatureCollection(route));
+    }catch(e){ console.warn('Radar desenho de trânsito:',e); }
+  },
+
+  clearTrafficOverlay(){
+    try{
+      const src=App.map?.getSource(this.trafficSourceId);
+      if(src?.setData) src.setData({type:'FeatureCollection',features:[]});
+    }catch(e){}
+  },
+
   schedule(delay=60000){
     clearTimeout(this.timer);
     this.timer=setTimeout(()=>this.check(),delay);
@@ -15151,7 +15257,7 @@ const TrafficAssistantV40={
     const [lon,lat]=App.userPos;
     const [dlon,dlat]=App.destination;
     const locations=lat+','+lon+':'+dlat+','+dlon;
-    const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=1';
+    const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=1&sectionType=traffic&routeRepresentation=polyline';
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),12000);
     try{
@@ -15160,6 +15266,7 @@ const TrafficAssistantV40={
       const data=await response.json();
       const route=data?.routes?.[0];
       if(!route) return null;
+      this.drawTrafficOverlay(route);
       return {
         travelSec:Number(route.summary?.travelTimeInSeconds),
         delaySec:Number(route.summary?.trafficDelayInSeconds||0),
@@ -15229,11 +15336,11 @@ const TrafficAssistantV40={
     clearTimeout(this.timer);
     this.timer=null;
     if(this.checking || !App.navActive || !App.route || !App.destination || !Array.isArray(App.userPos)){
-      if(App.navActive) this.schedule(90000);
+      if(App.navActive) this.schedule(75000);
       return;
     }
     if(document.visibilityState!=='visible'){
-      this.schedule(90000);
+      this.schedule(75000);
       return;
     }
 
@@ -15242,7 +15349,7 @@ const TrafficAssistantV40={
       const [lon,lat]=App.userPos;
       const [dlon,dlat]=App.destination;
       const locations=lat+','+lon+':'+dlat+','+dlon;
-      const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=1';
+      const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=1&sectionType=traffic&routeRepresentation=polyline';
       const controller=new AbortController();
       const timeout=setTimeout(()=>controller.abort(),12000);
       let response;
@@ -15252,6 +15359,7 @@ const TrafficAssistantV40={
       if(!response.ok) throw new Error('TomTom traffic '+response.status);
       const data=await response.json();
       const route=data?.routes?.[0];
+      if(route) this.drawTrafficOverlay(route);
       const freshSec=Number(route?.summary?.travelTimeInSeconds);
       const trafficDelay=Number(route?.summary?.trafficDelayInSeconds||0);
       const currentSec=this.remainingSeconds();
@@ -15272,7 +15380,7 @@ const TrafficAssistantV40={
       console.warn('Radar tráfego:',e);
     }finally{
       this.checking=false;
-      if(App.navActive) this.schedule(90000);
+      if(App.navActive) this.schedule(75000);
     }
   },
 
@@ -15315,6 +15423,7 @@ const TrafficAssistantV40={
         clearTimeout(TrafficAssistantV40.timer);
         TrafficAssistantV40.timer=null;
         TrafficAssistantV40.pending=null;
+        TrafficAssistantV40.clearTrafficOverlay();
         return originalClear.apply(this,args);
       };
       wrappedClear.__trafficV40=true;
