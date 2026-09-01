@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply v55 patch
-        run: python scripts/patch_location_map_clean_v55.py
-      - name: Commit v55
+      - name: Apply v56 patch
+        run: python scripts/patch_clean_traffic_poi_location_v56.py
+      - name: Commit v56
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Melhora localização e limpa mapa de navegação v55" || exit 0
+          git commit -m "Limpa trânsito visual, melhora localização e POI na rota v56" || exit 0
           git push
