@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T14:49:35.181Z",
+  "generatedAt": "2026-09-01T14:59:17.214Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 89,
+  "count": 90,
   "occurrences": [
+    {
+      "id": "7e2c4169-5e96-4939-b002-365ab95b08fd",
+      "documentNumber": 78865,
+      "date": "2026-09-01T09:50:00.000Z",
+      "address": "Comunidade Tijuquinha - Itanhangá, Rio de Janeiro - RJ, 22641-580, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "Comunidade TIJUQUINHA",
+      "latitude": -22.98600388,
+      "longitude": -43.30455399,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "ad7077b9-323c-42ce-8fd0-c2f63f4f69c8",
       "documentNumber": 78863,
