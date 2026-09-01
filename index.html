@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="48-recenter-panel-fix">
+<meta name="radar-build" content="49-icon-swap">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -1533,7 +1533,7 @@ body.nav-mode .community-sign{
 
 <div class="side">
 
-  <button class="locate" id="locateBtn" title="Onde estou">◎</button>
+  <button class="locate" id="locateBtn" title="Onde estou" aria-label="Recentralizar">📍</button>
 
   <button class="active-sound" id="soundBtn" title="Voz">🔊</button>
 
@@ -1556,9 +1556,7 @@ body.nav-mode .community-sign{
 
     <div class="sheet-recenter" id="btnRecenter">
 
-      <div class="recenter-icon">
-        📍
-      </div>
+      <div class="recenter-icon runner-icon" aria-hidden="true">🏃</div>
 
       <div class="sheet-time-dist">
         <b id="sheetTime">-- min</b>
@@ -16005,45 +16003,19 @@ document.addEventListener(
 </style>
 
 
-<style id="v48-recenter-pin">
-.side button.locate{
-  position:relative!important;
+
+<style id="v49-icon-swap">
+#locateBtn{
   border:2px solid #38bdf8!important;
   background:rgba(0,0,0,.84)!important;
   box-shadow:0 7px 18px rgba(0,0,0,.62),inset 0 0 0 1px rgba(255,255,255,.08)!important;
-  overflow:hidden!important;
+  font-size:25px!important;
+  line-height:1!important;
 }
-.side button.locate>*{
-  opacity:0!important;
-}
-.side button.locate::after{
-  content:''!important;
-  position:absolute!important;
-  left:50%!important;
-  top:50%!important;
-  width:18px!important;
-  height:22px!important;
-  background:#111!important;
-  border:2px solid #f8fafc!important;
-  border-radius:50% 50% 50% 0!important;
-  transform:translate(-50%,-56%) rotate(-45deg)!important;
-  box-sizing:border-box!important;
-  pointer-events:none!important;
-  z-index:2!important;
-}
-.side button.locate::before{
-  content:''!important;
-  position:absolute!important;
-  left:50%!important;
-  top:46%!important;
-  width:6px!important;
-  height:6px!important;
-  background:#111!important;
-  border:2px solid #f8fafc!important;
-  border-radius:50%!important;
-  transform:translate(-50%,-50%)!important;
-  box-sizing:border-box!important;
-  pointer-events:none!important;
-  z-index:3!important;
+#locateBtn:active{transform:scale(.94)}
+.recenter-icon.runner-icon{
+  font-size:25px!important;
+  line-height:1!important;
+  color:#fff!important;
 }
 </style>
