@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="49-icon-swap">
+<meta name="radar-build" content="50-icon-final">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -1522,9 +1522,7 @@ body.nav-mode .community-sign{
   <span>km/h</span>
 </div>
 
-<button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar">
-  <span class="recenter-crosshair" aria-hidden="true"></span>
-</button>
+<button class="nav-recenter-left" id="navRecenterLeft" title="Recentralizar" aria-label="Recentralizar">📍</button>
 
 <button class="nav-report-btn" id="navReportBtn" title="Alertar ocorrência">
   ⚠
@@ -1533,7 +1531,7 @@ body.nav-mode .community-sign{
 
 <div class="side">
 
-  <button class="locate" id="locateBtn" title="Onde estou" aria-label="Recentralizar">📍</button>
+  <button class="locate" id="locateBtn" title="Onde estou">◎</button>
 
   <button class="active-sound" id="soundBtn" title="Voz">🔊</button>
 
@@ -1556,7 +1554,7 @@ body.nav-mode .community-sign{
 
     <div class="sheet-recenter" id="btnRecenter">
 
-      <div class="recenter-icon runner-icon" aria-hidden="true">🏃</div>
+      <div class="recenter-icon runner-icon runner-right" aria-hidden="true">🏃</div>
 
       <div class="sheet-time-dist">
         <b id="sheetTime">-- min</b>
@@ -16004,18 +16002,17 @@ document.addEventListener(
 
 
 
-<style id="v49-icon-swap">
-#locateBtn{
-  border:2px solid #38bdf8!important;
-  background:rgba(0,0,0,.84)!important;
-  box-shadow:0 7px 18px rgba(0,0,0,.62),inset 0 0 0 1px rgba(255,255,255,.08)!important;
-  font-size:25px!important;
-  line-height:1!important;
-}
-#locateBtn:active{transform:scale(.94)}
-.recenter-icon.runner-icon{
+
+<style id="v50-icon-final">
+#navRecenterLeft{
   font-size:25px!important;
   line-height:1!important;
   color:#fff!important;
+}
+#navRecenterLeft .recenter-crosshair{display:none!important}
+.recenter-icon.runner-right{
+  font-size:25px!important;
+  line-height:1!important;
+  transform:scaleX(-1)!important;
 }
 </style>
