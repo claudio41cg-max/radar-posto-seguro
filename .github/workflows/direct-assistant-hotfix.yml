@@ -1,0 +1,54 @@
+name: Direct assistant hotfix
+on:
+  push:
+    paths:
+      - '.github/workflows/direct-assistant-hotfix.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch index directly
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+
+          # 1) reconhecimento contínuo: evita parar/reabrir a cada frase e o som repetitivo
+          s=s.replace("this.recognition.continuous=false;", "this.recognition.continuous=true;")
+          s=s.replace("        this.recognition.stop();\n", "        if(!this.handsFree) this.recognition.stop();\n", 1)
+
+          # 2) botão principal passa a ligar/desligar mãos livres; sem exigir navegação
+          old="""    if(!App.navActive){\n\n      this.reply(\n        'Inicie uma navegação para ligar o modo mãos livres.'\n      );\n\n      return;\n\n    }\n\n\n    Voice.clear();"""
+          s=s.replace(old, """    Voice.clear();""")
+
+          # visual estável no botão de navegação: não pisca vermelho/Ouvindo
+          s=s.replace("""      nav.classList.toggle(\n        'listening',\n        Boolean(active)\n      );""", """      nav.classList.remove('listening');""")
+          s=s.replace("""    if(nav)\n      nav.textContent=\n        active\n        ? '⏹️ Ouvindo'\n        : this.handsFree\n          ? '🟢 Radar'\n          : '🎙️ Radar';""", """    if(nav)\n      nav.textContent=this.handsFree ? '🎙️ Mãos livres' : '🎙️ Radar';""")
+
+          # botão principal: toque = mãos livres; estado visual limpo e estável
+          marker="""  toggle(){\n\n    if(!this.recognition){"""
+          repl="""  toggle(){\n\n    if(this.recognition){\n      this.toggleHandsFree();\n      return;\n    }\n\n    if(!this.recognition){"""
+          s=s.replace(marker,repl,1)
+
+          # 3) localização/ETA no fluxo PRINCIPAL, antes de qualquer IA/intenção de lugar
+          marker="""    if(!normalized){\n\n      this.reply(\n        'Não consegui entender. Tente novamente.'\n      );\n\n      return;\n\n    }\n\n\n    if(\n      await this.handleFlexibleIntent("""
+          insert="""    if(!normalized){\n\n      this.reply(\n        'Não consegui entender. Tente novamente.'\n      );\n\n      return;\n\n    }\n\n    // Respostas de contexto do próprio Radar: não passam pela IA.\n    if(/^(?:onde|aonde)(?: que)? (?:eu )?(?:estou|to)$/.test(normalized) || normalized.includes('minha localizacao atual') || normalized.includes('qual e minha localizacao')){\n      if(Array.isArray(App.userPos) && App.userPos.length>=2){\n        const lon=Number(App.userPos[0]), lat=Number(App.userPos[1]);\n        try{\n          const path='/search/2/reverseGeocode/'+lat+','+lon+'.json?language=pt-BR&radius=120';\n          const r=await fetch('https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});\n          const d=r.ok?await r.json():null;\n          const a=d?.addresses?.[0]?.address||{};\n          const endereco=a.freeformAddress || [a.streetName,a.streetNumber,a.municipalitySubdivision,a.municipality].filter(Boolean).join(', ');\n          this.reply(endereco ? 'Você está em '+endereco+'.' : 'Sua posição atual está no mapa. Latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'.');\n        }catch(e){\n          this.reply('Sua posição atual está no mapa. Latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'.');\n        }\n      }else this.reply('O GPS ainda está adquirindo sua posição. Aguarde alguns segundos.');\n      return;\n    }\n\n    if(normalized.includes('quanto tempo falta') || normalized.includes('falta quanto tempo') || normalized.includes('quanto falta para chegar') || normalized.includes('quanto falta pra chegar') || normalized.includes('hora de chegada')){\n      const txt=String(document.getElementById('sheetTime')?.textContent||'').trim();\n      const m=txt.match(/(\\d+)\\s*min/i);\n      if(m) this.reply('Faltam aproximadamente '+m[1]+' minutos para chegar ao destino.');\n      else if(App.route){\n        const sec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);\n        this.reply(Number.isFinite(sec) ? 'Faltam aproximadamente '+Math.max(1,Math.round(sec/60))+' minutos para chegar ao destino.' : 'A rota está ativa, mas o tempo ainda está sendo atualizado.');\n      }else this.reply('Não há uma rota ativa no momento.');\n      return;\n    }\n\n\n    if(\n      await this.handleFlexibleIntent("""
+          if marker not in s:
+              raise SystemExit('handle marker not found')
+          s=s.replace(marker,insert,1)
+
+          # marca versão no HTML para confirmar visualmente por fonte/build
+          s=s.replace('<title>Radar Seguro RJ PRO</title>','<title>Radar Seguro RJ PRO</title>\n<meta name="radar-build" content="34-direct">',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit direct hotfix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Corrige mãos livres e GPS diretamente no index v34" || exit 0
+          git push
