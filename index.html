@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="42-route-traffic-colors">
+<meta name="radar-build" content="43-route-preview-traffic">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -15257,7 +15257,7 @@ const TrafficAssistantV40={
     const [lon,lat]=App.userPos;
     const [dlon,dlat]=App.destination;
     const locations=lat+','+lon+':'+dlat+','+dlon;
-    const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=1&sectionType=traffic&routeRepresentation=polyline';
+    const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=2';
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),12000);
     try{
@@ -15265,6 +15265,7 @@ const TrafficAssistantV40={
       if(!response.ok) throw new Error('TomTom traffic '+response.status);
       const data=await response.json();
       const route=data?.routes?.[0];
+      if(Array.isArray(data?.routes)) App.routeAlternatives=data.routes.slice(0,3);
       if(!route) return null;
       this.drawTrafficOverlay(route);
       return {
@@ -15349,7 +15350,7 @@ const TrafficAssistantV40={
       const [lon,lat]=App.userPos;
       const [dlon,dlat]=App.destination;
       const locations=lat+','+lon+':'+dlat+','+dlon;
-      const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=1&sectionType=traffic&routeRepresentation=polyline';
+      const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=2';
       const controller=new AbortController();
       const timeout=setTimeout(()=>controller.abort(),12000);
       let response;
@@ -15359,6 +15360,7 @@ const TrafficAssistantV40={
       if(!response.ok) throw new Error('TomTom traffic '+response.status);
       const data=await response.json();
       const route=data?.routes?.[0];
+      if(Array.isArray(data?.routes)) App.routeAlternatives=data.routes.slice(0,3);
       if(route) this.drawTrafficOverlay(route);
       const freshSec=Number(route?.summary?.travelTimeInSeconds);
       const trafficDelay=Number(route?.summary?.trafficDelayInSeconds||0);
@@ -15467,6 +15469,34 @@ const RadarVoicePickerV41={
   }
 };
 
+const RoutePreviewV43={
+  pending:false,
+  alternatives:[],
+  routeSummary(route){
+    const sum=route?.summary||{};
+    const sec=Number(sum.travelTimeInSeconds??route?.duration??0);
+    const m=Number(sum.lengthInMeters??route?.distance??0);
+    return {minutes:sec?Math.max(1,Math.round(sec/60)):null,km:m?(m/1000).toFixed(1):null};
+  },
+  present(routes){
+    this.alternatives=Array.isArray(routes)?routes.filter(Boolean).slice(0,3):[];
+    if(!this.alternatives.length) return false;
+    this.pending=true;
+    const labels=this.alternatives.map((r,i)=>{const x=this.routeSummary(r);return 'Opção '+(i+1)+(x.minutes?' — '+x.minutes+' min':'')+(x.km?' — '+x.km+' km':'');});
+    const msg='Rota calculada. '+labels.join('. ')+'. Confira o destino e escolha a opção antes de iniciar.';
+    try{ VoiceAssistant?.reply?.(msg); }catch(e){ try{ App.toast?.(msg); }catch(_){} }
+    return true;
+  },
+  confirm(index=0){
+    const r=this.alternatives[index];
+    if(!r) return false;
+    try{ App.route=r; }catch(e){}
+    this.pending=false;
+    try{ App.startNavigation?.(); return true; }catch(e){ return false; }
+  },
+  cancel(){this.pending=false;this.alternatives=[];}
+};
+
 window.RadarApp={
 
   sendReport:
@@ -15481,6 +15511,10 @@ window.RadarApp={
 document.addEventListener(
   'DOMContentLoaded',
   ()=>{
+    App.showRoutePreviewV43=()=>{
+      const routes=Array.isArray(App.routeAlternatives)&&App.routeAlternatives.length?App.routeAlternatives:[App.route];
+      return RoutePreviewV43.present(routes);
+    };
     App.init();
     setTimeout(()=>TrafficAssistantV40.init(),1200);
     setTimeout(()=>RadarVoicePickerV41.init(),500);
