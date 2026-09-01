@@ -4,10 +4,8 @@ p=Path('index.html')
 s=p.read_text(encoding='utf-8')
 s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="46-bottom-panel-tomtom">',s,count=1)
 
-# Remove o bloco visual v45 que acabou apagando conteúdo do painel inferior.
 s=re.sub(r'\n?<style id="v45-ui-tweaks">.*?</style>\s*','\n',s,flags=re.S)
 
-# Mantém apenas o cartão superior de semáforo oculto; os ícones de rua continuam.
 if 'id="v46-ui-fix"' not in s:
     s += r'''
 <style id="v46-ui-fix">
@@ -16,8 +14,6 @@ if 'id="v46-ui-fix"' not in s:
 </style>
 '''
 
-# A escolha deixa de usar o quadrado preto. Em vez disso, abre o painel normal de Opções
-# onde já existem Radar, Waze, Maps e cancelar.
 start=s.find('const RouteChoiceGuardV44={')
 if start!=-1:
     end=s.find('\n};',start)
@@ -39,11 +35,10 @@ if start!=-1:
     return true;
   },
   hide()'''
-    newblock,n=re.subn(pat,repl,block,count=1,flags=re.S)
+    newblock,n=re.subn(pat,lambda m: repl,block,count=1,flags=re.S)
     if n:
         s=s[:start]+newblock+s[end+3:]
 
-# Remove o fallback para uma rota /tomtom inexistente e usa somente o endpoint real.
 s=re.sub(r"\.then\(async r=>\{if\(r\.ok\)return r;const r2=await fetch\(this\.worker\+'/tomtom\?path='\+encodeURIComponent\(path\),\{cache:'no-store',signal:controller\.signal\}\);return r2\}\)","",s)
 s=re.sub(r"\.then\(async r=>\{if\(r\.ok\)return r;return fetch\(this\.worker\+'/tomtom\?path='\+encodeURIComponent\(path\),\{signal:controller\.signal,cache:'no-store'\}\)\}\)","",s)
 
