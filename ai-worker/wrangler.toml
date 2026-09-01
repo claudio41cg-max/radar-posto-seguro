@@ -1,4 +1,4 @@
-name = "radar-seguro-rj-ai"
+name = "radar-seguro-ia-rj"
 main = "src/index.js"
 compatibility_date = "2026-08-28"
 workers_dev = true
