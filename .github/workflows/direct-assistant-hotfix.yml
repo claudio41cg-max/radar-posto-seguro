@@ -19,3 +19,4 @@ jobs:
           git add index.html
           git commit -m "Restaura painel de rota e remove modal separado v46" || exit 0
           git push
+# retry-v46
