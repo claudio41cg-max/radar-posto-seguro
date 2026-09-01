@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply v37 patch
-        run: python scripts/patch_voice_v37.py
-      - name: Commit v37
+      - name: Apply v38 patch
+        run: python scripts/patch_assistant_v38.py
+      - name: Commit v38
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Corrige audio e simplifica assistente por toque v37" || exit 0
+          git commit -m "Melhora contexto conversa e localizacao do assistente v38" || exit 0
           git push
