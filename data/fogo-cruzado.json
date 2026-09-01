@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T23:54:19.464Z",
+  "generatedAt": "2026-09-01T00:27:41.404Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 60,
-  "lastUpdate": "2026-08-31T18:31:08-03:00",
+  "count": 49,
+  "lastUpdate": "2026-08-31T21:12:31-03:00",
   "occurrences": [
     {
       "id": "c3c94dbc-1d83-434f-9dca-71e602519cee",
@@ -334,6 +334,21 @@
       "victims": []
     },
     {
+      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
+      "documentNumber": 78810,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8727268,
+      "longitude": -43.4949441,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -352,21 +367,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "676a5c31-6dc0-4aee-b1c5-067180f6379f",
@@ -660,11 +660,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -902,204 +902,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "181853a5-82f2-46fe-9a46-e1846557fd9e",
-      "documentNumber": 78736,
-      "date": "2026-08-24T22:17:00.000Z",
-      "address": "Andaraí, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ANDARAI",
-      "latitude": -22.922329,
-      "longitude": -43.2477454,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "e6dd54bf-61ab-46f8-861d-d4ae9900b61f",
-      "documentNumber": 78737,
-      "date": "2026-08-24T21:20:00.000Z",
-      "address": "Comunidade Parque Dois Irmão - Curicica, Rio de Janeiro - RJ, 22780-190, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
-      "latitude": -22.95105015,
-      "longitude": -43.39378358,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "0114f68d-8fba-4d2a-acfe-6d9a0a8db59d",
-      "documentNumber": 78738,
-      "date": "2026-08-24T19:57:00.000Z",
-      "address": "Avenida Ernani Cardoso - Cascadura, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8824151,
-      "longitude": -43.3352074,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "ecf2bf9c-1093-431e-a955-13963b390538",
-      "documentNumber": 78735,
-      "date": "2026-08-24T19:30:00.000Z",
-      "address": "Comunidade da Guacha - Glaucia, Belford Roxo - RJ, 26195-040, Brasil",
-      "neighborhood": "GLAUCIA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA GUACHA",
-      "latitude": -22.75440759,
-      "longitude": -43.35683055,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "5f16d5ff-b1e9-4781-87b4-e4dd0533ed89",
-      "documentNumber": 78732,
-      "date": "2026-08-24T10:00:00.000Z",
-      "address": "Brejal - Jardim Bom Retiro, São Gonçalo - RJ, 24722-271, Brasil",
-      "neighborhood": "BOM RETIRO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO BREJAL",
-      "latitude": -22.79654842,
-      "longitude": -42.9620609,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "4411cf9e-d662-4e92-8c21-12a8580ad1e4",
-      "documentNumber": 78729,
-      "date": "2026-08-24T08:49:00.000Z",
-      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GARDENIA AZUL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9582037,
-      "longitude": -43.3529536,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "7c594d88-41e9-4482-a195-d8352fc91d9d",
-      "documentNumber": 78719,
-      "date": "2026-08-24T06:55:00.000Z",
-      "address": "Comunidade de Vigário Geral (Complexo de Israel) - Rua Bulhões Marcial - Vigário Geral, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8081825,
-      "longitude": -43.3036695,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "e7ade23a-4267-4aa8-b071-a8d170b021c7",
-      "documentNumber": 78718,
-      "date": "2026-08-24T06:00:00.000Z",
-      "address": "Comunidade de Vigário Geral (Complexo de Israel) - Rua Bulhões Marcial - Vigário Geral, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8081825,
-      "longitude": -43.3036695,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "88d1cd15-46e8-4b1c-8e5b-d84e8faa0d99",
-      "documentNumber": 78730,
-      "date": "2026-08-24T03:00:00.000Z",
-      "address": "Pantanal, Vila São José - Duque de Caxias - RJ, Brasil",
-      "neighborhood": "VILA SAO JOSE",
-      "subNeighborhood": "PANTANAL",
-      "locality": "",
-      "latitude": -22.7472326,
-      "longitude": -43.3173933,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "7f7306f0-6715-4ac8-a980-71d55098a5ae",
-      "documentNumber": 78717,
-      "date": "2026-08-24T01:00:00.000Z",
-      "address": "Comunidade de Vigário Geral (Complexo de Israel) - Rua Bulhões Marcial - Vigário Geral, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8081825,
-      "longitude": -43.3036695,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "be8a70bf-10d1-45e1-8696-0971a29322cc",
-      "documentNumber": 78747,
-      "date": "2026-08-24T00:30:00.000Z",
-      "address": "Shopping Nova Iguaçu - Avenida Abílio Augusto Távora - Luz, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "LUZ",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7627867,
-      "longitude": -43.4651354,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        }
-      ]
     }
   ]
 }
