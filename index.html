@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="34-direct">
+<meta name="radar-build" content="35-voice-session">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -1397,6 +1397,13 @@ body.nav-mode .community-sign{
     width:430px
   }
 }
+</style>
+
+<style id="radar-voice-v35-style">
+#assistantMicBtn{border-radius:50%!important;width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;font-size:0!important;display:inline-grid!important;place-items:center!important;background:linear-gradient(145deg,#0f172a,#24324a)!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:0 4px 12px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.16)!important;transition:transform .18s ease,box-shadow .18s ease!important}
+#assistantMicBtn::before{content:'🎙';font-size:21px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+#assistantMicBtn.listening,#assistantMicBtn[aria-pressed="true"]{background:linear-gradient(145deg,#0f172a,#24324a)!important;box-shadow:0 4px 12px rgba(0,0,0,.28),0 0 0 2px rgba(56,189,248,.24)!important}
+#navAssistantMicBtn.listening{animation:none!important}
 </style>
 </head>
 
@@ -3053,11 +3060,9 @@ const VoiceAssistant = {
 
       if(this.handsFree){
 
-        if(
-          text &&
-          !error &&
-          this.hasWakeWord(text)
-        ){
+        if(text && !error && (this.hasWakeWord(text) || this.conversationOpen())){
+
+          if(this.hasWakeWord(text)) this.keepConversationOpen();
 
           Promise
           .resolve(
@@ -3171,8 +3176,7 @@ const VoiceAssistant = {
 
 
     if(main)
-      main.textContent=
-        active?'⏹️':'🎙️';
+      main.textContent='🎙️';
 
 
     if(nav)
@@ -3239,10 +3243,18 @@ const VoiceAssistant = {
   hasWakeWord(text){
 
     return /^\s*(?:(?:oi|ol[áa]|ei|por favor)\s+)?radar\b/i
-      .test(
-        String(text||'')
-      );
+      .test(String(text||''));
 
+  },
+
+  conversationUntil:0,
+
+  conversationOpen(){
+    return Date.now()<Number(this.conversationUntil||0);
+  },
+
+  keepConversationOpen(){
+    this.conversationUntil=Date.now()+120000;
   },
 
 
@@ -3395,6 +3407,7 @@ const VoiceAssistant = {
 
 
     this.handsFree=false;
+    this.conversationUntil=0;
 
     clearTimeout(
       this.restartTimer
@@ -5747,32 +5760,64 @@ const VoiceAssistant = {
 
     }
 
-    // Respostas de contexto do próprio Radar: não passam pela IA.
-    if(/^(?:onde|aonde)(?: que)? (?:eu )?(?:estou|to)$/.test(normalized) || normalized.includes('minha localizacao atual') || normalized.includes('qual e minha localizacao')){
+    // Contexto do GPS do próprio Radar: não passa pela IA.
+    const asksCurrentPlace =
+      /^(?:onde|aonde)(?: que)? (?:eu )?(?:estou|to)$/.test(normalized) ||
+      normalized.includes('minha localizacao atual') ||
+      normalized.includes('qual e minha localizacao') ||
+      normalized.includes('que rua eu estou') ||
+      normalized.includes('qual rua eu estou') ||
+      normalized.includes('em que rua estou') ||
+      normalized.includes('qual e essa rua') ||
+      normalized.includes('nessa latitude') ||
+      normalized.includes('nessa longitude');
+
+    if(asksCurrentPlace){
       if(Array.isArray(App.userPos) && App.userPos.length>=2){
         const lon=Number(App.userPos[0]), lat=Number(App.userPos[1]);
+        let endereco='';
         try{
-          const path='/search/2/reverseGeocode/'+lat+','+lon+'.json?language=pt-BR&radius=120';
+          const path='/search/2/reverseGeocode/'+lat+','+lon+'.json?language=pt-BR&radius=200';
           const r=await fetch('https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
           const d=r.ok?await r.json():null;
           const a=d?.addresses?.[0]?.address||{};
-          const endereco=a.freeformAddress || [a.streetName,a.streetNumber,a.municipalitySubdivision,a.municipality].filter(Boolean).join(', ');
-          this.reply(endereco ? 'Você está em '+endereco+'.' : 'Sua posição atual está no mapa. Latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'.');
-        }catch(e){
-          this.reply('Sua posição atual está no mapa. Latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'.');
+          endereco=a.freeformAddress || [a.streetName,a.streetNumber,a.municipalitySubdivision,a.municipality].filter(Boolean).join(', ');
+        }catch(e){}
+        if(endereco){
+          this.lastKnownAddress=endereco;
+          this.reply('Você está em '+endereco+'.');
+        }else if(this.lastKnownAddress){
+          this.reply('Sua localização atual é '+this.lastKnownAddress+'.');
+        }else{
+          this.reply('Estou com sua posição no mapa: latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'. O nome da rua ainda não foi confirmado pelo serviço de mapas.');
         }
       }else this.reply('O GPS ainda está adquirindo sua posição. Aguarde alguns segundos.');
       return;
     }
 
-    if(normalized.includes('quanto tempo falta') || normalized.includes('falta quanto tempo') || normalized.includes('quanto falta para chegar') || normalized.includes('quanto falta pra chegar') || normalized.includes('hora de chegada')){
-      const txt=String(document.getElementById('sheetTime')?.textContent||'').trim();
-      const m=txt.match(/(\d+)\s*min/i);
-      if(m) this.reply('Faltam aproximadamente '+m[1]+' minutos para chegar ao destino.');
-      else if(App.route){
-        const sec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);
-        this.reply(Number.isFinite(sec) ? 'Faltam aproximadamente '+Math.max(1,Math.round(sec/60))+' minutos para chegar ao destino.' : 'A rota está ativa, mas o tempo ainda está sendo atualizado.');
-      }else this.reply('Não há uma rota ativa no momento.');
+    const asksRouteTime = normalized.includes('quanto tempo falta') || normalized.includes('falta quanto tempo') || normalized.includes('quanto falta para chegar') || normalized.includes('quanto falta pra chegar') || normalized.includes('hora de chegada');
+    const asksRouteDistance = normalized.includes('qual a distancia') || normalized.includes('qual e a distancia') || normalized.includes('quanto falta de distancia') || normalized.includes('quantos quilometros faltam') || normalized.includes('quantos km faltam') || normalized.includes('distancia da rota');
+
+    if(asksRouteTime || asksRouteDistance){
+      if(!App.route){
+        this.reply('Não há uma rota ativa no momento.');
+        return;
+      }
+      const totalM=Number(App.route.distance ?? App.route.summary?.lengthInMeters);
+      const progressM=Math.max(0,Number(App.routeProgressMeters||0));
+      const remainM=Number.isFinite(totalM) ? Math.max(0,totalM-progressM) : NaN;
+      const totalSec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);
+      const ratio=Number.isFinite(totalM) && totalM>0 && Number.isFinite(remainM) ? remainM/totalM : 1;
+      const remainSec=Number.isFinite(totalSec) ? Math.max(0,totalSec*ratio) : NaN;
+      const km=Number.isFinite(remainM) ? remainM/1000 : NaN;
+      const min=Number.isFinite(remainSec) ? Math.max(1,Math.round(remainSec/60)) : NaN;
+      if(asksRouteDistance && Number.isFinite(km)){
+        this.reply(km<1 ? 'Faltam aproximadamente '+Math.max(10,Math.round(remainM/10)*10)+' metros para o destino.' : 'Faltam aproximadamente '+km.toFixed(km<10?1:0).replace('.',',')+' quilômetros para o destino.');
+      }else if(asksRouteTime && Number.isFinite(min)){
+        this.reply('Faltam aproximadamente '+min+' minutos para chegar ao destino.');
+      }else{
+        this.reply('A rota está ativa, mas ainda estou atualizando a distância e o tempo restantes.');
+      }
       return;
     }
 
