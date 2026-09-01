@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="37-touch-audio-release">
+<meta name="radar-build" content="38-context-location">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -3708,6 +3708,47 @@ const VoiceAssistant = {
   },
 
 
+  lastKnownAddress:'',
+  lastKnownAddressAt:0,
+  conversationHistory:[],
+
+  async getCurrentAddress(force=false){
+    if(!Array.isArray(App.userPos) || App.userPos.length<2) return null;
+    const lon=Number(App.userPos[0]), lat=Number(App.userPos[1]);
+    if(!Number.isFinite(lat)||!Number.isFinite(lon)) return null;
+    if(!force && this.lastKnownAddress && Date.now()-this.lastKnownAddressAt<120000)
+      return {label:this.lastKnownAddress,lat,lon};
+    let label='';
+    try{
+      const path='/search/2/reverseGeocode/'+lat+','+lon+'.json?language=pt-BR&radius=200';
+      const r=await fetch(this.aiEndpoint+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
+      const d=r.ok?await r.json():null;
+      const a=d?.addresses?.[0]?.address||{};
+      label=a.freeformAddress || [a.streetName,a.streetNumber,a.municipalitySubdivision,a.municipality].filter(Boolean).join(', ');
+    }catch(e){}
+    if(!label){
+      try{
+        const u='https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+encodeURIComponent(lat)+'&lon='+encodeURIComponent(lon)+'&zoom=18&addressdetails=1&accept-language=pt-BR';
+        const r=await fetch(u,{headers:{'Accept-Language':'pt-BR,pt;q=.9'},cache:'no-store'});
+        const d=r.ok?await r.json():null;
+        label=d?.display_name||'';
+      }catch(e){}
+    }
+    if(label){ this.lastKnownAddress=label; this.lastKnownAddressAt=Date.now(); }
+    return {label,lat,lon};
+  },
+
+  routeContext(){
+    if(!App.route) return null;
+    const totalM=Number(App.route.distance ?? App.route.summary?.lengthInMeters);
+    const progressM=Math.max(0,Number(App.routeProgressMeters||0));
+    const remainM=Number.isFinite(totalM)?Math.max(0,totalM-progressM):null;
+    const totalSec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);
+    const remainSec=Number.isFinite(totalSec)&&Number.isFinite(remainM)&&totalM>0?Math.max(0,totalSec*(remainM/totalM)):null;
+    const g=App.getUpcomingGuidance?.();
+    return {destination:document.getElementById('destInput')?.value||'',remainingMeters:remainM,remainingMinutes:Number.isFinite(remainSec)?Math.round(remainSec/60):null,currentRoad:g?.step?.name||'',nextInstruction:g?.step?App.maneuverText(g.step):''};
+  },
+
   async askAI(question){
 
     const text=
@@ -3762,12 +3803,13 @@ const VoiceAssistant = {
             },
             body:JSON.stringify({
               pergunta:(()=>{
-                const n=this.normalize(text);
-                const needsLocation=['perto','proximo','proxima','aqui','onde estou','minha localizacao','tempo','clima'].some(k=>n.includes(k));
-                if(needsLocation && Array.isArray(App.userPos) && App.userPos.length>=2){
-                  return text+'\n\nContexto do Radar: localização GPS atual latitude '+Number(App.userPos[1]).toFixed(5)+', longitude '+Number(App.userPos[0]).toFixed(5)+'. Use esse contexto apenas se for relevante.';
-                }
-                return text;
+                const context=[];
+                if(Array.isArray(App.userPos) && App.userPos.length>=2)
+                  context.push('GPS atual: latitude '+Number(App.userPos[1]).toFixed(5)+', longitude '+Number(App.userPos[0]).toFixed(5)+(this.lastKnownAddress?' — '+this.lastKnownAddress:''));
+                const route=this.routeContext();
+                if(route) context.push('Rota ativa: '+JSON.stringify(route));
+                if(this.conversationHistory.length) context.push('Conversa recente: '+this.conversationHistory.slice(-6).join(' | '));
+                return text+(context.length?'\n\nContexto confiável fornecido pelo Radar:\n'+context.join('\n'):'');
               })()
             }),
             signal:controller.signal
@@ -3805,6 +3847,8 @@ const VoiceAssistant = {
         );
 
 
+      this.conversationHistory.push('Motorista: '+text,'Radar: '+answer);
+      this.conversationHistory=this.conversationHistory.slice(-8);
       this.reply(answer);
 
       return true;
@@ -5106,6 +5150,22 @@ const VoiceAssistant = {
 
 
 
+    const dailyBriefIntent=this.containsAny(normalized,[
+      'relatorio do dia','resumo do dia','me atualiza','me atualize','o que aconteceu hoje','novidades de hoje','como esta o rio hoje'
+    ]);
+    if(dailyBriefIntent){
+      const pos=await this.getCurrentAddress(false);
+      const route=this.routeContext();
+      const parts=[];
+      if(pos?.label) parts.push('Você está em '+pos.label+'.');
+      if(route?.remainingMinutes!=null) parts.push('Na sua rota, faltam aproximadamente '+route.remainingMinutes+' minutos para o destino.');
+      const count=(App.fogoRecentOccurrences||[]).length;
+      parts.push(count?('O Radar tem '+count+' ocorrências registradas pelo Instituto Fogo Cruzado nas últimas 24 horas.'): 'Não há ocorrências das últimas 24 horas carregadas no Radar neste momento.');
+      parts.push('Posso detalhar as ocorrências, o clima, sua rota ou responder outra pergunta.');
+      this.reply(parts.join(' '));
+      return true;
+    }
+
     const stopAssistantIntent =
       /^(?:radar\s+)?(?:pode\s+)?(?:encerrar|encerra|encerre|parar|para|pare|sair|saia|fechar|fecha|feche|desligar|desliga|desligue)(?:\s+(?:de\s+ouvir|o\s+microfone|a\s+voz|a\s+assistente|agora))?$/.test(normalized) ||
       this.containsAny(normalized,[
@@ -5758,25 +5818,14 @@ const VoiceAssistant = {
       normalized.includes('onde eu me encontro');
 
     if(asksCurrentPlace){
-      if(Array.isArray(App.userPos) && App.userPos.length>=2){
-        const lon=Number(App.userPos[0]), lat=Number(App.userPos[1]);
-        let endereco='';
-        try{
-          const path='/search/2/reverseGeocode/'+lat+','+lon+'.json?language=pt-BR&radius=200';
-          const r=await fetch('https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
-          const d=r.ok?await r.json():null;
-          const a=d?.addresses?.[0]?.address||{};
-          endereco=a.freeformAddress || [a.streetName,a.streetNumber,a.municipalitySubdivision,a.municipality].filter(Boolean).join(', ');
-        }catch(e){}
-        if(endereco){
-          this.lastKnownAddress=endereco;
-          this.reply('Você está em '+endereco+'.');
-        }else if(this.lastKnownAddress){
-          this.reply('Sua localização atual é '+this.lastKnownAddress+'.');
-        }else{
-          this.reply('Estou com sua posição no mapa: latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'. O nome da rua ainda não foi confirmado pelo serviço de mapas.');
-        }
-      }else this.reply('O GPS ainda está adquirindo sua posição. Aguarde alguns segundos.');
+      if(!Array.isArray(App.userPos) || App.userPos.length<2){
+        App.startGPS?.();
+        this.reply('O GPS ainda está adquirindo sua posição. Aguarde alguns segundos e tente novamente.');
+        return;
+      }
+      const pos=await this.getCurrentAddress(true);
+      if(pos?.label) this.reply('Você está em '+pos.label+'.');
+      else this.reply('Estou com sua posição no GPS: latitude '+pos.lat.toFixed(5)+' e longitude '+pos.lon.toFixed(5)+'. Ainda não consegui converter essas coordenadas para o nome da rua.');
       return;
     }
 
@@ -5847,7 +5896,7 @@ const VoiceAssistant = {
     ){
 
       this.reply(
-        'Você pode pedir o clima de hoje ou amanhã, uma rota, a localização de um lugar, as ocorrências do Rio de Janeiro, repetir a orientação, consultar hora e data, mostrar ou ocultar postos e comunidades, salvar sua casa neste aparelho ou fazer perguntas gerais. Durante a navegação, toque uma vez no botão Radar para ligar o modo mãos livres e comece cada pedido dizendo Radar.'
+        'Você pode pedir o clima de hoje ou amanhã, uma rota, a localização de um lugar, as ocorrências do Rio de Janeiro, repetir a orientação, consultar hora e data, mostrar ou ocultar postos e comunidades, salvar sua casa neste aparelho ou fazer perguntas gerais. Toque no microfone quando quiser conversar comigo; durante a navegação eu também posso usar o contexto da rota.'
       );
 
       return;
