@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v32';
+const CACHE_NAME = 'radar-seguro-rj-v33';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const APP_SHELL = [
   './','./index.html','./manifest.json','./icon-192-1.png','./icon-512-1.png',
@@ -9,13 +9,13 @@ self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys
 async function injectAppModules(response){
   if(!response||!response.ok)return response;const type=response.headers.get('content-type')||'';if(!type.includes('text/html'))return response;
   let html=await response.text();const scripts=[];
-  if(!html.includes('tomtom-proxy-client.js'))scripts.push('<script src="./tomtom-proxy-client.js?v=32"></script>');
+  if(!html.includes('tomtom-proxy-client.js'))scripts.push('<script src="./tomtom-proxy-client.js?v=33"></script>');
   if(!html.includes('assistant-context-v1.js'))scripts.push('<script src="./assistant-context-v1.js?v=1"></script>');
-  if(!html.includes('assistant-polish-v2.js'))scripts.push('<script src="./assistant-polish-v2.js?v=3"></script>');
-  if(!html.includes('nav-enhancements.js'))scripts.push('<script src="./nav-enhancements.js?v=32"></script>');
-  if(!html.includes('runtime-stability.js'))scripts.push('<script src="./runtime-stability.js?v=32"></script>');
+  if(!html.includes('assistant-polish-v2.js'))scripts.push('<script src="./assistant-polish-v2.js?v=4"></script>');
+  if(!html.includes('nav-enhancements.js'))scripts.push('<script src="./nav-enhancements.js?v=33"></script>');
+  if(!html.includes('runtime-stability.js'))scripts.push('<script src="./runtime-stability.js?v=33"></script>');
   if(scripts.length)html=html.replace('</body>',`${scripts.join('\n')}\n</body>`);
-  const headers=new Headers(response.headers);headers.delete('content-length');headers.set('x-radar-build','32');return new Response(html,{status:response.status,statusText:response.statusText,headers});
+  const headers=new Headers(response.headers);headers.delete('content-length');headers.set('x-radar-build','33');return new Response(html,{status:response.status,statusText:response.statusText,headers});
 }
 function tomTomProxyRequest(request){const source=new URL(request.url);source.searchParams.delete('key');const path=source.pathname+(source.search||'');return fetch(`${TOMTOM_WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`,{method:'GET',headers:{'Accept':request.headers.get('Accept')||'*/*'},cache:'no-store'});}
 async function aiChatProxyRequest(request){const rawBody=await request.clone().text();let body=rawBody;try{const payload=JSON.parse(rawBody||'{}');if(!payload.message&&typeof payload.pergunta==='string'){payload.message=payload.pergunta;delete payload.pergunta;}if(!Array.isArray(payload.history))payload.history=[];body=JSON.stringify(payload);}catch(_){}return fetch(`${TOMTOM_WORKER}/v1/chat`,{method:'POST',headers:{'Content-Type':request.headers.get('Content-Type')||'application/json'},body,cache:'no-store'});}
