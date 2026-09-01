@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
+<meta name="radar-build" content="34-direct">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -2891,7 +2892,7 @@ const VoiceAssistant = {
 
     this.recognition.lang='pt-BR';
 
-    this.recognition.continuous=false;
+    this.recognition.continuous=true;
 
     this.recognition.interimResults=true;
 
@@ -2954,7 +2955,7 @@ const VoiceAssistant = {
           2600
         );
 
-        this.recognition.stop();
+        if(!this.handsFree) this.recognition.stop();
 
       }else if(interimText.trim()){
 
@@ -3145,10 +3146,7 @@ const VoiceAssistant = {
 
     if(nav){
 
-      nav.classList.toggle(
-        'listening',
-        Boolean(active)
-      );
+      nav.classList.remove('listening');
 
       nav.classList.toggle(
         'hands-free',
@@ -3178,17 +3176,17 @@ const VoiceAssistant = {
 
 
     if(nav)
-      nav.textContent=
-        active
-        ? '⏹️ Ouvindo'
-        : this.handsFree
-          ? '🟢 Radar'
-          : '🎙️ Radar';
+      nav.textContent=this.handsFree ? '🎙️ Mãos livres' : '🎙️ Radar';
 
   },
 
 
   toggle(){
+
+    if(this.recognition){
+      this.toggleHandsFree();
+      return;
+    }
 
     if(!this.recognition){
 
@@ -3367,17 +3365,6 @@ const VoiceAssistant = {
     if(this.handsFree){
 
       this.stopHandsFree(true);
-
-      return;
-
-    }
-
-
-    if(!App.navActive){
-
-      this.reply(
-        'Inicie uma navegação para ligar o modo mãos livres.'
-      );
 
       return;
 
@@ -5758,6 +5745,35 @@ const VoiceAssistant = {
 
       return;
 
+    }
+
+    // Respostas de contexto do próprio Radar: não passam pela IA.
+    if(/^(?:onde|aonde)(?: que)? (?:eu )?(?:estou|to)$/.test(normalized) || normalized.includes('minha localizacao atual') || normalized.includes('qual e minha localizacao')){
+      if(Array.isArray(App.userPos) && App.userPos.length>=2){
+        const lon=Number(App.userPos[0]), lat=Number(App.userPos[1]);
+        try{
+          const path='/search/2/reverseGeocode/'+lat+','+lon+'.json?language=pt-BR&radius=120';
+          const r=await fetch('https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
+          const d=r.ok?await r.json():null;
+          const a=d?.addresses?.[0]?.address||{};
+          const endereco=a.freeformAddress || [a.streetName,a.streetNumber,a.municipalitySubdivision,a.municipality].filter(Boolean).join(', ');
+          this.reply(endereco ? 'Você está em '+endereco+'.' : 'Sua posição atual está no mapa. Latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'.');
+        }catch(e){
+          this.reply('Sua posição atual está no mapa. Latitude '+lat.toFixed(5)+' e longitude '+lon.toFixed(5)+'.');
+        }
+      }else this.reply('O GPS ainda está adquirindo sua posição. Aguarde alguns segundos.');
+      return;
+    }
+
+    if(normalized.includes('quanto tempo falta') || normalized.includes('falta quanto tempo') || normalized.includes('quanto falta para chegar') || normalized.includes('quanto falta pra chegar') || normalized.includes('hora de chegada')){
+      const txt=String(document.getElementById('sheetTime')?.textContent||'').trim();
+      const m=txt.match(/(\d+)\s*min/i);
+      if(m) this.reply('Faltam aproximadamente '+m[1]+' minutos para chegar ao destino.');
+      else if(App.route){
+        const sec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);
+        this.reply(Number.isFinite(sec) ? 'Faltam aproximadamente '+Math.max(1,Math.round(sec/60))+' minutos para chegar ao destino.' : 'A rota está ativa, mas o tempo ainda está sendo atualizado.');
+      }else this.reply('Não há uma rota ativa no momento.');
+      return;
     }
 
 
