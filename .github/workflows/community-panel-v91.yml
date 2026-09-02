@@ -1,0 +1,38 @@
+name: Radar v91 - toque e sombra interna das comunidades
+
+on:
+  push:
+    paths:
+      - '.github/workflows/community-panel-v91.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ativar painel v91
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="91-community-panel-fixed-click">',s,count=1)
+          old='<script src="./community-panel-v90.js?v=90"></script>'
+          new='<script src="./community-panel-v90.js?v=91"></script>'
+          if old in s:
+              s=s.replace(old,new,1)
+          elif new not in s:
+              raise SystemExit('tag community-panel-v90.js nao encontrada')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit v91
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "v91: ativar painel corrigido e sombra interna"
+          git push
