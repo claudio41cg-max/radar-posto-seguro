@@ -1,0 +1,96 @@
+name: Radar v89 - remover geometrias inline
+
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-inline-community-geometries-v89.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar copia externa e remover fallback gigante do HTML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          external_doc = json.loads(Path('data/community-geometries.json').read_text(encoding='utf-8'))
+          external = external_doc.get('geometries') or {}
+          if not external:
+              raise SystemExit('Arquivo externo de geometrias esta vazio')
+
+          # Lê o fallback atual do HTML (v88): window.RADAR_COMMUNITY_GEOMETRIES || {...}
+          m = re.search(
+              r'const officialCommunityGeometries\s*=\s*window\.RADAR_COMMUNITY_GEOMETRIES\s*\|\|\s*(\{.*?\});\s*\n',
+              s,
+              re.S
+          )
+          if not m:
+              raise SystemExit('Fallback officialCommunityGeometries v88 nao encontrado')
+
+          try:
+              legacy = json.loads(m.group(1))
+          except Exception as e:
+              raise SystemExit(f'Fallback base nao e JSON valido: {e}')
+
+          # Soma os Object.assign legados exatamente como o navegador fazia.
+          assigns = list(re.finditer(
+              r'Object\.assign\(officialCommunityGeometries\s*,\s*(\{.*?\})\s*\);',
+              s,
+              re.S
+          ))
+          for am in assigns:
+              try:
+                  legacy.update(json.loads(am.group(1)))
+              except Exception as e:
+                  raise SystemExit(f'Object.assign legado invalido: {e}')
+
+          # Segurança: só remove do HTML se a copia externa for idêntica.
+          if legacy != external:
+              missing = sorted(set(legacy) - set(external))
+              extra = sorted(set(external) - set(legacy))
+              changed = sorted(k for k in set(legacy) & set(external) if legacy[k] != external[k])
+              raise SystemExit(
+                  'Geometrias externas nao conferem com o HTML. '
+                  f'missing={missing[:10]} extra={extra[:10]} changed={changed[:10]}'
+              )
+
+          # Deixa somente a referencia externa e um objeto vazio de emergencia.
+          s = s[:m.start()] + 'const officialCommunityGeometries=window.RADAR_COMMUNITY_GEOMETRIES||{};\n' + s[m.end():]
+
+          # Remove todos os Object.assign de geometrias que ja estao no arquivo externo.
+          s, removed = re.subn(
+              r'\s*Object\.assign\(officialCommunityGeometries\s*,\s*\{.*?\}\s*\);\s*',
+              '\n',
+              s,
+              flags=re.S
+          )
+
+          s = re.sub(
+              r'<meta name="radar-build" content="[^"]+">',
+              '<meta name="radar-build" content="89-no-inline-community-geometries">',
+              s,
+              count=1
+          )
+          s = s.replace('community-geometries-preload.js?v=88', 'community-geometries-preload.js?v=89', 1)
+
+          p.write_text(s, encoding='utf-8')
+          print('geometrias validadas:', len(external))
+          print('Object.assign removidos:', removed)
+          print('index.html final bytes:', p.stat().st_size)
+          PY
+      - name: Commit v89
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "v89: remover geometrias de comunidades do index.html"
+          git push
