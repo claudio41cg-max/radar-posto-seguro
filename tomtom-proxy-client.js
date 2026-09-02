@@ -1,5 +1,5 @@
 /* Radar Seguro RJ PRO — ponte protegida TomTom + IA
-   v70: bairro por Geoapify usando GPS vivo do aparelho. */
+   v76: GPS vivo + Geoapify; trânsito global bloqueado na origem. */
 (() => {
   'use strict';
   if (window.__radarTomTomProxyInstalled) return;
@@ -46,6 +46,15 @@
     if (!u) return false;
     const b = new URL(WORKER_BASE);
     return u.origin === b.origin && (u.pathname === '/' || u.pathname === '' || u.pathname === '/v1/chat');
+  }
+
+  function isGlobalTrafficTile(value) {
+    const u = toUrl(value);
+    if (!u || u.origin !== new URL(WORKER_BASE).origin || u.pathname !== '/v1/tomtom') return false;
+    let path = u.searchParams.get('path') || '';
+    try { path = decodeURIComponent(path); } catch (_) {}
+    const text = `${u.href} ${path}`.toLowerCase();
+    return text.includes('/traffic/map/') || text.includes('/tile/flow/') || text.includes('%2ftraffic%2fmap%2f') || text.includes('%2ftile%2fflow%2f');
   }
 
   function buildProxyUrl(value) {
@@ -102,8 +111,6 @@
       const a = Number(pos[0]);
       const b = Number(pos[1]);
       if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
-      // Rio de Janeiro: longitude fica perto de -43 e latitude perto de -23.
-      // Detecta automaticamente a ordem do par para evitar lat/lon invertidos.
       if (Math.abs(a) > 30 && Math.abs(b) <= 30) return { lat: b, lon: a };
       if (Math.abs(b) > 30 && Math.abs(a) <= 30) return { lat: a, lon: b };
       return { lat: b, lon: a };
@@ -181,21 +188,15 @@
   async function getNeighborhoodContext() {
     const gps = await getLiveGps();
     if (!gps) return '';
-
     if (
       neighborhoodCache.text &&
       Date.now() - neighborhoodCache.at <= LOCATION_CACHE_MS &&
       Math.abs(gps.lat - neighborhoodCache.lat) < 0.0007 &&
       Math.abs(gps.lon - neighborhoodCache.lon) < 0.0007
     ) return neighborhoodCache.text;
-
     try {
       const u = `${WORKER_BASE}/v1/geo/reverse?lat=${encodeURIComponent(gps.lat)}&lon=${encodeURIComponent(gps.lon)}&t=${Date.now()}`;
-      const response = await nativeFetch(u, {
-        method: 'GET',
-        headers: { Accept: 'application/json' },
-        cache: 'no-store'
-      });
+      const response = await nativeFetch(u, { method: 'GET', headers: { Accept: 'application/json' }, cache: 'no-store' });
       if (!response.ok) return '';
       const data = await response.json();
       const neighborhood = String(data?.neighborhood || '').trim();
@@ -250,10 +251,7 @@
 
   function isNeighborhoodQuestion(question) {
     const n = norm(question).replace(/^radar[, ]*/, '').replace(/[?.!]+$/g, '').trim();
-    return n.includes('meu bairro') ||
-      /\b(qual|que) bairro\b/.test(n) ||
-      /\bbairro (eu )?(estou|to)\b/.test(n) ||
-      n.includes('nome do bairro');
+    return n.includes('meu bairro') || /\b(qual|que) bairro\b/.test(n) || /\bbairro (eu )?(estou|to)\b/.test(n) || n.includes('nome do bairro');
   }
 
   function isEtaQuestion(question) {
@@ -340,8 +338,56 @@
     } catch (_) { return response; }
   }
 
+  function removeGlobalTrafficLayer() {
+    const app = getApp();
+    const map = app?.map;
+    if (!map) return false;
+    try { if (map.getLayer?.('tomtom-traffic-flow')) map.removeLayer('tomtom-traffic-flow'); } catch (_) {}
+    try { if (map.getSource?.('tomtom-traffic')) map.removeSource('tomtom-traffic'); } catch (_) {}
+    return true;
+  }
+
+  function installMapLibreTrafficGuard() {
+    const ml = window.maplibregl;
+    const proto = ml?.Map?.prototype;
+    if (!proto || proto.__radarNoGlobalTrafficV76) return Boolean(proto);
+    proto.__radarNoGlobalTrafficV76 = true;
+
+    const originalAddSource = proto.addSource;
+    const originalAddLayer = proto.addLayer;
+
+    proto.addSource = function radarAddSource(id, source, ...rest) {
+      if (String(id || '').toLowerCase() === 'tomtom-traffic') return this;
+      return originalAddSource.call(this, id, source, ...rest);
+    };
+
+    proto.addLayer = function radarAddLayer(layer, beforeId, ...rest) {
+      const id = String(layer?.id || '').toLowerCase();
+      const source = String(layer?.source || '').toLowerCase();
+      if (id === 'tomtom-traffic-flow' || source === 'tomtom-traffic') return this;
+      return originalAddLayer.call(this, layer, beforeId, ...rest);
+    };
+
+    return true;
+  }
+
+  let mapGuardTries = 0;
+  const mapGuardTimer = setInterval(() => {
+    mapGuardTries += 1;
+    installMapLibreTrafficGuard();
+    removeGlobalTrafficLayer();
+    if (mapGuardTries > 240) clearInterval(mapGuardTimer);
+  }, 50);
+
   window.fetch = function radarProtectedFetch(input, init) {
     const method = String(init?.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
+
+    // v76: nunca entrega ao mapa os tiles do overlay global de trânsito.
+    // As consultas flowSegmentData usadas para colorir SOMENTE a rota continuam permitidas.
+    if (method === 'GET' && isGlobalTrafficTile(input)) {
+      return Promise.resolve(new Response(null, { status: 204, headers: { 'Cache-Control': 'no-store' } }));
+    }
+
     if (method === 'POST' && isWorkerAI(input)) {
       const next = cloneInitFromRequest(input, init);
       next.method = 'POST';
@@ -402,8 +448,9 @@
     proxyBase: `${WORKER_BASE}/v1/tomtom`,
     aiBase: AI_CHAT,
     protected: true,
-    version: '70-live-geoapify',
+    version: '76-no-global-traffic',
     buildProxyUrl,
+    removeGlobalTrafficLayer,
     clearConversation() {
       try { sessionStorage.removeItem(MEMORY_KEY); } catch (_) {}
       neighborhoodCache = { at: 0, lat: null, lon: null, text: '' };
