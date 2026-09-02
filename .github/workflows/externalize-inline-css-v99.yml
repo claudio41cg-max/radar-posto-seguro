@@ -1,0 +1,51 @@
+name: v99 externalize remaining inline css
+
+on:
+  push:
+    paths:
+      - '.github/workflows/externalize-inline-css-v99.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Externalizar CSS inline restante
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          blocks=[]
+          pattern=re.compile(r'<style(?:\s[^>]*)?>(.*?)</style>\s*', re.S|re.I)
+          def take(m):
+              blocks.append(m.group(1).strip())
+              return ''
+          s2=pattern.sub(take,s)
+          if blocks:
+              Path('legacy-inline-v99.css').write_text('\n\n'.join(blocks)+'\n',encoding='utf-8')
+              anchor='<link rel="stylesheet" href="./voice-ui-v98.css?v=98">'
+              s2=s2.replace(anchor,anchor+'\n<link rel="stylesheet" href="./legacy-inline-v99.css?v=99">',1)
+          s2=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="99-clean-inline-css">',s2,1)
+          p.write_text(s2,encoding='utf-8')
+          sw=Path('service-worker.js')
+          w=sw.read_text(encoding='utf-8')
+          w=w.replace("radar-seguro-rj-v98","radar-seguro-rj-v99")
+          w=w.replace("build:'98'","build:'99'")
+          if blocks and "'./legacy-inline-v99.css'," not in w:
+              needle="'./voice-ui-v98.css',"
+              if needle in w: w=w.replace(needle,needle+"\n  './legacy-inline-v99.css',",1)
+          sw.write_text(w,encoding='utf-8')
+          print('Blocos CSS externalizados:',len(blocks))
+          PY
+      - name: Commit v99
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js legacy-inline-v99.css 2>/dev/null || git add index.html service-worker.js
+          git commit -m "v99: externalizar CSS inline restante" || exit 0
+          git push
