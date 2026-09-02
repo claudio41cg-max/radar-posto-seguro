@@ -1,8 +1,14 @@
-const CACHE_NAME = 'radar-seguro-rj-v76';
+const CACHE_NAME = 'radar-seguro-rj-v77';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const APP_SHELL = [
-  './manifest.json','./icon-192-1.png','./icon-512-1.png','./route-traffic-v74.js','./traffic-clean-v75.js'
+  './manifest.json',
+  './icon-192-1.png',
+  './icon-512-1.png',
+  './route-traffic-v74.js',
+  './traffic-clean-v75.js',
+  './community-data-loader.js',
+  './data/community-datasets.json'
 ];
 
 self.addEventListener('install',event=>{
@@ -16,7 +22,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'76'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'77'}));
   })());
 });
 
@@ -52,6 +58,21 @@ function isTrafficMapTile(url){
   return text.includes('/traffic/map/') || text.includes('%2ftraffic%2fmap%2f') || text.includes('/tile/flow/') || text.includes('%2ftile%2fflow%2f');
 }
 
+function isStaticCommunityData(url){
+  if(url.origin!==self.location.origin) return false;
+  return /\/data\/(?:sabren-|ibge-).+\.geojson$/i.test(url.pathname) ||
+    /\/data\/community-datasets\.json$/i.test(url.pathname);
+}
+
+async function cacheFirstStatic(request){
+  const cache=await caches.open(CACHE_NAME);
+  const cached=await cache.match(request);
+  if(cached) return cached;
+  const response=await fetch(request,{cache:'no-store'});
+  if(response.ok) cache.put(request,response.clone());
+  return response;
+}
+
 async function cleanOpenFreeMapStyle(request){
   try{
     const response=await fetch(request,{cache:'no-store'});
@@ -79,17 +100,19 @@ async function cleanOpenFreeMapStyle(request){
   }
 }
 
-async function navigationWithV76(request){
+async function navigationWithV77(request){
   try{
     const response=await fetch(request,{cache:'no-store'});
     if(!response.ok)return response;
     const type=response.headers.get('content-type')||'';
     if(!type.includes('text/html'))return response;
     let html=await response.text();
-    const routeTag='<script src="./route-traffic-v74.js?v=76"></script>';
-    const cleanTag='<script src="./traffic-clean-v75.js?v=76"></script>';
+    const routeTag='<script src="./route-traffic-v74.js?v=77"></script>';
+    const cleanTag='<script src="./traffic-clean-v75.js?v=77"></script>';
+    const communityTag='<script src="./community-data-loader.js?v=77"></script>';
     if(!html.includes('route-traffic-v74.js')) html=html.includes('</body>')?html.replace('</body>',routeTag+'\n</body>'):html+routeTag;
     if(!html.includes('traffic-clean-v75.js')) html=html.includes('</body>')?html.replace('</body>',cleanTag+'\n</body>'):html+cleanTag;
+    if(!html.includes('community-data-loader.js')) html=html.includes('</body>')?html.replace('</body>',communityTag+'\n</body>'):html+communityTag;
     return new Response(html,{status:response.status,statusText:response.statusText,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});
   }catch(_){
     return fetch(request,{cache:'no-store'});
@@ -104,7 +127,6 @@ self.addEventListener('fetch',event=>{
     return;
   }
 
-  // v76: overlay geral da TomTom bloqueado. FlowSegmentData da rota permanece permitido.
   if(event.request.method==='GET' && isTrafficMapTile(url)){
     event.respondWith(new Response(null,{status:204,headers:{'Cache-Control':'no-store'}}));
     return;
@@ -118,10 +140,17 @@ self.addEventListener('fetch',event=>{
   }
   if(url.origin!==self.location.origin)return;
 
+  // Polígonos estáticos de comunidades: baixa uma vez por versão e reutiliza do cache.
+  // Evita baixar arquivos de dezenas/centenas de KB repetidamente no celular.
+  if(event.request.method==='GET' && isStaticCommunityData(url)){
+    event.respondWith(cacheFirstStatic(event.request));
+    return;
+  }
+
   const isNav=event.request.mode==='navigate'||url.pathname.endsWith('/')||url.pathname.endsWith('/index.html');
   const liveFile=/\.(?:js|json|html)$/.test(url.pathname)||url.pathname.includes('/data/');
   if(isNav){
-    event.respondWith(navigationWithV76(event.request));
+    event.respondWith(navigationWithV77(event.request));
     return;
   }
   if(liveFile){
