@@ -1,9 +1,10 @@
-/* Radar Seguro RJ PRO v77 — carregador leve de dados de comunidades */
+/* Radar Seguro RJ PRO v78 — carregador leve de dados de comunidades */
 (() => {
   'use strict';
   if (window.RadarCommunityData) return;
 
   const REGISTRY_URL = './data/community-datasets.json';
+  const MAX_MEMORY_DATASETS = 2;
   const registryCache = { value: null, promise: null };
   const datasetCache = new Map();
   const inflight = new Map();
@@ -29,8 +30,21 @@
     return Array.isArray(registry?.datasets) ? registry.datasets.slice() : [];
   }
 
+  function touch(id, data){
+    if (datasetCache.has(id)) datasetCache.delete(id);
+    datasetCache.set(id, data);
+    while (datasetCache.size > MAX_MEMORY_DATASETS) {
+      const oldest = datasetCache.keys().next().value;
+      datasetCache.delete(oldest);
+    }
+  }
+
   async function load(id){
-    if (datasetCache.has(id)) return datasetCache.get(id);
+    if (datasetCache.has(id)) {
+      const data = datasetCache.get(id);
+      touch(id, data);
+      return data;
+    }
     if (inflight.has(id)) return inflight.get(id);
 
     const promise = (async () => {
@@ -40,7 +54,7 @@
       const response = await fetch(item.path, { cache: 'default' });
       if (!response.ok) throw new Error(`Falha ao carregar ${id}: ${response.status}`);
       const data = await response.json();
-      datasetCache.set(id, data);
+      touch(id, data);
       return data;
     })().finally(() => inflight.delete(id));
 
@@ -56,12 +70,18 @@
     datasetCache.clear();
   }
 
+  window.addEventListener('pagehide', () => {
+    // Os arquivos continuam no Cache Storage; liberamos apenas objetos pesados da RAM.
+    clear();
+  });
+
   window.RadarCommunityData = {
-    version: '77-lazy-community-data',
+    version: '78-lazy-lru-community-data',
     list,
     load,
     unload,
     clear,
-    isLoaded: id => datasetCache.has(id)
+    isLoaded: id => datasetCache.has(id),
+    loadedIds: () => Array.from(datasetCache.keys())
   };
 })();
