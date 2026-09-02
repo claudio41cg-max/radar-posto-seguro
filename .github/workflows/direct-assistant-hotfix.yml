@@ -10,22 +10,31 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply root fix v60
+      - name: Apply traffic visual root fix v60
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('index.html'); s=p.read_text()
-          s=s.replace('59-canonical-gps-diagnostics','60-root-fix',1)
-          s=s.replace("if(typeof App.calculateRoute==='function')await App.calculateRoute();\n   else if(typeof App.recalculateRoute==='function')await App.recalculateRoute();","if(typeof App.recalculateRoute==='function')await App.recalculateRoute();\n   else if(typeof App.calculateRoute==='function')await App.calculateRoute();",1)
-          p.write_text(s)
-          p=Path('tomtom-proxy-client.js'); s=p.read_text()
-          s=s.replace("return address\n      ? `${address}. Coordenadas aproximadas: ${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)}.`\n      : `Coordenadas aproximadas: ${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)}.`;","return address ? `${address}.` : '';",1)
+          old="""      let c='';let w=0;
+      try{c=String(m.getPaintProperty(l.id,'line-color')||'').toLowerCase()}catch(e){}
+      try{w=Number(m.getPaintProperty(l.id,'line-width')||0)}catch(e){}
+      trafficByColor=w>=3 && /#22c55e|#16a34a|#84cc16|#a3e635|#eab308|#facc15|#f59e0b|#ef4444/.test(c);"""
+          new="""      let c='',w='';
+      try{c=JSON.stringify(m.getPaintProperty(l.id,'line-color')||'').toLowerCase()}catch(e){}
+      try{w=JSON.stringify(m.getPaintProperty(l.id,'line-width')||'').toLowerCase()}catch(e){}
+      const palette=(c.match(/#(?:22c55e|16a34a|84cc16|a3e635|eab308|facc15|f59e0b|ef4444)/g)||[]);
+      const numericWidth=Number(m.getPaintProperty(l.id,'line-width')||0);
+      const expressionWidth=/interpolate|step|zoom/.test(w);
+      trafficByColor=palette.length>=2 && (expressionWidth || (Number.isFinite(numericWidth)&&numericWidth>=3));"""
+          if old not in s:
+              raise SystemExit('bloco de malha nao localizado')
+          s=s.replace(old,new,1)
           p.write_text(s)
           PY
-      - name: Commit v60
+      - name: Commit traffic visual fix v60
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html tomtom-proxy-client.js
-          git commit -m "Corrige destino confirmado e remove coordenadas faladas v60" || exit 0
+          git add index.html
+          git commit -m "Corrige identificação da malha verde e amarela v60" || exit 0
           git push
