@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply proximity and traffic fix v62
-        run: python scripts/patch_proximity_and_traffic_v62.py
-      - name: Commit proximity and traffic fix v62
+      - name: Apply proximity bypass v63
+        run: python scripts/patch_proximity_bypass_v63.py
+      - name: Commit proximity bypass v63
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Corrige comando mais próximo e remove malha verde amarela v62" || exit 0
+          git commit -m "Faz comandos mais perto usarem o fluxo normal v63" || exit 0
           git push
