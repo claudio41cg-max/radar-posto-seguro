@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="89-no-inline-community-geometries">
+<meta name="radar-build" content="90-community-history-panel">
 
 <script src="./community-index-preload.js?v=86"></script>
 <script src="./community-geometries-preload.js?v=89"></script>
@@ -15475,7 +15475,8 @@ document.addEventListener(
       const routes=Array.isArray(App.routeAlternatives)&&App.routeAlternatives.length?App.routeAlternatives:[App.route];
       return RoutePreviewV43.present(routes);
     };
-    App.init();
+    window.RadarApp=App;
+App.init();
     setTimeout(()=>RouteChoiceGuardV44.init(),700);
     setTimeout(()=>TrafficAssistantV40.init(),1200);
     setTimeout(()=>RadarVoicePickerV41.init(),500);
@@ -16223,6 +16224,7 @@ document.addEventListener(
 })();
 </script>
 
+<script src="./community-panel-v90.js?v=90"></script>
 </body>
 </html>
 
