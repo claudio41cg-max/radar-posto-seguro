@@ -148,9 +148,7 @@
     if (state && !parts.includes(state)) parts.push(state);
     const freeform = String(a.freeformAddress || '').trim();
     const address = parts.join(', ') || freeform;
-    return address
-      ? `${address}. Coordenadas aproximadas: ${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)}.`
-      : `Coordenadas aproximadas: ${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)}.`;
+    return address ? `${address}.` : '';
   }
 
   async function getLocationContext() {

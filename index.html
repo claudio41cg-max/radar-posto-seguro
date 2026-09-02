@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="59-canonical-gps-diagnostics">
+<meta name="radar-build" content="60-root-fix">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -16151,8 +16151,8 @@ document.addEventListener(
    App.destination=[p.lon,p.lat];
    const input=document.getElementById('destInput');if(input)input.value=p.name;
    VoiceAssistant.reply('Certo. Calculando a rota para '+p.name+'.');
-   if(typeof App.calculateRoute==='function')await App.calculateRoute();
-   else if(typeof App.recalculateRoute==='function')await App.recalculateRoute();
+   if(typeof App.recalculateRoute==='function')await App.recalculateRoute();
+   else if(typeof App.calculateRoute==='function')await App.calculateRoute();
    else throw new Error('sem calculador de rota');
   }catch(e){console.warn('v58 rota poi',e);VoiceAssistant.reply('Encontrei o local, mas não consegui abrir a rota agora.');}
   return true;
