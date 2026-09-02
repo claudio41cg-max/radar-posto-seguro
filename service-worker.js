@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v61';
+const CACHE_NAME = 'radar-seguro-rj-v71';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const APP_SHELL = [
   './manifest.json','./icon-192-1.png','./icon-512-1.png'
@@ -15,7 +15,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'61'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'71'}));
   })());
 });
 
@@ -42,8 +42,24 @@ async function aiChatProxyRequest(request){
   return fetch(`${TOMTOM_WORKER}/v1/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body,cache:'no-store'});
 }
 
+function isTrafficMapTile(url){
+  if(url.origin!==TOMTOM_WORKER || url.pathname!=='/v1/tomtom') return false;
+  const encoded=url.searchParams.get('path')||'';
+  let path=encoded;
+  try{ path=decodeURIComponent(encoded); }catch(_){}
+  return /\/traffic\/map\/.*\/tile\/flow\//i.test(path);
+}
+
 self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
+
+  // v71: remove apenas a camada visual verde de fluxo do TomTom.
+  // Consultas de trânsito usadas para rota/tempo continuam funcionando normalmente.
+  if(event.request.method==='GET' && isTrafficMapTile(url)){
+    event.respondWith(new Response(null,{status:204,headers:{'Cache-Control':'no-store'}}));
+    return;
+  }
+
   if(url.origin===TOMTOM_WORKER&&(url.pathname==='/'||url.pathname==='/v1/chat')&&event.request.method==='POST'){
     event.respondWith(aiChatProxyRequest(event.request));return;
   }
