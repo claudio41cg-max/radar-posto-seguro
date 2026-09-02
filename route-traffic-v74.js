@@ -1,13 +1,13 @@
-/* Radar Seguro RJ PRO v74 — trânsito somente na rota ativa */
+/* Radar Seguro RJ PRO v78 — trânsito somente na rota ativa, com menos processamento */
 (() => {
   'use strict';
-  if (window.__radarRouteTrafficV74) return;
-  window.__radarRouteTrafficV74 = true;
+  if (window.__radarRouteTrafficV78) return;
+  window.__radarRouteTrafficV78 = true;
 
   const WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
   const SOURCE_ID = 'route-traffic-v74';
   const LAYER_ID = 'route-traffic-v74-line';
-  const MAX_SAMPLES = 18;
+  const MAX_SAMPLES = 12;
   const COLORS = {
     free: '#2563eb',
     moderate: '#f59e0b',
@@ -24,17 +24,10 @@
     const map = app?.map;
     if (!map) return;
     try {
-      const style = map.getStyle?.();
-      for (const layer of style?.layers || []) {
-        const id = String(layer.id || '').toLowerCase();
-        const src = String(layer.source || '').toLowerCase();
-        if (id === LAYER_ID) continue;
-        if (/tomtom.*traffic|traffic.*tomtom|traffic-flow|flow.*traffic/.test(id + ' ' + src)) {
-          try { map.setLayoutProperty(layer.id, 'visibility', 'none'); } catch (_) {}
-          try { if (layer.type === 'raster') map.setPaintProperty(layer.id, 'raster-opacity', 0); } catch (_) {}
-          try { if (layer.type === 'line') map.setPaintProperty(layer.id, 'line-opacity', 0); } catch (_) {}
-        }
-      }
+      if (map.getLayer?.('tomtom-traffic-flow')) map.removeLayer('tomtom-traffic-flow');
+    } catch (_) {}
+    try {
+      if (map.getSource?.('tomtom-traffic')) map.removeSource('tomtom-traffic');
     } catch (_) {}
   }
 
@@ -90,6 +83,11 @@
 
   function ensureLayer(map, data){
     try {
+      const source = map.getSource(SOURCE_ID);
+      if (source?.setData) {
+        source.setData(data);
+        return;
+      }
       if (map.getLayer(LAYER_ID)) map.removeLayer(LAYER_ID);
       if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
       map.addSource(SOURCE_ID, { type: 'geojson', data });
@@ -105,16 +103,31 @@
         }
       });
     } catch (e) {
-      console.warn('Radar v74: erro ao desenhar trânsito da rota', e);
+      console.warn('Radar v78: erro ao desenhar trânsito da rota', e);
     }
   }
 
   let refreshToken = 0;
-  async function refreshRouteTraffic(route){
+  let lastRouteKey = '';
+
+  function routeKey(route){
+    const coords = route?.coords;
+    if (!Array.isArray(coords) || coords.length < 2) return '';
+    const first = coords[0] || [];
+    const last = coords[coords.length - 1] || [];
+    return `${coords.length}:${Number(first[0]).toFixed(5)},${Number(first[1]).toFixed(5)}:${Number(last[0]).toFixed(5)},${Number(last[1]).toFixed(5)}`;
+  }
+
+  async function refreshRouteTraffic(route, force = false){
     const app = getApp();
     const map = app?.map;
     const coords = route?.coords;
     if (!map || !Array.isArray(coords) || coords.length < 2) return;
+
+    const key = routeKey(route);
+    if (!force && key && key === lastRouteKey && map.getSource?.(SOURCE_ID)) return;
+    lastRouteKey = key;
+
     hideGlobalTraffic();
     const token = ++refreshToken;
     const features = await buildTrafficFeatures(coords);
@@ -124,21 +137,19 @@
 
   function install(){
     const app = getApp();
-    if (!app || app.__routeTrafficV74Installed) return false;
-    app.__routeTrafficV74Installed = true;
+    if (!app || app.__routeTrafficV78Installed) return false;
+    app.__routeTrafficV78Installed = true;
 
     const originalDrawRoute = typeof app.drawRoute === 'function' ? app.drawRoute.bind(app) : null;
     if (originalDrawRoute) {
       app.drawRoute = function(route, fit){
         const result = originalDrawRoute(route, fit);
-        setTimeout(() => refreshRouteTraffic(route), 80);
+        setTimeout(() => refreshRouteTraffic(route), 100);
         return result;
       };
     }
 
-    try { app.map?.on?.('styledata', () => setTimeout(hideGlobalTraffic, 60)); } catch (_) {}
-    try { app.map?.on?.('idle', hideGlobalTraffic); } catch (_) {}
-    [150,500,1200,2500].forEach(ms => setTimeout(hideGlobalTraffic, ms));
+    hideGlobalTraffic();
     if (app.route?.coords?.length) setTimeout(() => refreshRouteTraffic(app.route), 250);
     return true;
   }
@@ -146,8 +157,12 @@
   let tries = 0;
   const timer = setInterval(() => {
     tries++;
-    if (install() || tries > 120) clearInterval(timer);
+    if (install() || tries > 60) clearInterval(timer);
   }, 250);
 
-  window.RadarRouteTrafficV74 = { refresh: () => refreshRouteTraffic(getApp()?.route), hideGlobalTraffic };
+  window.RadarRouteTrafficV74 = {
+    version: '78-low-power',
+    refresh: () => refreshRouteTraffic(getApp()?.route, true),
+    hideGlobalTraffic
+  };
 })();
