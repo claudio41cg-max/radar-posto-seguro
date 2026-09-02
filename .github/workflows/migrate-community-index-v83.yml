@@ -1,0 +1,58 @@
+name: Radar v83 - migrar catalogo de comunidades
+
+on:
+  push:
+    paths:
+      - '.github/workflows/migrate-community-index-v83.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remover rawAreas embutido do index
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          start_token = 'const rawAreas = ['
+          end_token = '\n];\n\n\n/*\n  LIMITES OFICIAIS'
+
+          start = text.find(start_token)
+          if start < 0:
+              raise SystemExit('rawAreas não encontrado')
+
+          end = text.find(end_token, start)
+          if end < 0:
+              raise SystemExit('fim de rawAreas não encontrado')
+
+          replacement = "const rawAreas = [];\n\n\n/*\n  LIMITES OFICIAIS"
+          updated = text[:start] + replacement + text[end + len(end_token):]
+          updated = updated.replace(
+              '<meta name="radar-build" content="69-geoapify-neighborhood">',
+              '<meta name="radar-build" content="83-external-community-index">',
+              1
+          )
+
+          path.write_text(updated, encoding='utf-8')
+          print('index.html:', len(text), '->', len(updated), 'bytes')
+
+      - name: Commit da migracao
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html; then
+            echo 'Nenhuma alteracao necessaria.'
+            exit 0
+          fi
+          git config user.name 'Radar Seguro RJ Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html
+          git commit -m 'v83: remover catalogo rawAreas do index.html'
+          git push
