@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="99-clean-inline-css">
+<meta name="radar-build" content="100-external-safe-config">
 
 <script src="./community-index-preload.js?v=86"></script>
 <script src="./community-geometries-preload.js?v=89"></script>
 <script src="./tomtom-proxy-client.js?v=69"></script>
+<script src="./app-config-v100.js?v=100"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 
@@ -496,28 +497,13 @@
    CONFIGURAÇÕES
 ========================================================= */
 
-const TOMTOM_KEY = '';
-
-const ANP_APP =
-'https://anpcomvcpostos.anp.gov.br/';
-
-const ANP_REPORT =
-'https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados';
-
-/*
-  Somente inclua um posto nesta lista quando uma fonte oficial identificar
-  de forma inequívoca o estabelecimento e registrar combustível fora da
-  especificação ou volume fornecido menor que o indicado na bomba.
-
-  status: "current" (medida ativa), "pending" (processo/resultado pendente)
-  ou "history" (ocorrência passada, já regularizada/desinterditada).
-*/
-const VERIFIED_FUEL_INCIDENTS = [];
-
-const VERIFIED_FUEL_URL =
-'./data/postos-oficiais.json';
-
-const ANP_STATIONS = [];
+const RADAR_CONFIG = window.RADAR_CONFIG_V100 || {};
+const TOMTOM_KEY = RADAR_CONFIG.TOMTOM_KEY || '';
+const ANP_APP = RADAR_CONFIG.ANP_APP || 'https://anpcomvcpostos.anp.gov.br/';
+const ANP_REPORT = RADAR_CONFIG.ANP_REPORT || '';
+const VERIFIED_FUEL_INCIDENTS = Array.from(RADAR_CONFIG.VERIFIED_FUEL_INCIDENTS || []);
+const VERIFIED_FUEL_URL = RADAR_CONFIG.VERIFIED_FUEL_URL || './data/postos-oficiais.json';
+const ANP_STATIONS = Array.from(RADAR_CONFIG.ANP_STATIONS || []);
 
 const ANP_STATIONS_URL =
 './data/postos-anp-rio.json';
