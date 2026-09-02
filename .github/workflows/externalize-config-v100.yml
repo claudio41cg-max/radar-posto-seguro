@@ -1,0 +1,50 @@
+name: v100 externalize safe config
+
+on:
+  push:
+    paths:
+      - '.github/workflows/externalize-config-v100.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Externalizar configuracoes seguras
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          start=s.index("const TOMTOM_KEY = '';")
+          end=s.index("const ANP_STATIONS = [];", start)+len("const ANP_STATIONS = [];")
+          old=s[start:end]
+          # Preserve lexical names by reading values from a preloaded namespace.
+          cfg="""window.RADAR_CONFIG_V100 = Object.freeze({\n  TOMTOM_KEY: '',\n  ANP_APP: 'https://anpcomvcpostos.anp.gov.br/',\n  ANP_REPORT: 'https://www.gov.br/anp/pt-br/canais_atendimento/reclamacoes-e-denuncias-contra-postos-de-combustiveis-revendas-de-glp-inclusive-programa-gas-do-povo-e-outros-agentes-regulados',\n  VERIFIED_FUEL_INCIDENTS: Object.freeze([]),\n  VERIFIED_FUEL_URL: './data/postos-oficiais.json',\n  ANP_STATIONS: Object.freeze([])\n});\n"""
+          Path('app-config-v100.js').write_text(cfg,encoding='utf-8')
+          replacement="""const RADAR_CONFIG = window.RADAR_CONFIG_V100 || {};\nconst TOMTOM_KEY = RADAR_CONFIG.TOMTOM_KEY || '';\nconst ANP_APP = RADAR_CONFIG.ANP_APP || 'https://anpcomvcpostos.anp.gov.br/';\nconst ANP_REPORT = RADAR_CONFIG.ANP_REPORT || '';\nconst VERIFIED_FUEL_INCIDENTS = Array.from(RADAR_CONFIG.VERIFIED_FUEL_INCIDENTS || []);\nconst VERIFIED_FUEL_URL = RADAR_CONFIG.VERIFIED_FUEL_URL || './data/postos-oficiais.json';\nconst ANP_STATIONS = Array.from(RADAR_CONFIG.ANP_STATIONS || []);"""
+          s=s[:start]+replacement+s[end:]
+          anchor='<script src="./tomtom-proxy-client.js?v=69"></script>'
+          s=s.replace(anchor,anchor+'\n<script src="./app-config-v100.js?v=100"></script>',1)
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="100-external-safe-config">',s,1)
+          p.write_text(s,encoding='utf-8')
+          sw=Path('service-worker.js')
+          w=sw.read_text(encoding='utf-8')
+          w=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v100",w,count=1)
+          w=re.sub(r"build:'\d+'","build:'100'",w)
+          if "./app-config-v100.js?v=100" not in w:
+              marker="'./tomtom-proxy-client.js?v=69',"
+              if marker in w: w=w.replace(marker,marker+"\n  './app-config-v100.js?v=100',",1)
+          sw.write_text(w,encoding='utf-8')
+          PY
+      - name: Commit v100
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js app-config-v100.js
+          git commit -m "v100: externalizar configuracoes seguras do app" || exit 0
+          git push
