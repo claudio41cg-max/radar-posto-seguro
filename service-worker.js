@@ -7,6 +7,7 @@ const APP_SHELL = [
   './manifest.json',
   './app-shell-v97.css',
   './voice-ui-v98.css',
+  './legacy-inline-v99.css',
   './icon-192-1.png',
   './icon-512-1.png',
   './app-shell-v97.css?v=97',
