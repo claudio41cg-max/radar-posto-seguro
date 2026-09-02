@@ -1,5 +1,6 @@
-const CACHE_NAME = 'radar-seguro-rj-v71';
+const CACHE_NAME = 'radar-seguro-rj-v72';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
+const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const APP_SHELL = [
   './manifest.json','./icon-192-1.png','./icon-512-1.png'
 ];
@@ -15,7 +16,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'71'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'72'}));
   })());
 });
 
@@ -50,11 +51,43 @@ function isTrafficMapTile(url){
   return /\/traffic\/map\/.*\/tile\/flow\//i.test(path);
 }
 
+async function cleanOpenFreeMapStyle(request){
+  try{
+    const response=await fetch(request,{cache:'no-store'});
+    if(!response.ok)return response;
+    const style=await response.json();
+    if(Array.isArray(style.layers)){
+      for(const layer of style.layers){
+        if(layer?.type!=='line')continue;
+        const id=String(layer.id||'').toLowerCase();
+        const sourceLayer=String(layer['source-layer']||'').toLowerCase();
+        const roadLayer=sourceLayer.includes('transportation') || /road|street|highway|motorway|trunk|primary|secondary|tertiary/.test(id);
+        if(!roadLayer)continue;
+        layer.paint=layer.paint||{};
+        const isCasing=/case|casing|outline/.test(id);
+        layer.paint['line-color']=isCasing?'#cbd5e1':'#94a3b8';
+        if(layer.paint['line-opacity']==null)layer.paint['line-opacity']=0.72;
+      }
+    }
+    return new Response(JSON.stringify(style),{
+      status:200,
+      headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}
+    });
+  }catch(_){
+    return fetch(request,{cache:'no-store'});
+  }
+}
+
 self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
 
-  // v71: remove apenas a camada visual verde de fluxo do TomTom.
-  // Consultas de trânsito usadas para rota/tempo continuam funcionando normalmente.
+  // v72: deixa o mapa-base sem as vias verdes. A rota do Radar é desenhada depois e não é alterada.
+  if(event.request.method==='GET' && url.hostname===OPENFREEMAP_HOST && /\/styles\/(?:liberty|dark)\/?$/i.test(url.pathname)){
+    event.respondWith(cleanOpenFreeMapStyle(event.request));
+    return;
+  }
+
+  // Remove somente os tiles visuais de fluxo TomTom (verde/amarelo/vermelho).
   if(event.request.method==='GET' && isTrafficMapTile(url)){
     event.respondWith(new Response(null,{status:204,headers:{'Cache-Control':'no-store'}}));
     return;
