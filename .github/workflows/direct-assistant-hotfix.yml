@@ -10,13 +10,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply traffic visual root fix v60
-        shell: bash
-        run: python -c "from pathlib import Path; p=Path('index.html'); s=p.read_text(); s=s.replace(\"try{w=Number(m.getPaintProperty(l.id,'line-width')||0)}catch(e){}\",\"try{w=String(m.getPaintProperty(l.id,'line-width')||'')}catch(e){}\",1); s=s.replace(\"trafficByColor=w>=3 && /#22c55e|#16a34a|#84cc16|#a3e635|#eab308|#facc15|#f59e0b|#ef4444/.test(c);\",\"trafficByColor=/#22c55e|#16a34a|#84cc16|#a3e635|#eab308|#facc15|#f59e0b|#ef4444/.test(c) && (/interpolate|step|zoom/.test(w) || Number(w)>=3);\",1); p.write_text(s)"
-      - name: Commit traffic visual fix v60
+      - name: Apply proximity and traffic fix v62
+        run: python scripts/patch_proximity_and_traffic_v62.py
+      - name: Commit proximity and traffic fix v62
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Corrige leitura da malha verde e amarela v60" || exit 0
+          git commit -m "Corrige comando mais próximo e remove malha verde amarela v62" || exit 0
           git push
