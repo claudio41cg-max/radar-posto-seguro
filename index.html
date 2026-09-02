@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="97-external-shell-css">
+<meta name="radar-build" content="98-external-voice-css">
 
 <script src="./community-index-preload.js?v=86"></script>
 <script src="./community-geometries-preload.js?v=89"></script>
@@ -14,37 +14,8 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 
 <link rel="stylesheet" href="./app-shell-v97.css?v=97">
+<link rel="stylesheet" href="./voice-ui-v98.css?v=98">
 
-<style id="radar-voice-v35-style">
-#assistantMicBtn{border-radius:50%!important;width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;font-size:0!important;display:inline-grid!important;place-items:center!important;background:linear-gradient(145deg,#0f172a,#24324a)!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:0 4px 12px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.16)!important;transition:transform .18s ease,box-shadow .18s ease!important}
-#assistantMicBtn::before{content:'🎙';font-size:21px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
-#assistantMicBtn.listening,#assistantMicBtn[aria-pressed="true"]{background:linear-gradient(145deg,#0f172a,#24324a)!important;box-shadow:0 4px 12px rgba(0,0,0,.28),0 0 0 2px rgba(56,189,248,.24)!important}
-#navAssistantMicBtn.listening{animation:none!important}
-</style>
-
-<style id="radar-voice-v36-style">
-#assistantMicBtn{position:relative!important;overflow:hidden!important;border-radius:50%!important;width:46px!important;height:46px!important;min-width:46px!important;padding:0!important;display:inline-grid!important;place-items:center!important;color:#fff!important;background:radial-gradient(circle at 50% 38%,#7d86ff 0%,#6776ff 28%,#22273f 72%,#11131c 100%)!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:0 6px 18px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.22)!important;transition:transform .18s ease,box-shadow .25s ease!important}
-#assistantMicBtn .radar-voice-svg{position:relative;z-index:2;width:25px;height:25px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
-#assistantMicBtn .radar-voice-orb{position:absolute;inset:-16%;border-radius:50%;background:radial-gradient(circle at 55% 35%,rgba(255,255,255,.72),rgba(164,178,255,.5) 22%,rgba(95,111,255,.55) 50%,rgba(18,22,42,.2) 73%,transparent 74%);opacity:.34;transform:scale(.8);transition:opacity .25s ease}
-#assistantMicBtn.radar-handsfree .radar-voice-orb{opacity:.72;animation:radarVoiceBreath 3.6s ease-in-out infinite}
-#assistantMicBtn.listening .radar-voice-orb{opacity:.95;animation:radarVoiceListen 1.15s ease-in-out infinite}
-#assistantMicBtn.listening,#assistantMicBtn[aria-pressed="true"]{background:radial-gradient(circle at 50% 38%,#8b95ff 0%,#6776ff 34%,#22273f 76%,#11131c 100%)!important;box-shadow:0 6px 18px rgba(0,0,0,.34),0 0 0 3px rgba(106,125,255,.18)!important}
-#assistantMicBtn:active{transform:scale(.94)}
-#navAssistantMicBtn.listening{animation:none!important}
-@keyframes radarVoiceBreath{0%,100%{transform:scale(.78) rotate(0deg)}50%{transform:scale(1.04) rotate(4deg)}}
-@keyframes radarVoiceListen{0%,100%{transform:scale(.82)}50%{transform:scale(1.16)}}
-@media (prefers-reduced-motion:reduce){#assistantMicBtn .radar-voice-orb{animation:none!important}}
-</style>
-
-<style id="radar-voice-v37-style">
-#assistantMicBtn::before{content:none!important;display:none!important}
-#assistantMicBtn{position:relative!important;overflow:hidden!important;border-radius:50%!important;width:54px!important;height:54px!important;min-width:54px!important;padding:0!important;display:inline-grid!important;place-items:center!important;background:radial-gradient(circle at 35% 30%,#8b9bff 0%,#6269e8 34%,#313659 72%,#1d2238 100%)!important;border:1px solid rgba(255,255,255,.32)!important;box-shadow:0 5px 16px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.25)!important;color:#fff!important}
-#assistantMicBtn .radar-voice-orb{position:absolute!important;inset:5px!important;border-radius:50%!important;background:radial-gradient(circle at 48% 34%,rgba(255,255,255,.26),rgba(119,126,255,.10) 42%,rgba(0,0,0,.08) 75%)!important;opacity:.9!important;transform:scale(.92)!important}
-#assistantMicBtn .radar-voice-svg{position:relative!important;z-index:2!important;width:29px!important;height:29px!important;color:#fff!important;filter:drop-shadow(0 2px 3px rgba(0,0,0,.28))!important}
-#assistantMicBtn.listening .radar-voice-orb{animation:radarVoicePulse 1.25s ease-in-out infinite!important;background:radial-gradient(circle at 48% 34%,rgba(255,255,255,.42),rgba(99,102,241,.34) 46%,rgba(14,165,233,.22) 72%,rgba(0,0,0,.06) 100%)!important}
-#assistantMicBtn.listening{box-shadow:0 5px 16px rgba(0,0,0,.38),0 0 0 3px rgba(96,165,250,.24),0 0 20px rgba(99,102,241,.28)!important}
-@keyframes radarVoicePulse{0%,100%{transform:scale(.90);opacity:.72}50%{transform:scale(1.08);opacity:1}}
-</style>
 </head>
 
 <body>

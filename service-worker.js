@@ -5,6 +5,8 @@ const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 /* Shell atual. Sem injetar scripts antigos no HTML: o index.html é a fonte de verdade. */
 const APP_SHELL = [
   './manifest.json',
+  './app-shell-v97.css',
+  './voice-ui-v98.css',
   './icon-192-1.png',
   './icon-512-1.png',
   './app-shell-v97.css?v=97',
