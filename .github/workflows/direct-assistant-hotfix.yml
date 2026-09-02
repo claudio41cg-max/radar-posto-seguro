@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply proximity alias v64
-        run: python scripts/patch_proximity_alias_v64.py
-      - name: Commit proximity alias v64
+      - name: Apply perto minha casa v65
+        run: python scripts/patch_perto_minha_casa_v65.py
+      - name: Commit perto minha casa v65
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Faz mais próximo usar a referência que já funciona v64" || exit 0
+          git commit -m "Unifica perto de minha casa com proximidade correta v65" || exit 0
           git push
