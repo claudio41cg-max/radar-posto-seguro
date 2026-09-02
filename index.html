@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="65-perto-minha-casa">
+<meta name="radar-build" content="66-terminal-proximity">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -16224,7 +16224,15 @@ document.addEventListener(
       if(/^(nao|não|cancela|cancelar|deixa|deixa pra la|deixa pra lá)$/.test(n)){pendingPlace=null;this.reply('Tudo bem. Não vou mudar sua rota.');return;}
     }
     if(isLocationQuestion(command)){const p=await this.getCurrentAddress(true);this.reply(formatCurrentPlace(p,command));return;}
-    let normalizedCommand=norm(command);
+    let normalizedCommand=norm(command).replace(/[.,!?;:]+$/g,'').trim();
+    // Sem a palavra "casa", reconhecimento de voz pode entregar pontuação ou pequenas
+    // variações no fim. Convertemos qualquer final "mais perto/mais próximo" para a
+    // mesma referência que já funciona: "mais próximo da minha casa".
+    normalizedCommand=normalizedCommand.replace(
+      /\b(mais proximo|mais proxima|mais perto)\s*$/,
+      'mais proximo da minha casa'
+    );
+    command=normalizedCommand;
     // Teste real confirmou que "mais próximo da minha casa" usa a referência correta.
     // Normalize também as formas naturais "perto de minha casa" / "perto da minha casa"
     // para exatamente a mesma intenção antes de qualquer regex ou busca concorrente.
@@ -16234,10 +16242,7 @@ document.addEventListener(
     // O usuário confirmou em teste real que "mais próximo da minha casa" funciona.
     // Portanto, quando a frase termina apenas em "mais próximo/mais perto", tratamos
     // isso como o mesmo pedido relativo à posição atual/casa, sem deixar outro fluxo decidir.
-    if(/\b(mais proximo|mais proxima|mais perto)\s*$/.test(normalizedCommand)){
-      normalizedCommand=normalizedCommand.replace(/\b(mais proximo|mais proxima|mais perto)\s*$/,'mais proximo da minha casa');
-      command=normalizedCommand;
-    }
+    command=normalizedCommand;
     const pq=nearestPlaceQuery(command);
     if(pq){
       let cleaned=norm(command)
