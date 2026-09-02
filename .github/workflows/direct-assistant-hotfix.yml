@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply nearest and roads consolidation v67
-        run: python scripts/patch_consolidate_nearest_roads_v67.py
-      - name: Commit nearest and roads consolidation v67
+      - name: Apply neighborhood GPS fix v68
+        run: python scripts/patch_neighborhood_v68.py
+      - name: Commit neighborhood GPS fix v68
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Consolida busca mais próxima e neutraliza vias v67" || exit 0
+          git add index.html tomtom-proxy-client.js
+          git commit -m "Corrige bairro usando GPS e CEP v68" || exit 0
           git push
