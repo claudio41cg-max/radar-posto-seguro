@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="66-terminal-proximity">
+<meta name="radar-build" content="67-nearest-road-consolidation">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -16110,7 +16110,7 @@ document.addEventListener(
   return n;
  }
  async function tomtomNearest(query,gps){
-  const path='/search/2/search/'+encodeURIComponent(query)+'.json?lat='+gps.lat+'&lon='+gps.lon+'&radius=30000&limit=12&countrySet=BR&language=pt-BR';
+  const path='/search/2/search/'+encodeURIComponent(query)+'.json?lat='+gps.lat+'&lon='+gps.lon+'&radius=20000&limit=20&countrySet=BR&language=pt-BR';
   const r=await fetch(WORKER+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
   if(!r.ok)throw new Error('search '+r.status);
   const d=await r.json();
@@ -16195,11 +16195,39 @@ document.addEventListener(
    }
   }catch(e){console.warn('v58 limpeza visual',e)}
  }
+ function neutralizeBaseRoadPalette(){
+  const m=getMap();if(!m)return;
+  try{
+    const st=m.getStyle?.();if(!st?.layers)return;
+    const changed=[];
+    for(const l of st.layers){
+      if(l.type!=='line')continue;
+      const id=String(l.id||'').toLowerCase();
+      const sourceLayer=String(l['source-layer']||'').toLowerCase();
+      const sourceId=String(l.source||'').toLowerCase();
+      if(/radar|route|community|comunidade|fogo|hazard|semaforo|traffic/.test(id))continue;
+      const baseRoad = sourceLayer==='transportation' || sourceLayer.includes('transportation') ||
+        (/road|street|highway|motorway|trunk|primary|secondary|tertiary/.test(id) && /open|map|liberty|tiles/.test(sourceId+' '+JSON.stringify(st.sources?.[l.source]||{}).toLowerCase()));
+      if(!baseRoad)continue;
+      let color='';
+      try{color=JSON.stringify(m.getPaintProperty(l.id,'line-color')||'').toLowerCase()}catch(e){}
+      if(!/green|yellow|orange|#22c55e|#16a34a|#84cc16|#a3e635|#eab308|#facc15|#fde047|#f59e0b|#f97316|rgb/.test(color))continue;
+      try{
+        const isCasing=/case|casing|outline/.test(id);
+        m.setPaintProperty(l.id,'line-color',isCasing?'#374151':'#6b7280');
+        changed.push(l.id);
+      }catch(e){}
+    }
+    window.RadarBaseRoadLayersV67=changed;
+    if(changed.length)console.info('Radar v67 vias base neutralizadas:',changed);
+  }catch(e){console.warn('v67 paleta de vias',e)}
+ }
+
  function armTrafficCleaner(){
   const m=getMap();if(!m){setTimeout(armTrafficCleaner,400);return;}
-  try{m.on?.('styledata',()=>setTimeout(hideTrafficVisual,80));}catch(e){}
-  try{m.on?.('idle',hideTrafficVisual);}catch(e){}
-  [100,400,900,1800,3500].forEach(ms=>setTimeout(hideTrafficVisual,ms));
+  try{m.on?.('styledata',()=>setTimeout(()=>{hideTrafficVisual();neutralizeBaseRoadPalette();},80));}catch(e){}
+  try{m.on?.('idle',()=>{hideTrafficVisual();neutralizeBaseRoadPalette();});}catch(e){}
+  [100,400,900,1800,3500].forEach(ms=>setTimeout(()=>{hideTrafficVisual();neutralizeBaseRoadPalette();},ms));
  }
  armTrafficCleaner();
 
@@ -16252,7 +16280,7 @@ document.addEventListener(
         .replace(/\b(mais proximo|mais proxima|mais perto)\b/g,' ')
         .replace(/\s+/g,' ').trim();
       if(!/^(me leve|me leva|leve me|leva me|quero ir|ir|va|vá)\b/.test(cleaned)) cleaned='me leva para '+pq;
-      return originalHandle(cleaned,...rest);
+      return answerNearestPlace(pq);
     }
     return originalHandle(command,...rest);
    };
