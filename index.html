@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="64-proximity-alias">
+<meta name="radar-build" content="65-perto-minha-casa">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -16225,6 +16225,12 @@ document.addEventListener(
     }
     if(isLocationQuestion(command)){const p=await this.getCurrentAddress(true);this.reply(formatCurrentPlace(p,command));return;}
     let normalizedCommand=norm(command);
+    // Teste real confirmou que "mais próximo da minha casa" usa a referência correta.
+    // Normalize também as formas naturais "perto de minha casa" / "perto da minha casa"
+    // para exatamente a mesma intenção antes de qualquer regex ou busca concorrente.
+    normalizedCommand=normalizedCommand
+      .replace(/\b(perto de minha casa|perto da minha casa|perto de casa)\b/g,'mais proximo da minha casa');
+    command=normalizedCommand;
     // O usuário confirmou em teste real que "mais próximo da minha casa" funciona.
     // Portanto, quando a frase termina apenas em "mais próximo/mais perto", tratamos
     // isso como o mesmo pedido relativo à posição atual/casa, sem deixar outro fluxo decidir.
