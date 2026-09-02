@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v96';
+const CACHE_NAME = 'radar-seguro-rj-v97';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 
@@ -7,6 +7,7 @@ const APP_SHELL = [
   './manifest.json',
   './icon-192-1.png',
   './icon-512-1.png',
+  './app-shell-v97.css?v=97',
   './tomtom-proxy-client.js',
   './route-traffic-v74.js',
   './traffic-clean-v75.js',
@@ -35,7 +36,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'96'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'97'}));
   })());
 });
 
@@ -183,7 +184,7 @@ self.addEventListener('fetch',event=>{
     return;
   }
 
-  const liveFile=/\.(?:js|json|html)$/.test(url.pathname)||url.pathname.includes('/data/');
+  const liveFile=/\.(?:js|json|html|css)$/.test(url.pathname)||url.pathname.includes('/data/');
   if(liveFile){
     event.respondWith(fetch(event.request,{cache:'no-store'}).catch(()=>caches.match(event.request)));
     return;

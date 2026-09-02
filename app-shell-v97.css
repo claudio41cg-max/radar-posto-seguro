@@ -1,0 +1,1385 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif
+}
+
+html,body,#map{
+  width:100%;
+  height:100%;
+  overflow:hidden
+}
+
+body{
+  background:#07131f;
+  color:#fff
+}
+
+button,input{
+  font:inherit
+}
+
+button{
+  -webkit-tap-highlight-color:transparent
+}
+
+#map{
+  position:fixed;
+  inset:0
+}
+
+.maplibregl-canvas{
+  outline:none
+}
+
+.maplibregl-ctrl-attrib{
+  font-size:9px;
+  background:rgba(0,0,0,.52)!important;
+  color:#ddd!important
+}
+
+.maplibregl-ctrl-attrib a{
+  color:#ddd!important
+}
+
+
+/* =========================================================
+   TOPO
+========================================================= */
+
+.topbar{
+  position:fixed;
+  top:10px;
+  left:10px;
+  right:10px;
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  pointer-events:none;
+  transition:.3s
+}
+
+.topbar>*{
+  pointer-events:auto
+}
+
+.topbar.hide-nav{
+  transform:translateY(-130%);
+  opacity:0;
+  pointer-events:none
+}
+
+.appbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 14px;
+  border-radius:18px;
+  background:rgba(7,19,31,.94);
+  border:1px solid rgba(56,189,248,.25);
+  box-shadow:0 8px 24px rgba(0,0,0,.60);
+  backdrop-filter:blur(14px)
+}
+
+.brand{
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.5px
+}
+
+.brand span{
+  color:#38bdf8
+}
+
+#gpsBadge{
+  background:#475569;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:9px;
+  font-weight:900;
+  color:#fff
+}
+
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.search{
+  position:relative;
+  display:flex;
+  gap:4px;
+  padding:5px;
+  background:rgba(7,19,31,.96);
+  border:1px solid #38bdf8;
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(0,0,0,.6)
+}
+
+.search input{
+  min-width:0;
+  flex:1;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#fff;
+  padding:10px 8px;
+  font-size:14px
+}
+
+.search input::placeholder{
+  color:#94a3b8
+}
+
+.search button{
+  border:0;
+  border-radius:12px;
+  background:#0284c7;
+  color:#fff;
+  font-weight:900;
+  padding:10px 14px;
+  cursor:pointer
+}
+
+.search .clear{
+  background:#1e293b;
+  font-size:16px
+}
+
+.search .assistant-mic-btn{
+  min-width:42px;
+  padding:10px 11px;
+  background:#047857;
+  font-size:17px
+}
+
+.assistant-mic-btn.listening,
+.nav-map-chip.listening{
+  background:#b91c1c!important;
+  border-color:#fca5a5!important;
+  animation:assistantPulse 1s infinite
+}
+
+@keyframes assistantPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(248,113,113,.55)}
+  50%{box-shadow:0 0 0 8px rgba(248,113,113,0)}
+}
+
+.suggest{
+  display:none;
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0;
+  right:0;
+  max-height:300px;
+  overflow:auto;
+  border:1px solid #334155;
+  border-radius:14px;
+  background:#07131f;
+  box-shadow:0 12px 30px rgba(0,0,0,.85);
+  z-index:40
+}
+
+.suggest.show{
+  display:block
+}
+
+.suggest-item{
+  padding:12px;
+  border-bottom:1px solid #1e293b;
+  font-size:12px;
+  color:#e2e8f0;
+  line-height:1.35;
+  cursor:pointer
+}
+
+.suggest-item:active{
+  background:#102337
+}
+
+.suggest-primary{
+  font-weight:800;
+  color:#f8fafc
+}
+
+.suggest-secondary{
+  margin-top:3px;
+  color:#94a3b8;
+  font-size:10px
+}
+
+
+/* =========================================================
+   CHIPS
+========================================================= */
+
+.chips{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  scrollbar-width:none
+}
+
+.chips::-webkit-scrollbar{
+  display:none
+}
+
+.chip{
+  white-space:nowrap;
+  border:1px solid #334155;
+  background:rgba(4,16,28,.92);
+  color:#dbeafe;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.chip.active{
+  background:#0284c7;
+  border-color:#38bdf8
+}
+
+
+/* =========================================================
+   HUD DE NAVEGAÇÃO
+========================================================= */
+
+.waze-top-hud{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:40;
+  background:linear-gradient(135deg,#005b61,#006a72);
+  color:#fff;
+  padding:12px 16px 8px;
+  box-shadow:0 8px 24px rgba(0,0,0,.7);
+  display:none;
+  flex-direction:column
+}
+
+.waze-top-hud.show{
+  display:flex
+}
+
+.nav-map-chips{
+  position:fixed;
+  top:128px;
+  left:10px;
+  z-index:41;
+  display:none;
+  gap:7px;
+  pointer-events:auto
+}
+
+body.nav-mode .nav-map-chips{
+  display:flex
+}
+
+.nav-map-chip{
+  white-space:nowrap;
+  border:1px solid #38bdf8;
+  background:rgba(4,16,28,.94);
+  color:#dbeafe;
+  padding:8px 11px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  box-shadow:0 5px 14px rgba(0,0,0,.45);
+  cursor:pointer
+}
+
+.nav-map-chip.active{
+  background:#0284c7
+}
+
+.nav-map-chip.assistant{
+  background:#047857;
+  border-color:#34d399
+}
+
+.nav-map-chip.assistant.hands-free{
+  background:#15803d;
+  border-color:#86efac;
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.45),
+    0 0 0 2px rgba(134,239,172,.28)
+}
+
+.waze-maneuver-row{
+  display:flex;
+  align-items:center;
+  gap:16px
+}
+
+.waze-arrow{
+  width:76px;
+  text-align:center;
+  font-size:62px;
+  line-height:1;
+  font-weight:900
+}
+
+.waze-meta{
+  flex:1;
+  min-width:0
+}
+
+.waze-dist{
+  font-size:26px;
+  font-weight:900
+}
+
+.waze-street{
+  font-size:19px;
+  font-weight:900;
+  color:#67e8f9;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.waze-sub-hud{
+  background:rgba(0,0,0,.30);
+  margin:8px -16px -8px;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  font-size:15px;
+  font-weight:800;
+  color:#bbf7d0
+}
+
+.next-name{
+  color:#fff
+}
+
+.waze-danger-tag{
+  display:none;
+  color:#fecaca;
+  font-weight:900;
+  text-align:right
+}
+
+.waze-danger-tag.active{
+  display:block
+}
+
+
+/* =========================================================
+   SEMÁFORO
+========================================================= */
+
+.traffic-light-hud{
+  position:fixed;
+  top:138px;
+  left:14px;
+  z-index:39;
+  background:rgba(15,23,42,.96);
+  border:2px solid #38bdf8;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:16px;
+  display:none;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,.65);
+  max-width:265px
+}
+
+.traffic-light-hud.show{
+  display:flex
+}
+
+.traffic-light-visual{
+  width:20px;
+  height:45px;
+  background:#020617;
+  border-radius:9px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  align-items:center;
+  padding:3px;
+  border:1px solid #475569;
+  flex-shrink:0
+}
+
+.traffic-light-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  display:none
+}
+
+.traffic-light-dot.active{
+  display:block;
+  box-shadow:0 0 10px currentColor
+}
+
+.traffic-light-dot.red{
+  background:#7f1d1d
+}
+
+.traffic-light-dot.yellow{
+  background:#713f12
+}
+
+.traffic-light-dot.green{
+  background:#14532d
+}
+
+.traffic-light-info b{
+  display:block;
+  font-size:12px
+}
+
+.traffic-light-info span{
+  display:block;
+  margin-top:3px;
+  font-size:10px;
+  color:#cbd5e1;
+  line-height:1.25
+}
+
+
+/* =========================================================
+   VIA ATUAL
+========================================================= */
+
+.current-road-pill{
+  position:fixed;
+  bottom:92px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:30;
+  background:#0284c7;
+  color:#fff;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:900;
+  box-shadow:0 6px 16px rgba(0,0,0,.6);
+  border:2px solid #fff;
+  display:none;
+  white-space:nowrap;
+  max-width:65vw;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+body.nav-mode .current-road-pill{
+  display:block
+}
+
+
+/* =========================================================
+   VELOCÍMETRO
+========================================================= */
+
+.speedometer-box{
+  position:fixed;
+  left:14px;
+  bottom:92px;
+  z-index:35;
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  background:#04101c;
+  border:3px solid #0284c7;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 20px rgba(0,0,0,.7)
+}
+
+body.nav-mode .speedometer-box{
+  display:flex
+}
+
+.speedometer-box b{
+  font-size:24px;
+  line-height:1
+}
+
+.speedometer-box span{
+  margin-top:2px;
+  font-size:11px;
+  color:#94a3b8;
+  font-weight:800
+}
+
+.speedometer-box.speed-alert{
+  border-color:#ef4444;
+  background:#450a0a;
+  animation:pulseRed .65s infinite alternate
+}
+
+@keyframes pulseRed{
+  from{transform:scale(1)}
+  to{transform:scale(1.07)}
+}
+
+.fogo-live-marker{
+  --fogo-color:#ef2929;
+  --fogo-size:22px;
+  width:var(--fogo-size);
+  height:var(--fogo-size);
+  box-sizing:border-box;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.96);
+  background:radial-gradient(circle,
+    var(--fogo-color) 0 13%,
+    #fff 14% 27%,
+    var(--fogo-color) 28% 42%,
+    #fff 43% 56%,
+    var(--fogo-color) 57% 72%,
+    #fff 73% 85%,
+    var(--fogo-color) 86% 100%);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.45),
+    0 3px 9px rgba(0,0,0,.52);
+  color:transparent;
+  display:block;
+  padding:0;
+  margin:0;
+  font-size:0;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  overflow:visible;
+  transform-origin:center center;
+  isolation:isolate
+}
+
+.fogo-live-marker::before,
+.fogo-live-marker::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:42%;
+  height:42%;
+  box-sizing:border-box;
+  border:1.5px solid var(--fogo-color);
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.15);
+  animation:fogoRadarPulse 1.65s infinite cubic-bezier(.18,.62,.36,1)
+}
+
+.fogo-live-marker::after{
+  animation-delay:-.825s
+}
+
+.fogo-live-marker.fogo-previous{
+  --fogo-color:#f59e0b;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.42),
+    0 3px 8px rgba(0,0,0,.48)
+}
+
+.fogo-live-marker.fogo-previous::before,
+.fogo-live-marker.fogo-previous::after{
+  animation-duration:2s
+}
+
+.fogo-live-marker.fogo-previous::after{
+  animation-delay:-1s
+}
+
+@keyframes fogoRadarPulse{
+  0%{
+    transform:translate(-50%,-50%) scale(.15);
+    opacity:.9
+  }
+  72%{
+    opacity:.28
+  }
+  100%{
+    transform:translate(-50%,-50%) scale(3.25);
+    opacity:0
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fogo-live-marker::before,
+  .fogo-live-marker::after{
+    animation:none;
+    display:none
+  }
+}
+
+/* =========================================================
+   RECENTRALIZAR
+========================================================= */
+
+.nav-recenter-left{
+  position:fixed;
+  left:14px;
+  bottom:181px;
+  z-index:35;
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:2px solid #38bdf8;
+  background:linear-gradient(180deg,#111827,#030712);
+  color:#fff;
+  box-shadow:0 8px 22px rgba(0,0,0,.68),inset 0 0 0 1px rgba(255,255,255,.08);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:0
+}
+
+.recenter-crosshair{
+  width:25px;
+  height:25px;
+  border:2px solid #67e8f9;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#fff 0 3px,transparent 4px),
+    linear-gradient(#67e8f9,#67e8f9) center/2px 100% no-repeat,
+    linear-gradient(90deg,#67e8f9,#67e8f9) center/100% 2px no-repeat;
+  filter:drop-shadow(0 0 4px rgba(56,189,248,.65))
+}
+
+body.nav-mode .nav-recenter-left{
+  display:flex
+}
+
+
+/* =========================================================
+   BOTÃO AMARELO DE ALERTA
+========================================================= */
+
+.nav-report-btn{
+  position:fixed;
+  right:14px;
+  bottom:92px;
+  z-index:36;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:3px solid #fff;
+  background:#ffcf00;
+  color:#111827;
+  box-shadow:0 8px 22px rgba(0,0,0,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:27px
+}
+
+.nav-report-btn:active{
+  transform:scale(.92)
+}
+
+body.nav-mode .nav-report-btn{
+  display:flex
+}
+
+
+/* =========================================================
+   CONTROLES LATERAIS
+========================================================= */
+
+.side{
+  position:fixed;
+  right:12px;
+  top:150px;
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  transition:.3s
+}
+
+body.nav-mode .side{
+  top:124px
+}
+
+.side button{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:1px solid #334155;
+  background:rgba(0,0,0,.80);
+  color:#fff;
+  box-shadow:0 7px 18px rgba(0,0,0,.6);
+  font-size:18px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.side button.locate{
+  border-color:#38bdf8
+}
+
+.side button.active-sound{
+  border-color:#34d399;
+  color:#34d399
+}
+
+.side button.muted-sound{
+  border-color:#f87171;
+  color:#f87171
+}
+
+
+/* =========================================================
+   PAINEL INFERIOR
+========================================================= */
+
+.waze-bottom-sheet{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:37;
+  background:#fff;
+  color:#0f172a;
+  border-radius:24px 24px 0 0;
+  box-shadow:0 -8px 30px rgba(0,0,0,.42);
+  transition:transform .3s cubic-bezier(.1,.9,.2,1);
+  transform:translateY(calc(100% - 75px));
+  display:none
+}
+
+.waze-bottom-sheet.show{
+  display:block
+}
+
+.waze-bottom-sheet.expanded{
+  transform:translateY(0)
+}
+
+.sheet-handle{
+  width:42px;
+  height:5px;
+  background:#cbd5e1;
+  border-radius:99px;
+  margin:8px auto 4px
+}
+
+.sheet-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:4px 18px 12px
+}
+
+.sheet-recenter{
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
+.recenter-icon{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#0f172a;
+  color:#38bdf8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px
+}
+
+.sheet-time-dist{
+  display:flex;
+  flex-direction:column
+}
+
+.sheet-time-dist b{
+  font-size:18px
+}
+
+.sheet-time-dist span{
+  font-size:15px;
+  color:#64748b;
+  font-weight:800;
+  line-height:1.25
+}
+
+.sheet-toggle-btn{
+  padding:8px 13px;
+  border-radius:999px;
+  border:0;
+  background:#f1f5f9;
+  color:#0284c7;
+  font-size:12px;
+  font-weight:900
+}
+
+.sheet-content{
+  padding:0 18px 20px;
+  border-top:1px solid #f1f5f9;
+  display:flex;
+  flex-direction:column;
+  gap:10px
+}
+
+.sheet-nav-actions{
+  margin-top:10px
+}
+
+.btn-nav-radar{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px;
+  font-size:15px;
+  font-weight:900;
+  color:#fff;
+  background:linear-gradient(135deg,#0284c7,#0369a1);
+  cursor:pointer
+}
+
+.btn-nav-stop{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:12px;
+  font-size:13px;
+  font-weight:900;
+  color:#fff;
+  background:#dc2626;
+  cursor:pointer
+}
+
+.sheet-external-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px
+}
+
+.sheet-external-grid button{
+  border:0;
+  border-radius:14px;
+  padding:13px 8px;
+  font-size:12px;
+  font-weight:900;
+  color:#fff;
+  cursor:pointer
+}
+
+.btn-waze{
+  background:#06b6d4
+}
+
+.btn-maps{
+  background:#2563eb
+}
+
+
+/* =========================================================
+   MARCADOR USUÁRIO
+========================================================= */
+
+.user-marker-waze{
+  width:52px;
+  height:52px;
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="%230284c7" opacity=".20"/><circle cx="26" cy="26" r="17" fill="%230284c7" opacity=".35"/><path d="M26 4 L42 42 L26 33 L10 42 Z" fill="%2300f2fe" stroke="%23ffffff" stroke-width="3.5" stroke-linejoin="round"/><circle cx="26" cy="26" r="4.5" fill="%23ffffff"/></svg>') no-repeat center/contain;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))
+}
+
+.finish-flag-marker{
+  font-size:38px;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,.7))
+}
+
+
+/* =========================================================
+   POSTOS
+========================================================= */
+
+.fuel-marker{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  border:2px solid #fff;
+  box-shadow:0 3px 10px rgba(0,0,0,.8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:15px;
+  font-weight:900;
+  color:#fff;
+  cursor:pointer;
+  background:#0ea5e9
+}
+
+.fuel-marker.gnv{
+  background:#16a34a
+}
+
+.fuel-marker.official-current{
+  background:#dc2626;
+  border-color:#fee2e2
+}
+
+.fuel-marker.official-pending{
+  background:#f59e0b;
+  border-color:#fef3c7
+}
+
+.fuel-marker.official-history{
+  background:#2563eb;
+  border-color:#dbeafe
+}
+
+
+/* =========================================================
+   HAZARDS
+========================================================= */
+
+.hazard-marker{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,.8))
+}
+
+.hazard-marker svg{
+  width:34px;
+  height:34px
+}
+
+
+/* =========================================================
+   OUTDOOR COMUNIDADE
+========================================================= */
+
+.community-billboard{
+  min-width:115px;
+  max-width:165px;
+  padding:6px 9px 7px;
+  border-radius:5px;
+  background:linear-gradient(180deg,#102a43,#071827);
+  border:2px solid #fbbf24;
+  color:#fff;
+  box-shadow:
+    0 7px 14px rgba(0,0,0,.65),
+    inset 0 0 0 1px rgba(255,255,255,.08);
+  text-align:center;
+  font-size:10px;
+  line-height:1.15;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.25px;
+  transform:perspective(130px) rotateX(4deg)
+}
+
+.community-billboard:after{
+  content:"";
+  display:block;
+  width:3px;
+  height:18px;
+  background:#64748b;
+  margin:6px auto -24px;
+  border-radius:2px
+}
+
+.community-billboard small{
+  display:block;
+  margin-bottom:2px;
+  color:#fde68a;
+  font-size:8px;
+  letter-spacing:.5px
+}
+
+.community-billboard-hud{
+  position:fixed;
+  top:165px;
+  left:12px;
+  z-index:55;
+  display:none;
+  width:155px;
+  pointer-events:none
+}
+
+.community-billboard-hud.show{
+  display:block;
+  animation:billboardIn .28s ease-out
+}
+
+.community-billboard-hud .community-billboard{
+  width:100%;
+  max-width:none;
+  font-size:11px
+}
+
+.community-direction{
+  display:block;
+  margin-top:4px;
+  color:#fbbf24;
+  font-size:17px;
+  line-height:1
+}
+
+@keyframes billboardIn{
+  from{opacity:0;transform:translateX(-18px)}
+  to{opacity:1;transform:translateX(0)}
+}
+
+
+/* =========================================================
+   BOTÕES INFERIORES
+========================================================= */
+
+.bottom-actions{
+  position:fixed;
+  left:10px;
+  right:10px;
+  bottom:12px;
+  z-index:20;
+  display:flex;
+  gap:8px;
+  transition:.3s
+}
+
+.bottom-actions.hide-nav{
+  transform:translateY(150%);
+  pointer-events:none
+}
+
+.action{
+  flex:1;
+  border:0;
+  border-radius:15px;
+  padding:13px 7px;
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+  box-shadow:0 8px 22px rgba(0,0,0,.6);
+  cursor:pointer
+}
+
+.action.danger{
+  background:#991b1b
+}
+
+.action.chat{
+  background:#7c3aed
+}
+
+
+/* =========================================================
+   ALERTAS
+========================================================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:150px;
+  transform:translate(-50%,20px);
+  z-index:110;
+  opacity:0;
+  pointer-events:none;
+  background:#111827;
+  border:1px solid #38bdf8;
+  color:#fff;
+  padding:11px 15px;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:700;
+  max-width:90vw;
+  text-align:center;
+  transition:.25s
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0)
+}
+
+.community-sign{
+  position:fixed;
+  top:180px;
+  left:50%;
+  transform:translate(-50%,-8px);
+  z-index:32;
+  background:#7f1d1d;
+  color:#fff;
+  padding:7px 12px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:900;
+  box-shadow:0 8px 20px rgba(0,0,0,.6);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  white-space:nowrap;
+  max-width:82vw;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  border:1px solid #f87171
+}
+
+.community-sign.show{
+  opacity:1;
+  transform:translate(-50%,0)
+}
+
+body.nav-mode .community-sign{
+  top:152px
+}
+
+.source-note{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  background:#0b1b2a;
+  border:1px solid #334155;
+  color:#cbd5e1;
+  font-size:11px;
+  line-height:1.45
+}
+
+.source-link{
+  display:block;
+  width:100%;
+  margin-top:8px;
+  padding:11px 12px;
+  border-radius:12px;
+  border:1px solid #38bdf8;
+  background:#082f49;
+  color:#fff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:900
+}
+
+.danger-banner{
+  position:fixed;
+  top:14px;
+  left:10px;
+  right:10px;
+  z-index:80;
+  background:#b91c1c;
+  color:#fff;
+  border-radius:16px;
+  padding:14px 16px;
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.75);
+  border:2px solid #fecaca
+}
+
+.danger-banner.show{
+  display:flex
+}
+
+.danger-banner b{
+  font-size:12px;
+  line-height:1.35
+}
+
+.danger-banner button{
+  flex-shrink:0;
+  border:0;
+  background:rgba(255,255,255,.2);
+  color:#fff;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  font-weight:900
+}
+
+
+/* =========================================================
+   MODAIS
+========================================================= */
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(0,0,0,.62);
+  align-items:center;
+  justify-content:center
+}
+
+.modal-overlay.show{
+  display:flex
+}
+
+.modal-card{
+  background:#07131f;
+  border-radius:20px;
+  padding:22px;
+  max-width:440px;
+  width:90%;
+  border:1px solid #334155;
+  max-height:90vh;
+  overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.7)
+}
+
+.modal-card h2{
+  font-size:18px;
+  margin-bottom:10px;
+  color:#38bdf8
+}
+
+.modal-card p{
+  font-size:12px;
+  color:#94a3b8;
+  margin-bottom:14px;
+  line-height:1.4
+}
+
+.modal-options{
+  display:flex;
+  flex-direction:column;
+  gap:9px
+}
+
+.modal-options button{
+  background:#0b1b2a;
+  border:1px solid #334155;
+  border-radius:14px;
+  padding:13px;
+  color:#fff;
+  font-weight:800;
+  font-size:13px;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer
+}
+
+.modal-options button.active-mode{
+  border-color:#38bdf8;
+  background:#0e2338
+}
+
+.modal-options .icon{
+  font-size:22px;
+  width:32px;
+  text-align:center
+}
+
+.modal-close{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:12px;
+  background:#1e293b;
+  color:#fff;
+  font-weight:900;
+  margin-top:13px;
+  cursor:pointer
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+.chat-status{
+  font-size:11px;
+  color:#64748b;
+  margin-bottom:8px
+}
+
+.chat-messages{
+  max-height:300px;
+  overflow-y:auto;
+  background:#040c14;
+  border-radius:12px;
+  padding:10px;
+  margin-bottom:12px;
+  font-size:13px
+}
+
+.chat-msg{
+  margin-bottom:8px;
+  padding:8px 12px;
+  background:#0b1b2a;
+  border-radius:8px;
+  border-left:3px solid #38bdf8
+}
+
+.chat-msg .user{
+  font-weight:900;
+  color:#38bdf8
+}
+
+.chat-msg .time{
+  font-size:10px;
+  color:#64748b;
+  margin-left:8px
+}
+
+.chat-input-row{
+  display:flex;
+  gap:8px
+}
+
+.chat-input-row input{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #334155;
+  background:#040c14;
+  color:#fff
+}
+
+.chat-input-row button{
+  padding:10px 15px;
+  border-radius:10px;
+  border:0;
+  background:#0284c7;
+  color:#fff;
+  font-weight:900
+}
+
+
+@media(min-width:700px){
+  .topbar{
+    left:20px;
+    right:auto;
+    width:460px
+  }
+
+  .waze-bottom-sheet{
+    left:20px;
+    right:auto;
+    width:430px;
+    border-radius:20px 20px 0 0
+  }
+
+  .bottom-actions{
+    left:auto;
+    right:20px;
+    width:430px
+  }
+
+  .danger-banner{
+    left:20px;
+    right:auto;
+    width:430px
+  }
+}
