@@ -1,10 +1,11 @@
-const CACHE_NAME = 'radar-seguro-rj-v78';
+const CACHE_NAME = 'radar-seguro-rj-v79';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const APP_SHELL = [
   './manifest.json',
   './icon-192-1.png',
   './icon-512-1.png',
+  './tomtom-proxy-client.js',
   './route-traffic-v74.js',
   './traffic-clean-v75.js',
   './community-data-loader.js',
@@ -22,7 +23,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'78'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'79'}));
   })());
 });
 
@@ -73,43 +74,52 @@ async function cacheFirstStatic(request){
   return response;
 }
 
-async function cleanOpenFreeMapStyle(request){
-  try{
-    const response=await fetch(request,{cache:'no-store'});
-    if(!response.ok)return response;
-    const style=await response.json();
-    if(Array.isArray(style.layers)){
-      for(const layer of style.layers){
-        if(layer?.type!=='line')continue;
-        const id=String(layer.id||'').toLowerCase();
-        const sourceLayer=String(layer['source-layer']||'').toLowerCase();
-        const roadLayer=sourceLayer.includes('transportation') || /road|street|highway|motorway|trunk|primary|secondary|tertiary/.test(id);
-        if(!roadLayer)continue;
-        layer.paint=layer.paint||{};
-        const isCasing=/case|casing|outline/.test(id);
-        layer.paint['line-color']=isCasing?'#cbd5e1':'#94a3b8';
-        layer.paint['line-opacity']=0.56;
-      }
+async function buildCleanOpenFreeMapStyle(request){
+  const response=await fetch(request,{cache:'no-store'});
+  if(!response.ok)return response;
+  const style=await response.json();
+  if(Array.isArray(style.layers)){
+    for(const layer of style.layers){
+      if(layer?.type!=='line')continue;
+      const id=String(layer.id||'').toLowerCase();
+      const sourceLayer=String(layer['source-layer']||'').toLowerCase();
+      const roadLayer=sourceLayer.includes('transportation') || /road|street|highway|motorway|trunk|primary|secondary|tertiary/.test(id);
+      if(!roadLayer)continue;
+      layer.paint=layer.paint||{};
+      const isCasing=/case|casing|outline/.test(id);
+      layer.paint['line-color']=isCasing?'#cbd5e1':'#94a3b8';
+      layer.paint['line-opacity']=0.56;
     }
-    return new Response(JSON.stringify(style),{
-      status:200,
-      headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}
-    });
+  }
+  return new Response(JSON.stringify(style),{
+    status:200,
+    headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=86400'}
+  });
+}
+
+async function cleanOpenFreeMapStyle(request){
+  const cache=await caches.open(CACHE_NAME);
+  const cached=await cache.match(request);
+  if(cached) return cached;
+  try{
+    const cleaned=await buildCleanOpenFreeMapStyle(request);
+    if(cleaned.ok) await cache.put(request,cleaned.clone());
+    return cleaned;
   }catch(_){
     return fetch(request,{cache:'no-store'});
   }
 }
 
-async function navigationWithV78(request){
+async function navigationWithV79(request){
   try{
     const response=await fetch(request,{cache:'no-store'});
     if(!response.ok)return response;
     const type=response.headers.get('content-type')||'';
     if(!type.includes('text/html'))return response;
     let html=await response.text();
-    const routeTag='<script src="./route-traffic-v74.js?v=78"></script>';
-    const cleanTag='<script src="./traffic-clean-v75.js?v=78"></script>';
-    const communityTag='<script src="./community-data-loader.js?v=78"></script>';
+    const routeTag='<script src="./route-traffic-v74.js?v=79"></script>';
+    const cleanTag='<script src="./traffic-clean-v75.js?v=79"></script>';
+    const communityTag='<script src="./community-data-loader.js?v=79"></script>';
     if(!html.includes('route-traffic-v74.js')) html=html.includes('</body>')?html.replace('</body>',routeTag+'\n</body>'):html+routeTag;
     if(!html.includes('traffic-clean-v75.js')) html=html.includes('</body>')?html.replace('</body>',cleanTag+'\n</body>'):html+cleanTag;
     if(!html.includes('community-data-loader.js')) html=html.includes('</body>')?html.replace('</body>',communityTag+'\n</body>'):html+communityTag;
@@ -142,7 +152,6 @@ self.addEventListener('fetch',event=>{
   if(url.origin!==self.location.origin)return;
 
   // Dados geográficos estáticos: download somente quando requisitados e depois cache local.
-  // Não pré-carrega os GeoJSON pesados na instalação do app.
   if(event.request.method==='GET' && isStaticCommunityData(url)){
     event.respondWith(cacheFirstStatic(event.request));
     return;
@@ -151,7 +160,7 @@ self.addEventListener('fetch',event=>{
   const isNav=event.request.mode==='navigate'||url.pathname.endsWith('/')||url.pathname.endsWith('/index.html');
   const liveFile=/\.(?:js|json|html)$/.test(url.pathname)||url.pathname.includes('/data/');
   if(isNav){
-    event.respondWith(navigationWithV78(event.request));
+    event.respondWith(navigationWithV79(event.request));
     return;
   }
   if(liveFile){
