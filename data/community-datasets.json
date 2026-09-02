@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "description": "Catálogo de conjuntos geográficos de comunidades. Arquivos pesados ficam fora do index.html e podem ser carregados sob demanda.",
+  "datasets": [
+    {
+      "id": "sabren-terreirao-taboinha",
+      "path": "./data/sabren-terreirao-taboinha.geojson",
+      "format": "geojson",
+      "static": true
+    },
+    {
+      "id": "sabren-mare-rocinha-vidigal",
+      "path": "./data/sabren-mare-rocinha-vidigal.geojson",
+      "format": "geojson",
+      "static": true
+    },
+    {
+      "id": "sabren-barra-tres",
+      "path": "./data/sabren-barra-tres.geojson",
+      "format": "geojson",
+      "static": true
+    },
+    {
+      "id": "ibge-zona-sul-tres",
+      "path": "./data/ibge-zona-sul-tres.geojson",
+      "format": "geojson",
+      "static": true
+    },
+    {
+      "id": "ibge-zona-sul-mais-tres",
+      "path": "./data/ibge-zona-sul-mais-tres.geojson",
+      "format": "geojson",
+      "static": true
+    }
+  ]
+}
