@@ -1,0 +1,74 @@
+name: v97 externalize app shell css
+
+on:
+  push:
+    paths:
+      - '.github/workflows/externalize-shell-css-v97.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Externalize main CSS and refresh service worker
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          index = Path('index.html')
+          html = index.read_text(encoding='utf-8')
+
+          # Extrai somente o bloco CSS principal. Nenhuma lógica JS é movida nesta etapa.
+          m = re.search(r'<style>(.*?)</style>', html, flags=re.S|re.I)
+          if not m:
+              raise SystemExit('Bloco <style> principal não encontrado')
+
+          css = m.group(1).strip() + '\n'
+          Path('app-shell-v97.css').write_text(css, encoding='utf-8')
+
+          link = '<link rel="stylesheet" href="./app-shell-v97.css?v=97">'
+          html = html[:m.start()] + link + html[m.end():]
+          html = re.sub(
+              r'<meta name="radar-build" content="[^"]*">',
+              '<meta name="radar-build" content="97-external-shell-css">',
+              html,
+              count=1,
+              flags=re.I
+          )
+          index.write_text(html, encoding='utf-8')
+
+          swp = Path('service-worker.js')
+          sw = swp.read_text(encoding='utf-8')
+          sw = sw.replace("const CACHE_NAME = 'radar-seguro-rj-v96';", "const CACHE_NAME = 'radar-seguro-rj-v97';")
+          sw = sw.replace("clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'96'}));", "clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'97'}));")
+
+          shell_marker = "  './icon-512-1.png',\n"
+          css_entry = "  './app-shell-v97.css?v=97',\n"
+          if css_entry not in sw:
+              if shell_marker not in sw:
+                  raise SystemExit('Ponto de inserção do CSS no APP_SHELL não encontrado')
+              sw = sw.replace(shell_marker, shell_marker + css_entry, 1)
+
+          sw = sw.replace(
+              "const liveFile=/\\.(?:js|json|html)$/.test(url.pathname)||url.pathname.includes('/data/');",
+              "const liveFile=/\\.(?:js|json|html|css)$/.test(url.pathname)||url.pathname.includes('/data/');"
+          )
+          swp.write_text(sw, encoding='utf-8')
+
+          print('v97 preparada: CSS principal externalizado; JS intocado; SW atualizado.')
+          PY
+
+      - name: Commit v97
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html app-shell-v97.css service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v97: externalizar CSS principal do index"
+          git push
