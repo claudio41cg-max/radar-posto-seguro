@@ -1,0 +1,58 @@
+name: Radar v90 - painel de comunidades e Fogo Cruzado
+
+on:
+  push:
+    paths:
+      - '.github/workflows/community-panel-v90.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Expor App e carregar painel externo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+
+          s=re.sub(
+            r'<meta name="radar-build" content="[^"]+">',
+            '<meta name="radar-build" content="90-community-history-panel">',
+            s,
+            count=1
+          )
+
+          if 'window.RadarApp=App;' not in s and 'window.RadarApp = App;' not in s:
+              patterns=['App.init();','App.init();\n','App.init()']
+              replaced=False
+              for marker in patterns:
+                  if marker in s:
+                      s=s.replace(marker,'window.RadarApp=App;\n'+marker,1)
+                      replaced=True
+                      break
+              if not replaced:
+                  raise SystemExit('App.init() nao encontrado para expor RadarApp com seguranca')
+
+          tag='<script src="./community-panel-v90.js?v=90"></script>'
+          if tag not in s:
+              if '</body>' not in s:
+                  raise SystemExit('</body> nao encontrado')
+              s=s.replace('</body>',tag+'\n</body>',1)
+
+          p.write_text(s,encoding='utf-8')
+          print('v90 integrada')
+          PY
+      - name: Commit v90
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "v90: painel de comunidade com histórico Fogo Cruzado"
+          git push
