@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T17:54:49.474Z",
+  "generatedAt": "2026-09-02T16:19:15.925Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,99 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 54,
-  "lastUpdate": "2026-09-01T12:04:07-03:00",
+  "count": 56,
+  "lastUpdate": "2026-09-02T11:14:13-03:00",
   "occurrences": [
+    {
+      "id": "b2aa4730-42ee-42c7-9500-6464ba44f8be",
+      "documentNumber": 78879,
+      "date": "2026-09-02T07:00:00.000Z",
+      "address": "Av. Renascer - Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8035032,
+      "longitude": -43.3160903,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "739b3c1b-f627-4048-b17a-a29aae8225f9",
+      "documentNumber": 78876,
+      "date": "2026-09-02T06:25:00.000Z",
+      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.9352778,
+      "longitude": -43.2563889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "0ebb6ab5-0e96-44bb-b6e4-eef464297837",
+      "documentNumber": 78880,
+      "date": "2026-09-02T05:00:00.000Z",
+      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.9352778,
+      "longitude": -43.2563889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "1465db77-21f5-4a4e-a47b-466f06346d6b",
+      "documentNumber": 78872,
+      "date": "2026-09-01T20:00:00.000Z",
+      "address": "Comunidade do Lixão - Centro, Duque de Caxias - RJ, 25011-000, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO LIXAO",
+      "latitude": -22.797893,
+      "longitude": -43.308876,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "52abc355-875f-46af-a578-47f58b9cb769",
+      "documentNumber": 78869,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
+      "neighborhood": "PIAM",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CASTELAR",
+      "latitude": -22.75173021,
+      "longitude": -43.40115974,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
+      "documentNumber": 78868,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "7e2c4169-5e96-4939-b002-365ab95b08fd",
       "documentNumber": 78865,
@@ -77,6 +167,30 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "1ed6e145-ffc6-450c-bb9c-ef4cf66cdcda",
+      "documentNumber": 78870,
+      "date": "2026-08-31T15:00:00.000Z",
+      "address": "Rua das Margaridas - Vila Valqueire, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VILA VALQUEIRE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8819209,
+      "longitude": -43.3630089,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "c3c94dbc-1d83-434f-9dca-71e602519cee",
@@ -229,6 +343,26 @@
       ]
     },
     {
+      "id": "c93c29fa-4385-41be-935f-1ea22270f162",
+      "documentNumber": 78836,
+      "date": "2026-08-29T23:30:00.000Z",
+      "address": "Estrada do Guerenguê - Taquara, Rio de Janeiro - RJ, 22713-001, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.940077751307967,
+      "longitude": -43.38434160213013,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "7df91566-4e81-4292-b22c-553f13abd3dc",
       "documentNumber": 78835,
       "date": "2026-08-29T23:00:00.000Z",
@@ -250,26 +384,6 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c93c29fa-4385-41be-935f-1ea22270f162",
-      "documentNumber": 78836,
-      "date": "2026-08-29T22:00:00.000Z",
-      "address": "Estrada do Guerenguê - Taquara, Rio de Janeiro - RJ, 22713-001, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.940077751307967,
-      "longitude": -43.38434160213013,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -523,11 +637,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -601,7 +715,7 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -617,12 +731,8 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -740,11 +850,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -897,91 +1007,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "6a9391b7-64ee-411f-863b-22fb26862489",
-      "documentNumber": 78759,
-      "date": "2026-08-25T21:20:00.000Z",
-      "address": "Av. Brasil - Cordovil, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8158921,
-      "longitude": -43.2895198,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8ebd83ba-67e5-4519-be52-2f00e3a1da0e",
-      "documentNumber": 78758,
-      "date": "2026-08-25T15:00:00.000Z",
-      "address": "R. Sessenta e Dois - Boa Esperança, Seropédica - RJ, 23894-634, Brasil",
-      "neighborhood": "BOA ESPERANCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.732498425221028,
-      "longitude": -43.690338820222706,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "cff14b59-1797-419d-96e2-1c3d9d7c11ea",
-      "documentNumber": 78750,
-      "date": "2026-08-25T15:00:00.000Z",
-      "address": "Largo da Segunda-Feira - Rua São Francisco Xavier - Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9218834,
-      "longitude": -43.2215127,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "71f19c9e-10ce-4945-8ec1-3bc931876e74",
-      "documentNumber": 78740,
-      "date": "2026-08-25T07:00:00.000Z",
-      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
-      "neighborhood": "PARQUE FLORA",
-      "subNeighborhood": "",
-      "locality": "BURACO DO BOI",
-      "latitude": -22.707769,
-      "longitude": -43.451663,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "7e895ace-8083-46c8-b381-0c4b98ab0712",
-      "documentNumber": 78739,
-      "date": "2026-08-25T00:00:00.000Z",
-      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
-      "latitude": -22.892324971301786,
-      "longitude": -43.33377861518315,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
