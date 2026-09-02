@@ -1,0 +1,56 @@
+name: Radar v92 - toque robusto e contorno natural
+
+on:
+  push:
+    paths:
+      - '.github/workflows/community-panel-v92.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Criar painel v92 e ativar
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          js=Path('community-panel-v90.js').read_text(encoding='utf-8')
+          js=js.replace("if (window.__radarCommunityPanelV90) return;\n  window.__radarCommunityPanelV90 = true;", "if (window.__radarCommunityPanelV92) return;\n  window.__radarCommunityPanelV92 = true;")
+          js=js.replace("const PANEL_ID = 'radar-community-panel-v90';", "const PANEL_ID = 'radar-community-panel-v92';")
+          js=js.replace("map.__radarCommunityPanelV90", "map.__radarCommunityPanelV92")
+          js=js.replace("radar-community-close-v90", "radar-community-close-v92")
+          js=js.replace("community-inner-shade-v90", "community-inner-shade-v92")
+          js=js.replace("community-soft-shadow-v90", "community-soft-shadow-v92")
+          js=js.replace("window.RadarCommunityPanelV90", "window.RadarCommunityPanelV92")
+          js=js.replace("90-community-history-panel", "92-natural-boundary-panel")
+
+          # Visual: interior transparente e borda mais leve. Evita engrossar o contorno.
+          js=js.replace("map.setPaintProperty('community-fill','fill-opacity',0.28)", "map.setPaintProperty('community-fill','fill-opacity',0.12)")
+          js=js.replace("'fill-opacity':0.075", "'fill-opacity':0.14")
+          js=js.replace("'line-width':6,'line-opacity':0.18,'line-blur':4", "'line-width':3,'line-opacity':0.11,'line-blur':3")
+
+          # Remove o listener por camada e usa clique global + queryRenderedFeatures.
+          old="""map.on('click','community-fill',e=>{\n      const feature=e?.features?.[0];\n      const name=feature?.properties?.name;\n      if(!name) return;\n      setTimeout(closeOldPopup,0);\n      openPanel(name);\n    });"""
+          new="""map.on('click',e=>{\n      let features=[];\n      try {\n        const candidates=['community-fill','community-inner-shade-v92','community-outline','community-dot','community-label'].filter(id=>map.getLayer(id));\n        if(candidates.length) features=map.queryRenderedFeatures(e.point,{layers:candidates})||[];\n      } catch(err) {}\n      let feature=features.find(f=>f?.properties?.name);\n      let name=feature?.properties?.name;\n      if(!name){\n        try {\n          const ll=e.lngLat;\n          let best=null;\n          for(const a of (typeof rawAreas!=='undefined'?rawAreas:[])){\n            const geom=window.RADAR_COMMUNITY_GEOMETRIES?.[a.name];\n            if(geom && pointInGeometry([ll.lng,ll.lat],geom)){ best=a; break; }\n            if(!geom && a?.c && distanceKm(a.c,[ll.lng,ll.lat])<=Number(a.r||0)){ best=a; break; }\n          }\n          name=best?.name;\n        } catch(err) {}\n      }\n      if(!name) return;\n      setTimeout(closeOldPopup,0);\n      openPanel(name);\n    });"""
+          if old not in js:
+              raise SystemExit('listener antigo nao encontrado')
+          js=js.replace(old,new,1)
+          Path('community-panel-v92.js').write_text(js,encoding='utf-8')
+
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="92-natural-boundary-panel">',s,count=1)
+          s=re.sub(r'<script src="\./community-panel-v90\.js\?v=\d+"></script>', '<script src="./community-panel-v92.js?v=92"></script>', s, count=1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit v92
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html community-panel-v92.js
+          git diff --cached --quiet || git commit -m "v92: toque robusto e visual natural das comunidades"
+          git push
