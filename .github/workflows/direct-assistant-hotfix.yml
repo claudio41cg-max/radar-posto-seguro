@@ -10,12 +10,22 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply canonical GPS diagnostics v59
-        run: python scripts/patch_canonical_gps_diagnostics_v59.py
-      - name: Commit canonical GPS diagnostics v59
+      - name: Apply root fix v60
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html'); s=p.read_text()
+          s=s.replace('59-canonical-gps-diagnostics','60-root-fix',1)
+          s=s.replace("if(typeof App.calculateRoute==='function')await App.calculateRoute();\n   else if(typeof App.recalculateRoute==='function')await App.recalculateRoute();","if(typeof App.recalculateRoute==='function')await App.recalculateRoute();\n   else if(typeof App.calculateRoute==='function')await App.calculateRoute();",1)
+          p.write_text(s)
+          p=Path('tomtom-proxy-client.js'); s=p.read_text()
+          s=s.replace("return address\n      ? `${address}. Coordenadas aproximadas: ${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)}.`\n      : `Coordenadas aproximadas: ${gps.lat.toFixed(5)}, ${gps.lon.toFixed(5)}.`;","return address ? `${address}.` : '';",1)
+          p.write_text(s)
+          PY
+      - name: Commit v60
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Unifica fonte de GPS e adiciona diagnóstico de camadas v59" || exit 0
+          git add index.html tomtom-proxy-client.js
+          git commit -m "Corrige destino confirmado e remove coordenadas faladas v60" || exit 0
           git push
