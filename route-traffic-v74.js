@@ -1,13 +1,16 @@
-/* Radar Seguro RJ PRO v78 — trânsito somente na rota ativa, com menos processamento */
+/* Radar Seguro RJ PRO v80 — trânsito somente na rota ativa, com cache de baixo consumo */
 (() => {
   'use strict';
-  if (window.__radarRouteTrafficV78) return;
-  window.__radarRouteTrafficV78 = true;
+  if (window.__radarRouteTrafficV80) return;
+  window.__radarRouteTrafficV80 = true;
 
   const WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
   const SOURCE_ID = 'route-traffic-v74';
   const LAYER_ID = 'route-traffic-v74-line';
   const MAX_SAMPLES = 12;
+  const FLOW_CACHE_MS = 45000;
+  const MAX_FLOW_CACHE_ITEMS = 96;
+  const flowCache = new Map();
   const COLORS = {
     free: '#2563eb',
     moderate: '#f59e0b',
@@ -41,16 +44,49 @@
     return 'free';
   }
 
+  function cacheKey(lat, lon){
+    // ~11 m de precisão: suficiente para reutilizar amostras na mesma via.
+    return `${lat.toFixed(4)},${lon.toFixed(4)}`;
+  }
+
+  function getCachedFlow(key){
+    const entry = flowCache.get(key);
+    if (!entry) return '';
+    if (Date.now() - entry.at > FLOW_CACHE_MS) {
+      flowCache.delete(key);
+      return '';
+    }
+    // LRU: item usado volta para o fim do Map.
+    flowCache.delete(key);
+    flowCache.set(key, entry);
+    return entry.status;
+  }
+
+  function setCachedFlow(key, status){
+    if (flowCache.has(key)) flowCache.delete(key);
+    flowCache.set(key, { status, at: Date.now() });
+    while (flowCache.size > MAX_FLOW_CACHE_ITEMS) {
+      flowCache.delete(flowCache.keys().next().value);
+    }
+  }
+
   async function flowAt(coord){
     const lon = Number(coord?.[0]);
     const lat = Number(coord?.[1]);
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) return 'free';
+
+    const key = cacheKey(lat, lon);
+    const cached = getCachedFlow(key);
+    if (cached) return cached;
+
     const path = `/traffic/services/4/flowSegmentData/absolute/10/json?point=${encodeURIComponent(lat + ',' + lon)}&unit=KMPH&openLr=false`;
     const url = `${WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`;
     try {
       const r = await fetch(url, { cache: 'no-store' });
       if (!r.ok) return 'free';
-      return trafficStatus(await r.json());
+      const status = trafficStatus(await r.json());
+      setCachedFlow(key, status);
+      return status;
     } catch (_) {
       return 'free';
     }
@@ -103,7 +139,7 @@
         }
       });
     } catch (e) {
-      console.warn('Radar v78: erro ao desenhar trânsito da rota', e);
+      console.warn('Radar v80: erro ao desenhar trânsito da rota', e);
     }
   }
 
@@ -137,8 +173,8 @@
 
   function install(){
     const app = getApp();
-    if (!app || app.__routeTrafficV78Installed) return false;
-    app.__routeTrafficV78Installed = true;
+    if (!app || app.__routeTrafficV80Installed) return false;
+    app.__routeTrafficV80Installed = true;
 
     const originalDrawRoute = typeof app.drawRoute === 'function' ? app.drawRoute.bind(app) : null;
     if (originalDrawRoute) {
@@ -160,9 +196,12 @@
     if (install() || tries > 60) clearInterval(timer);
   }, 250);
 
+  window.addEventListener('pagehide', () => flowCache.clear());
+
   window.RadarRouteTrafficV74 = {
-    version: '78-low-power',
+    version: '80-low-power-flow-cache',
     refresh: () => refreshRouteTraffic(getApp()?.route, true),
-    hideGlobalTraffic
+    hideGlobalTraffic,
+    clearCache: () => flowCache.clear()
   };
 })();
