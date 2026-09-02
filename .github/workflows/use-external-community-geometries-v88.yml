@@ -1,0 +1,70 @@
+name: Radar v88 - usar geometrias externas com fallback
+
+on:
+  push:
+    paths:
+      - '.github/workflows/use-external-community-geometries-v88.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gerar preload de geometrias e ativar no HTML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          data = json.loads(Path('data/community-geometries.json').read_text(encoding='utf-8'))
+          geoms = data.get('geometries') or {}
+          if not geoms:
+              raise SystemExit('community-geometries.json sem geometrias')
+
+          preload = (
+              '/* Radar Seguro RJ PRO v88 — geometrias externas preload */\n'
+              '(function(){\n'
+              '  window.RADAR_COMMUNITY_GEOMETRIES = ' +
+              json.dumps(geoms, ensure_ascii=False, separators=(',', ':')) + ';\n'
+              '  window.RADAR_COMMUNITY_GEOMETRIES_VERSION = 88;\n'
+              '})();\n'
+          )
+          Path('community-geometries-preload.js').write_text(preload, encoding='utf-8')
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = re.sub(
+              r'<meta name="radar-build" content="[^"]+">',
+              '<meta name="radar-build" content="88-community-external-geometries">',
+              s,
+              count=1
+          )
+
+          marker = '<script src="./community-index-preload.js?v=86"></script>'
+          inject = marker + '\n<script src="./community-geometries-preload.js?v=88"></script>'
+          if 'community-geometries-preload.js' not in s:
+              if marker not in s:
+                  raise SystemExit('community-index-preload marker nao encontrado')
+              s = s.replace(marker, inject, 1)
+
+          old = 'const officialCommunityGeometries='
+          new = 'const officialCommunityGeometries=window.RADAR_COMMUNITY_GEOMETRIES||'
+          if new not in s:
+              if old not in s:
+                  raise SystemExit('officialCommunityGeometries nao encontrado')
+              s = s.replace(old, new, 1)
+
+          p.write_text(s, encoding='utf-8')
+          print('geometrias externas ativadas:', len(geoms))
+          PY
+      - name: Commit v88
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add community-geometries-preload.js index.html
+          git diff --cached --quiet || git commit -m "v88: usar geometrias externas com fallback interno"
+          git push
