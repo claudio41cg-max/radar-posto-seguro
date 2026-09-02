@@ -1,0 +1,62 @@
+name: Radar v86 - catalogo externo antes do mapa
+
+on:
+  push:
+    paths:
+      - '.github/workflows/migrate-community-preload-v86.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Retirar rawAreas do HTML e carregar arquivo externo antes do mapa
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = re.sub(
+              r'<meta name="radar-build" content="[^"]+">',
+              '<meta name="radar-build" content="86-community-external-preload">',
+              s,
+              count=1,
+          )
+
+          preload = '<script src="./community-index-preload.js?v=86"></script>'
+          if preload not in s:
+              marker = '<script src="./tomtom-proxy-client.js?v=69"></script>'
+              if marker not in s:
+                  raise SystemExit('Marcador do tomtom-proxy-client não encontrado')
+              s = s.replace(marker, preload + '\n' + marker, 1)
+
+          start = s.find('const rawAreas = [')
+          if start < 0:
+              raise SystemExit('rawAreas preenchido não encontrado')
+
+          official_marker = '/*\n  LIMITES OFICIAIS (IPP/SMH, Prefeitura do Rio).'
+          end = s.find(official_marker, start)
+          if end < 0:
+              raise SystemExit('Marcador LIMITES OFICIAIS não encontrado')
+
+          replacement = '/* Catálogo rawAreas carregado de community-index-preload.js antes do mapa. */\n\n'
+          s = s[:start] + replacement + s[end:]
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit da migracao v86
+        run: |
+          git config user.name "claudio41cg-max"
+          git config user.email "claudio41cg@gmail.com"
+          git add index.html
+          git commit -m "v86: carregar comunidades fora do HTML antes do mapa" || exit 0
+          git push
