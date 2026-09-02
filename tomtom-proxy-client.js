@@ -176,56 +176,21 @@
   async function getNeighborhoodContext() {
     const gps = currentGps();
     if (!gps) return '';
+    if (neighborhoodCache.text && Date.now()-neighborhoodCache.at<=LOCATION_CACHE_MS && Math.abs(gps.lat-neighborhoodCache.lat)<0.001 && Math.abs(gps.lon-neighborhoodCache.lon)<0.001) return neighborhoodCache.text;
 
-    if (
-      neighborhoodCache.text &&
-      Date.now() - neighborhoodCache.at <= LOCATION_CACHE_MS &&
-      Math.abs(gps.lat - neighborhoodCache.lat) < 0.001 &&
-      Math.abs(gps.lon - neighborhoodCache.lon) < 0.001
-    ) return neighborhoodCache.text;
-
-    let address = null;
+    // v69: bairro vem de uma API de geocodificacao reversa dedicada (Geoapify),
+    // usando exatamente o GPS atual. A chave fica somente no Worker.
+    let neighborhood = '';
     try {
-      const u = `https://api.tomtom.com/search/2/reverseGeocode/${gps.lat},${gps.lon}.json?language=pt-BR&radius=80`;
-      const response = await nativeFetch(buildProxyUrl(u), {
-        method: 'GET',
-        headers: { Accept: 'application/json' },
-        cache: 'no-store'
-      });
-      if (response.ok) address = (await response.json())?.addresses?.[0]?.address || null;
+      const u = `${WORKER_BASE}/v1/geo/reverse?lat=${encodeURIComponent(gps.lat)}&lon=${encodeURIComponent(gps.lon)}`;
+      const response = await nativeFetch(u, { method:'GET', headers:{Accept:'application/json'}, cache:'no-store' });
+      if (response.ok) {
+        const data = await response.json();
+        neighborhood = String(data?.neighborhood || '').trim();
+      }
     } catch (_) {}
 
-    // Para bairro no Brasil, o CEP costuma ser uma referência mais estável que o campo
-    // municipalitySubdivision da TomTom. O ViaCEP devolve o bairro oficial daquele CEP.
-    let postal = String(address?.postalCode || '').replace(/\D/g, '');
-    if (postal.length !== 8) {
-      const freeform = String(address?.freeformAddress || '');
-      const m = freeform.match(/\b(\d{5})-?(\d{3})\b/);
-      if (m) postal = `${m[1]}${m[2]}`;
-    }
-
-    let neighborhood = '';
-    if (postal.length === 8) {
-      try {
-        const via = await nativeFetch(`https://viacep.com.br/ws/${postal}/json/`, {
-          method: 'GET',
-          headers: { Accept: 'application/json' },
-          cache: 'no-store'
-        });
-        if (via.ok) {
-          const data = await via.json();
-          if (!data?.erro) neighborhood = String(data?.bairro || '').trim();
-        }
-      } catch (_) {}
-    }
-
-    if (!neighborhood) {
-      neighborhood = String(address?.municipalitySubdivision || address?.localName || '').trim();
-    }
-
-    if (neighborhood) {
-      neighborhoodCache = { at: Date.now(), lat: gps.lat, lon: gps.lon, text: neighborhood };
-    }
+    if (neighborhood) neighborhoodCache = { at:Date.now(), lat:gps.lat, lon:gps.lon, text:neighborhood };
     return neighborhood;
   }
 
