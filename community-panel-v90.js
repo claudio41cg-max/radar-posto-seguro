@@ -1,14 +1,16 @@
-/* Radar Seguro RJ PRO v90 — painel de comunidades + histórico Fogo Cruzado */
+/* Radar Seguro RJ PRO v91 — painel de comunidades + histórico Fogo Cruzado */
 (() => {
   'use strict';
-  if (window.__radarCommunityPanelV90) return;
-  window.__radarCommunityPanelV90 = true;
+  if (window.__radarCommunityPanelV91) return;
+  window.__radarCommunityPanelV91 = true;
 
   const HISTORY_URL = './data/fogo-cruzado-history.json';
   const LIVE_URL = './data/fogo-cruzado.json';
-  const PANEL_ID = 'radar-community-panel-v90';
+  const PANEL_ID = 'radar-community-panel-v91';
+  const SELECTED_LAYER = 'community-selected-v91';
   let cache = null;
   let cacheAt = 0;
+  let selectedName = '';
   const CACHE_MS = 60000;
 
   const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
@@ -93,14 +95,36 @@
 
   function regionFromName(name){
     const m=String(name||'').match(/\(([^)]+)\)/);
-    return m?.[1]?.trim()||'';
+    return m?.[1]?.trim()||'Rio de Janeiro';
+  }
+
+  function ensureStyle(){
+    if(document.getElementById('radar-community-panel-style-v91')) return;
+    const style=document.createElement('style');
+    style.id='radar-community-panel-style-v91';
+    style.textContent=`
+      #${PANEL_ID}{position:fixed;z-index:70;background:rgba(7,19,31,.97);color:#fff;border:1px solid rgba(255,255,255,.16);box-shadow:0 18px 48px rgba(0,0,0,.52);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;backdrop-filter:blur(12px);display:none;overflow:auto}
+      #${PANEL_ID} .rc-title{font-size:21px;font-weight:900;line-height:1.1;padding-right:48px}
+      #${PANEL_ID} .rc-sub{font-size:12px;opacity:.65;margin-top:5px}
+      #${PANEL_ID} .rc-desc{font-size:13px;line-height:1.48;opacity:.83;margin-top:12px}
+      #${PANEL_ID} .rc-section{font-size:12px;font-weight:900;letter-spacing:.06em;margin:17px 0 9px;opacity:.85}
+      #${PANEL_ID} .rc-cards{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+      #${PANEL_ID} .rc-card{border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:11px;text-align:center;background:rgba(255,255,255,.035)}
+      #${PANEL_ID} .rc-card b{display:block;font-size:22px;margin:3px 0}
+      #${PANEL_ID} .rc-card small{font-size:10px;opacity:.7;text-transform:uppercase}
+      #${PANEL_ID} .rc-recent{padding:10px 0;border-top:1px solid rgba(255,255,255,.09)}
+      #${PANEL_ID} .rc-close{position:absolute;right:12px;top:12px;border:0;background:rgba(255,255,255,.08);color:#fff;width:34px;height:34px;border-radius:50%;font-size:22px}
+      @media (min-width:800px){#${PANEL_ID}{right:12px;top:72px;bottom:12px;width:min(400px,34vw);border-radius:16px;padding:18px}}
+      @media (max-width:799px){#${PANEL_ID}{left:8px;right:8px;bottom:10px;max-height:62vh;border-radius:18px;padding:16px}}
+    `;
+    document.head.appendChild(style);
   }
 
   function ensurePanel(){
+    ensureStyle();
     let panel=document.getElementById(PANEL_ID);
     if(panel) return panel;
     panel=document.createElement('section'); panel.id=PANEL_ID;
-    panel.style.cssText='position:fixed;left:10px;right:10px;bottom:12px;z-index:60;max-height:58vh;overflow:auto;background:rgba(7,19,31,.96);color:#fff;border:1px solid rgba(255,255,255,.16);border-radius:18px;box-shadow:0 12px 36px rgba(0,0,0,.45);padding:16px;display:none;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;backdrop-filter:blur(10px)';
     document.body.appendChild(panel);
     return panel;
   }
@@ -109,70 +133,131 @@
     document.querySelectorAll('.maplibregl-popup-close-button').forEach(btn=>{ try{btn.click();}catch(e){} });
   }
 
+  function selectOnMap(name){
+    selectedName=name||'';
+    const map=window.RadarApp?.map;
+    if(!map) return;
+    try{
+      if(map.getLayer(SELECTED_LAYER)) map.setFilter(SELECTED_LAYER,['==',['get','name'],selectedName]);
+    }catch(e){}
+  }
+
   async function openPanel(name){
+    if(!name) return;
+    selectOnMap(name);
     const panel=ensurePanel(); panel.style.display='block';
-    panel.innerHTML='<div style="font-weight:800;font-size:17px">'+esc(name)+'</div><div style="opacity:.72;margin-top:7px">Carregando histórico de ocorrências...</div>';
+    panel.innerHTML='<button class="rc-close" aria-label="Fechar">×</button><div class="rc-title">'+esc(name)+'</div><div class="rc-sub">Carregando dados da comunidade...</div>';
+    panel.querySelector('.rc-close')?.addEventListener('click',()=>{panel.style.display='none';selectOnMap('');},{once:true});
+
     let data; try{data=await loadOccurrences();}catch(e){data={occurrences:[]};}
     const matched=(data.occurrences||[]).filter(o=>occurrenceMatches(name,o)).sort((a,b)=>new Date(b.date)-new Date(a.date));
-    const s=statsFor(matched), region=regionFromName(name);
-    const recent=matched.slice(0,5);
-    const description=region
-      ? 'Comunidade cadastrada no Radar Seguro RJ na região de '+esc(region)+'. O limite do mapa é usado para relacionar ocorrências próximas registradas pelo Instituto Fogo Cruzado.'
-      : 'Comunidade cadastrada no Radar Seguro RJ. O limite do mapa é usado para relacionar ocorrências próximas registradas pelo Instituto Fogo Cruzado.';
-    const cards=[['Hoje',s.today],['30 dias',s.month],[String(s.yearLabel),s.year],['Histórico',s.total]].map(([label,value])=>'<div style="flex:1;min-width:70px;background:rgba(255,255,255,.07);border-radius:12px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:800">'+value+'</div><div style="font-size:11px;opacity:.72">'+label+'</div></div>').join('');
+    const s=statsFor(matched), region=regionFromName(name), recent=matched.slice(0,6);
+    const description='Área de comunidade cadastrada no Radar Seguro RJ, na região de '+esc(region)+'. O Radar cruza o limite geográfico da comunidade com registros disponíveis do Instituto Fogo Cruzado para formar um histórico local de ocorrências.';
+    const cards=[['Hoje',s.today],['Últimos 30 dias',s.month],['Ano de '+s.yearLabel,s.year],['Total armazenado',s.total]].map(([label,value],i)=>{
+      const border=['rgba(239,68,68,.65)','rgba(245,158,11,.65)','rgba(34,197,94,.55)','rgba(59,130,246,.6)'][i];
+      return '<div class="rc-card" style="border-color:'+border+'"><small>'+label+'</small><b>'+value+'</b><span style="font-size:11px;opacity:.65">ocorrências</span></div>';
+    }).join('');
     const list=recent.length?recent.map(o=>{
       const d=new Date(o.date); const when=Number.isFinite(d.getTime())?d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'Data não informada';
       const reason=esc(o.reason||'Ocorrência registrada');
       const place=esc(o.locality||o.neighborhood||o.address||'');
-      return '<div style="padding:10px 0;border-top:1px solid rgba(255,255,255,.09)"><div style="font-weight:700">'+reason+'</div><div style="font-size:12px;opacity:.76;margin-top:3px">'+when+(place?' • '+place:'')+'</div></div>';
-    }).join(''):'<div style="padding:10px 0;opacity:.72">Nenhuma ocorrência associada a esta comunidade no histórico atualmente armazenado pelo Radar.</div>';
-    panel.innerHTML='<button id="radar-community-close-v90" aria-label="Fechar" style="float:right;border:0;background:rgba(255,255,255,.1);color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px">×</button>'+
-      '<div style="font-weight:900;font-size:19px;padding-right:42px">'+esc(name)+'</div>'+
-      '<div style="font-size:13px;line-height:1.45;opacity:.82;margin-top:8px">'+description+'</div>'+
-      '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:13px">'+cards+'</div>'+
-      '<div style="margin-top:14px;font-size:12px;font-weight:800;letter-spacing:.04em;opacity:.8">FOGO CRUZADO — REGISTROS ASSOCIADOS</div>'+list+
-      '<div style="font-size:10px;opacity:.55;margin-top:8px">Fonte: Instituto Fogo Cruzado. As contagens refletem o histórico disponível no Radar e podem não representar toda a série histórica da comunidade.</div>';
-    document.getElementById('radar-community-close-v90')?.addEventListener('click',()=>panel.style.display='none',{once:true});
+      return '<div class="rc-recent"><div style="font-weight:750">'+reason+'</div><div style="font-size:11px;opacity:.68;margin-top:3px">'+when+(place?' • '+place:'')+'</div></div>';
+    }).join(''):'<div style="padding:11px 0;opacity:.68">Nenhuma ocorrência associada a esta comunidade no histórico atualmente armazenado pelo Radar.</div>';
+
+    panel.innerHTML='<button class="rc-close" aria-label="Fechar">×</button>'+
+      '<div class="rc-title">'+esc(name)+'</div><div class="rc-sub">'+esc(region)+' • RJ</div>'+
+      '<div class="rc-desc">'+description+'</div>'+
+      '<div class="rc-section">FOGO CRUZADO</div><div class="rc-cards">'+cards+'</div>'+
+      '<div class="rc-section">OCORRÊNCIAS MAIS RECENTES</div>'+list+
+      '<div style="font-size:10px;opacity:.5;margin-top:9px">Fonte: Instituto Fogo Cruzado. As contagens refletem o histórico disponível no Radar e podem não representar toda a série histórica da comunidade.</div>';
+    panel.querySelector('.rc-close')?.addEventListener('click',()=>{panel.style.display='none';selectOnMap('');},{once:true});
   }
 
   function applyCommunityVisual(map){
     if(!map) return false;
     try{
-      if(map.getLayer('community-fill')) map.setPaintProperty('community-fill','fill-opacity',0.28);
-      if(map.getSource('communities') && !map.getLayer('community-inner-shade-v90')){
-        const before=map.getLayer('community-outline')?'community-outline':undefined;
-        map.addLayer({id:'community-inner-shade-v90',type:'fill',source:'communities',paint:{'fill-color':'#000000','fill-opacity':0.075}},before);
+      /* Contorno mais claro; preenchimento base leve. */
+      if(map.getLayer('community-fill')) map.setPaintProperty('community-fill','fill-opacity',0.13);
+      if(map.getLayer('community-outline')){
+        map.setPaintProperty('community-outline','line-opacity',0.78);
+        map.setPaintProperty('community-outline','line-width',1.7);
       }
-      if(map.getSource('communities') && !map.getLayer('community-soft-shadow-v90')){
+
+      /* Sombra transparente DENTRO do polígono. */
+      if(map.getSource('communities') && !map.getLayer('community-inner-shade-v91')){
         const before=map.getLayer('community-outline')?'community-outline':undefined;
-        map.addLayer({id:'community-soft-shadow-v90',type:'line',source:'communities',paint:{'line-color':'#000000','line-width':6,'line-opacity':0.18,'line-blur':4}},before);
+        map.addLayer({
+          id:'community-inner-shade-v91',type:'fill',source:'communities',
+          paint:{'fill-color':'#07131f','fill-opacity':0.16}
+        },before);
+      }
+
+      /* Halo discreto junto à borda, sem escurecer o mapa inteiro. */
+      if(map.getSource('communities') && !map.getLayer('community-edge-shadow-v91')){
+        const before=map.getLayer('community-outline')?'community-outline':undefined;
+        map.addLayer({
+          id:'community-edge-shadow-v91',type:'line',source:'communities',
+          paint:{'line-color':'#02070c','line-width':4,'line-opacity':0.16,'line-blur':3}
+        },before);
+      }
+
+      /* Destaque apenas da comunidade tocada. */
+      if(map.getSource('communities') && !map.getLayer(SELECTED_LAYER)){
+        const before=map.getLayer('community-outline')?'community-outline':undefined;
+        map.addLayer({
+          id:SELECTED_LAYER,type:'fill',source:'communities',
+          filter:['==',['get','name'],'__nenhuma__'],
+          paint:{'fill-color':'#ffffff','fill-opacity':0.09}
+        },before);
       }
       return !!map.getLayer('community-fill');
-    }catch(e){ return false; }
+    }catch(e){ console.warn('Radar v91 visual comunidades:',e); return false; }
+  }
+
+  function featureName(feature){
+    return String(feature?.properties?.name || feature?.properties?.nome || feature?.properties?.community || '').trim();
+  }
+
+  function findCommunityAt(map, point){
+    const candidates=['community-fill','community-label','community-dot','community-pointer'].filter(id=>map.getLayer(id));
+    try{
+      const features=candidates.length?map.queryRenderedFeatures(point,{layers:candidates}):[];
+      for(const feature of features){ const name=featureName(feature); if(name) return name; }
+    }catch(e){}
+    return '';
   }
 
   function install(){
     const app=window.RadarApp;
     const map=app?.map;
     if(!map || typeof map.on!=='function') return false;
-    if(map.__radarCommunityPanelV90) return true;
-    map.__radarCommunityPanelV90=true;
+    if(map.__radarCommunityPanelV91) return true;
+    map.__radarCommunityPanelV91=true;
+
     const visual=()=>applyCommunityVisual(map);
     if(map.loaded?.()) visual();
-    map.on('style.load',visual);
-    map.on('click','community-fill',e=>{
-      const feature=e?.features?.[0];
-      const name=feature?.properties?.name;
+    map.on('style.load',()=>setTimeout(visual,0));
+
+    /* Clique genérico é mais robusto do que depender só de community-fill. */
+    map.on('click',e=>{
+      const name=findCommunityAt(map,e.point);
       if(!name) return;
       setTimeout(closeOldPopup,0);
       openPanel(name);
     });
-    try{ map.on('mouseenter','community-fill',()=>{map.getCanvas().style.cursor='pointer';}); map.on('mouseleave','community-fill',()=>{map.getCanvas().style.cursor='';}); }catch(e){}
+
+    try{
+      map.on('mousemove',e=>{
+        const name=findCommunityAt(map,e.point);
+        map.getCanvas().style.cursor=name?'pointer':'';
+      });
+    }catch(e){}
+
     return true;
   }
 
   let tries=0;
-  const timer=setInterval(()=>{ if(install() || ++tries>100) clearInterval(timer); },150);
+  const timer=setInterval(()=>{ if(install() || ++tries>140) clearInterval(timer); },150);
   window.addEventListener('load',install,{once:true});
-  window.RadarCommunityPanelV90={version:'90-community-history-panel',open:openPanel,refresh:()=>{cache=null;cacheAt=0;}};
+  window.RadarCommunityPanelV91={version:'91-community-panel-fixed-click',open:openPanel,refresh:()=>{cache=null;cacheAt=0;},install};
 })();
