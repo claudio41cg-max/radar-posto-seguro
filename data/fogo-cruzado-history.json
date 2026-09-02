@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T23:41:07.066Z",
+  "generatedAt": "2026-09-02T23:54:35.448Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 97,
+  "count": 98,
   "occurrences": [
+    {
+      "id": "b72896c8-80d3-48d7-9558-8a20dd037178",
+      "documentNumber": 78886,
+      "date": "2026-09-02T19:30:00.000Z",
+      "address": "Vila Rosário, Duque de Caxias - RJ, 25041-030, Brasil",
+      "neighborhood": "PARQUE FLUMINENSE",
+      "subNeighborhood": "VILA ROSARIO",
+      "locality": "",
+      "latitude": -22.73711379,
+      "longitude": -43.31454076,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "b2aa4730-42ee-42c7-9500-6464ba44f8be",
       "documentNumber": 78879,
@@ -636,15 +651,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -715,7 +730,7 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Wounded",
@@ -731,7 +746,7 @@
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
