@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v79';
+const CACHE_NAME = 'radar-seguro-rj-v80';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const APP_SHELL = [
@@ -23,7 +23,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'79'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'80'}));
   })());
 });
 
@@ -110,16 +110,16 @@ async function cleanOpenFreeMapStyle(request){
   }
 }
 
-async function navigationWithV79(request){
+async function navigationWithV80(request){
   try{
     const response=await fetch(request,{cache:'no-store'});
     if(!response.ok)return response;
     const type=response.headers.get('content-type')||'';
     if(!type.includes('text/html'))return response;
     let html=await response.text();
-    const routeTag='<script src="./route-traffic-v74.js?v=79"></script>';
-    const cleanTag='<script src="./traffic-clean-v75.js?v=79"></script>';
-    const communityTag='<script src="./community-data-loader.js?v=79"></script>';
+    const routeTag='<script src="./route-traffic-v74.js?v=80"></script>';
+    const cleanTag='<script src="./traffic-clean-v75.js?v=80"></script>';
+    const communityTag='<script src="./community-data-loader.js?v=80"></script>';
     if(!html.includes('route-traffic-v74.js')) html=html.includes('</body>')?html.replace('</body>',routeTag+'\n</body>'):html+routeTag;
     if(!html.includes('traffic-clean-v75.js')) html=html.includes('</body>')?html.replace('</body>',cleanTag+'\n</body>'):html+cleanTag;
     if(!html.includes('community-data-loader.js')) html=html.includes('</body>')?html.replace('</body>',communityTag+'\n</body>'):html+communityTag;
@@ -160,7 +160,7 @@ self.addEventListener('fetch',event=>{
   const isNav=event.request.mode==='navigate'||url.pathname.endsWith('/')||url.pathname.endsWith('/index.html');
   const liveFile=/\.(?:js|json|html)$/.test(url.pathname)||url.pathname.includes('/data/');
   if(isNav){
-    event.respondWith(navigationWithV79(event.request));
+    event.respondWith(navigationWithV80(event.request));
     return;
   }
   if(liveFile){
