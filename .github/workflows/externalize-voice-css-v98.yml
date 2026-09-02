@@ -1,0 +1,56 @@
+name: v98 externalize voice css
+
+on:
+  push:
+    paths:
+      - '.github/workflows/externalize-voice-css-v98.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Externalizar estilos de voz sem alterar comportamento
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          blocks=[]
+          pattern=re.compile(r'<style id="radar-voice-v(35|36|37)-style">(.*?)</style>\s*', re.S)
+          def take(m):
+              blocks.append('/* radar-voice-v%s */\n%s' % (m.group(1), m.group(2).strip()))
+              return ''
+          s2=pattern.sub(take,s)
+          if len(blocks)!=3:
+              raise SystemExit(f'Esperava 3 blocos de voz, encontrei {len(blocks)}')
+          Path('voice-ui-v98.css').write_text('\n\n'.join(blocks)+'\n',encoding='utf-8')
+          marker='<link rel="stylesheet" href="./app-shell-v97.css?v=97">'
+          link=marker+'\n<link rel="stylesheet" href="./voice-ui-v98.css?v=98">'
+          if 'voice-ui-v98.css' not in s2:
+              s2=s2.replace(marker,link,1)
+          s2=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="98-external-voice-css">',s2,1)
+          p.write_text(s2,encoding='utf-8')
+
+          sw=Path('service-worker.js')
+          w=sw.read_text(encoding='utf-8')
+          w=w.replace("const CACHE_NAME = 'radar-seguro-rj-v96';","const CACHE_NAME = 'radar-seguro-rj-v98';")
+          if "'./app-shell-v97.css'," not in w:
+              w=w.replace("'./manifest.json',","'./manifest.json',\n  './app-shell-v97.css',\n  './voice-ui-v98.css',",1)
+          elif "'./voice-ui-v98.css'," not in w:
+              w=w.replace("'./app-shell-v97.css',","'./app-shell-v97.css',\n  './voice-ui-v98.css',",1)
+          w=w.replace("build:'96'","build:'98'")
+          sw.write_text(w,encoding='utf-8')
+          PY
+      - name: Commit v98
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html voice-ui-v98.css service-worker.js
+          git commit -m "v98: externalizar CSS da interface de voz" || exit 0
+          git push
