@@ -1,0 +1,57 @@
+name: Radar v87 - extrair geometrias de comunidades
+
+on:
+  push:
+    paths:
+      - '.github/workflows/extract-community-geometries-v87.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extrair geometrias sem remover fallback do HTML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, json
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          m = re.search(r'const officialCommunityGeometries\s*=\s*(\{.*?\});\s*\n', s, re.S)
+          if not m:
+              raise SystemExit('officialCommunityGeometries nao encontrado')
+
+          try:
+              base = json.loads(m.group(1))
+          except Exception as e:
+              raise SystemExit(f'objeto base nao e JSON valido: {e}')
+
+          # Captura Object.assign(officialCommunityGeometries,{...}); adicionais.
+          assigns = re.findall(r'Object\.assign\(officialCommunityGeometries\s*,\s*(\{.*?\})\s*\);', s, re.S)
+          for text in assigns:
+              try:
+                  extra = json.loads(text)
+              except Exception as e:
+                  raise SystemExit(f'Object.assign de geometria nao e JSON valido: {e}')
+              base.update(extra)
+
+          out = Path('data/community-geometries.json')
+          out.write_text(json.dumps({
+              'version': 87,
+              'description': 'Geometrias de comunidades extraidas do index.html. v87 mantem o HTML como fallback ate validacao.',
+              'geometries': base
+          }, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
+          print('geometrias extraidas:', len(base))
+          PY
+      - name: Commit arquivo externo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/community-geometries.json
+          git diff --cached --quiet || git commit -m "v87: externalizar copia das geometrias de comunidades"
+          git push
