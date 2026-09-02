@@ -12,6 +12,7 @@
   const MAX_MEMORY_ITEMS = 12;
   const LOCATION_CACHE_MS = 30000;
   let locationCache = { at: 0, lat: null, lon: null, text: '' };
+  let neighborhoodCache = { at: 0, lat: null, lon: null, text: '' };
 
   const norm = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
 
@@ -172,6 +173,62 @@
     return text;
   }
 
+  async function getNeighborhoodContext() {
+    const gps = currentGps();
+    if (!gps) return '';
+
+    if (
+      neighborhoodCache.text &&
+      Date.now() - neighborhoodCache.at <= LOCATION_CACHE_MS &&
+      Math.abs(gps.lat - neighborhoodCache.lat) < 0.001 &&
+      Math.abs(gps.lon - neighborhoodCache.lon) < 0.001
+    ) return neighborhoodCache.text;
+
+    let address = null;
+    try {
+      const u = `https://api.tomtom.com/search/2/reverseGeocode/${gps.lat},${gps.lon}.json?language=pt-BR&radius=80`;
+      const response = await nativeFetch(buildProxyUrl(u), {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        cache: 'no-store'
+      });
+      if (response.ok) address = (await response.json())?.addresses?.[0]?.address || null;
+    } catch (_) {}
+
+    // Para bairro no Brasil, o CEP costuma ser uma referência mais estável que o campo
+    // municipalitySubdivision da TomTom. O ViaCEP devolve o bairro oficial daquele CEP.
+    let postal = String(address?.postalCode || '').replace(/\D/g, '');
+    if (postal.length !== 8) {
+      const freeform = String(address?.freeformAddress || '');
+      const m = freeform.match(/\b(\d{5})-?(\d{3})\b/);
+      if (m) postal = `${m[1]}${m[2]}`;
+    }
+
+    let neighborhood = '';
+    if (postal.length === 8) {
+      try {
+        const via = await nativeFetch(`https://viacep.com.br/ws/${postal}/json/`, {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+          cache: 'no-store'
+        });
+        if (via.ok) {
+          const data = await via.json();
+          if (!data?.erro) neighborhood = String(data?.bairro || '').trim();
+        }
+      } catch (_) {}
+    }
+
+    if (!neighborhood) {
+      neighborhood = String(address?.municipalitySubdivision || address?.localName || '').trim();
+    }
+
+    if (neighborhood) {
+      neighborhoodCache = { at: Date.now(), lat: gps.lat, lon: gps.lon, text: neighborhood };
+    }
+    return neighborhood;
+  }
+
   function firstFinite(...values) {
     for (const value of values) {
       const n = Number(value);
@@ -241,6 +298,14 @@
     return /^(onde|aonde) (eu )?(estou|to)$/.test(n) || n.includes('minha localizacao atual') || n.includes('qual e minha localizacao');
   }
 
+  function isNeighborhoodQuestion(question) {
+    const n = norm(question).replace(/^radar[, ]*/, '');
+    return /^(qual|qual e|qual eh|que) (e |eh )?(o )?meu bairro\??$/.test(n) ||
+      /^(em )?(qual|que) bairro (eu )?(estou|to)\??$/.test(n) ||
+      /^(onde|aonde) fica (o )?meu bairro\??$/.test(n) ||
+      n.includes('nome do meu bairro');
+  }
+
   function isEtaQuestion(question) {
     const n = norm(question).replace(/^radar[, ]*/, '');
     return n.includes('quanto tempo falta') || n.includes('falta quanto tempo') || n.includes('quanto falta para chegar') || n.includes('quanto falta pra chegar') || n.includes('hora de chegada') || n.includes('chegar no destino');
@@ -286,6 +351,12 @@
   async function localAnswer(question) {
     const device = localDeviceCommand(question);
     if (device) return device;
+
+    if (isNeighborhoodQuestion(question)) {
+      const neighborhood = await getNeighborhoodContext();
+      if (neighborhood) return `Seu bairro é ${neighborhood}.`;
+      return 'Ainda não consegui confirmar o seu bairro pelo GPS. Aguarde alguns segundos e tente novamente.';
+    }
 
     if (isWhereAmI(question)) {
       const loc = await getLocationContext();
