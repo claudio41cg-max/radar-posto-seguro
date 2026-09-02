@@ -1,0 +1,61 @@
+name: Radar v85 - restaurar catalogo de comunidades
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/restore-community-index-v85.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Restaurar rawAreas a partir do arquivo externo
+        run: |
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+
+          index_path = Path('index.html')
+          data_path = Path('data/community-index.json')
+          html = index_path.read_text(encoding='utf-8')
+          data = json.loads(data_path.read_text(encoding='utf-8'))
+          areas = data.get('areas') or []
+          if not areas:
+              raise SystemExit('community-index.json sem areas')
+
+          lines = ['const rawAreas = [']
+          for a in areas:
+              name = json.dumps(str(a['name']), ensure_ascii=False)
+              c0, c1 = a['c']
+              r = a['r']
+              lines.append(f'  {{name:{name},c:[{c0},{c1}],r:{r}}},')
+          lines.append('];')
+          replacement = '\n'.join(lines)
+
+          html2, n = re.subn(r'const rawAreas = \[\];', replacement, html, count=1)
+          if n != 1:
+              raise SystemExit('const rawAreas = []; não encontrado exatamente uma vez')
+
+          html2 = re.sub(
+              r'<meta name="radar-build" content="[^"]+">',
+              '<meta name="radar-build" content="85-community-recovery">',
+              html2,
+              count=1,
+          )
+          index_path.write_text(html2, encoding='utf-8')
+          print(f'Restauradas {len(areas)} comunidades no rawAreas.')
+          PY
+      - name: Commit da recuperacao
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'v85: restaurar comunidades enquanto a migracao externa e corrigida'
+          git push
