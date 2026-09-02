@@ -1,52 +1,101 @@
-/* Radar Seguro RJ PRO v83 — índice externo de comunidades como fonte principal */
+/* Radar Seguro RJ PRO v84 — comunidades externas com inicialização resiliente */
 (() => {
   'use strict';
-  if (window.__radarCommunityRuntimeV83) return;
-  window.__radarCommunityRuntimeV83 = true;
+  if (window.__radarCommunityRuntimeV84) return;
+  window.__radarCommunityRuntimeV84 = true;
 
-  const VERSION = '83-external-index-only';
+  const VERSION = '84-external-index-resilient';
+  let adopted = false;
+  let refreshTimer = null;
+  let refreshTries = 0;
 
   function getApp(){
     try { if (typeof App !== 'undefined' && App) return App; } catch (_) {}
     return window.App || null;
   }
 
+  function occurrenceStatusMap(app){
+    const result = {};
+    for (const [name, info] of Object.entries(app?.communityOccurrenceInfo || {})) {
+      result[name] = info?.status || 'normal';
+    }
+    return result;
+  }
+
   function refreshMapSources(){
     const app = getApp();
     const map = app?.map;
-    if (!map) return;
+    if (!map) return false;
+
+    let refreshed = false;
 
     try {
-      if (typeof communitiesPolygonGeoJSON === 'function') {
-        const source = map.getSource?.('communities');
-        if (source?.setData) {
-          const status = app.communityOccurrenceInfo || {};
-          const occurrenceStatusByName = {};
-          for (const [name, info] of Object.entries(status)) {
-            occurrenceStatusByName[name] = info?.status || 'normal';
-          }
-          source.setData(communitiesPolygonGeoJSON(occurrenceStatusByName));
-        }
+      const source = map.getSource?.('communities');
+      if (source?.setData && typeof communitiesPolygonGeoJSON === 'function') {
+        source.setData(communitiesPolygonGeoJSON(occurrenceStatusMap(app)));
+        refreshed = true;
       }
     } catch (e) {
-      console.warn('Radar v83: não foi possível atualizar polígonos das comunidades.', e);
+      console.warn('Radar v84: falha ao atualizar polígonos.', e);
     }
 
     try {
-      if (typeof communitiesPointGeoJSON === 'function') {
-        const source = map.getSource?.('community-points');
-        if (source?.setData) source.setData(communitiesPointGeoJSON());
+      const source = map.getSource?.('community-points');
+      if (source?.setData && typeof communitiesPointGeoJSON === 'function') {
+        source.setData(communitiesPointGeoJSON());
+        refreshed = true;
       }
     } catch (e) {
-      console.warn('Radar v83: não foi possível atualizar pontos das comunidades.', e);
+      console.warn('Radar v84: falha ao atualizar pontos.', e);
     }
 
     try {
-      if (typeof communityBridgesGeoJSON === 'function') {
-        const source = map.getSource?.('community-bridges');
-        if (source?.setData) source.setData(communityBridgesGeoJSON());
+      const source = map.getSource?.('community-bridges');
+      if (source?.setData && typeof communityBridgesGeoJSON === 'function') {
+        source.setData(communityBridgesGeoJSON());
       }
     } catch (_) {}
+
+    // Se o mapa foi criado antes de o catálogo externo chegar e ainda não possui
+    // as fontes de comunidades, pede ao próprio App para criá-las agora.
+    if (!refreshed && typeof app?.addCommunityLayers === 'function') {
+      try {
+        app.addCommunityLayers();
+        refreshed = Boolean(
+          map.getSource?.('communities') || map.getSource?.('community-points')
+        );
+      } catch (e) {
+        console.warn('Radar v84: falha ao recriar camadas de comunidades.', e);
+      }
+    }
+
+    return refreshed;
+  }
+
+  function scheduleRefresh(){
+    if (refreshTimer) clearInterval(refreshTimer);
+    refreshTries = 0;
+
+    const attempt = () => {
+      refreshTries += 1;
+      const ok = refreshMapSources();
+      if (ok || refreshTries >= 80) {
+        clearInterval(refreshTimer);
+        refreshTimer = null;
+        if (ok) {
+          window.dispatchEvent(new CustomEvent('radar:communities-map-ready', {
+            detail: { version: VERSION, count: safeCount() }
+          }));
+        }
+      }
+    };
+
+    attempt();
+    if (!refreshMapSources()) refreshTimer = setInterval(attempt, 250);
+  }
+
+  function safeCount(){
+    try { return Array.isArray(rawAreas) ? rawAreas.length : 0; } catch (_) { return 0; }
   }
 
   async function adoptExternalIndex(){
@@ -57,51 +106,72 @@
     try {
       areas = await api.index();
     } catch (e) {
-      console.warn('Radar v83: índice externo de comunidades indisponível.', e);
+      console.warn('Radar v84: índice externo indisponível.', e);
       return false;
     }
 
-    if (!Array.isArray(areas) || !areas.length) return false;
+    const normalized = (Array.isArray(areas) ? areas : [])
+      .map(a => ({
+        name: String(a?.name || '').trim(),
+        c: [Number(a?.c?.[0]), Number(a?.c?.[1])],
+        r: Number(a?.r)
+      }))
+      .filter(a => a.name && Number.isFinite(a.c[0]) && Number.isFinite(a.c[1]) && Number.isFinite(a.r));
+
+    if (!normalized.length) return false;
 
     try {
       if (typeof rawAreas === 'undefined' || !Array.isArray(rawAreas)) return false;
-
-      const normalized = areas
-        .map(a => ({
-          name: String(a?.name || '').trim(),
-          c: [Number(a?.c?.[0]), Number(a?.c?.[1])],
-          r: Number(a?.r)
-        }))
-        .filter(a => a.name && Number.isFinite(a.c[0]) && Number.isFinite(a.c[1]) && Number.isFinite(a.r));
-
-      if (!normalized.length) return false;
-
       rawAreas.splice(0, rawAreas.length, ...normalized);
-      refreshMapSources();
-
-      window.dispatchEvent(new CustomEvent('radar:communities-index-ready', {
-        detail: { version: VERSION, count: rawAreas.length }
-      }));
-      return true;
+      adopted = true;
     } catch (e) {
-      console.warn('Radar v83: falha ao adotar índice externo.', e);
+      console.warn('Radar v84: não foi possível preencher rawAreas.', e);
       return false;
     }
+
+    scheduleRefresh();
+
+    // Atualiza os dados de ocorrências após o catálogo existir, sem bloquear o mapa.
+    try {
+      const app = getApp();
+      if (typeof window.RadarApp?.refreshFogoCruzado === 'function') {
+        Promise.resolve(window.RadarApp.refreshFogoCruzado()).catch(() => {});
+      } else if (typeof app?.refreshCommunityOccurrenceLayer === 'function') {
+        Promise.resolve(app.refreshCommunityOccurrenceLayer()).catch(() => {});
+      }
+    } catch (_) {}
+
+    window.dispatchEvent(new CustomEvent('radar:communities-index-ready', {
+      detail: { version: VERSION, count: normalized.length }
+    }));
+    return true;
   }
 
-  let tries = 0;
-  const timer = setInterval(async () => {
-    tries += 1;
-    if (window.RadarCommunityData?.index) {
-      clearInterval(timer);
-      const ok = await adoptExternalIndex();
-      window.RadarCommunityRuntimeV83 = {
-        version: VERSION,
-        externalIndexActive: ok,
-        reload: adoptExternalIndex
-      };
-    } else if (tries >= 60) {
-      clearInterval(timer);
+  async function boot(){
+    let tries = 0;
+    while (tries < 80) {
+      tries += 1;
+      if (window.RadarCommunityData?.index) break;
+      await new Promise(resolve => setTimeout(resolve, 100));
     }
-  }, 150);
+
+    const ok = await adoptExternalIndex();
+    window.RadarCommunityRuntimeV83 = {
+      version: VERSION,
+      externalIndexActive: ok,
+      get count(){ return safeCount(); },
+      reload: adoptExternalIndex,
+      refresh: refreshMapSources
+    };
+  }
+
+  window.addEventListener('load', () => {
+    if (adopted) scheduleRefresh();
+  }, { once: true });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && adopted) scheduleRefresh();
+  });
+
+  boot();
 })();
