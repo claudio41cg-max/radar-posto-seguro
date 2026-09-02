@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="63-proximity-bypass">
+<meta name="radar-build" content="64-proximity-alias">
 
 <script src="./tomtom-proxy-client.js?v=26"></script>
 
@@ -16224,15 +16224,22 @@ document.addEventListener(
       if(/^(nao|não|cancela|cancelar|deixa|deixa pra la|deixa pra lá)$/.test(n)){pendingPlace=null;this.reply('Tudo bem. Não vou mudar sua rota.');return;}
     }
     if(isLocationQuestion(command)){const p=await this.getCurrentAddress(true);this.reply(formatCurrentPlace(p,command));return;}
+    let normalizedCommand=norm(command);
+    // O usuário confirmou em teste real que "mais próximo da minha casa" funciona.
+    // Portanto, quando a frase termina apenas em "mais próximo/mais perto", tratamos
+    // isso como o mesmo pedido relativo à posição atual/casa, sem deixar outro fluxo decidir.
+    if(/\b(mais proximo|mais proxima|mais perto)\s*$/.test(normalizedCommand)){
+      normalizedCommand=normalizedCommand.replace(/\b(mais proximo|mais proxima|mais perto)\s*$/,'mais proximo da minha casa');
+      command=normalizedCommand;
+    }
     const pq=nearestPlaceQuery(command);
     if(pq){
       let cleaned=norm(command)
         .replace(/^radar[, ]*/,'')
+        .replace(/\b(mais perto da minha casa|mais proximo da minha casa|mais proxima da minha casa|perto da minha casa|perto de casa|perto de mim|perto daqui|proximo de mim|proxima de mim|da minha casa)\b/g,' ')
         .replace(/\b(o|a)\s+(mais proximo|mais proxima|mais perto)\b/g,' ')
-        .replace(/\b(mais proximo|mais proxima|mais perto|mais perto da minha casa|mais proximo da minha casa|mais proxima da minha casa|perto da minha casa|perto de casa|da minha casa|perto de mim|perto daqui|proximo de mim|proxima de mim)\b/g,' ')
+        .replace(/\b(mais proximo|mais proxima|mais perto)\b/g,' ')
         .replace(/\s+/g,' ').trim();
-      // Usa o mesmo fluxo que ja funciona quando o motorista fala apenas o destino.
-      // Assim a expressao de proximidade nao aciona uma segunda busca geografica concorrente.
       if(!/^(me leve|me leva|leve me|leva me|quero ir|ir|va|vá)\b/.test(cleaned)) cleaned='me leva para '+pq;
       return originalHandle(cleaned,...rest);
     }
