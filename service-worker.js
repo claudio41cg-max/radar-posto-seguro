@@ -1,8 +1,8 @@
-const CACHE_NAME = 'radar-seguro-rj-v74';
+const CACHE_NAME = 'radar-seguro-rj-v75';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const APP_SHELL = [
-  './manifest.json','./icon-192-1.png','./icon-512-1.png','./route-traffic-v74.js'
+  './manifest.json','./icon-192-1.png','./icon-512-1.png','./route-traffic-v74.js','./traffic-clean-v75.js'
 ];
 
 self.addEventListener('install',event=>{
@@ -16,7 +16,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'74'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'75'}));
   })());
 });
 
@@ -79,17 +79,17 @@ async function cleanOpenFreeMapStyle(request){
   }
 }
 
-async function navigationWithV74(request){
+async function navigationWithV75(request){
   try{
     const response=await fetch(request,{cache:'no-store'});
     if(!response.ok)return response;
     const type=response.headers.get('content-type')||'';
     if(!type.includes('text/html'))return response;
     let html=await response.text();
-    const tag='<script src="./route-traffic-v74.js?v=74"></script>';
-    if(!html.includes('route-traffic-v74.js')){
-      html=html.includes('</body>')?html.replace('</body>',tag+'\n</body>'):html+tag;
-    }
+    const routeTag='<script src="./route-traffic-v74.js?v=75"></script>';
+    const cleanTag='<script src="./traffic-clean-v75.js?v=75"></script>';
+    if(!html.includes('route-traffic-v74.js')) html=html.includes('</body>')?html.replace('</body>',routeTag+'\n</body>'):html+routeTag;
+    if(!html.includes('traffic-clean-v75.js')) html=html.includes('</body>')?html.replace('</body>',cleanTag+'\n</body>'):html+cleanTag;
     return new Response(html,{status:response.status,statusText:response.statusText,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});
   }catch(_){
     return fetch(request,{cache:'no-store'});
@@ -104,8 +104,8 @@ self.addEventListener('fetch',event=>{
     return;
   }
 
-  // v74: bloqueia somente o overlay visual de trânsito do mapa inteiro.
-  // A rota continua consultando o fluxo TomTom por trecho e desenha azul, laranja ou vermelho apenas nela.
+  // v75: nunca deixa o overlay geral de trânsito chegar ao mapa.
+  // Só o módulo route-traffic-v74 consulta fluxo para colorir a rota ativa.
   if(event.request.method==='GET' && isTrafficMapTile(url)){
     event.respondWith(new Response(null,{status:204,headers:{'Cache-Control':'no-store'}}));
     return;
@@ -122,7 +122,7 @@ self.addEventListener('fetch',event=>{
   const isNav=event.request.mode==='navigate'||url.pathname.endsWith('/')||url.pathname.endsWith('/index.html');
   const liveFile=/\.(?:js|json|html)$/.test(url.pathname)||url.pathname.includes('/data/');
   if(isNav){
-    event.respondWith(navigationWithV74(event.request));
+    event.respondWith(navigationWithV75(event.request));
     return;
   }
   if(liveFile){
