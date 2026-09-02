@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Apply structural v58
-        run: python scripts/patch_structural_consolidation_v58.py
-      - name: Commit structural v58
+      - name: Apply canonical GPS diagnostics v59
+        run: python scripts/patch_canonical_gps_diagnostics_v59.py
+      - name: Commit canonical GPS diagnostics v59
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Consolida localização e POI e limpa trânsito visual v58" || exit 0
+          git commit -m "Unifica fonte de GPS e adiciona diagnóstico de camadas v59" || exit 0
           git push
