@@ -1,30 +1,41 @@
-/* Radar Seguro RJ PRO v79 — carregador leve de dados de comunidades */
+/* Radar Seguro RJ PRO v81 — carregador leve de dados de comunidades */
 (() => {
   'use strict';
   if (window.RadarCommunityData) return;
 
   const REGISTRY_URL = './data/community-datasets.json';
+  const INDEX_URL = './data/community-index.json';
   const MAX_MEMORY_DATASETS = 2;
   const BACKGROUND_CLEAR_MS = 45000;
   const registryCache = { value: null, promise: null };
+  const indexCache = { value: null, promise: null };
   const datasetCache = new Map();
   const inflight = new Map();
   let backgroundTimer = null;
 
-  async function getRegistry(){
-    if (registryCache.value) return registryCache.value;
-    if (registryCache.promise) return registryCache.promise;
-    registryCache.promise = fetch(REGISTRY_URL, { cache: 'default' })
+  async function loadJsonCached(holder, url, label){
+    if (holder.value) return holder.value;
+    if (holder.promise) return holder.promise;
+    holder.promise = fetch(url, { cache: 'default' })
       .then(r => {
-        if (!r.ok) throw new Error(`Falha ao carregar catálogo de comunidades: ${r.status}`);
+        if (!r.ok) throw new Error(`Falha ao carregar ${label}: ${r.status}`);
         return r.json();
       })
       .then(data => {
-        registryCache.value = data;
+        holder.value = data;
         return data;
       })
-      .finally(() => { registryCache.promise = null; });
-    return registryCache.promise;
+      .finally(() => { holder.promise = null; });
+    return holder.promise;
+  }
+
+  async function getRegistry(){
+    return loadJsonCached(registryCache, REGISTRY_URL, 'catálogo de geometrias');
+  }
+
+  async function getIndex(){
+    const data = await loadJsonCached(indexCache, INDEX_URL, 'índice de comunidades');
+    return Array.isArray(data?.areas) ? data.areas.slice() : [];
   }
 
   async function list(){
@@ -64,13 +75,8 @@
     return promise;
   }
 
-  function unload(id){
-    datasetCache.delete(id);
-  }
-
-  function clear(){
-    datasetCache.clear();
-  }
+  function unload(id){ datasetCache.delete(id); }
+  function clear(){ datasetCache.clear(); }
 
   function cancelBackgroundClear(){
     if (backgroundTimer) {
@@ -82,8 +88,6 @@
   document.addEventListener('visibilitychange', () => {
     cancelBackgroundClear();
     if (document.hidden) {
-      // Se o Radar permanecer em segundo plano, libera GeoJSON pesados da RAM.
-      // Eles continuam no Cache Storage e voltam rapidamente quando necessários.
       backgroundTimer = setTimeout(() => {
         clear();
         backgroundTimer = null;
@@ -97,7 +101,8 @@
   });
 
   window.RadarCommunityData = {
-    version: '79-lazy-lru-background-release',
+    version: '81-external-community-index',
+    index: getIndex,
     list,
     load,
     unload,
