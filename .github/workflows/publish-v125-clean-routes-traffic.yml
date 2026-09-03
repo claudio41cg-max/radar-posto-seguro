@@ -1,0 +1,45 @@
+name: Publish v125 clean routes and traffic
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-v125-clean-routes-traffic.yml'
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch runtime references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace("window.RADAR_RUNTIME_BUILD='124'", "window.RADAR_RUNTIME_BUILD='125'")
+          s=s.replace('route-traffic-v74.js?v=124','route-traffic-v74.js?v=125')
+          s=s.replace('route-alternatives-v116.js?v=124','route-alternatives-v116.js?v=125')
+          s=s.replace('route-traffic-v74.js?v=123','route-traffic-v74.js?v=125')
+          s=s.replace('route-alternatives-v116.js?v=123','route-alternatives-v116.js?v=125')
+          p.write_text(s)
+          p=Path('service-worker.js')
+          s=p.read_text()
+          s=s.replace("radar-seguro-rj-v124", "radar-seguro-rj-v125")
+          s=s.replace("radar-seguro-rj-v123", "radar-seguro-rj-v125")
+          s=s.replace("build:'124'", "build:'125'")
+          s=s.replace("build:'123'", "build:'125'")
+          s=s.replace('route-traffic-v74.js?v=124','route-traffic-v74.js?v=125')
+          s=s.replace('route-alternatives-v116.js?v=124','route-alternatives-v116.js?v=125')
+          s=s.replace('route-traffic-v74.js?v=123','route-traffic-v74.js?v=125')
+          s=s.replace('route-alternatives-v116.js?v=123','route-alternatives-v116.js?v=125')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v125: ativar rotas limpas e transito conservador"
+          git push
