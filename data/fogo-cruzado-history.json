@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T09:18:09.932Z",
+  "generatedAt": "2026-09-03T09:31:27.051Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 103,
+  "count": 104,
   "occurrences": [
+    {
+      "id": "95975828-f47c-4271-8c97-9a1f487ebc66",
+      "documentNumber": 78893,
+      "date": "2026-09-03T05:00:00.000Z",
+      "address": "Vila Rosário, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "VILA ROSARIO",
+      "locality": "",
+      "latitude": -22.7369146,
+      "longitude": -43.3161859,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "d0ec972e-15fd-4522-990a-a5a68bb810df",
       "documentNumber": 78889,
