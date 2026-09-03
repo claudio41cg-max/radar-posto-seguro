@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v102';
+const CACHE_NAME = 'radar-seguro-rj-v103';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 
@@ -41,7 +41,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'102'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'103'}));
   })());
 });
 
@@ -158,6 +158,20 @@ async function navigationNetworkFirst(request){
   }
 }
 
+/* JS/CSS/JSON atuais: rede primeiro, mas guarda a última resposta válida para falhas de conexão. */
+async function liveFileNetworkFirst(request){
+  const cache=await caches.open(CACHE_NAME);
+  try{
+    const response=await fetch(request,{cache:'no-store'});
+    if(response&&response.ok){
+      await cache.put(request,response.clone());
+    }
+    return response;
+  }catch(_){
+    return (await cache.match(request)) || Response.error();
+  }
+}
+
 self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
 
@@ -196,7 +210,7 @@ self.addEventListener('fetch',event=>{
 
   const liveFile=/\.(?:js|json|html|css)$/.test(url.pathname)||url.pathname.includes('/data/');
   if(liveFile){
-    event.respondWith(fetch(event.request,{cache:'no-store'}).catch(()=>caches.match(event.request)));
+    event.respondWith(liveFileNetworkFirst(event.request));
     return;
   }
 
