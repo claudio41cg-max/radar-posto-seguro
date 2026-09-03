@@ -1,0 +1,21 @@
+name: Runtime loader v121
+on:
+  push:
+    paths:
+      - '.github/workflows/runtime-loader-v121.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplicar runtime direto v121
+        run: python scripts/patch_runtime_loader_v121.py
+      - name: Commit runtime v121
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "v121: carregar módulos críticos direto no index" || exit 0
+          git push
