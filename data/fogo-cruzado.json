@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T23:54:35.446Z",
+  "generatedAt": "2026-09-03T00:28:43.057Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 57,
+  "count": 48,
   "lastUpdate": "2026-09-02T20:52:13-03:00",
   "occurrences": [
     {
@@ -652,15 +652,15 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -734,19 +734,19 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -849,179 +849,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "9a340013-37c0-48f4-92c0-5617655b99db",
-      "documentNumber": 78779,
-      "date": "2026-08-26T23:51:00.000Z",
-      "address": "Boiúna - Estr. da Boiúna - Taquara, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "BOIUNA",
-      "latitude": -22.9114683,
-      "longitude": -43.4057049,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "f0ce00d1-84d3-4bd0-ab60-24e1884b92d2",
-      "documentNumber": 78778,
-      "date": "2026-08-26T22:00:00.000Z",
-      "address": "Terra Nostra (Complexo da Pedreira) - Barros Filho, Rio de Janeiro - RJ, 21670-511, Brasil",
-      "neighborhood": "BARROS FILHO",
-      "subNeighborhood": "",
-      "locality": "TERRA NOSTRA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.829157820592094,
-      "longitude": -43.36825541055908,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "318ac2c0-dd08-4626-b6e0-37e7acab3d7a",
-      "documentNumber": 78794,
-      "date": "2026-08-26T17:00:00.000Z",
-      "address": "Rua Genaro Teixeira Gonçalves, s/n - Brisa Mar, Itaguaí - RJ, 23825-440, Brasil",
-      "neighborhood": "BRISA MAR",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8729546,
-      "longitude": -43.808328,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "3d1011bd-44ec-4791-959d-4c59b627c28e",
-      "documentNumber": 78776,
-      "date": "2026-08-26T15:00:00.000Z",
-      "address": "Rua Zélio Valverde, Federal - Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -23.028568,
-      "longitude": -43.4805033,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "2e401c26-997c-4063-ab05-2a513346eef5",
-      "documentNumber": 78769,
-      "date": "2026-08-26T12:08:00.000Z",
-      "address": "Chapero, Itaguaí - RJ, Brasil",
-      "neighborhood": "CHAPERO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8185399,
-      "longitude": -43.764303,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "db4f0afe-70df-4fcd-a6f4-bd14e95bbab7",
-      "documentNumber": 78767,
-      "date": "2026-08-26T10:00:00.000Z",
-      "address": "Morro do Fubá - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
-      "latitude": -22.892324971301786,
-      "longitude": -43.33377861518315,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "f27c8cfc-bebe-4280-9098-8e82a1fc5ac5",
-      "documentNumber": 78760,
-      "date": "2026-08-26T03:00:00.000Z",
-      "address": "Magalhães Bastos, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MAGALHAES BASTOS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8711722,
-      "longitude": -43.4145531,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "bdca0f2b-7edd-4983-9866-b0d2c8c4e164",
-      "documentNumber": 78815,
-      "date": "2026-08-26T00:00:00.000Z",
-      "address": "BR-101, KM 308, - Itaúna, São Gonçalo - RJ, 24461-840, Brasil",
-      "neighborhood": "ITAUNA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.794521010932797,
-      "longitude": -43.03254196566772,
-      "reason": "Tentativa/Roubo de cargas",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "232c9080-4efc-49bd-ae7d-93a5e78784c7",
-      "documentNumber": 78816,
-      "date": "2026-08-26T00:00:00.000Z",
-      "address": "Rua Moreira Castelo - Colubandê, São Gonçalo - RJ, Brasil",
-      "neighborhood": "COLUBANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8415893,
-      "longitude": -43.0095728,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }
