@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T01:56:04.520Z",
+  "generatedAt": "2026-09-03T02:21:28.878Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 48,
-  "lastUpdate": "2026-09-02T20:52:13-03:00",
+  "count": 49,
+  "lastUpdate": "2026-09-02T23:12:09-03:00",
   "occurrences": [
+    {
+      "id": "4ed36500-eeca-41a8-9bff-acd5e802bd77",
+      "documentNumber": 78888,
+      "date": "2026-09-02T20:00:00.000Z",
+      "address": "Rua Tenente Cleto Campelo - Cocotá, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "COCOTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8083092,
+      "longitude": -43.1834453,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "b72896c8-80d3-48d7-9558-8a20dd037178",
       "documentNumber": 78886,
@@ -89,21 +113,6 @@
       "victims": []
     },
     {
-      "id": "52abc355-875f-46af-a578-47f58b9cb769",
-      "documentNumber": 78869,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
-      "neighborhood": "PIAM",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CASTELAR",
-      "latitude": -22.75173021,
-      "longitude": -43.40115974,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
       "documentNumber": 78868,
       "date": "2026-09-01T16:00:00.000Z",
@@ -113,6 +122,21 @@
       "locality": "COMPLEXO DA PEDREIRA",
       "latitude": -22.82425288,
       "longitude": -43.36809439,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "52abc355-875f-46af-a578-47f58b9cb769",
+      "documentNumber": 78869,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
+      "neighborhood": "PIAM",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CASTELAR",
+      "latitude": -22.75173021,
+      "longitude": -43.40115974,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -528,15 +552,15 @@
       "victims": []
     },
     {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
       "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -563,15 +587,15 @@
       ]
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
+      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
+      "documentNumber": 78810,
       "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
+      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8727268,
+      "longitude": -43.4949441,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -652,11 +676,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -730,8 +754,12 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
@@ -743,11 +771,7 @@
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
