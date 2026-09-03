@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T09:31:27.049Z",
+  "generatedAt": "2026-09-03T09:44:35.471Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,19 +10,34 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 54,
-  "lastUpdate": "2026-09-03T06:30:16-03:00",
+  "count": 55,
+  "lastUpdate": "2026-09-03T06:37:38-03:00",
   "occurrences": [
     {
       "id": "95975828-f47c-4271-8c97-9a1f487ebc66",
       "documentNumber": 78893,
       "date": "2026-09-03T05:00:00.000Z",
-      "address": "Vila Rosário, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "CENTRO",
+      "address": "Vila Rosário, Duque de Caxias - RJ, 25041-010, Brasil",
+      "neighborhood": "PARQUE FLUMINENSE",
       "subNeighborhood": "VILA ROSARIO",
       "locality": "",
-      "latitude": -22.7369146,
-      "longitude": -43.3161859,
+      "latitude": -22.735974341315153,
+      "longitude": -43.31607019214835,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "70bc0a1b-3625-4473-9dbc-ecc4f898f2af",
+      "documentNumber": 78894,
+      "date": "2026-09-03T00:00:00.000Z",
+      "address": "Marapicu, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "MARAPICU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.803517,
+      "longitude": -43.5874274,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
