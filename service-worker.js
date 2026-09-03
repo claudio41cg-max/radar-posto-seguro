@@ -1,5 +1,5 @@
-const CACHE_NAME = 'radar-seguro-rj-v107';
-const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
+const CACHE_NAME = 'radar-seguro-rj-v108';
+const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
 
@@ -42,7 +42,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'107'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'108'}));
   })());
 });
 
@@ -57,7 +57,7 @@ function tomTomProxyRequest(request){
   const source=new URL(request.url);
   source.searchParams.delete('key');
   const path=source.pathname+(source.search||'');
-  return fetch(`${TOMTOM_WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`,{
+  return fetch(`${RADAR_WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`,{
     method:request.method==='POST'?'POST':'GET',
     headers:{
       'Accept':request.headers.get('Accept')||'*/*',
@@ -80,7 +80,7 @@ async function aiChatProxyRequest(request){
     if(!Array.isArray(payload.history))payload.history=[];
     body=JSON.stringify(payload);
   }catch(_){}
-  return fetch(`${TOMTOM_WORKER}/v1/chat`,{
+  return fetch(`${RADAR_WORKER}/v1/chat`,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body,
@@ -91,7 +91,7 @@ async function aiChatProxyRequest(request){
 /* Proteção mantida: nunca desenhar o trânsito global sobre todas as ruas. */
 function isTrafficMapTile(url){
   const raw=String(url.href||'').toLowerCase();
-  if(url.origin!==TOMTOM_WORKER||url.pathname!=='/v1/tomtom')return false;
+  if(url.origin!==RADAR_WORKER||url.pathname!=='/v1/tomtom')return false;
   let path=url.searchParams.get('path')||'';
   try{path=decodeURIComponent(path);}catch(_){}
   const text=(raw+' '+String(path)).toLowerCase();
@@ -193,7 +193,7 @@ self.addEventListener('fetch',event=>{
     return;
   }
 
-  if(url.origin===TOMTOM_WORKER&&(url.pathname==='/'||url.pathname==='/v1/chat')&&event.request.method==='POST'){
+  if(url.origin===RADAR_WORKER&&(url.pathname==='/'||url.pathname==='/v1/chat')&&event.request.method==='POST'){
     event.respondWith(aiChatProxyRequest(event.request));
     return;
   }
