@@ -1,14 +1,10 @@
-/* Radar Seguro RJ PRO v127 — cores claras para rota principal e secundarias */
-(()=>{'use strict';if(window.__radarRouteStyleV127)return;window.__radarRouteStyleV127=true;
-const MAIN='#123B8F',ALT='#69B7FF';
+/* Radar Seguro RJ PRO v130 — rota principal inteira na cor original */
+(()=>{'use strict';if(window.__radarRouteStyleV130)return;window.__radarRouteStyleV130=true;
+const MAIN='#5B21B6',ALT='#69B7FF',SRC='route-primary-v130',CASING='route-primary-v130-casing',LINE='route-primary-v130-line';
 function app(){return window.RadarApp||window.App||null;}
-function paint(){const map=app()?.map;if(!map?.getStyle)return;let layers=[];try{layers=map.getStyle()?.layers||[];}catch(_){return;}
-for(const l of layers){if(l?.type!=='line')continue;const id=String(l.id||'').toLowerCase();try{
-if(id.includes('route-alt-v125-line')||id.includes('route-alt-v127-line')){map.setPaintProperty(l.id,'line-color',ALT);map.setPaintProperty(l.id,'line-opacity',.96);continue;}
-if(id.includes('route-main-traffic'))continue;
-const routeLike=(id.includes('route')||id.includes('rota'))&&!id.includes('alt')&&!id.includes('alternative')&&!id.includes('casing')&&!id.includes('hit')&&!id.includes('traffic');
-if(routeLike){map.setPaintProperty(l.id,'line-color',MAIN);map.setPaintProperty(l.id,'line-opacity',1);}
-}catch(_){}}
-}
-function install(){const a=app();if(!a?.map)return false;if(!a.__routeStyleV127Installed){a.__routeStyleV127Installed=true;const old=typeof a.drawRoute==='function'?a.drawRoute.bind(a):null;if(old)a.drawRoute=function(r,f){const out=old(r,f);setTimeout(paint,80);setTimeout(paint,700);return out;};try{a.map.on?.('styledata',()=>setTimeout(paint,50));}catch(_){}}paint();return true;}
-let n=0,t=setInterval(()=>{n++;if(install()||n>200)clearInterval(t);},200);window.RadarRouteStyleV127={paint,main:MAIN,alternative:ALT};})();
+function ensureMain(){const a=app(),map=a?.map,c=a?.route?.coords;if(!map||!Array.isArray(c)||c.length<2)return;const data={type:'FeatureCollection',features:[{type:'Feature',properties:{},geometry:{type:'LineString',coordinates:c}}]};try{const s=map.getSource(SRC);if(s?.setData)s.setData(data);else{if(map.getLayer(LINE))map.removeLayer(LINE);if(map.getLayer(CASING))map.removeLayer(CASING);if(map.getSource(SRC))map.removeSource(SRC);map.addSource(SRC,{type:'geojson',data});map.addLayer({id:CASING,type:'line',source:SRC,layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#ffffff','line-width':['interpolate',['linear'],['zoom'],9,7,13,10,16,13],'line-opacity':.9}});map.addLayer({id:LINE,type:'line',source:SRC,layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':MAIN,'line-width':['interpolate',['linear'],['zoom'],9,4.8,13,7.2,16,10],'line-opacity':1}});}try{map.moveLayer(CASING);}catch(_){}try{map.moveLayer(LINE);}catch(_){}setTimeout(()=>{try{window.RadarRouteTrafficV74?.refresh?.();}catch(_){}},60);}catch(e){console.warn('Radar v130 estilo rota:',e);}}
+function clearMain(){const map=app()?.map;if(!map)return;try{if(map.getLayer(LINE))map.removeLayer(LINE);}catch(_){}try{if(map.getLayer(CASING))map.removeLayer(CASING);}catch(_){}try{if(map.getSource(SRC))map.removeSource(SRC);}catch(_){}}
+function paintLegacy(){const map=app()?.map;if(!map?.getStyle)return;let layers=[];try{layers=map.getStyle()?.layers||[];}catch(_){return;}for(const l of layers){if(l?.type!=='line')continue;const id=String(l.id||'').toLowerCase();try{if(id.includes('route-alt-v')){map.setPaintProperty(l.id,'line-color',ALT);continue;}if(id.includes('route-main-traffic')||id.includes('route-primary-v130'))continue;const routeLike=(id.includes('route')||id.includes('rota'))&&!id.includes('alt')&&!id.includes('alternative')&&!id.includes('casing')&&!id.includes('hit')&&!id.includes('traffic');if(routeLike){map.setPaintProperty(l.id,'line-color',MAIN);map.setPaintProperty(l.id,'line-opacity',1);}}catch(_){}}}
+function refresh(){paintLegacy();ensureMain();}
+function install(){const a=app();if(!a?.map)return false;if(!a.__routeStyleV130Installed){a.__routeStyleV130Installed=true;const old=typeof a.drawRoute==='function'?a.drawRoute.bind(a):null;if(old)a.drawRoute=function(r,f){const out=old(r,f);setTimeout(refresh,30);setTimeout(refresh,400);return out;};try{a.map.on?.('styledata',()=>setTimeout(refresh,80));}catch(_){}}if(a.route?.coords?.length)refresh();else clearMain();return true;}
+let n=0,t=setInterval(()=>{n++;if(install()||n>200)clearInterval(t);},200);window.RadarRouteStyleV127={paint:refresh,clear:clearMain,main:MAIN,alternative:ALT,version:'130'};})();
