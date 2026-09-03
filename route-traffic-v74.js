@@ -7,7 +7,7 @@ const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const SOURCE_ID='route-main-traffic-v122',LAYER_ID='route-main-traffic-v122-line';
 const REFRESH_MS=30000,TARGET_SAMPLE_METERS=450,MAX_SAMPLES=72,MAX_CONCURRENT=7;
 const COLORS={moderate:'#f59e0b',heavy:'#ef4444'};
-function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.App||null;}
+function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.RadarApp||window.App||null;}
 function hideGlobalTraffic(){const map=getApp()?.map;if(!map)return;try{if(map.getLayer?.('tomtom-traffic-flow'))map.removeLayer('tomtom-traffic-flow');}catch(_){}try{if(map.getSource?.('tomtom-traffic'))map.removeSource('tomtom-traffic');}catch(_){}}
 function keepTop(){const map=getApp()?.map;if(!map)return;try{if(map.getLayer?.(LAYER_ID)&&map.moveLayer)map.moveLayer(LAYER_ID);}catch(_){}}
 function ensureLayer(features){const map=getApp()?.map;if(!map)return;const data={type:'FeatureCollection',features:Array.isArray(features)?features:[]};try{const s=map.getSource(SOURCE_ID);if(s?.setData){s.setData(data);keepTop();return;}if(map.getLayer(LAYER_ID))map.removeLayer(LAYER_ID);if(map.getSource(SOURCE_ID))map.removeSource(SOURCE_ID);map.addSource(SOURCE_ID,{type:'geojson',data});map.addLayer({id:LAYER_ID,type:'line',source:SOURCE_ID,layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':['match',['get','status'],'heavy',COLORS.heavy,COLORS.moderate],'line-width':['interpolate',['linear'],['zoom'],10,7.5,13,11,16,15],'line-opacity':1}});keepTop();}catch(e){console.warn('Radar v122 trânsito:',e);statusBadge('TRÂNSITO v122 • erro ao criar camada: '+String(e?.message||e),'err');}}

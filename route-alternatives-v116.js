@@ -2,7 +2,7 @@
 (()=>{'use strict';if(window.__radarAlternativesV118)return;window.__radarAlternativesV118=true;
 const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev',SRC='route-alt-v118',CASING='route-alt-v118-casing',LINE='route-alt-v118-line',LABEL='route-alt-v118-label';
 let timer=null,current=[],lastAnnounced='';
-function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.App||null;}
+function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.RadarApp||window.App||null;}
 function getVoice(){try{if(typeof Voice!=='undefined'&&Voice)return Voice;}catch(_){}return window.Voice||null;}
 function clear(){const map=getApp()?.map;if(!map)return;for(const id of [LABEL,LINE,CASING])try{if(map.getLayer(id))map.removeLayer(id);}catch(_){}try{if(map.getSource(SRC))map.removeSource(SRC);}catch(_){}current=[];}
 function routeCoords(rr){const out=[];for(const leg of rr?.legs||[]){for(const p of leg?.points||[]){const c=[Number(p.longitude),Number(p.latitude)];if(!c.every(Number.isFinite))continue;const last=out[out.length-1];if(last&&Math.abs(last[0]-c[0])<1e-9&&Math.abs(last[1]-c[1])<1e-9)continue;out.push(c);}}return out;}

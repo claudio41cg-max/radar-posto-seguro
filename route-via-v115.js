@@ -4,7 +4,7 @@
 if(window.__radarRouteViaV116)return;window.__radarRouteViaV116=true;
 const state={pending:null,current:null,installed:false};
 function lexical(name){try{return (0,eval)(`typeof ${name}!=='undefined'?${name}:null`);}catch(_){return null;}}
-function app(){return lexical('App')||window.App||null;}
+function app(){return lexical('App')||window.RadarApp||window.App||null;}
 function assistant(){return lexical('VoiceAssistant')||window.VoiceAssistant||null;}
 function splitVia(query){const s=String(query||'').trim();const m=s.match(/^(.+?)\s+(?:pela|pelo|por meio da|por meio do|passando pela|passando pelo)\s+(.+)$/i);if(!m)return null;return{destination:m[1].trim(),via:m[2].trim()};}
 async function geocode(q){const a=app();if(!a?.searchAddress)return null;const r=await a.searchAddress(q);const x=r?.[0];return x&&Number.isFinite(Number(x.lat))&&Number.isFinite(Number(x.lon))?{lat:Number(x.lat),lon:Number(x.lon),label:x.name||x.display||q}:null;}
