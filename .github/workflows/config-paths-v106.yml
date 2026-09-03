@@ -1,0 +1,52 @@
+name: v106 centralize data paths
+
+on:
+  push:
+    paths:
+      - '.github/workflows/config-paths-v106.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Centralizar caminho ANP sem alterar comportamento
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          cfg=Path('app-config-v100.js')
+          c=cfg.read_text(encoding='utf-8')
+          if 'ANP_STATIONS_URL:' not in c:
+              c=c.replace("  VERIFIED_FUEL_URL: './data/postos-oficiais.json',\n", "  VERIFIED_FUEL_URL: './data/postos-oficiais.json',\n  ANP_STATIONS_URL: './data/postos-anp-rio.json',\n", 1)
+          cfg.write_text(c,encoding='utf-8')
+
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          old="const ANP_STATIONS_URL =\n'./data/postos-anp-rio.json';"
+          new="const ANP_STATIONS_URL = RADAR_CONFIG.ANP_STATIONS_URL || './data/postos-anp-rio.json';"
+          if old not in s:
+              raise SystemExit('Bloco ANP_STATIONS_URL esperado nao encontrado')
+          s=s.replace(old,new,1)
+          s=s.replace('./app-config-v100.js?v=100','./app-config-v100.js?v=106',1)
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="106-centralized-data-paths">',s,1)
+          p.write_text(s,encoding='utf-8')
+
+          sw=Path('service-worker.js')
+          w=sw.read_text(encoding='utf-8')
+          w=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';","const CACHE_NAME = 'radar-seguro-rj-v106';",w,1)
+          w=re.sub(r"build:'\d+'","build:'106'",w)
+          w=w.replace('./app-config-v100.js?v=100','./app-config-v100.js?v=106')
+          sw.write_text(w,encoding='utf-8')
+          PY
+      - name: Commit v106
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html app-config-v100.js service-worker.js
+          git commit -m "v106: centralizar caminhos de dados ANP" || exit 0
+          git push
