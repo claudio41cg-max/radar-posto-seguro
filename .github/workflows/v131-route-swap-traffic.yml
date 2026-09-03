@@ -1,0 +1,35 @@
+name: v131 route swap traffic
+on:
+  push:
+    paths:
+      - '.github/workflows/v131-route-swap-traffic.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch v131
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text()
+          s=re.sub(r'<script src="\./route-traffic-v74\.js\?v=\d+"></script>','<script src="./route-traffic-v74.js?v=131"></script>',s)
+          s=re.sub(r'<script src="\./route-alternatives-v116\.js\?v=\d+"></script>','<script src="./route-alternatives-v116.js?v=131"></script>',s)
+          s=re.sub(r'<script src="\./route-style-v127\.js\?v=\d+"></script>','<script src="./route-style-v127.js?v=131"></script>',s)
+          p.write_text(s)
+          sw=Path('service-worker.js'); x=sw.read_text()
+          x=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v131",x)
+          x=re.sub(r'route-traffic-v74\.js\?v=\d+','route-traffic-v74.js?v=131',x)
+          x=re.sub(r'route-alternatives-v116\.js\?v=\d+','route-alternatives-v116.js?v=131',x)
+          x=re.sub(r'route-style-v127\.js\?v=\d+','route-style-v127.js?v=131',x)
+          x=re.sub(r"build:'\d+'","build:'131'",x)
+          sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git commit -m 'v131: ativar troca reversivel de rota e transito firme' || exit 0
+          git push
