@@ -1,4 +1,4 @@
-name: v115 activate route via
+name: v116 activate traffic alternatives
 on:
   push:
     paths:
@@ -10,30 +10,52 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Activate v115 modules
+      - name: Activate v116 modules
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
           p=Path('index.html'); s=p.read_text()
-          tag='<script src="./route-via-v115.js?v=115"></script>'
+          s=s.replace('<script src="./route-via-v115.js?v=115"></script>','<script src="./route-via-v115.js?v=116"></script>')
+          s=s.replace('<script src="./route-traffic-v74.js"></script>','<script src="./route-traffic-v74.js?v=116"></script>')
+          s=s.replace('<script src="./route-traffic-v74.js?v=115"></script>','<script src="./route-traffic-v74.js?v=116"></script>')
+          tag='<script src="./route-alternatives-v116.js?v=116"></script>'
           if tag not in s:
-              anchor='<script src="./route-traffic-v74.js"></script>'
-              if anchor in s: s=s.replace(anchor, tag+'\n'+anchor,1)
+              anchor='<script src="./route-traffic-v74.js?v=116"></script>'
+              if anchor in s: s=s.replace(anchor,anchor+'\n'+tag,1)
               else: s=s.replace('</body>',tag+'\n</body>',1)
-          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="115-route-traffic-via">',s,1)
+          old="""  drawTrafficOverlay(route){
+    // v58: trânsito continua sendo consultado para ETA/rota/voz,
+    // porém o mapa não recebe malha colorida de trânsito.
+    try{
+      const src=App.map?.getSource(this.trafficSourceId);
+      if(src?.setData) src.setData({type:'FeatureCollection',features:[]});
+    }catch(e){}
+  },"""
+          new="""  drawTrafficOverlay(route){
+    try{
+      const data=this.trafficFeatureCollection(route);
+      if(!data?.features?.length){
+        const src=App.map?.getSource(this.trafficSourceId);
+        if(src?.setData) src.setData({type:'FeatureCollection',features:[]});
+        return;
+      }
+      if(!this.ensureTrafficLayers()) return;
+      const src=App.map?.getSource(this.trafficSourceId);
+      if(src?.setData) src.setData(data);
+      try{ if(App.map?.getLayer(this.trafficLayerOrange)) App.map.moveLayer(this.trafficLayerOrange); }catch(e){}
+      try{ if(App.map?.getLayer(this.trafficLayerRed)) App.map.moveLayer(this.trafficLayerRed); }catch(e){}
+    }catch(e){ console.warn('Radar retenções da rota:',e); }
+  },"""
+          if old in s: s=s.replace(old,new,1)
+          s=s.replace("Encontrei uma rota cerca de '+minutes+' minutos mais rápida. Toque no Radar e diga sim para recalcular.","Encontrei uma rota cerca de '+minutes+' minutos mais rápida. Ela está desenhada no mapa. Toque na rota alternativa para trocar.")
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="116-traffic-alternatives">',s,1)
           p.write_text(s)
-          sw=Path('service-worker.js'); w=sw.read_text()
-          w=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v115",w,1)
-          w=re.sub(r"build:'\d+'","build:'115'",w)
-          if "'./route-via-v115.js?v=115'" not in w:
-              w=w.replace("'./route-traffic-v74.js'","'./route-via-v115.js?v=115','./route-traffic-v74.js'",1)
-          sw.write_text(w)
           PY
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html service-worker.js
-          git diff --cached --quiet || git commit -m "v115: ativar transito oficial e rotas por via"
+          git add index.html
+          git diff --cached --quiet || git commit -m "v116: ativar retencoes e rota alternativa visual"
           git push
