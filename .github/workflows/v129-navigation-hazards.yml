@@ -1,0 +1,37 @@
+name: v129 navigation hazards
+on:
+  push:
+    paths:
+      - '.github/workflows/v129-navigation-hazards.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch v129
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text()
+          s=re.sub(r'<script src="\./navigation-recovery-v128\.js\?v=\d+"></script>','<script src="./navigation-recovery-v128.js?v=129"></script>',s)
+          s=re.sub(r'<script src="\./hazard-declutter-v119\.js\?v=\d+"></script>','<script src="./hazard-declutter-v119.js?v=129"></script>',s)
+          if 'navigation-recovery-v128.js?v=129' not in s:
+              s=s.replace('</body>','<script src="./navigation-recovery-v128.js?v=129"></script>\n</body>')
+          if 'hazard-declutter-v119.js?v=129' not in s:
+              s=s.replace('</body>','<script src="./hazard-declutter-v119.js?v=129"></script>\n</body>')
+          p.write_text(s)
+          sw=Path('service-worker.js'); x=sw.read_text()
+          x=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v129",x)
+          x=x.replace('navigation-recovery-v128.js?v=128','navigation-recovery-v128.js?v=129')
+          x=x.replace('hazard-declutter-v119.js?v=119','hazard-declutter-v119.js?v=129')
+          x=x.replace("build:'128'","build:'129'")
+          sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git commit -m 'v129: ativar recalculo forte e limpeza de perigos' || exit 0
+          git push
