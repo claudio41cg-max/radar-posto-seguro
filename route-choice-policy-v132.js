@@ -1,0 +1,10 @@
+/* Radar Seguro RJ PRO v132 — respeita escolha manual de rota; só interrompe por problema relevante */
+(()=>{'use strict';if(window.__radarRouteChoicePolicyV132)return;window.__radarRouteChoicePolicyV132=true;
+function locked(){const l=window.RadarRouteChoiceLock;return !!(l?.active&&Date.now()<(l.until||0)&&!l.allowMajor);}
+function major(text){return /acidente|interdi[cç][aã]o|bloqueio|via fechada|alagamento|engarrafamento (?:muito )?(?:forte|intenso|grave)|tr[aâ]nsito parado|ocorr[eê]ncia grave/i.test(String(text||''));}
+function suggestion(text){return /rota melhor|melhor rota|rota mais r[aá]pida|economia de tempo|economi[az].*min|alternativa.*(?:minuto|min)|ganhar.*min/i.test(String(text||''));}
+function shouldBlock(text){return locked()&&suggestion(text)&&!major(text);}
+function installVoice(){const v=window.Voice;if(!v||v.__routePolicyV132)return false;const old=typeof v.speak==='function'?v.speak.bind(v):null;if(!old)return false;v.__routePolicyV132=true;v.speak=function(text,...args){if(shouldBlock(text)){console.info('Radar v132: sugestão de rota ignorada porque o motorista já escolheu a rota.');return;}return old(text,...args);};return true;}
+function installToast(){const a=window.RadarApp||window.App;if(!a||a.__routePolicyToastV132)return false;const old=typeof a.toast==='function'?a.toast.bind(a):null;if(!old)return false;a.__routePolicyToastV132=true;a.toast=function(text,...args){if(shouldBlock(text))return;return old(text,...args);};return true;}
+let n=0,t=setInterval(()=>{n++;const a=installVoice(),b=installToast();if((a||window.Voice?.__routePolicyV132)&&(b||(window.RadarApp||window.App)?.__routePolicyToastV132)||n>200)clearInterval(t);},200);
+window.RadarRouteChoicePolicyV132={allowMajor(reason='problema relevante'){if(window.RadarRouteChoiceLock){window.RadarRouteChoiceLock.allowMajor=true;window.RadarRouteChoiceLock.majorReason=reason;}try{window.RadarRouteAlternativesV116?.refresh?.();}catch(_){}},clear(){window.RadarRouteChoiceLock=null;},version:'132'};})();
