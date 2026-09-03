@@ -1,12 +1,14 @@
-/* Radar Seguro RJ PRO — contexto local do assistente
-   Liga perguntas de localização e ETA aos dados reais do navegador/rota. */
+/* Radar Seguro RJ PRO — contexto local do assistente v112
+   Responde localização, rua, bairro e ETA usando os dados reais do aparelho/rota. */
 (() => {
   'use strict';
-  if (window.__radarAssistantContextV1) return;
-  window.__radarAssistantContextV1 = true;
+  if (window.__radarAssistantContextV112) return;
+  window.__radarAssistantContextV112 = true;
 
-  const WORKER_BASE = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
+  const config = window.RADAR_CONFIG_V100 || {};
+  const WORKER_BASE = config.AI_ENDPOINT || 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
   const normalize = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+  const cleanQuestion = (s) => normalize(s).replace(/^radar[, ]*/, '').trim();
 
   function getLexical(name) {
     try { return (0, eval)(`typeof ${name} !== 'undefined' ? ${name} : null`); } catch (_) { return null; }
@@ -24,14 +26,17 @@
     return getLexical('Voice') || window.Voice || null;
   }
 
-  function isWhere(question) {
-    const n = normalize(question).replace(/^radar[, ]*/, '');
-    return /^(onde|aonde) (eu )?(estou|to)$/.test(n) || n.includes('minha localizacao') || n.includes('qual e minha localizacao');
+  function locationIntent(question) {
+    const n = cleanQuestion(question);
+    if (/^(onde|aonde) (eu )?(estou|to)( agora)?$/.test(n) || n.includes('minha localizacao') || n.includes('qual e minha localizacao')) return 'full';
+    if (n.includes('qual bairro') || n.includes('que bairro') || n.includes('em que bairro') || n.includes('bairro eu estou') || n.includes('bairro eu to')) return 'district';
+    if (n.includes('qual rua') || n.includes('que rua') || n.includes('em que rua') || n.includes('rua eu estou') || n.includes('rua eu to') || n.includes('nome da rua')) return 'street';
+    return '';
   }
 
   function isEta(question) {
-    const n = normalize(question).replace(/^radar[, ]*/, '');
-    return n.includes('quanto tempo falta') || n.includes('falta quanto tempo') || n.includes('quanto falta para chegar') || n.includes('quanto falta pra chegar') || n.includes('hora de chegada') || n.includes('tempo ate o destino') || n.includes('tempo até o destino');
+    const n = cleanQuestion(question);
+    return n.includes('quanto tempo falta') || n.includes('falta quanto tempo') || n.includes('quanto falta para chegar') || n.includes('quanto falta pra chegar') || n.includes('hora de chegada') || n.includes('tempo ate o destino');
   }
 
   function speak(text) {
@@ -80,7 +85,7 @@
   }
 
   async function reverseAddress(gps) {
-    if (!gps) return '';
+    if (!gps) return null;
     try {
       const path = `/search/2/reverseGeocode/${gps.lat},${gps.lon}.json?language=pt-BR&radius=80`;
       const url = `${WORKER_BASE}/v1/tomtom?path=${encodeURIComponent(path)}`;
@@ -88,17 +93,18 @@
       if (!r.ok) throw new Error('reverse');
       const data = await r.json();
       const a = data?.addresses?.[0]?.address || {};
-      const parts = [];
       const street = String(a.streetName || '').trim();
       const number = String(a.streetNumber || '').trim();
       const district = String(a.municipalitySubdivision || a.localName || '').trim();
       const city = String(a.municipality || '').trim();
+      const freeform = String(a.freeformAddress || '').trim();
+      const parts = [];
       if (street) parts.push(number ? `${street}, ${number}` : street);
       if (district && !parts.includes(district)) parts.push(district);
       if (city && !parts.includes(city)) parts.push(city);
-      return parts.join(', ') || String(a.freeformAddress || '').trim();
+      return { street, number, district, city, full: parts.join(', ') || freeform };
     } catch (_) {
-      return '';
+      return null;
     }
   }
 
@@ -126,13 +132,23 @@
   }
 
   async function localAnswer(question) {
-    if (isWhere(question)) {
+    const intent = locationIntent(question);
+    if (intent) {
       const gps = await browserGps();
-      if (!gps) return 'O GPS está ativo no mapa, mas não consegui ler a posição agora. Tente novamente em alguns segundos.';
+      if (!gps) return 'Não consegui ler sua posição agora. Tente novamente em alguns segundos.';
       const address = await reverseAddress(gps);
-      if (address) return `Você está em ${address}.`;
+      if (intent === 'district') {
+        if (address?.district) return `Você está no bairro ${address.district}.`;
+        if (address?.full) return `Sua localização atual é ${address.full}.`;
+      }
+      if (intent === 'street') {
+        if (address?.street) return `Você está na ${address.street}${address.number ? `, próximo ao número ${address.number}` : ''}.`;
+        if (address?.full) return `Sua localização atual é ${address.full}.`;
+      }
+      if (address?.full) return `Você está em ${address.full}.`;
       return `Sua posição atual é latitude ${gps.lat.toFixed(5)} e longitude ${gps.lon.toFixed(5)}.`;
     }
+
     if (isEta(question)) {
       const mins = etaMinutes();
       if (Number.isFinite(mins)) return `Faltam aproximadamente ${mins} minutos para chegar ao destino.`;
@@ -143,8 +159,8 @@
 
   function install() {
     const assistant = getAssistant();
-    if (!assistant || assistant.__gpsEtaDirectV1) return Boolean(assistant?.__gpsEtaDirectV1);
-    assistant.__gpsEtaDirectV1 = true;
+    if (!assistant || assistant.__localContextV112) return Boolean(assistant?.__localContextV112);
+    assistant.__localContextV112 = true;
 
     const originalAskAI = typeof assistant.askAI === 'function' ? assistant.askAI.bind(assistant) : null;
     if (!originalAskAI) return false;
