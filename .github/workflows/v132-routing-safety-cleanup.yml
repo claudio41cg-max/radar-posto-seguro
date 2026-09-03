@@ -1,0 +1,41 @@
+name: v132 routing safety cleanup
+on:
+  push:
+    paths:
+      - '.github/workflows/v132-routing-safety-cleanup.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch v132
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text()
+          s=re.sub(r'<script src="\./route-alternatives-v116\.js\?v=\d+"></script>','<script src="./route-alternatives-v116.js?v=132"></script>',s)
+          s=re.sub(r'<script src="\./hazard-declutter-v119\.js\?v=\d+"></script>','<script src="./hazard-declutter-v119.js?v=132"></script>',s)
+          s=re.sub(r'<script src="\./navigation-recovery-v128\.js\?v=\d+"></script>','<script src="./navigation-recovery-v128.js?v=132"></script>',s)
+          if 'route-choice-policy-v132.js' not in s:
+              s=s.replace('</body>','<script src="./route-choice-policy-v132.js?v=132"></script>\n</body>')
+          p.write_text(s)
+          sw=Path('service-worker.js'); x=sw.read_text()
+          x=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v132",x)
+          x=x.replace('route-alternatives-v116.js?v=131','route-alternatives-v116.js?v=132')
+          x=x.replace('hazard-declutter-v119.js?v=129','hazard-declutter-v119.js?v=132')
+          x=x.replace('navigation-recovery-v128.js?v=129','navigation-recovery-v128.js?v=132')
+          if './route-choice-policy-v132.js?v=132' not in x:
+              x=x.replace("'./route-alternatives-v116.js?v=132'","'./route-alternatives-v116.js?v=132','./route-choice-policy-v132.js?v=132'")
+          if 'route-choice-policy-v132.js?v=132' not in x.split('const CORE_SHELL')[0]:
+              x=x.replace('</script>\';', '</script>\\n<script src="./route-choice-policy-v132.js?v=132"></script>\';', 1)
+          x=re.sub(r"build:'\d+'","build:'132'",x)
+          sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git commit -m 'v132: ativar rotas seguras, simbolos graduais e cancelamento limpo' || exit 0
+          git push
