@@ -1,0 +1,36 @@
+name: v127 publish
+on:
+  push:
+    paths:
+      - '.github/workflows/v127-publish.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch v127
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html'); s=p.read_text()
+          import re
+          s=re.sub(r'<script src="\./route-traffic-v74\.js\?v=\d+"></script>','<script src="./route-traffic-v74.js?v=127"></script>',s)
+          s=re.sub(r'<script src="\./route-alternatives-v116\.js\?v=\d+"></script>','<script src="./route-alternatives-v116.js?v=127"></script>',s)
+          if 'route-style-v127.js' not in s:
+              s=s.replace('</body>','<script src="./route-style-v127.js?v=127"></script>\n</body>')
+          p.write_text(s)
+          sw=Path('service-worker.js'); x=sw.read_text()
+          x=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v127",x)
+          x=x.replace('route-traffic-v74.js?v=126','route-traffic-v74.js?v=127').replace('route-alternatives-v116.js?v=125','route-alternatives-v116.js?v=127')
+          if "./route-style-v127.js?v=127" not in x:
+              x=x.replace("'./route-traffic-v74.js?v=127'","'./route-traffic-v74.js?v=127','./route-style-v127.js?v=127'")
+          x=x.replace("build:'126'","build:'127'")
+          sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git commit -m 'v127: ativar cores, alternativas e transito refinado' || exit 0
+          git push
