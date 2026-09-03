@@ -1,0 +1,41 @@
+name: v109 sync shell versions
+
+on:
+  push:
+    paths:
+      - '.github/workflows/sync-config-version-v109.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synchronize shell versions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          text = text.replace('content="107-central-ai-endpoint"', 'content="109-sync-shell-versions"')
+          text = text.replace('./app-config-v100.js?v=106', './app-config-v100.js?v=107')
+          index.write_text(text, encoding='utf-8')
+
+          sw = Path('service-worker.js')
+          s = sw.read_text(encoding='utf-8')
+          s = s.replace("radar-seguro-rj-v108", "radar-seguro-rj-v109")
+          s = s.replace("./app-config-v100.js?v=106", "./app-config-v100.js?v=107")
+          s = s.replace("build:'108'", "build:'109'")
+          sw.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit migration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v109: sincronizar versoes do shell e cache"
+          git push
