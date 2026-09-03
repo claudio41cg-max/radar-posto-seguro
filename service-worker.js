@@ -1,24 +1,28 @@
-const CACHE_NAME = 'radar-seguro-rj-v110';
+const CACHE_NAME = 'radar-seguro-rj-v111';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
 
-/* Shell atual. Sem injetar scripts antigos no HTML: o index.html é a fonte de verdade. */
-const APP_SHELL = [
+/* Arquivos essenciais: se algum falhar, a versão anterior continua ativa. */
+const CORE_SHELL = [
   './index.html',
   './manifest.json',
   './app-shell-v97.css?v=97',
   './voice-ui-v98.css?v=98',
   './legacy-inline-v99.css?v=99',
-  './icon-192-1.png',
-  './icon-512-1.png',
-  './community-index-preload.js?v=86',
-  './community-geometries-preload.js?v=89',
   './tomtom-proxy-client.js?v=69',
   './app-config-v100.js?v=107',
   './map-utils-v101.js?v=101',
   './route-traffic-v74.js',
-  './traffic-clean-v75.js',
+  './traffic-clean-v75.js'
+];
+
+/* Arquivos complementares podem entrar no cache sem bloquear a instalação. */
+const OPTIONAL_SHELL = [
+  './icon-192-1.png',
+  './icon-512-1.png',
+  './community-index-preload.js?v=86',
+  './community-geometries-preload.js?v=89',
   './community-data-loader.js',
   './community-runtime-v83.js',
   './community-panel-v93.js',
@@ -29,10 +33,11 @@ const APP_SHELL = [
 ];
 
 self.addEventListener('install',event=>{
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache=>Promise.allSettled(APP_SHELL.map(file=>cache.add(file))))
-  );
+  event.waitUntil((async()=>{
+    const cache=await caches.open(CACHE_NAME);
+    await Promise.all(CORE_SHELL.map(file=>cache.add(file)));
+    await Promise.allSettled(OPTIONAL_SHELL.map(file=>cache.add(file)));
+  })());
   self.skipWaiting();
 });
 
@@ -42,7 +47,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k.startsWith('radar-seguro-rj-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'110'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'111'}));
   })());
 });
 
