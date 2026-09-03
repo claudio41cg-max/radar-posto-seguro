@@ -1,21 +1,23 @@
-const CACHE_NAME = 'radar-seguro-rj-v101';
+const CACHE_NAME = 'radar-seguro-rj-v102';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 
 /* Shell atual. Sem injetar scripts antigos no HTML: o index.html é a fonte de verdade. */
 const APP_SHELL = [
+  './index.html',
   './manifest.json',
-  './app-shell-v97.css',
-  './voice-ui-v98.css',
-  './legacy-inline-v99.css',
+  './app-shell-v97.css?v=97',
+  './voice-ui-v98.css?v=98',
+  './legacy-inline-v99.css?v=99',
   './icon-192-1.png',
   './icon-512-1.png',
-  './app-shell-v97.css?v=97',
-  './tomtom-proxy-client.js',
+  './community-index-preload.js?v=86',
+  './community-geometries-preload.js?v=89',
+  './tomtom-proxy-client.js?v=69',
+  './app-config-v100.js?v=100',
+  './map-utils-v101.js?v=101',
   './route-traffic-v74.js',
   './traffic-clean-v75.js',
-  './community-index-preload.js',
-  './community-geometries-preload.js',
   './community-data-loader.js',
   './community-runtime-v83.js',
   './community-panel-v93.js',
@@ -39,7 +41,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'101'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'102'}));
   })());
 });
 
@@ -145,7 +147,12 @@ async function cleanOpenFreeMapStyle(request){
 /* Navegação sempre busca o index atual. Offline usa o último index que tiver sido salvo pelo navegador. */
 async function navigationNetworkFirst(request){
   try{
-    return await fetch(request,{cache:'no-store'});
+    const response=await fetch(request,{cache:'no-store'});
+    if(response&&response.ok){
+      const cache=await caches.open(CACHE_NAME);
+      cache.put('./index.html',response.clone()).catch(()=>{});
+    }
+    return response;
   }catch(_){
     return (await caches.match(request)) || (await caches.match('./index.html')) || Response.error();
   }
