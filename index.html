@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#07131f">
 <title>Radar Seguro RJ PRO</title>
-<meta name="radar-build" content="106-centralized-data-paths">
+<meta name="radar-build" content="107-central-ai-endpoint">
 
 <script src="./community-index-preload.js?v=86"></script>
 <script src="./community-geometries-preload.js?v=89"></script>
@@ -1039,7 +1039,7 @@ const VoiceAssistant = {
 
   weatherCache:{},
 
-  aiEndpoint:'https://radar-seguro-ia-rj.claudio41cg.workers.dev',
+  aiEndpoint:RADAR_CONFIG.AI_ENDPOINT || 'https://radar-seguro-ia-rj.claudio41cg.workers.dev',
 
   aiBusy:false,
   conversationHistory:[],

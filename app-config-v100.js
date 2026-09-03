@@ -5,5 +5,6 @@ window.RADAR_CONFIG_V100 = Object.freeze({
   VERIFIED_FUEL_INCIDENTS: Object.freeze([]),
   VERIFIED_FUEL_URL: './data/postos-oficiais.json',
   ANP_STATIONS_URL: './data/postos-anp-rio.json',
+  AI_ENDPOINT: 'https://radar-seguro-ia-rj.claudio41cg.workers.dev',
   ANP_STATIONS: Object.freeze([])
 });
