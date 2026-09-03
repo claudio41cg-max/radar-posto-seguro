@@ -1,6 +1,6 @@
 /* Radar Seguro RJ PRO v116 — trânsito TomTom somente sobre a rota ativa */
 (()=>{'use strict';if(window.__radarRouteTrafficV116)return;window.__radarRouteTrafficV116=true;
-const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev',SOURCE_ID='route-traffic-v74',LAYER_ID='route-traffic-v74-line',REFRESH_MS=45000,COLORS={free:'#2563eb',moderate:'#f59e0b',heavy:'#ef4444'};
+const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev',SOURCE_ID='route-main-traffic-v116',LAYER_ID='route-main-traffic-v116-line',REFRESH_MS=45000,COLORS={free:'#2563eb',moderate:'#f59e0b',heavy:'#ef4444'};
 function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.App||null;}
 function hideGlobalTraffic(){const map=getApp()?.map;if(!map)return;try{if(map.getLayer?.('tomtom-traffic-flow'))map.removeLayer('tomtom-traffic-flow');}catch(_){}try{if(map.getSource?.('tomtom-traffic'))map.removeSource('tomtom-traffic');}catch(_){}}
 function keepTop(map){try{if(map.getLayer?.(LAYER_ID)&&map.moveLayer)map.moveLayer(LAYER_ID);}catch(_){}}
