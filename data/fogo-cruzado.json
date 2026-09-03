@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T02:21:28.878Z",
+  "generatedAt": "2026-09-03T05:14:02.768Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 49,
-  "lastUpdate": "2026-09-02T23:12:09-03:00",
+  "count": 53,
+  "lastUpdate": "2026-09-03T00:09:45-03:00",
   "occurrences": [
+    {
+      "id": "d0ec972e-15fd-4522-990a-a5a68bb810df",
+      "documentNumber": 78889,
+      "date": "2026-09-02T23:20:00.000Z",
+      "address": "R. Teixeira Heizer - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-883, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -23.0198639,
+      "longitude": -43.5117768,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "ca105b15-ef14-41cb-9bcf-fc03c936e4b8",
+      "documentNumber": 78891,
+      "date": "2026-09-02T21:00:00.000Z",
+      "address": "Viçoso Jardim, Niterói - RJ, Brasil",
+      "neighborhood": "VICOSO JARDIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8909371,
+      "longitude": -43.0871608,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "4ed36500-eeca-41a8-9bff-acd5e802bd77",
       "documentNumber": 78888,
@@ -51,6 +81,41 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
+      "documentNumber": 78890,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "SAO SIMAO",
+      "locality": "MORRO DO SAO SIMAO",
+      "latitude": -22.71020959,
+      "longitude": -43.55081638,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
+      "documentNumber": 78892,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Santo Antonio, Itaboraí - RJ, Brasil",
+      "neighborhood": "SANTO ANTONIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7598383,
+      "longitude": -42.925027,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "b2aa4730-42ee-42c7-9500-6464ba44f8be",
@@ -113,21 +178,6 @@
       "victims": []
     },
     {
-      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
-      "documentNumber": 78868,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "52abc355-875f-46af-a578-47f58b9cb769",
       "documentNumber": 78869,
       "date": "2026-09-01T16:00:00.000Z",
@@ -137,6 +187,21 @@
       "locality": "MORRO DO CASTELAR",
       "latitude": -22.75173021,
       "longitude": -43.40115974,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
+      "documentNumber": 78868,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -552,15 +617,15 @@
       "victims": []
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
+      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
+      "documentNumber": 78810,
       "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
+      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8727268,
+      "longitude": -43.4949441,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -587,15 +652,15 @@
       ]
     },
     {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
       "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -754,14 +819,6 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
         },
@@ -770,8 +827,16 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },

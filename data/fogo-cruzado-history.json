@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T02:21:28.879Z",
+  "generatedAt": "2026-09-03T05:14:02.769Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 99,
+  "count": 103,
   "occurrences": [
+    {
+      "id": "d0ec972e-15fd-4522-990a-a5a68bb810df",
+      "documentNumber": 78889,
+      "date": "2026-09-02T23:20:00.000Z",
+      "address": "R. Teixeira Heizer - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-883, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -23.0198639,
+      "longitude": -43.5117768,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "ca105b15-ef14-41cb-9bcf-fc03c936e4b8",
+      "documentNumber": 78891,
+      "date": "2026-09-02T21:00:00.000Z",
+      "address": "Viçoso Jardim, Niterói - RJ, Brasil",
+      "neighborhood": "VICOSO JARDIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8909371,
+      "longitude": -43.0871608,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "4ed36500-eeca-41a8-9bff-acd5e802bd77",
       "documentNumber": 78888,
@@ -50,6 +80,41 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
+      "documentNumber": 78890,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "SAO SIMAO",
+      "locality": "MORRO DO SAO SIMAO",
+      "latitude": -22.71020959,
+      "longitude": -43.55081638,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
+      "documentNumber": 78892,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Santo Antonio, Itaboraí - RJ, Brasil",
+      "neighborhood": "SANTO ANTONIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7598383,
+      "longitude": -42.925027,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "b2aa4730-42ee-42c7-9500-6464ba44f8be",
@@ -753,14 +818,6 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
         },
@@ -769,8 +826,16 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
