@@ -1,15 +1,18 @@
-/* Radar Seguro RJ PRO v80 — trânsito somente na rota ativa, com cache de baixo consumo */
+/* Radar Seguro RJ PRO v113 — trânsito real somente sobre a rota ativa */
 (() => {
   'use strict';
-  if (window.__radarRouteTrafficV80) return;
-  window.__radarRouteTrafficV80 = true;
+  if (window.__radarRouteTrafficV113) return;
+  window.__radarRouteTrafficV113 = true;
 
   const WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
   const SOURCE_ID = 'route-traffic-v74';
   const LAYER_ID = 'route-traffic-v74-line';
-  const MAX_SAMPLES = 12;
+  const MAX_SAMPLES = 32;
+  const TARGET_SAMPLE_METERS = 900;
+  const REFRESH_MS = 60000;
   const FLOW_CACHE_MS = 45000;
-  const MAX_FLOW_CACHE_ITEMS = 96;
+  const MAX_FLOW_CACHE_ITEMS = 160;
+  const MAX_CONCURRENT = 6;
   const flowCache = new Map();
   const COLORS = {
     free: '#2563eb',
@@ -39,13 +42,12 @@
     const free = Number(data?.flowSegmentData?.freeFlowSpeed);
     if (!Number.isFinite(current) || !Number.isFinite(free) || free <= 0) return 'free';
     const ratio = current / free;
-    if (ratio < 0.50) return 'heavy';
-    if (ratio < 0.75) return 'moderate';
+    if (ratio < 0.55) return 'heavy';
+    if (ratio < 0.88) return 'moderate';
     return 'free';
   }
 
   function cacheKey(lat, lon){
-    // ~11 m de precisão: suficiente para reutilizar amostras na mesma via.
     return `${lat.toFixed(4)},${lon.toFixed(4)}`;
   }
 
@@ -56,7 +58,6 @@
       flowCache.delete(key);
       return '';
     }
-    // LRU: item usado volta para o fim do Map.
     flowCache.delete(key);
     flowCache.set(key, entry);
     return entry.status;
@@ -92,29 +93,78 @@
     }
   }
 
-  function sampleIndexes(length){
-    if (length < 2) return [];
-    const segmentCount = Math.min(MAX_SAMPLES, Math.max(1, length - 1));
-    const out = [];
-    for (let i = 0; i < segmentCount; i++) {
-      const a = Math.floor(i * (length - 1) / segmentCount);
-      const b = Math.max(a + 1, Math.floor((i + 1) * (length - 1) / segmentCount));
-      out.push([a, Math.min(length - 1, b)]);
+  function haversineMeters(a,b){
+    const lon1=Number(a?.[0]), lat1=Number(a?.[1]);
+    const lon2=Number(b?.[0]), lat2=Number(b?.[1]);
+    if (![lon1,lat1,lon2,lat2].every(Number.isFinite)) return 0;
+    const R=6371000;
+    const p1=lat1*Math.PI/180, p2=lat2*Math.PI/180;
+    const dp=(lat2-lat1)*Math.PI/180;
+    const dl=(lon2-lon1)*Math.PI/180;
+    const h=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;
+    return 2*R*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));
+  }
+
+  function buildRanges(coords){
+    if (!Array.isArray(coords) || coords.length < 2) return [];
+    const cumulative=[0];
+    for(let i=1;i<coords.length;i++){
+      cumulative[i]=cumulative[i-1]+haversineMeters(coords[i-1],coords[i]);
+    }
+    const total=cumulative[cumulative.length-1] || 0;
+    const segmentCount=Math.max(1,Math.min(MAX_SAMPLES,Math.ceil(total/TARGET_SAMPLE_METERS) || 1));
+    const out=[];
+    let prev=0;
+    for(let s=1;s<=segmentCount;s++){
+      const target=total*(s/segmentCount);
+      let end=prev+1;
+      while(end<cumulative.length-1 && cumulative[end]<target) end++;
+      end=Math.min(coords.length-1,Math.max(prev+1,end));
+      const midTarget=(cumulative[prev]+cumulative[end])/2;
+      let mid=prev;
+      while(mid<end && cumulative[mid]<midTarget) mid++;
+      out.push([prev,end,Math.min(end,Math.max(prev,mid))]);
+      prev=end;
+      if(prev>=coords.length-1) break;
+    }
+    if(out.length && out[out.length-1][1] < coords.length-1){
+      const last=out[out.length-1];
+      last[1]=coords.length-1;
+      last[2]=Math.floor((last[0]+last[1])/2);
     }
     return out;
   }
 
+  async function mapLimit(items, limit, worker){
+    const results=new Array(items.length);
+    let next=0;
+    const runners=Array.from({length:Math.min(limit,items.length)},async()=>{
+      while(true){
+        const i=next++;
+        if(i>=items.length) return;
+        results[i]=await worker(items[i],i);
+      }
+    });
+    await Promise.all(runners);
+    return results;
+  }
+
   async function buildTrafficFeatures(coords){
-    const ranges = sampleIndexes(coords.length);
-    return Promise.all(ranges.map(async ([a,b]) => {
-      const mid = coords[Math.floor((a+b)/2)] || coords[a];
-      const status = await flowAt(mid);
+    const ranges=buildRanges(coords);
+    return mapLimit(ranges,MAX_CONCURRENT,async([a,b,mid])=>{
+      const status=await flowAt(coords[mid] || coords[a]);
       return {
-        type: 'Feature',
-        properties: { status },
-        geometry: { type: 'LineString', coordinates: coords.slice(a, b + 1) }
+        type:'Feature',
+        properties:{status},
+        geometry:{type:'LineString',coordinates:coords.slice(a,b+1)}
       };
-    }));
+    });
+  }
+
+  function keepLayerOnTop(map){
+    try {
+      if(map.getLayer?.(LAYER_ID) && typeof map.moveLayer==='function') map.moveLayer(LAYER_ID);
+    } catch (_) {}
   }
 
   function ensureLayer(map, data){
@@ -122,6 +172,7 @@
       const source = map.getSource(SOURCE_ID);
       if (source?.setData) {
         source.setData(data);
+        keepLayerOnTop(map);
         return;
       }
       if (map.getLayer(LAYER_ID)) map.removeLayer(LAYER_ID);
@@ -134,17 +185,19 @@
         layout: { 'line-join': 'round', 'line-cap': 'round' },
         paint: {
           'line-color': ['match', ['get','status'], 'heavy', COLORS.heavy, 'moderate', COLORS.moderate, COLORS.free],
-          'line-width': ['interpolate', ['linear'], ['zoom'], 12, 4, 15, 7, 18, 10],
-          'line-opacity': 0.96
+          'line-width': ['interpolate', ['linear'], ['zoom'], 11, 4.5, 14, 7.5, 17, 10.5],
+          'line-opacity': 0.98
         }
       });
+      keepLayerOnTop(map);
     } catch (e) {
-      console.warn('Radar v80: erro ao desenhar trânsito da rota', e);
+      console.warn('Radar v113: erro ao desenhar trânsito da rota', e);
     }
   }
 
   let refreshToken = 0;
   let lastRouteKey = '';
+  let refreshTimer = null;
 
   function routeKey(route){
     const coords = route?.coords;
@@ -161,7 +214,10 @@
     if (!map || !Array.isArray(coords) || coords.length < 2) return;
 
     const key = routeKey(route);
-    if (!force && key && key === lastRouteKey && map.getSource?.(SOURCE_ID)) return;
+    if (!force && key && key === lastRouteKey && map.getSource?.(SOURCE_ID)) {
+      keepLayerOnTop(map);
+      return;
+    }
     lastRouteKey = key;
 
     hideGlobalTraffic();
@@ -171,35 +227,54 @@
     ensureLayer(map, { type: 'FeatureCollection', features });
   }
 
+  function startPeriodicRefresh(){
+    clearInterval(refreshTimer);
+    refreshTimer=setInterval(()=>{
+      if(document.visibilityState==='hidden') return;
+      const route=getApp()?.route;
+      if(route?.coords?.length) refreshRouteTraffic(route,true);
+    },REFRESH_MS);
+  }
+
   function install(){
     const app = getApp();
-    if (!app || app.__routeTrafficV80Installed) return false;
-    app.__routeTrafficV80Installed = true;
+    if (!app || app.__routeTrafficV113Installed) return false;
+    app.__routeTrafficV113Installed = true;
 
     const originalDrawRoute = typeof app.drawRoute === 'function' ? app.drawRoute.bind(app) : null;
     if (originalDrawRoute) {
       app.drawRoute = function(route, fit){
         const result = originalDrawRoute(route, fit);
-        setTimeout(() => refreshRouteTraffic(route), 100);
+        setTimeout(() => refreshRouteTraffic(route,true), 120);
         return result;
       };
     }
 
     hideGlobalTraffic();
-    if (app.route?.coords?.length) setTimeout(() => refreshRouteTraffic(app.route), 250);
+    if (app.route?.coords?.length) setTimeout(() => refreshRouteTraffic(app.route,true), 300);
+    startPeriodicRefresh();
     return true;
   }
 
   let tries = 0;
   const timer = setInterval(() => {
     tries++;
-    if (install() || tries > 60) clearInterval(timer);
+    if (install() || tries > 80) clearInterval(timer);
   }, 250);
 
-  window.addEventListener('pagehide', () => flowCache.clear());
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible' && getApp()?.route?.coords?.length){
+      setTimeout(()=>refreshRouteTraffic(getApp().route,true),250);
+    }
+  });
+
+  window.addEventListener('pagehide', () => {
+    flowCache.clear();
+    clearInterval(refreshTimer);
+  });
 
   window.RadarRouteTrafficV74 = {
-    version: '80-low-power-flow-cache',
+    version: '113-route-live-traffic',
     refresh: () => refreshRouteTraffic(getApp()?.route, true),
     hideGlobalTraffic,
     clearCache: () => flowCache.clear()
