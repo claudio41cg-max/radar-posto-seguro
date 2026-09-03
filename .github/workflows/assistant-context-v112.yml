@@ -1,0 +1,51 @@
+name: v112 activate assistant local context
+
+on:
+  push:
+    paths:
+      - '.github/workflows/assistant-context-v112.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Activate local assistant context
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          tag = '<script src="./assistant-context-v1.js?v=112"></script>'
+          if 'assistant-context-v1.js' not in text:
+              marker = '<script src="./map-utils-v101.js?v=101"></script>'
+              if marker not in text:
+                  raise SystemExit('map-utils marker not found')
+              text = text.replace(marker, marker + '\n' + tag, 1)
+          else:
+              text = re.sub(r'<script src="\./assistant-context-v1\.js\?v=\d+"></script>', tag, text, count=1)
+          text = re.sub(r'<meta name="radar-build" content="[^"]+">', '<meta name="radar-build" content="112-assistant-local-context">', text, count=1)
+          index.write_text(text, encoding='utf-8')
+
+          sw = Path('service-worker.js')
+          s = sw.read_text(encoding='utf-8')
+          s = re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';", "const CACHE_NAME = 'radar-seguro-rj-v112';", s, count=1)
+          s = re.sub(r"build:'\d+'", "build:'112'", s)
+          if "'./assistant-context-v1.js?v=112'" not in s:
+              marker = "  './map-utils-v101.js?v=101',"
+              if marker not in s:
+                  raise SystemExit('service worker marker not found')
+              s = s.replace(marker, marker + "\n  './assistant-context-v1.js?v=112',", 1)
+          sw.write_text(s, encoding='utf-8')
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js
+          git commit -m "v112: ativar contexto local do assistente"
+          git push
