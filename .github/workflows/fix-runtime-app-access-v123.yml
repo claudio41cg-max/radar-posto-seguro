@@ -1,0 +1,56 @@
+name: Fix runtime App access v123
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-runtime-app-access-v123.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch external runtime modules to use window.RadarApp
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace(path, old, new):
+              p=Path(path)
+              s=p.read_text(encoding='utf-8')
+              if old not in s:
+                  raise SystemExit(f'Pattern not found in {path}: {old[:120]}')
+              p.write_text(s.replace(old,new),encoding='utf-8')
+
+          replace('route-traffic-v74.js',
+            "function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.App||null;}",
+            "function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.RadarApp||window.App||null;}")
+          replace('route-alternatives-v116.js',
+            "function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.App||null;}",
+            "function getApp(){try{if(typeof App!=='undefined'&&App)return App;}catch(_){}return window.RadarApp||window.App||null;}")
+          replace('route-via-v115.js',
+            "function app(){return lexical('App')||window.App||null;}",
+            "function app(){return lexical('App')||window.RadarApp||window.App||null;}")
+
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          s=s.replace("window.RADAR_RUNTIME_BUILD='122'","window.RADAR_RUNTIME_BUILD='123'")
+          s=s.replace('./route-via-v115.js?v=116','./route-via-v115.js?v=123')
+          s=s.replace('./route-traffic-v74.js?v=122','./route-traffic-v74.js?v=123')
+          s=s.replace('./route-alternatives-v116.js?v=118','./route-alternatives-v116.js?v=123')
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('service-worker.js'); s=p.read_text(encoding='utf-8')
+          s=s.replace("radar-seguro-rj-v122","radar-seguro-rj-v123")
+          s=s.replace("build:'122'","build:'123'")
+          s=s.replace('./route-via-v115.js?v=116','./route-via-v115.js?v=123')
+          s=s.replace('./route-traffic-v74.js?v=122','./route-traffic-v74.js?v=123')
+          s=s.replace('./route-alternatives-v116.js?v=118','./route-alternatives-v116.js?v=123')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit v123 runtime fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add route-traffic-v74.js route-alternatives-v116.js route-via-v115.js index.html service-worker.js
+          git commit -m "v123: corrigir acesso dos módulos ao RadarApp" || exit 0
+          git push
