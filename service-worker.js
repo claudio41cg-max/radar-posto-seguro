@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v112';
+const CACHE_NAME = 'radar-seguro-rj-v113';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
@@ -48,7 +48,7 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k.startsWith('radar-seguro-rj-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'112'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'113'}));
   })());
 });
 
