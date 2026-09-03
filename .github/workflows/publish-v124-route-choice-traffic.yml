@@ -1,0 +1,40 @@
+name: Publish v124 route choice and traffic
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v124-route-choice-traffic.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch v124 runtime references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace("window.RADAR_RUNTIME_BUILD='123'", "window.RADAR_RUNTIME_BUILD='124'")
+          s=s.replace('./route-traffic-v74.js?v=123','./route-traffic-v74.js?v=124')
+          s=s.replace('./route-alternatives-v116.js?v=123','./route-alternatives-v116.js?v=124')
+          p.write_text(s)
+
+          p=Path('service-worker.js')
+          s=p.read_text()
+          s=s.replace("radar-seguro-rj-v123", "radar-seguro-rj-v124")
+          s=s.replace("build:'123'", "build:'124'")
+          s=s.replace('./route-traffic-v74.js?v=123','./route-traffic-v74.js?v=124')
+          s=s.replace('./route-alternatives-v116.js?v=123','./route-alternatives-v116.js?v=124')
+          p.write_text(s)
+          PY
+      - name: Commit v124
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v124: ativar rotas selecionaveis e transito estavel"
+          git push
