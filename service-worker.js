@@ -1,6 +1,7 @@
-const CACHE_NAME = 'radar-seguro-rj-v104';
+const CACHE_NAME = 'radar-seguro-rj-v105';
 const TOMTOM_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
+const NETWORK_TIMEOUT_MS = 4500;
 
 /* Shell atual. Sem injetar scripts antigos no HTML: o index.html é a fonte de verdade. */
 const APP_SHELL = [
@@ -41,9 +42,16 @@ self.addEventListener('activate',event=>{
     await Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)));
     await self.clients.claim();
     const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'104'}));
+    clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'105'}));
   })());
 });
+
+function fetchWithTimeout(request,options={},timeout=NETWORK_TIMEOUT_MS){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),timeout);
+  return fetch(request,{...options,signal:controller.signal})
+    .finally(()=>clearTimeout(timer));
+}
 
 function tomTomProxyRequest(request){
   const source=new URL(request.url);
@@ -144,10 +152,10 @@ async function cleanOpenFreeMapStyle(request){
   }
 }
 
-/* Navegação sempre busca o index atual. Offline usa o último index que tiver sido salvo pelo navegador. */
+/* Rede primeiro, mas sem deixar a tela esperando indefinidamente em conexão ruim. */
 async function navigationNetworkFirst(request){
   try{
-    const response=await fetch(request,{cache:'no-store'});
+    const response=await fetchWithTimeout(request,{cache:'no-store'});
     if(response&&response.ok){
       const cache=await caches.open(CACHE_NAME);
       cache.put('./index.html',response.clone()).catch(()=>{});
@@ -158,11 +166,11 @@ async function navigationNetworkFirst(request){
   }
 }
 
-/* JS/CSS/JSON atuais: rede primeiro, mas guarda a última resposta válida para falhas de conexão. */
+/* JS/CSS/JSON atuais: rede primeiro; após 4,5 s usa a última cópia válida já salva. */
 async function liveFileNetworkFirst(request){
   const cache=await caches.open(CACHE_NAME);
   try{
-    const response=await fetch(request,{cache:'no-store'});
+    const response=await fetchWithTimeout(request,{cache:'no-store'});
     if(response&&response.ok){
       await cache.put(request,response.clone());
     }
