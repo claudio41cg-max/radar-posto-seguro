@@ -1,0 +1,33 @@
+name: v128 navigation recovery
+on:
+  push:
+    paths:
+      - '.github/workflows/v128-navigation-recovery.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch v128
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text()
+          if 'navigation-recovery-v128.js' not in s:
+              s=s.replace('</body>','<script src="./navigation-recovery-v128.js?v=128"></script>\n</body>')
+          p.write_text(s)
+          sw=Path('service-worker.js'); x=sw.read_text()
+          x=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v128",x)
+          if "./navigation-recovery-v128.js?v=128" not in x:
+              x=x.replace("'./route-style-v127.js?v=127'","'./route-style-v127.js?v=127','./navigation-recovery-v128.js?v=128'")
+          x=x.replace("build:'127'","build:'128'")
+          sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git commit -m 'v128: ativar limpeza e recalculo automatico da rota' || exit 0
+          git push
