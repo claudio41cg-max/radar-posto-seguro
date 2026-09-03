@@ -1,40 +1,37 @@
-name: radar v116 publish
+name: v116 traffic and alternatives
 on:
   push:
     paths:
       - '.github/workflows/radar-v116.yml'
-  workflow_dispatch:
 permissions:
   contents: write
 jobs:
-  patch:
+  migrate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Patch v116
+      - name: Activate v116 modules
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
-          p=Path('index.html')
-          s=p.read_text(encoding='utf-8')
-
-          # Atualiza as referências dos módulos já existentes.
-          s=re.sub(r'<script\s+src=["\']route-via-v115\.js(?:\?v=\d+)?["\']\s*></script>', '<script src="route-via-v115.js?v=116"></script>', s)
-          s=re.sub(r'<script\s+src=["\']route-traffic-v74\.js(?:\?v=\d+)?["\']\s*></script>', '<script src="route-traffic-v74.js?v=116"></script>', s)
-
-          # Inclui a rota alternativa visual sem duplicar.
-          alt='<script src="route-alternatives-v116.js?v=116"></script>'
-          if 'route-alternatives-v116.js' not in s:
-              anchor='<script src="route-traffic-v74.js?v=116"></script>'
-              if anchor in s:
-                  s=s.replace(anchor, anchor+'\n'+alt, 1)
-              else:
-                  s=s.replace('</body>', alt+'\n</body>', 1)
-
-          # Reativa somente a camada de retenções da rota (não a malha global de trânsito).
-          pattern=r"drawTrafficOverlay\(route\)\{\s*// v58:[\s\S]*?\n\s*\},\n\n\s*clearTrafficOverlay\(\)\{"
-          replacement="""drawTrafficOverlay(route){
+          p=Path('index.html'); s=p.read_text()
+          s=re.sub(r'<script src="\./route-via-v115\.js\?v=\d+"></script>','<script src="./route-via-v115.js?v=116"></script>',s)
+          s=re.sub(r'<script src="\./route-traffic-v74\.js(?:\?v=\d+)?"></script>','<script src="./route-traffic-v74.js?v=116"></script>',s)
+          tag='<script src="./route-alternatives-v116.js?v=116"></script>'
+          if tag not in s:
+              anchor='<script src="./route-traffic-v74.js?v=116"></script>'
+              if anchor in s: s=s.replace(anchor,anchor+'\n'+tag,1)
+              else: s=s.replace('</body>',tag+'\n</body>',1)
+          old='''  drawTrafficOverlay(route){
+    // v58: trânsito continua sendo consultado para ETA/rota/voz,
+    // porém o mapa não recebe malha colorida de trânsito.
+    try{
+      const src=App.map?.getSource(this.trafficSourceId);
+      if(src?.setData) src.setData({type:'FeatureCollection',features:[]});
+    }catch(e){}
+  },'''
+          new='''  drawTrafficOverlay(route){
     try{
       const data=this.trafficFeatureCollection(route);
       if(!data?.features?.length){
@@ -48,23 +45,16 @@ jobs:
       try{ if(App.map?.getLayer(this.trafficLayerOrange)) App.map.moveLayer(this.trafficLayerOrange); }catch(e){}
       try{ if(App.map?.getLayer(this.trafficLayerRed)) App.map.moveLayer(this.trafficLayerRed); }catch(e){}
     }catch(e){ console.warn('Radar retenções da rota:',e); }
-  },
-
-  clearTrafficOverlay(){"""
-          s2,n=re.subn(pattern,replacement,s,count=1)
-          if n:
-              s=s2
-
-          # Mensagem de alternativa passa a orientar pelo mapa, sem depender da resposta de voz imediata.
-          s=s.replace('Encontrei uma rota cerca de '+"'"+'+minutes+'+"'"+' minutos mais rápida. Toque no Radar e diga sim para recalcular.', 'Encontrei uma rota cerca de '+"'"+'+minutes+'+"'"+' minutos mais rápida. Ela está desenhada no mapa. Toque na rota alternativa para trocar.')
-
-          p.write_text(s,encoding='utf-8')
+  },'''
+          if old in s: s=s.replace(old,new,1)
+          s=s.replace("Encontrei uma rota cerca de '+minutes+' minutos mais rápida. Toque no Radar e diga sim para recalcular.","Encontrei uma rota cerca de '+minutes+' minutos mais rápida. Ela está desenhada no mapa. Toque na rota alternativa para trocar.")
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="116-traffic-alternatives">',s,1)
+          p.write_text(s)
           PY
-
+      - name: Commit
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          if ! git diff --cached --quiet; then
-            git commit -m "v116: ativar retencoes e rota alternativa visual"
-            git push
-          fi
+          git diff --cached --quiet || git commit -m "v116: ativar retencoes e rota alternativa visual"
+          git push
