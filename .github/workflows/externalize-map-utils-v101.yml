@@ -1,0 +1,57 @@
+name: v101 externalize map utilities
+
+on:
+  push:
+    paths:
+      - '.github/workflows/externalize-map-utils-v101.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Externalizar estilos de mapa e utilitarios sem quebrar escopo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          # Move only pure helpers to a preload namespace, preserving local aliases.
+          start=s.index('const RJ_CENTER = [-43.40,-22.90];')
+          util_start=s.index('const Utils = {', start)
+          # locate closing of Utils by the next major section marker
+          marker='/* ========================================================='
+          util_end=s.index(marker, util_start+20)
+          original=s[start:util_end]
+          # extract function blocks and Utils object as-is, then export names from a dedicated IIFE
+          preload="""(function(){\n'use strict';\nconst RJ_CENTER=[-43.40,-22.90];\nconst STYLE_VECTOR='https://tiles.openfreemap.org/styles/liberty';\nfunction satelliteStyle(){return {version:8,sources:{sat:{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri'}},layers:[{id:'sat',type:'raster',source:'sat'}]};}\nfunction darkStyle(){return 'https://tiles.openfreemap.org/styles/dark';}\n"""
+          # obtain Utils object from current source
+          utils_text=s[util_start:util_end].rstrip()
+          preload += utils_text + "\nwindow.RADAR_MAP_UTILS_V101=Object.freeze({RJ_CENTER,STYLE_VECTOR,satelliteStyle,darkStyle,Utils});\n})();\n"
+          Path('map-utils-v101.js').write_text(preload,encoding='utf-8')
+          replacement="""const MAP_UTILS = window.RADAR_MAP_UTILS_V101;\nconst RJ_CENTER = MAP_UTILS.RJ_CENTER;\nconst STYLE_VECTOR = MAP_UTILS.STYLE_VECTOR;\nconst satelliteStyle = MAP_UTILS.satelliteStyle;\nconst darkStyle = MAP_UTILS.darkStyle;\nconst Utils = MAP_UTILS.Utils;\n\n"""
+          s=s[:start]+replacement+s[util_end:]
+          anchor='<script src="./app-config-v100.js?v=100"></script>'
+          s=s.replace(anchor,anchor+'\n<script src="./map-utils-v101.js?v=101"></script>',1)
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="101-external-map-utils">',s,1)
+          p.write_text(s,encoding='utf-8')
+          sw=Path('service-worker.js')
+          w=sw.read_text(encoding='utf-8')
+          w=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v101",w,count=1)
+          w=re.sub(r"build:'\d+'","build:'101'",w)
+          if './map-utils-v101.js?v=101' not in w:
+              needle="'./app-config-v100.js?v=100',"
+              if needle in w: w=w.replace(needle,needle+"\n  './map-utils-v101.js?v=101',",1)
+          sw.write_text(w,encoding='utf-8')
+          PY
+      - name: Commit v101
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js map-utils-v101.js
+          git commit -m "v101: externalizar mapa e utilitarios" || exit 0
+          git push
