@@ -1,0 +1,37 @@
+name: Publish v126 TomTom segment traffic
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-v126-tomtom-segment-traffic.yml'
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch runtime references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace("window.RADAR_RUNTIME_BUILD='125'", "window.RADAR_RUNTIME_BUILD='126'")
+          s=s.replace('route-traffic-v74.js?v=125','route-traffic-v74.js?v=126')
+          p.write_text(s)
+          p=Path('service-worker.js')
+          s=p.read_text()
+          s=s.replace("radar-seguro-rj-v125", "radar-seguro-rj-v126")
+          s=s.replace("build:'125'", "build:'126'")
+          s=s.replace('route-traffic-v74.js?v=125','route-traffic-v74.js?v=126')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v126: ativar transito alinhado ao segmento TomTom"
+          git push
