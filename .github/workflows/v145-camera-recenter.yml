@@ -1,0 +1,64 @@
+name: v145 camera e recentralizacao
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ajustar camera mantendo base funcional
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          changes={
+            "if(\n      now-\n      this.lastCameraUpdate<\n      650\n    )":"if(\n      now-\n      this.lastCameraUpdate<\n      520\n    )",
+            "let zoom=18.15;\n\n    let lookAhead=65;":"let zoom=18.05;\n\n    let lookAhead=72;",
+            "zoom=15.9;\n      lookAhead=300;":"zoom=16.10;\n      lookAhead=290;",
+            "zoom=16.35;\n      lookAhead=220;":"zoom=16.55;\n      lookAhead=215;",
+            "zoom=16.95;\n      lookAhead=150;":"zoom=17.10;\n      lookAhead=145;",
+            "zoom=17.5;\n      lookAhead=95;":"zoom=17.60;\n      lookAhead=100;",
+            "zoom-=.25;":"zoom-=.18;",
+            "Utils.interpolatePoint(\n            this.userPos,\n            ahead,\n            .34\n          );":"Utils.interpolatePoint(\n            this.userPos,\n            ahead,\n            .38\n          );",
+            "duration:460,":"duration:520,",
+            "this.pointAhead(80)||\n        this.userPos,\n        .30":"this.pointAhead(105)||\n        this.userPos,\n        .36",
+            "this.navActive\n        ?\n        18\n        :\n        16.3":"this.navActive\n        ?\n        Math.max(16.6,Math.min(18.05,this.map.getZoom()))\n        :\n        16.3",
+            "duration:650\n\n    });":"duration:720\n\n    });"
+          }
+          for old,new in changes.items():
+              count=s.count(old)
+              if count!=1:
+                  raise SystemExit(f'Padrao inseguro: {old[:50]!r} encontrado {count} vezes')
+              s=s.replace(old,new,1)
+          s=s.replace('<meta name="radar-build" content="115-route-traffic-via">','<meta name="radar-build" content="145-camera-recenter">',1)
+          p.write_text(s)
+
+          sw=Path('service-worker.js')
+          t=sw.read_text()
+          import re
+          t=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';", "const CACHE_NAME = 'radar-seguro-rj-v145';", t, count=1)
+          t=re.sub(r"build:'\d+'", "build:'145'", t, count=1)
+          sw.write_text(t)
+          PY
+      - name: Validar integridade
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          required=['startGPS(){','handleGPS(','updateCamera(){','recenter(){','new maplibregl.Map({','window.RadarApp=App']
+          for x in required:
+              assert x in s, x
+          assert '145-camera-recenter' in s
+          assert "radar-seguro-rj-v145" in Path('service-worker.js').read_text()
+          print('v145 validada: mapa/GPS preservados e apenas camera/recentralizacao ajustados')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js
+          git commit -m "v145: melhorar camera e recentralizacao"
+          git push
