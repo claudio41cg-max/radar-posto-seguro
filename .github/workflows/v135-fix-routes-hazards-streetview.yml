@@ -1,0 +1,42 @@
+name: v135 fix routes hazards streetview
+on:
+  push:
+    paths:
+      - '.github/workflows/v135-fix-routes-hazards-streetview.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ativar v135
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text()
+          for f in ['route-alternatives-v116.js','hazard-declutter-v119.js','route-safety-v133.js','navigation-persistence-v134.js']:
+              s=re.sub(r'('+re.escape(f)+r')\?v=\d+',r'\1?v=135',s)
+          tags=[
+            '<script src="route-choice-final-v135.js?v=135"></script>',
+            '<script src="streetview-destination-v135.js?v=135"></script>'
+          ]
+          for tag in tags:
+              name=tag.split('src="')[1].split('?')[0]
+              if name not in s:s=s.replace('</body>',tag+'\n</body>')
+          p.write_text(s)
+          sw=Path('service-worker.js')
+          if sw.exists():
+              x=sw.read_text();x=re.sub(r'radar-seguro-rj-v\d+','radar-seguro-rj-v135',x);x=re.sub(r'BUILD_VERSION\s*=\s*["\']\d+["\']','BUILD_VERSION = "135"',x)
+              for f in ['route-alternatives-v116.js?v=135','hazard-declutter-v119.js?v=135','route-safety-v133.js?v=135','navigation-persistence-v134.js?v=135','route-choice-final-v135.js?v=135','streetview-destination-v135.js?v=135']:
+                  if f not in x:
+                      marker='const OPTIONAL_SHELL = ['
+                      if marker in x:x=x.replace(marker,marker+"\n  './"+f+"',",1)
+              sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git diff --cached --quiet || git commit -m 'v135: ativar alternativas, perigos e Street View do destino'
+          git push
