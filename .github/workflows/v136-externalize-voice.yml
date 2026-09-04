@@ -1,0 +1,55 @@
+name: v136 externalize voice
+on:
+  push:
+    paths:
+      - '.github/workflows/v136-externalize-voice.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tirar voz e assistente do index
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          index=Path('index.html')
+          s=index.read_text()
+          start='/* =========================================================\n   VOZ\n========================================================= */'
+          end='/* =========================================================\n   POSTOS\n========================================================= */'
+          i=s.find(start)
+          j=s.find(end)
+          if i<0 or j<0 or j<=i:
+              raise SystemExit('Marcadores VOZ/POSTOS não encontrados')
+
+          block=s[i:j].rstrip()+"\n"
+          Path('voice-assistant-v136.js').write_text(
+              '/* Radar Seguro RJ PRO v136 — voz e assistente extraídos do index.html */\n'+block
+          )
+
+          replacement='''</script>\n<script src="./voice-assistant-v136.js?v=136"></script>\n<script>\n\n'''
+          s=s[:i]+replacement+s[j:]
+          s=s.replace('<meta name="radar-build" content="115-route-traffic-via">','<meta name="radar-build" content="136-modular-voice">')
+          index.write_text(s)
+
+          sw=Path('service-worker.js')
+          if sw.exists():
+              x=sw.read_text()
+              x=re.sub(r'radar-seguro-rj-v\d+','radar-seguro-rj-v136',x)
+              x=re.sub(r'BUILD_VERSION\s*=\s*["\'][^"\']+["\']','BUILD_VERSION = "136"',x)
+              if 'voice-assistant-v136.js' not in x:
+                  marker='const OPTIONAL_SHELL = ['
+                  pos=x.find(marker)
+                  if pos>=0:
+                      insert_pos=x.find('\n',pos)+1
+                      x=x[:insert_pos]+"  './voice-assistant-v136.js?v=136',\n"+x[insert_pos:]
+              sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html voice-assistant-v136.js service-worker.js
+          git diff --cached --quiet || git commit -m 'v136: extrair voz e assistente do index'
+          git push
