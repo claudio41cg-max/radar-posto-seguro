@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T16:30:53.302Z",
+  "generatedAt": "2026-09-04T16:42:29.285Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -81,16 +81,37 @@
       "id": "faed3702-d7bf-406f-bc81-1340fae584da",
       "documentNumber": 78905,
       "date": "2026-09-03T23:54:00.000Z",
-      "address": "Morro da Coroa - Santa Teresa, Rio de Janeiro - RJ, Brasil",
+      "address": "Morro Fallet / Fogueteiro - Santa Teresa, Rio de Janeiro - RJ, 20251-320, Brasil",
       "neighborhood": "SANTA TERESA",
       "subNeighborhood": "",
       "locality": "MORRO DA COROA",
-      "latitude": -22.9225,
-      "longitude": -43.1925,
-      "reason": "Não identificado",
+      "latitude": -22.92694665016564,
+      "longitude": -43.19707048416139,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "d64b5321-dba4-45d4-8ff8-ce8e7ae79d6c",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T16:30:53.300Z",
+  "generatedAt": "2026-09-04T16:42:29.284Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -82,16 +82,37 @@
       "id": "faed3702-d7bf-406f-bc81-1340fae584da",
       "documentNumber": 78905,
       "date": "2026-09-03T23:54:00.000Z",
-      "address": "Morro da Coroa - Santa Teresa, Rio de Janeiro - RJ, Brasil",
+      "address": "Morro Fallet / Fogueteiro - Santa Teresa, Rio de Janeiro - RJ, 20251-320, Brasil",
       "neighborhood": "SANTA TERESA",
       "subNeighborhood": "",
       "locality": "MORRO DA COROA",
-      "latitude": -22.9225,
-      "longitude": -43.1925,
-      "reason": "Não identificado",
+      "latitude": -22.92694665016564,
+      "longitude": -43.19707048416139,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "d64b5321-dba4-45d4-8ff8-ce8e7ae79d6c",
@@ -308,21 +329,6 @@
       "victims": []
     },
     {
-      "id": "52abc355-875f-46af-a578-47f58b9cb769",
-      "documentNumber": 78869,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
-      "neighborhood": "PIAM",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CASTELAR",
-      "latitude": -22.75173021,
-      "longitude": -43.40115974,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
       "documentNumber": 78868,
       "date": "2026-09-01T16:00:00.000Z",
@@ -332,6 +338,21 @@
       "locality": "COMPLEXO DA PEDREIRA",
       "latitude": -22.82425288,
       "longitude": -43.36809439,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "52abc355-875f-46af-a578-47f58b9cb769",
+      "documentNumber": 78869,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
+      "neighborhood": "PIAM",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CASTELAR",
+      "latitude": -22.75173021,
+      "longitude": -43.40115974,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -767,21 +788,6 @@
       "victims": []
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
       "documentNumber": 78810,
       "date": "2026-08-28T08:00:00.000Z",
@@ -791,6 +797,21 @@
       "locality": "",
       "latitude": -22.8727268,
       "longitude": -43.4949441,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
