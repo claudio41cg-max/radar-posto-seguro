@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T23:54:20.570Z",
+  "generatedAt": "2026-09-04T00:25:42.462Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
+  "count": 43,
   "lastUpdate": "2026-09-03T20:16:04-03:00",
   "occurrences": [
     {
@@ -652,6 +652,21 @@
       "victims": []
     },
     {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -687,21 +702,6 @@
       "victims": []
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "676a5c31-6dc0-4aee-b1c5-067180f6379f",
       "documentNumber": 78802,
       "date": "2026-08-28T06:36:00.000Z",
@@ -714,21 +714,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "de84687d-b385-4a46-aefc-35b6d562f268",
-      "documentNumber": 78801,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Morro do Tuiuti - Imperial de São Cristóvão, Rio de Janeiro - RJ, 20920-000, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO TUIUTI",
-      "latitude": -22.8975895,
-      "longitude": -43.2321904,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     },
     {
@@ -747,229 +732,16 @@
       "victims": []
     },
     {
-      "id": "cc422c6f-fd7d-4380-bf5f-10dcdf3c593f",
-      "documentNumber": 78839,
-      "date": "2026-08-27T22:00:00.000Z",
-      "address": "Vila Heliopolis, Belford Roxo - RJ, Brasil",
-      "neighborhood": "HELIOPOLIS",
+      "id": "de84687d-b385-4a46-aefc-35b6d562f268",
+      "documentNumber": 78801,
+      "date": "2026-08-28T06:27:00.000Z",
+      "address": "Morro do Tuiuti - Imperial de São Cristóvão, Rio de Janeiro - RJ, 20920-000, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7330662,
-      "longitude": -43.4054565,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "58ff618e-c412-4288-a97d-fec017bf64ac",
-      "documentNumber": 78803,
-      "date": "2026-08-27T21:46:00.000Z",
-      "address": "Comunidade do Muquiço - Guadalupe, Rio de Janeiro - RJ, 21670-220, Brasil",
-      "neighborhood": "GUADALUPE",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO MUQUICO",
-      "latitude": -22.84999622,
-      "longitude": -43.37689349,
+      "locality": "MORRO DO TUIUTI",
+      "latitude": -22.8975895,
+      "longitude": -43.2321904,
       "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8bc1aa47-6257-4758-a27d-50cbce55b3f2",
-      "documentNumber": 78804,
-      "date": "2026-08-27T21:00:00.000Z",
-      "address": "Rua Abrahão Jabour - Jacarepaguá, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9729943,
-      "longitude": -43.4089046,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "f7afafea-4179-45fe-aa85-3c05fa253e0e",
-      "documentNumber": 78805,
-      "date": "2026-08-27T19:00:00.000Z",
-      "address": "Avenida Brasil - Manguinhos, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MANGUINHOS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8781116,
-      "longitude": -43.2411685,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "4a934c50-cee8-441c-92b3-db5224804577",
-      "documentNumber": 78797,
-      "date": "2026-08-27T18:30:00.000Z",
-      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CRUZ",
-      "latitude": -22.9277778,
-      "longitude": -43.2483333,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "2dedb6ef-cc07-442c-8532-997daa569999",
-      "documentNumber": 78798,
-      "date": "2026-08-27T17:40:00.000Z",
-      "address": "Av. Roberto Silveira - Olinda, Nilópolis - RJ, Brasil",
-      "neighborhood": "CENTRO DE OLINDA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8164624,
-      "longitude": -43.4102811,
-      "reason": "Ataque a civis",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8224f1ad-f5aa-49fb-acb2-3ad2cefc69a4",
-      "documentNumber": 78799,
-      "date": "2026-08-27T17:30:00.000Z",
-      "address": "Rua do Arquiteto - Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO TERREIRAO",
-      "latitude": -23.024883,
-      "longitude": -43.4815255,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "5f4f2045-59dd-4339-b238-60cc99e9e036",
-      "documentNumber": 78793,
-      "date": "2026-08-27T11:33:00.000Z",
-      "address": "Complexo da Serrinha - Madureira, Rio de Janeiro - RJ, 21370-030, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA SERRINHA",
-      "latitude": -22.87059846,
-      "longitude": -43.33228522,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "3b27da0b-c580-40ce-9128-44ae86b4d4a5",
-      "documentNumber": 78791,
-      "date": "2026-08-27T10:20:00.000Z",
-      "address": "Cidade Alta (Complexo de Israel) - Cordovil, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8147224,
-      "longitude": -43.29297469999999,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "739d2056-edb9-4df3-ba27-7bfcfa63eba3",
-      "documentNumber": 78785,
-      "date": "2026-08-27T07:17:00.000Z",
-      "address": "Jardim Novo - Realengo, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "REALENGO",
-      "subNeighborhood": "JARDIM NOVO",
-      "locality": "",
-      "latitude": -22.8786524,
-      "longitude": -43.42851719999999,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "bcfb8972-6b50-4623-b120-6b0f94567bdd",
-      "documentNumber": 78782,
-      "date": "2026-08-27T06:25:00.000Z",
-      "address": "Jardim Novo - Realengo, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "REALENGO",
-      "subNeighborhood": "JARDIM NOVO",
-      "locality": "",
-      "latitude": -22.8786524,
-      "longitude": -43.42851719999999,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "0af51f4b-eccf-472b-a163-e59540fb86c5",
-      "documentNumber": 78792,
-      "date": "2026-08-27T02:00:00.000Z",
-      "address": "Estrada Marechal Miguel Salazar Mendes de Moraes - Cidade de Deus, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CIDADE DE DEUS",
-      "subNeighborhood": "",
-      "locality": "CIDADE DE DEUS",
-      "latitude": -22.9454232,
-      "longitude": -43.3635383,
-      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
