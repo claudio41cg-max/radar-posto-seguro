@@ -84,10 +84,16 @@ jobs:
           m = Path('route-drawing-v140.js').read_text(encoding='utf-8')
           assert 'route-drawing-v140.js?v=140' in s
           assert 'Object.assign(App, window.RadarRouteDrawingV140 || {});' in s
-          for needle in ['updateRemainingRouteLine()','drawRoute(route,fit=true)','updateRouteSummary()','renderDestinationFlag()']:
+          declarations = [
+              '\n  updateRemainingRouteLine(){',
+              '\n  drawRoute(route,fit=true){',
+              '\n  updateRouteSummary(){',
+              '\n  renderDestinationFlag(){'
+          ]
+          for needle in declarations:
               assert needle not in s
               assert needle in m
-          assert 'checkOffRoute(match)' in s
+          assert '\n  checkOffRoute(match){' in s
           assert 'const App = {' in s
           print('v140 validada')
 
