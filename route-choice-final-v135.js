@@ -1,0 +1,6 @@
+/* Radar Seguro RJ PRO v135 — alternativas ficam até o motorista escolher */
+(()=>{'use strict';if(window.__radarRouteChoiceFinalV135)return;window.__radarRouteChoiceFinalV135=true;
+const app=()=>window.RadarApp||window.App||null;
+function lockAndHide(){const api=window.RadarRouteAlternativesV116;try{api?.clear?.();}catch(_){}const old=window.RadarRouteChoiceLock||{};window.RadarRouteChoiceLock={...old,active:true,chosenAt:Date.now(),until:Date.now()+45*60*1000,allowMajor:false,hideAlternatives:true};}
+function install(){const a=app(),api=window.RadarRouteAlternativesV116;if(!a?.map||!api)return false;if(api.__finalChoiceV135)return true;api.__finalChoiceV135=true;const m=a.map,handler=()=>setTimeout(lockAndHide,1100);for(const id of['route-alt-v132-hit','route-alt-v132-line','route-alt-v132-label'])try{m.on?.('click',id,handler);}catch(_){}return true;}
+let n=0,t=setInterval(()=>{if(install()||++n>200)clearInterval(t);},200);window.RadarRouteChoiceFinalV135={hide:lockAndHide,version:'135'};})();
