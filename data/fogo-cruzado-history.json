@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T01:55:07.630Z",
+  "generatedAt": "2026-09-04T02:29:13.079Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -76,12 +76,12 @@
       "id": "4ed36500-eeca-41a8-9bff-acd5e802bd77",
       "documentNumber": 78888,
       "date": "2026-09-02T20:00:00.000Z",
-      "address": "Rua Tenente Cleto Campelo - Cocotá, Rio de Janeiro - RJ, Brasil",
+      "address": "Morro do Dendê, R. Ten. Cleto Campelo - Cocotá, Rio de Janeiro - RJ, 21921-025, Brasil",
       "neighborhood": "COCOTA",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8083092,
-      "longitude": -43.1834453,
+      "locality": "MORRO DO DENDE",
+      "latitude": -22.80697405485593,
+      "longitude": -43.18269428147583,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -99,7 +99,7 @@
     {
       "id": "b72896c8-80d3-48d7-9558-8a20dd037178",
       "documentNumber": 78886,
-      "date": "2026-09-02T19:30:00.000Z",
+      "date": "2026-09-02T19:03:00.000Z",
       "address": "Vila Rosário, Duque de Caxias - RJ, 25041-030, Brasil",
       "neighborhood": "PARQUE FLUMINENSE",
       "subNeighborhood": "VILA ROSARIO",
