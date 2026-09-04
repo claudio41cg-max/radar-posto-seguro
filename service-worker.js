@@ -1,11 +1,10 @@
-const CACHE_NAME = 'radar-seguro-rj-v137';
+const CACHE_NAME = 'radar-seguro-rj-v144';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
 const V122_SCRIPTS = '<script src="./route-via-v115.js?v=123"></script>\n<script src="./route-traffic-v74.js?v=131"></script>\n<script src="./route-alternatives-v116.js?v=133','./route-safety-v133.js?v=133"></script>\n<script src="./hazard-declutter-v119.js?v=133"></script>\n<script src="./route-choice-policy-v132.js?v=132"></script>';
 const CORE_SHELL = ['./index.html','./manifest.json','./app-shell-v97.css?v=97','./voice-ui-v98.css?v=98','./legacy-inline-v99.css?v=99','./tomtom-proxy-client.js?v=69','./app-config-v100.js?v=107','./map-utils-v101.js?v=101','./assistant-context-v1.js?v=112','./route-via-v115.js?v=123','./route-traffic-v74.js?v=131','./route-style-v127.js?v=131','./navigation-recovery-v128.js?v=132','./route-alternatives-v116.js?v=133','./route-safety-v133.js?v=133','./route-choice-policy-v132.js?v=132','./hazard-declutter-v119.js?v=133','./traffic-clean-v75.js'];
 const OPTIONAL_SHELL = [
-  './voice-assistant-v136.js?v=136','./fuel-module-v137.js?v=137',
   './streetview-destination-v135.js?v=135',
   './route-choice-final-v135.js?v=135',
   './navigation-persistence-v134.js?v=135',
@@ -13,7 +12,7 @@ const OPTIONAL_SHELL = [
   './hazard-declutter-v119.js?v=135',
   './route-alternatives-v116.js?v=135','./icon-192-1.png','./icon-512-1.png','./community-index-preload.js?v=86','./community-geometries-preload.js?v=89','./community-data-loader.js','./community-runtime-v83.js','./community-panel-v93.js','./community-map-style-v95.js','./data/community-datasets.json','./data/community-index.json','./data/community-geometries.json'];
 self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE_NAME);await Promise.all(CORE_SHELL.map(file=>cache.add(file)));await Promise.allSettled(OPTIONAL_SHELL.map(file=>cache.add(file)));})());self.skipWaiting();});
-self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('radar-seguro-rj-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'133'}));})());});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('radar-seguro-rj-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'144'}));})());});
 function fetchWithTimeout(request,options={},timeout=NETWORK_TIMEOUT_MS){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeout);return fetch(request,{...options,signal:controller.signal}).finally(()=>clearTimeout(timer));}
 function tomTomProxyRequest(request){const source=new URL(request.url);source.searchParams.delete('key');const path=source.pathname+(source.search||'');return fetch(`${RADAR_WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`,{method:request.method==='POST'?'POST':'GET',headers:{'Accept':request.headers.get('Accept')||'*/*','Content-Type':request.headers.get('Content-Type')||'application/json'},body:request.method==='POST'?request.clone().body:undefined,cache:'no-store'});}
 async function aiChatProxyRequest(request){const rawBody=await request.clone().text();let body=rawBody;try{const payload=JSON.parse(rawBody||'{}');if(!payload.message&&typeof payload.pergunta==='string'){payload.message=payload.pergunta;delete payload.pergunta;}if(!Array.isArray(payload.history))payload.history=[];body=JSON.stringify(payload);}catch(_){}return fetch(`${RADAR_WORKER}/v1/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body,cache:'no-store'});}
