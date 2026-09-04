@@ -1,0 +1,105 @@
+name: v142 externalize navigation guidance
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v142-externalize-navigation-guidance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Tirar manobras e orientacao da navegacao do index
+        shell: python
+        run: |
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          start_marker = "/* =========================================================\n   MANOBRAS\n========================================================= */"
+          end_marker = "/* =========================================================\n   COMUNIDADE\n========================================================= */"
+
+          start = s.find(start_marker)
+          end = s.find(end_marker, start + 1)
+          if start < 0 or end < 0 or end <= start:
+              raise SystemExit('Marcadores MANOBRAS/COMUNIDADE nao encontrados na ordem esperada')
+
+          body_start = start + len(start_marker)
+          body = s[body_start:end]
+          required = [
+              'maneuverIcon(step)',
+              'maneuverText(step)',
+              'isRoundaboutStep(step)',
+              'isTurnStep(step)',
+              'getUpcomingGuidance()',
+              'isComplexManeuverArea(guidance)',
+              'updateNavigation()'
+          ]
+          missing = [x for x in required if x not in body]
+          if missing:
+              raise SystemExit('Bloco de navegacao inesperado; faltando: ' + ', '.join(missing))
+
+          module = """/* Radar Seguro RJ PRO v142 — manobras e orientacao da navegacao extraidas do index.html */\nwindow.RadarNavigationGuidanceV142 = {""" + body + "\n};\n"
+          Path('navigation-guidance-v142.js').write_text(module, encoding='utf-8')
+
+          replacement = "/* =========================================================\n   MANOBRAS / NAVEGACAO — externalizadas em navigation-guidance-v142.js\n========================================================= */\n\n"
+          s = s[:start] + replacement + s[end:]
+
+          traffic_anchor = 'const TrafficAssistantV40='
+          pos = s.find(traffic_anchor)
+          if pos < 0:
+              raise SystemExit('Ponto seguro apos o fechamento do App nao encontrado')
+
+          assign = "Object.assign(App, window.RadarNavigationGuidanceV142 || {});\n\n"
+          if assign not in s:
+              s = s[:pos] + assign + s[pos:]
+
+          reroute_tag = '<script src="./reroute-engine-v141.js?v=141"></script>'
+          nav_tag = '<script src="./navigation-guidance-v142.js?v=142"></script>'
+          if reroute_tag in s and nav_tag not in s:
+              s = s.replace(reroute_tag, reroute_tag + '\n' + nav_tag, 1)
+          elif nav_tag not in s:
+              route_draw_tag = '<script src="./route-drawing-v140.js?v=140"></script>'
+              if route_draw_tag in s:
+                  s = s.replace(route_draw_tag, route_draw_tag + '\n' + nav_tag, 1)
+              else:
+                  raise SystemExit('Ancora de modulos de rota nao encontrada para carregar navegacao')
+
+          p.write_text(s, encoding='utf-8')
+
+      - name: Validar alteracao
+        shell: python
+        run: |
+          from pathlib import Path
+          s = Path('index.html').read_text(encoding='utf-8')
+          m = Path('navigation-guidance-v142.js').read_text(encoding='utf-8')
+          assert 'navigation-guidance-v142.js?v=142' in s
+          assert 'Object.assign(App, window.RadarNavigationGuidanceV142 || {});' in s
+          assert 'MANOBRAS / NAVEGACAO — externalizadas em navigation-guidance-v142.js' in s
+          assert 'routeNearCommunity(area)' in s
+          for needle in ['maneuverIcon(step)','maneuverText(step)','isRoundaboutStep(step)','isTurnStep(step)','getUpcomingGuidance()','isComplexManeuverArea(guidance)','updateNavigation()']:
+              assert needle in m
+          # Garante que as definicoes principais sairam do corpo do App, sem confundir chamadas existentes.
+          segment = s[s.find('const App = {'):s.find('Object.assign(App, window.RadarSearchV138 || {});')]
+          assert '  maneuverIcon(step){' not in segment
+          assert '  updateNavigation(){' not in segment
+          assert '  getUpcomingGuidance(){' not in segment
+          print('v142 validada')
+
+      - name: Commit v142
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html navigation-guidance-v142.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v142: extrair manobras e orientacao da navegacao do index"
+          git push
