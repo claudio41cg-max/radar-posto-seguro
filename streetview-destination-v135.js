@@ -1,0 +1,8 @@
+/* Radar Seguro RJ PRO v135 — Street View sempre aponta para o destino da rota */
+(()=>{'use strict';if(window.__radarStreetViewDestinationV135)return;window.__radarStreetViewDestinationV135=true;
+const app=()=>window.RadarApp||window.App||null;
+function dest(){const d=app()?.destination;if(Array.isArray(d)&&d.length>=2)return{lon:+d[0],lat:+d[1],label:''};if(d&&Number.isFinite(+(d.lon??d.lng))&&Number.isFinite(+d.lat))return{lon:+(d.lon??d.lng),lat:+d.lat,label:d.label||d.name||''};return null;}
+function openDestination(){const d=dest();if(!d){app()?.toast?.('Escolha um destino primeiro.',2200);return;}const url=`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${d.lat.toFixed(6)},${d.lon.toFixed(6)}`;try{const w=window.open(url,'_blank','noopener,noreferrer');if(!w)location.href=url;}catch(_){location.href=url;}}
+function isStreetButton(el){if(!el)return false;const txt=((el.id||'')+' '+(el.className||'')+' '+(el.getAttribute?.('aria-label')||'')+' '+(el.title||'')+' '+(el.textContent||'')).toLowerCase();return /street.?view|ver rua|visao da rua|vista da rua/.test(txt);}
+function bind(){document.addEventListener('click',e=>{const el=e.target?.closest?.('button,a,[role="button"]');if(!isStreetButton(el))return;e.preventDefault();e.stopImmediatePropagation();openDestination();},true);}
+bind();window.RadarStreetViewDestinationV135={open:openDestination,version:'135'};})();
