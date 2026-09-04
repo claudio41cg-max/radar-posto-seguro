@@ -36,7 +36,6 @@ jobs:
               if count!=1:
                   raise SystemExit(f'Padrao inseguro: {old[:50]!r} encontrado {count} vezes')
               s=s.replace(old,new,1)
-          s=s.replace('<meta name="radar-build" content="115-route-traffic-via">','<meta name="radar-build" content="145-camera-recenter">',1)
           p.write_text(s)
           sw=Path('service-worker.js')
           t=sw.read_text()
@@ -52,9 +51,10 @@ jobs:
           s=Path('index.html').read_text()
           for x in ['startGPS(){','handleGPS(','updateCamera(){','recenter(){','new maplibregl.Map({','window.RadarApp=App']:
               assert x in s, x
-          assert '145-camera-recenter' in s
+          assert 'let zoom=18.05;' in s
+          assert 'this.pointAhead(105)' in s
           assert "radar-seguro-rj-v145" in Path('service-worker.js').read_text()
-          print('v145 validada: mapa/GPS preservados e apenas camera/recentralizacao ajustados')
+          print('v145 validada: mapa/GPS preservados e camera/recentralizacao ajustados')
           PY
       - name: Commit
         run: |
