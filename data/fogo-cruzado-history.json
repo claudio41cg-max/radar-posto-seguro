@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T13:56:11.999Z",
+  "generatedAt": "2026-09-04T14:16:56.321Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 111,
+  "count": 112,
   "occurrences": [
+    {
+      "id": "5bf25c22-5a47-40ae-a1b9-7b528f250030",
+      "documentNumber": 78916,
+      "date": "2026-09-04T10:50:00.000Z",
+      "address": "Avenida Ernani Cardoso - Cascadura, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8824151,
+      "longitude": -43.3352074,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "18cb7234-00c5-4282-a66c-03b394d783d3",
       "documentNumber": 78911,

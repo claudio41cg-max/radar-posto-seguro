@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T13:56:11.997Z",
+  "generatedAt": "2026-09-04T14:16:56.319Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 49,
-  "lastUpdate": "2026-09-04T10:52:15-03:00",
+  "count": 50,
+  "lastUpdate": "2026-09-04T10:56:36-03:00",
   "occurrences": [
+    {
+      "id": "5bf25c22-5a47-40ae-a1b9-7b528f250030",
+      "documentNumber": 78916,
+      "date": "2026-09-04T10:50:00.000Z",
+      "address": "Avenida Ernani Cardoso - Cascadura, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8824151,
+      "longitude": -43.3352074,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "18cb7234-00c5-4282-a66c-03b394d783d3",
       "documentNumber": 78911,
@@ -293,21 +308,6 @@
       "victims": []
     },
     {
-      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
-      "documentNumber": 78868,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "52abc355-875f-46af-a578-47f58b9cb769",
       "documentNumber": 78869,
       "date": "2026-09-01T16:00:00.000Z",
@@ -317,6 +317,21 @@
       "locality": "MORRO DO CASTELAR",
       "latitude": -22.75173021,
       "longitude": -43.40115974,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
+      "documentNumber": 78868,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
