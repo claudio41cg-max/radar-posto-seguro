@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T12:58:49.412Z",
+  "generatedAt": "2026-09-04T13:18:06.029Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 108,
+  "count": 109,
   "occurrences": [
     {
       "id": "18cb7234-00c5-4282-a66c-03b394d783d3",
@@ -42,6 +42,21 @@
       "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
       "latitude": -22.86651325,
       "longitude": -43.32711774,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e15c5f24-bc96-426e-8135-2ef4109353a7",
+      "documentNumber": 78907,
+      "date": "2026-09-03T23:57:00.000Z",
+      "address": "Rua Miguel de Paiva, 71, Catumbi, Rio de Janeiro, Rio de Janeiro, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9190719,
+      "longitude": -43.1933161,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,

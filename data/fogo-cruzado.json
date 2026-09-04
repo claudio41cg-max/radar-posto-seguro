@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T12:58:49.411Z",
+  "generatedAt": "2026-09-04T13:18:06.027Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 46,
+  "count": 47,
   "lastUpdate": "2026-09-04T09:45:29-03:00",
   "occurrences": [
     {
@@ -43,6 +43,21 @@
       "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
       "latitude": -22.86651325,
       "longitude": -43.32711774,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e15c5f24-bc96-426e-8135-2ef4109353a7",
+      "documentNumber": 78907,
+      "date": "2026-09-03T23:57:00.000Z",
+      "address": "Rua Miguel de Paiva, 71, Catumbi, Rio de Janeiro, Rio de Janeiro, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9190719,
+      "longitude": -43.1933161,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -263,21 +278,6 @@
       "victims": []
     },
     {
-      "id": "52abc355-875f-46af-a578-47f58b9cb769",
-      "documentNumber": 78869,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
-      "neighborhood": "PIAM",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CASTELAR",
-      "latitude": -22.75173021,
-      "longitude": -43.40115974,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
       "documentNumber": 78868,
       "date": "2026-09-01T16:00:00.000Z",
@@ -287,6 +287,21 @@
       "locality": "COMPLEXO DA PEDREIRA",
       "latitude": -22.82425288,
       "longitude": -43.36809439,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "52abc355-875f-46af-a578-47f58b9cb769",
+      "documentNumber": 78869,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
+      "neighborhood": "PIAM",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CASTELAR",
+      "latitude": -22.75173021,
+      "longitude": -43.40115974,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -722,21 +737,6 @@
       ]
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
       "documentNumber": 78810,
       "date": "2026-08-28T08:00:00.000Z",
@@ -746,6 +746,21 @@
       "locality": "",
       "latitude": -22.8727268,
       "longitude": -43.4949441,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
