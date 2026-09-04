@@ -1,11 +1,11 @@
-const CACHE_NAME = 'radar-seguro-rj-v136';
+const CACHE_NAME = 'radar-seguro-rj-v137';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
 const V122_SCRIPTS = '<script src="./route-via-v115.js?v=123"></script>\n<script src="./route-traffic-v74.js?v=131"></script>\n<script src="./route-alternatives-v116.js?v=133','./route-safety-v133.js?v=133"></script>\n<script src="./hazard-declutter-v119.js?v=133"></script>\n<script src="./route-choice-policy-v132.js?v=132"></script>';
 const CORE_SHELL = ['./index.html','./manifest.json','./app-shell-v97.css?v=97','./voice-ui-v98.css?v=98','./legacy-inline-v99.css?v=99','./tomtom-proxy-client.js?v=69','./app-config-v100.js?v=107','./map-utils-v101.js?v=101','./assistant-context-v1.js?v=112','./route-via-v115.js?v=123','./route-traffic-v74.js?v=131','./route-style-v127.js?v=131','./navigation-recovery-v128.js?v=132','./route-alternatives-v116.js?v=133','./route-safety-v133.js?v=133','./route-choice-policy-v132.js?v=132','./hazard-declutter-v119.js?v=133','./traffic-clean-v75.js'];
 const OPTIONAL_SHELL = [
-  './voice-assistant-v136.js?v=136',
+  './voice-assistant-v136.js?v=136','./fuel-module-v137.js?v=137',
   './streetview-destination-v135.js?v=135',
   './route-choice-final-v135.js?v=135',
   './navigation-persistence-v134.js?v=135',
