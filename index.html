@@ -7790,7 +7790,7 @@ const App = {
     if(
       now-
       this.lastCameraUpdate<
-      650
+      520
     )
       return;
 
@@ -7833,17 +7833,17 @@ const App = {
       return;
 
 
-    let zoom=18.15;
+    let zoom=18.05;
 
-    let lookAhead=65;
+    let lookAhead=72;
 
 
     if(
       this.currentSpeed>70
     ){
 
-      zoom=15.9;
-      lookAhead=300;
+      zoom=16.10;
+      lookAhead=290;
 
     }
 
@@ -7851,8 +7851,8 @@ const App = {
       this.currentSpeed>52
     ){
 
-      zoom=16.35;
-      lookAhead=220;
+      zoom=16.55;
+      lookAhead=215;
 
     }
 
@@ -7860,8 +7860,8 @@ const App = {
       this.currentSpeed>32
     ){
 
-      zoom=16.95;
-      lookAhead=150;
+      zoom=17.10;
+      lookAhead=145;
 
     }
 
@@ -7869,8 +7869,8 @@ const App = {
       this.currentSpeed>18
     ){
 
-      zoom=17.5;
-      lookAhead=95;
+      zoom=17.60;
+      lookAhead=100;
 
     }
 
@@ -7894,7 +7894,7 @@ const App = {
       majorRoad &&
       this.currentSpeed>28
     )
-      zoom-=.25;
+      zoom-=.18;
 
 
     /*
@@ -7948,7 +7948,7 @@ const App = {
           Utils.interpolatePoint(
             this.userPos,
             ahead,
-            .34
+            .38
           );
 
 
@@ -7987,7 +7987,7 @@ const App = {
       bearing:
         targetBearing,
 
-      duration:460,
+      duration:520,
 
       essential:true
 
@@ -11624,9 +11624,9 @@ fill="#22c55e"/>
       ?
       Utils.interpolatePoint(
         this.userPos,
-        this.pointAhead(80)||
+        this.pointAhead(105)||
         this.userPos,
-        .30
+        .36
       )
       :
       this.userPos;
@@ -11639,7 +11639,7 @@ fill="#22c55e"/>
       zoom:
         this.navActive
         ?
-        18
+        Math.max(16.6,Math.min(18.05,this.map.getZoom()))
         :
         16.3,
 
@@ -11660,7 +11660,7 @@ fill="#22c55e"/>
         :
         0,
 
-      duration:650
+      duration:720
 
     });
 
