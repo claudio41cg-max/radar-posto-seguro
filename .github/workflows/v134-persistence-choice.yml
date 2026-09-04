@@ -1,0 +1,38 @@
+name: v134 persistence choice
+on:
+  push:
+    paths:
+      - '.github/workflows/v134-persistence-choice.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ativar v134
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html'); s=p.read_text()
+          import re
+          # sobe cache-busters dos módulos conhecidos
+          for f in ['route-alternatives-v116.js','hazard-declutter-v119.js','navigation-recovery-v128.js','route-style-v127.js','route-traffic-v74.js']:
+              s=re.sub(r'('+re.escape(f)+r')\?v=\d+',r'\1?v=134',s)
+          # módulo novo de persistência, carregado antes do fechamento do body
+          tag='<script src="navigation-persistence-v134.js?v=134"></script>'
+          if 'navigation-persistence-v134.js' not in s:
+              s=s.replace('</body>',tag+'\n</body>')
+          # pequeno ajuste de enquadramento: intercepta fitBounds/easeTo da navegação sem tirar dinâmica por velocidade/via
+          zoomtag='''<script>\n(()=>{let n=0,t=setInterval(()=>{const a=window.RadarApp||window.App,m=a?.map;if(!m){if(++n>100)clearInterval(t);return;}clearInterval(t);if(m.__zoomComfortV134)return;m.__zoomComfortV134=true;const oe=m.easeTo?.bind(m);if(oe)m.easeTo=o=>oe({...o,zoom:Number.isFinite(o?.zoom)?Math.min(17.2,o.zoom+.35):o?.zoom});},200);})();\n</script>'''
+          if '__zoomComfortV134' not in s:s=s.replace('</body>',zoomtag+'\n</body>')
+          p.write_text(s)
+          sw=Path('service-worker.js')
+          if sw.exists():
+              x=sw.read_text();x=re.sub(r'radar-seguro-rj-v\d+','radar-seguro-rj-v134',x);x=re.sub(r'BUILD_VERSION\s*=\s*["\']\d+["\']','BUILD_VERSION = "134"',x);sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git diff --cached --quiet || git commit -m 'v134: ativar persistência, escolha final e zoom confortável'
+          git push
