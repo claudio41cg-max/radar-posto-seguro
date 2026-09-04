@@ -1,0 +1,38 @@
+name: v133 safe routing
+on:
+  push:
+    paths:
+      - '.github/workflows/v133-safe-routing.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch v133
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text()
+          s=re.sub(r'<script src="\./route-alternatives-v116\.js\?v=\d+"></script>','<script src="./route-alternatives-v116.js?v=133"></script>',s)
+          s=re.sub(r'<script src="\./hazard-declutter-v119\.js\?v=\d+"></script>','<script src="./hazard-declutter-v119.js?v=133"></script>',s)
+          if 'route-safety-v133.js' not in s:
+              s=s.replace('</body>','<script src="./route-safety-v133.js?v=133"></script>\n</body>')
+          p.write_text(s)
+          sw=Path('service-worker.js'); x=sw.read_text()
+          x=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v133",x)
+          x=re.sub(r'route-alternatives-v116\.js\?v=\d+','route-alternatives-v116.js?v=133',x)
+          x=re.sub(r'hazard-declutter-v119\.js\?v=\d+','hazard-declutter-v119.js?v=133',x)
+          if 'route-safety-v133.js?v=133' not in x:
+              marker='route-alternatives-v116.js?v=133'
+              x=x.replace(marker,marker+"','./route-safety-v133.js?v=133") if "'./"+marker in x else x
+          x=re.sub(r"build:'\d+'","build:'133'",x)
+          sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html service-worker.js
+          git commit -m 'v133: ativar rota segura competitiva e símbolos por zoom' || exit 0
+          git push
