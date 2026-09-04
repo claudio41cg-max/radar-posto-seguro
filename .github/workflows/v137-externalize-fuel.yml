@@ -1,0 +1,45 @@
+name: v137 externalize fuel
+on:
+  push:
+    paths:
+      - '.github/workflows/v137-externalize-fuel.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tirar módulo de postos do index
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text()
+          start=s.find('/* =========================================================\n   POSTOS\n========================================================= */')
+          end=s.find('/* =========================================================\n   APP\n========================================================= */', start)
+          if start<0 or end<0:
+              raise SystemExit('Marcadores de POSTOS/APP não encontrados')
+          block=s[start:end].rstrip()+"\n"
+          out=Path('fuel-module-v137.js')
+          out.write_text('/* Radar Seguro RJ PRO v137 — módulo de postos extraído do index.html */\n'+block)
+          replacement='</script>\n<script src="./fuel-module-v137.js?v=137"></script>\n<script>\n\n'
+          s=s[:start]+replacement+s[end:]
+          s=s.replace('<meta name="radar-build" content="115-route-traffic-via">','<meta name="radar-build" content="137-modular-fuel">')
+          p.write_text(s)
+          sw=Path('service-worker.js')
+          if sw.exists():
+              x=sw.read_text()
+              x=re.sub(r'radar-seguro-rj-v\d+','radar-seguro-rj-v137',x)
+              x=re.sub(r'BUILD_VERSION\s*=\s*["\'][^"\']+["\']','BUILD_VERSION = "137"',x)
+              if 'fuel-module-v137.js' not in x:
+                  # insere no shell ao lado do módulo de voz quando houver
+                  x=x.replace("'./voice-assistant-v136.js?v=136'", "'./voice-assistant-v136.js?v=136','./fuel-module-v137.js?v=137'")
+              sw.write_text(x)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html fuel-module-v137.js service-worker.js
+          git diff --cached --quiet || git commit -m 'v137: extrair módulo de postos do index'
+          git push
