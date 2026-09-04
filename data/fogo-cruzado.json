@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T12:23:21.602Z",
+  "generatedAt": "2026-09-04T12:49:04.546Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 44,
-  "lastUpdate": "2026-09-04T07:37:43-03:00",
+  "count": 46,
+  "lastUpdate": "2026-09-04T09:45:29-03:00",
   "occurrences": [
+    {
+      "id": "18cb7234-00c5-4282-a66c-03b394d783d3",
+      "documentNumber": 78911,
+      "date": "2026-09-04T05:29:00.000Z",
+      "address": "Rua Debussy - Jardim América, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "JARDIM AMERICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8073899,
+      "longitude": -43.3217608,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "8d4461e1-a157-4537-a696-06188ee3c8e0",
+      "documentNumber": 78912,
+      "date": "2026-09-04T03:32:00.000Z",
+      "address": "Morro da Serrinha (Complexo da Serrinha) - Vaz Lobo, Rio de Janeiro - RJ, 21360-320, Brasil",
+      "neighborhood": "VAZ LOBO",
+      "subNeighborhood": "",
+      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
+      "latitude": -22.86651325,
+      "longitude": -43.32711774,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "d64b5321-dba4-45d4-8ff8-ce8e7ae79d6c",
       "documentNumber": 78904,
@@ -128,26 +163,6 @@
       "victims": []
     },
     {
-      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
-      "documentNumber": 78890,
-      "date": "2026-09-02T19:00:00.000Z",
-      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "SAO SIMAO",
-      "locality": "MORRO DO SAO SIMAO",
-      "latitude": -22.71020959,
-      "longitude": -43.55081638,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
       "documentNumber": 78892,
       "date": "2026-09-02T19:00:00.000Z",
@@ -160,6 +175,26 @@
       "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
+      "documentNumber": 78890,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "SAO SIMAO",
+      "locality": "MORRO DO SAO SIMAO",
+      "latitude": -22.71020959,
+      "longitude": -43.55081638,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": [
         {
           "situation": "Wounded",
@@ -506,7 +541,7 @@
       "locality": "",
       "latitude": -22.940077751307967,
       "longitude": -43.38434160213013,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -526,7 +561,7 @@
       "locality": "",
       "latitude": -22.958897360131534,
       "longitude": -43.385976533868416,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -667,21 +702,6 @@
       "victims": []
     },
     {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
       "documentNumber": 78811,
       "date": "2026-08-28T08:00:00.000Z",
@@ -700,6 +720,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
+      "documentNumber": 78814,
+      "date": "2026-08-28T08:00:00.000Z",
+      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.777234892549426,
+      "longitude": -43.30793296980591,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
@@ -732,21 +767,6 @@
       "victims": []
     },
     {
-      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
-      "documentNumber": 78800,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "de84687d-b385-4a46-aefc-35b6d562f268",
       "documentNumber": 78801,
       "date": "2026-08-28T06:27:00.000Z",
@@ -759,6 +779,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
+      "documentNumber": 78800,
+      "date": "2026-08-28T06:27:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     }
   ]
