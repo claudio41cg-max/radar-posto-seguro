@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v133';
+const CACHE_NAME = 'radar-seguro-rj-v134';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
