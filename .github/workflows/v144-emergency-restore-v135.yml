@@ -1,0 +1,70 @@
+name: v144 emergency restore v135
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v144-emergency-restore-v135.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restaurar index e service worker funcionais da v135
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=1dc2b8c63a63bbf082df0b9a6a16ec279d62bd9b
+          git show "$BASE:index.html" > index.html
+          git show "$BASE:service-worker.js" > service-worker.js
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'<meta name="radar-build" content="[^"]*">', '<meta name="radar-build" content="144-emergency-restore-v135">', s, count=1)
+          p.write_text(s,encoding='utf-8')
+
+          sw=Path('service-worker.js')
+          w=sw.read_text(encoding='utf-8')
+          w=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';", "const CACHE_NAME = 'radar-seguro-rj-v144';", w, count=1)
+          w=re.sub(r"build:'\d+'", "build:'144'", w)
+          sw.write_text(w,encoding='utf-8')
+          PY
+
+      - name: Validar restauracao
+        shell: python
+        run: |
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          sw=Path('service-worker.js').read_text(encoding='utf-8')
+          assert '144-emergency-restore-v135' in s
+          assert 'new maplibregl.Map' in s
+          assert 'this.startGPS()' in s
+          assert 'Radar Seguro RJ PRO' in s
+          assert "radar-seguro-rj-v144" in sw
+          assert 'voice-assistant-v136.js' not in s
+          assert 'fuel-module-v137.js' not in s
+          assert 'search-module-v138.js' not in s
+          assert 'routing-engine-v139.js' not in s
+          assert 'route-drawing-v140.js' not in s
+          assert 'reroute-engine-v141.js' not in s
+          print('v144 restaurada e validada')
+
+      - name: Commit v144
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v144: restaurar mapa e GPS para base funcional v135"
+          git push
