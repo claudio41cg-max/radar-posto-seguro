@@ -1,0 +1,100 @@
+name: v141 externalize reroute
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v141-externalize-reroute.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Tirar recalculo e fora da rota do index
+        shell: python
+        run: |
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          start_marker = "/* =========================================================\n   FORA DA ROTA\n========================================================= */"
+          end_marker = "/* =========================================================\n   MANOBRAS\n========================================================= */"
+
+          start = s.find(start_marker)
+          end = s.find(end_marker, start + 1)
+          if start < 0 or end < 0 or end <= start:
+              raise SystemExit('Marcadores FORA DA ROTA/MANOBRAS nao encontrados na ordem esperada')
+
+          body_start = start + len(start_marker)
+          body = s[body_start:end]
+          required = [
+              'isRoundaboutSoon()',
+              'checkOffRoute(match)',
+              'async recalculateRoute()'
+          ]
+          missing = [x for x in required if x not in body]
+          if missing:
+              raise SystemExit('Bloco de recalculo inesperado; faltando: ' + ', '.join(missing))
+
+          module = """/* Radar Seguro RJ PRO v141 — recalculo/fora da rota extraidos do index.html */\nwindow.RadarRerouteV141 = {""" + body + "\n};\n"
+          Path('reroute-engine-v141.js').write_text(module, encoding='utf-8')
+
+          replacement = "/* =========================================================\n   RECALCULO / FORA DA ROTA — externalizado em reroute-engine-v141.js\n========================================================= */\n\n"
+          s = s[:start] + replacement + s[end:]
+
+          traffic_anchor = 'const TrafficAssistantV40='
+          pos = s.find(traffic_anchor)
+          if pos < 0:
+              raise SystemExit('Ponto seguro apos o fechamento do App nao encontrado')
+
+          assign = "Object.assign(App, window.RadarRerouteV141 || {});\n\n"
+          if assign not in s:
+              s = s[:pos] + assign + s[pos:]
+
+          draw_tag = '<script src="./route-drawing-v140.js?v=140"></script>'
+          reroute_tag = '<script src="./reroute-engine-v141.js?v=141"></script>'
+          if draw_tag in s and reroute_tag not in s:
+              s = s.replace(draw_tag, draw_tag + '\n' + reroute_tag, 1)
+          elif reroute_tag not in s:
+              app_marker = '/* =========================================================\n   APP\n========================================================= */'
+              app_pos = s.find(app_marker)
+              if app_pos < 0:
+                  raise SystemExit('Ancora APP nao encontrada para carregar modulo de recalculo')
+              script_open = s.rfind('<script>', 0, app_pos)
+              if script_open < 0:
+                  raise SystemExit('Script do APP nao encontrado')
+              s = s[:script_open] + reroute_tag + '\n' + s[script_open:]
+
+          p.write_text(s, encoding='utf-8')
+
+      - name: Validar alteracao
+        shell: python
+        run: |
+          from pathlib import Path
+          s = Path('index.html').read_text(encoding='utf-8')
+          m = Path('reroute-engine-v141.js').read_text(encoding='utf-8')
+          assert 'reroute-engine-v141.js?v=141' in s
+          assert 'Object.assign(App, window.RadarRerouteV141 || {});' in s
+          for needle in ['isRoundaboutSoon(){','checkOffRoute(match){','async recalculateRoute(){']:
+              assert needle not in s
+              assert needle in m
+          assert 'maneuverIcon(step)' in s
+          assert 'const App = {' in s
+          print('v141 validada')
+
+      - name: Commit v141
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html reroute-engine-v141.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v141: extrair recalculo e fora da rota do index"
+          git push
