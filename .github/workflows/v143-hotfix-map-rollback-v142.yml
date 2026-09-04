@@ -1,0 +1,45 @@
+name: v143 hotfix map rollback v142
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v143-hotfix-map-rollback-v142.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  hotfix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restaurar index funcional anterior ao v142
+        run: |
+          git show efa51f603ee89f6a206640ab33e7d482357e3bb0:index.html > index.html
+          rm -f navigation-guidance-v142.js
+
+      - name: Validar restauracao
+        shell: python
+        run: |
+          from pathlib import Path
+          s = Path('index.html').read_text(encoding='utf-8')
+          assert 'const App = {' in s
+          assert 'updateNavigation(){' in s
+          assert 'maneuverIcon(step){' in s
+          assert 'navigation-guidance-v142.js' not in s
+          assert 'reroute-engine-v141.js?v=141' in s
+          print('v143 hotfix validado: index restaurado ao estado funcional v141')
+
+      - name: Commit hotfix v143
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm -f navigation-guidance-v142.js 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "v143: restaurar mapa apos regressao da v142"
+          git push
