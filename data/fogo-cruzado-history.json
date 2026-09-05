@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T11:54:37.173Z",
+  "generatedAt": "2026-09-05T12:20:39.196Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 113,
+  "count": 115,
   "occurrences": [
     {
       "id": "466b9cd2-7e93-47d0-91fb-f904cd4e8303",
@@ -26,6 +26,45 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "97331d04-9796-4bba-899b-e3ad3c0a3f8e",
+      "documentNumber": 78925,
+      "date": "2026-09-05T04:32:00.000Z",
+      "address": "Vargem Grande, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VARGEM GRANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9762943,
+      "longitude": -43.4941932,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "c0516af9-1dca-4bb2-a250-50a8a54d72f3",
+      "documentNumber": 78926,
+      "date": "2026-09-04T18:40:00.000Z",
+      "address": "Avenida Aílton Henrique da Costa - Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -23.0233493,
+      "longitude": -43.4854115,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "5bf25c22-5a47-40ae-a1b9-7b528f250030",
