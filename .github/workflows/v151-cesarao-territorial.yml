@@ -1,0 +1,111 @@
+name: v151 Cesarão territorial
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v151-cesarao-territorial.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Atualizar área territorial do Cesarão
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,re
+
+          # Delimitação territorial aproximada do Cesarão, construída para representar
+          # a área urbana contínua conhecida localmente como Cesarão/Conjunto Otacílio Camará.
+          # Não substituirá a classificação de fonte oficial SABREN no app.
+          ring=[
+            [-43.6669,-22.9303],
+            [-43.6637,-22.9288],
+            [-43.6598,-22.9281],
+            [-43.6554,-22.9285],
+            [-43.6515,-22.9300],
+            [-43.6488,-22.9324],
+            [-43.6482,-22.9355],
+            [-43.6490,-22.9388],
+            [-43.6512,-22.9412],
+            [-43.6544,-22.9433],
+            [-43.6581,-22.9444],
+            [-43.6616,-22.9440],
+            [-43.6645,-22.9421],
+            [-43.6664,-22.9392],
+            [-43.6674,-22.9358],
+            [-43.6669,-22.9303]
+          ]
+          geom={'type':'Polygon','coordinates':[ring]}
+
+          gp=Path('data/community-geometries.json')
+          data=json.loads(gp.read_text(encoding='utf-8'))
+          data.setdefault('geometries',{})['Cesarão (Santa Cruz)']=geom
+          data['version']=151
+          data['description']='v151: Cesarão ampliado para representar a área urbana contínua conhecida localmente como Cesarão/Conjunto Otacílio Camará. Limite territorial interpretativo, não classificado como limite oficial SABREN. Bordas brancas preservadas.'
+          gp.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+
+          # Centro do polígono territorial.
+          xs=[p[0] for p in ring[:-1]]; ys=[p[1] for p in ring[:-1]]
+          c=[round(sum(xs)/len(xs),6),round(sum(ys)/len(ys),6)]
+          ip=Path('data/community-index.json')
+          idx=json.loads(ip.read_text(encoding='utf-8'))
+          for a in idx.get('areas',[]):
+            if a.get('name')=='Cesarão (Santa Cruz)':
+              a['c']=c
+              a['territorial_note']='Área urbana contínua conhecida localmente como Cesarão; limite interpretativo v151, não oficial SABREN.'
+              break
+          idx['version']=151
+          ip.write_text(json.dumps(idx,ensure_ascii=False,indent=2),encoding='utf-8')
+
+          # Regenera preloads.
+          geoms=data['geometries']
+          Path('community-geometries-preload.js').write_text("/* v151 Cesarão territorial */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES="+json.dumps(geoms,ensure_ascii=False,separators=(',',':'))+";window.RadarCommunityGeometriesPreload={version:'151-cesarao-territorial',count:Object.keys(window.RADAR_COMMUNITY_GEOMETRIES).length};})();\n",encoding='utf-8')
+          lines=['/* v151 índice */','const rawAreas = [']+['  '+json.dumps(a,ensure_ascii=False,separators=(',',':'))+',' for a in idx.get('areas',[])]+['];',"window.RadarCommunityIndexPreload={version:'151-cesarao-territorial',count:rawAreas.length};",'']
+          Path('community-index-preload.js').write_text('\n'.join(lines),encoding='utf-8')
+
+          # Versões/cache, preservando todo o restante do app.
+          hp=Path('index.html'); h=hp.read_text(encoding='utf-8')
+          h=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="151-cesarao-territorial">',h,count=1)
+          h=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=151',h,count=1)
+          h=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=151',h,count=1)
+          h=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=151',h)
+          hp.write_text(h,encoding='utf-8')
+
+          sw=Path('service-worker.js'); w=sw.read_text(encoding='utf-8')
+          w=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';","const CACHE_NAME = 'radar-seguro-rj-v151';",w,count=1)
+          w=re.sub(r"build:'\d+'","build:'151'",w,count=1)
+          w=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=151',w)
+          w=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=151',w)
+          w=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=151',w)
+          sw.write_text(w,encoding='utf-8')
+          PY
+      - name: Validar
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          g=json.loads(Path('data/community-geometries.json').read_text())
+          cg=g['geometries']['Cesarão (Santa Cruz)']
+          assert g['version']==151
+          assert cg['type']=='Polygon'
+          assert len(cg['coordinates'][0])>=12
+          h=Path('index.html').read_text(); sw=Path('service-worker.js').read_text(); st=Path('community-map-style-v95.js').read_text()
+          for x in ['startGPS(){','updateCamera(){','new maplibregl.Map({']: assert x in h,x
+          assert 'community-geometries-preload.js?v=151' in h
+          assert 'radar-seguro-rj-v151' in sw
+          assert "line-color':'#ffffff'" in st
+          print('v151 validada')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/community-geometries.json data/community-index.json community-geometries-preload.js community-index-preload.js index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v151: ampliar território conhecido do Cesarão"
+          git push
