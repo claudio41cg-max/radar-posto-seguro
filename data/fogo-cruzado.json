@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T23:39:31.534Z",
+  "generatedAt": "2026-09-05T00:27:41.615Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 50,
-  "lastUpdate": "2026-09-04T17:35:11-03:00",
+  "count": 41,
+  "lastUpdate": "2026-09-04T21:00:56-03:00",
   "occurrences": [
     {
       "id": "5bf25c22-5a47-40ae-a1b9-7b528f250030",
@@ -229,26 +229,6 @@
       "victims": []
     },
     {
-      "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
-      "documentNumber": 78892,
-      "date": "2026-09-02T19:00:00.000Z",
-      "address": "Santo Antonio, Itaboraí - RJ, Brasil",
-      "neighborhood": "SANTO ANTONIO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7598383,
-      "longitude": -42.925027,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
       "documentNumber": 78890,
       "date": "2026-09-02T19:00:00.000Z",
@@ -261,6 +241,26 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
+      "documentNumber": 78892,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Santo Antonio, Itaboraí - RJ, Brasil",
+      "neighborhood": "SANTO ANTONIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7598383,
+      "longitude": -42.925027,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Wounded",
@@ -329,21 +329,6 @@
       "victims": []
     },
     {
-      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
-      "documentNumber": 78868,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "52abc355-875f-46af-a578-47f58b9cb769",
       "documentNumber": 78869,
       "date": "2026-09-01T16:00:00.000Z",
@@ -353,6 +338,21 @@
       "locality": "MORRO DO CASTELAR",
       "latitude": -22.75173021,
       "longitude": -43.40115974,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
+      "documentNumber": 78868,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -740,146 +740,6 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "4c798514-09f7-4557-8b8e-4a8945f52612",
-      "documentNumber": 78817,
-      "date": "2026-08-28T15:00:00.000Z",
-      "address": "Comunidade da Guacha - Glaucia, Belford Roxo - RJ, 26195-040, Brasil",
-      "neighborhood": "GLAUCIA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA GUACHA",
-      "latitude": -22.75440759,
-      "longitude": -43.35683055,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4ce28fb2-1393-49c0-93b6-e1db25fb578c",
-      "documentNumber": 78813,
-      "date": "2026-08-28T11:00:00.000Z",
-      "address": "Comunidade do Brejal - Jardim Bom Retiro, São Gonçalo - RJ, 24722-271, Brasil",
-      "neighborhood": "BOM RETIRO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO BREJAL",
-      "latitude": -22.79654842,
-      "longitude": -42.9620609,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "8fab4111-6fac-4017-bf9d-addfb13f8816",
-      "documentNumber": 78808,
-      "date": "2026-08-28T09:40:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.8694071,
-      "longitude": -43.4790849,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "c2fed46f-1be8-47b2-811e-57574b91a93b",
-      "documentNumber": 78810,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8727268,
-      "longitude": -43.4949441,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "2c136dde-e7a8-4aa7-aae9-1ef0bf86d58b",
-      "documentNumber": 78814,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "Avenida Presidente Kennedy, Corte 8 (Complexo da Mangueirinha) Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-001, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.777234892549426,
-      "longitude": -43.30793296980591,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "99cf0c61-8e53-462c-9630-cc7b75ad4e16",
-      "documentNumber": 78811,
-      "date": "2026-08-28T08:00:00.000Z",
-      "address": "R. Capitulina Sereno da Silva - Amendoeira, Itaguaí - RJ, Brasil",
-      "neighborhood": "AMENDOEIRA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8482716,
-      "longitude": -43.7841331,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "676a5c31-6dc0-4aee-b1c5-067180f6379f",
-      "documentNumber": 78802,
-      "date": "2026-08-28T06:36:00.000Z",
-      "address": "Comunidade da Regata - Itanhangá, Rio de Janeiro - RJ, 22753-035, Brasil",
-      "neighborhood": "ITANHANGA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.988804658616857,
-      "longitude": -43.32998553957767,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "753f62a5-8814-4203-871b-5f92f658bf9a",
-      "documentNumber": 78800,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "de84687d-b385-4a46-aefc-35b6d562f268",
-      "documentNumber": 78801,
-      "date": "2026-08-28T06:27:00.000Z",
-      "address": "Morro do Tuiuti - São Cristóvão, Rio de Janeiro - RJ, 20920-000, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO TUIUTI",
-      "latitude": -22.8975895,
-      "longitude": -43.2321904,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
