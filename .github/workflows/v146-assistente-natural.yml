@@ -1,0 +1,206 @@
+name: v146 assistente natural
+on:
+  push:
+    paths:
+      - '.github/workflows/v146-assistente-natural.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ampliar comandos naturais sem mexer no mapa GPS
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('index.html')
+          s=p.read_text()
+
+          anchor="""    const compact=\n      normalized.replace(\n        /\\s+/g,\n        ''\n      );\n"""
+          if s.count(anchor)!=1:
+              raise SystemExit('Âncora handleFlexibleIntent não encontrada de forma única')
+
+          natural="""
+
+    /* =====================================================
+       v146 — COMANDOS NATURAIS DO DIA A DIA
+       Entende frases curtas, coloquiais e incompletas antes
+       de cair nas regras mais rígidas ou na IA.
+    ===================================================== */
+    const everyday=normalized
+      .replace(/\\b(?:pra|pro|pras|pros)\\b/g,'para')
+      .replace(/\\bto\\b/g,'estou')
+      .replace(/\\bta\\b/g,'esta')
+      .replace(/\\bce\\b/g,'voce')
+      .replace(/\\s+/g,' ')
+      .trim();
+
+    const casualHello=/^(?:e ai|fala|fala ai|opa|oi ai|beleza|bom dia|boa tarde|boa noite)(?: radar)?$/.test(everyday);
+    if(casualHello){
+      this.reply('Fala. Estou pronta. Pode pedir uma rota, um lugar perto, clima, trânsito, ocorrências ou fazer uma pergunta.');
+      return true;
+    }
+
+    const casualWhere=this.containsAny(everyday,[
+      'que lugar e esse','onde a gente esta','estou onde','onde que eu estou','qual bairro e esse',
+      'que bairro e esse','qual e essa rua','que rua e essa','onde eu vim parar','em que lugar eu estou'
+    ]);
+    if(casualWhere){
+      if(!Array.isArray(App.userPos) || App.userPos.length<2){
+        App.startGPS?.();
+        this.reply('Estou buscando sua localização. Aguarde alguns segundos.');
+        return true;
+      }
+      const pos=await this.getCurrentAddress(true);
+      if(pos?.label) this.reply('Você está em '+pos.label+'.');
+      else this.reply('Estou com sua posição no GPS, mas ainda não consegui identificar o nome da rua.');
+      return true;
+    }
+
+    const casualWeather=this.containsAny(everyday,[
+      'vai chover','sera que chove','esta chovendo','ta chovendo','vai fazer calor','vai fazer frio',
+      'esta calor','esta frio','como esta o tempo','como fica o tempo','preciso de guarda chuva','levo guarda chuva'
+    ]);
+    if(casualWeather){
+      await this.reportWeather(command);
+      return true;
+    }
+
+    const casualRouteStatus=this.containsAny(everyday,[
+      'falta muito','esta longe ainda','ta longe ainda','quanto falta','falta quanto','demora muito',
+      'chega que horas','que horas chega','quanto tempo ainda','quanto falta para chegar'
+    ]);
+    if(casualRouteStatus && App.route){
+      const totalM=Number(App.route.distance ?? App.route.summary?.lengthInMeters);
+      const progressM=Math.max(0,Number(App.routeProgressMeters||0));
+      const remainM=Number.isFinite(totalM)?Math.max(0,totalM-progressM):NaN;
+      const totalSec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);
+      const ratio=Number.isFinite(totalM)&&totalM>0&&Number.isFinite(remainM)?remainM/totalM:1;
+      const remainSec=Number.isFinite(totalSec)?Math.max(0,totalSec*ratio):NaN;
+      const km=Number.isFinite(remainM)?remainM/1000:NaN;
+      const min=Number.isFinite(remainSec)?Math.max(1,Math.round(remainSec/60)):NaN;
+      if(Number.isFinite(min) && Number.isFinite(km)){
+        this.reply('Faltam aproximadamente '+min+' minutos e '+(km<1?Math.max(10,Math.round(remainM/10)*10)+' metros':km.toFixed(km<10?1:0).replace('.',',')+' quilômetros')+' para chegar.');
+      }else{
+        this.reply('A rota está ativa, mas ainda estou atualizando o tempo restante.');
+      }
+      return true;
+    }
+
+    const casualNearby=command.match(/^(?:tem|tem algum|tem alguma|onde tem|onde acho|onde encontro|acha|ache|procura|procure|me mostra|mostra|quero achar)\\s+(?:um|uma|o|a)?\\s*(.+?)\\s*(?:aqui perto|por aqui|perto daqui|perto de mim|mais perto|mais proximo|mais próxima|mais proxima)$/i);
+    if(casualNearby?.[1]){
+      const q=this.trimPoliteWords(casualNearby[1]).trim();
+      if(q){
+        await this.findNearbyPlace(q,false);
+        return true;
+      }
+    }
+
+    const homeTalk=/^(?:bora|vamos|vamo|partiu|quero ir|quero voltar|me leva|leva eu|pode ir|vai|vamos embora|bora embora)(?:\\s+para)?\\s+(?:minha )?casa$/i.test(everyday);
+    if(homeTalk){
+      await this.routeTo('minha casa');
+      return true;
+    }
+
+    const casualRoute=command.match(/^(?:bora|vamos|vamo|partiu|me leva|leva eu|quero ir|quero chegar|vai|segue|toca|pode ir|vamos embora)(?:\\s+(?:pra|para|pro|ate|até|em))?\\s+(.{2,})$/i);
+    if(casualRoute?.[1] && !/^(?:embora|agora|ai|aí)$/i.test(casualRoute[1].trim())){
+      await this.routeTo(casualRoute[1].trim());
+      return true;
+    }
+
+    const casualRepeat=this.containsAny(everyday,[
+      'fala de novo','repete ai','repete isso','o que voce falou','nao ouvi','nao escutei','como e que e'
+    ]);
+    if(casualRepeat){
+      this.repeatGuidance();
+      return true;
+    }
+
+    if(this.containsAny(everyday,['mostra os postos','cadê os postos','cade os postos','quero ver os postos','tem posto no mapa'])){
+      this.setFuel('all');
+      return true;
+    }
+    if(this.containsAny(everyday,['tira os postos','some com os postos','nao quero ver os postos'])){
+      this.setFuel('none');
+      return true;
+    }
+
+    if(this.containsAny(everyday,['mostra as comunidades','quero ver as comunidades','tem comunidade no mapa'])){
+      this.setCommunities(true);
+      return true;
+    }
+    if(this.containsAny(everyday,['tira as comunidades','esconde as comunidades','nao quero ver as comunidades'])){
+      this.setCommunities(false);
+      return true;
+    }
+
+    if(this.containsAny(everyday,['mais noticias','continua as noticias','manda mais noticias','tem mais noticia'])){
+      await this.reportNews(true,false);
+      return true;
+    }
+
+    if(this.containsAny(everyday,['mais ocorrencias','continua as ocorrencias','manda mais ocorrencias','tem mais ocorrencia'])){
+      await this.reportRioOccurrences(true);
+      return true;
+    }
+"""
+          s=s.replace(anchor,anchor+natural,1)
+
+          # Torna a busca de proximidade existente mais tolerante a 'por aqui' e 'perto daqui'.
+          old="""(?:mais\\s+)?(?:perto|proximo|proxima)(?:\\s+(?:de|da|do))?\\s*(mim|minha localizacao|onde estou|minha casa|aqui)?$"""
+          new="""(?:mais\\s+)?(?:perto|proximo|proxima|por aqui|perto daqui)(?:\\s+(?:de|da|do))?\\s*(mim|minha localizacao|onde estou|minha casa|aqui)?$"""
+          if old in s:
+              s=s.replace(old,new,1)
+
+          # Aceita 'bora/vamos/vamo/toca/segue' também no parser final de rota.
+          old_route="""(?:(?:agora\\s+)?(?:me\\s+leve|leve(?:-|\\s)?me|navegue|quero\\s+ir|ir|vá|va|trace(?:\\s+uma)?\\s+rota|troque(?:\\s+a)?\\s+rota|mude(?:\\s+a)?\\s+rota))"""
+          new_route="""(?:(?:agora\\s+)?(?:me\\s+leve|leve(?:-|\\s)?me|navegue|quero\\s+ir|ir|vá|va|bora|vamos|vamo|segue|toca|trace(?:\\s+uma)?\\s+rota|troque(?:\\s+a)?\\s+rota|mude(?:\\s+a)?\\s+rota))"""
+          if s.count(old_route)==1:
+              s=s.replace(old_route,new_route,1)
+
+          # Marca build e renova cache sem alterar lógica de mapa/GPS.
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="146-assistente-natural">',s,count=1)
+          p.write_text(s)
+
+          sw=Path('service-worker.js')
+          t=sw.read_text()
+          t=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\\d+';","const CACHE_NAME = 'radar-seguro-rj-v146';",t,count=1)
+          t=re.sub(r"build:'\\d+'","build:'146'",t,count=1)
+          sw.write_text(t)
+          PY
+
+      - name: Validar
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          sw=Path('service-worker.js').read_text()
+          required=[
+            '146-assistente-natural',
+            'v146 — COMANDOS NATURAIS DO DIA A DIA',
+            "await this.routeTo('minha casa');",
+            'casualNearby=command.match',
+            'casualRoute=command.match',
+            'casualWeather=this.containsAny',
+            'handleFlexibleIntent(command,normalized)',
+            'startGPS(){',
+            'updateCamera(){',
+            'new maplibregl.Map({'
+          ]
+          for x in required:
+              assert x in s, x
+          assert "radar-seguro-rj-v146" in sw
+          print('v146 validada: comandos naturais adicionados; mapa/GPS/câmera preservados')
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js
+          git commit -m "v146: aceitar comandos de voz naturais"
+          git push
