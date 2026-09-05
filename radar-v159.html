@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Radar Seguro RJ PRO v159</title>
+</head>
+<body style="margin:0;background:#07131f;color:#fff;font-family:Arial,sans-serif">
+<div id="loading" style="padding:24px;text-align:center;font-weight:700">Abrindo Radar Seguro RJ PRO...</div>
+<script>
+(async()=>{
+  try{
+    const r=await fetch('./index.html?fresh='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('index '+r.status);
+    let html=await r.text();
+    html=html.replace(/community-map-style-v95\.js\?v=\d+/g,'community-map-style-v95.js?v=159');
+    const fix='<script src="./community-force-overlay-v159.js?v=159"><\/script>';
+    if(/<\/body>/i.test(html)) html=html.replace(/<\/body>/i,fix+'</body>');
+    else html+=fix;
+    document.open();
+    document.write(html);
+    document.close();
+  }catch(e){
+    document.getElementById('loading').textContent='Não consegui abrir o Radar agora. Atualize a página.';
+    console.error(e);
+  }
+})();
+</script>
+</body>
+</html>
