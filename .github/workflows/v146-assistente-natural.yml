@@ -150,19 +150,16 @@ jobs:
 """
           s=s.replace(anchor,anchor+natural,1)
 
-          # Torna a busca de proximidade existente mais tolerante a 'por aqui' e 'perto daqui'.
           old="""(?:mais\\s+)?(?:perto|proximo|proxima)(?:\\s+(?:de|da|do))?\\s*(mim|minha localizacao|onde estou|minha casa|aqui)?$"""
           new="""(?:mais\\s+)?(?:perto|proximo|proxima|por aqui|perto daqui)(?:\\s+(?:de|da|do))?\\s*(mim|minha localizacao|onde estou|minha casa|aqui)?$"""
           if old in s:
               s=s.replace(old,new,1)
 
-          # Aceita 'bora/vamos/vamo/toca/segue' também no parser final de rota.
           old_route="""(?:(?:agora\\s+)?(?:me\\s+leve|leve(?:-|\\s)?me|navegue|quero\\s+ir|ir|vá|va|trace(?:\\s+uma)?\\s+rota|troque(?:\\s+a)?\\s+rota|mude(?:\\s+a)?\\s+rota))"""
           new_route="""(?:(?:agora\\s+)?(?:me\\s+leve|leve(?:-|\\s)?me|navegue|quero\\s+ir|ir|vá|va|bora|vamos|vamo|segue|toca|trace(?:\\s+uma)?\\s+rota|troque(?:\\s+a)?\\s+rota|mude(?:\\s+a)?\\s+rota))"""
           if s.count(old_route)==1:
               s=s.replace(old_route,new_route,1)
 
-          # Marca build e renova cache sem alterar lógica de mapa/GPS.
           s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="146-assistente-natural">',s,count=1)
           p.write_text(s)
 
