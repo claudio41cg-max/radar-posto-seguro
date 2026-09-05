@@ -1,0 +1,1 @@
+/* Backup v159 antes da mudança territorial v160. O conteúdo original está preservado no commit anterior 34b3bb2aa5755d9dd3b140473b009e0dbaa9f8ac. */
