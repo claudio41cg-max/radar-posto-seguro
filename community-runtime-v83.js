@@ -4,7 +4,7 @@
   if (window.__radarCommunityRuntimeV84) return;
   window.__radarCommunityRuntimeV84 = true;
 
-  const VERSION = '84-external-index-resilient';
+  const VERSION = '153-geometry-authoritative';
   let adopted = false;
   let refreshTimer = null;
   let refreshTries = 0;

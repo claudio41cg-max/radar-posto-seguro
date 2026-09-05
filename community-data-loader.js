@@ -16,7 +16,7 @@
   async function loadJsonCached(holder, url, label){
     if (holder.value) return holder.value;
     if (holder.promise) return holder.promise;
-    holder.promise = fetch(url, { cache: 'default' })
+    holder.promise = fetch(url + (url.includes('?') ? '&' : '?') + 'v=153', { cache: 'no-store' })
       .then(r => {
         if (!r.ok) throw new Error(`Falha ao carregar ${label}: ${r.status}`);
         return r.json();
@@ -64,7 +64,7 @@
       const datasets = await list();
       const item = datasets.find(d => d.id === id);
       if (!item) throw new Error(`Conjunto de comunidades não encontrado: ${id}`);
-      const response = await fetch(item.path, { cache: 'default' });
+      const response = await fetch(item.path + (item.path.includes('?') ? '&' : '?') + 'v=153', { cache: 'no-store' });
       if (!response.ok) throw new Error(`Falha ao carregar ${id}: ${response.status}`);
       const data = await response.json();
       touch(id, data);
@@ -101,7 +101,7 @@
   });
 
   window.RadarCommunityData = {
-    version: '81-external-community-index',
+    version: '153-community-source-fresh',
     index: getIndex,
     list,
     load,
