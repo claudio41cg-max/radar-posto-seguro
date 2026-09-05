@@ -1,4 +1,4 @@
-name: v148 Santa Cruz real
+name: v148 Santa Cruz oficial 2022
 on:
   push:
     paths:
@@ -11,28 +11,157 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Diagnosticar SABREN 2022 em Santa Cruz
+      - name: Aplicar limites oficiais SABREN 2022
         run: |
           python3 - <<'PY'
-          import json,urllib.parse,urllib.request
-          url='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN/Limites_de_Favelas/FeatureServer/13/query'
-          q=urllib.parse.urlencode({'where':'1=1','outFields':'nome,bairro,ra,complexo,cod_favela','returnGeometry':'true','outSR':'4326','f':'geojson'})
-          req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148-diag'})
-          with urllib.request.urlopen(req,timeout=60) as r:d=json.loads(r.read().decode())
-          def pts(g):
-            out=[]
-            def walk(x):
-              if isinstance(x,list) and len(x)>=2 and all(isinstance(v,(int,float)) for v in x[:2]):out.append(x[:2])
-              elif isinstance(x,list):
-                for y in x:walk(y)
-            walk((g or {}).get('coordinates',[]));return out
-          rows=[]
-          for f in d.get('features',[]):
-            p=f.get('properties') or {};g=f.get('geometry');a=pts(g)
-            if not a:continue
-            x=sum(v[0] for v in a)/len(a);y=sum(v[1] for v in a)/len(a)
-            if -43.75<=x<=-43.55 and -23.05<=y<=-22.85:
-              rows.append((str(p.get('nome')),str(p.get('bairro')),str(p.get('ra')),str(p.get('complexo')),p.get('cod_favela'),round(x,6),round(y,6)))
-          for row in sorted(rows):print('SABREN2022',row)
-          print('TOTAL',len(rows))
+          from pathlib import Path
+          import json,re,unicodedata,urllib.parse,urllib.request
+
+          URL='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN/Limites_de_Favelas/FeatureServer/13/query'
+          params={'where':'1=1','outFields':'nome,bairro,ra,complexo,cod_favela','returnGeometry':'true','outSR':'4326','f':'geojson'}
+          q=urllib.parse.urlencode(params)
+          req=urllib.request.Request(URL+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148'})
+          with urllib.request.urlopen(req,timeout=60) as r:
+              fc=json.loads(r.read().decode('utf-8'))
+
+          def norm(v):
+              return re.sub(r'[^a-z0-9]+',' ',unicodedata.normalize('NFKD',str(v or '')).encode('ascii','ignore').decode().lower()).strip()
+          def points(g):
+              out=[]
+              def walk(x):
+                  if isinstance(x,list) and len(x)>=2 and all(isinstance(v,(int,float)) for v in x[:2]): out.append(x[:2])
+                  elif isinstance(x,list):
+                      for y in x: walk(y)
+              walk((g or {}).get('coordinates',[])); return out
+          def centroid(g):
+              p=points(g); return (sum(x for x,y in p)/len(p),sum(y for x,y in p)/len(p))
+          def in_santa_cruz(f):
+              p=f.get('properties') or {}; g=f.get('geometry')
+              if not g: return False
+              x,y=centroid(g)
+              return p.get('ra')=='Santa Cruz' and -43.75<=x<=-43.55 and -23.05<=y<=-22.85
+          def aggregate(features):
+              polys=[]
+              for f in features:
+                  g=f['geometry']
+                  if g['type']=='Polygon': polys.append(g['coordinates'])
+                  elif g['type']=='MultiPolygon': polys.extend(g['coordinates'])
+              return {'type':'MultiPolygon','coordinates':polys}
+
+          sc=[f for f in fc.get('features',[]) if in_santa_cruz(f)]
+          def select(test): return [f for f in sc if test(norm((f.get('properties') or {}).get('nome')))]
+
+          rollas=select(lambda n:n=='rollas')
+          coqueiral=select(lambda n:'coqueiral' in n)
+          urucania=select(lambda n:'urucania' in n)
+          joao=select(lambda n:'joao xxiii' in n or 'joao 23' in n)
+          if not rollas: raise SystemExit('Rollas não encontrado no SABREN 2022')
+          if not coqueiral: raise SystemExit('Coqueiral não encontrado no SABREN 2022')
+          if not urucania: raise SystemExit('Urucânia não encontrada no SABREN 2022')
+          if not joao: raise SystemExit('João XXIII não encontrado no SABREN 2022')
+
+          official={
+              'Rollas / Rodo (Santa Cruz)':aggregate(rollas),
+              'Coqueiral (Santa Cruz)':aggregate(coqueiral),
+              'Urucânia (Santa Cruz)':aggregate(urucania),
+              'João XXIII (Santa Cruz)':aggregate(joao),
+          }
+
+          # Corrige o erro da v147: Rodo não é mais um homônimo de outro bairro.
+          # Nos documentos oficiais consultados, Rodo aparece como denominação popular de Rollas;
+          # por isso o Radar usa um único polígono oficial Rollas / Rodo, sem duplicar área.
+          gp=Path('data/community-geometries.json'); data=json.loads(gp.read_text(encoding='utf-8'))
+          geoms=data.setdefault('geometries',{})
+          geoms.pop('Rodo (Santa Cruz)',None)
+          geoms.pop('Comunidade do Rola (Santa Cruz)',None)
+          for name,g in official.items(): geoms[name]=g
+          data['version']=148
+          data['description']='v148: Santa Cruz usa limites oficiais SABREN/IPP 2022. Rodo é tratado como denominação popular de Rollas, usando um único polígono oficial. Aço permanece sem selo oficial de polígono até fonte cartográfica municipal específica.'
+          gp.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+
+          ip=Path('data/community-index.json'); idx=json.loads(ip.read_text(encoding='utf-8'))
+          areas=[a for a in idx.get('areas',[]) if a.get('name') not in ('Rodo (Santa Cruz)','Comunidade do Rola (Santa Cruz)')]
+          by={a.get('name'):a for a in areas}
+          for name,g in official.items():
+              x,y=centroid(g)
+              if name in by: by[name]['c']=[round(x,6),round(y,6)]
+              else:
+                  a={'name':name,'c':[round(x,6),round(y,6)],'r':0.30};areas.append(a);by[name]=a
+          idx['areas']=areas; idx['version']=148
+          idx['description']='v148: centros derivados dos limites SABREN/IPP 2022; raio é apenas índice de proximidade, nunca limite cartográfico.'
+          ip.write_text(json.dumps(idx,ensure_ascii=False,indent=2),encoding='utf-8')
+
+          audit=[]
+          groups={'Rollas / Rodo (Santa Cruz)':rollas,'Coqueiral (Santa Cruz)':coqueiral,'Urucânia (Santa Cruz)':urucania,'João XXIII (Santa Cruz)':joao}
+          for app,features in groups.items():
+              for f in features:
+                  p=f.get('properties') or {}
+                  audit.append({'type':'Feature','properties':{'app_name':app,'nome_oficial':p.get('nome'),'bairro':p.get('bairro'),'ra':p.get('ra'),'cod_favela':p.get('cod_favela'),'fonte':'SABREN/IPP 2022'},'geometry':f.get('geometry')})
+          Path('data/sabren-santa-cruz-v148.geojson').write_text(json.dumps({'type':'FeatureCollection','features':audit},ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+
+          Path('community-geometries-preload.js').write_text("/* Radar Seguro RJ PRO v148 — Santa Cruz SABREN 2022 */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES="+json.dumps(geoms,ensure_ascii=False,separators=(',',':'))+";window.RadarCommunityGeometriesPreload={version:'148-santa-cruz-sabren-2022',count:Object.keys(window.RADAR_COMMUNITY_GEOMETRIES).length};})();\n",encoding='utf-8')
+          lines=['/* Radar Seguro RJ PRO v148 — índice Santa Cruz SABREN 2022 */','const rawAreas = [']
+          for a in areas: lines.append('  '+json.dumps(a,ensure_ascii=False,separators=(',',':'))+',')
+          lines += ['];',"window.RadarCommunityIndexPreload={version:'148-santa-cruz-sabren-2022',count:rawAreas.length};",'']
+          Path('community-index-preload.js').write_text('\n'.join(lines),encoding='utf-8')
+
+          # Azul translúcido, no próprio MapLibre do app (não troca o motor por Leaflet).
+          sp=Path('community-map-style-v95.js'); s=sp.read_text(encoding='utf-8')
+          s=s.replace("const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95';","const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95',SCF='santa-cruz-blue-fill-v148',SCO='santa-cruz-blue-outline-v148';\nconst SCN=['Rollas / Rodo (Santa Cruz)','Coqueiral (Santa Cruz)','Urucânia (Santa Cruz)','João XXIII (Santa Cruz)'];")
+          marker="if(!map.getLayer(OUT))map.addLayer({id:OUT,type:'line',source:'communities',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#f7fbfd','line-width':['interpolate',['linear'],['zoom'],9,1.05,12,1.45,15,1.8,18,2.1],'line-opacity':.96,'line-blur':.12}});"
+          if 'santa-cruz-blue-fill-v148' not in s.split(marker)[-1]:
+              extra=marker+"\n  if(!map.getLayer(SCF))map.addLayer({id:SCF,type:'fill',source:'communities',filter:['match',['get','name'],SCN,true,false],paint:{'fill-color':'#3388ff','fill-opacity':.30}},map.getLayer('community-outline')?'community-outline':undefined);\n  if(!map.getLayer(SCO))map.addLayer({id:SCO,type:'line',source:'communities',filter:['match',['get','name'],SCN,true,false],layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#4da3ff','line-width':2.2,'line-opacity':.96}});"
+              if marker not in s: raise SystemExit('Marcador de estilo não encontrado')
+              s=s.replace(marker,extra,1)
+          sp.write_text(s,encoding='utf-8')
+
+          hp=Path('index.html'); h=hp.read_text(encoding='utf-8')
+          h=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="148-santa-cruz-sabren-2022">',h,count=1)
+          h=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=148',h,count=1)
+          h=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=148',h,count=1)
+          h=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=148',h,count=1)
+          hp.write_text(h,encoding='utf-8')
+
+          sw=Path('service-worker.js'); w=sw.read_text(encoding='utf-8')
+          w=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';","const CACHE_NAME = 'radar-seguro-rj-v148';",w,count=1)
+          w=re.sub(r"build:'\d+'","build:'148'",w,count=1)
+          w=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=148',w)
+          w=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=148',w)
+          w=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=148',w)
+          sw.write_text(w,encoding='utf-8')
+
+          print('v148 preparada com polígonos SABREN 2022:', ', '.join(official))
           PY
+      - name: Validar v148
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          g=json.loads(Path('data/community-geometries.json').read_text())
+          s=Path('index.html').read_text(); st=Path('community-map-style-v95.js').read_text(); sw=Path('service-worker.js').read_text()
+          names=['Rollas / Rodo (Santa Cruz)','Coqueiral (Santa Cruz)','Urucânia (Santa Cruz)','João XXIII (Santa Cruz)']
+          for n in names:
+              assert n in g['geometries'],n
+              pts=[]
+              def walk(a):
+                  if isinstance(a,list) and len(a)>=2 and all(isinstance(v,(int,float)) for v in a[:2]):pts.append(a[:2])
+                  elif isinstance(a,list):
+                      for b in a:walk(b)
+              walk(g['geometries'][n]['coordinates'])
+              x=sum(p[0] for p in pts)/len(pts);y=sum(p[1] for p in pts)/len(pts)
+              assert -43.75<=x<=-43.55 and -23.05<=y<=-22.85,(n,x,y)
+          assert 'Rodo (Santa Cruz)' not in g['geometries']
+          for x in ['startGPS(){','updateCamera(){','new maplibregl.Map({','v146 — COMANDOS NATURAIS DO DIA A DIA']: assert x in s,x
+          assert '#3388ff' in st and 'santa-cruz-blue-fill-v148' in st
+          assert '148-santa-cruz-sabren-2022' in s and 'radar-seguro-rj-v148' in sw
+          assert Path('data/sabren-santa-cruz-v148.geojson').exists()
+          print('v148 validada: polígonos oficiais dentro de Santa Cruz, Rodo incorreto removido, mapa/GPS/câmera preservados')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/community-geometries.json data/community-index.json data/sabren-santa-cruz-v148.geojson community-geometries-preload.js community-index-preload.js community-map-style-v95.js index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v148: corrigir Santa Cruz com limites SABREN 2022 e azul translúcido"
+          git push
