@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T11:40:23.265Z",
+  "generatedAt": "2026-09-05T11:54:37.172Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 41,
-  "lastUpdate": "2026-09-05T07:30:58-03:00",
+  "count": 42,
+  "lastUpdate": "2026-09-05T08:52:56-03:00",
   "occurrences": [
+    {
+      "id": "466b9cd2-7e93-47d0-91fb-f904cd4e8303",
+      "documentNumber": 78924,
+      "date": "2026-09-05T05:36:00.000Z",
+      "address": "Comunidade de Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, 21241-310, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
+      "latitude": -22.80801593,
+      "longitude": -43.30553607,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "5bf25c22-5a47-40ae-a1b9-7b528f250030",
       "documentNumber": 78916,
