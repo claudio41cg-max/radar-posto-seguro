@@ -1,0 +1,188 @@
+name: v150 Cesarão completo e bordas brancas
+on:
+  push:
+    paths:
+      - '.github/workflows/v150-cesarao-completo.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Atualizar Cesarão e bordas
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,re,unicodedata,urllib.parse,urllib.request
+
+          REPO_BOUNDS=(-43.75,-23.00,-43.60,-22.88)
+          BASE='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN'
+          SOURCES=[
+            ('Limites2022',BASE+'/Limites_de_Favelas/FeatureServer/13/query'),
+            ('DadosGerais',BASE+'/DadosGeraisFavelas/FeatureServer/0/query'),
+            ('Loteamentos',BASE+'/Loteamentos/FeatureServer/0/query'),
+            ('Conjuntos',BASE+'/Conjuntos_Habitacionais/FeatureServer/0/query')
+          ]
+
+          def get(url):
+            q=urllib.parse.urlencode({'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
+            req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/150'})
+            with urllib.request.urlopen(req,timeout=60) as r:
+              return json.loads(r.read().decode('utf-8'))
+
+          def norm(v):
+            return re.sub(r'[^a-z0-9]+',' ',unicodedata.normalize('NFKD',str(v or '')).encode('ascii','ignore').decode().lower()).strip()
+
+          def allpts(g):
+            out=[]
+            def walk(x):
+              if isinstance(x,list) and len(x)>=2 and all(isinstance(v,(int,float)) for v in x[:2]): out.append((x[0],x[1]))
+              elif isinstance(x,list):
+                for y in x: walk(y)
+            walk((g or {}).get('coordinates',[])); return out
+
+          def centroid(g):
+            p=allpts(g)
+            return (sum(x for x,y in p)/len(p),sum(y for x,y in p)/len(p)) if p else (None,None)
+
+          def inside_bbox(g):
+            x,y=centroid(g); a,b,c,d=REPO_BOUNDS
+            return x is not None and a<=x<=c and b<=y<=d
+
+          def polygons(g):
+            if not g:return []
+            if g.get('type')=='Polygon': return [g.get('coordinates')]
+            if g.get('type')=='MultiPolygon': return list(g.get('coordinates') or [])
+            return []
+
+          def point_in_ring(pt,ring):
+            x,y=pt; inside=False; j=len(ring)-1
+            for i in range(len(ring)):
+              xi,yi=ring[i][0],ring[i][1]; xj,yj=ring[j][0],ring[j][1]
+              hit=((yi>y)!=(yj>y)) and (x < (xj-xi)*(y-yi)/((yj-yi) or 1e-15)+xi)
+              if hit: inside=not inside
+              j=i
+            return inside
+
+          def point_in_geom(pt,g):
+            for poly in polygons(g):
+              if poly and point_in_ring(pt,poly[0]): return True
+            return False
+
+          exact=[]; extras=[]
+          audit=[]
+          for label,url in SOURCES:
+            data=get(url)
+            for f in data.get('features',[]):
+              g=f.get('geometry'); p=f.get('properties') or {}
+              if not g or not inside_bbox(g): continue
+              text=' | '.join(str(v) for v in p.values() if isinstance(v,str) and v.strip())
+              if 'cesarao' not in norm(text): continue
+              row={'source':label,'text':text,'geometry':g}
+              audit.append(row)
+              if label=='Limites2022': exact.append(g)
+              else: extras.append(g)
+
+          if not exact:
+            raise SystemExit('Nenhum polígono Cesarão encontrado na camada oficial 2022')
+
+          # Base oficial 2022 + partes adicionais com nome Cesarão que realmente ampliem o conjunto.
+          chosen=list(exact)
+          for g in extras:
+            c=centroid(g)
+            if c[0] is None: continue
+            if any(point_in_geom(c,b) for b in exact):
+              continue
+            chosen.append(g)
+
+          seen=set(); mp=[]
+          for g in chosen:
+            for poly in polygons(g):
+              key=json.dumps(poly,separators=(',',':'))
+              if key in seen: continue
+              seen.add(key); mp.append(poly)
+          if not mp: raise SystemExit('Cesarão sem geometria após consolidação')
+          merged={'type':'MultiPolygon','coordinates':mp}
+
+          gp=Path('data/community-geometries.json')
+          data=json.loads(gp.read_text(encoding='utf-8'))
+          data.setdefault('geometries',{})['Cesarão (Santa Cruz)']=merged
+          data['version']=150
+          data['description']='v150: Cesarão consolidado com todas as feições municipais de Santa Cruz que contêm Cesarão no nome/descrição, usando o limite 2022 como base e adicionando apenas partes externas; bordas visuais em branco.'
+          gp.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+
+          # Centro derivado da geometria consolidada.
+          x,y=centroid(merged)
+          ip=Path('data/community-index.json')
+          idx=json.loads(ip.read_text(encoding='utf-8'))
+          for a in idx.get('areas',[]):
+            if a.get('name')=='Cesarão (Santa Cruz)':
+              a['c']=[round(x,6),round(y,6)]
+              break
+          idx['version']=150
+          ip.write_text(json.dumps(idx,ensure_ascii=False,indent=2),encoding='utf-8')
+
+          # Regenera preloads para garantir que o app use a geometria nova.
+          geoms=data['geometries']
+          Path('community-geometries-preload.js').write_text("/* v150 Cesarão consolidado */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES="+json.dumps(geoms,ensure_ascii=False,separators=(',',':'))+";window.RadarCommunityGeometriesPreload={version:'150-cesarao-completo',count:Object.keys(window.RADAR_COMMUNITY_GEOMETRIES).length};})();\n",encoding='utf-8')
+          lines=['/* v150 índice */','const rawAreas = [']+['  '+json.dumps(a,ensure_ascii=False,separators=(',',':'))+',' for a in idx.get('areas',[])]+['];',"window.RadarCommunityIndexPreload={version:'150-cesarao-completo',count:rawAreas.length};",'']
+          Path('community-index-preload.js').write_text('\n'.join(lines),encoding='utf-8')
+
+          # Bordas brancas para Santa Cruz, mantendo preenchimento azul translúcido e brilho.
+          sp=Path('community-map-style-v95.js')
+          s=sp.read_text(encoding='utf-8')
+          s=s.replace("line-color':'#63b3ff'","line-color':'#ffffff'")
+          s=s.replace("'line-opacity':.99,'line-blur':.04","'line-opacity':1,'line-blur':.02")
+          s=s.replace("version:'149-santa-cruz-reference-look'","version:'150-santa-cruz-white-borders'")
+          s=s.replace('Radar Seguro RJ PRO v149','Radar Seguro RJ PRO v150')
+          sp.write_text(s,encoding='utf-8')
+
+          # Auditoria dos nomes encontrados.
+          Path('data/cesarao-v150-audit.json').write_text(json.dumps({'matches':[{'source':r['source'],'text':r['text']} for r in audit],'polygons':len(mp),'center':[round(x,6),round(y,6)]},ensure_ascii=False,indent=2),encoding='utf-8')
+
+          # Versões/cache.
+          hp=Path('index.html'); h=hp.read_text(encoding='utf-8')
+          h=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="150-cesarao-completo">',h,count=1)
+          h=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=150',h,count=1)
+          h=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=150',h,count=1)
+          h=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=150',h)
+          hp.write_text(h,encoding='utf-8')
+
+          sw=Path('service-worker.js'); w=sw.read_text(encoding='utf-8')
+          w=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';","const CACHE_NAME = 'radar-seguro-rj-v150';",w,count=1)
+          w=re.sub(r"build:'\d+'","build:'150'",w,count=1)
+          w=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=150',w)
+          w=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=150',w)
+          w=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=150',w)
+          sw.write_text(w,encoding='utf-8')
+
+          print('Cesarão matches:',len(audit),'polygons:',len(mp),'center:',x,y)
+          for r in audit: print(r['source'],r['text'][:500])
+          PY
+      - name: Validar
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          g=json.loads(Path('data/community-geometries.json').read_text())
+          assert g['version']==150
+          cg=g['geometries']['Cesarão (Santa Cruz)']
+          assert cg['type']=='MultiPolygon' and len(cg['coordinates'])>=1
+          st=Path('community-map-style-v95.js').read_text()
+          assert "line-color':'#ffffff'" in st
+          h=Path('index.html').read_text(); sw=Path('service-worker.js').read_text()
+          for x in ['startGPS(){','updateCamera(){','new maplibregl.Map({']: assert x in h,x
+          assert 'community-geometries-preload.js?v=150' in h
+          assert 'radar-seguro-rj-v150' in sw
+          print('v150 validada')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/community-geometries.json data/community-index.json data/cesarao-v150-audit.json community-geometries-preload.js community-index-preload.js community-map-style-v95.js index.html service-worker.js
+          git diff --cached --quiet && exit 0
+          git commit -m "v150: ampliar Cesarão e usar bordas brancas"
+          git push
