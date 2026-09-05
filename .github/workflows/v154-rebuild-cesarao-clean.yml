@@ -1,0 +1,118 @@
+name: v154 reconstruir Cesarão do zero
+on:
+  push:
+    paths:
+      - '.github/workflows/v154-rebuild-cesarao-clean.yml'
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apagar Cesarão antigo e recriar uma única fonte
+        run: |
+          python3 - <<'PY'
+          import json,re,unicodedata
+          from pathlib import Path
+
+          def norm(s):
+              s=unicodedata.normalize('NFD',str(s or ''))
+              s=''.join(c for c in s if unicodedata.category(c)!='Mn')
+              return s.lower().strip()
+          def is_cesarao(s):
+              n=norm(s)
+              return 'cesarao' in n or 'otacilio camara' in n
+
+          # Geometria territorial única aprovada para o conjunto Cesarão/Otacílio Camará.
+          ring=[
+            [-43.6668,-22.9288],[-43.6622,-22.9272],[-43.6564,-22.9275],
+            [-43.6510,-22.9292],[-43.6478,-22.9325],[-43.6482,-22.9372],
+            [-43.6502,-22.9415],[-43.6537,-22.9450],[-43.6586,-22.9462],
+            [-43.6633,-22.9447],[-43.6662,-22.9410],[-43.6677,-22.9362],
+            [-43.6674,-22.9321],[-43.6668,-22.9288]
+          ]
+          geom={'type':'Polygon','coordinates':[ring]}
+          canonical_name='Cesarão (Santa Cruz)'
+          center=[-43.65775,-22.9367]
+          note='Área territorial conhecida localmente como Cesarão / Conjunto Otacílio Camará; contorno interpretativo v154.'
+
+          # 1) Apaga QUALQUER entrada antiga de Cesarão/Otacílio do arquivo de geometrias.
+          gp=Path('data/community-geometries.json')
+          geoms=json.loads(gp.read_text())
+          geoms={k:v for k,v in geoms.items() if not is_cesarao(k)}
+          geoms[canonical_name]=geom
+          gp.write_text(json.dumps(geoms,ensure_ascii=False,separators=(',',':'))+'\n')
+
+          # 2) Apaga QUALQUER entrada antiga do índice e cria só uma.
+          ip=Path('data/community-index.json')
+          idx=json.loads(ip.read_text())
+          areas=[a for a in idx.get('areas',[]) if not is_cesarao(a.get('name'))]
+          areas.append({'name':canonical_name,'c':center,'r':1.15,'territorial_note':note})
+          idx['version']=154
+          idx['areas']=areas
+          ip.write_text(json.dumps(idx,ensure_ascii=False,indent=2)+'\n')
+
+          # 3) Regenera os dois preloads a partir dos JSON limpos. Nada legado de Cesarão sobra neles.
+          Path('community-geometries-preload.js').write_text(
+            '/* v154 Cesarão reconstruído do zero */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES='+
+            json.dumps(geoms,ensure_ascii=False,separators=(',',':'))+';})();\n'
+          )
+          raw='const rawAreas = '+json.dumps(areas,ensure_ascii=False,separators=(',',':'))+';\n'
+          raw+="window.RadarCommunityIndexPreload={version:'154-cesarao-clean-rebuild',count:rawAreas.length};\n"
+          Path('community-index-preload.js').write_text(raw)
+
+          # 4) Atualiza os carregadores para sempre buscar a versão 154 sem cache.
+          p=Path('community-data-loader.js'); s=p.read_text()
+          s=re.sub(r"\+ 'v=\d+'","+ 'v=154'",s)
+          s=re.sub(r"version: '[^']+'","version: '154-community-source-fresh'",s)
+          p.write_text(s)
+
+          # 5) Corrige o estilo: remove qualquer camada de rótulo antiga de Santa Cruz antes de criar a atual.
+          p=Path('community-map-style-v95.js'); s=p.read_text()
+          s=s.replace("if(window.__radarCommunityMapStyleV149)return;window.__radarCommunityMapStyleV149=true;","if(window.__radarCommunityMapStyleV154)return;window.__radarCommunityMapStyleV154=true;")
+          s=s.replace("function apply(map){\n try{\n  if(!map||!map.getSource('communities'))return false;","function apply(map){\n try{\n  if(!map||!map.getSource('communities'))return false;\n  ['santa-cruz-label-v149','santa-cruz-blue-fill-v149','santa-cruz-blue-glow-v149','santa-cruz-blue-outline-v149'].forEach(id=>{try{if(map.getLayer(id))map.removeLayer(id)}catch(_){}});")
+          s=s.replace("if(map.__communityStyleV149)return true;map.__communityStyleV149=true;","if(map.__communityStyleV154)return true;map.__communityStyleV154=true;")
+          s=s.replace("version:'150-santa-cruz-white-borders'","version:'154-cesarao-clean-rebuild'")
+          p.write_text(s)
+
+          # 6) Atualiza referências/caches do app.
+          p=Path('index.html'); s=p.read_text()
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="154-cesarao-clean-rebuild">',s)
+          for f in ['community-index-preload.js','community-geometries-preload.js','community-map-style-v95.js']:
+              s=re.sub(re.escape(f)+r'\?v=\d+',f+'?v=154',s)
+          p.write_text(s)
+
+          p=Path('service-worker.js'); s=p.read_text()
+          s=re.sub(r'radar-seguro-rj-v\d+','radar-seguro-rj-v154',s)
+          s=re.sub(r"RADAR_SW_BUILD\s*=\s*['\"]\d+['\"]","RADAR_SW_BUILD = '154'",s)
+          p.write_text(s)
+          PY
+      - name: Validar limpeza total do Cesarão
+        run: |
+          python3 - <<'PY'
+          import json,unicodedata
+          def norm(s):
+              s=unicodedata.normalize('NFD',str(s or ''))
+              return ''.join(c for c in s if unicodedata.category(c)!='Mn').lower()
+          g=json.load(open('data/community-geometries.json'))
+          i=json.load(open('data/community-index.json'))
+          gkeys=[k for k in g if 'cesarao' in norm(k) or 'otacilio camara' in norm(k)]
+          ikeys=[a['name'] for a in i['areas'] if 'cesarao' in norm(a.get('name')) or 'otacilio camara' in norm(a.get('name'))]
+          assert gkeys==['Cesarão (Santa Cruz)'], gkeys
+          assert ikeys==['Cesarão (Santa Cruz)'], ikeys
+          assert open('community-geometries-preload.js').read().count('Cesarão (Santa Cruz)')==1
+          assert open('community-index-preload.js').read().count('Cesarão (Santa Cruz)')==1
+          ring=g['Cesarão (Santa Cruz)']['coordinates'][0]
+          xs=[p[0] for p in ring]; ys=[p[1] for p in ring]
+          assert max(xs)-min(xs)>0.015 and max(ys)-min(ys)>0.015
+          assert '154-cesarao-clean-rebuild' in open('index.html').read()
+          print('v154 OK: só existe um Cesarão no catálogo, geometria e preload')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/community-geometries.json data/community-index.json community-geometries-preload.js community-index-preload.js community-data-loader.js community-map-style-v95.js index.html service-worker.js
+          git commit -m 'v154: apagar Cesarão antigo e reconstruir do zero'
+          git push
