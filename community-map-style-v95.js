@@ -2,7 +2,8 @@
 (()=>{
 'use strict';
 if(window.__radarCommunityMapStyleV95)return;window.__radarCommunityMapStyleV95=true;
-const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95';
+const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95',SCF='santa-cruz-blue-fill-v148',SCO='santa-cruz-blue-outline-v148';
+const SCN=['Rollas / Rodo (Santa Cruz)','Coqueiral (Santa Cruz)','Urucânia (Santa Cruz)','Comunidade do Aço (Santa Cruz)','João XXIII (Santa Cruz)'];
 function apply(map){
  try{
   if(!map||!map.getSource('communities'))return false;
@@ -12,6 +13,8 @@ function apply(map){
   if(!map.getLayer(FILL))map.addLayer({id:FILL,type:'fill',source:'communities',paint:{'fill-color':'#58788d','fill-opacity':.18}},map.getLayer('community-outline')?'community-outline':undefined);
   if(map.getLayer('community-outline')){map.setPaintProperty('community-outline','line-color','#f2f8fb');map.setPaintProperty('community-outline','line-width',1.55);map.setPaintProperty('community-outline','line-opacity',.94)}
   if(!map.getLayer(OUT))map.addLayer({id:OUT,type:'line',source:'communities',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#f7fbfd','line-width':['interpolate',['linear'],['zoom'],9,1.05,12,1.45,15,1.8,18,2.1],'line-opacity':.96,'line-blur':.12}});
+  if(!map.getLayer(SCF))map.addLayer({id:SCF,type:'fill',source:'communities',filter:['match',['get','name'],SCN,true,false],paint:{'fill-color':'#3388ff','fill-opacity':.32}},map.getLayer('community-outline')?'community-outline':undefined);
+  if(!map.getLayer(SCO))map.addLayer({id:SCO,type:'line',source:'communities',filter:['match',['get','name'],SCN,true,false],layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#4da3ff','line-width':2.3,'line-opacity':.98}});
   /* Nome principal: branco, discreto, desaparece ao afastar para não poluir. */
   if(map.getLayer('community-label')){
    map.setLayoutProperty('community-label','text-size',['interpolate',['linear'],['zoom'],10,0,11,10,13,12,16,14]);
