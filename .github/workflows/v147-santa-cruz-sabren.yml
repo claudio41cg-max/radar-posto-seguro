@@ -11,18 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Aplicar polígonos reais de Santa Cruz
+      - name: Diagnosticar SABREN 2022 em Santa Cruz
         run: |
           python3 - <<'PY'
-          from pathlib import Path
-          import json,re,unicodedata,urllib.parse,urllib.request
-          BASE='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN'
-          B=(-43.75,-23.05,-43.55,-22.85)
-          def get(url,params):
-            q=urllib.parse.urlencode(params);req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148'})
-            with urllib.request.urlopen(req,timeout=60) as r:return json.loads(r.read().decode())
-          def norm(v):
-            return re.sub(r'[^a-z0-9]+',' ',unicodedata.normalize('NFKD',str(v or '')).encode('ascii','ignore').decode().lower()).strip()
+          import json,urllib.parse,urllib.request
+          url='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN/Limites_de_Favelas/FeatureServer/13/query'
+          q=urllib.parse.urlencode({'where':'1=1','outFields':'nome,bairro,ra,complexo,cod_favela','returnGeometry':'true','outSR':'4326','f':'geojson'})
+          req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148-diag'})
+          with urllib.request.urlopen(req,timeout=60) as r:d=json.loads(r.read().decode())
           def pts(g):
             out=[]
             def walk(x):
@@ -30,126 +26,13 @@ jobs:
               elif isinstance(x,list):
                 for y in x:walk(y)
             walk((g or {}).get('coordinates',[]));return out
-          def in_sc(g):
-            p=pts(g)
-            if not p:return False
-            x=sum(a[0] for a in p)/len(p);y=sum(a[1] for a in p)/len(p)
-            return B[0]<=x<=B[2] and B[1]<=y<=B[3]
-          def agg(gs):
-            polys=[]
-            for g in gs:
-              polys += [g['coordinates']] if g['type']=='Polygon' else g['coordinates']
-            return {'type':'MultiPolygon','coordinates':polys}
-          targets={
-            'Rodo (Santa Cruz)':['rodo','favela do rodo'],
-            'Comunidade do Rola (Santa Cruz)':['rollas','rolas','rola','comunidade do rollas','comunidade do rola'],
-            'Coqueiral (Santa Cruz)':['coqueiral'],
-            'Urucânia (Santa Cruz)':['urucania'],
-            'Comunidade do Aço (Santa Cruz)':['aco','comunidade do aco'],
-            'João XXIII (Santa Cruz)':['joao xxiii','joao 23','joao xxiii santa cruz']
-          }
-          found={k:[] for k in targets}; audit=[]
-          # Favelas + tabela oficial de nomes
-          fav=get(BASE+'/DadosGeraisFavelas/FeatureServer/0/query',{'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
-          ntab=get(BASE+'/Tabelas_SABREN/FeatureServer/36/query',{'where':'1=1','outFields':'*','returnGeometry':'false','f':'json'})
-          by={}
-          for row in ntab.get('features',[]):
-            a=row.get('attributes') or {};c=a.get('cod_favela');n=a.get('nome')
-            if c is not None and n:by.setdefault(str(c),set()).add(str(n))
-          sources=[]
-          for f in fav.get('features',[]):
-            g=f.get('geometry');p=f.get('properties') or {}
-            if not g or not in_sc(g):continue
-            names=set(by.get(str(p.get('cod_favela')),set()))
-            for v in p.values():
-              if isinstance(v,str) and v.strip():names.add(v.strip())
-            sources.append(('SABREN Favelas',f,names))
-          # Loteamentos oficiais
-          lot=get(BASE+'/Loteamentos/FeatureServer/0/query',{'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
-          for f in lot.get('features',[]):
-            g=f.get('geometry');p=f.get('properties') or {}
-            if not g or not in_sc(g):continue
-            names={str(p.get(k)) for k in ('nome','nome_nrl') if p.get(k)}
-            sources.append(('SABREN Loteamentos',f,names))
-          # Conjuntos habitacionais oficiais
-          con=get(BASE+'/Conjuntos_Habitacionais/FeatureServer/0/query',{'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
-          for f in con.get('features',[]):
-            g=f.get('geometry');p=f.get('properties') or {}
-            if not g or not in_sc(g):continue
-            names={str(p.get('conjunto'))} if p.get('conjunto') else set()
-            sources.append(('SABREN Conjuntos',f,names))
-          def hit(names,aliases):
-            ns=[norm(n) for n in names]
-            for a in aliases:
-              aa=norm(a)
-              for n in ns:
-                if n==aa or re.search(r'(^| )'+re.escape(aa)+r'( |$)',n):return True
-            return False
-          for src,f,names in sources:
-            for app,aliases in targets.items():
-              if hit(names,aliases):
-                g=f.get('geometry')
-                found[app].append(g)
-                audit.append({'type':'Feature','properties':{'app_name':app,'source':src,'official_names':sorted(names)},'geometry':g})
-                break
-          print('Correspondências oficiais em Santa Cruz:')
-          for k,v in found.items():print(k,len(v))
-          missing=[k for k,v in found.items() if not v]
-          if missing:raise SystemExit('Sem polígono oficial seguro para: '+', '.join(missing))
-          # Atualiza geometrias e índice
-          gp=Path('data/community-geometries.json');data=json.loads(gp.read_text());data['version']=148
-          data['description']='v148: polígonos de Santa Cruz filtrados espacialmente e obtidos das camadas oficiais SABREN/IPP (Favelas, Loteamentos e Conjuntos Habitacionais).'
-          ip=Path('data/community-index.json');idx=json.loads(ip.read_text());areas=idx.get('areas',[]);am={a.get('name'):a for a in areas}
-          for name,gs in found.items():
-            g=agg(gs);data['geometries'][name]=g;p=pts(g);cx=sum(x for x,y in p)/len(p);cy=sum(y for x,y in p)/len(p)
-            if name in am:am[name]['c']=[round(cx,6),round(cy,6)]
-            else:
-              it={'name':name,'c':[round(cx,6),round(cy,6)],'r':0.30};areas.append(it);am[name]=it
-          idx['version']=148;idx['description']='Centros derivados dos polígonos oficiais; r é só índice de proximidade, nunca limite cartográfico.'
-          gp.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')))
-          ip.write_text(json.dumps(idx,ensure_ascii=False,indent=2))
-          Path('data/sabren-santa-cruz-v148.geojson').write_text(json.dumps({'type':'FeatureCollection','features':audit},ensure_ascii=False,separators=(',',':')))
-          Path('community-geometries-preload.js').write_text("/* v148 Santa Cruz oficial */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES="+json.dumps(data['geometries'],ensure_ascii=False,separators=(',',':'))+";window.RadarCommunityGeometriesPreload={version:'148-santa-cruz-oficial',count:Object.keys(window.RADAR_COMMUNITY_GEOMETRIES).length};})();\n")
-          lines=['/* v148 índice oficial Santa Cruz */','const rawAreas = [']+[ '  '+json.dumps(a,ensure_ascii=False,separators=(',',':'))+',' for a in areas]+['];',"window.RadarCommunityIndexPreload={version:'148-santa-cruz-oficial',count:rawAreas.length};",'']
-          Path('community-index-preload.js').write_text('\n'.join(lines))
-          # Estilo azul translúcido SOMENTE nas seis áreas solicitadas.
-          sp=Path('community-map-style-v95.js');s=sp.read_text()
-          s=s.replace("const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95';","const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95',SCF='santa-cruz-blue-fill-v148',SCO='santa-cruz-blue-outline-v148';\nconst SCN=['Rodo (Santa Cruz)','Comunidade do Rola (Santa Cruz)','Coqueiral (Santa Cruz)','Urucânia (Santa Cruz)','Comunidade do Aço (Santa Cruz)','João XXIII (Santa Cruz)'];")
-          marker="if(!map.getLayer(OUT))map.addLayer({id:OUT,type:'line',source:'communities',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#f7fbfd','line-width':['interpolate',['linear'],['zoom'],9,1.05,12,1.45,15,1.8,18,2.1],'line-opacity':.96,'line-blur':.12}});"
-          blue=marker+"\n  if(!map.getLayer(SCF))map.addLayer({id:SCF,type:'fill',source:'communities',filter:['match',['get','name'],SCN,true,false],paint:{'fill-color':'#3388ff','fill-opacity':.30}},map.getLayer('community-outline')?'community-outline':undefined);\n  if(!map.getLayer(SCO))map.addLayer({id:SCO,type:'line',source:'communities',filter:['match',['get','name'],SCN,true,false],layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#4da3ff','line-width':2.2,'line-opacity':.96}});"
-          if "santa-cruz-blue-fill-v148" not in s:
-            if marker not in s:raise SystemExit('Marcador de estilo não encontrado')
-            s=s.replace(marker,blue,1)
-          sp.write_text(s)
-          # Versões/cache sem mexer no mapa/GPS/câmera.
-          hp=Path('index.html');h=hp.read_text();h=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="148-santa-cruz-oficial">',h,count=1)
-          h=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=148',h,count=1);h=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=148',h,count=1);h=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=148',h,count=1);hp.write_text(h)
-          sw=Path('service-worker.js');w=sw.read_text();w=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';","const CACHE_NAME = 'radar-seguro-rj-v148';",w,count=1);w=re.sub(r"build:'\d+'","build:'148'",w,count=1);w=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=148',w);w=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=148',w);w=w.replace('./community-map-style-v95.js','./community-map-style-v95.js?v=148');sw.write_text(w)
+          rows=[]
+          for f in d.get('features',[]):
+            p=f.get('properties') or {};g=f.get('geometry');a=pts(g)
+            if not a:continue
+            x=sum(v[0] for v in a)/len(a);y=sum(v[1] for v in a)/len(a)
+            if -43.75<=x<=-43.55 and -23.05<=y<=-22.85:
+              rows.append((str(p.get('nome')),str(p.get('bairro')),str(p.get('ra')),str(p.get('complexo')),p.get('cod_favela'),round(x,6),round(y,6)))
+          for row in sorted(rows):print('SABREN2022',row)
+          print('TOTAL',len(rows))
           PY
-      - name: Validar v148
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import json
-          g=json.loads(Path('data/community-geometries.json').read_text());s=Path('index.html').read_text();st=Path('community-map-style-v95.js').read_text();sw=Path('service-worker.js').read_text()
-          names=['Rodo (Santa Cruz)','Comunidade do Rola (Santa Cruz)','Coqueiral (Santa Cruz)','Urucânia (Santa Cruz)','Comunidade do Aço (Santa Cruz)','João XXIII (Santa Cruz)']
-          for n in names:
-            x=g['geometries'][n];assert x['type']=='MultiPolygon';p=[]
-            def walk(a):
-              if isinstance(a,list) and len(a)>=2 and all(isinstance(v,(int,float)) for v in a[:2]):p.append(a[:2])
-              elif isinstance(a,list):
-                for b in a:walk(b)
-            walk(x['coordinates']);cx=sum(q[0] for q in p)/len(p);cy=sum(q[1] for q in p)/len(p);assert -43.75<=cx<=-43.55 and -23.05<=cy<=-22.85,(n,cx,cy)
-          for x in ['startGPS(){','updateCamera(){','new maplibregl.Map({','v146 — COMANDOS NATURAIS DO DIA A DIA']:assert x in s,x
-          assert '#3388ff' in st and 'santa-cruz-blue-fill-v148' in st
-          assert '148-santa-cruz-oficial' in s and 'radar-seguro-rj-v148' in sw
-          print('v148 validada: 6 polígonos oficiais dentro de Santa Cruz + azul translúcido; mapa/GPS/voz/câmera preservados')
-          PY
-      - name: Commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/community-geometries.json data/community-index.json data/sabren-santa-cruz-v148.geojson community-geometries-preload.js community-index-preload.js community-map-style-v95.js index.html service-worker.js
-          git diff --cached --quiet && exit 0
-          git commit -m "v148: corrigir polígonos oficiais de Santa Cruz e estilo azul"
-          git push
