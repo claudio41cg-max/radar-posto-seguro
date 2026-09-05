@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v148';
+const CACHE_NAME = 'radar-seguro-rj-v149';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
@@ -10,9 +10,9 @@ const OPTIONAL_SHELL = [
   './navigation-persistence-v134.js?v=135',
   './route-safety-v133.js?v=135',
   './hazard-declutter-v119.js?v=135',
-  './route-alternatives-v116.js?v=135','./icon-192-1.png','./icon-512-1.png','./community-index-preload.js?v=148','./community-geometries-preload.js?v=148','./community-data-loader.js','./community-runtime-v83.js','./community-panel-v93.js','./community-map-style-v95.js?v=148','./data/community-datasets.json','./data/community-index.json','./data/community-geometries.json'];
+  './route-alternatives-v116.js?v=135','./icon-192-1.png','./icon-512-1.png','./community-index-preload.js?v=148','./community-geometries-preload.js?v=148','./community-data-loader.js','./community-runtime-v83.js','./community-panel-v93.js','./community-map-style-v95.js?v=149','./data/community-datasets.json','./data/community-index.json','./data/community-geometries.json'];
 self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE_NAME);await Promise.all(CORE_SHELL.map(file=>cache.add(file)));await Promise.allSettled(OPTIONAL_SHELL.map(file=>cache.add(file)));})());self.skipWaiting();});
-self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('radar-seguro-rj-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'148'}));})());});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('radar-seguro-rj-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'149'}));})());});
 function fetchWithTimeout(request,options={},timeout=NETWORK_TIMEOUT_MS){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeout);return fetch(request,{...options,signal:controller.signal}).finally(()=>clearTimeout(timer));}
 function tomTomProxyRequest(request){const source=new URL(request.url);source.searchParams.delete('key');const path=source.pathname+(source.search||'');return fetch(`${RADAR_WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`,{method:request.method==='POST'?'POST':'GET',headers:{'Accept':request.headers.get('Accept')||'*/*','Content-Type':request.headers.get('Content-Type')||'application/json'},body:request.method==='POST'?request.clone().body:undefined,cache:'no-store'});}
 async function aiChatProxyRequest(request){const rawBody=await request.clone().text();let body=rawBody;try{const payload=JSON.parse(rawBody||'{}');if(!payload.message&&typeof payload.pergunta==='string'){payload.message=payload.pergunta;delete payload.pergunta;}if(!Array.isArray(payload.history))payload.history=[];body=JSON.stringify(payload);}catch(_){}return fetch(`${RADAR_WORKER}/v1/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body,cache:'no-store'});}
