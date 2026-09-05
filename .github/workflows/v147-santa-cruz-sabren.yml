@@ -19,13 +19,13 @@ jobs:
           from pathlib import Path
           import json
           s=Path('index.html').read_text(); sw=Path('service-worker.js').read_text(); g=json.loads(Path('data/community-geometries.json').read_text())
-          for x in ['Cesarão (Santa Cruz)','Comunidade do Rola (Santa Cruz)','Comunidade de Antares (Santa Cruz)','Comunidade do Aço (Santa Cruz)']:
+          for x in ['Cesarão (Santa Cruz)','Comunidade do Rola (Santa Cruz)','Comunidade de Antares (Santa Cruz)','Três Pontes (Santa Cruz)','João XXIII (Santa Cruz)','Rodo (Santa Cruz)']:
               assert x in g['geometries'] and g['geometries'][x]['type']=='MultiPolygon', x
           for x in ['startGPS(){','updateCamera(){','new maplibregl.Map({','v146 — COMANDOS NATURAIS DO DIA A DIA']:
               assert x in s, x
           assert '147-santa-cruz-sabren' in s and 'radar-seguro-rj-v147' in sw
           assert Path('data/sabren-santa-cruz-v147.geojson').exists()
-          print('v147 validada: SABREN aplicado onde confirmado; demais contornos preservados; mapa/GPS/voz/câmera intactos')
+          print('v147 validada: 6 áreas SABREN confirmadas; Aço/Vila Paciência não foram inventadas; mapa/GPS/voz/câmera intactos')
           PY
       - name: Commit
         run: |
