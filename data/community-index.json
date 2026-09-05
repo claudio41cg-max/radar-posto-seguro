@@ -1,5 +1,5 @@
 {
-  "version": 151,
+  "version": 152,
   "description": "Centros calculados a partir dos polígonos municipais reais; r é apenas índice de proximidade e não delimitação.",
   "areas": [
     {
@@ -165,11 +165,11 @@
     {
       "name": "Cesarão (Santa Cruz)",
       "c": [
-        -43.657793,
-        -22.93616
+        -43.65775,
+        -22.9367
       ],
-      "r": 0.35,
-      "territorial_note": "Área urbana contínua conhecida localmente como Cesarão; limite interpretativo v151, não oficial SABREN."
+      "r": 1.15,
+      "territorial_note": "Área urbana contínua conhecida localmente como Cesarão / Conjunto Otacílio Camará; delimitação territorial interpretativa v152, não limite oficial SABREN."
     },
     {
       "name": "Comunidade de Antares (Santa Cruz)",
