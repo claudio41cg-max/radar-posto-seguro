@@ -1,7 +1,7 @@
 /* Radar Seguro RJ PRO v150 — visual de Santa Cruz inspirado na referência aprovada */
 (()=>{
 'use strict';
-if(window.__radarCommunityMapStyleV149)return;window.__radarCommunityMapStyleV149=true;
+if(window.__radarCommunityMapStyleV154)return;window.__radarCommunityMapStyleV154=true;
 const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95';
 const SCF='santa-cruz-blue-fill-v149',SCG='santa-cruz-blue-glow-v149',SCO='santa-cruz-blue-outline-v149',SCL='santa-cruz-label-v149';
 const SCN=[
@@ -31,6 +31,7 @@ function addBefore(map,layer,before){try{map.addLayer(layer,before&&map.getLayer
 function apply(map){
  try{
   if(!map||!map.getSource('communities'))return false;
+  ['santa-cruz-label-v149','santa-cruz-blue-fill-v149','santa-cruz-blue-glow-v149','santa-cruz-blue-outline-v149'].forEach(id=>{try{if(map.getLayer(id))map.removeLayer(id)}catch(_){}});
   ['community-label-v94','community-label-natural-v94','barbante-label-v94','community-big-label','community-area-label'].forEach(id=>{try{if(map.getLayer(id))map.setLayoutProperty(id,'visibility','none')}catch(_){}});
   if(map.getLayer('community-fill')){
    map.setPaintProperty('community-fill','fill-color','#60798a');
@@ -61,7 +62,7 @@ function apply(map){
   return true;
  }catch(e){console.warn('Estilo Santa Cruz v149 indisponível',e);return false}
 }
-function install(){const map=window.RadarApp?.map;if(!map?.on)return false;if(map.__communityStyleV149)return true;map.__communityStyleV149=true;apply(map);map.on('style.load',()=>setTimeout(()=>apply(map),30));return true}
+function install(){const map=window.RadarApp?.map;if(!map?.on)return false;if(map.__communityStyleV154)return true;map.__communityStyleV154=true;apply(map);map.on('style.load',()=>setTimeout(()=>apply(map),30));return true}
 let tries=0,t=setInterval(()=>{if(install()||++tries>120)clearInterval(t)},150);window.addEventListener('load',install,{once:true});
-window.RadarCommunityMapStyleV95={version:'150-santa-cruz-white-borders',apply:()=>apply(window.RadarApp?.map)};
+window.RadarCommunityMapStyleV95={version:'154-cesarao-clean-rebuild',apply:()=>apply(window.RadarApp?.map)};
 })();
