@@ -15,68 +15,28 @@ jobs:
           python3 - <<'PY'
           import json,re
           from pathlib import Path
-          # Contorno territorial interpretativo amplo do Conjunto Otacílio Camará / Cesarão.
-          # Deliberadamente substitui (não soma) a geometria estreita anterior.
-          ring=[
-            [-43.6668,-22.9288],[-43.6622,-22.9272],[-43.6564,-22.9275],
-            [-43.6510,-22.9292],[-43.6478,-22.9325],[-43.6482,-22.9372],
-            [-43.6502,-22.9415],[-43.6537,-22.9450],[-43.6586,-22.9462],
-            [-43.6633,-22.9447],[-43.6662,-22.9410],[-43.6677,-22.9362],
-            [-43.6674,-22.9321],[-43.6668,-22.9288]
-          ]
+          ring=[[-43.6668,-22.9288],[-43.6622,-22.9272],[-43.6564,-22.9275],[-43.6510,-22.9292],[-43.6478,-22.9325],[-43.6482,-22.9372],[-43.6502,-22.9415],[-43.6537,-22.9450],[-43.6586,-22.9462],[-43.6633,-22.9447],[-43.6662,-22.9410],[-43.6677,-22.9362],[-43.6674,-22.9321],[-43.6668,-22.9288]]
           geom={"type":"Polygon","coordinates":[ring]}
-          p=Path('data/community-geometries.json')
-          d=json.loads(p.read_text())
-          d['Cesarão (Santa Cruz)']=geom
-          p.write_text(json.dumps(d,ensure_ascii=False,separators=(',',':'))+'\n')
-
-          p=Path('community-geometries-preload.js')
-          s=p.read_text()
-          m=re.search(r'window\.RADAR_COMMUNITY_GEOMETRIES=(\{.*\});?\s*\}\)\(\);?',s,re.S)
-          if not m: raise SystemExit('preload geometry marker not found')
-          d=json.loads(m.group(1)); d['Cesarão (Santa Cruz)']=geom
-          p.write_text('/* v152 Cesarão área ampla */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES='+json.dumps(d,ensure_ascii=False,separators=(',',':'))+';})();\n')
-
+          p=Path('data/community-geometries.json'); d=json.loads(p.read_text()); d['Cesarão (Santa Cruz)']=geom; p.write_text(json.dumps(d,ensure_ascii=False,separators=(',',':'))+'\n')
+          p=Path('community-geometries-preload.js'); s=p.read_text(); prefix='window.RADAR_COMMUNITY_GEOMETRIES='; a=s.index(prefix)+len(prefix); b=s.index(';',a); d=json.loads(s[a:b]); d['Cesarão (Santa Cruz)']=geom; p.write_text('/* v152 Cesarão área ampla */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES='+json.dumps(d,ensure_ascii=False,separators=(',',':'))+';})();\n')
           center=[-43.65775,-22.9367]
           p=Path('data/community-index.json'); idx=json.loads(p.read_text()); idx['version']=152
-          for a in idx['areas']:
-            if a.get('name')=='Cesarão (Santa Cruz)':
-              a['c']=center; a['r']=1.15
-              a['territorial_note']='Área urbana contínua conhecida localmente como Cesarão / Conjunto Otacílio Camará; delimitação territorial interpretativa v152, não limite oficial SABREN.'
+          for x in idx['areas']:
+            if x.get('name')=='Cesarão (Santa Cruz)': x.update(c=center,r=1.15,territorial_note='Área urbana contínua conhecida localmente como Cesarão / Conjunto Otacílio Camará; delimitação territorial interpretativa v152, não limite oficial SABREN.')
           p.write_text(json.dumps(idx,ensure_ascii=False,indent=2)+'\n')
-
-          p=Path('community-index-preload.js'); s=p.read_text()
-          s=s.replace('/* v151 índice */','/* v152 índice */')
-          s=re.sub(r'\{"name":"Cesarão \(Santa Cruz\)"[^\n]+', '{"name":"Cesarão (Santa Cruz)","c":[-43.65775,-22.9367],"r":1.15,"territorial_note":"Área urbana contínua conhecida localmente como Cesarão / Conjunto Otacílio Camará; delimitação territorial interpretativa v152, não limite oficial SABREN."},', s)
-          s=re.sub(r"window\.RadarCommunityIndexPreload=\{version:'[^']+'", "window.RadarCommunityIndexPreload={version:'152-cesarao-area-ampla'", s)
-          p.write_text(s)
-
-          p=Path('index.html'); s=p.read_text()
-          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="152-cesarao-area-ampla">',s)
-          s=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=152',s)
-          s=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=152',s)
-          s=re.sub(r'community-map-style-v95\.js\?v=\d+','community-map-style-v95.js?v=152',s)
-          p.write_text(s)
-
-          p=Path('service-worker.js'); s=p.read_text()
-          s=re.sub(r"radar-seguro-rj-v\d+","radar-seguro-rj-v152",s)
-          s=re.sub(r"RADAR_SW_BUILD\s*=\s*['\"]\d+['\"]","RADAR_SW_BUILD = '152'",s)
-          p.write_text(s)
+          p=Path('community-index-preload.js'); s=p.read_text().replace('/* v151 índice */','/* v152 índice */'); s=re.sub(r'  \{"name":"Cesarão \(Santa Cruz\)".*?\n', '  {"name":"Cesarão (Santa Cruz)","c":[-43.65775,-22.9367],"r":1.15,"territorial_note":"Área urbana contínua conhecida localmente como Cesarão / Conjunto Otacílio Camará; delimitação territorial interpretativa v152, não limite oficial SABREN."},\n', s); s=re.sub(r"window\.RadarCommunityIndexPreload=\{version:'[^']+'", "window.RadarCommunityIndexPreload={version:'152-cesarao-area-ampla'", s); p.write_text(s)
+          p=Path('index.html'); s=p.read_text(); s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="152-cesarao-area-ampla">',s); s=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=152',s); s=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=152',s); s=re.sub(r'community-map-style-v95\.js\?v=\d+','community-map-style-v95.js?v=152',s); p.write_text(s)
+          p=Path('service-worker.js'); s=p.read_text(); s=re.sub(r'radar-seguro-rj-v\d+','radar-seguro-rj-v152',s); p.write_text(s)
           PY
       - name: Validar
         run: |
           python3 - <<'PY'
           import json
-          d=json.load(open('data/community-geometries.json'))
-          g=d['Cesarão (Santa Cruz)']
-          assert g['type']=='Polygon'
-          ring=g['coordinates'][0]
-          xs=[p[0] for p in ring]; ys=[p[1] for p in ring]
-          assert max(xs)-min(xs)>0.015
-          assert max(ys)-min(ys)>0.015
+          g=json.load(open('data/community-geometries.json'))['Cesarão (Santa Cruz)']; ring=g['coordinates'][0]; xs=[x[0] for x in ring]; ys=[x[1] for x in ring]
+          assert g['type']=='Polygon' and max(xs)-min(xs)>0.015 and max(ys)-min(ys)>0.015
           assert open('community-geometries-preload.js').read().count('"Cesarão (Santa Cruz)"')==1
           assert '152-cesarao-area-ampla' in open('index.html').read()
-          print('v152 validada: Cesarão amplo único')
+          print('v152 validada')
           PY
       - name: Commit
         run: |
