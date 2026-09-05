@@ -1,135 +1,61 @@
-name: v148 Santa Cruz oficial
+name: v148 diagnostico Urucania Aco
 on:
   push:
     paths:
       - '.github/workflows/v147-santa-cruz-sabren.yml'
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
-  patch:
+  diag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Aplicar limites oficiais de Santa Cruz
+      - name: Diagnosticar nomes e geometrias oficiais
         run: |
           python3 - <<'PY'
-          from pathlib import Path
           import json,re,unicodedata,urllib.parse,urllib.request
           B=(-43.75,-23.05,-43.55,-22.85)
+          BASE='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN'
           def get(url,params):
-              q=urllib.parse.urlencode(params); req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148'})
-              with urllib.request.urlopen(req,timeout=60) as r:return json.loads(r.read().decode('utf-8'))
+            q=urllib.parse.urlencode(params);req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148-diag2'})
+            with urllib.request.urlopen(req,timeout=60) as r:return json.loads(r.read().decode('utf-8'))
           def norm(v):return re.sub(r'[^a-z0-9]+',' ',unicodedata.normalize('NFKD',str(v or '')).encode('ascii','ignore').decode().lower()).strip()
           def pts(g):
-              out=[]
-              def walk(x):
-                  if isinstance(x,list) and len(x)>=2 and all(isinstance(v,(int,float)) for v in x[:2]):out.append(x[:2])
-                  elif isinstance(x,list):
-                      for y in x:walk(y)
-              walk((g or {}).get('coordinates',[]));return out
+            out=[]
+            def walk(x):
+              if isinstance(x,list) and len(x)>=2 and all(isinstance(v,(int,float)) for v in x[:2]):out.append(x[:2])
+              elif isinstance(x,list):
+                for y in x:walk(y)
+            walk((g or {}).get('coordinates',[]));return out
           def cent(g):
-              p=pts(g);return (sum(x for x,y in p)/len(p),sum(y for x,y in p)/len(p))
-          def inbox(g):
-              x,y=cent(g);return B[0]<=x<=B[2] and B[1]<=y<=B[3]
-          def agg(fs):
-              polys=[]
-              for f in fs:
-                  g=f['geometry'];polys += [g['coordinates']] if g['type']=='Polygon' else g['coordinates']
-              return {'type':'MultiPolygon','coordinates':polys}
+            p=pts(g)
+            return (sum(x for x,y in p)/len(p),sum(y for x,y in p)/len(p)) if p else (None,None)
+          def inside(g):
+            x,y=cent(g);return x is not None and B[0]<=x<=B[2] and B[1]<=y<=B[3]
 
-          base='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN'
-          lim=get(base+'/Limites_de_Favelas/FeatureServer/13/query',{'where':'1=1','outFields':'nome,bairro,ra,complexo,cod_favela','returnGeometry':'true','outSR':'4326','f':'geojson'})
-          sc=[]
-          for f in lim.get('features',[]):
-              p=f.get('properties') or {};g=f.get('geometry')
-              if g and inbox(g) and p.get('ra')=='Santa Cruz':sc.append(f)
-          def sel(token):return [f for f in sc if token(norm((f.get('properties') or {}).get('nome')))]
-          rollas=sel(lambda n:n=='rollas')
-          coqueiral=sel(lambda n:'coqueiral' in n)
-          joao=sel(lambda n:'joao xxiii' in n or 'joao 23' in n)
+          names=get(BASE+'/Tabelas_SABREN/FeatureServer/36/query',{'where':'1=1','outFields':'*','returnGeometry':'false','f':'json'})
+          by={}
+          for row in names.get('features',[]):
+            a=row.get('attributes') or {};c=a.get('cod_favela')
+            vals=[str(v) for v in a.values() if isinstance(v,str) and v.strip()]
+            if c is not None:by.setdefault(str(c),set()).update(vals)
 
-          # Urucânia não aparece nominalmente na camada 2022 de favelas; usa a camada oficial de Loteamentos SABREN.
-          lot=get(base+'/Loteamentos/FeatureServer/0/query',{'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
-          urucania=[]
-          aco=[]
-          for f in lot.get('features',[]):
+          sources=[
+            ('DadosGeraisFavelas',BASE+'/DadosGeraisFavelas/FeatureServer/0/query'),
+            ('Loteamentos',BASE+'/Loteamentos/FeatureServer/0/query'),
+            ('Conjuntos',BASE+'/Conjuntos_Habitacionais/FeatureServer/0/query')
+          ]
+          for label,url in sources:
+            d=get(url,{'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
+            print('\nSOURCE',label,'features',len(d.get('features',[])))
+            for f in d.get('features',[]):
               g=f.get('geometry');p=f.get('properties') or {}
-              if not g or not inbox(g):continue
-              names=' '.join(norm(p.get(k)) for k in ('nome','nome_nrl','bairro') if p.get(k))
-              if 'urucania' in names:urucania.append(f)
-              if re.search(r'(^| )aco( |$)',names):aco.append(f)
-          # Tenta também conjuntos habitacionais oficiais para Aço.
-          con=get(base+'/Conjuntos_Habitacionais/FeatureServer/0/query',{'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
-          for f in con.get('features',[]):
-              g=f.get('geometry');p=f.get('properties') or {}
-              if not g or not inbox(g):continue
-              names=' '.join(norm(v) for v in p.values() if isinstance(v,str))
-              if re.search(r'(^| )aco( |$)',names):aco.append(f)
-
-          for label,fs in [('Rollas',rollas),('Coqueiral',coqueiral),('Urucânia',urucania),('João XXIII',joao)]:
-              if not fs:raise SystemExit(label+' sem polígono oficial seguro')
-
-          official={
-              'Rollas / Rodo (Santa Cruz)':agg(rollas),
-              'Coqueiral (Santa Cruz)':agg(coqueiral),
-              'Urucânia (Santa Cruz)':agg(urucania),
-              'João XXIII (Santa Cruz)':agg(joao)
-          }
-          if aco:official['Comunidade do Aço (Santa Cruz)']=agg(aco)
-
-          gp=Path('data/community-geometries.json');data=json.loads(gp.read_text(encoding='utf-8'));geoms=data.setdefault('geometries',{})
-          geoms.pop('Rodo (Santa Cruz)',None);geoms.pop('Comunidade do Rola (Santa Cruz)',None)
-          for n,g in official.items():geoms[n]=g
-          data['version']=148
-          data['description']='v148: limites de Santa Cruz obtidos de camadas oficiais SABREN/IPP. Rodo usa o mesmo limite oficial de Rollas por ser denominação popular. Aço só é substituído se uma camada municipal retornar polígono nominal seguro.'
-          gp.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
-
-          ip=Path('data/community-index.json');idx=json.loads(ip.read_text(encoding='utf-8'));areas=[a for a in idx.get('areas',[]) if a.get('name') not in ('Rodo (Santa Cruz)','Comunidade do Rola (Santa Cruz)')];by={a.get('name'):a for a in areas}
-          for n,g in official.items():
-              x,y=cent(g)
-              if n in by:by[n]['c']=[round(x,6),round(y,6)]
-              else:
-                  a={'name':n,'c':[round(x,6),round(y,6)],'r':0.30};areas.append(a);by[n]=a
-          idx['areas']=areas;idx['version']=148;idx['description']='Centros derivados de polígonos oficiais; r é apenas proximidade.';ip.write_text(json.dumps(idx,ensure_ascii=False,indent=2),encoding='utf-8')
-
-          audit=[]
-          for n,fs in [('Rollas / Rodo (Santa Cruz)',rollas),('Coqueiral (Santa Cruz)',coqueiral),('Urucânia (Santa Cruz)',urucania),('João XXIII (Santa Cruz)',joao),('Comunidade do Aço (Santa Cruz)',aco)]:
-              for f in fs:audit.append({'type':'Feature','properties':{'app_name':n,'fonte':'SABREN/IPP'},'geometry':f.get('geometry')})
-          Path('data/sabren-santa-cruz-v148.geojson').write_text(json.dumps({'type':'FeatureCollection','features':audit},ensure_ascii=False,separators=(',',':')),encoding='utf-8')
-          Path('community-geometries-preload.js').write_text("/* v148 Santa Cruz oficial */\n(function(){window.RADAR_COMMUNITY_GEOMETRIES="+json.dumps(geoms,ensure_ascii=False,separators=(',',':'))+";window.RadarCommunityGeometriesPreload={version:'148-santa-cruz-oficial',count:Object.keys(window.RADAR_COMMUNITY_GEOMETRIES).length};})();\n",encoding='utf-8')
-          lines=['/* v148 índice Santa Cruz oficial */','const rawAreas = [']+['  '+json.dumps(a,ensure_ascii=False,separators=(',',':'))+',' for a in areas]+['];',"window.RadarCommunityIndexPreload={version:'148-santa-cruz-oficial',count:rawAreas.length};",''];Path('community-index-preload.js').write_text('\n'.join(lines),encoding='utf-8')
-
-          sp=Path('community-map-style-v95.js');s=sp.read_text(encoding='utf-8')
-          s=s.replace("const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95';","const OUT='community-cartographic-outline-v95',FILL='community-cartographic-fill-v95',SCF='santa-cruz-blue-fill-v148',SCO='santa-cruz-blue-outline-v148';\nconst SCN=['Rollas / Rodo (Santa Cruz)','Coqueiral (Santa Cruz)','Urucânia (Santa Cruz)','João XXIII (Santa Cruz)']"+("+['Comunidade do Aço (Santa Cruz)']" if aco else "")+";")
-          marker="if(!map.getLayer(OUT))map.addLayer({id:OUT,type:'line',source:'communities',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#f7fbfd','line-width':['interpolate',['linear'],['zoom'],9,1.05,12,1.45,15,1.8,18,2.1],'line-opacity':.96,'line-blur':.12}});"
-          extra=marker+"\n  if(!map.getLayer(SCF))map.addLayer({id:SCF,type:'fill',source:'communities',filter:['match',['get','name'],SCN,true,false],paint:{'fill-color':'#3388ff','fill-opacity':.30}},map.getLayer('community-outline')?'community-outline':undefined);\n  if(!map.getLayer(SCO))map.addLayer({id:SCO,type:'line',source:'communities',filter:['match',['get','name'],SCN,true,false],layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#4da3ff','line-width':2.2,'line-opacity':.96}});"
-          if 'santa-cruz-blue-fill-v148' not in s:
-              if marker not in s:raise SystemExit('marcador de estilo ausente')
-              s=s.replace(marker,extra,1)
-          sp.write_text(s,encoding='utf-8')
-
-          hp=Path('index.html');h=hp.read_text(encoding='utf-8');h=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="148-santa-cruz-oficial">',h,count=1);h=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=148',h,count=1);h=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=148',h,count=1);h=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=148',h,count=1);hp.write_text(h,encoding='utf-8')
-          sw=Path('service-worker.js');w=sw.read_text(encoding='utf-8');w=re.sub(r"const CACHE_NAME = 'radar-seguro-rj-v\d+';","const CACHE_NAME = 'radar-seguro-rj-v148';",w,count=1);w=re.sub(r"build:'\d+'","build:'148'",w,count=1);w=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=148',w);w=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=148',w);w=re.sub(r'community-map-style-v95\.js(?:\?v=\d+)?','community-map-style-v95.js?v=148',w);sw.write_text(w,encoding='utf-8')
-          print('OFICIAIS:',','.join(official.keys()));print('ACO_OFICIAL',bool(aco))
+              vals={str(v) for v in p.values() if isinstance(v,str) and v.strip()}
+              c=p.get('cod_favela')
+              if c is not None:vals.update(by.get(str(c),set()))
+              joined=' | '.join(sorted(vals));nj=norm(joined)
+              if any(t in nj for t in ['urucan','aco','rollas','rodo','coqueiral','joao xxiii','joao 23']):
+                x,y=cent(g)
+                print('MATCH',label,'inside=',inside(g),'centroid=',round(x,6) if x else None,round(y,6) if y else None,'code=',c,'names=',joined[:700])
           PY
-      - name: Validar
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import json
-          g=json.loads(Path('data/community-geometries.json').read_text());s=Path('index.html').read_text();st=Path('community-map-style-v95.js').read_text();sw=Path('service-worker.js').read_text()
-          for n in ['Rollas / Rodo (Santa Cruz)','Coqueiral (Santa Cruz)','Urucânia (Santa Cruz)','João XXIII (Santa Cruz)']:assert n in g['geometries'],n
-          assert 'Rodo (Santa Cruz)' not in g['geometries']
-          for x in ['startGPS(){','updateCamera(){','new maplibregl.Map({','v146 — COMANDOS NATURAIS DO DIA A DIA']:assert x in s,x
-          assert '#3388ff' in st and 'santa-cruz-blue-fill-v148' in st and 'radar-seguro-rj-v148' in sw
-          print('v148 validada')
-          PY
-      - name: Commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/community-geometries.json data/community-index.json data/sabren-santa-cruz-v148.geojson community-geometries-preload.js community-index-preload.js community-map-style-v95.js index.html service-worker.js
-          git diff --cached --quiet && exit 0
-          git commit -m "v148: Santa Cruz com limites oficiais e azul translúcido"
-          git push
