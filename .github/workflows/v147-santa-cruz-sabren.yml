@@ -1,4 +1,4 @@
-name: v148 diagnostico Urucania Aco
+name: v148 diagnostico Aco por aliases
 on:
   push:
     paths:
@@ -11,51 +11,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Diagnosticar nomes e geometrias oficiais
+      - name: Procurar Aço em camadas municipais
         run: |
           python3 - <<'PY'
           import json,re,unicodedata,urllib.parse,urllib.request
-          B=(-43.75,-23.05,-43.55,-22.85)
+          B=(-43.70,-22.96,-43.61,-22.89)
           BASE='https://pgeo3.rio.rj.gov.br/arcgis/rest/services/SABREN'
-          def get(url,params):
-            q=urllib.parse.urlencode(params);req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148-diag2'})
-            with urllib.request.urlopen(req,timeout=60) as r:return json.loads(r.read().decode('utf-8'))
+          def get(url):
+            q=urllib.parse.urlencode({'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
+            req=urllib.request.Request(url+'?'+q,headers={'User-Agent':'Radar-Seguro-RJ/148-diag3'})
+            with urllib.request.urlopen(req,timeout=60) as r:return json.loads(r.read().decode())
           def norm(v):return re.sub(r'[^a-z0-9]+',' ',unicodedata.normalize('NFKD',str(v or '')).encode('ascii','ignore').decode().lower()).strip()
           def pts(g):
-            out=[]
-            def walk(x):
-              if isinstance(x,list) and len(x)>=2 and all(isinstance(v,(int,float)) for v in x[:2]):out.append(x[:2])
+            o=[]
+            def w(x):
+              if isinstance(x,list) and len(x)>=2 and all(isinstance(v,(int,float)) for v in x[:2]):o.append(x[:2])
               elif isinstance(x,list):
-                for y in x:walk(y)
-            walk((g or {}).get('coordinates',[]));return out
+                for y in x:w(y)
+            w((g or {}).get('coordinates',[]));return o
           def cent(g):
-            p=pts(g)
-            return (sum(x for x,y in p)/len(p),sum(y for x,y in p)/len(p)) if p else (None,None)
-          def inside(g):
-            x,y=cent(g);return x is not None and B[0]<=x<=B[2] and B[1]<=y<=B[3]
-
-          names=get(BASE+'/Tabelas_SABREN/FeatureServer/36/query',{'where':'1=1','outFields':'*','returnGeometry':'false','f':'json'})
-          by={}
-          for row in names.get('features',[]):
-            a=row.get('attributes') or {};c=a.get('cod_favela')
-            vals=[str(v) for v in a.values() if isinstance(v,str) and v.strip()]
-            if c is not None:by.setdefault(str(c),set()).update(vals)
-
-          sources=[
-            ('DadosGeraisFavelas',BASE+'/DadosGeraisFavelas/FeatureServer/0/query'),
+            p=pts(g);return (sum(x for x,y in p)/len(p),sum(y for x,y in p)/len(p)) if p else (None,None)
+          aliases=['aco','vila paciencia','sao gomario','massape','dialta','vagoes','vagao','santa efigenia','estrada da pedra']
+          layers=[
+            ('Favelas2019',BASE+'/DadosGeraisFavelas/FeatureServer/0/query'),
+            ('Favelas2022',BASE+'/Limites_de_Favelas/FeatureServer/13/query'),
             ('Loteamentos',BASE+'/Loteamentos/FeatureServer/0/query'),
-            ('Conjuntos',BASE+'/Conjuntos_Habitacionais/FeatureServer/0/query')
-          ]
-          for label,url in sources:
-            d=get(url,{'where':'1=1','outFields':'*','returnGeometry':'true','outSR':'4326','f':'geojson'})
-            print('\nSOURCE',label,'features',len(d.get('features',[])))
+            ('Conjuntos',BASE+'/Conjuntos_Habitacionais/FeatureServer/0/query')]
+          for label,url in layers:
+            d=get(url);print('\nSOURCE',label)
             for f in d.get('features',[]):
-              g=f.get('geometry');p=f.get('properties') or {}
-              vals={str(v) for v in p.values() if isinstance(v,str) and v.strip()}
-              c=p.get('cod_favela')
-              if c is not None:vals.update(by.get(str(c),set()))
-              joined=' | '.join(sorted(vals));nj=norm(joined)
-              if any(t in nj for t in ['urucan','aco','rollas','rodo','coqueiral','joao xxiii','joao 23']):
-                x,y=cent(g)
-                print('MATCH',label,'inside=',inside(g),'centroid=',round(x,6) if x else None,round(y,6) if y else None,'code=',c,'names=',joined[:700])
+              g=f.get('geometry');p=f.get('properties') or {};x,y=cent(g)
+              if x is None or not(B[0]<=x<=B[2] and B[1]<=y<=B[3]):continue
+              text=' | '.join(str(v) for v in p.values() if isinstance(v,str) and v.strip());n=norm(text)
+              if any(a in n for a in aliases):print('CANDIDATE',round(x,6),round(y,6),text[:1200])
           PY
