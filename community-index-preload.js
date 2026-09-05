@@ -1,4 +1,4 @@
-/* Radar Seguro RJ PRO v148 — índice Santa Cruz polígonos oficiais */
+/* v150 índice */
 const rawAreas = [
   {"name":"Comunidade Grão Pará","c":[-43.5118,-22.7472],"r":0.45},
   {"name":"Comunidade Dom Bosco","c":[-43.4682,-22.7562],"r":0.45},
@@ -20,7 +20,7 @@ const rawAreas = [
   {"name":"Guacha (Belford Roxo)","c":[-43.3867,-22.7364],"r":0.4},
   {"name":"Complexo do Lixão (Caxias)","c":[-43.3108,-22.7844],"r":0.45},
   {"name":"Beira-Mar (Caxias)","c":[-43.2756,-22.7661],"r":0.4},
-  {"name":"Cesarão (Santa Cruz)","c":[-43.655339,-22.940837],"r":0.35},
+  {"name":"Cesarão (Santa Cruz)","c":[-43.655819,-22.940232],"r":0.35},
   {"name":"Comunidade de Antares (Santa Cruz)","c":[-43.658783,-22.92304],"r":0.3},
   {"name":"Pantanal (Santa Cruz)","c":[-43.652883,-22.922147],"r":0.28},
   {"name":"Nova Sepetiba","c":[-43.686,-22.9582],"r":0.42},
@@ -69,4 +69,4 @@ const rawAreas = [
   {"name":"Comunidade do Aço (Santa Cruz)","c":[-43.650409,-22.930687],"r":0.3},
   {"name":"João XXIII (Santa Cruz)","c":[-43.693608,-22.905715],"r":0.3},
 ];
-window.RadarCommunityIndexPreload={version:'148-santa-cruz-poligonos-oficiais',count:rawAreas.length};
+window.RadarCommunityIndexPreload={version:'150-cesarao-completo',count:rawAreas.length};

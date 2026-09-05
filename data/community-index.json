@@ -1,5 +1,5 @@
 {
-  "version": 148,
+  "version": 150,
   "description": "Centros calculados a partir dos polígonos municipais reais; r é apenas índice de proximidade e não delimitação.",
   "areas": [
     {
@@ -165,8 +165,8 @@
     {
       "name": "Cesarão (Santa Cruz)",
       "c": [
-        -43.655339,
-        -22.940837
+        -43.655819,
+        -22.940232
       ],
       "r": 0.35
     },

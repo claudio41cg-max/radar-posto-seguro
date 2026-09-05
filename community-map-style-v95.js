@@ -1,4 +1,4 @@
-/* Radar Seguro RJ PRO v149 — visual de Santa Cruz inspirado na referência aprovada */
+/* Radar Seguro RJ PRO v150 — visual de Santa Cruz inspirado na referência aprovada */
 (()=>{
 'use strict';
 if(window.__radarCommunityMapStyleV149)return;window.__radarCommunityMapStyleV149=true;
@@ -47,7 +47,7 @@ function apply(map){
   /* Santa Cruz: preenchimento azul translúcido, contorno vivo e leve brilho como na referência. */
   if(!map.getLayer(SCF))addBefore(map,{id:SCF,type:'fill',source:'communities',filter:['match',['get','name'],SCN,true,false],paint:{'fill-color':'#0f66d8','fill-opacity':['interpolate',['linear'],['zoom'],9,.18,12,.27,15,.33,18,.29]}},'community-outline');
   if(!map.getLayer(SCG))addBefore(map,{id:SCG,type:'line',source:'communities',filter:['match',['get','name'],SCN,true,false],layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#178cff','line-width':['interpolate',['linear'],['zoom'],9,4.0,12,5.0,15,6.0,18,7.0],'line-opacity':.34,'line-blur':2.2}},'community-outline');
-  if(!map.getLayer(SCO))addBefore(map,{id:SCO,type:'line',source:'communities',filter:['match',['get','name'],SCN,true,false],layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#63b3ff','line-width':['interpolate',['linear'],['zoom'],9,1.7,12,2.2,15,2.8,18,3.2],'line-opacity':.99,'line-blur':.04}});
+  if(!map.getLayer(SCO))addBefore(map,{id:SCO,type:'line',source:'communities',filter:['match',['get','name'],SCN,true,false],layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#ffffff','line-width':['interpolate',['linear'],['zoom'],9,1.7,12,2.2,15,2.8,18,3.2],'line-opacity':1,'line-blur':.02}});
 
   /* Evita rótulo duplicado nas áreas de Santa Cruz. */
   if(map.getLayer('community-label')){
@@ -63,5 +63,5 @@ function apply(map){
 }
 function install(){const map=window.RadarApp?.map;if(!map?.on)return false;if(map.__communityStyleV149)return true;map.__communityStyleV149=true;apply(map);map.on('style.load',()=>setTimeout(()=>apply(map),30));return true}
 let tries=0,t=setInterval(()=>{if(install()||++tries>120)clearInterval(t)},150);window.addEventListener('load',install,{once:true});
-window.RadarCommunityMapStyleV95={version:'149-santa-cruz-reference-look',apply:()=>apply(window.RadarApp?.map)};
+window.RadarCommunityMapStyleV95={version:'150-santa-cruz-white-borders',apply:()=>apply(window.RadarApp?.map)};
 })();

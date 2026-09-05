@@ -1,0 +1,21 @@
+{
+  "matches": [
+    {
+      "source": "Limites2022",
+      "text": "Rua 66 (Cesarão) | Bairro Canaã | Santa Cruz | Santa Cruz | 5.3 | Santa Cruz | IPP com base em IBGE - Censo Demográfico 2022 | 149"
+    },
+    {
+      "source": "DadosGerais",
+      "text": "Rua 66 (Cesarão)"
+    },
+    {
+      "source": "Conjuntos",
+      "text": "Conjunto Otacílio Camará (Cesarão) | RUA VINTE E SETE 109"
+    }
+  ],
+  "polygons": 3,
+  "center": [
+    -43.655819,
+    -22.940232
+  ]
+}
