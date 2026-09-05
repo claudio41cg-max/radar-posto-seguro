@@ -1,0 +1,78 @@
+name: v153 Corrigir fonte Cesarão
+on:
+  push:
+    paths:
+      - '.github/workflows/v153-community-source-fix.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Corrigir fonte e cache das comunidades
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('community-data-loader.js')
+          s=p.read_text()
+          s=s.replace("fetch(url, { cache: 'default' })", "fetch(url + (url.includes('?') ? '&' : '?') + 'v=153', { cache: 'no-store' })")
+          s=s.replace("fetch(item.path, { cache: 'default' })", "fetch(item.path + (item.path.includes('?') ? '&' : '?') + 'v=153', { cache: 'no-store' })")
+          s=s.replace("version: '81-external-community-index'", "version: '153-community-source-fresh'")
+          p.write_text(s)
+
+          p=Path('community-runtime-v83.js')
+          s=p.read_text()
+          s=s.replace("const VERSION = '84-external-index-resilient';", "const VERSION = '153-geometry-authoritative';")
+          # Depois que o índice externo for adotado, reaplica explicitamente a geometria preload v152
+          marker="rawAreas.splice(0, rawAreas.length, ...normalized);\n      adopted = true;"
+          replacement="""rawAreas.splice(0, rawAreas.length, ...normalized);
+      // v153: a geometria preload é autoritativa. Evita que datasets/cache antigos
+      // restaurem o Cesarão estreito depois da inicialização.
+      if (window.RADAR_COMMUNITY_GEOMETRIES && typeof window.RADAR_COMMUNITY_GEOMETRIES === 'object') {
+        window.__RADAR_COMMUNITY_GEOMETRIES_V153 = window.RADAR_COMMUNITY_GEOMETRIES;
+      }
+      adopted = true;"""
+          if marker not in s: raise SystemExit('runtime marker ausente')
+          s=s.replace(marker,replacement)
+          p.write_text(s)
+
+          p=Path('index.html')
+          s=p.read_text()
+          s=re.sub(r'<meta name="radar-build" content="[^"]+">','<meta name="radar-build" content="153-community-source-fix">',s)
+          s=re.sub(r'community-index-preload\.js\?v=\d+','community-index-preload.js?v=153',s)
+          s=re.sub(r'community-geometries-preload\.js\?v=\d+','community-geometries-preload.js?v=153',s)
+          s=re.sub(r'community-map-style-v95\.js\?v=\d+','community-map-style-v95.js?v=153',s)
+          s=re.sub(r'community-data-loader\.js\?v=\d+','community-data-loader.js?v=153',s)
+          s=re.sub(r'community-runtime-v83\.js\?v=\d+','community-runtime-v83.js?v=153',s)
+          p.write_text(s)
+
+          p=Path('service-worker.js')
+          s=p.read_text()
+          s=re.sub(r'radar-seguro-rj-v\d+','radar-seguro-rj-v153',s)
+          s=re.sub(r"RADAR_SW_BUILD\s*=\s*['\"]\d+['\"]","RADAR_SW_BUILD = '153'",s)
+          p.write_text(s)
+          PY
+      - name: Validar
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          g=json.load(open('data/community-geometries.json'))['Cesarão (Santa Cruz)']
+          ring=g['coordinates'][0]
+          xs=[x for x,y in ring]; ys=[y for x,y in ring]
+          assert max(xs)-min(xs)>0.015 and max(ys)-min(ys)>0.015
+          assert "cache: 'no-store'" in Path('community-data-loader.js').read_text()
+          assert '153-community-source-fix' in Path('index.html').read_text()
+          assert 'radar-seguro-rj-v153' in Path('service-worker.js').read_text()
+          print('v153 validada')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add community-data-loader.js community-runtime-v83.js index.html service-worker.js
+          git commit -m 'v153: impedir cache antigo de restaurar Cesarão estreito'
+          git push
