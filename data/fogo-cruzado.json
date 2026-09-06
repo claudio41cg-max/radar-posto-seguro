@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T18:54:58.950Z",
+  "generatedAt": "2026-09-06T19:14:52.691Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
+  "count": 40,
   "lastUpdate": "2026-09-06T11:59:05-03:00",
   "occurrences": [
+    {
+      "id": "bb5ef3a7-de37-436c-b7cb-c71b69187a10",
+      "documentNumber": 78935,
+      "date": "2026-09-06T05:35:00.000Z",
+      "address": "R. Ouro Fino - Irajá, Rio de Janeiro - RJ, 21371-230, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8526387,
+      "longitude": -43.3224096,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "86a35e4e-39b5-4d21-bb3e-5baad3570877",
       "documentNumber": 78936,
@@ -65,7 +80,16 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "c0516af9-1dca-4bb2-a250-50a8a54d72f3",
@@ -82,11 +106,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -307,26 +331,6 @@
       "victims": []
     },
     {
-      "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
-      "documentNumber": 78892,
-      "date": "2026-09-02T19:00:00.000Z",
-      "address": "Santo Antonio, Itaboraí - RJ, Brasil",
-      "neighborhood": "SANTO ANTONIO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7598383,
-      "longitude": -42.925027,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
       "documentNumber": 78890,
       "date": "2026-09-02T19:00:00.000Z",
@@ -339,6 +343,26 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
+      "documentNumber": 78892,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Santo Antonio, Itaboraí - RJ, Brasil",
+      "neighborhood": "SANTO ANTONIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7598383,
+      "longitude": -42.925027,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Wounded",
@@ -407,21 +431,6 @@
       "victims": []
     },
     {
-      "id": "52abc355-875f-46af-a578-47f58b9cb769",
-      "documentNumber": 78869,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
-      "neighborhood": "PIAM",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CASTELAR",
-      "latitude": -22.75173021,
-      "longitude": -43.40115974,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
       "documentNumber": 78868,
       "date": "2026-09-01T16:00:00.000Z",
@@ -431,6 +440,21 @@
       "locality": "COMPLEXO DA PEDREIRA",
       "latitude": -22.82425288,
       "longitude": -43.36809439,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "52abc355-875f-46af-a578-47f58b9cb769",
+      "documentNumber": 78869,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Castelar - Piam, Belford Roxo - RJ, 26116-170, Brasil",
+      "neighborhood": "PIAM",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CASTELAR",
+      "latitude": -22.75173021,
+      "longitude": -43.40115974,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,

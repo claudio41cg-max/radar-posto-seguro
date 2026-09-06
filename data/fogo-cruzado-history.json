@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T18:54:58.952Z",
+  "generatedAt": "2026-09-06T19:14:52.692Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 116,
+  "count": 117,
   "occurrences": [
+    {
+      "id": "bb5ef3a7-de37-436c-b7cb-c71b69187a10",
+      "documentNumber": 78935,
+      "date": "2026-09-06T05:35:00.000Z",
+      "address": "R. Ouro Fino - Irajá, Rio de Janeiro - RJ, 21371-230, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8526387,
+      "longitude": -43.3224096,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "86a35e4e-39b5-4d21-bb3e-5baad3570877",
       "documentNumber": 78936,
@@ -64,7 +79,16 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "c0516af9-1dca-4bb2-a250-50a8a54d72f3",
@@ -81,11 +105,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
