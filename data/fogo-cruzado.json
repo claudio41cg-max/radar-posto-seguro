@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T23:54:30.937Z",
+  "generatedAt": "2026-09-06T00:29:50.200Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 44,
+  "count": 38,
   "lastUpdate": "2026-09-05T20:33:00-03:00",
   "occurrences": [
     {
@@ -670,131 +670,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "c93c29fa-4385-41be-935f-1ea22270f162",
-      "documentNumber": 78836,
-      "date": "2026-08-29T23:30:00.000Z",
-      "address": "Estrada do Guerenguê - Taquara, Rio de Janeiro - RJ, 22713-001, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.940077751307967,
-      "longitude": -43.38434160213013,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "7df91566-4e81-4292-b22c-553f13abd3dc",
-      "documentNumber": 78835,
-      "date": "2026-08-29T23:00:00.000Z",
-      "address": "R. Sd. Bruno Estrifíca - Curicica, Rio de Janeiro - RJ, 22780-600, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.958897360131534,
-      "longitude": -43.385976533868416,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "31019102-ccae-4688-a401-ad45305e20af",
-      "documentNumber": 78827,
-      "date": "2026-08-29T11:40:00.000Z",
-      "address": "Chacará do Céu - Tijuca, Rio de Janeiro - RJ, 20530-390, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "CHACARA DO CEU (TIJUCA)",
-      "latitude": -22.9353782,
-      "longitude": -43.2531083,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "23ec4b11-0689-4cb5-b2c0-fcb5b6b2e700",
-      "documentNumber": 78828,
-      "date": "2026-08-29T05:00:00.000Z",
-      "address": "Gogó de São João  - Centro, São João de Meriti - RJ, 25515-220, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "GOGO DE SAO JOAO",
-      "latitude": -22.7981649,
-      "longitude": -43.3639608,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "3194db92-df63-44be-94bd-a5e487f8af99",
-      "documentNumber": 78825,
-      "date": "2026-08-29T04:04:00.000Z",
-      "address": "Corte 8 (Complexo da Manguerinha), Centenário - Vila Centenario, Duque de Caxias - RJ, 25030-030, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.77079678748936,
-      "longitude": -43.31164472809448,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "8c71883f-5dcd-41f9-a0b7-878b2acbaa0a",
-      "documentNumber": 78829,
-      "date": "2026-08-29T03:00:00.000Z",
-      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CRUZ",
-      "latitude": -22.930738,
-      "longitude": -43.251766,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
