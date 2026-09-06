@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T14:27:59.292Z",
+  "generatedAt": "2026-09-06T14:41:51.070Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,32 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 115,
+  "count": 116,
   "occurrences": [
+    {
+      "id": "86a35e4e-39b5-4d21-bb3e-5baad3570877",
+      "documentNumber": 78936,
+      "date": "2026-09-06T04:00:00.000Z",
+      "address": "Morro da Serrinha - Madureira, Rio de Janeiro - RJ, 21370-030, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
+      "latitude": -22.87059846,
+      "longitude": -43.33228522,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "466b9cd2-7e93-47d0-91fb-f904cd4e8303",
       "documentNumber": 78924,
@@ -57,11 +81,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T14:27:59.291Z",
+  "generatedAt": "2026-09-06T14:41:51.069Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 38,
-  "lastUpdate": "2026-09-05T20:33:00-03:00",
+  "count": 39,
+  "lastUpdate": "2026-09-06T11:37:06-03:00",
   "occurrences": [
+    {
+      "id": "86a35e4e-39b5-4d21-bb3e-5baad3570877",
+      "documentNumber": 78936,
+      "date": "2026-09-06T04:00:00.000Z",
+      "address": "Morro da Serrinha - Madureira, Rio de Janeiro - RJ, 21370-030, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
+      "latitude": -22.87059846,
+      "longitude": -43.33228522,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "466b9cd2-7e93-47d0-91fb-f904cd4e8303",
       "documentNumber": 78924,
@@ -58,11 +82,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -283,26 +307,6 @@
       "victims": []
     },
     {
-      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
-      "documentNumber": 78890,
-      "date": "2026-09-02T19:00:00.000Z",
-      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "SAO SIMAO",
-      "locality": "MORRO DO SAO SIMAO",
-      "latitude": -22.71020959,
-      "longitude": -43.55081638,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
       "documentNumber": 78892,
       "date": "2026-09-02T19:00:00.000Z",
@@ -315,6 +319,26 @@
       "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
+      "documentNumber": 78890,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "SAO SIMAO",
+      "locality": "MORRO DO SAO SIMAO",
+      "latitude": -22.71020959,
+      "longitude": -43.55081638,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": [
         {
           "situation": "Wounded",
@@ -383,21 +407,6 @@
       "victims": []
     },
     {
-      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
-      "documentNumber": 78868,
-      "date": "2026-09-01T16:00:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "52abc355-875f-46af-a578-47f58b9cb769",
       "documentNumber": 78869,
       "date": "2026-09-01T16:00:00.000Z",
@@ -407,6 +416,21 @@
       "locality": "MORRO DO CASTELAR",
       "latitude": -22.75173021,
       "longitude": -43.40115974,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d0dabfb0-bafa-4b02-8398-b08372eb222d",
+      "documentNumber": 78868,
+      "date": "2026-09-01T16:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
