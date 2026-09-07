@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T11:32:06.899Z",
+  "generatedAt": "2026-09-07T11:45:18.493Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 118,
+  "count": 119,
   "occurrences": [
     {
       "id": "d01fa07f-ff59-4faf-80eb-ab2ec1db0157",
@@ -23,6 +23,21 @@
       "latitude": -22.9398582,
       "longitude": -43.3684169,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "73705785-1b5b-470c-a8fe-96b2690d30b8",
+      "documentNumber": 78943,
+      "date": "2026-09-06T08:26:00.000Z",
+      "address": "Cidade Alta - Cordovil, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8147224,
+      "longitude": -43.29297469999999,
+      "reason": "Outro",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
