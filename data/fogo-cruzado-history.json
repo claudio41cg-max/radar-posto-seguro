@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T11:17:59.704Z",
+  "generatedAt": "2026-09-07T11:32:06.899Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 117,
+  "count": 118,
   "occurrences": [
+    {
+      "id": "d01fa07f-ff59-4faf-80eb-ab2ec1db0157",
+      "documentNumber": 78940,
+      "date": "2026-09-07T00:04:00.000Z",
+      "address": "Estrada Marechal Miguel Salazar Mendes de Moraes - Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9398582,
+      "longitude": -43.3684169,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "bb5ef3a7-de37-436c-b7cb-c71b69187a10",
       "documentNumber": 78935,
