@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T23:54:41.568Z",
+  "generatedAt": "2026-09-08T00:29:07.236Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
+  "count": 29,
   "lastUpdate": "2026-09-07T19:26:53-03:00",
   "occurrences": [
     {
@@ -524,145 +524,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "8b353430-428e-4117-9038-6964a257a364",
-      "documentNumber": 78857,
-      "date": "2026-08-31T22:02:00.000Z",
-      "address": "Morro dos Prazeres - Santa Teresa, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SANTA TERESA",
-      "subNeighborhood": "",
-      "locality": "MORRO DOS PRAZERES",
-      "latitude": -22.9347222,
-      "longitude": -43.2047222,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "92888341-c7e4-40e7-bd70-e84db313355f",
-      "documentNumber": 78913,
-      "date": "2026-08-31T20:00:00.000Z",
-      "address": "Pantanal, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "VILA SAO JOSE",
-      "subNeighborhood": "PANTANAL",
-      "locality": "",
-      "latitude": -22.7472326,
-      "longitude": -43.3173933,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "84123707-5524-4143-84ab-956370bb3783",
-      "documentNumber": 78856,
-      "date": "2026-08-31T19:00:00.000Z",
-      "address": "Rua Arari - Bangu, Rio de Janeiro - RJ, 21875-260, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "CONJUNTO HABITACIONAL DOM JAIME CAMARA (CONJUNTAO)",
-      "latitude": -22.8658963,
-      "longitude": -43.4533225,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "1ed6e145-ffc6-450c-bb9c-ef4cf66cdcda",
-      "documentNumber": 78870,
-      "date": "2026-08-31T15:00:00.000Z",
-      "address": "Rua das Margaridas - Vila Valqueire, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VILA VALQUEIRE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8819209,
-      "longitude": -43.3630089,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c3c94dbc-1d83-434f-9dca-71e602519cee",
-      "documentNumber": 78851,
-      "date": "2026-08-31T14:00:00.000Z",
-      "address": "Tv. União - Rocinha, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ROCINHA",
-      "subNeighborhood": "",
-      "locality": "ROCINHA",
-      "latitude": -22.9902679,
-      "longitude": -43.2513999,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "30afdb37-eb06-434e-8f32-8de35b046d79",
-      "documentNumber": 78862,
-      "date": "2026-08-31T01:00:00.000Z",
-      "address": "Outeiro das Pedras, Itaboraí - RJ, Brasil",
-      "neighborhood": "OUTEIRO DAS PEDRAS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.749148,
-      "longitude": -42.8755389,
-      "reason": "Outro",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "95dd731c-9111-435b-b920-587f9aea1b87",
-      "documentNumber": 78840,
-      "date": "2026-08-31T00:05:00.000Z",
-      "address": "Morro da Serrinha (Complexo da Serrinha) - Madureira, Rio de Janeiro, RJ, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
-      "latitude": -22.86538627717719,
-      "longitude": -43.32327681669067,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "e1305d34-b1d8-40bb-8bb7-2a74a08d6900",
-      "documentNumber": 78841,
-      "date": "2026-08-31T00:00:00.000Z",
-      "address": "Morro do Campinho (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21320-300, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CAMPINHO (COMPLEXO DO FUBA)",
-      "latitude": -22.8850951874697,
-      "longitude": -43.337939003183074,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
