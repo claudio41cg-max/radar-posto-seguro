@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T21:54:21.904Z",
+  "generatedAt": "2026-09-08T22:17:10.477Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 33,
-  "lastUpdate": "2026-09-08T18:16:08-03:00",
+  "count": 35,
+  "lastUpdate": "2026-09-08T19:11:32-03:00",
   "occurrences": [
+    {
+      "id": "67a1d045-7d6a-4990-b6cd-c8b3623a51fd",
+      "documentNumber": 78966,
+      "date": "2026-09-08T18:40:00.000Z",
+      "address": "Colonia Juliano Moreira - Jacarepaguá, Rio de Janeiro - RJ, 22713-550, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "COLONIA JULIANO MOREIRA",
+      "latitude": -22.934696168550737,
+      "longitude": -43.39342490862055,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "db4ded06-edcc-4fc8-878f-9fca2caf7b21",
+      "documentNumber": 78965,
+      "date": "2026-09-08T18:08:00.000Z",
+      "address": "Quitungo-Guaporé - Brás de Pina, Rio de Janeiro - RJ, 21215-510, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "QUITUNGO-GUAPORE",
+      "latitude": -22.835,
+      "longitude": -43.300278,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "77b8fab8-6a89-441d-a931-fe3f74b69e76",
       "documentNumber": 78958,
@@ -242,11 +272,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
