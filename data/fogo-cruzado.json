@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:49:14.672Z",
+  "generatedAt": "2026-09-08T14:59:32.153Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 33,
+  "count": 32,
   "lastUpdate": "2026-09-08T11:47:37-03:00",
   "occurrences": [
     {
@@ -278,21 +278,6 @@
       "victims": []
     },
     {
-      "id": "e15c5f24-bc96-426e-8135-2ef4109353a7",
-      "documentNumber": 78907,
-      "date": "2026-09-03T23:57:00.000Z",
-      "address": "Rua Miguel de Paiva, 71, Catumbi, Rio de Janeiro, Rio de Janeiro, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9190719,
-      "longitude": -43.1933161,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "faed3702-d7bf-406f-bc81-1340fae584da",
       "documentNumber": 78905,
       "date": "2026-09-03T23:54:00.000Z",
@@ -332,12 +317,12 @@
       "id": "d64b5321-dba4-45d4-8ff8-ce8e7ae79d6c",
       "documentNumber": 78904,
       "date": "2026-09-03T17:00:00.000Z",
-      "address": "Corte 8 (Complexo da Mangueirinha), Centenário - Duque de Caxias - RJ, Brasil",
+      "address": "Corte 8 (Complexo da Mangueirinha), Centenário, Vila Centenário - Duque de Caxias - RJ, Brasil",
       "neighborhood": "CENTENARIO",
-      "subNeighborhood": "",
+      "subNeighborhood": "VILA CENTENARIO",
       "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.774734,
-      "longitude": -43.3047139,
+      "latitude": -22.770866035926794,
+      "longitude": -43.31236356011047,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,

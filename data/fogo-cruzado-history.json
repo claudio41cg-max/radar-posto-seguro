@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:49:14.673Z",
+  "generatedAt": "2026-09-08T14:59:32.154Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -331,12 +331,12 @@
       "id": "d64b5321-dba4-45d4-8ff8-ce8e7ae79d6c",
       "documentNumber": 78904,
       "date": "2026-09-03T17:00:00.000Z",
-      "address": "Corte 8 (Complexo da Mangueirinha), Centenário - Duque de Caxias - RJ, Brasil",
+      "address": "Corte 8 (Complexo da Mangueirinha), Centenário, Vila Centenário - Duque de Caxias - RJ, Brasil",
       "neighborhood": "CENTENARIO",
-      "subNeighborhood": "",
+      "subNeighborhood": "VILA CENTENARIO",
       "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.774734,
-      "longitude": -43.3047139,
+      "latitude": -22.770866035926794,
+      "longitude": -43.31236356011047,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
