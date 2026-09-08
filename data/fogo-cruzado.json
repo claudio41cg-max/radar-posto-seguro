@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T21:16:12.496Z",
+  "generatedAt": "2026-09-08T21:27:33.129Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 32,
-  "lastUpdate": "2026-09-08T16:54:12-03:00",
+  "count": 33,
+  "lastUpdate": "2026-09-08T18:16:08-03:00",
   "occurrences": [
     {
       "id": "77b8fab8-6a89-441d-a931-fe3f74b69e76",
@@ -201,6 +201,26 @@
           "situation": "Wounded",
           "personType": "Civilian"
         },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "0a01ad17-4589-486d-845a-76701d311f08",
+      "documentNumber": 78964,
+      "date": "2026-09-04T22:00:00.000Z",
+      "address": "Rio das Pedras, Itanhangá - Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.9896881,
+      "longitude": -43.3220093,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
         {
           "situation": "Wounded",
           "personType": "Civilian"
