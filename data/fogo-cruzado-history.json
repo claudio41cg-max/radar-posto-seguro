@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:35:21.451Z",
+  "generatedAt": "2026-09-08T14:49:14.673Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 122,
+  "count": 123,
   "occurrences": [
     {
       "id": "77b8fab8-6a89-441d-a931-fe3f74b69e76",
@@ -61,6 +61,38 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "7e98a36d-157d-4973-9be1-0563f6cc842a",
+      "documentNumber": 78961,
+      "date": "2026-09-07T22:00:00.000Z",
+      "address": "Rua Itabaiana - Carlos Sampaio, Nova Iguaçu - RJ, 26089-225, Brasil",
+      "neighborhood": "CARLOS SAMPAIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.691071103478112,
+      "longitude": -43.512186582858604,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "d01fa07f-ff59-4faf-80eb-ab2ec1db0157",
@@ -185,11 +217,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -314,7 +346,7 @@
       "id": "95975828-f47c-4271-8c97-9a1f487ebc66",
       "documentNumber": 78893,
       "date": "2026-09-03T05:00:00.000Z",
-      "address": "Vila Rosário, Duque de Caxias - RJ, 25041-010, Brasil",
+      "address": "Parque Fluminense, Vila Rosário, Duque de Caxias - RJ, 25041-010, Brasil",
       "neighborhood": "PARQUE FLUMINENSE",
       "subNeighborhood": "VILA ROSARIO",
       "locality": "",
@@ -359,12 +391,12 @@
       "id": "ca105b15-ef14-41cb-9bcf-fc03c936e4b8",
       "documentNumber": 78891,
       "date": "2026-09-02T21:00:00.000Z",
-      "address": "Viçoso Jardim, Niterói - RJ, Brasil",
+      "address": "Morro do Capim Melado - Viçoso Jardim, Niterói - RJ, 24140-169, Brasil",
       "neighborhood": "VICOSO JARDIM",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.8909371,
-      "longitude": -43.0871608,
+      "latitude": -22.89475223463686,
+      "longitude": -43.08050892164308,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
