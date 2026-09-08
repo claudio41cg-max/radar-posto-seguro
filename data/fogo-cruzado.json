@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T02:31:53.287Z",
+  "generatedAt": "2026-09-08T02:45:04.698Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 29,
-  "lastUpdate": "2026-09-07T19:26:53-03:00",
+  "count": 30,
+  "lastUpdate": "2026-09-07T23:32:48-03:00",
   "occurrences": [
+    {
+      "id": "7d982594-e0c0-41e0-b299-d7696877e0fd",
+      "documentNumber": 78949,
+      "date": "2026-09-07T23:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7959312,
+      "longitude": -43.0393139,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "d01fa07f-ff59-4faf-80eb-ab2ec1db0157",
       "documentNumber": 78940,
