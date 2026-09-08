@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:48:48.200Z",
+  "generatedAt": "2026-09-08T13:58:40.476Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 30,
-  "lastUpdate": "2026-09-08T10:40:03-03:00",
+  "count": 32,
+  "lastUpdate": "2026-09-08T10:55:52-03:00",
   "occurrences": [
+    {
+      "id": "77b8fab8-6a89-441d-a931-fe3f74b69e76",
+      "documentNumber": 78958,
+      "date": "2026-09-08T03:27:00.000Z",
+      "address": "Estrada Vítor Dumas - Santa Cruz, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SANTA CRUZ",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9295917,
+      "longitude": -43.6948678,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "528f58f4-b0be-45c8-af41-adf843d0d150",
+      "documentNumber": 78956,
+      "date": "2026-09-08T01:30:00.000Z",
+      "address": "Rua Corrêa Dutra - Catete, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CATETE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9274602,
+      "longitude": -43.1770805,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "7d982594-e0c0-41e0-b299-d7696877e0fd",
       "documentNumber": 78949,
@@ -151,11 +186,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
