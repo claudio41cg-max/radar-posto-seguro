@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T13:56:57.101Z",
+  "generatedAt": "2026-09-09T14:18:18.265Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 130,
+  "count": 131,
   "occurrences": [
+    {
+      "id": "f04ebc8f-dd7f-49a9-9356-e59fbf4cc030",
+      "documentNumber": 78976,
+      "date": "2026-09-09T08:48:00.000Z",
+      "address": "Barro Branco, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "BARRO BRANCO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6332622,
+      "longitude": -43.2448963,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "afff18ec-4c79-4c56-91fb-528e42656cee",
       "documentNumber": 78975,
@@ -184,11 +199,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
