@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T00:49:28.502Z",
+  "generatedAt": "2026-09-09T00:59:36.662Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 127,
+  "count": 128,
   "occurrences": [
     {
       "id": "e2c86ab3-18f1-4d70-b786-9dc53fcea36e",
@@ -40,6 +40,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "0e5b9cbd-ada8-4577-8b64-7f3adf4c7c08",
+      "documentNumber": 78970,
+      "date": "2026-09-08T18:30:00.000Z",
+      "address": "Santa Barbara, Niterói - RJ, Brasil",
+      "neighborhood": "SANTA BARBARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8768738,
+      "longitude": -43.0481813,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -126,15 +141,15 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -286,11 +301,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
