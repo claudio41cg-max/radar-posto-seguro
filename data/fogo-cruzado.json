@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T13:00:26.234Z",
+  "generatedAt": "2026-09-09T13:48:14.329Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 33,
-  "lastUpdate": "2026-09-09T09:21:41-03:00",
+  "count": 34,
+  "lastUpdate": "2026-09-09T10:29:05-03:00",
   "occurrences": [
+    {
+      "id": "afff18ec-4c79-4c56-91fb-528e42656cee",
+      "documentNumber": 78975,
+      "date": "2026-09-09T08:06:00.000Z",
+      "address": "Rua Orquídeas - Parque Araruama, São João de Meriti - RJ, Brasil",
+      "neighborhood": "PARQUE ARARUAMA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7897475,
+      "longitude": -43.3376711,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "05992e44-7ab6-46a7-9e71-35932984dcb1",
       "documentNumber": 78973,
@@ -153,7 +177,7 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -165,7 +189,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -317,11 +341,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
