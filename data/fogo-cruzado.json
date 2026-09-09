@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T11:55:42.589Z",
+  "generatedAt": "2026-09-09T12:24:00.914Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 32,
-  "lastUpdate": "2026-09-09T06:55:03-03:00",
+  "count": 33,
+  "lastUpdate": "2026-09-09T09:21:41-03:00",
   "occurrences": [
+    {
+      "id": "05992e44-7ab6-46a7-9e71-35932984dcb1",
+      "documentNumber": 78973,
+      "date": "2026-09-09T04:26:00.000Z",
+      "address": "Estrada Rio Douro - Barros Filho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BARROS FILHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8308955,
+      "longitude": -43.3593934,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "e2c86ab3-18f1-4d70-b786-9dc53fcea36e",
       "documentNumber": 78968,
@@ -142,15 +157,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -512,26 +527,6 @@
       "victims": []
     },
     {
-      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
-      "documentNumber": 78890,
-      "date": "2026-09-02T19:00:00.000Z",
-      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "SAO SIMAO",
-      "locality": "MORRO DO SAO SIMAO",
-      "latitude": -22.71020959,
-      "longitude": -43.55081638,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
       "documentNumber": 78892,
       "date": "2026-09-02T19:00:00.000Z",
@@ -544,6 +539,26 @@
       "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
+      "documentNumber": 78890,
+      "date": "2026-09-02T19:00:00.000Z",
+      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "SAO SIMAO",
+      "locality": "MORRO DO SAO SIMAO",
+      "latitude": -22.71020959,
+      "longitude": -43.55081638,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": [
         {
           "situation": "Wounded",

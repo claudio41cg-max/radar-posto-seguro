@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T11:55:42.590Z",
+  "generatedAt": "2026-09-09T12:24:00.915Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 128,
+  "count": 129,
   "occurrences": [
+    {
+      "id": "05992e44-7ab6-46a7-9e71-35932984dcb1",
+      "documentNumber": 78973,
+      "date": "2026-09-09T04:26:00.000Z",
+      "address": "Estrada Rio Douro - Barros Filho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BARROS FILHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8308955,
+      "longitude": -43.3593934,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "e2c86ab3-18f1-4d70-b786-9dc53fcea36e",
       "documentNumber": 78968,
@@ -141,15 +156,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
