@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T02:31:49.493Z",
+  "generatedAt": "2026-09-10T02:45:09.180Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -17,20 +17,16 @@
       "id": "bfda3dda-f6be-40a0-9ed3-a18b7d7c97cb",
       "documentNumber": 78982,
       "date": "2026-09-09T18:00:00.000Z",
-      "address": "R. Orquídeas, Morro da Caixa d'Água- Parque Araruama, São João de Meriti - RJ, 25585-360, Brasil",
-      "neighborhood": "PARQUE ARARUAMA",
+      "address": "Morro do Cruzeiro - Jardim Metropole, São João de Meriti - RJ, 25575-021, Brasil",
+      "neighborhood": "JARDIM METROPOLE",
       "subNeighborhood": "",
-      "locality": "MORRO DA CAIXA D'AGUA (VENDA VELHA)",
-      "latitude": -22.789460632335473,
-      "longitude": -43.33767110487625,
-      "reason": "Ação policial",
+      "locality": "",
+      "latitude": -22.762123375359145,
+      "longitude": -43.33466550404737,
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -220,11 +216,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
