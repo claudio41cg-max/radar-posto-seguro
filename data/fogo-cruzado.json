@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T23:54:33.880Z",
+  "generatedAt": "2026-09-10T00:24:08.489Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 35,
+  "count": 26,
   "lastUpdate": "2026-09-09T15:26:44-03:00",
   "occurrences": [
     {
@@ -192,19 +192,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -492,160 +492,6 @@
       "latitude": -22.803517,
       "longitude": -43.5874274,
       "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "d0ec972e-15fd-4522-990a-a5a68bb810df",
-      "documentNumber": 78889,
-      "date": "2026-09-02T23:20:00.000Z",
-      "address": "R. Teixeira Heizer - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-883, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -23.0198639,
-      "longitude": -43.5117768,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "ca105b15-ef14-41cb-9bcf-fc03c936e4b8",
-      "documentNumber": 78891,
-      "date": "2026-09-02T21:00:00.000Z",
-      "address": "Morro do Capim Melado - Viçoso Jardim, Niterói - RJ, 24140-169, Brasil",
-      "neighborhood": "VICOSO JARDIM",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.89475223463686,
-      "longitude": -43.08050892164308,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4ed36500-eeca-41a8-9bff-acd5e802bd77",
-      "documentNumber": 78888,
-      "date": "2026-09-02T20:00:00.000Z",
-      "address": "Morro do Dendê, R. Ten. Cleto Campelo - Cocotá, Rio de Janeiro - RJ, 21921-025, Brasil",
-      "neighborhood": "COCOTA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO DENDE",
-      "latitude": -22.80697405485593,
-      "longitude": -43.18269428147583,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "b72896c8-80d3-48d7-9558-8a20dd037178",
-      "documentNumber": 78886,
-      "date": "2026-09-02T19:03:00.000Z",
-      "address": "Parque Fluminense, Vila Rosário, Duque de Caxias - RJ, 25041-030, Brasil",
-      "neighborhood": "PARQUE FLUMINENSE",
-      "subNeighborhood": "VILA ROSARIO",
-      "locality": "",
-      "latitude": -22.73711379,
-      "longitude": -43.31454076,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "0f8b0ad2-fc95-4152-a023-bdf9a3226c7b",
-      "documentNumber": 78890,
-      "date": "2026-09-02T19:00:00.000Z",
-      "address": "Morro do São Simão - São Simao, Queimados - RJ, 26380-270, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "SAO SIMAO",
-      "locality": "MORRO DO SAO SIMAO",
-      "latitude": -22.71020959,
-      "longitude": -43.55081638,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "eacf6ded-27db-4e09-b292-a43881a47e4a",
-      "documentNumber": 78892,
-      "date": "2026-09-02T19:00:00.000Z",
-      "address": "Santo Antonio, Itaboraí - RJ, Brasil",
-      "neighborhood": "SANTO ANTONIO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7598383,
-      "longitude": -42.925027,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "b2aa4730-42ee-42c7-9500-6464ba44f8be",
-      "documentNumber": 78879,
-      "date": "2026-09-02T07:00:00.000Z",
-      "address": "Av. Renascer - Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8035032,
-      "longitude": -43.3160903,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "739b3c1b-f627-4048-b17a-a29aae8225f9",
-      "documentNumber": 78876,
-      "date": "2026-09-02T06:25:00.000Z",
-      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ANDARAI",
-      "latitude": -22.9352778,
-      "longitude": -43.2563889,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "0ebb6ab5-0e96-44bb-b6e4-eef464297837",
-      "documentNumber": 78880,
-      "date": "2026-09-02T05:00:00.000Z",
-      "address": "Morro do Andarai - Andaraí, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ANDARAI",
-      "latitude": -22.9352778,
-      "longitude": -43.2563889,
-      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
