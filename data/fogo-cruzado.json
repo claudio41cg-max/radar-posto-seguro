@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T14:17:17.513Z",
+  "generatedAt": "2026-09-10T14:30:52.737Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 27,
-  "lastUpdate": "2026-09-10T10:32:52-03:00",
+  "count": 28,
+  "lastUpdate": "2026-09-10T11:29:46-03:00",
   "occurrences": [
+    {
+      "id": "6e28165a-ef8e-4fd5-bd80-83c4fc5a391c",
+      "documentNumber": 78987,
+      "date": "2026-09-09T21:06:00.000Z",
+      "address": "Complexo da Serrinha - Madureira, Rio de Janeiro - RJ, 21370-030, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA SERRINHA",
+      "latitude": -22.87059846,
+      "longitude": -43.33228522,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "bfda3dda-f6be-40a0-9ed3-a18b7d7c97cb",
       "documentNumber": 78982,
@@ -216,11 +231,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
