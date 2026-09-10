@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T14:30:52.741Z",
+  "generatedAt": "2026-09-10T14:46:28.628Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 133,
+  "count": 134,
   "occurrences": [
+    {
+      "id": "7893784a-9ad4-4fef-847b-1e09a222c57c",
+      "documentNumber": 78988,
+      "date": "2026-09-10T04:22:00.000Z",
+      "address": "Comunidade Bandeira 2 - Del Castilho, Rio de Janeiro - RJ, 20785-330, Brasil",
+      "neighborhood": "DEL CASTILHO",
+      "subNeighborhood": "",
+      "locality": "Comunidade BANDEIRA 2",
+      "latitude": -22.88224012,
+      "longitude": -43.26958745,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "6e28165a-ef8e-4fd5-bd80-83c4fc5a391c",
       "documentNumber": 78987,
@@ -226,19 +241,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -390,11 +405,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
