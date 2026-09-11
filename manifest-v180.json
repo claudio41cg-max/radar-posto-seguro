@@ -1,0 +1,29 @@
+{
+  "id": "./",
+  "name": "Radar Seguro RJ PRO",
+  "short_name": "Radar Seguro",
+  "description": "Navegação com alertas de segurança, comunidades, trânsito e postos no Rio de Janeiro.",
+  "start_url": "./radar-v180.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "portrait-primary",
+  "background_color": "#07131f",
+  "theme_color": "#07131f",
+  "lang": "pt-BR",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./icon-192-1.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512-1.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
