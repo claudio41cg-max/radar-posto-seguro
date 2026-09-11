@@ -1,0 +1,46 @@
+name: Package Radar Seguro RJ PRO v178
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/package-app-v178.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare app package
+        run: |
+          mkdir -p package
+          rsync -a ./ package/ \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude 'package'
+          cp package/radar-v178.html package/ABRIR-RADAR-V178.html
+          cat > package/LEIA-ME.txt <<'EOF'
+          Radar Seguro RJ PRO — pacote completo v178
+
+          Arquivo principal para testar a versão mais recente:
+          radar-v178.html
+
+          Cópia de atalho:
+          ABRIR-RADAR-V178.html
+
+          Este pacote foi gerado a partir do branch main do repositório radar-posto-seguro.
+          EOF
+
+      - name: Upload complete app
+        uses: actions/upload-artifact@v4
+        with:
+          name: radar-seguro-rj-pro-v178
+          path: package/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 7
