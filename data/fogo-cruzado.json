@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T23:54:35.324Z",
+  "generatedAt": "2026-09-11T00:25:42.887Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 29,
+  "count": 25,
   "lastUpdate": "2026-09-10T18:27:20-03:00",
   "occurrences": [
     {
@@ -242,15 +242,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -463,87 +463,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "faed3702-d7bf-406f-bc81-1340fae584da",
-      "documentNumber": 78905,
-      "date": "2026-09-03T23:54:00.000Z",
-      "address": "Morro Fallet / Fogueteiro - Santa Teresa, Rio de Janeiro - RJ, 20251-320, Brasil",
-      "neighborhood": "SANTA TERESA",
-      "subNeighborhood": "",
-      "locality": "MORRO DA COROA",
-      "latitude": -22.92694665016564,
-      "longitude": -43.19707048416139,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "d64b5321-dba4-45d4-8ff8-ce8e7ae79d6c",
-      "documentNumber": 78904,
-      "date": "2026-09-03T17:00:00.000Z",
-      "address": "Corte 8 (Complexo da Mangueirinha), Centenário, Vila Centenário - Duque de Caxias - RJ, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.770866035926794,
-      "longitude": -43.31236356011047,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "95975828-f47c-4271-8c97-9a1f487ebc66",
-      "documentNumber": 78893,
-      "date": "2026-09-03T05:00:00.000Z",
-      "address": "Parque Fluminense, Vila Rosário, Duque de Caxias - RJ, 25041-010, Brasil",
-      "neighborhood": "PARQUE FLUMINENSE",
-      "subNeighborhood": "VILA ROSARIO",
-      "locality": "",
-      "latitude": -22.735974341315153,
-      "longitude": -43.31607019214835,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "70bc0a1b-3625-4473-9dbc-ecc4f898f2af",
-      "documentNumber": 78894,
-      "date": "2026-09-03T00:00:00.000Z",
-      "address": "Marapicu, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "MARAPICU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.803517,
-      "longitude": -43.5874274,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
