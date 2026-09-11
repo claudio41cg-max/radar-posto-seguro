@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T17:42:32.281Z",
+  "generatedAt": "2026-09-11T17:54:20.145Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 134,
+  "count": 135,
   "occurrences": [
+    {
+      "id": "bce18c04-36ba-41e1-928b-4999a91e52fa",
+      "documentNumber": 78998,
+      "date": "2026-09-11T08:00:00.000Z",
+      "address": "Morro do Campinho - Cascadura, Rio de Janeiro - RJ, 21320-300, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CAMPINHO (COMPLEXO DO FUBA)",
+      "latitude": -22.8850951874697,
+      "longitude": -43.337939003183074,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "7893784a-9ad4-4fef-847b-1e09a222c57c",
       "documentNumber": 78988,
@@ -245,15 +265,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
