@@ -1,0 +1,39 @@
+/* Radar Seguro RJ PRO v181 — instalação/atualização PWA. */
+(()=>{
+'use strict';
+if(window.__radarPwaInstallV181)return;
+window.__radarPwaInstallV181=true;
+
+const isStandalone=()=>
+  window.matchMedia?.('(display-mode: standalone)').matches ||
+  window.navigator.standalone===true;
+
+let deferredPrompt=null;
+let installButton=null;
+
+function removeButton(){try{installButton?.remove();}catch(_){}installButton=null;}
+function showInstallButton(){
+  if(isStandalone()||installButton||!deferredPrompt)return;
+  const btn=document.createElement('button');
+  btn.type='button';
+  btn.textContent='📲 Instalar Radar Seguro';
+  btn.setAttribute('aria-label','Instalar Radar Seguro como aplicativo');
+  Object.assign(btn.style,{position:'fixed',left:'50%',bottom:'18px',transform:'translateX(-50%)',zIndex:'2147483647',border:'0',borderRadius:'999px',padding:'13px 20px',font:'700 15px Arial,sans-serif',background:'#0f766e',color:'#fff',boxShadow:'0 8px 24px rgba(0,0,0,.35)'});
+  btn.addEventListener('click',async()=>{
+    const prompt=deferredPrompt;if(!prompt)return;
+    try{prompt.prompt();await prompt.userChoice;}catch(_){}
+    deferredPrompt=null;removeButton();
+  });
+  document.body.appendChild(btn);installButton=btn;
+}
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredPrompt=event;setTimeout(showInstallButton,200);});
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;removeButton();});
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./service-worker-v181.js',{scope:'./',updateViaCache:'none'})
+      .then(reg=>reg.update().catch(()=>{}))
+      .catch(err=>console.warn('Service Worker v181 não registrado:',err));
+  });
+}
+if(isStandalone())removeButton();
+})();
