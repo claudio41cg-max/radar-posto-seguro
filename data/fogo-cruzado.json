@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T17:40:51.051Z",
+  "generatedAt": "2026-09-12T17:54:09.382Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 22,
-  "lastUpdate": "2026-09-12T12:21:13-03:00",
+  "count": 24,
+  "lastUpdate": "2026-09-12T14:52:22-03:00",
   "occurrences": [
+    {
+      "id": "b6399277-04f0-48e1-9589-933a2b33cf0e",
+      "documentNumber": 79004,
+      "date": "2026-09-12T10:00:00.000Z",
+      "address": "Risca Faca, Inoã - Inoã, Maricá - RJ, Brasil",
+      "neighborhood": "INOA",
+      "subNeighborhood": "",
+      "locality": "FAVELINHA DO RISCA A FACA",
+      "latitude": -22.9126916,
+      "longitude": -42.9349485,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "7e1c8923-d37b-4b4c-8fdc-2f7713f3a672",
       "documentNumber": 79002,
@@ -44,6 +59,30 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "e213a5df-54b8-4f1c-9e9d-a03d03c7264f",
+      "documentNumber": 79003,
+      "date": "2026-09-11T02:00:00.000Z",
+      "address": "Morro do Urubu - Piedade, Rio de Janeiro - RJ, 20751-240, Brasil",
+      "neighborhood": "PIEDADE",
+      "subNeighborhood": "",
+      "locality": "MORRO DO URUBU (COMPLEXO DO URUBU)",
+      "latitude": -22.87805496600965,
+      "longitude": -43.306187080673226,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -277,15 +316,15 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         },
         {
