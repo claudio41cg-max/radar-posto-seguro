@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T15:16:10.023Z",
+  "generatedAt": "2026-09-12T15:27:50.096Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 21,
-  "lastUpdate": "2026-09-12T07:48:28-03:00",
+  "count": 22,
+  "lastUpdate": "2026-09-12T12:21:13-03:00",
   "occurrences": [
+    {
+      "id": "7e1c8923-d37b-4b4c-8fdc-2f7713f3a672",
+      "documentNumber": 79002,
+      "date": "2026-09-11T21:00:00.000Z",
+      "address": "Muzema - Itanhangá, Rio de Janeiro - RJ, 22753-060, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "MORRO DA MUZEMA",
+      "latitude": -22.982796781992455,
+      "longitude": -43.32523301626098,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "bce18c04-36ba-41e1-928b-4999a91e52fa",
       "documentNumber": 78998,
