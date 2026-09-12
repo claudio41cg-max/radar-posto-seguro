@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T23:40:40.443Z",
+  "generatedAt": "2026-09-12T23:54:29.444Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 25,
-  "lastUpdate": "2026-09-12T18:44:08-03:00",
+  "count": 26,
+  "lastUpdate": "2026-09-12T20:53:39-03:00",
   "occurrences": [
+    {
+      "id": "9fca5990-b454-4614-998e-04ef8853fe83",
+      "documentNumber": 79010,
+      "date": "2026-09-12T18:00:00.000Z",
+      "address": "Rua Mariz e Barros - Icaraí, Niterói - RJ, Brasil",
+      "neighborhood": "ICARAI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9084097,
+      "longitude": -43.1070801,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "f50b0341-261e-4bd5-ba1f-d39a7c4c9dd7",
       "documentNumber": 79008,
@@ -331,19 +351,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
