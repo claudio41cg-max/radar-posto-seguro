@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T17:54:21.202Z",
+  "generatedAt": "2026-09-13T18:19:30.527Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 143,
+  "count": 145,
   "occurrences": [
+    {
+      "id": "a84dd298-e5fa-4bec-bb1a-121b13f5799e",
+      "documentNumber": 79018,
+      "date": "2026-09-13T07:00:00.000Z",
+      "address": "Rua Mucuripe - Senador Camará, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8945737,
+      "longitude": -43.4884467,
+      "reason": "Ação policial",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
+    },
     {
       "id": "f5a3edcb-f9f3-4365-8ba6-c2fa871fdfd4",
       "documentNumber": 79012,
@@ -25,6 +45,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "de119cad-745e-412c-95a4-f143572b4bde",
+      "documentNumber": 79017,
+      "date": "2026-09-13T03:00:00.000Z",
+      "address": " Táboinha - Vargem Grande, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VARGEM GRANDE",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA TABOINHA",
+      "latitude": -23.0118301,
+      "longitude": -43.5132507,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
