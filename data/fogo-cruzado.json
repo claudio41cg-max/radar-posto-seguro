@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T00:48:14.493Z",
+  "generatedAt": "2026-09-13T00:57:48.164Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 24,
-  "lastUpdate": "2026-09-12T20:53:39-03:00",
+  "count": 25,
+  "lastUpdate": "2026-09-12T21:56:21-03:00",
   "occurrences": [
+    {
+      "id": "51a2f739-25d4-4743-b116-435612d53575",
+      "documentNumber": 79011,
+      "date": "2026-09-12T19:00:00.000Z",
+      "address": "Comunidade Porto d'Água - Porto do Rosa, São Gonçalo - RJ, 24470-540, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PORTO D'AGUA",
+      "latitude": -22.79432417,
+      "longitude": -43.04542933,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "9fca5990-b454-4614-998e-04ef8853fe83",
       "documentNumber": 79010,
@@ -355,11 +370,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
