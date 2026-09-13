@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T12:21:28.572Z",
+  "generatedAt": "2026-09-13T12:36:41.805Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 25,
-  "lastUpdate": "2026-09-12T21:56:21-03:00",
+  "count": 27,
+  "lastUpdate": "2026-09-13T09:34:23-03:00",
   "occurrences": [
+    {
+      "id": "f5a3edcb-f9f3-4365-8ba6-c2fa871fdfd4",
+      "documentNumber": 79012,
+      "date": "2026-09-13T06:20:00.000Z",
+      "address": "Morro da Quitanda - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.81949929,
+      "longitude": -43.36693375,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "04dd62b1-5819-4e6a-aabd-4adc778f1dc6",
+      "documentNumber": 79013,
+      "date": "2026-09-13T06:20:00.000Z",
+      "address": "Morro da Quitanda - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.81949929,
+      "longitude": -43.36693375,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "51a2f739-25d4-4743-b116-435612d53575",
       "documentNumber": 79011,
@@ -366,7 +396,7 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -378,7 +408,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
