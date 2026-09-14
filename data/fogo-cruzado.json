@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T20:16:28.738Z",
+  "generatedAt": "2026-09-14T23:10:57.860Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 27,
-  "lastUpdate": "2026-09-14T17:02:02-03:00",
+  "count": 28,
+  "lastUpdate": "2026-09-14T18:45:17-03:00",
   "occurrences": [
+    {
+      "id": "b5a7fd2c-8157-449c-bc26-04409070d977",
+      "documentNumber": 79034,
+      "date": "2026-09-14T15:00:00.000Z",
+      "address": "R. Simeão Custódio - Centro, São Gonçalo - RJ, 24445-020, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.820940499043093,
+      "longitude": -43.04643839940569,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
+    },
     {
       "id": "5b67cb04-28dd-4b69-ac62-4e1c7a555996",
       "documentNumber": 79019,
