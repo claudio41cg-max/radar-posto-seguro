@@ -8,7 +8,6 @@ const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const app=()=>{try{return window.RadarApp||window.App||null;}catch(_){return null;}};
 const point=p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(+p[0])&&Number.isFinite(+p[1]);
 const rad=d=>d*Math.PI/180,deg=r=>r*180/Math.PI;
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function distM(a,b){if(!point(a)||!point(b))return Infinity;const R=6371000,p1=rad(+a[1]),p2=rad(+b[1]),d1=p2-p1,d2=rad(+b[0]-+a[0]);const q=Math.sin(d1/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(d2/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(q)));}
 function bearing(a,b){if(!point(a)||!point(b))return null;const p1=rad(+a[1]),p2=rad(+b[1]),dl=rad(+b[0]-+a[0]),y=Math.sin(dl)*Math.cos(p2),x=Math.cos(p1)*Math.sin(p2)-Math.sin(p1)*Math.cos(p2)*Math.cos(dl);return(deg(Math.atan2(y,x))+360)%360;}
 function angleDiff(a,b){return Math.abs((((a-b)+540)%360)-180);}
@@ -21,8 +20,8 @@ function liveOrigin(a,fallback){
   return point(fallback)?[+fallback[0],+fallback[1]]:null;
 }
 function vehicleHeading(a){
-  const speed=Math.max(0,+a?.currentSpeed||0),h=+a?.currentBearing;
-  return speed>=6&&Number.isFinite(h)?Math.round((h+360)%360):null;
+  const speed=Math.max(0,+a?.currentSpeed||0),trusted=Math.max(0,+a?.lastTrustedSpeed||0),h=+a?.currentBearing;
+  return (speed>=6||trusted>=6)&&Number.isFinite(h)?Math.round((h+360)%360):null;
 }
 function firstTravelBearing(coords,origin){
   if(!Array.isArray(coords)||coords.length<2||!point(origin))return null;
@@ -38,18 +37,19 @@ function hasEarlyReturn(coords,origin){
   }
   return false;
 }
+function uturnCount(rt){return(rt?.guidance?.instructions||[]).filter(i=>/U.?TURN|TURN_AROUND|TURNAROUND|MAKE_UTURN/i.test(String(i?.maneuver||'')+' '+String(i?.message||''))).length;}
 function quality(rt,origin,dest,heading,speed){
   const coords=[];
   for(const leg of rt?.legs||[])for(const p of leg?.points||[]){const c=[+p.longitude,+p.latitude],z=coords[coords.length-1];if(c.every(Number.isFinite)&&(!z||z[0]!==c[0]||z[1]!==c[1]))coords.push(c);}
   if(coords.length<2)return{valid:false,score:Infinity,coords,reason:'sem geometria'};
-  const sd=distM(coords[0],origin),ed=distM(coords[coords.length-1],dest),fb=firstTravelBearing(coords,origin),hd=Number.isFinite(heading)&&Number.isFinite(fb)?angleDiff(heading,fb):0,loop=hasEarlyReturn(coords,origin),sec=+rt.summary?.travelTimeInSeconds||999999;
+  const sd=distM(coords[0],origin),ed=distM(coords[coords.length-1],dest),fb=firstTravelBearing(coords,origin),hd=Number.isFinite(heading)&&Number.isFinite(fb)?angleDiff(heading,fb):0,loop=hasEarlyReturn(coords,origin),uturns=uturnCount(rt),sec=+rt.summary?.travelTimeInSeconds||999999;
   let valid=sd<=180&&ed<=260;
   if(speed>=8&&Number.isFinite(heading)&&Number.isFinite(fb)&&hd>128)valid=false;
   if(loop)valid=false;
-  const score=sec+Math.min(sd,300)*1.4+Math.min(ed,300)*.6+(speed>=8?hd*4:0)+(loop?8000:0);
-  return{valid,score,coords,sd,ed,headingDiff:hd,loop,reason:loop?'retorno precoce':hd>128?'sentido inicial incompatível':''};
+  const score=sec+Math.min(sd,300)*1.4+Math.min(ed,300)*.6+(speed>=8?hd*4:0)+(loop?8000:0)+uturns*2400;
+  return{valid,score,coords,sd,ed,headingDiff:hd,loop,uturns,reason:loop?'retorno precoce':hd>128?'sentido inicial incompatível':uturns?'retorno em U penalizado':''};
 }
-function modifier(a,type){try{return a.tomTomModifier?.(type)||'straight';}catch(_){const t=String(type||'').toUpperCase();if(t.includes('LEFT'))return'left';if(t.includes('RIGHT'))return'right';if(t.includes('ROUNDABOUT'))return'roundabout';if(t.includes('UTURN'))return'uturn';return'straight';}}
+function modifier(a,type){try{return a.tomTomModifier?.(type)||'straight';}catch(_){const t=String(type||'').toUpperCase();if(t.includes('LEFT'))return'left';if(t.includes('RIGHT'))return'right';if(t.includes('ROUNDABOUT'))return'roundabout';if(t.includes('UTURN')||t.includes('TURN_AROUND'))return'uturn';return'straight';}}
 function normalize(a,rt,coords){
   const steps=(rt.guidance?.instructions||[]).map(i=>({name:i.street||i.roadNumbers?.[0]||'Siga pela via',maneuver:{type:i.maneuver||'',modifier:modifier(a,i.maneuver),location:[+i.point?.longitude,+i.point?.latitude]},routeOffsetMeters:Number(i.routeOffsetInMeters)||0}));
   const route={coords,steps,distance:+rt.summary?.lengthInMeters||0,duration:+rt.summary?.travelTimeInSeconds||0,trafficDelaySeconds:+rt.summary?.trafficDelayInSeconds||0,liveTraffic:true,engine:'tomtom',provider:'TomTom',routingVersion:'187',tomtomRoute:rt};
