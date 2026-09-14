@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T23:54:34.287Z",
+  "generatedAt": "2026-09-14T00:26:11.234Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -232,26 +232,6 @@
       "victims": []
     },
     {
-      "id": "bfda3dda-f6be-40a0-9ed3-a18b7d7c97cb",
-      "documentNumber": 78982,
-      "date": "2026-09-09T18:00:00.000Z",
-      "address": "Morro do Cruzeiro - Jardim Metropole, São João de Meriti - RJ, 25575-021, Brasil",
-      "neighborhood": "JARDIM METROPOLE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.762123375359145,
-      "longitude": -43.33466550404737,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "f04ebc8f-dd7f-49a9-9356-e59fbf4cc030",
       "documentNumber": 78976,
       "date": "2026-09-09T08:48:00.000Z",
@@ -304,6 +284,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "bfda3dda-f6be-40a0-9ed3-a18b7d7c97cb",
+      "documentNumber": 78982,
+      "date": "2026-09-08T22:00:00.000Z",
+      "address": "Morro do Cruzeiro - Jardim Metropole, São João de Meriti - RJ, 25575-021, Brasil",
+      "neighborhood": "JARDIM METROPOLE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.762123375359145,
+      "longitude": -43.33466550404737,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "e2c86ab3-18f1-4d70-b786-9dc53fcea36e",
@@ -430,19 +430,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

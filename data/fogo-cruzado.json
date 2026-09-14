@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T23:54:34.286Z",
+  "generatedAt": "2026-09-14T00:26:11.233Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 29,
+  "count": 26,
   "lastUpdate": "2026-09-13T15:12:02-03:00",
   "occurrences": [
     {
@@ -233,26 +233,6 @@
       "victims": []
     },
     {
-      "id": "bfda3dda-f6be-40a0-9ed3-a18b7d7c97cb",
-      "documentNumber": 78982,
-      "date": "2026-09-09T18:00:00.000Z",
-      "address": "Morro do Cruzeiro - Jardim Metropole, São João de Meriti - RJ, 25575-021, Brasil",
-      "neighborhood": "JARDIM METROPOLE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.762123375359145,
-      "longitude": -43.33466550404737,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "f04ebc8f-dd7f-49a9-9356-e59fbf4cc030",
       "documentNumber": 78976,
       "date": "2026-09-09T08:48:00.000Z",
@@ -305,6 +285,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "bfda3dda-f6be-40a0-9ed3-a18b7d7c97cb",
+      "documentNumber": 78982,
+      "date": "2026-09-08T22:00:00.000Z",
+      "address": "Morro do Cruzeiro - Jardim Metropole, São João de Meriti - RJ, 25575-021, Brasil",
+      "neighborhood": "JARDIM METROPOLE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.762123375359145,
+      "longitude": -43.33466550404737,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "e2c86ab3-18f1-4d70-b786-9dc53fcea36e",
@@ -431,19 +431,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -462,64 +462,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "73705785-1b5b-470c-a8fe-96b2690d30b8",
-      "documentNumber": 78943,
-      "date": "2026-09-06T08:26:00.000Z",
-      "address": "Cidade Alta - Cordovil, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "CIDADE ALTA (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8147224,
-      "longitude": -43.29297469999999,
-      "reason": "Outro",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "bb5ef3a7-de37-436c-b7cb-c71b69187a10",
-      "documentNumber": 78935,
-      "date": "2026-09-06T05:35:00.000Z",
-      "address": "R. Ouro Fino - Irajá, Rio de Janeiro - RJ, 21371-230, Brasil",
-      "neighborhood": "IRAJA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8526387,
-      "longitude": -43.3224096,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "86a35e4e-39b5-4d21-bb3e-5baad3570877",
-      "documentNumber": 78936,
-      "date": "2026-09-06T04:00:00.000Z",
-      "address": "Morro da Serrinha - Madureira, Rio de Janeiro - RJ, 21370-030, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
-      "latitude": -22.87059846,
-      "longitude": -43.33228522,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }
