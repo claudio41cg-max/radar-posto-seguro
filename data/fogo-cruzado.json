@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T09:46:15.868Z",
+  "generatedAt": "2026-09-14T16:00:32.275Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 26,
-  "lastUpdate": "2026-09-14T06:42:11-03:00",
+  "count": 27,
+  "lastUpdate": "2026-09-14T10:54:15-03:00",
   "occurrences": [
+    {
+      "id": "5b67cb04-28dd-4b69-ac62-4e1c7a555996",
+      "documentNumber": 79019,
+      "date": "2026-09-13T23:45:00.000Z",
+      "address": "Rua Felipe Cardoso, Santa Cruz, Rio de Janeiro, Rio de Janeiro, Brasil",
+      "neighborhood": "SANTA CRUZ",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.928293,
+      "longitude": -43.6757519,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "a84dd298-e5fa-4bec-bb1a-121b13f5799e",
       "documentNumber": 79018,
@@ -24,7 +39,7 @@
       "latitude": -22.8945737,
       "longitude": -43.4884467,
       "reason": "Ação policial",
-      "policeAction": false,
+      "policeAction": true,
       "agentPresence": true,
       "victims": [
         {
@@ -52,7 +67,7 @@
       "id": "de119cad-745e-412c-95a4-f143572b4bde",
       "documentNumber": 79017,
       "date": "2026-09-13T03:00:00.000Z",
-      "address": " Táboinha - Vargem Grande, Rio de Janeiro - RJ, Brasil",
+      "address": " Comunidade Vila Taboinha - Vargem Grande, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "VARGEM GRANDE",
       "subNeighborhood": "",
       "locality": "Comunidade VILA TABOINHA",
@@ -132,13 +147,13 @@
       "id": "b6399277-04f0-48e1-9589-933a2b33cf0e",
       "documentNumber": 79004,
       "date": "2026-09-12T10:00:00.000Z",
-      "address": "Risca Faca, Inoã - Inoã, Maricá - RJ, Brasil",
+      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, Brasil",
       "neighborhood": "INOA",
       "subNeighborhood": "",
       "locality": "FAVELINHA DO RISCA A FACA",
       "latitude": -22.9126916,
       "longitude": -42.9349485,
-      "reason": "Ação policial",
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -156,7 +171,12 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "bce18c04-36ba-41e1-928b-4999a91e52fa",
@@ -251,10 +271,10 @@
       "id": "afff18ec-4c79-4c56-91fb-528e42656cee",
       "documentNumber": 78975,
       "date": "2026-09-09T08:06:00.000Z",
-      "address": "Rua Orquídeas - Parque Araruama, São João de Meriti - RJ, Brasil",
+      "address": "Rua Orquídeas, Morro da Caixa D'água (São Matheus) - Parque Araruama, São João de Meriti - RJ, Brasil",
       "neighborhood": "PARQUE ARARUAMA",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "MORRO DA CAIXA D'AGUA (SÃO MATEUS)",
       "latitude": -22.7897475,
       "longitude": -43.3376711,
       "reason": "Ação policial",
@@ -310,7 +330,7 @@
       "id": "e2c86ab3-18f1-4d70-b786-9dc53fcea36e",
       "documentNumber": 78968,
       "date": "2026-09-08T20:40:00.000Z",
-      "address": "Comunidade da Guarda (Parque União de Del Castilha) - Del Castilho, Rio de Janeiro - RJ, 20760-070, Brasil",
+      "address": "Comunidade da Guarda (Parque União de Del Castilho) - Del Castilho, Rio de Janeiro - RJ, 20760-070, Brasil",
       "neighborhood": "DEL CASTILHO",
       "subNeighborhood": "",
       "locality": "Comunidade DO GUARDA (OU PARQUE UNIAO DE DEL CASTILHO)",
@@ -420,13 +440,13 @@
       "id": "7e98a36d-157d-4973-9be1-0563f6cc842a",
       "documentNumber": 78961,
       "date": "2026-09-07T22:00:00.000Z",
-      "address": "Rua Itabaiana - Carlos Sampaio, Nova Iguaçu - RJ, 26089-225, Brasil",
+      "address": "Rua Itabaiana - Comunidade Carlos Sampaio, Nova Iguaçu - RJ, 26089-225, Brasil",
       "neighborhood": "CARLOS SAMPAIO",
       "subNeighborhood": "",
       "locality": "",
       "latitude": -22.691071103478112,
       "longitude": -43.512186582858604,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Ataque a civis",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -435,15 +455,15 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
