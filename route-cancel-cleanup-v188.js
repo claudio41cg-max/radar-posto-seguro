@@ -35,5 +35,7 @@ function install(){const a=app();if(!a?.map)return false;if(a.__routeCancelClean
  document.getElementById('stopNavBtn')?.addEventListener('click',()=>clearState(a),true);
  return true;}
 let n=0,t=setInterval(()=>{n++;if(install()||n>300)clearInterval(t);},100);
-window.RadarRouteCancelCleanupV188={version:'188',clear:()=>{const a=app();if(a)clearState(a);}};
+const api={version:'188',clear:()=>{const a=app();if(a)clearState(a);}};
+window.RadarRouteCancelCleanupV188=api;
+window.RadarRouteCancelCleanupV186=api;
 })();
