@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T16:00:32.275Z",
+  "generatedAt": "2026-09-14T20:16:28.738Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -11,7 +11,7 @@
     "days": 7
   },
   "count": 27,
-  "lastUpdate": "2026-09-14T10:54:15-03:00",
+  "lastUpdate": "2026-09-14T17:02:02-03:00",
   "occurrences": [
     {
       "id": "5b67cb04-28dd-4b69-ac62-4e1c7a555996",
@@ -38,8 +38,8 @@
       "locality": "",
       "latitude": -22.8945737,
       "longitude": -43.4884467,
-      "reason": "Ação policial",
-      "policeAction": true,
+      "reason": "Briga",
+      "policeAction": false,
       "agentPresence": true,
       "victims": [
         {
