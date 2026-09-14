@@ -1,0 +1,37 @@
+/* Radar Seguro RJ PRO v187 — recálculo TomTom com GPS real, heading e somente durante navegação ativa. */
+(()=>{
+'use strict';
+if(window.__radarNavRecoveryV187)return;window.__radarNavRecoveryV187=true;
+const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev';
+const OFF_ROUTE_M=48,IMMEDIATE_M=105,CONFIRM=2,COOLDOWN=8000,CHECK_MS=1200,BACKTRACK_M=190;
+let offCount=0,lastReroute=0,busy=false,lastRouteSig='',cum=[],maxProgress=0,lastNearest=null;
+const app=()=>{try{return window.RadarApp||window.App||null;}catch(_){return null;}};
+const point=p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(+p[0])&&Number.isFinite(+p[1]);
+const rad=d=>d*Math.PI/180;
+function hav(a,b){if(!point(a)||!point(b))return Infinity;const R=6371000,p1=rad(+a[1]),p2=rad(+b[1]),d1=p2-p1,d2=rad(+b[0]-+a[0]);const q=Math.sin(d1/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(d2/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(q)));}
+function origin(a){const acc=Math.max(0,+a?.currentAccuracy||999);if(point(a?.rawUserPos)&&acc<=100)return[+a.rawUserPos[0],+a.rawUserPos[1]];if(point(a?.filteredPos))return[+a.filteredPos[0],+a.filteredPos[1]];if(point(a?.rawUserPos))return[+a.rawUserPos[0],+a.rawUserPos[1]];return point(a?.userPos)?[+a.userPos[0],+a.userPos[1]]:null;}
+function dest(a){const d=a?.destination;if(point(d))return[+d[0],+d[1]];if(d&&Number.isFinite(+(d.lon??d.lng))&&Number.isFinite(+d.lat))return[+(d.lon??d.lng),+d.lat];return null;}
+function heading(a){const s=Math.max(0,+a?.currentSpeed||0),h=+a?.currentBearing;return s>=6&&Number.isFinite(h)?Math.round((h+360)%360):null;}
+function rebuildCum(c){cum=[0];let s=0;for(let i=1;i<c.length;i++){s+=hav(c[i-1],c[i]);cum[i]=s;}maxProgress=0;lastNearest=null;}
+function nearestInfo(p,c){if(!Array.isArray(c)||c.length<2)return{distance:Infinity,index:-1,progress:0};let bi=-1,bd=Infinity;const step=Math.max(1,Math.floor(c.length/900));for(let i=0;i<c.length;i+=step){const d=hav(p,c[i]);if(d<bd){bd=d;bi=i;}}if(step>1&&bi>=0){for(let i=Math.max(0,bi-step*2);i<=Math.min(c.length-1,bi+step*2);i++){const d=hav(p,c[i]);if(d<bd){bd=d;bi=i;}}}return{distance:bd,index:bi,progress:cum[bi]||0};}
+function routeish(id){const s=String(id||'').toLowerCase();return /^route($|-)|^rota($|-)|route-(main|alt|traffic|primary|previous)|radar-flow/.test(s);}
+function clearKnownRouteLayers(){const a=app(),m=a?.map;if(!m)return;const layers=[],sources=[];try{for(const l of m.getStyle()?.layers||[])if(routeish(l.id))layers.push(l.id);}catch(_){}for(const id of layers)try{if(m.getLayer(id))m.removeLayer(id);}catch(_){}try{for(const[id]of Object.entries(m.getStyle()?.sources||{}))if(routeish(id))sources.push(id);}catch(_){}for(const id of sources)try{if(m.getSource(id))m.removeSource(id);}catch(_){}try{window.RadarRouteAlternativesV116?.clear?.();}catch(_){}try{window.RadarRouteStyleV127?.clear?.();}catch(_){}try{window.RadarRouteTrafficV74?.clear?.();}catch(_){} }
+function normalizeTomTom(d,old){const rr=d?.routes?.[0];if(!rr)return null;const coords=[];for(const leg of rr.legs||[])for(const p of leg.points||[]){const c=[+p.longitude,+p.latitude],z=coords[coords.length-1];if(c.every(Number.isFinite)&&(!z||z[0]!==c[0]||z[1]!==c[1]))coords.push(c);}if(coords.length<2)return null;const sum=rr.summary||{},instructions=rr.guidance?.instructions||[];const steps=instructions.map(x=>({distance:Number(x.routeOffsetInMeters)||0,routeOffsetMeters:Number(x.routeOffsetInMeters)||0,instruction:x.message||'',street:x.street||x.roadNumbers?.join(' ')||'',name:x.street||x.roadNumbers?.[0]||'Siga pela via',maneuver:{type:x.maneuver||'',modifier:String(x.maneuver||'').toLowerCase().includes('left')?'left':String(x.maneuver||'').toLowerCase().includes('right')?'right':'straight',location:[+x.point?.longitude,+x.point?.latitude]},point:[+x.point?.longitude,+x.point?.latitude]}));return{...(old||{}),coords,distance:+sum.lengthInMeters||0,duration:+sum.travelTimeInSeconds||0,time:+sum.travelTimeInSeconds||0,steps,instructions:steps,guidance:rr.guidance,tomtomRoute:rr,engine:'tomtom',provider:'TomTom',routingVersion:'187-reroute'};}
+async function reroute(reason='desvio'){
+  const a=app(),p=origin(a),e=dest(a);if(!a?.navActive||!a?.route?.coords?.length||!p||!e||busy)return false;if(Date.now()-lastReroute<COOLDOWN)return false;busy=true;lastReroute=Date.now();
+  try{
+    a.toast?.('Recalculando rota pela TomTom...',2200);try{window.Voice?.speak?.('Recalculando rota.',true);}catch(_){}
+    const params=new URLSearchParams({traffic:'true',routeType:'fastest',travelMode:a.transportMode==='motorcycle'?'motorcycle':'car',routeRepresentation:'polyline',computeTravelTimeFor:'all',instructionsType:'text',language:'pt-BR',avoid:'unpavedRoads',maxAlternatives:'0'}),h=heading(a);if(h!=null)params.set('vehicleHeading',String(h));
+    const points=`${p[1].toFixed(6)},${p[0].toFixed(6)}:${e[1].toFixed(6)},${e[0].toFixed(6)}`,path=`/routing/1/calculateRoute/${points}/json?${params.toString()}`;
+    const r=await fetch(`${WORKER}/v1/tomtom?path=${encodeURIComponent(path)}`,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const nr=normalizeTomTom(await r.json(),a.route);if(!nr)throw new Error('rota vazia');
+    clearKnownRouteLayers();a.route=nr;try{a.prepareRouteGeometry?.(nr);}catch(_){}rebuildCum(nr.coords);offCount=0;try{a.drawRoute?.(nr,false);}catch(_){try{a.drawRoute?.(nr,true);}catch(__){}}
+    for(const fn of['updateRouteUI','updateNavigation','updateHUD'])try{a[fn]?.();}catch(_){}
+    setTimeout(()=>{try{window.RadarRouteAlternativesV116?.refresh?.();}catch(_){}try{window.RadarRouteTrafficV74?.refresh?.();}catch(_){}try{window.RadarHazardDeclutterV119?.apply?.();}catch(_){}},500);
+    a.toast?.('Rota recalculada pela TomTom.',1800);return true;
+  }catch(e){console.warn('Radar v187 recálculo',reason,e);a.toast?.('Não consegui recalcular pela TomTom agora.',2200);return false;}finally{busy=false;}
+}
+function tick(){const a=app();if(!a?.navActive){offCount=0;return;}const c=a?.route?.coords,p=origin(a),e=dest(a);if(!Array.isArray(c)||c.length<2||!p||!e){offCount=0;return;}const sig=`${c.length}:${e.join(',')}:${c[0]?.join(',')}:${c[c.length-1]?.join(',')}`;if(sig!==lastRouteSig){lastRouteSig=sig;rebuildCum(c);offCount=0;}const ni=nearestInfo(p,c);if(ni.index<0)return;maxProgress=Math.max(maxProgress,ni.progress);const backtracking=maxProgress-ni.progress>BACKTRACK_M,indexBack=lastNearest&&ni.index<lastNearest.index-8&&hav(p,lastNearest.pos)>25;lastNearest={index:ni.index,progress:ni.progress,pos:p.slice()};if(ni.distance>=IMMEDIATE_M){offCount=CONFIRM;reroute('fora da rota');return;}if(ni.distance>=OFF_ROUTE_M){if(++offCount>=CONFIRM)reroute('desvio confirmado');return;}if(backtracking||indexBack){if(++offCount>=CONFIRM)reroute('sentido contrário');return;}if(ni.distance<30)offCount=0;}
+function install(){const a=app();if(!a)return false;if(a.__radarNavRecoveryV187Installed)return true;a.__radarNavRecoveryV187Installed=true;return true;}
+let tries=0,boot=setInterval(()=>{tries++;install();if(tries>200)clearInterval(boot);},200);setInterval(tick,CHECK_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){install();setTimeout(tick,500);}});
+window.RadarNavRecoveryV128={reroute,clearNavigation:()=>{try{window.RadarRouteCancelCleanupV186?.clear?.();}catch(_){}},version:'187-tomtom-heading'};
+})();
