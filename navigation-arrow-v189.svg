@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 112" role="img" aria-label="Seta 3D de navegação Radar Seguro">
+  <defs>
+    <linearGradient id="front" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#E8FEFF"/>
+      <stop offset="0.18" stop-color="#74F5FF"/>
+      <stop offset="0.48" stop-color="#11D8F4"/>
+      <stop offset="0.78" stop-color="#079BC8"/>
+      <stop offset="1" stop-color="#046784"/>
+    </linearGradient>
+    <linearGradient id="leftFace" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9EFAFF"/>
+      <stop offset="1" stop-color="#0A89B0"/>
+    </linearGradient>
+    <linearGradient id="rightFace" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B7EA5"/>
+      <stop offset="1" stop-color="#03445F"/>
+    </linearGradient>
+    <linearGradient id="bevel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.38" stop-color="#D7FBFF"/>
+      <stop offset="1" stop-color="#90DCE8"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4.2" result="blur"/>
+      <feOffset dy="7" result="off"/>
+      <feColorMatrix in="off" type="matrix" values="0 0 0 0 0.00 0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 .72 0" result="shade"/>
+      <feMerge><feMergeNode in="shade"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#52E9FF" stop-opacity=".36"/>
+      <stop offset="1" stop-color="#52E9FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="48" cy="92" rx="35" ry="13" fill="url(#glow)"/>
+  <ellipse cx="48" cy="92" rx="24" ry="7.5" fill="#03141E" opacity=".34"/>
+
+  <g filter="url(#shadow)">
+    <!-- volume / extrusion -->
+    <path d="M48 6 L83 87 L55 75 L48 94 L41 75 L13 87 Z" fill="#052F43" stroke="#001D2B" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M48 6 L48 94 L41 75 L13 87 Z" fill="url(#leftFace)" opacity=".78"/>
+    <path d="M48 6 L83 87 L55 75 L48 94 Z" fill="url(#rightFace)" opacity=".92"/>
+
+    <!-- white bevel -->
+    <path d="M48 2.5 L88 93 L57.5 80 L48 103 L38.5 80 L8 93 Z" fill="url(#bevel)" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round"/>
+
+    <!-- main cyan face -->
+    <path d="M48 8.5 L80.5 84 L54.5 73.2 L48 90.2 L41.5 73.2 L15.5 84 Z" fill="url(#front)" stroke="#0A516A" stroke-width="2.2" stroke-linejoin="round"/>
+
+    <!-- highlight -->
+    <path d="M47.8 13.5 L31 66 L42.2 61.5 L48 76.5 Z" fill="#FFFFFF" opacity=".34"/>
+    <path d="M49.2 13.5 L66.8 66 L54.7 61.4 L48 76.5 Z" fill="#0A6482" opacity=".26"/>
+
+    <!-- center ridge -->
+    <path d="M48 12 L48 82" stroke="#D9FCFF" stroke-width="2.2" stroke-linecap="round" opacity=".75"/>
+    <path d="M48 12 L48 82" stroke="#137A99" stroke-width=".9" stroke-linecap="round" opacity=".5" transform="translate(1.4 0)"/>
+
+    <!-- hub -->
+    <ellipse cx="48" cy="68" rx="6.7" ry="5.5" fill="#F9FFFF" stroke="#0A6F8D" stroke-width="1.8"/>
+    <ellipse cx="46.2" cy="66.3" rx="2.1" ry="1.5" fill="#FFFFFF" opacity=".95"/>
+  </g>
+</svg>
