@@ -41,8 +41,12 @@ try{
   }
 }catch(e){ clientId='radar_live_'+Date.now()+'_'+Math.random().toString(36).slice(2); }
 
+function appRef(){ try{return typeof App!=='undefined'?App:window.App;}catch(e){return window.App;} }
+function voiceRef(){ try{return typeof Voice!=='undefined'?Voice:window.Voice;}catch(e){return window.Voice;} }
+function assistantRef(){ try{return typeof VoiceAssistant!=='undefined'?VoiceAssistant:window.VoiceAssistant;}catch(e){return window.VoiceAssistant;} }
+
 function appToast(text,ms=3200){
-  try{ if(window.App?.toast) return App.toast(text,ms); }catch(e){}
+  try{ const app=appRef(); if(app?.toast) return app.toast(text,ms); }catch(e){}
   console.log('[Gemini Live]',text);
 }
 
@@ -203,14 +207,16 @@ async function stopMicrophone(){
 
 function routeContext(){
   let route=null;
-  try{ route=window.VoiceAssistant?.routeContext?.()||null; }catch(e){}
-  const pos=Array.isArray(window.App?.userPos)?window.App.userPos:null;
+  const assistant=assistantRef();
+  const app=appRef();
+  try{ route=assistant?.routeContext?.()||null; }catch(e){}
+  const pos=Array.isArray(app?.userPos)?app.userPos:null;
   let currentRoad='';
   try{ currentRoad=document.getElementById('currentRoadPill')?.textContent?.trim()||route?.currentRoad||''; }catch(e){}
   return {
     gps:pos&&pos.length>=2?{longitude:Number(pos[0]),latitude:Number(pos[1])}:null,
     destination:document.getElementById('destInput')?.value?.trim()||route?.destination||'',
-    routeActive:Boolean(window.App?.route),
+    routeActive:Boolean(app?.route),
     currentRoad,
     route
   };
@@ -219,17 +225,19 @@ function routeContext(){
 async function executeRadarCommand(command){
   const text=String(command||'').trim();
   if(!text) return {ok:false,error:'Comando vazio.'};
-  if(!window.VoiceAssistant?.handle) return {ok:false,error:'Assistente local do Radar indisponível.'};
+  const assistant=assistantRef();
+  const voice=voiceRef();
+  if(!assistant?.handle) return {ok:false,error:'Assistente local do Radar indisponível.'};
   let previousVoice=true;
   try{
-    if(window.Voice){ previousVoice=Voice.enabled!==false; Voice.clear?.(); Voice.enabled=false; }
-    await Promise.resolve(VoiceAssistant.handle(text));
+    if(voice){ previousVoice=voice.enabled!==false; voice.clear?.(); voice.enabled=false; }
+    await Promise.resolve(assistant.handle(text));
     return {ok:true,command:text};
   }catch(error){
     console.warn('Gemini Live tool command',error);
     return {ok:false,error:String(error?.message||error).slice(0,180)};
   }finally{
-    if(window.Voice) Voice.enabled=previousVoice;
+    if(voice) voice.enabled=previousVoice;
   }
 }
 
@@ -308,8 +316,8 @@ async function start(tier='auto'){
   setButtons(true);
   setStatus('Gemini Live • conectando…');
   try{
-    try{ window.Voice?.clear?.(); }catch(e){}
-    try{ window.VoiceAssistant?.stopHandsFree?.(false); }catch(e){}
+    try{ voiceRef()?.clear?.(); }catch(e){}
+    try{ assistantRef()?.stopHandsFree?.(false); }catch(e){}
     const auth=await requestToken(tier);
     currentSource=String(auth?.source||'default');
     paidFallbackAvailable=Boolean(auth?.paidFallbackAvailable);
