@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T12:04:00.808Z",
+  "generatedAt": "2026-09-15T16:50:43.215Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,25 +10,70 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 27,
-  "lastUpdate": "2026-09-15T08:12:57-03:00",
+  "count": 31,
+  "lastUpdate": "2026-09-15T11:12:50-03:00",
   "occurrences": [
     {
-      "id": "d9633641-f0ce-4d86-970f-3d904fcb29e2",
-      "documentNumber": 79037,
-      "date": "2026-09-14T15:00:00.000Z",
-      "address": "Sítio da Capelinha - Vale das Pedrinhas, Guapimirim - RJ, 25940-000, Brasil",
-      "neighborhood": "VALE DAS PEDRINHAS",
+      "id": "c94e9749-b1ce-44a3-a904-e8967345f847",
+      "documentNumber": 79044,
+      "date": "2026-09-15T10:15:00.000Z",
+      "address": "Morro São João - Engenho Novo, Rio de Janeiro - RJ, 20950-370, Brasil",
+      "neighborhood": "ENGENHO NOVO",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.64924465481227,
-      "longitude": -43.013060030680414,
+      "locality": "MORRO SAO JOAO",
+      "latitude": -22.90860304,
+      "longitude": -43.26500038,
       "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "8ea4f91a-7f44-4203-bc3f-a305e9727e3e",
+      "documentNumber": 79043,
+      "date": "2026-09-15T09:00:00.000Z",
+      "address": "Morro São João - Engenho Novo, Rio de Janeiro - RJ, 20950-370, Brasil",
+      "neighborhood": "ENGENHO NOVO",
+      "subNeighborhood": "",
+      "locality": "MORRO SAO JOAO",
+      "latitude": -22.90860304,
+      "longitude": -43.26500038,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "5eaa224d-07bf-421e-b53d-d23a15ba0c9a",
+      "documentNumber": 79041,
+      "date": "2026-09-15T07:20:00.000Z",
+      "address": "Comunidade Bateau Mouche - Praça Seca, Rio de Janeiro - RJ, 22733-000, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade BATEAU MOUCHE",
+      "latitude": -22.90553130050597,
+      "longitude": -43.354608754520655,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "778c86f3-a51d-4b32-bb0f-8a1b3efa7d01",
+      "documentNumber": 79042,
+      "date": "2026-09-15T07:02:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21831-440, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.895833,
+      "longitude": -43.4825,
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -54,6 +99,30 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "d9633641-f0ce-4d86-970f-3d904fcb29e2",
+      "documentNumber": 79037,
+      "date": "2026-09-14T15:00:00.000Z",
+      "address": "Sítio da Capelinha - Vale das Pedrinhas, Guapimirim - RJ, 25940-000, Brasil",
+      "neighborhood": "VALE DAS PEDRINHAS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.64924465481227,
+      "longitude": -43.013060030680414,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
