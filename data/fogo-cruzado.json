@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T06:37:05.808Z",
+  "generatedAt": "2026-09-15T12:04:00.808Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 26,
-  "lastUpdate": "2026-09-14T23:01:03-03:00",
+  "count": 27,
+  "lastUpdate": "2026-09-15T08:12:57-03:00",
   "occurrences": [
     {
       "id": "d9633641-f0ce-4d86-970f-3d904fcb29e2",
@@ -56,6 +56,21 @@
           "personType": "Agent"
         }
       ]
+    },
+    {
+      "id": "9b912d5a-747a-4ca6-a687-2edd5500813f",
+      "documentNumber": 79039,
+      "date": "2026-09-14T12:19:00.000Z",
+      "address": "Complexo do Lins - Lins de Vasconcelos, Rio de Janeiro - RJ, 20725-140, Brasil",
+      "neighborhood": "LINS DE VASCONCELOS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO LINS",
+      "latitude": -22.91534468,
+      "longitude": -43.28452174,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "5b67cb04-28dd-4b69-ac62-4e1c7a555996",
