@@ -1,6 +1,7 @@
 import {handleTomTomProxy} from './tomtom-proxy.js';
 
 const DEFAULT_MODEL='gemini-2.5-flash-lite';
+const LIVE_MODEL='gemini-3.1-flash-live-preview';
 const DEFAULT_ORIGIN='https://claudio41cg-max.github.io';
 const MAX_MESSAGE_LENGTH=600;
 const MAX_HISTORY_ITEMS=6;
@@ -42,11 +43,74 @@ async function askGemini(message,history,env){
   if(!response.ok){const upstreamMessage=cleanText(data?.error?.message,500)||`Gemini HTTP ${response.status}`;console.error('Gemini upstream error',{status:response.status,message:upstreamMessage,model});const upstreamError=new Error(upstreamMessage);upstreamError.status=response.status;throw upstreamError;}
   const reply=extractAnswer(data);if(!reply)throw new Error('Resposta vazia');return{reply,sources:extractSources(data),model};
 }
+
+function liveKeyFor(env,tier='auto'){
+  const requested=String(tier||'auto').toLowerCase();
+  const free=String(env.GEMINI_LIVE_FREE_API_KEY||'').trim();
+  const paid=String(env.GEMINI_LIVE_PAID_API_KEY||'').trim();
+  const fallback=String(env.GEMINI_API_KEY||'').trim();
+  if(requested==='free') return free?{key:free,source:'free'}:fallback?{key:fallback,source:'default'}:{key:'',source:'none'};
+  if(requested==='paid') return paid?{key:paid,source:'paid'}:fallback?{key:fallback,source:'default'}:{key:'',source:'none'};
+  if(free) return {key:free,source:'free'};
+  if(fallback) return {key:fallback,source:'default'};
+  if(paid) return {key:paid,source:'paid'};
+  return {key:'',source:'none'};
+}
+
+async function createLiveToken(apiKey){
+  const now=Date.now();
+  const expireTime=new Date(now+30*60*1000).toISOString();
+  const newSessionExpireTime=new Date(now+2*60*1000).toISOString();
+  const response=await fetch('https://generativelanguage.googleapis.com/v1beta/auth_tokens',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-goog-api-key':apiKey},
+    body:JSON.stringify({uses:1,expireTime,newSessionExpireTime})
+  });
+  let data={};try{data=await response.json();}catch(error){}
+  if(!response.ok){
+    const upstreamMessage=cleanText(data?.error?.message,500)||`Gemini auth token HTTP ${response.status}`;
+    const err=new Error(upstreamMessage);err.status=response.status;throw err;
+  }
+  const token=cleanText(data?.name,3000);
+  if(!token)throw new Error('O Gemini não retornou o token temporário.');
+  return {token,expireTime:data?.expireTime||expireTime,newSessionExpireTime:data?.newSessionExpireTime||newSessionExpireTime};
+}
+
+async function liveTokenResponse(request,url,origin,env){
+  if(!await withinRateLimit(request,env))return json({ok:false,error:'Muitas tentativas em pouco tempo. Aguarde um minuto.'},429,origin,env);
+  const tier=String(url.searchParams.get('tier')||'auto').toLowerCase();
+  let selected=liveKeyFor(env,tier);
+  if(!selected.key)return json({ok:false,error:'Gemini Live ainda não configurado no servidor.'},503,origin,env);
+  try{
+    const out=await createLiveToken(selected.key);
+    return json({ok:true,token:out.token,model:LIVE_MODEL,source:selected.source,expiresAt:out.expireTime,newSessionExpiresAt:out.newSessionExpireTime,paidFallbackAvailable:Boolean(env.GEMINI_LIVE_PAID_API_KEY)},200,origin,env);
+  }catch(error){
+    const upstreamStatus=Number(error?.status)||0;
+    const quotaLike=upstreamStatus===429||/quota|rate|resource|exhaust/i.test(String(error?.message||''));
+    if(tier==='auto'&&selected.source==='free'&&quotaLike&&env.GEMINI_LIVE_PAID_API_KEY){
+      try{
+        selected={key:String(env.GEMINI_LIVE_PAID_API_KEY).trim(),source:'paid'};
+        const out=await createLiveToken(selected.key);
+        return json({ok:true,token:out.token,model:LIVE_MODEL,source:'paid',fallbackFrom:'free',expiresAt:out.expireTime,newSessionExpiresAt:out.newSessionExpireTime,paidFallbackAvailable:true},200,origin,env);
+      }catch(paidError){
+        const paidStatus=Number(paidError?.status)||0;
+        return json({ok:false,error:'Não foi possível abrir a reserva paga do Gemini Live.',upstreamStatus:paidStatus||undefined},paidStatus===429?429:502,origin,env);
+      }
+    }
+    const status=upstreamStatus===429?429:502;
+    return json({ok:false,error:status===429?'O limite do Gemini Live foi atingido.':'Não foi possível iniciar o Gemini Live agora.',upstreamStatus:upstreamStatus||undefined,source:selected.source},status,origin,env);
+  }
+}
+
 export default{async fetch(request,env){
   const url=new URL(request.url),origin=request.headers.get('Origin')||'',originAllowed=allowedOrigins(env).has(origin);
   if(request.method==='OPTIONS'){if(!originAllowed)return json({ok:false,error:'Origem não autorizada.'},403,origin,env);return new Response(null,{status:204,headers:corsHeaders(origin,env)});}
-  if(request.method==='GET'&&url.pathname==='/health')return json({ok:true,service:'radar-seguro-rj-ai',configured:Boolean(env.GEMINI_API_KEY),tomtomConfigured:Boolean(env.TOMTOM_API_KEY),model:cleanText(env.GEMINI_MODEL||DEFAULT_MODEL,80)},200,originAllowed?origin:'',env);
+  if(request.method==='GET'&&url.pathname==='/health')return json({ok:true,service:'radar-seguro-rj-ai',configured:Boolean(env.GEMINI_API_KEY),liveConfigured:Boolean(env.GEMINI_LIVE_FREE_API_KEY||env.GEMINI_LIVE_PAID_API_KEY||env.GEMINI_API_KEY),liveModel:LIVE_MODEL,tomtomConfigured:Boolean(env.TOMTOM_API_KEY),model:cleanText(env.GEMINI_MODEL||DEFAULT_MODEL,80)},200,originAllowed?origin:'',env);
   if(url.pathname==='/v1/tomtom'){if(!originAllowed)return json({ok:false,error:'Origem não autorizada.'},403,origin,env);if(!await withinRateLimit(request,env))return json({ok:false,error:'Muitas consultas em pouco tempo.'},429,origin,env);try{return await handleTomTomProxy(request,env,origin);}catch(error){return json({ok:false,error:'Serviço TomTom temporariamente indisponível.'},502,origin,env);}}
+  if(url.pathname==='/v1/live-token'&&request.method==='POST'){
+    if(!originAllowed)return json({ok:false,error:'Origem não autorizada.'},403,origin,env);
+    return liveTokenResponse(request,url,origin,env);
+  }
   if(url.pathname!=='/v1/chat'||request.method!=='POST')return json({ok:false,error:'Rota não encontrada.'},404,origin,env);
   if(!originAllowed)return json({ok:false,error:'Origem não autorizada.'},403,origin,env);
   if(!env.GEMINI_API_KEY)return json({ok:false,error:'Inteligência ainda não configurada.'},503,origin,env);
