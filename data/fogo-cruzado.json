@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T19:52:14.166Z",
+  "generatedAt": "2026-09-15T22:28:18.626Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 31,
-  "lastUpdate": "2026-09-15T11:12:50-03:00",
+  "count": 32,
+  "lastUpdate": "2026-09-15T18:13:37-03:00",
   "occurrences": [
+    {
+      "id": "5f476a74-f00f-45b0-b230-2d3218d38db5",
+      "documentNumber": 79049,
+      "date": "2026-09-15T16:51:00.000Z",
+      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
+      "latitude": -22.892324971301786,
+      "longitude": -43.33377861518315,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "c94e9749-b1ce-44a3-a904-e8967345f847",
       "documentNumber": 79044,
@@ -85,7 +100,7 @@
     {
       "id": "b5a7fd2c-8157-449c-bc26-04409070d977",
       "documentNumber": 79034,
-      "date": "2026-09-14T15:00:00.000Z",
+      "date": "2026-09-14T15:22:00.000Z",
       "address": "R. Simeão Custódio - Centro, São Gonçalo - RJ, 24445-020, Brasil",
       "neighborhood": "CENTRO",
       "subNeighborhood": "",
