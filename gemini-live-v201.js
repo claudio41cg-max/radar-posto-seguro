@@ -29,6 +29,8 @@ let originalNavText='';
 let clientId='';
 let introAudioReceived=false;
 let introTimer=null;
+let stage='idle';
+let lastTokenDiag=null;
 const outputSources=new Set();
 
 try{
@@ -43,19 +45,20 @@ function appRef(){try{return typeof App!=='undefined'?App:window.App}catch(e){re
 function assistantRef(){try{return typeof VoiceAssistant!=='undefined'?VoiceAssistant:window.VoiceAssistant}catch(e){return window.VoiceAssistant}}
 function voiceRef(){try{return typeof Voice!=='undefined'?Voice:window.Voice}catch(e){return window.Voice}}
 function toast(text,ms=4200){try{const a=appRef();if(a?.toast)return a.toast(text,ms)}catch(e){}console.log('[Gemini Live v201]',text)}
+function safeText(v,max=700){const s=String(v??'').replace(/\s+/g,' ').trim();return s.length>max?s.slice(0,max)+'…':s}
 
 function ensureUI(){
   if(!document.getElementById('geminiLiveV201Style')){
     const s=document.createElement('style');
     s.id='geminiLiveV201Style';
-    s.textContent=`#${MAIN_ID}.gemini-live-active{background:#0b5d3b!important;color:#effff6!important;box-shadow:0 0 0 3px rgba(71,255,153,.25),0 0 22px rgba(71,255,153,.55)!important;animation:livePulse201 1.25s ease-in-out infinite}#${NAV_ID}.gemini-live-active{background:#0b5d3b!important;color:#effff6!important;box-shadow:0 0 0 2px rgba(71,255,153,.22),0 0 18px rgba(71,255,153,.45)!important}#geminiLiveStatusV201{position:fixed;right:12px;top:118px;z-index:99999;padding:8px 11px;border-radius:999px;background:rgba(4,24,18,.95);border:1px solid rgba(103,255,178,.45);color:#ecfff4;font:700 11px/1.2 Arial,sans-serif;display:none;max-width:82vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 6px 22px rgba(0,0,0,.35)}#geminiLiveStatusV201.on{display:block}#geminiLiveDetailV201{position:fixed;left:12px;right:12px;bottom:88px;z-index:99999;padding:10px 12px;border-radius:12px;background:rgba(25,10,10,.95);border:1px solid rgba(255,120,120,.45);color:#fff;font:700 12px/1.35 Arial,sans-serif;display:none;box-shadow:0 8px 28px rgba(0,0,0,.42)}#geminiLiveDetailV201.on{display:block}@keyframes livePulse201{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}`;
+    s.textContent=`#${MAIN_ID}.gemini-live-active{background:#0b5d3b!important;color:#effff6!important;box-shadow:0 0 0 3px rgba(71,255,153,.25),0 0 22px rgba(71,255,153,.55)!important;animation:livePulse201 1.25s ease-in-out infinite}#${NAV_ID}.gemini-live-active{background:#0b5d3b!important;color:#effff6!important;box-shadow:0 0 0 2px rgba(71,255,153,.22),0 0 18px rgba(71,255,153,.45)!important}#geminiLiveStatusV201{position:fixed;right:12px;top:118px;z-index:99999;padding:8px 11px;border-radius:999px;background:rgba(4,24,18,.95);border:1px solid rgba(103,255,178,.45);color:#ecfff4;font:700 11px/1.2 Arial,sans-serif;display:none;max-width:82vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 6px 22px rgba(0,0,0,.35)}#geminiLiveStatusV201.on{display:block}#geminiLiveDetailV201{position:fixed;left:12px;right:12px;bottom:88px;z-index:99999;padding:11px 12px;border-radius:12px;background:rgba(25,10,10,.97);border:1px solid rgba(255,120,120,.55);color:#fff;font:700 12px/1.4 Arial,sans-serif;display:none;box-shadow:0 8px 28px rgba(0,0,0,.42);white-space:pre-wrap;word-break:break-word;max-height:34vh;overflow:auto}#geminiLiveDetailV201.on{display:block}@keyframes livePulse201{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}`;
     document.head.appendChild(s);
   }
   if(!statusEl?.isConnected){statusEl=document.createElement('div');statusEl.id='geminiLiveStatusV201';statusEl.setAttribute('role','status');document.body.appendChild(statusEl)}
   if(!detailEl?.isConnected){detailEl=document.createElement('div');detailEl.id='geminiLiveDetailV201';document.body.appendChild(detailEl)}
 }
 function setStatus(text,on=true){ensureUI();statusEl.textContent=String(text||'');statusEl.classList.toggle('on',Boolean(on&&text))}
-function showDetail(text){ensureUI();detailEl.textContent=String(text||'');detailEl.classList.toggle('on',Boolean(text));if(text)setTimeout(()=>{if(detailEl?.textContent===text)detailEl.classList.remove('on')},15000)}
+function showDetail(text,timeout=60000){ensureUI();detailEl.textContent=String(text||'');detailEl.classList.toggle('on',Boolean(text));if(text&&timeout>0)setTimeout(()=>{if(detailEl?.textContent===text)detailEl.classList.remove('on')},timeout)}
 function setButtons(active){
   const main=document.getElementById(MAIN_ID),nav=document.getElementById(NAV_ID);
   if(main){main.classList.toggle('gemini-live-active',active);main.setAttribute('aria-pressed',active?'true':'false');main.title=active?'Encerrar Gemini Live':'Falar com Gemini Live'}
@@ -115,22 +118,55 @@ async function stopMic(){
 }
 
 function send(obj){if(ws?.readyState===WebSocket.OPEN){ws.send(JSON.stringify(obj));return true}return false}
+
 async function requestToken(){
-  const r=await fetch(`${WORKER}/v1/live-token?tier=auto`,{method:'POST',headers:{'Content-Type':'application/json','X-Radar-Client':clientId},body:'{}',cache:'no-store'});
-  let d={};try{d=await r.json()}catch(e){}
-  if(!r.ok){const er=new Error(d?.error||`live_token_${r.status}`);er.status=r.status;throw er}
-  return d;
+  const url=`${WORKER}/v1/live-token?tier=auto&diag=201`;
+  let r;
+  try{
+    r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','X-Radar-Client':clientId,'X-Radar-Diag':'201'},body:'{}',cache:'no-store'});
+  }catch(e){
+    const er=new Error(`Falha de rede/CORS ao chamar live-token • ${safeText(e?.message||e,220)}`);
+    er.stage='live-token-fetch';
+    throw er;
+  }
+
+  const raw=await r.text();
+  let data=null;
+  try{data=raw?JSON.parse(raw):null}catch(e){}
+  const cfRay=r.headers.get('cf-ray')||'';
+  lastTokenDiag={status:r.status,statusText:r.statusText||'',cfRay,body:data??raw};
+
+  if(!r.ok){
+    const body=safeText(data?JSON.stringify(data):raw,650)||'(resposta vazia)';
+    const er=new Error(`live-token HTTP ${r.status}${r.statusText?' '+r.statusText:''}${cfRay?' • CF-Ray '+cfRay:''}\nResposta: ${body}`);
+    er.status=r.status;
+    er.stage='live-token-http';
+    throw er;
+  }
+
+  if(!data||typeof data!=='object'){
+    const er=new Error(`live-token HTTP ${r.status}, mas a resposta não é JSON.\nResposta: ${safeText(raw,650)||'(vazia)'}`);
+    er.stage='live-token-json';
+    throw er;
+  }
+  if(!data.token){
+    const er=new Error(`live-token HTTP ${r.status}, mas não veio token.\nResposta: ${safeText(JSON.stringify(data),650)}`);
+    er.stage='live-token-no-token';
+    throw er;
+  }
+  return data;
 }
 
 function handleServerMessage(m){
   if(m?.setupComplete!==undefined){
+    stage='ready';
     setupReady=true;
     setStatus('Gemini Live • conectado');
     toast('✨ Gemini Live conectado.',1800);
     send({realtimeInput:{text:'Diga apenas em português: Radar conectado e ouvindo.'}});
     clearTimeout(introTimer);
     introTimer=setTimeout(()=>{
-      if(running&&!introAudioReceived){micSending=true;setStatus('Gemini Live • pode falar');showDetail('A conexão ficou aberta, mas a fala inicial não chegou. O microfone foi liberado para teste.');}
+      if(running&&!introAudioReceived){micSending=true;setStatus('Gemini Live • pode falar');showDetail('A conexão ficou aberta, mas a fala inicial não chegou. O microfone foi liberado para teste.',15000);}
     },5000);
     return;
   }
@@ -157,40 +193,56 @@ async function cleanup(closeSocket=false){
 
 async function start(){
   if(running||starting)return;
-  starting=true;manualStop=false;introAudioReceived=false;setButtons(true);showDetail('');setStatus('Gemini Live • preparando áudio…');
+  stage='start';
+  starting=true;manualStop=false;introAudioReceived=false;lastTokenDiag=null;setButtons(true);showDetail('');setStatus('Gemini Live • preparando áudio…');
   try{
     try{voiceRef()?.clear?.()}catch(e){}try{assistantRef()?.stopHandsFree?.(false)}catch(e){}
+    stage='audio';
     await Promise.all([prepareOutput(),prepareMic()]);
-    setStatus('Gemini Live • conectando…');
-    const auth=await requestToken();if(!auth?.token)throw new Error('Token temporário não recebido');
+
+    stage='live-token';
+    setStatus('Gemini Live • pedindo token…');
+    const auth=await requestToken();
+    setStatus('Gemini Live • token recebido…');
+
+    stage='websocket-create';
     ws=new WebSocket(`${WS_BASE}?access_token=${encodeURIComponent(auth.token)}`);
     ws.onopen=()=>{
+      stage='websocket-open';
       running=true;starting=false;setStatus('Gemini Live • configurando…');
       send({setup:{model:`models/${MODEL}`,responseModalities:['AUDIO']}});
     };
     ws.onmessage=e=>{try{handleServerMessage(JSON.parse(e.data))}catch(err){console.warn('Gemini Live v201 message',err)}};
     ws.onerror=e=>console.warn('Gemini Live v201 WebSocket',e);
     ws.onclose=async e=>{
-      const manual=manualStop,code=Number(e?.code)||0,reason=String(e?.reason||'').trim();
-      console.warn('Gemini Live v201 closed',{code,reason,setupReady,introAudioReceived,micSending});
+      const manual=manualStop,code=Number(e?.code)||0,reason=String(e?.reason||'').trim(),closedAt=stage;
+      console.warn('Gemini Live v201 closed',{code,reason,stage:closedAt,setupReady,introAudioReceived,micSending,lastTokenDiag});
       await cleanup(false);
       if(!manual){
-        const detail=`Gemini Live encerrou • código ${code||'sem código'}${reason?' • '+reason:''}`;
-        setStatus('Gemini Live • desconectado');showDetail(detail);toast(detail,7000);
+        const detail=`DIAGNÓSTICO GEMINI LIVE\nEtapa: ${closedAt}\nWebSocket fechou • código ${code||'sem código'}${reason?' • '+reason:''}${lastTokenDiag?.status?'\nToken HTTP: '+lastTokenDiag.status:''}`;
+        setStatus('Gemini Live • desconectado');showDetail(detail);toast('Gemini Live desconectou. Veja o diagnóstico na tela.',7000);
       }else setStatus('',false);
     };
   }catch(e){
-    console.warn('Gemini Live v201 start',e);await cleanup(true);
+    const failedAt=e?.stage||stage;
+    console.warn('Gemini Live v201 start',{stage:failedAt,error:e,lastTokenDiag});
+    await cleanup(true);
     const denied=String(e?.name||'').toLowerCase().includes('notallowed');
-    setStatus('',false);const msg=denied?'Permita o microfone no Chrome e tente novamente.':'Não consegui abrir o Gemini Live: '+String(e?.message||e).slice(0,150);showDetail(msg);toast(msg,7000);
+    setStatus('',false);
+    const msg=denied
+      ?'DIAGNÓSTICO GEMINI LIVE\nEtapa: microfone\nPermita o microfone no Chrome e tente novamente.'
+      :`DIAGNÓSTICO GEMINI LIVE\nEtapa: ${failedAt}\n${safeText(e?.message||e,900)}`;
+    showDetail(msg);
+    toast('Falha no Gemini Live. Veja o diagnóstico vermelho na tela.',7000);
   }
 }
-async function stop(){manualStop=true;setStatus('Gemini Live • encerrando…');await cleanup(true);setStatus('',false)}
+
+async function stop(){manualStop=true;stage='manual-stop';setStatus('Gemini Live • encerrando…');await cleanup(true);stage='idle';setStatus('',false)}
 function toggle(){if(running||starting)stop();else start()}
 function intercept(e){const t=e.target?.closest?.(`#${MAIN_ID},#${NAV_ID}`);if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();toggle()}
 
 document.addEventListener('click',intercept,true);
 window.addEventListener('pagehide',()=>{manualStop=true;cleanup(true)});
 ensureUI();setButtons(false);
-window.RadarGeminiLiveV201={start,stop,toggle,get state(){return{running,starting,setupReady,micSending,introAudioReceived,wsState:ws?.readyState??-1}}};
+window.RadarGeminiLiveV201={start,stop,toggle,get state(){return{running,starting,setupReady,micSending,introAudioReceived,stage,lastTokenDiag,wsState:ws?.readyState??-1}}};
 })();
