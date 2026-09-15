@@ -158,12 +158,12 @@ async function start(){
 
     stage='worker-websocket';
     setStatus('Gemini Live • abrindo ponte segura…');
-    const join=LIVE_WS+(LIVE_WS.includes('?')?'&':'?')+'client='+encodeURIComponent(clientId)+'&v=202';
+    const join=LIVE_WS+(LIVE_WS.includes('?')?'&':'?')+'client='+encodeURIComponent(clientId)+'&v=203';
     ws=new WebSocket(join);
 
     ws.onopen=()=>{
       stage='gemini-setup';running=true;starting=false;setStatus('Gemini Live • configurando 3.1…');
-      send({setup:{model:`models/${MODEL}`,responseModalities:['AUDIO'],systemInstruction:{parts:[{text:SYSTEM_TEXT}]}}});
+      send({setup:{model:`models/${MODEL}`,generationConfig:{responseModalities:['AUDIO']},systemInstruction:{parts:[{text:SYSTEM_TEXT}]}}});
     };
     ws.onmessage=e=>{try{handleServerMessage(JSON.parse(e.data))}catch(err){console.warn('Gemini Live v202 message',err)}};
     ws.onerror=e=>console.warn('Gemini Live v202 WebSocket',e);
