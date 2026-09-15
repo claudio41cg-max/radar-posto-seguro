@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T23:10:57.860Z",
+  "generatedAt": "2026-09-15T01:32:03.165Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 28,
-  "lastUpdate": "2026-09-14T18:45:17-03:00",
+  "count": 25,
+  "lastUpdate": "2026-09-14T21:56:25-03:00",
   "occurrences": [
     {
       "id": "b5a7fd2c-8157-449c-bc26-04409070d977",
@@ -440,68 +440,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "7d982594-e0c0-41e0-b299-d7696877e0fd",
-      "documentNumber": 78949,
-      "date": "2026-09-07T23:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7959312,
-      "longitude": -43.0393139,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "7e98a36d-157d-4973-9be1-0563f6cc842a",
-      "documentNumber": 78961,
-      "date": "2026-09-07T22:00:00.000Z",
-      "address": "Rua Itabaiana - Comunidade Carlos Sampaio, Nova Iguaçu - RJ, 26089-225, Brasil",
-      "neighborhood": "CARLOS SAMPAIO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.691071103478112,
-      "longitude": -43.512186582858604,
-      "reason": "Ataque a civis",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "d01fa07f-ff59-4faf-80eb-ab2ec1db0157",
-      "documentNumber": 78940,
-      "date": "2026-09-07T00:04:00.000Z",
-      "address": "Estrada Marechal Miguel Salazar Mendes de Moraes - Taquara, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9398582,
-      "longitude": -43.3684169,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
