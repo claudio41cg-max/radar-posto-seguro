@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T01:32:03.165Z",
+  "generatedAt": "2026-09-15T06:37:05.808Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 25,
-  "lastUpdate": "2026-09-14T21:56:25-03:00",
+  "count": 26,
+  "lastUpdate": "2026-09-14T23:01:03-03:00",
   "occurrences": [
+    {
+      "id": "d9633641-f0ce-4d86-970f-3d904fcb29e2",
+      "documentNumber": 79037,
+      "date": "2026-09-14T15:00:00.000Z",
+      "address": "Sítio da Capelinha - Vale das Pedrinhas, Guapimirim - RJ, 25940-000, Brasil",
+      "neighborhood": "VALE DAS PEDRINHAS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.64924465481227,
+      "longitude": -43.013060030680414,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "b5a7fd2c-8157-449c-bc26-04409070d977",
       "documentNumber": 79034,
