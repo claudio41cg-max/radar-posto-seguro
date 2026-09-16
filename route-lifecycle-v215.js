@@ -1,0 +1,15 @@
+/* Radar Seguro RJ PRO v215 — corrige rota fantasma sem afetar preview valido. */
+(()=>{'use strict';
+if(window.__radarRouteLifecycleV215)return;window.__radarRouteLifecycleV215=true;
+const EMPTY={type:'FeatureCollection',features:[]};
+const app=()=>{try{return window.RadarApp||window.App||null}catch(_){return null}};
+const routeId=id=>{id=String(id||'').toLowerCase();return id==='route-main'||id==='route-outline'||id.includes('route-primary')||id.includes('route-main-traffic')||id.includes('route-alt')||id.includes('radar-flow')||id.includes('navigation-route')||id.includes('tomtom-route')};
+function clearStored(){for(const k of['radar-nav-v134','activeRoute','destination','navigationState'])try{localStorage.removeItem(k)}catch(_){}}
+function clearVisual(a){const m=a?.map;try{window.RadarRouteStyleV127?.clear?.()}catch(_){}try{window.RadarRouteAlternativesV116?.clear?.()}catch(_){}try{window.RadarRouteTrafficV74?.clear?.()}catch(_){}if(!m)return;try{for(const l of[...(m.getStyle()?.layers||[])])if(routeId(l?.id)&&m.getLayer(l.id))try{m.removeLayer(l.id)}catch(_){}}catch(_){}try{for(const id of Object.keys(m.getStyle()?.sources||{}))if(routeId(id)){try{m.getSource(id)?.setData?.(EMPTY)}catch(_){}try{if(m.getSource(id))m.removeSource(id)}catch(_){}}}catch(_){}}
+function finish(reason){const a=app();if(!a)return;try{a.navActive=false;a.navigating=false;a.navigationActive=false;a.routeActive=false;a.rerouting=false;a.route=null;a.routeAlternatives=[];a.routeProgressIndex=0;a.routeProgressMeters=0;a.routeStepIndex=0;a.activeGuidanceStep=-1;a.lastGuidanceStep=-1;a.announced={};a.offRouteHits=0;}catch(_){}try{a.destinationMarker?.remove?.();a.destinationMarker=null;a.destination=null}catch(_){}try{a.routeHazards=[];(a.hazardMarkers||[]).forEach(m=>m.remove?.());a.hazardMarkers=[]}catch(_){}clearStored();try{window.Voice?.clear?.();window.speechSynthesis?.cancel?.()}catch(_){}clearVisual(a);[80,250,700,1600].forEach(ms=>setTimeout(()=>clearVisual(a),ms));try{window.dispatchEvent(new CustomEvent('radar-route-ended',{detail:{reason}}))}catch(_){}}
+function inputEmpty(){const el=document.getElementById('destInput');return !String(el?.value||'').trim();}
+function scrub(){const a=app();if(!a)return;if(!a.navActive&&a.route&&inputEmpty())return finish('stale-route-empty-destination');if(!a.navActive&&!a.route)clearVisual(a);}
+function install(){const a=app();if(!a?.map)return false;if(a.__routeLifecycleV215)return true;a.__routeLifecycleV215=true;let was=!!a.navActive;setInterval(()=>{const x=app();if(!x)return;const now=!!x.navActive;if(was&&!now&&inputEmpty())finish('navigation-ended');was=now;},150);const x=document.getElementById('clearBtn');if(x&&!x.__v215){x.__v215=true;x.addEventListener('click',()=>setTimeout(()=>finish('clear-search'),0),true)};setTimeout(scrub,700);setTimeout(scrub,1800);window.addEventListener('pageshow',()=>setTimeout(scrub,500));document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(scrub,450)});return true}
+let n=0,t=setInterval(()=>{n++;if(install()||n>300)clearInterval(t)},100);
+window.RadarRouteLifecycleV215={version:'215',finish,scrub};
+})();
