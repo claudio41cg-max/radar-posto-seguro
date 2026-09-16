@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T10:03:23.692Z",
+  "generatedAt": "2026-09-16T14:49:24.426Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 156,
+  "count": 158,
   "occurrences": [
+    {
+      "id": "241e8b0d-48c9-4019-8923-35c7022be356",
+      "documentNumber": 79055,
+      "date": "2026-09-15T22:00:00.000Z",
+      "address": "Comunidade Muquiço, Deodoro, Rio de Janeiro - RJ, 21670-490, Brasil",
+      "neighborhood": "DEODORO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO MUQUICO",
+      "latitude": -22.8511046,
+      "longitude": -43.3791733,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "5f476a74-f00f-45b0-b230-2d3218d38db5",
       "documentNumber": 79049,
@@ -31,16 +46,21 @@
       "id": "ecfc607e-e610-4695-9fd7-5c3935f0cbb0",
       "documentNumber": 79053,
       "date": "2026-09-15T15:00:00.000Z",
-      "address": "Cascadura, Rio de Janeiro - RJ, 21310-310, Brasil",
+      "address": "R. São Pedro, 155 - Quintino Bocaiúva, Rio de Janeiro - RJ, 21311-170, Brasil",
       "neighborhood": "CASCADURA",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8821302,
-      "longitude": -43.334589,
+      "locality": "FAZENDA DA BICA",
+      "latitude": -22.893204360593476,
+      "longitude": -43.331951481614695,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "c94e9749-b1ce-44a3-a904-e8967345f847",
@@ -130,6 +150,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "2440b087-8853-45e8-a490-3b3e75b8731a",
+      "documentNumber": 79056,
+      "date": "2026-09-15T00:00:00.000Z",
+      "address": "Comunidade Danon, Danon, Nova Iguaçu - RJ, 26270-390, Brasil",
+      "neighborhood": "DANON",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DANON",
+      "latitude": -22.7726993,
+      "longitude": -43.5111267,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "b5a7fd2c-8157-449c-bc26-04409070d977",
