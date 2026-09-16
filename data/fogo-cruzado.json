@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T05:20:40.361Z",
+  "generatedAt": "2026-09-16T10:03:23.691Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 26,
-  "lastUpdate": "2026-09-15T23:25:02-03:00",
+  "count": 27,
+  "lastUpdate": "2026-09-16T06:28:37-03:00",
   "occurrences": [
     {
       "id": "5f476a74-f00f-45b0-b230-2d3218d38db5",
@@ -26,6 +26,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "ecfc607e-e610-4695-9fd7-5c3935f0cbb0",
+      "documentNumber": 79053,
+      "date": "2026-09-15T15:00:00.000Z",
+      "address": "Cascadura, Rio de Janeiro - RJ, 21310-310, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8821302,
+      "longitude": -43.334589,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -108,11 +123,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
