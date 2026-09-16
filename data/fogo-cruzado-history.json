@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T14:49:24.426Z",
+  "generatedAt": "2026-09-16T18:28:43.531Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -46,12 +46,12 @@
       "id": "ecfc607e-e610-4695-9fd7-5c3935f0cbb0",
       "documentNumber": 79053,
       "date": "2026-09-15T15:00:00.000Z",
-      "address": "R. São Pedro, 155 - Quintino Bocaiúva, Rio de Janeiro - RJ, 21311-170, Brasil",
+      "address": "Rua São Pedro, Complexo do Fubá, Cascadura, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "CASCADURA",
       "subNeighborhood": "",
-      "locality": "FAZENDA DA BICA",
-      "latitude": -22.893204360593476,
-      "longitude": -43.331951481614695,
+      "locality": "COMPLEXO DO FUBA",
+      "latitude": -22.8933284,
+      "longitude": -43.3321124,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
