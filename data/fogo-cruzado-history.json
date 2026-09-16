@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T00:45:08.622Z",
+  "generatedAt": "2026-09-16T05:20:40.363Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 154,
+  "count": 155,
   "occurrences": [
     {
       "id": "5f476a74-f00f-45b0-b230-2d3218d38db5",
@@ -41,6 +41,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "6d1cd08d-dd95-4766-8189-f3aa55459c87",
+      "documentNumber": 79051,
+      "date": "2026-09-15T10:00:00.000Z",
+      "address": "Av. Nova Aurora - Nova Aurora, Belford Roxo - RJ, 26155-070, Brasil",
+      "neighborhood": "NOVA AURORA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.722849093990966,
+      "longitude": -43.39964073398181,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "8ea4f91a-7f44-4203-bc3f-a305e9727e3e",
@@ -87,11 +107,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
