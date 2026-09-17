@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T23:52:51.764Z",
+  "generatedAt": "2026-09-17T04:42:38.525Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 158,
+  "count": 160,
   "occurrences": [
+    {
+      "id": "8de712cc-e984-46eb-aeab-a81c952341c0",
+      "documentNumber": 79076,
+      "date": "2026-09-16T23:15:00.000Z",
+      "address": "Barrão- Vila Kennedy, Rio de Janeiro - RJ, 21853-460, Brasil",
+      "neighborhood": "VILA KENNEDY",
+      "subNeighborhood": "",
+      "locality": "BARRAO (VILA KENNEDY)",
+      "latitude": -22.8529855,
+      "longitude": -43.4942364,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "855a2ac2-7933-48ea-b155-278733737920",
+      "documentNumber": 79075,
+      "date": "2026-09-16T18:00:00.000Z",
+      "address": "Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9229954,
+      "longitude": -43.3742313,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "241e8b0d-48c9-4019-8923-35c7022be356",
       "documentNumber": 79055,
@@ -37,15 +67,10 @@
       "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
       "latitude": -22.892324971301786,
       "longitude": -43.33377861518315,
-      "reason": "Ação policial",
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
+      "victims": []
     },
     {
       "id": "ecfc607e-e610-4695-9fd7-5c3935f0cbb0",
@@ -147,11 +172,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
