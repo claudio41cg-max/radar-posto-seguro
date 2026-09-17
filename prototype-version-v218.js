@@ -1,0 +1,2 @@
+/* Radar Seguro RJ PRO — indicador de teste V218 */
+(()=>{'use strict';function add(){if(document.getElementById('radar-prototype-v218'))return true;const b=document.createElement('div');b.id='radar-prototype-v218';b.textContent='V 218';Object.assign(b.style,{position:'fixed',right:'12px',top:'112px',zIndex:'99999',padding:'4px 8px',border:'1px solid rgba(255,255,255,.35)',borderRadius:'9px',background:'rgba(5,18,29,.82)',color:'#fff',font:'700 12px Arial'});document.body.appendChild(b);return true;}if(document.body)add();else addEventListener('DOMContentLoaded',add);})();
