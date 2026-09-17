@@ -1,7 +1,6 @@
 /* Radar Seguro RJ PRO — v191 sem camera interna.
-   Carrega o motor v191 preservando matching, progresso e recalculo, mas bloqueia somente
-   os movimentos de camera feitos durante a inicializacao do v191. A camera externa v221
-   passa a ser a unica dona do acompanhamento visual. */
+   Preserva matching GPS, progresso, recálculo e chegada do v191. Somente a camera interna
+   e neutralizada para que o controlador FOLLOW v221 seja o unico dono visual do mapa. */
 (()=>{'use strict';
 if(window.__radarNavigationEngineNoCameraLoader)return;window.__radarNavigationEngineNoCameraLoader=true;
 const src='./navigation-engine-v191.js?v=221';
@@ -13,18 +12,21 @@ async function load(){
  const rawFly=typeof m.flyTo==='function'?m.flyTo.bind(m):null;
  const block=()=>m;
  try{
-  /* O v191 instala sua camera via chamadas imediatas/timers. Durante a instalacao,
-     neutralizamos apenas camera; o restante do motor continua intacto. */
   if(rawEase)m.easeTo=block;if(rawJump)m.jumpTo=block;if(rawFly)m.flyTo=block;
   const r=await fetch(src,{cache:'no-store'});if(!r.ok)throw new Error('navigation-engine '+r.status);
   const code=await r.text();(0,eval)(code+'\n//# sourceURL=navigation-engine-v191.js');
  } finally {
-  if(rawEase)m.easeTo=rawEase;if(rawJump)m.jumpTo=rawJump;if(rawFly)m.flyTo=rawFly;
+  if(rawJump)m.jumpTo=rawJump;if(rawFly)m.flyTo=rawFly;
  }
- /* A camera interna do v191 continua chamando easeTo depois da instalacao. Marcamos o mapa
-    para o controlador unico filtrar essas chamadas enquanto a navegacao estiver ativa. */
- m.__radarV191InternalCameraDisabled=true;
  window.__RADAR_SINGLE_CAMERA_OWNER='v221';
+ m.__radarV191InternalCameraDisabled=true;
+ /* O v191 usa easeTo para sua camera. Enquanto a navegacao esta ativa, essas chamadas
+    ficam bloqueadas. O v221 usa jumpTo e continua livre. Fora da navegacao, easeTo original
+    permanece disponivel para a tela comum. */
+ if(rawEase)m.easeTo=function(opts){
+   try{if((app()?.navActive)&&window.__RADAR_SINGLE_CAMERA_OWNER==='v221')return m;}catch(_){}
+   return rawEase(opts);
+ };
 }
 let tries=0,t=setInterval(()=>{const a=app();if(a?.map){clearInterval(t);load().catch(e=>console.error('Radar v191 no-camera',e));}else if(++tries>300)clearInterval(t);},50);
 })();
