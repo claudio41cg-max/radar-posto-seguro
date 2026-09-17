@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T21:39:48.854Z",
+  "generatedAt": "2026-09-17T23:43:20.573Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 165,
+  "count": 167,
   "occurrences": [
+    {
+      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
+      "documentNumber": 79085,
+      "date": "2026-09-17T18:00:00.000Z",
+      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PENHA",
+      "latitude": -22.84802717,
+      "longitude": -43.28613964,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "3c6e5e2a-2595-4c6a-bcf4-3c58c204732b",
+      "documentNumber": 79086,
+      "date": "2026-09-17T18:00:00.000Z",
+      "address": "Complexo do Fubá, Cascadura, Rio de Janeiro - RJ, 21311-170, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO FUBA",
+      "latitude": -22.8933284,
+      "longitude": -43.3321124,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fb45daa3-52ed-4ec2-87b1-44b48fda2f6b",
       "documentNumber": 79084,
