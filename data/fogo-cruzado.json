@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T18:29:10.329Z",
+  "generatedAt": "2026-09-17T21:39:48.852Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 29,
-  "lastUpdate": "2026-09-17T11:27:31-03:00",
+  "count": 32,
+  "lastUpdate": "2026-09-17T17:25:08-03:00",
   "occurrences": [
+    {
+      "id": "fb45daa3-52ed-4ec2-87b1-44b48fda2f6b",
+      "documentNumber": 79084,
+      "date": "2026-09-17T16:30:00.000Z",
+      "address": "R. Cordovil, Parada de Lucas, Rio de Janeiro - RJ, 21250-450, Brasil",
+      "neighborhood": "PARADA DE LUCAS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.818736470565923,
+      "longitude": -43.302018061871344,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "6d473f0d-a9fe-449d-a9a4-a346297f29e2",
+      "documentNumber": 79083,
+      "date": "2026-09-17T11:00:00.000Z",
+      "address": "Jardim Nova Marília, Magé - RJ, Brasil",
+      "neighborhood": "NOVA MARILIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6357536,
+      "longitude": -43.0303906,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "6f3027d0-d7c5-49df-9111-a5607877ed14",
       "documentNumber": 79077,
@@ -23,6 +53,21 @@
       "locality": "",
       "latitude": -22.900353,
       "longitude": -43.3540577,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "80614b6f-f09a-4241-b0ba-8b7b5f545ffa",
+      "documentNumber": 79082,
+      "date": "2026-09-17T00:00:00.000Z",
+      "address": "Morro do São Carlos - Estácio, Rio de Janeiro - RJ, 20250-150, Brasil",
+      "neighborhood": "ESTACIO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO SAO CARLOS (COMPLEXO DO SAO CARLOS)",
+      "latitude": -22.91824946,
+      "longitude": -43.20363845,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
