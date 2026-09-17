@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#07131f"><title>Radar Seguro RJ PRO v217 — câmera following</title></head><body style="margin:0;background:#07131f;color:#fff"><div id="loading" style="padding:24px;text-align:center;font-family:Arial;font-weight:700">Carregando Radar v217...</div><script>
+(async()=>{try{
+const r=await fetch('./radar-tomtom-live-v216.html?base='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('v216 '+r.status);let h=await r.text();
+/* Mantém toda a V216 aprovada e injeta somente a câmera following V217 e o indicador. */
+const extra='<script src="./navigation-camera-v217.js?v=217"><\/script>'+'<script src="./prototype-version-v217.js?v=217"><\/script>';
+h=/<\/body>/i.test(h)?h.replace(/<\/body>/i,extra+'</body>'):h+extra;
+document.open();document.write(h);document.close();
+}catch(e){document.getElementById('loading').textContent='Não consegui abrir o teste V217 agora. Atualize a página.';console.error(e)}})();
+</script></body></html>
