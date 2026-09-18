@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T23:43:20.560Z",
+  "generatedAt": "2026-09-18T01:35:06.323Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,24 +10,9 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 34,
+  "count": 33,
   "lastUpdate": "2026-09-17T19:10:46-03:00",
   "occurrences": [
-    {
-      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
-      "documentNumber": 79085,
-      "date": "2026-09-17T18:00:00.000Z",
-      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
-      "neighborhood": "PENHA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PENHA",
-      "latitude": -22.84802717,
-      "longitude": -43.28613964,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
     {
       "id": "3c6e5e2a-2595-4c6a-bcf4-3c58c204732b",
       "documentNumber": 79086,
@@ -39,6 +24,21 @@
       "latitude": -22.8933284,
       "longitude": -43.3321124,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
+      "documentNumber": 79085,
+      "date": "2026-09-17T18:00:00.000Z",
+      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PENHA",
+      "latitude": -22.84802717,
+      "longitude": -43.28613964,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -292,11 +292,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -583,21 +583,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "7893784a-9ad4-4fef-847b-1e09a222c57c",
-      "documentNumber": 78988,
-      "date": "2026-09-10T04:22:00.000Z",
-      "address": "Comunidade Bandeira 2 - Del Castilho, Rio de Janeiro - RJ, 20785-330, Brasil",
-      "neighborhood": "DEL CASTILHO",
-      "subNeighborhood": "",
-      "locality": "Comunidade BANDEIRA 2",
-      "latitude": -22.88224012,
-      "longitude": -43.26958745,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     }
   ]
 }
