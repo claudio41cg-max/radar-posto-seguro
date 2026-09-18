@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T01:35:06.325Z",
+  "generatedAt": "2026-09-18T06:35:10.994Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,47 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 167,
+  "count": 169,
   "occurrences": [
+    {
+      "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
+      "documentNumber": 79087,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade Beira Mar, Parque Duque, Duque de Caxias - RJ, 25085-262, Brasil",
+      "neighborhood": "PARQUE DUQUE",
+      "subNeighborhood": "",
+      "locality": "Comunidade BEIRA MAR",
+      "latitude": -22.79693,
+      "longitude": -43.289741,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
+      "documentNumber": 79088,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "R. Itapiru, Catumbi, Rio de Janeiro - RJ, 20251-030, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9222658,
+      "longitude": -43.1974191,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
       "documentNumber": 79085,
