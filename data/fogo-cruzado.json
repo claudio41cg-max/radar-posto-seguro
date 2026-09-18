@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T21:10:31.365Z",
+  "generatedAt": "2026-09-18T23:20:51.684Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
-  "lastUpdate": "2026-09-18T17:20:57-03:00",
+  "count": 38,
+  "lastUpdate": "2026-09-18T19:27:19-03:00",
   "occurrences": [
+    {
+      "id": "fe6cbfb9-839e-4675-a411-cbe4a1b110c2",
+      "documentNumber": 79101,
+      "date": "2026-09-18T15:00:00.000Z",
+      "address": "Comunidade do Curumau, Estrada Curumau - Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE CURUMAU",
+      "latitude": -22.9163171,
+      "longitude": -43.4017337,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "22d7f026-b795-4bf2-af0c-31aefc55b3fc",
       "documentNumber": 79093,
@@ -49,21 +64,6 @@
       "victims": []
     },
     {
-      "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
-      "documentNumber": 79088,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "R. Itapiru, Catumbi, Rio de Janeiro - RJ, 20251-030, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9222658,
-      "longitude": -43.1974191,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -86,6 +86,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
+      "documentNumber": 79088,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "R. Itapiru, Catumbi, Rio de Janeiro - RJ, 20251-030, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9222658,
+      "longitude": -43.1974191,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "3c6e5e2a-2595-4c6a-bcf4-3c58c204732b",
@@ -366,11 +381,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
