@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T01:17:07.378Z",
+  "generatedAt": "2026-09-19T05:57:54.411Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -31,16 +31,21 @@
       "id": "fe6cbfb9-839e-4675-a411-cbe4a1b110c2",
       "documentNumber": 79101,
       "date": "2026-09-18T15:00:00.000Z",
-      "address": "Comunidade do Curumau, Estrada Curumau - Taquara, Rio de Janeiro - RJ, Brasil",
+      "address": "Estr. Curumau - Taquara, Rio de Janeiro - RJ, 22723-010, Brasil",
       "neighborhood": "TAQUARA",
       "subNeighborhood": "",
       "locality": "COMUNIDADE CURUMAU",
-      "latitude": -22.9163171,
-      "longitude": -43.4017337,
-      "reason": "Não identificado",
+      "latitude": -22.915472181419915,
+      "longitude": -43.40190536137694,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "22d7f026-b795-4bf2-af0c-31aefc55b3fc",
@@ -395,11 +400,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
