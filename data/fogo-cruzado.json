@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T23:20:51.684Z",
+  "generatedAt": "2026-09-19T01:17:07.377Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 38,
-  "lastUpdate": "2026-09-18T19:27:19-03:00",
+  "count": 36,
+  "lastUpdate": "2026-09-18T21:35:30-03:00",
   "occurrences": [
+    {
+      "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",
+      "documentNumber": 79102,
+      "date": "2026-09-18T21:05:00.000Z",
+      "address": "Jardim Paraíso, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "PARAISO",
+      "subNeighborhood": "JARDIM PARAISO",
+      "locality": "",
+      "latitude": -22.8209259,
+      "longitude": -43.591924,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fe6cbfb9-839e-4675-a411-cbe4a1b110c2",
       "documentNumber": 79101,
@@ -47,21 +62,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
@@ -100,6 +100,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -608,70 +623,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "7e1c8923-d37b-4b4c-8fdc-2f7713f3a672",
-      "documentNumber": 79002,
-      "date": "2026-09-11T21:00:00.000Z",
-      "address": "Muzema - Itanhangá, Rio de Janeiro - RJ, 22753-060, Brasil",
-      "neighborhood": "ITANHANGA",
-      "subNeighborhood": "",
-      "locality": "MORRO DA MUZEMA",
-      "latitude": -22.982796781992455,
-      "longitude": -43.32523301626098,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "bce18c04-36ba-41e1-928b-4999a91e52fa",
-      "documentNumber": 78998,
-      "date": "2026-09-11T08:00:00.000Z",
-      "address": "Morro do Campinho - Cascadura, Rio de Janeiro - RJ, 21320-300, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CAMPINHO (COMPLEXO DO FUBA)",
-      "latitude": -22.8850951874697,
-      "longitude": -43.337939003183074,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "e213a5df-54b8-4f1c-9e9d-a03d03c7264f",
-      "documentNumber": 79003,
-      "date": "2026-09-11T02:00:00.000Z",
-      "address": "Morro do Urubu - Piedade, Rio de Janeiro - RJ, 20751-240, Brasil",
-      "neighborhood": "PIEDADE",
-      "subNeighborhood": "",
-      "locality": "MORRO DO URUBU (COMPLEXO DO URUBU)",
-      "latitude": -22.87805496600965,
-      "longitude": -43.306187080673226,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }

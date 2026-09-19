@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T23:20:51.685Z",
+  "generatedAt": "2026-09-19T01:17:07.378Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 172,
+  "count": 173,
   "occurrences": [
+    {
+      "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",
+      "documentNumber": 79102,
+      "date": "2026-09-18T21:05:00.000Z",
+      "address": "Jardim Paraíso, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "PARAISO",
+      "subNeighborhood": "JARDIM PARAISO",
+      "locality": "",
+      "latitude": -22.8209259,
+      "longitude": -43.591924,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fe6cbfb9-839e-4675-a411-cbe4a1b110c2",
       "documentNumber": 79101,
