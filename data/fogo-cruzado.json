@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T19:21:06.985Z",
+  "generatedAt": "2026-09-19T21:30:00.577Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
-  "lastUpdate": "2026-09-19T10:57:40-03:00",
+  "count": 40,
+  "lastUpdate": "2026-09-19T16:50:47-03:00",
   "occurrences": [
     {
       "id": "b33f425f-f249-4ff4-bfb8-4c0f4b4d3bfb",
@@ -73,6 +73,21 @@
       ]
     },
     {
+      "id": "2b6c975f-180e-4a36-aa7c-65449145f51b",
+      "documentNumber": 79106,
+      "date": "2026-09-19T02:30:00.000Z",
+      "address": "Morro do Tamanco - Jardim Paraíso, Vila São João, São João de Meriti - Rio de Janeiro, Brasil",
+      "neighborhood": "JARDIM PARAISO",
+      "subNeighborhood": "VILA SAO JOAO",
+      "locality": "MORRO DO TAMANCO",
+      "latitude": -22.762165636657198,
+      "longitude": -43.3433198556304,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",
       "documentNumber": 79102,
       "date": "2026-09-18T21:05:00.000Z",
@@ -128,21 +143,6 @@
       ]
     },
     {
-      "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
-      "documentNumber": 79088,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "R. Itapiru, Catumbi, Rio de Janeiro - RJ, 20251-030, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9222658,
-      "longitude": -43.1974191,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -165,6 +165,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
+      "documentNumber": 79088,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "R. Itapiru, Catumbi, Rio de Janeiro - RJ, 20251-030, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9222658,
+      "longitude": -43.1974191,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
