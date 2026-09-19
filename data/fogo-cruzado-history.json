@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T10:47:18.006Z",
+  "generatedAt": "2026-09-19T14:00:00.615Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,67 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 173,
+  "count": 176,
   "occurrences": [
+    {
+      "id": "b33f425f-f249-4ff4-bfb8-4c0f4b4d3bfb",
+      "documentNumber": 79103,
+      "date": "2026-09-19T06:00:00.000Z",
+      "address": "Nova América, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "NOVA AMERICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7209052,
+      "longitude": -43.43798839999999,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "b73085d3-042e-489b-986c-c33236bf5285",
+      "documentNumber": 79104,
+      "date": "2026-09-19T05:00:00.000Z",
+      "address": "Rua João Henrique - Cordovil, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8265798,
+      "longitude": -43.3004059,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "258f938a-3d2e-47df-9ace-adf2289d7091",
+      "documentNumber": 79105,
+      "date": "2026-09-19T04:00:00.000Z",
+      "address": "Rua Tavares Belfort - Engenheiro Leal, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ENGENHEIRO LEAL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8759222,
+      "longitude": -43.3262474,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",
       "documentNumber": 79102,
@@ -400,11 +459,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
