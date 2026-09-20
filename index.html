@@ -5301,6 +5301,10 @@ out center tags;`;
 };
 
 
+/* Expose only the existing local voice assistant reference for external Gemini modules.
+   No routing/GPS/TomTom logic is changed here. */
+window.VoiceAssistant = VoiceAssistant;
+
 /* =========================================================
    APP
 ========================================================= */
