@@ -1,0 +1,1 @@
+(()=>{'use strict';const V='V 249';function apply(){const candidates=[...document.querySelectorAll('body *')].filter(el=>/^V\s*248$/i.test((el.textContent||'').trim()));for(const el of candidates)el.textContent=V;}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();setTimeout(apply,800);})();
