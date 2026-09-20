@@ -2726,6 +2726,10 @@ const VoiceAssistant = {
       if(App.route){
 
         if(fromGemini){
+          // V255: impede apenas a orientação local inicial de atropelar
+          // a confirmação falada pelo Gemini. Não altera Voice.enabled,
+          // microfone, reconhecimento, WebSocket ou o Worker.
+          window.__RADAR_GEMINI_NAV_VOICE_MUTE_UNTIL=Date.now()+6500;
           window.__RADAR_GEMINI_ROUTE_STARTING=true;
           try{
             if(typeof RouteChoiceGuardV44!=='undefined'){
@@ -10116,6 +10120,17 @@ ${Utils.sanitize(item.display)}
         'Destino';
 
     }
+
+
+    /*
+      V255 — janela curta de exclusividade da voz Gemini.
+      O HUD continua atualizando normalmente; somente a orientação
+      falada local espera a confirmação inicial do Gemini terminar.
+    */
+    if(
+      Number(window.__RADAR_GEMINI_NAV_VOICE_MUTE_UNTIL||0)>Date.now()
+    )
+      return;
 
 
     /*
