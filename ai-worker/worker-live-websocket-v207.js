@@ -44,7 +44,7 @@ function sendDiag(ws, stage, extra = {}) {
     if (ws?.readyState === WebSocket.OPEN) {
       ws.send(JSON.stringify({
         __radarProxy: {
-          version: '207',
+          version: '237-worker-diag',
           stage,
           ...extra
         }
@@ -141,7 +141,7 @@ function handleLive(request, env) {
   sendDiag(browser, 'proxy-created');
 
   upstream.addEventListener('open', () => {
-    console.log('Radar Live v207 upstream open');
+    console.log('Radar Live v237 diagnostic upstream open');
     sendDiag(browser, 'gemini-websocket-open');
 
     while (
@@ -200,6 +200,30 @@ function handleLive(request, env) {
           preview: String(payload).slice(0, 160)
         });
       }
+
+      // Diagnostic only: inspect Gemini's raw server payload before relaying it.
+      // No API keys or browser audio are logged here.
+      try {
+        const parsed = JSON.parse(payload);
+        const rootToolCall = parsed?.toolCall || null;
+        const serverToolCall = parsed?.serverContent?.toolCall || null;
+        const partCalls = (parsed?.serverContent?.modelTurn?.parts || [])
+          .map(part => part?.functionCall || part?.function_call)
+          .filter(Boolean);
+
+        if (rootToolCall || serverToolCall || partCalls.length) {
+          console.log('RADAR_TOOLCALL_DIAG_V237', JSON.stringify({
+            rootToolCall,
+            serverToolCall,
+            partCalls
+          }));
+          sendDiag(browser, 'toolcall-detected-at-worker', {
+            root: Boolean(rootToolCall),
+            serverContent: Boolean(serverToolCall),
+            parts: partCalls.length
+          });
+        }
+      } catch (_) {}
 
       if (browser.readyState === WebSocket.OPEN) {
         browser.send(payload);
