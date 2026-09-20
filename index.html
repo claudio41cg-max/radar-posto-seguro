@@ -2698,7 +2698,17 @@ const VoiceAssistant = {
           'Destino encontrado. Estou aguardando o GPS para calcular a rota.'
         );
 
-        return;
+        const gpsDeadline=Date.now()+12000;
+        while(!App.userPos && Date.now()<gpsDeadline){
+          await new Promise(resolve=>setTimeout(resolve,250));
+        }
+
+        if(!App.userPos){
+          this.reply(
+            'Encontrei o destino, mas ainda não consegui sua posição pelo GPS. Tente novamente em alguns segundos.'
+          );
+          return;
+        }
 
       }
 
