@@ -137,10 +137,16 @@ function handleLive(request, env) {
   const queue = [];
   let firstClientMessage = true;
   let firstUpstreamMessage = true;
+  const diagId = `${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
+  const openedAt = Date.now();
+  let browserMessages = 0;
+  let upstreamMessages = 0;
+  const logDiag = (event, extra = {}) => console.log('RADAR_LIVE_V254', JSON.stringify({diagId,event,ms:Date.now()-openedAt,browserState:browser.readyState,upstreamState:upstream.readyState,browserMessages,upstreamMessages,...extra}));
 
   sendDiag(browser, 'proxy-created');
 
   upstream.addEventListener('open', () => {
+    logDiag('upstream-open');
     console.log('Radar Live v237 diagnostic upstream open');
     sendDiag(browser, 'gemini-websocket-open');
 
@@ -153,6 +159,7 @@ function handleLive(request, env) {
   });
 
   browser.addEventListener('message', event => {
+    browserMessages++;
     const payload = event.data;
 
     if (firstClientMessage) {
@@ -189,6 +196,7 @@ function handleLive(request, env) {
   });
 
   upstream.addEventListener('message', async event => {
+    upstreamMessages++;
     try {
       const payload = await normalizeUpstreamData(event.data);
 
@@ -244,11 +252,13 @@ function handleLive(request, env) {
   });
 
   upstream.addEventListener('error', event => {
+    logDiag('upstream-error');
     console.warn('Radar Live v207 upstream error', event);
     sendDiag(browser, 'gemini-websocket-error');
   });
 
   upstream.addEventListener('close', event => {
+    logDiag('upstream-close',{code:event.code,reason:event.reason||'',wasClean:event.wasClean});
     console.warn('Radar Live v207 upstream close', {
       code: event.code,
       reason: event.reason
@@ -267,6 +277,7 @@ function handleLive(request, env) {
   });
 
   browser.addEventListener('close', event => {
+    logDiag('browser-close',{code:event.code,reason:event.reason||'',wasClean:event.wasClean});
     safeClose(
       upstream,
       event.code || 1000,
@@ -275,6 +286,7 @@ function handleLive(request, env) {
   });
 
   browser.addEventListener('error', () => {
+    logDiag('browser-error');
     safeClose(upstream, 1011, 'browser_error');
   });
 
@@ -298,7 +310,7 @@ export default {
       return json({
         ok: true,
         service: 'radar-gemini-live-websocket-proxy',
-        version: '207',
+        version: '254-diagnostic',
         configured: Boolean(keyFor(env)),
         mode: 'worker-websocket-client-normalized',
         upstream: 'BidiGenerateContent'
