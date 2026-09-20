@@ -2725,11 +2725,18 @@ const VoiceAssistant = {
 
       if(App.route){
 
-        if(fromGemini) window.__RADAR_GEMINI_ROUTE_STARTING=true;
-        try{
+        if(fromGemini){
+          window.__RADAR_GEMINI_ROUTE_STARTING=true;
+          try{
+            if(typeof RouteChoiceGuardV44!=='undefined'){
+              RouteChoiceGuardV44.allowStartUntil=Date.now()+3000;
+            }
+            App.startNavigation();
+          }finally{
+            window.__RADAR_GEMINI_ROUTE_STARTING=false;
+          }
+        }else{
           App.startNavigation();
-        }finally{
-          if(fromGemini) window.__RADAR_GEMINI_ROUTE_STARTING=false;
         }
 
         reply(
