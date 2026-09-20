@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T15:56:49.827Z",
+  "generatedAt": "2026-09-20T18:41:06.484Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 36,
-  "lastUpdate": "2026-09-20T09:57:35-03:00",
+  "count": 38,
+  "lastUpdate": "2026-09-20T13:09:03-03:00",
   "occurrences": [
+    {
+      "id": "fd97319a-772b-4f0a-a6c9-e21b88b8d430",
+      "documentNumber": 79113,
+      "date": "2026-09-19T16:00:00.000Z",
+      "address": "Travessa Marquês - Barro Vermelho, São Gonçalo - RJ, Brasil",
+      "neighborhood": "BARRO VERMELHO I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8405811,
+      "longitude": -43.080525,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "b33f425f-f249-4ff4-bfb8-4c0f4b4d3bfb",
       "documentNumber": 79103,
@@ -86,6 +106,26 @@
       "policeAction": false,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "8cebb060-ebe6-47a6-af60-de80704dcf7b",
+      "documentNumber": 79112,
+      "date": "2026-09-19T02:00:00.000Z",
+      "address": "Rua Mario Daflon - Nova Cidade, São Gonçalo - RJ, Brasil",
+      "neighborhood": "NOVA CIDADES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8119952,
+      "longitude": -43.0227504,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",
@@ -167,21 +207,6 @@
       ]
     },
     {
-      "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
-      "documentNumber": 79088,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "R. Itapiru, Catumbi, Rio de Janeiro - RJ, 20251-030, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9222658,
-      "longitude": -43.1974191,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
       "documentNumber": 79096,
       "date": "2026-09-17T22:00:00.000Z",
@@ -197,16 +222,16 @@
       "victims": []
     },
     {
-      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
-      "documentNumber": 79085,
-      "date": "2026-09-17T18:00:00.000Z",
-      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
-      "neighborhood": "PENHA",
+      "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
+      "documentNumber": 79088,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "R. Itapiru, Catumbi, Rio de Janeiro - RJ, 20251-030, Brasil",
+      "neighborhood": "CATUMBI",
       "subNeighborhood": "",
-      "locality": "COMPLEXO DA PENHA",
-      "latitude": -22.84802717,
-      "longitude": -43.28613964,
-      "reason": "Disputa",
+      "locality": "",
+      "latitude": -22.9222658,
+      "longitude": -43.1974191,
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -222,6 +247,21 @@
       "latitude": -22.8933284,
       "longitude": -43.3321124,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
+      "documentNumber": 79085,
+      "date": "2026-09-17T18:00:00.000Z",
+      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PENHA",
+      "latitude": -22.84802717,
+      "longitude": -43.28613964,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -475,11 +515,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
