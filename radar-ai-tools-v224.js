@@ -1,0 +1,25 @@
+/* Radar Seguro RJ PRO v224 — ponte de ferramentas entre Gemini Live e o app.
+   Nao altera o motor de navegacao. Favoritos ficam apenas no localStorage do aparelho. */
+(()=>{'use strict';
+if(window.__radarAiToolsV224)return;window.__radarAiToolsV224=true;
+const app=()=>{try{return window.RadarApp||window.App||null}catch(_){return null}};
+const point=p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(+p[0])&&Number.isFinite(+p[1]);
+const KEY='radar-private-places-v224';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(_){return{}}}
+function save(v){try{localStorage.setItem(KEY,JSON.stringify(v));return true}catch(_){return false}}
+function pos(a){for(const p of[a?.matchedUserPos,a?.userPos,a?.filteredPos,a?.rawUserPos])if(point(p))return[+p[0],+p[1]];return null}
+function nav(){const a=app(),p=pos(a),g=a?.getUpcomingGuidance?.(),r=a?.route;return{gps:p?{longitude:p[0],latitude:p[1]}:null,navigationActive:!!a?.navActive,destination:document.getElementById('destInput')?.value||'',currentRoad:g?.step?.name||document.getElementById('currentRoadPill')?.textContent||'',nextInstruction:g?.step&&a?.maneuverText?a.maneuverText(g.step):'',speedKmh:Math.max(0,Math.round(+a?.currentSpeed||0)),speedLimitKmh:Number.isFinite(+a?.currentSpeedLimitKmh)?+a.currentSpeedLimitKmh:null,remainingMeters:r?Math.max(0,(+r.distance||0)-(+a.routeProgressMeters||0)):null};}
+async function searchPlace(query){const a=app();if(!a?.searchAddress)throw new Error('Busca ainda nao esta pronta');const x=await a.searchAddress(String(query||'').trim());return(x||[]).slice(0,5).map(v=>({name:v.name||'',address:v.display||v.address||'',longitude:+v.lon,latitude:+v.lat}));}
+async function startRoute(query){const a=app();if(!a)throw new Error('Radar ainda nao esta pronto');let q=String(query||'').trim();const fav=load();const k=q.toLowerCase().replace(/^minha?\s+/,'');if((k==='casa'||k==='home')&&fav.home)q=fav.home.address;if((k==='trabalho'||k==='work')&&fav.work)q=fav.work.address;const rs=await a.searchAddress(q);if(!rs?.length)throw new Error('Destino nao encontrado com seguranca');const v=rs[0];a.destination=[+v.lon,+v.lat];const input=document.getElementById('destInput');if(input)input.value=v.display||v.address||v.name||q;document.getElementById('suggest')?.classList.remove('show');if(!pos(a)){a.startGPS?.();return{started:false,waitingForGps:true,destination:input?.value||q}}a.showRoutePanel?.();await a.calculateRoute?.();if(a.route){a.startNavigation?.();return{started:true,destination:input?.value||q}}throw new Error('Nao foi possivel criar a rota');}
+async function saveFavorite(kind,address){const k=/trabalho|work/i.test(kind)?'work':'home';let q=String(address||'').trim();const a=app();if(!q){const p=pos(a);if(!p)throw new Error('GPS indisponivel');try{const va=window.VoiceAssistant;if(va?.getCurrentAddress){const r=await va.getCurrentAddress(true);q=r?.label||''}}catch(_){}if(!q)throw new Error('Nao consegui obter o endereco atual');}const f=load();f[k]={address:q,updatedAt:Date.now()};if(!save(f))throw new Error('Nao consegui salvar neste aparelho');return{saved:true,kind:k,address:q};}
+function getFavorite(kind){const f=load(),k=/trabalho|work/i.test(kind)?'work':'home';return f[k]||null}
+const defs=[
+{name:'get_navigation_context',description:'Consulta GPS, via, velocidade e estado da navegacao atual.',parameters:{type:'object',properties:{}}},
+{name:'search_place',description:'Procura um lugar real usando a busca TomTom do Radar.',parameters:{type:'object',properties:{query:{type:'string'}},required:['query']}},
+{name:'start_route',description:'Cria e inicia uma rota para um destino, casa ou trabalho.',parameters:{type:'object',properties:{destination:{type:'string'}},required:['destination']}},
+{name:'save_favorite_place',description:'Salva casa ou trabalho somente neste aparelho.',parameters:{type:'object',properties:{kind:{type:'string'},address:{type:'string'}},required:['kind']}},
+{name:'get_favorite_place',description:'Consulta casa ou trabalho salvo neste aparelho.',parameters:{type:'object',properties:{kind:{type:'string'}},required:['kind']}}
+];
+async function execute(name,args={}){if(name==='get_navigation_context')return nav();if(name==='search_place')return{results:await searchPlace(args.query)};if(name==='start_route')return await startRoute(args.destination);if(name==='save_favorite_place')return await saveFavorite(args.kind,args.address);if(name==='get_favorite_place')return getFavorite(args.kind);throw new Error('Ferramenta desconhecida: '+name)}
+window.RadarAiToolsV224={version:'224',declarations:defs,execute,getNavigationContext:nav,searchPlace,startRoute,saveFavorite,getFavorite};
+})();
