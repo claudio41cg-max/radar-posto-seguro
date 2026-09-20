@@ -2596,7 +2596,11 @@ const VoiceAssistant = {
   },
 
 
-  async routeTo(query){
+  async routeTo(query,options={}){
+
+    const fromGemini=Boolean(options?.fromGemini);
+    const legacyReply=this.reply.bind(this);
+    const reply=fromGemini ? ((text)=>{ App.toast(String(text||''),5200); }) : legacyReply;
 
     let destination=
       this.cleanDestination(
@@ -2615,11 +2619,11 @@ const VoiceAssistant = {
 
       if(!destination){
 
-        this.reply(
+        reply(
           'Sua casa ainda não foi salva. Pesquise o endereço e diga: Radar, salve como minha casa.'
         );
 
-        return;
+        return {ok:false,error:'Casa não cadastrada'};
 
       }
 
@@ -2628,11 +2632,11 @@ const VoiceAssistant = {
 
     if(!destination){
 
-      this.reply(
+      reply(
         'Diga para onde você quer ir.'
       );
 
-      return;
+      return {ok:false,error:'Destino vazio'};
 
     }
 
@@ -2654,11 +2658,11 @@ const VoiceAssistant = {
 
       if(!results.length){
 
-        this.reply(
+        reply(
           'Não encontrei esse destino com segurança.'
         );
 
-        return;
+        return {ok:false,error:'Destino não encontrado',destination};
 
       }
 
@@ -2694,7 +2698,7 @@ const VoiceAssistant = {
 
         App.startGPS();
 
-        this.reply(
+        reply(
           'Destino encontrado. Estou aguardando o GPS para calcular a rota.'
         );
 
@@ -2704,10 +2708,11 @@ const VoiceAssistant = {
         }
 
         if(!App.userPos){
-          this.reply(
+          reply(
             'Encontrei o destino, mas ainda não consegui sua posição pelo GPS. Tente novamente em alguns segundos.'
           );
-          return;
+          return {ok:false,error:'GPS indisponível',destination:result.display||destination};
+
         }
 
       }
@@ -2720,22 +2725,42 @@ const VoiceAssistant = {
 
       if(App.route){
 
-        App.startNavigation();
+        if(fromGemini) window.__RADAR_GEMINI_ROUTE_STARTING=true;
+        try{
+          App.startNavigation();
+        }finally{
+          if(fromGemini) window.__RADAR_GEMINI_ROUTE_STARTING=false;
+        }
 
-        this.reply(
+        reply(
           'Rota para '+
           (result.name||destination)+
           ' iniciada.'
         );
 
+        return {
+          ok:true,
+          destination:result.display||result.name||destination,
+          routeActive:true,
+          navigationActive:Boolean(App.navActive)
+        };
+
       }
+
+      return {
+        ok:false,
+        error:'Rota não criada',
+        destination:result.display||result.name||destination
+      };
 
     }catch(e){
 
       if(e.name!=='AbortError')
-        this.reply(
+        reply(
           'Não foi possível calcular essa rota agora.'
         );
+
+      return {ok:false,error:String(e?.message||'Falha ao calcular rota'),destination};
 
     }
 
@@ -11571,10 +11596,12 @@ fill="#22c55e"/>
     this.fetchHazardsAlongRoute();
 
 
-    Voice.speak(
-      'Iniciando Radar Seguro.',
-      true
-    );
+    if(!window.__RADAR_GEMINI_ROUTE_STARTING){
+      Voice.speak(
+        'Iniciando Radar Seguro.',
+        true
+      );
+    }
 
 
     this.recenter();
