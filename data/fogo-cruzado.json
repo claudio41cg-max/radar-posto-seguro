@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T23:26:41.131Z",
+  "generatedAt": "2026-09-20T01:31:31.154Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 40,
+  "count": 36,
   "lastUpdate": "2026-09-19T19:18:07-03:00",
   "occurrences": [
     {
@@ -475,11 +475,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -636,71 +636,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "51a2f739-25d4-4743-b116-435612d53575",
-      "documentNumber": 79011,
-      "date": "2026-09-12T19:00:00.000Z",
-      "address": "Comunidade Porto d'Água - Porto do Rosa, São Gonçalo - RJ, 24470-540, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PORTO D'AGUA",
-      "latitude": -22.79432417,
-      "longitude": -43.04542933,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "9fca5990-b454-4614-998e-04ef8853fe83",
-      "documentNumber": 79010,
-      "date": "2026-09-12T18:00:00.000Z",
-      "address": "Rua Mariz e Barros - Icaraí, Niterói - RJ, Brasil",
-      "neighborhood": "ICARAI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9084097,
-      "longitude": -43.1070801,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "f50b0341-261e-4bd5-ba1f-d39a7c4c9dd7",
-      "documentNumber": 79008,
-      "date": "2026-09-12T16:30:00.000Z",
-      "address": "Comunidade Furquim Mendes - Vigário Geral, Rio de Janeiro - RJ, 21240-800, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "FURQUIM MENDES",
-      "latitude": -22.805109646920855,
-      "longitude": -43.316591602460726,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "b6399277-04f0-48e1-9589-933a2b33cf0e",
-      "documentNumber": 79004,
-      "date": "2026-09-12T10:00:00.000Z",
-      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, Brasil",
-      "neighborhood": "INOA",
-      "subNeighborhood": "",
-      "locality": "FAVELINHA DO RISCA A FACA",
-      "latitude": -22.9126916,
-      "longitude": -42.9349485,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
