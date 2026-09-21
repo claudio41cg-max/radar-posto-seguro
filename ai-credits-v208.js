@@ -8,7 +8,15 @@ const STORAGE_KEY='radar_ai_credit_usage_v208';
 const CREDIT_REFERENCE_USD=10;
 const GOOGLE_BALANCE_BRL=157.86;
 const GOOGLE_BALANCE_SNAPSHOT='21/09/2026 14:06';
-const LIVE_HOST='radar-gemini-live-a5bf.claudio41cg.workers.dev/v1/live-ws';
+const LIVE_HOSTS=[
+  'radar-gemini-live-a5bf.claudio41cg.workers.dev/v1/live-ws',
+  'generativelanguage.googleapis.com/ws/google.ai.generativelanguage'
+];
+
+function isGeminiLiveUrl(url){
+  const s=String(url||'');
+  return LIVE_HOSTS.some(host=>s.includes(host));
+}
 
 // Gemini 3.1 Flash Live Preview — paid tier, USD per 1M tokens.
 // Pricing snapshot used by this prototype: 2026-09-15.
@@ -155,7 +163,7 @@ async function dataToText(data){
 }
 
 function instrumentSocket(ws,url){
-  if(!String(url).includes(LIVE_HOST))return ws;
+  if(!isGeminiLiveUrl(url))return ws;
   liveSocketCount++;
   ws.addEventListener('message',async ev=>{
     try{
