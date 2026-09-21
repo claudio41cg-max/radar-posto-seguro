@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T18:45:07.859Z",
+  "generatedAt": "2026-09-21T22:17:49.626Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 38,
-  "lastUpdate": "2026-09-21T12:06:54-03:00",
+  "count": 39,
+  "lastUpdate": "2026-09-21T19:09:28-03:00",
   "occurrences": [
+    {
+      "id": "16a11787-2024-4f59-a5f0-646b0b8ca5f2",
+      "documentNumber": 79140,
+      "date": "2026-09-21T17:00:00.000Z",
+      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CRUZ",
+      "latitude": -22.930738,
+      "longitude": -43.251766,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "970ecceb-6c1f-4b3d-ae26-68e3b2e53660",
       "documentNumber": 79127,
@@ -272,21 +287,6 @@
       ]
     },
     {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -326,18 +326,18 @@
       "victims": []
     },
     {
-      "id": "3c6e5e2a-2595-4c6a-bcf4-3c58c204732b",
-      "documentNumber": 79086,
-      "date": "2026-09-17T18:00:00.000Z",
-      "address": "Complexo do Fubá, Cascadura, Rio de Janeiro - RJ, 21311-170, Brasil",
-      "neighborhood": "CASCADURA",
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
       "subNeighborhood": "",
-      "locality": "COMPLEXO DO FUBA",
-      "latitude": -22.8933284,
-      "longitude": -43.3321124,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -351,6 +351,21 @@
       "latitude": -22.84802717,
       "longitude": -43.28613964,
       "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "3c6e5e2a-2595-4c6a-bcf4-3c58c204732b",
+      "documentNumber": 79086,
+      "date": "2026-09-17T18:00:00.000Z",
+      "address": "Complexo do Fubá, Cascadura, Rio de Janeiro - RJ, 21311-170, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO FUBA",
+      "latitude": -22.8933284,
+      "longitude": -43.3321124,
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []

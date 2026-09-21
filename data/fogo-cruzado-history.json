@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T18:45:07.861Z",
+  "generatedAt": "2026-09-21T22:17:49.627Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 184,
+  "count": 185,
   "occurrences": [
+    {
+      "id": "16a11787-2024-4f59-a5f0-646b0b8ca5f2",
+      "documentNumber": 79140,
+      "date": "2026-09-21T17:00:00.000Z",
+      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CRUZ",
+      "latitude": -22.930738,
+      "longitude": -43.251766,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "970ecceb-6c1f-4b3d-ae26-68e3b2e53660",
       "documentNumber": 79127,
