@@ -6,6 +6,8 @@ window.__radarAiCreditsV208=true;
 
 const STORAGE_KEY='radar_ai_credit_usage_v208';
 const CREDIT_REFERENCE_USD=10;
+const GOOGLE_BALANCE_BRL=157.86;
+const GOOGLE_BALANCE_SNAPSHOT='21/09/2026 14:06';
 const LIVE_HOST='radar-gemini-live-a5bf.claudio41cg.workers.dev/v1/live-ws';
 
 // Gemini 3.1 Flash Live Preview — paid tier, USD per 1M tokens.
@@ -273,6 +275,13 @@ function renderPanel(){
   const remaining=Math.max(0,ref-num(month.costUsd));
   const inAudioMin=today.inAudio/600;
   const outAudioMin=today.outAudio/1500;
+  const inAudioCost=today.inAudio*PRICE.inputAudio;
+  const outAudioCost=today.outAudio*PRICE.outputAudio;
+  const inPerMin=inAudioMin>0?inAudioCost/inAudioMin:0;
+  const outPerMin=outAudioMin>0?outAudioCost/outAudioMin:0;
+  const liveApproxMin=Math.max(inAudioMin,outAudioMin);
+  const livePerMin=liveApproxMin>0?today.costUsd/liveApproxMin:0;
+  const avgTurn=today.turns>0?today.costUsd/today.turns:0;
   const active=liveSocketCount>0?'Sessão Live ativa':'Sem sessão Live ativa';
 
   panel.innerHTML=`
@@ -298,10 +307,19 @@ function renderPanel(){
     </div>
 
     <div class="ai-cr-section">
-      <h4>Crédito de referência</h4>
-      <div class="ai-cr-row"><span>Benefício mensal configurado</span><b>${fmtUsd(ref,2)}</b></div>
-      <div class="ai-cr-row"><span>Consumido neste mês</span><b>${fmtUsd(month.costUsd,3)}</b></div>
-      <div class="ai-cr-row"><span>Saldo estimado do benefício</span><b>${fmtUsd(remaining,2)}</b></div>
+      <h4>Saldo Google Cloud</h4>
+      <div class="ai-cr-row"><span>Saldo oficial informado</span><b>R$ ${GOOGLE_BALANCE_BRL.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}</b></div>
+      <div class="ai-cr-row"><span>Última conferência</span><b>${GOOGLE_BALANCE_SNAPSHOT}</b></div>
+      <div class="ai-cr-row"><span>Gasto medido pelo Radar neste mês</span><b>${fmtUsd(month.costUsd,3)}</b></div>
+      <div class="ai-cr-note">O saldo em reais é uma fotografia da conta Google. Como Radar Seguro e Meu Inglês compartilham a mesma conta de faturamento, ele não é abatido automaticamente aqui.</div>
+    </div>
+    <div class="ai-cr-section">
+      <h4>Médias reais do Radar</h4>
+      <div class="ai-cr-row"><span>Áudio enviado por minuto</span><b>${fmtUsd(inPerMin,4)}</b></div>
+      <div class="ai-cr-row"><span>Áudio recebido por minuto</span><b>${fmtUsd(outPerMin,4)}</b></div>
+      <div class="ai-cr-row"><span>Live por minuto aproximado</span><b>${fmtUsd(livePerMin,4)}</b></div>
+      <div class="ai-cr-row"><span>Custo médio por turno</span><b>${fmtUsd(avgTurn,4)}</b></div>
+      <div class="ai-cr-row"><span>Sessão atual</span><b>${fmtUsd(sessionAgg.costUsd,4)}</b></div>
     </div>
 
     <div class="ai-cr-section">
