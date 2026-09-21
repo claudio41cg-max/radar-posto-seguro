@@ -59,7 +59,20 @@ async function readMessageData(data){if(typeof data==='string')return data;if(da
 
 async function getToken(){const r=await fetch(TOKEN_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',cache:'no-store'});let d=null;try{d=await r.json()}catch(_){}if(!r.ok||!d?.ok||!d?.token||!d?.websocket)throw new Error('Falha ao obter token temporário'+(d?.detail?' • '+d.detail:''));return d}
 
-async function handleToolCall(tc){const calls=tc?.functionCalls||tc?.function_calls||[];if(!calls.length)return;const responses=[];for(const call of calls){const name=String(call?.name||''),id=call?.id||call?.callId;try{let args=call?.args??call?.arguments??{};if(typeof args==='string'){try{args=JSON.parse(args)}catch(_){args={comando:args}}}let result;if(name==='executar_comando_radar'){const command=String(args?.comando??args?.command??'').trim();const m=command.match(/(?:me\s+leve|me\s+leva|leve(?:-|\s)?me|navegue|quero\s+ir|ir|vá|va|bora|vamos|vamo|trace(?:\s+uma)?\s+rota)(?:\s+(?:para|pra|pro|até|ate|em))?\s+(.+)/i);const destination=String(m?.[1]||command).replace(/[.!?]+$/,'').trim();const va=window.VoiceAssistant;if(!destination)result={ok:false,error:'Destino vazio'};else if(typeof va?.routeTo!=='function')result={ok:false,error:'Fluxo original de rota indisponível'};else result=await va.routeTo(destination,{fromGemini:true});}else result=await window.RadarAiToolsV224?.execute?.(name,args||{});responses.push({id,name,response:{result:result??null}})}catch(e){responses.push({id,name,response:{error:String(e?.message||e)}})}}if(responses.length)send({toolResponse:{functionResponses:responses}})}
+async function handleToolCall(tc){const calls=tc?.functionCalls||tc?.function_calls||[];if(!calls.length)return;const responses=[];for(const call of calls){const name=String(call?.name||''),id=call?.id||call?.callId;try{let args=call?.args??call?.arguments??{};if(typeof args==='string'){try{args=JSON.parse(args)}catch(_){args={comando:args}}}let result;if(name==='executar_comando_radar'){const command=String(args?.comando??args?.command??'').trim();const m=command.match(/(?:me\s+leve|me\s+leva|leve(?:-|\s)?me|navegue|quero\s+ir|ir|vá|va|bora|vamos|vamo|trace(?:\s+uma)?\s+rota)(?:\s+(?:para|pra|pro|até|ate|em))?\s+(.+)/i);const destination=String(m?.[1]||command).replace(/[.!?]+$/,'').trim();const va=window.VoiceAssistant;if(!destination)result={ok:false,error:'Destino vazio'};else if(typeof va?.routeTo!=='function')result={ok:false,error:'Fluxo original de rota indisponível'};else{
+  const app=appRef();
+  const originalShowRoutePanel=app?.showRoutePanel;
+  try{
+    if(app&&typeof originalShowRoutePanel==='function'){
+      app.showRoutePanel=()=>{};
+    }
+    result=await va.routeTo(destination,{fromGemini:true});
+  }finally{
+    if(app&&typeof originalShowRoutePanel==='function'){
+      app.showRoutePanel=originalShowRoutePanel;
+    }
+  }
+}}else result=await window.RadarAiToolsV224?.execute?.(name,args||{});responses.push({id,name,response:{result:result??null}})}catch(e){responses.push({id,name,response:{error:String(e?.message||e)}})}}if(responses.length)send({toolResponse:{functionResponses:responses}})}
 
 function handleServerMessage(m){
   if(m?.setupComplete!==undefined){
