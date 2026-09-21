@@ -69,7 +69,16 @@
   let chunksSent = 0;
   let firstAudioReceived = false;
   let lastVoiceSeenAt = 0;
+  let resumeHandle = '';
+  let reconnecting = false;
+  let resumedConnection = false;
+  let userStarted = false;
+  let hiddenAt = 0;
   const outputSources = new Set();
+
+  try {
+    resumeHandle = localStorage.getItem('radarGeminiDirectResumeHandle') || '';
+  } catch (_) {}
 
   function render(cls='muted') {
     out.className = cls;
@@ -275,6 +284,14 @@
     return String(data ?? '');
   }
 
+  function saveResumeHandle(handle) {
+    if (!handle) return;
+    resumeHandle = String(handle);
+    try {
+      localStorage.setItem('radarGeminiDirectResumeHandle', resumeHandle);
+    } catch (_) {}
+  }
+
   async function getToken() {
     const res = await fetch(TOKEN_ENDPOINT, {
       method: 'POST',
@@ -318,32 +335,33 @@
     stopBtn.disabled = true;
   }
 
-  async function start() {
-    if (running) return;
-
-    manualStop = false;
-    lines = [];
-    resetDiagnostics();
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
+  async function openSession({resume=false} = {}) {
+    if (reconnecting) return;
+    reconnecting = true;
+    resumedConnection = Boolean(resume && resumeHandle);
 
     try {
-      log('1. Preparando áudio...');
-      await Promise.all([prepareOutput(), prepareMic()]);
+      if (!micStream) {
+        log(resumedConnection ? 'Preparando microfone para retomada...' : '1. Preparando áudio...');
+        await Promise.all([prepareOutput(), prepareMic()]);
+      } else {
+        await prepareOutput();
+      }
 
-      log('2. Solicitando token efêmero...');
+      log(resumedConnection ? 'Solicitando novo token para retomar sessão...' : '2. Solicitando token efêmero...');
       const auth = await getToken();
 
-      log('3. Token criado.');
-      log('4. Abrindo WebSocket direto com Gemini...');
+      log(resumedConnection ? 'Novo token criado.' : '3. Token criado.');
+      log(resumedConnection ? 'Abrindo novo WebSocket para retomada...' : '4. Abrindo WebSocket direto com Gemini...');
 
       const url = auth.websocket + '?access_token=' + encodeURIComponent(auth.token);
       ws = new WebSocket(url);
 
       ws.onopen = () => {
         running = true;
-        log('5. WebSocket direto ABERTO.');
-        log('6. Enviando setup de áudio...');
+        reconnecting = false;
+        log(resumedConnection ? 'WebSocket de retomada ABERTO.' : '5. WebSocket direto ABERTO.');
+        log(resumedConnection ? 'Enviando setup com handle salvo...' : '6. Enviando setup de áudio...');
 
         ws.send(JSON.stringify({
           setup: {
@@ -356,7 +374,7 @@
                 text: 'Você é Radar, o copiloto de voz do Radar Seguro RJ Pro. Fale em português do Brasil, de forma curta, natural e direta. Neste teste não há ferramentas de rota.'
               }]
             },
-            sessionResumption: {}
+            sessionResumption: resumedConnection ? {handle: resumeHandle} : {}
           }
         }));
       };
@@ -369,8 +387,14 @@
           if (msg?.setupComplete !== undefined) {
             setupReady = true;
             micSending = true;
-            log('7. setupComplete recebido.');
-            log('8. Microfone LIBERADO. Pode falar com o Radar.', 'ok');
+            if (resumedConnection) {
+              log('SESSÃO RETOMADA com sucesso.', 'ok');
+              log('Microfone LIBERADO novamente. Pode continuar falando.', 'ok');
+            } else {
+              log('7. setupComplete recebido.');
+              log('8. Microfone LIBERADO. Pode falar com o Radar.', 'ok');
+            }
+            resumedConnection = false;
             return;
           }
 
@@ -403,10 +427,11 @@
 
           if (msg?.sessionResumptionUpdate) {
             const u = msg.sessionResumptionUpdate;
+            if (u.newHandle) saveResumeHandle(u.newHandle);
             log(
               'SessionResumptionUpdate: resumable=' +
               String(u.resumable) +
-              (u.newHandle ? ' • handle recebido' : '')
+              (u.newHandle ? ' • handle salvo' : '')
             );
           }
 
@@ -427,7 +452,13 @@
         const code = Number(event?.code) || 0;
         const reason = String(event?.reason || '');
 
-        await cleanup(false);
+        running = false;
+        setupReady = false;
+        micSending = false;
+        ws = null;
+        reconnecting = false;
+        await stopMic();
+        stopOutput();
 
         if (!wasManual) {
           log(
@@ -435,28 +466,92 @@
             (reason ? ' • ' + reason : ''),
             'err'
           );
+
+          if (document.visibilityState === 'visible' && userStarted && resumeHandle) {
+            log('Tentando retomada automática...');
+            setTimeout(() => openSession({resume:true}), 500);
+          } else if (resumeHandle) {
+            log('Handle preservado. A sessão será retomada quando a página voltar.');
+          }
         } else {
           log('Teste encerrado manualmente.');
         }
       };
     } catch (err) {
+      reconnecting = false;
       await cleanup(true);
       log('FALHOU: ' + String(err?.message || err), 'err');
     }
+  }
+
+  async function start() {
+    if (running || reconnecting) return;
+
+    manualStop = false;
+    userStarted = true;
+    lines = [];
+    resetDiagnostics();
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+
+    await openSession({resume:false});
   }
 
   startBtn.addEventListener('click', start);
 
   stopBtn.addEventListener('click', async () => {
     manualStop = true;
+    userStarted = false;
+    reconnecting = false;
+    resumedConnection = false;
     log('Encerrando teste...');
     await cleanup(true);
     log('Teste encerrado manualmente.');
   });
 
-  window.addEventListener('pagehide', () => {
-    manualStop = true;
-    cleanup(true);
+  document.addEventListener('visibilitychange', async () => {
+    if (!userStarted || manualStop) return;
+
+    if (document.visibilityState === 'hidden') {
+      hiddenAt = Date.now();
+      micSending = false;
+      await stopMic();
+      log('Página em segundo plano. Handle preservado.');
+      return;
+    }
+
+    const awayMs = hiddenAt ? Date.now() - hiddenAt : 0;
+    log('Página voltou ao primeiro plano após ' + Math.round(awayMs / 1000) + 's.');
+
+    if (ws?.readyState === WebSocket.OPEN && setupReady) {
+      try {
+        await prepareMic();
+        micSending = true;
+        log('Conexão ainda ativa. Microfone retomado.', 'ok');
+      } catch (err) {
+        log('Falha ao reabrir microfone: ' + String(err?.message || err), 'err');
+      }
+      return;
+    }
+
+    if (resumeHandle) {
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+      log('Socket não está ativo. Retomando com o último handle salvo...');
+      await openSession({resume:true});
+    } else {
+      log('Socket não está ativo e ainda não existe handle de retomada.', 'err');
+    }
+  });
+
+  window.addEventListener('pageshow', async () => {
+    if (!userStarted || manualStop) return;
+    if (document.visibilityState !== 'visible') return;
+    if ((ws?.readyState === WebSocket.OPEN && setupReady) || reconnecting) return;
+    if (resumeHandle) {
+      log('pageshow: retomando sessão salva...');
+      await openSession({resume:true});
+    }
   });
 })();
 </script>
