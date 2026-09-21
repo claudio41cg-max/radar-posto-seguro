@@ -16,6 +16,8 @@
     button:disabled{opacity:.55}
     pre{white-space:pre-wrap;word-break:break-word;background:#08131d;padding:14px;border-radius:12px;border:1px solid #1b384d;min-height:180px}
     .ok{color:#70f0a7}.err{color:#ff8c8c}.muted{color:#91a7b8}
+    .diag{margin:12px 0 0;background:#0a1824;border:1px solid #1b384d;border-radius:12px;padding:12px;font:700 14px/1.55 monospace}
+    .diag b{color:#fff}.diag .yes{color:#70f0a7}.diag .no{color:#ff8c8c}.diag .val{color:#8fd8ff}
   </style>
 </head>
 <body>
@@ -25,6 +27,12 @@
       <p>Este teste usa token efêmero e conecta o navegador direto ao Gemini. Não usa a ponte WebSocket antiga, não mexe no Radar principal e não cria rotas.</p>
       <button id="start">Iniciar voz direta</button>
       <button id="stop" class="stop" disabled>Parar teste</button>
+      <div class="diag" id="diag">
+        Microfone detectando voz: <b id="voiceDetected" class="no">NÃO</b><br>
+        Nível do áudio: <b id="audioLevel" class="val">0%</b><br>
+        Blocos enviados ao Gemini: <b id="chunksSent" class="val">0</b><br>
+        Primeiro áudio recebido do Gemini: <b id="audioReceived" class="no">NÃO</b>
+      </div>
       <pre id="out" class="muted">Aguardando teste...</pre>
     </div>
   </div>
@@ -40,6 +48,10 @@
   const startBtn = document.getElementById('start');
   const stopBtn = document.getElementById('stop');
   const out = document.getElementById('out');
+  const voiceDetectedEl = document.getElementById('voiceDetected');
+  const audioLevelEl = document.getElementById('audioLevel');
+  const chunksSentEl = document.getElementById('chunksSent');
+  const audioReceivedEl = document.getElementById('audioReceived');
 
   let ws = null;
   let micStream = null;
@@ -54,6 +66,9 @@
   let micSending = false;
   let manualStop = false;
   let lines = [];
+  let chunksSent = 0;
+  let firstAudioReceived = false;
+  let lastVoiceSeenAt = 0;
   const outputSources = new Set();
 
   function render(cls='muted') {
@@ -64,6 +79,32 @@
   function log(text, cls='muted') {
     lines.push(text);
     render(cls);
+  }
+
+  function setYesNo(el, yes) {
+    el.textContent = yes ? 'SIM' : 'NÃO';
+    el.className = yes ? 'yes' : 'no';
+  }
+
+  function resetDiagnostics() {
+    chunksSent = 0;
+    firstAudioReceived = false;
+    lastVoiceSeenAt = 0;
+    setYesNo(voiceDetectedEl, false);
+    setYesNo(audioReceivedEl, false);
+    audioLevelEl.textContent = '0%';
+    chunksSentEl.textContent = '0';
+  }
+
+  function updateMicDiagnostics(raw) {
+    let sum = 0;
+    for (let i = 0; i < raw.length; i++) sum += raw[i] * raw[i];
+    const rms = Math.sqrt(sum / Math.max(1, raw.length));
+    const level = Math.max(0, Math.min(100, Math.round(rms * 300)));
+    audioLevelEl.textContent = level + '%';
+
+    if (rms > 0.012) lastVoiceSeenAt = Date.now();
+    setYesNo(voiceDetectedEl, Date.now() - lastVoiceSeenAt < 700);
   }
 
   function bytesToBase64(buffer) {
@@ -118,6 +159,11 @@
 
   async function playAudio(b64, rate = 24000) {
     await prepareOutput();
+    if (!firstAudioReceived) {
+      firstAudioReceived = true;
+      setYesNo(audioReceivedEl, true);
+      log('Áudio do Gemini RECEBIDO.', 'ok');
+    }
     const bytes = base64ToBytes(b64);
     const count = Math.floor(bytes.byteLength / 2);
     if (!count) return;
@@ -178,6 +224,7 @@
       if (!micSending || !running || !setupReady || ws?.readyState !== WebSocket.OPEN) return;
 
       const raw = event.inputBuffer.getChannelData(0);
+      updateMicDiagnostics(raw);
       const chunk = toPCM16(raw, inputCtx.sampleRate, 16000);
       if (!chunk.byteLength) return;
 
@@ -189,6 +236,8 @@
           }
         }
       }));
+      chunksSent++;
+      chunksSentEl.textContent = String(chunksSent);
     };
   }
 
@@ -274,6 +323,7 @@
 
     manualStop = false;
     lines = [];
+    resetDiagnostics();
     startBtn.disabled = true;
     stopBtn.disabled = false;
 
