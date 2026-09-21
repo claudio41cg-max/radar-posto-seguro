@@ -66,6 +66,11 @@ async function handleToolCall(tc){const calls=tc?.functionCalls||tc?.function_ca
     if(app&&typeof originalShowRoutePanel==='function'){
       app.showRoutePanel=()=>{};
     }
+    try{
+      if(typeof RouteChoiceGuardV44!=='undefined'){
+        RouteChoiceGuardV44.allowStartUntil=Date.now()+8000;
+      }
+    }catch(_){}
     result=await va.routeTo(destination,{fromGemini:true});
   }finally{
     if(app&&typeof originalShowRoutePanel==='function'){
