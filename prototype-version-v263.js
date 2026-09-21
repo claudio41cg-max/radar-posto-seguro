@@ -1,0 +1,1 @@
+(()=>{const f=()=>{let e=document.getElementById('radarPrototypeVersion');if(!e){e=document.createElement('div');e.id='radarPrototypeVersion';document.body.appendChild(e)}e.textContent='V 263'};document.readyState==='loading'?document.addEventListener('DOMContentLoaded',f):f()})();
