@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07131f">
+  <title>Radar Seguro RJ PRO - Teste Voz Direta Gemini Live</title>
+  <style>
+    body{margin:0;background:#07131f;color:#fff;font-family:Arial,sans-serif}
+    .wrap{max-width:760px;margin:0 auto;padding:24px}
+    .card{background:#0f2233;border:1px solid #244763;border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{font-size:22px;margin:0 0 8px}
+    p{color:#b8cad8;line-height:1.5}
+    button{width:100%;padding:14px 16px;border:0;border-radius:12px;background:#0aa6df;color:#fff;font-weight:700;font-size:16px;margin-top:10px}
+    button.stop{background:#b3261e}
+    button:disabled{opacity:.55}
+    pre{white-space:pre-wrap;word-break:break-word;background:#08131d;padding:14px;border-radius:12px;border:1px solid #1b384d;min-height:180px}
+    .ok{color:#70f0a7}.err{color:#ff8c8c}.muted{color:#91a7b8}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Teste de voz direto Gemini Live 3.1</h1>
+      <p>Este teste usa token efêmero e conecta o navegador direto ao Gemini. Não usa a ponte WebSocket antiga, não mexe no Radar principal e não cria rotas.</p>
+      <button id="start">Iniciar voz direta</button>
+      <button id="stop" class="stop" disabled>Parar teste</button>
+      <pre id="out" class="muted">Aguardando teste...</pre>
+    </div>
+  </div>
+
+<script>
+(() => {
+  'use strict';
+
+  const TOKEN_ENDPOINT =
+    'https://radar-gemini-token-test.claudio41cg.workers.dev/v1/ephemeral-token';
+  const MODEL = 'models/gemini-3.1-flash-live-preview';
+
+  const startBtn = document.getElementById('start');
+  const stopBtn = document.getElementById('stop');
+  const out = document.getElementById('out');
+
+  let ws = null;
+  let micStream = null;
+  let inputCtx = null;
+  let sourceNode = null;
+  let processor = null;
+  let sinkGain = null;
+  let outputCtx = null;
+  let outputCursor = 0;
+  let running = false;
+  let setupReady = false;
+  let micSending = false;
+  let manualStop = false;
+  let lines = [];
+  const outputSources = new Set();
+
+  function render(cls='muted') {
+    out.className = cls;
+    out.textContent = lines.slice(-30).join('\n');
+  }
+
+  function log(text, cls='muted') {
+    lines.push(text);
+    render(cls);
+  }
+
+  function bytesToBase64(buffer) {
+    const b = new Uint8Array(buffer);
+    let out = '';
+    for (let i = 0; i < b.length; i += 0x8000) {
+      out += String.fromCharCode(...b.subarray(i, Math.min(i + 0x8000, b.length)));
+    }
+    return btoa(out);
+  }
+
+  function base64ToBytes(v) {
+    const s = atob(String(v || ''));
+    const b = new Uint8Array(s.length);
+    for (let i = 0; i < s.length; i++) b[i] = s.charCodeAt(i);
+    return b;
+  }
+
+  function toPCM16(input, inputRate, targetRate = 16000) {
+    if (!input?.length) return new ArrayBuffer(0);
+    const ratio = Math.max(1, inputRate / targetRate);
+    const len = Math.max(1, Math.floor(input.length / ratio));
+    const out = new Int16Array(len);
+
+    for (let i = 0; i < len; i++) {
+      const a = Math.floor(i * ratio);
+      const z = Math.min(input.length, Math.max(a + 1, Math.floor((i + 1) * ratio)));
+      let sum = 0;
+      for (let j = a; j < z; j++) sum += input[j];
+      let x = Math.max(-1, Math.min(1, sum / Math.max(1, z - a)));
+      out[i] = x < 0 ? Math.round(x * 32768) : Math.round(x * 32767);
+    }
+
+    return out.buffer;
+  }
+
+  async function prepareOutput() {
+    const C = window.AudioContext || window.webkitAudioContext;
+    if (!C) throw new Error('AudioContext indisponível.');
+    if (!outputCtx || outputCtx.state === 'closed') outputCtx = new C();
+    if (outputCtx.state === 'suspended') await outputCtx.resume();
+    outputCursor = Math.max(outputCursor, outputCtx.currentTime);
+  }
+
+  function stopOutput() {
+    for (const node of [...outputSources]) {
+      try { node.stop(); } catch (_) {}
+    }
+    outputSources.clear();
+    if (outputCtx) outputCursor = outputCtx.currentTime;
+  }
+
+  async function playAudio(b64, rate = 24000) {
+    await prepareOutput();
+    const bytes = base64ToBytes(b64);
+    const count = Math.floor(bytes.byteLength / 2);
+    if (!count) return;
+
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    const samples = new Float32Array(count);
+
+    for (let i = 0; i < count; i++) {
+      samples[i] = view.getInt16(i * 2, true) / 32768;
+    }
+
+    const buf = outputCtx.createBuffer(1, count, rate);
+    buf.copyToChannel(samples, 0);
+
+    const node = outputCtx.createBufferSource();
+    node.buffer = buf;
+    node.connect(outputCtx.destination);
+
+    const when = Math.max(outputCtx.currentTime + 0.02, outputCursor);
+    outputCursor = when + buf.duration;
+
+    outputSources.add(node);
+    node.onended = () => outputSources.delete(node);
+    node.start(when);
+  }
+
+  async function prepareMic() {
+    if (!navigator.mediaDevices?.getUserMedia) {
+      throw new Error('Microfone não suportado neste navegador.');
+    }
+
+    micStream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+        channelCount: 1
+      },
+      video: false
+    });
+
+    const C = window.AudioContext || window.webkitAudioContext;
+    if (!C) throw new Error('AudioContext indisponível.');
+
+    inputCtx = new C();
+    if (inputCtx.state === 'suspended') await inputCtx.resume();
+
+    sourceNode = inputCtx.createMediaStreamSource(micStream);
+    processor = inputCtx.createScriptProcessor(4096, 1, 1);
+    sinkGain = inputCtx.createGain();
+    sinkGain.gain.value = 0;
+
+    sourceNode.connect(processor);
+    processor.connect(sinkGain);
+    sinkGain.connect(inputCtx.destination);
+
+    processor.onaudioprocess = event => {
+      if (!micSending || !running || !setupReady || ws?.readyState !== WebSocket.OPEN) return;
+
+      const raw = event.inputBuffer.getChannelData(0);
+      const chunk = toPCM16(raw, inputCtx.sampleRate, 16000);
+      if (!chunk.byteLength) return;
+
+      ws.send(JSON.stringify({
+        realtimeInput: {
+          audio: {
+            data: bytesToBase64(chunk),
+            mimeType: 'audio/pcm;rate=16000'
+          }
+        }
+      }));
+    };
+  }
+
+  async function stopMic() {
+    try {
+      if (processor) {
+        processor.onaudioprocess = null;
+        processor.disconnect();
+      }
+    } catch (_) {}
+
+    try { sourceNode?.disconnect(); } catch (_) {}
+    try { sinkGain?.disconnect(); } catch (_) {}
+    try { micStream?.getTracks()?.forEach(t => t.stop()); } catch (_) {}
+
+    processor = null;
+    sourceNode = null;
+    sinkGain = null;
+    micStream = null;
+    micSending = false;
+
+    if (inputCtx) {
+      try { await inputCtx.close(); } catch (_) {}
+    }
+    inputCtx = null;
+  }
+
+  async function readMessageData(data) {
+    if (typeof data === 'string') return data;
+    if (data instanceof Blob) return await data.text();
+    if (data instanceof ArrayBuffer) return new TextDecoder().decode(data);
+    if (ArrayBuffer.isView(data)) {
+      return new TextDecoder().decode(data.buffer, data.byteOffset, data.byteLength);
+    }
+    return String(data ?? '');
+  }
+
+  async function getToken() {
+    const res = await fetch(TOKEN_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: '{}',
+      cache: 'no-store'
+    });
+
+    let data = null;
+    try { data = await res.json(); } catch (_) {}
+
+    if (!res.ok || !data?.ok || !data?.token || !data?.websocket) {
+      throw new Error(
+        'Falha ao obter token. HTTP ' + res.status +
+        (data?.detail ? ' • ' + data.detail : '')
+      );
+    }
+
+    return data;
+  }
+
+  async function cleanup(closeSocket = true) {
+    running = false;
+    setupReady = false;
+    micSending = false;
+
+    if (closeSocket && ws) {
+      try {
+        ws.onclose = null;
+        ws.onerror = null;
+        ws.onmessage = null;
+        ws.close(1000, 'user_stop');
+      } catch (_) {}
+    }
+
+    ws = null;
+    await stopMic();
+    stopOutput();
+
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  }
+
+  async function start() {
+    if (running) return;
+
+    manualStop = false;
+    lines = [];
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+
+    try {
+      log('1. Preparando áudio...');
+      await Promise.all([prepareOutput(), prepareMic()]);
+
+      log('2. Solicitando token efêmero...');
+      const auth = await getToken();
+
+      log('3. Token criado.');
+      log('4. Abrindo WebSocket direto com Gemini...');
+
+      const url = auth.websocket + '?access_token=' + encodeURIComponent(auth.token);
+      ws = new WebSocket(url);
+
+      ws.onopen = () => {
+        running = true;
+        log('5. WebSocket direto ABERTO.');
+        log('6. Enviando setup de áudio...');
+
+        ws.send(JSON.stringify({
+          setup: {
+            model: MODEL,
+            generationConfig: {
+              responseModalities: ['AUDIO']
+            },
+            systemInstruction: {
+              parts: [{
+                text: 'Você é Radar, o copiloto de voz do Radar Seguro RJ Pro. Fale em português do Brasil, de forma curta, natural e direta. Neste teste não há ferramentas de rota.'
+              }]
+            },
+            sessionResumption: {}
+          }
+        }));
+      };
+
+      ws.onmessage = async event => {
+        try {
+          const raw = await readMessageData(event.data);
+          const msg = JSON.parse(raw);
+
+          if (msg?.setupComplete !== undefined) {
+            setupReady = true;
+            micSending = true;
+            log('7. setupComplete recebido.');
+            log('8. Microfone LIBERADO. Pode falar com o Radar.', 'ok');
+            return;
+          }
+
+          if (msg?.serverContent?.interrupted) {
+            stopOutput();
+            log('Gemini interrompido pelo usuário.');
+          }
+
+          const parts = msg?.serverContent?.modelTurn?.parts || [];
+
+          for (const part of parts) {
+            const inline = part?.inlineData || part?.inline_data;
+            if (!inline?.data) continue;
+
+            const mime = String(
+              inline.mimeType ||
+              inline.mime_type ||
+              'audio/pcm;rate=24000'
+            );
+
+            if (!/^audio\//i.test(mime)) continue;
+
+            const rate = Number((mime.match(/rate=(\d+)/i) || [])[1]) || 24000;
+            await playAudio(inline.data, rate);
+          }
+
+          if (msg?.serverContent?.turnComplete) {
+            log('Resposta concluída. Ouvindo novamente.', 'ok');
+          }
+
+          if (msg?.sessionResumptionUpdate) {
+            const u = msg.sessionResumptionUpdate;
+            log(
+              'SessionResumptionUpdate: resumable=' +
+              String(u.resumable) +
+              (u.newHandle ? ' • handle recebido' : '')
+            );
+          }
+
+          if (msg?.goAway) {
+            log('GoAway recebido do Gemini.');
+          }
+        } catch (err) {
+          log('Erro ao interpretar mensagem: ' + String(err?.message || err), 'err');
+        }
+      };
+
+      ws.onerror = () => {
+        log('ERRO no WebSocket direto.', 'err');
+      };
+
+      ws.onclose = async event => {
+        const wasManual = manualStop;
+        const code = Number(event?.code) || 0;
+        const reason = String(event?.reason || '');
+
+        await cleanup(false);
+
+        if (!wasManual) {
+          log(
+            'WebSocket fechou. Código ' + (code || 'sem código') +
+            (reason ? ' • ' + reason : ''),
+            'err'
+          );
+        } else {
+          log('Teste encerrado manualmente.');
+        }
+      };
+    } catch (err) {
+      await cleanup(true);
+      log('FALHOU: ' + String(err?.message || err), 'err');
+    }
+  }
+
+  startBtn.addEventListener('click', start);
+
+  stopBtn.addEventListener('click', async () => {
+    manualStop = true;
+    log('Encerrando teste...');
+    await cleanup(true);
+    log('Teste encerrado manualmente.');
+  });
+
+  window.addEventListener('pagehide', () => {
+    manualStop = true;
+    cleanup(true);
+  });
+})();
+</script>
+</body>
+</html>
