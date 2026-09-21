@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07131f">
+  <title>Radar Seguro RJ PRO - Teste Token Gemini</title>
+  <style>
+    body{margin:0;background:#07131f;color:#fff;font-family:Arial,sans-serif}
+    .wrap{max-width:720px;margin:0 auto;padding:24px}
+    .card{background:#0f2233;border:1px solid #244763;border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{font-size:22px;margin:0 0 8px}
+    p{color:#b8cad8;line-height:1.5}
+    button{width:100%;padding:14px 16px;border:0;border-radius:12px;background:#0aa6df;color:white;font-weight:700;font-size:16px}
+    button:disabled{opacity:.55}
+    pre{white-space:pre-wrap;word-break:break-word;background:#08131d;padding:14px;border-radius:12px;border:1px solid #1b384d;min-height:110px}
+    .ok{color:#70f0a7}.err{color:#ff8c8c}.muted{color:#91a7b8}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Teste de token efêmero Gemini Live</h1>
+      <p>Este teste apenas pede um token temporário ao Worker novo. Não abre microfone, não cria rota e não altera o Radar atual.</p>
+      <button id="run">Testar criação do token</button>
+      <pre id="out" class="muted">Aguardando teste...</pre>
+    </div>
+  </div>
+<script>
+(() => {
+  'use strict';
+  const ENDPOINT = 'https://radar-gemini-token-test.claudio41cg.workers.dev/v1/ephemeral-token';
+  const btn = document.getElementById('run');
+  const out = document.getElementById('out');
+
+  function show(text, cls='muted'){
+    out.className = cls;
+    out.textContent = text;
+  }
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    show('Solicitando token temporário ao Worker...');
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: '{}',
+        cache: 'no-store'
+      });
+
+      let data = null;
+      try { data = await res.json(); } catch (_) {}
+
+      if (!res.ok) {
+        show(
+          'FALHOU\n' +
+          'HTTP: ' + res.status + '\n' +
+          'Erro: ' + (data?.error || 'Resposta inválida') + '\n' +
+          'Detalhe: ' + (data?.detail || 'sem detalhe'),
+          'err'
+        );
+        return;
+      }
+
+      if (!data?.ok || !data?.token) {
+        show(
+          'FALHOU\nA resposta chegou, mas não trouxe um token válido.\n' +
+          JSON.stringify(data, null, 2),
+          'err'
+        );
+        return;
+      }
+
+      const token = String(data.token);
+      show(
+        'SUCESSO\n' +
+        'Token efêmero criado pelo Google.\n' +
+        'Modelo: ' + (data.model || 'não informado') + '\n' +
+        'WebSocket direto: ' + (data.websocket || 'não informado') + '\n' +
+        'Token: ' + token.slice(0,12) + '…' + token.slice(-6) + '\n' +
+        'Tamanho do token: ' + token.length + ' caracteres\n' +
+        'Validade: ' + (data.expireTime || 'não informada'),
+        'ok'
+      );
+    } catch (err) {
+      show(
+        'FALHOU\nErro de rede/CORS ao chamar o Worker.\n' +
+        String(err?.message || err),
+        'err'
+      );
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>
