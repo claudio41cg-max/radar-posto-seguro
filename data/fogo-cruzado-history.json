@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T13:14:44.317Z",
+  "generatedAt": "2026-09-21T18:45:07.861Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,97 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 179,
+  "count": 184,
   "occurrences": [
+    {
+      "id": "970ecceb-6c1f-4b3d-ae26-68e3b2e53660",
+      "documentNumber": 79127,
+      "date": "2026-09-21T08:00:00.000Z",
+      "address": "Rua Abrahão Jabour - Jacarepaguá, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9729943,
+      "longitude": -43.4089046,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "801f04a8-46e5-4649-b971-dd0feefb52ff",
+      "documentNumber": 79125,
+      "date": "2026-09-21T05:55:00.000Z",
+      "address": "Comunidade de Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8086939,
+      "longitude": -43.3071081,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "b3d2b551-b104-423d-b3d1-80aa96437b4c",
+      "documentNumber": 79114,
+      "date": "2026-09-21T02:50:00.000Z",
+      "address": "Rua do Monjolo, Pitangueiras, Rio de Janeiro, Rio de Janeiro, Brasil",
+      "neighborhood": "PITANGUEIRAS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8167096,
+      "longitude": -43.1804751,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "6e5117d1-2884-4144-a4c1-d2b7b4e2204e",
+      "documentNumber": 79117,
+      "date": "2026-09-21T01:45:00.000Z",
+      "address": "Comunidade Danon, Nova Iguaçu - RJ, 26270-080, Brasil",
+      "neighborhood": "DANON",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DANON",
+      "latitude": -22.77260584927679,
+      "longitude": -43.51081809717132,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "6f2a59dc-d975-4e80-80a4-64e0c54b603e",
+      "documentNumber": 79116,
+      "date": "2026-09-19T20:00:00.000Z",
+      "address": "Rua Frei Martinho - Vargem Grande, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VARGEM GRANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9819638,
+      "longitude": -43.5031592,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
+    },
     {
       "id": "fd97319a-772b-4f0a-a6c9-e21b88b8d430",
       "documentNumber": 79113,
@@ -363,6 +452,10 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        },
         {
           "situation": "Dead",
           "personType": "Civilian"
