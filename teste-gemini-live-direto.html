@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07131f">
+  <title>Radar Seguro RJ PRO - Teste Gemini Live Direto</title>
+  <style>
+    body{margin:0;background:#07131f;color:#fff;font-family:Arial,sans-serif}
+    .wrap{max-width:760px;margin:0 auto;padding:24px}
+    .card{background:#0f2233;border:1px solid #244763;border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{font-size:22px;margin:0 0 8px}
+    p{color:#b8cad8;line-height:1.5}
+    button{width:100%;padding:14px 16px;border:0;border-radius:12px;background:#0aa6df;color:#fff;font-weight:700;font-size:16px}
+    button:disabled{opacity:.55}
+    pre{white-space:pre-wrap;word-break:break-word;background:#08131d;padding:14px;border-radius:12px;border:1px solid #1b384d;min-height:180px}
+    .ok{color:#70f0a7}.err{color:#ff8c8c}.muted{color:#91a7b8}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Teste direto Gemini Live 3.1</h1>
+      <p>Este teste cria um token efêmero e abre o WebSocket diretamente do navegador para o Gemini. Não usa a ponte WebSocket antiga, não abre microfone e não cria rotas.</p>
+      <button id="run">Testar conexão direta</button>
+      <pre id="out" class="muted">Aguardando teste...</pre>
+    </div>
+  </div>
+
+<script>
+(() => {
+  'use strict';
+
+  const TOKEN_ENDPOINT =
+    'https://radar-gemini-token-test.claudio41cg.workers.dev/v1/ephemeral-token';
+
+  const MODEL = 'models/gemini-3.1-flash-live-preview';
+
+  const btn = document.getElementById('run');
+  const out = document.getElementById('out');
+
+  let ws = null;
+  let lines = [];
+
+  function render(cls='muted') {
+    out.className = cls;
+    out.textContent = lines.join('\n');
+  }
+
+  function log(text, cls='muted') {
+    lines.push(text);
+    render(cls);
+  }
+
+  function finish(text, ok) {
+    lines.push('');
+    lines.push(text);
+    render(ok ? 'ok' : 'err');
+    btn.disabled = false;
+  }
+
+  async function getToken() {
+    const res = await fetch(TOKEN_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: '{}',
+      cache: 'no-store'
+    });
+
+    let data = null;
+    try { data = await res.json(); } catch (_) {}
+
+    if (!res.ok || !data?.ok || !data?.token || !data?.websocket) {
+      throw new Error(
+        'Falha ao obter token. HTTP ' + res.status +
+        (data?.detail ? ' • ' + data.detail : '')
+      );
+    }
+
+    return data;
+  }
+
+  function parseMessage(data) {
+    if (typeof data === 'string') return data;
+    if (data instanceof Blob) return data.text();
+    if (data instanceof ArrayBuffer) return Promise.resolve(new TextDecoder().decode(data));
+    if (ArrayBuffer.isView(data)) {
+      return Promise.resolve(
+        new TextDecoder().decode(data.buffer, data.byteOffset, data.byteLength)
+      );
+    }
+    return Promise.resolve(String(data ?? ''));
+  }
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    lines = [];
+    log('1. Solicitando token efêmero...');
+
+    try {
+      const auth = await getToken();
+      log('2. Token criado com sucesso.');
+      log('3. Abrindo WebSocket direto com o Gemini...');
+
+      const url =
+        auth.websocket +
+        '?access_token=' +
+        encodeURIComponent(auth.token);
+
+      ws = new WebSocket(url);
+
+      let setupComplete = false;
+      let timeout = setTimeout(() => {
+        if (!setupComplete) {
+          try { ws?.close(); } catch (_) {}
+          finish('FALHOU: não chegou setupComplete em 15 segundos.', false);
+        }
+      }, 15000);
+
+      ws.onopen = () => {
+        log('4. WebSocket direto ABERTO.');
+        log('5. Enviando setup...');
+
+        ws.send(JSON.stringify({
+          setup: {
+            model: MODEL,
+            generationConfig: {
+              responseModalities: ['AUDIO']
+            },
+            sessionResumption: {}
+          }
+        }));
+      };
+
+      ws.onmessage = async event => {
+        try {
+          const raw = await parseMessage(event.data);
+          const msg = JSON.parse(raw);
+
+          if (msg?.setupComplete !== undefined) {
+            setupComplete = true;
+            clearTimeout(timeout);
+            log('6. setupComplete RECEBIDO do Gemini.');
+            log('7. Sessão direta autenticada e pronta.');
+            setTimeout(() => {
+              try { ws?.close(1000, 'direct_test_complete'); } catch (_) {}
+            }, 500);
+            return;
+          }
+
+          if (msg?.sessionResumptionUpdate) {
+            const u = msg.sessionResumptionUpdate;
+            log(
+              'SessionResumptionUpdate: resumable=' +
+              String(u.resumable) +
+              (u.newHandle ? ' • handle recebido' : '')
+            );
+            return;
+          }
+
+          if (msg?.goAway) {
+            log('GoAway recebido do Gemini antes do fim do teste.');
+            return;
+          }
+
+          log('Mensagem Gemini recebida antes do setupComplete.');
+        } catch (err) {
+          log('Mensagem recebida, mas não foi possível interpretar: ' + String(err?.message || err));
+        }
+      };
+
+      ws.onerror = () => {
+        log('ERRO de WebSocket direto.');
+      };
+
+      ws.onclose = event => {
+        clearTimeout(timeout);
+
+        if (setupComplete && Number(event.code) === 1000) {
+          finish(
+            'SUCESSO: navegador → Gemini Live funcionou diretamente, sem a ponte WebSocket antiga.',
+            true
+          );
+          return;
+        }
+
+        if (!setupComplete) {
+          finish(
+            'FALHOU: WebSocket fechou antes do setupComplete. Código ' +
+            String(event.code || 'sem código') +
+            (event.reason ? ' • ' + event.reason : ''),
+            false
+          );
+        }
+      };
+    } catch (err) {
+      finish('FALHOU: ' + String(err?.message || err), false);
+    }
+  });
+})();
+</script>
+</body>
+</html>
