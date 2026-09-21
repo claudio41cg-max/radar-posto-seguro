@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T23:10:32.571Z",
+  "generatedAt": "2026-09-21T01:10:47.959Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 38,
+  "count": 33,
   "lastUpdate": "2026-09-20T13:09:03-03:00",
   "occurrences": [
     {
@@ -207,21 +207,6 @@
       ]
     },
     {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
       "documentNumber": 79088,
       "date": "2026-09-17T22:00:00.000Z",
@@ -234,6 +219,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -515,11 +515,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -593,86 +593,6 @@
       "locality": "COMPLEXO DO LINS",
       "latitude": -22.91534468,
       "longitude": -43.28452174,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "5b67cb04-28dd-4b69-ac62-4e1c7a555996",
-      "documentNumber": 79019,
-      "date": "2026-09-13T23:45:00.000Z",
-      "address": "Rua Felipe Cardoso, Santa Cruz, Rio de Janeiro, Rio de Janeiro, Brasil",
-      "neighborhood": "SANTA CRUZ",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.928293,
-      "longitude": -43.6757519,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "a84dd298-e5fa-4bec-bb1a-121b13f5799e",
-      "documentNumber": 79018,
-      "date": "2026-09-13T07:00:00.000Z",
-      "address": "Rua Mucuripe - Senador Camará, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8945737,
-      "longitude": -43.4884467,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "f5a3edcb-f9f3-4365-8ba6-c2fa871fdfd4",
-      "documentNumber": 79012,
-      "date": "2026-09-13T06:20:00.000Z",
-      "address": "Morro da Quitanda - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.81949929,
-      "longitude": -43.36693375,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "de119cad-745e-412c-95a4-f143572b4bde",
-      "documentNumber": 79017,
-      "date": "2026-09-13T03:00:00.000Z",
-      "address": " Comunidade Vila Taboinha - Vargem Grande, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VARGEM GRANDE",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA TABOINHA",
-      "latitude": -23.0118301,
-      "longitude": -43.5132507,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "04dd62b1-5819-4e6a-aabd-4adc778f1dc6",
-      "documentNumber": 79013,
-      "date": "2026-09-13T02:22:00.000Z",
-      "address": "Morro da Quitanda - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.81949929,
-      "longitude": -43.36693375,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
