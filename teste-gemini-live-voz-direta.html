@@ -74,10 +74,14 @@
   let resumedConnection = false;
   let userStarted = false;
   let hiddenAt = 0;
+  let autoResumeAfterReload = false;
   const outputSources = new Set();
 
   try {
     resumeHandle = localStorage.getItem('radarGeminiDirectResumeHandle') || '';
+    autoResumeAfterReload =
+      localStorage.getItem('radarGeminiDirectShouldResume') === '1';
+    userStarted = autoResumeAfterReload;
   } catch (_) {}
 
   function render(cls='muted') {
@@ -489,6 +493,10 @@
 
     manualStop = false;
     userStarted = true;
+    autoResumeAfterReload = true;
+    try {
+      localStorage.setItem('radarGeminiDirectShouldResume', '1');
+    } catch (_) {}
     lines = [];
     resetDiagnostics();
     startBtn.disabled = true;
@@ -502,6 +510,10 @@
   stopBtn.addEventListener('click', async () => {
     manualStop = true;
     userStarted = false;
+    autoResumeAfterReload = false;
+    try {
+      localStorage.removeItem('radarGeminiDirectShouldResume');
+    } catch (_) {}
     reconnecting = false;
     resumedConnection = false;
     log('Encerrando teste...');
@@ -549,10 +561,33 @@
     if (document.visibilityState !== 'visible') return;
     if ((ws?.readyState === WebSocket.OPEN && setupReady) || reconnecting) return;
     if (resumeHandle) {
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
       log('pageshow: retomando sessão salva...');
       await openSession({resume:true});
     }
   });
+
+  async function resumeAfterReloadIfNeeded() {
+    if (!autoResumeAfterReload || !resumeHandle) return;
+    if (document.visibilityState !== 'visible') return;
+    if (running || reconnecting) return;
+
+    manualStop = false;
+    userStarted = true;
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    log('Página recriada pelo navegador. Retomando sessão salva automaticamente...');
+    await openSession({resume:true});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(resumeAfterReloadIfNeeded, 250);
+    }, {once:true});
+  } else {
+    setTimeout(resumeAfterReloadIfNeeded, 250);
+  }
 })();
 </script>
 </body>
