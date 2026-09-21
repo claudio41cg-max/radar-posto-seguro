@@ -102,14 +102,7 @@ export default {
     const body = {
       uses: 1,
       newSessionExpireTime: new Date(now + 60 * 1000).toISOString(),
-      expireTime: new Date(now + 30 * 60 * 1000).toISOString(),
-      liveConnectConstraints: {
-        model: LIVE_MODEL,
-        config: {
-          sessionResumption: {},
-          responseModalities: ['AUDIO']
-        }
-      }
+      expireTime: new Date(now + 30 * 60 * 1000).toISOString()
     };
 
     let upstream;
