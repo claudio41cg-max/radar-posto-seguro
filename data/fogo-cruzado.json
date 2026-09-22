@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T11:25:25.347Z",
+  "generatedAt": "2026-09-22T15:38:12.860Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 40,
-  "lastUpdate": "2026-09-22T07:43:35-03:00",
+  "count": 39,
+  "lastUpdate": "2026-09-22T11:44:57-03:00",
   "occurrences": [
+    {
+      "id": "41ae28c6-23bb-4b7d-b091-9bedc90d3ae0",
+      "documentNumber": 79157,
+      "date": "2026-09-22T07:28:00.000Z",
+      "address": "Jardim Anhangá, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "JARDIM ANHANGA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6491876,
+      "longitude": -43.2400595,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "b5d74dbd-44e9-4d02-a05f-a96eb1c32bb0",
       "documentNumber": 79148,
@@ -216,7 +236,7 @@
       "locality": "",
       "latitude": -22.8265798,
       "longitude": -43.3004059,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -347,21 +367,6 @@
       "victims": []
     },
     {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -386,6 +391,21 @@
       ]
     },
     {
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "3c6e5e2a-2595-4c6a-bcf4-3c58c204732b",
       "documentNumber": 79086,
       "date": "2026-09-17T18:00:00.000Z",
@@ -401,31 +421,16 @@
       "victims": []
     },
     {
-      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
-      "documentNumber": 79085,
-      "date": "2026-09-17T18:00:00.000Z",
-      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
-      "neighborhood": "PENHA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PENHA",
-      "latitude": -22.84802717,
-      "longitude": -43.28613964,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "fb45daa3-52ed-4ec2-87b1-44b48fda2f6b",
       "documentNumber": 79084,
       "date": "2026-09-17T16:30:00.000Z",
-      "address": "R. Cordovil, Parada de Lucas, Rio de Janeiro - RJ, 21250-450, Brasil",
+      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
       "neighborhood": "PARADA DE LUCAS",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.818736470565923,
-      "longitude": -43.302018061871344,
-      "reason": "Não identificado",
+      "latitude": -22.82650326,
+      "longitude": -43.29951507,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -440,7 +445,7 @@
       "locality": "",
       "latitude": -22.6357536,
       "longitude": -43.0303906,
-      "reason": "Ação policial",
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -470,7 +475,7 @@
       "locality": "MORRO DO SAO CARLOS (COMPLEXO DO SAO CARLOS)",
       "latitude": -22.91824946,
       "longitude": -43.20363845,
-      "reason": "Não identificado",
+      "reason": "Tiros a esmo",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -515,11 +520,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
-          "situation": "Dead",
-          "personType": "Agent"
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -577,25 +582,10 @@
       "id": "5f476a74-f00f-45b0-b230-2d3218d38db5",
       "documentNumber": 79049,
       "date": "2026-09-15T16:51:00.000Z",
-      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
+      "address": "Rua São Pedro, Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "CASCADURA",
       "subNeighborhood": "",
       "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
-      "latitude": -22.892324971301786,
-      "longitude": -43.33377861518315,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "ecfc607e-e610-4695-9fd7-5c3935f0cbb0",
-      "documentNumber": 79053,
-      "date": "2026-09-15T15:00:00.000Z",
-      "address": "Rua São Pedro, Complexo do Fubá, Cascadura, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO FUBA",
       "latitude": -22.8933284,
       "longitude": -43.3321124,
       "reason": "Ação policial",
