@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T00:53:35.122Z",
+  "generatedAt": "2026-09-22T06:01:06.959Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 185,
+  "count": 188,
   "occurrences": [
+    {
+      "id": "317504f6-38be-48fa-b7f2-be4cf4800470",
+      "documentNumber": 79147,
+      "date": "2026-09-21T18:00:00.000Z",
+      "address": "Comunidade Fernão Cardim - Engenho de Dentro, Rio de Janeiro - RJ, 20771-020, Brasil",
+      "neighborhood": "ENGENHO DE DENTRO",
+      "subNeighborhood": "",
+      "locality": "Comunidade FERNAO CARDIM",
+      "latitude": -22.88555202,
+      "longitude": -43.28747901,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a259ffc2-e614-481d-8b4f-fd1797c6e8c4",
+      "documentNumber": 79146,
+      "date": "2026-09-21T17:50:00.000Z",
+      "address": "Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9324433,
+      "longitude": -43.2411073,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "16a11787-2024-4f59-a5f0-646b0b8ca5f2",
       "documentNumber": 79140,
@@ -107,12 +137,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -491,6 +521,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "6f0b05ea-6d83-410c-b88a-930ba8bf99fa",
+      "documentNumber": 79145,
+      "date": "2026-09-16T18:00:00.000Z",
+      "address": "Avenida Professor Manoel de Abreu - Maracanã, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARACANA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9124771,
+      "longitude": -43.233908,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "241e8b0d-48c9-4019-8923-35c7022be356",

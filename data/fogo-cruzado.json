@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T00:53:35.121Z",
+  "generatedAt": "2026-09-22T06:01:06.958Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 36,
-  "lastUpdate": "2026-09-21T19:36:42-03:00",
+  "count": 39,
+  "lastUpdate": "2026-09-21T23:44:19-03:00",
   "occurrences": [
+    {
+      "id": "317504f6-38be-48fa-b7f2-be4cf4800470",
+      "documentNumber": 79147,
+      "date": "2026-09-21T18:00:00.000Z",
+      "address": "Comunidade Fernão Cardim - Engenho de Dentro, Rio de Janeiro - RJ, 20771-020, Brasil",
+      "neighborhood": "ENGENHO DE DENTRO",
+      "subNeighborhood": "",
+      "locality": "Comunidade FERNAO CARDIM",
+      "latitude": -22.88555202,
+      "longitude": -43.28747901,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a259ffc2-e614-481d-8b4f-fd1797c6e8c4",
+      "documentNumber": 79146,
+      "date": "2026-09-21T17:50:00.000Z",
+      "address": "Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9324433,
+      "longitude": -43.2411073,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "16a11787-2024-4f59-a5f0-646b0b8ca5f2",
       "documentNumber": 79140,
@@ -108,12 +138,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -287,21 +317,6 @@
       ]
     },
     {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -338,6 +353,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -475,6 +505,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "6f0b05ea-6d83-410c-b88a-930ba8bf99fa",
+      "documentNumber": 79145,
+      "date": "2026-09-16T18:00:00.000Z",
+      "address": "Avenida Professor Manoel de Abreu - Maracanã, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARACANA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9124771,
+      "longitude": -43.233908,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
