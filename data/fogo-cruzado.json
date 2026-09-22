@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T06:01:06.958Z",
+  "generatedAt": "2026-09-22T11:25:25.347Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
-  "lastUpdate": "2026-09-21T23:44:19-03:00",
+  "count": 40,
+  "lastUpdate": "2026-09-22T07:43:35-03:00",
   "occurrences": [
+    {
+      "id": "b5d74dbd-44e9-4d02-a05f-a96eb1c32bb0",
+      "documentNumber": 79148,
+      "date": "2026-09-22T02:15:00.000Z",
+      "address": "Morro dos Macacos - Vila Isabel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VILA ISABEL",
+      "subNeighborhood": "",
+      "locality": "MORRO DOS MACACOS",
+      "latitude": -22.91,
+      "longitude": -43.2575,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "317504f6-38be-48fa-b7f2-be4cf4800470",
       "documentNumber": 79147,
@@ -317,30 +332,6 @@
       ]
     },
     {
-      "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
-      "documentNumber": 79087,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade Beira Mar, Parque Duque, Duque de Caxias - RJ, 25085-262, Brasil",
-      "neighborhood": "PARQUE DUQUE",
-      "subNeighborhood": "",
-      "locality": "Comunidade BEIRA MAR",
-      "latitude": -22.79693,
-      "longitude": -43.289741,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
       "documentNumber": 79088,
       "date": "2026-09-17T22:00:00.000Z",
@@ -371,19 +362,28 @@
       "victims": []
     },
     {
-      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
-      "documentNumber": 79085,
-      "date": "2026-09-17T18:00:00.000Z",
-      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
-      "neighborhood": "PENHA",
+      "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
+      "documentNumber": 79087,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade Beira Mar, Parque Duque, Duque de Caxias - RJ, 25085-262, Brasil",
+      "neighborhood": "PARQUE DUQUE",
       "subNeighborhood": "",
-      "locality": "COMPLEXO DA PENHA",
-      "latitude": -22.84802717,
-      "longitude": -43.28613964,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
+      "locality": "Comunidade BEIRA MAR",
+      "latitude": -22.79693,
+      "longitude": -43.289741,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "3c6e5e2a-2595-4c6a-bcf4-3c58c204732b",
@@ -396,6 +396,21 @@
       "latitude": -22.8933284,
       "longitude": -43.3321124,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "db6e70f3-6550-446d-9e4a-cffb3078c259",
+      "documentNumber": 79085,
+      "date": "2026-09-17T18:00:00.000Z",
+      "address": "Complexo da Penha, Penha, Rio de Janeiro - RJ, 21072-590, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PENHA",
+      "latitude": -22.84802717,
+      "longitude": -43.28613964,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T06:01:06.959Z",
+  "generatedAt": "2026-09-22T11:25:25.348Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 188,
+  "count": 189,
   "occurrences": [
+    {
+      "id": "b5d74dbd-44e9-4d02-a05f-a96eb1c32bb0",
+      "documentNumber": 79148,
+      "date": "2026-09-22T02:15:00.000Z",
+      "address": "Morro dos Macacos - Vila Isabel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VILA ISABEL",
+      "subNeighborhood": "",
+      "locality": "MORRO DOS MACACOS",
+      "latitude": -22.91,
+      "longitude": -43.2575,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "317504f6-38be-48fa-b7f2-be4cf4800470",
       "documentNumber": 79147,
