@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T22:17:49.626Z",
+  "generatedAt": "2026-09-22T00:53:35.121Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
-  "lastUpdate": "2026-09-21T19:09:28-03:00",
+  "count": 36,
+  "lastUpdate": "2026-09-21T19:36:42-03:00",
   "occurrences": [
     {
       "id": "16a11787-2024-4f59-a5f0-646b0b8ca5f2",
@@ -108,12 +108,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -287,6 +287,21 @@
       ]
     },
     {
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -323,21 +338,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     },
     {
@@ -470,11 +470,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -642,65 +642,6 @@
       "locality": "COMUNIDADE DANON",
       "latitude": -22.7726993,
       "longitude": -43.5111267,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "b5a7fd2c-8157-449c-bc26-04409070d977",
-      "documentNumber": 79034,
-      "date": "2026-09-14T15:22:00.000Z",
-      "address": "R. Simeão Custódio - Centro, São Gonçalo - RJ, 24445-020, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.820940499043093,
-      "longitude": -43.04643839940569,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "d9633641-f0ce-4d86-970f-3d904fcb29e2",
-      "documentNumber": 79037,
-      "date": "2026-09-14T15:00:00.000Z",
-      "address": "Sítio da Capelinha - Vale das Pedrinhas, Guapimirim - RJ, 25940-000, Brasil",
-      "neighborhood": "VALE DAS PEDRINHAS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.64924465481227,
-      "longitude": -43.013060030680414,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "9b912d5a-747a-4ca6-a687-2edd5500813f",
-      "documentNumber": 79039,
-      "date": "2026-09-14T12:19:00.000Z",
-      "address": "Complexo do Lins - Lins de Vasconcelos, Rio de Janeiro - RJ, 20725-140, Brasil",
-      "neighborhood": "LINS DE VASCONCELOS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO LINS",
-      "latitude": -22.91534468,
-      "longitude": -43.28452174,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
