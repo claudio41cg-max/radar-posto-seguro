@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T18:57:48.416Z",
+  "generatedAt": "2026-09-23T22:11:20.350Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 194,
+  "count": 195,
   "occurrences": [
+    {
+      "id": "c202d237-937e-4d0d-9d95-1d5601895d12",
+      "documentNumber": 79178,
+      "date": "2026-09-23T11:20:00.000Z",
+      "address": "Av. Prefeito Milton Rodrigues da Rocha, Manilha, Itaboraí - RJ, 24860-124, Brasil",
+      "neighborhood": "MANILHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.775004781162714,
+      "longitude": -42.92217608360595,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "7b9c8401-11c8-4721-a518-4cd5ac674214",
       "documentNumber": 79163,
