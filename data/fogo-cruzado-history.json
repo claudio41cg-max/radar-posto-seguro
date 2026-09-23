@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T10:03:25.338Z",
+  "generatedAt": "2026-09-23T14:53:59.711Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 193,
+  "count": 194,
   "occurrences": [
     {
       "id": "7b9c8401-11c8-4721-a518-4cd5ac674214",
@@ -354,6 +354,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "78337390-4de9-463a-92aa-cee2ecbf1f35",
+      "documentNumber": 79175,
+      "date": "2026-09-18T22:00:00.000Z",
+      "address": "Comunidade Grão Pará, Paraíso, Nova Iguaçu - RJ, 26297-279, Brasil",
+      "neighborhood": "PARAISO",
+      "subNeighborhood": "",
+      "locality": "Comunidade GRAO PARA E GUACHA",
+      "latitude": -22.8137798309,
+      "longitude": -43.5864830017,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",

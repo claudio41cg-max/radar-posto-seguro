@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T10:03:25.336Z",
+  "generatedAt": "2026-09-23T14:53:59.709Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 34,
-  "lastUpdate": "2026-09-22T22:36:10-03:00",
+  "count": 35,
+  "lastUpdate": "2026-09-23T11:52:05-03:00",
   "occurrences": [
     {
       "id": "7b9c8401-11c8-4721-a518-4cd5ac674214",
@@ -357,6 +357,21 @@
       ]
     },
     {
+      "id": "78337390-4de9-463a-92aa-cee2ecbf1f35",
+      "documentNumber": 79175,
+      "date": "2026-09-18T22:00:00.000Z",
+      "address": "Comunidade Grão Pará, Paraíso, Nova Iguaçu - RJ, 26297-279, Brasil",
+      "neighborhood": "PARAISO",
+      "subNeighborhood": "",
+      "locality": "Comunidade GRAO PARA E GUACHA",
+      "latitude": -22.8137798309,
+      "longitude": -43.5864830017,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",
       "documentNumber": 79102,
       "date": "2026-09-18T21:05:00.000Z",
@@ -412,21 +427,6 @@
       ]
     },
     {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -449,6 +449,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "83fc2f2c-3ebb-44f0-84ad-96eb67050cc6",
