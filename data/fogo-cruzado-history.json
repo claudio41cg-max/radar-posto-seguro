@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T22:15:10.470Z",
+  "generatedAt": "2026-09-23T00:38:51.839Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 191,
+  "count": 192,
   "occurrences": [
+    {
+      "id": "7b9c8401-11c8-4721-a518-4cd5ac674214",
+      "documentNumber": 79163,
+      "date": "2026-09-22T18:00:00.000Z",
+      "address": "Conjunto Habitacional Minha Casa Minha Vida - Rua Tapajos - Inoã, Maricá - RJ, Brasil",
+      "neighborhood": "INOA",
+      "subNeighborhood": "",
+      "locality": "CONJUNTO HABITACIONAL MINHA CASA MINHA VIDA",
+      "latitude": -22.9344771,
+      "longitude": -42.9638948,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "0bfbc453-319c-4007-9043-3ecd7fce1f3f",
       "documentNumber": 79161,
