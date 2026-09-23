@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T00:38:51.839Z",
+  "generatedAt": "2026-09-23T05:15:15.357Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 192,
+  "count": 193,
   "occurrences": [
     {
       "id": "7b9c8401-11c8-4721-a518-4cd5ac674214",
@@ -131,6 +131,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "aa64da93-0f55-4307-aee7-673d652900ec",
+      "documentNumber": 79165,
+      "date": "2026-09-21T15:00:00.000Z",
+      "address": "Beira-Rio, Japeri - RJ, 26443-180, Brasil",
+      "neighborhood": "BEIRA RIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6393432386323,
+      "longitude": -43.66761518037248,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "970ecceb-6c1f-4b3d-ae26-68e3b2e53660",
