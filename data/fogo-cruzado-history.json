@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T14:53:59.711Z",
+  "generatedAt": "2026-09-23T18:57:48.416Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -45,12 +45,7 @@
       "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
+      "victims": []
     },
     {
       "id": "41ae28c6-23bb-4b7d-b091-9bedc90d3ae0",
