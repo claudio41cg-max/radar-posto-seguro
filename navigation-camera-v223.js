@@ -20,6 +20,10 @@ function holdNavManual(a){
  manualUntil=Date.now()+10000;
  a.followMode=false;
  try{clearTimeout(a.manualFollowTimer)}catch(_){}
+ try{
+   const p=Math.abs(+a.map?.getPitch?.()||0);
+   if(p>.5)a.map.jumpTo({pitch:0});
+ }catch(_){}
  a.manualFollowTimer=setTimeout(()=>{
    if(!a.navActive)return;
    manualUntil=0;
@@ -80,7 +84,18 @@ function install(){const a=app();if(!a?.map)return false;if(installed)return tru
  const start=typeof a.startNavigation==='function'?a.startNavigation.bind(a):null;if(start)a.startNavigation=function(...args){target=shown=null;targetBearing=shownBearing=null;manualUntil=0;const out=start(...args);setTimeout(()=>capture(a),80);return out};
  const stop=typeof a.stopNavigation==='function'?a.stopNavigation.bind(a):null;if(stop)a.stopNavigation=function(...args){const out=stop(...args);this.followMode=true;lastFreePoint=null;capture(this);followFree(this,true);return out};
  ['dragstart','zoomstart','rotatestart','pitchstart'].forEach(ev=>a.map.on?.(ev,e=>{if(e?.originalEvent&&a.navActive)holdNavManual(a);}));
- ['zoomIn','zoomOut'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{if(a.navActive)holdNavManual(a);},true));
+ ['zoomIn','zoomOut'].forEach(id=>document.getElementById(id)?.addEventListener('click',e=>{
+   if(!a.navActive)return;
+   e.preventDefault();
+   e.stopPropagation();
+   e.stopImmediatePropagation();
+   holdNavManual(a);
+   try{
+     const current=+a.map.getZoom?.()||16;
+     const delta=id==='zoomIn'?.7:-.7;
+     a.map.jumpTo({zoom:clamp(current+delta,8,18),pitch:0});
+   }catch(_){}
+ },true));
  ['navRecenterLeft','btnRecenter','locateBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{resumeNavFollow(a);if(!a.navActive)followFree(a,true);},true));capture(a);if(!raf)raf=requestAnimationFrame(frame);return true}
 let n=0,t=setInterval(()=>{if(install()||++n>300)clearInterval(t)},100);
 window.RadarNavigationCameraV223={version:'223',heading:()=>app()?.navActive?shownBearing:freeHeading,refresh:()=>{manualUntil=0;capture(app())}};
