@@ -18,7 +18,7 @@ function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.navActi
  try{const cv=a.map.getCanvas?.(),h=Math.max(400,cv?.clientHeight||innerHeight||700),w=Math.max(280,cv?.clientWidth||innerWidth||390),side=Math.round(clamp(w*.05,18,42));
  /* Ajuste V264: baixa mais o ponto focal da navegacao, no estilo Maps/Waze.
     Apenas o enquadramento vertical muda; GPS, zoom, pitch e rotacao permanecem intactos. */
- const top=Math.round(clamp(h*.46,220,h*.50)),bottom=Math.round(clamp(h*.065,38,64));
+ const top=Math.round(clamp(h*.50,240,h*.54)),bottom=Math.round(clamp(h*.055,32,56));
  a.followMode=true;a.map.jumpTo({center:shown,zoom:cfg.z,pitch:cfg.p,bearing:Number.isFinite(shownBearing)?shownBearing:0,padding:{top,left:side,right:side,bottom}});
  }catch(_){}}
 function install(){const a=app();if(!a?.map)return false;if(installed)return true;installed=true;window.__RADAR_SINGLE_CAMERA_OWNER='v223';
