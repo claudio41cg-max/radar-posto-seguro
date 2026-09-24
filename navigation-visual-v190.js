@@ -4,13 +4,13 @@
 if(window.__radarNavigationVisualV190)return;window.__radarNavigationVisualV190=true;
 const app=()=>{try{return window.RadarApp||window.App||null;}catch(_){return null;}};
 function injectCss(){if(document.getElementById('radar-v190-visual-css'))return;const s=document.createElement('style');s.id='radar-v190-visual-css';s.textContent=`
-.user-marker-waze.radar-arrow3d-v190{width:var(--radar-arrow-w,49px)!important;height:var(--radar-arrow-h,57px)!important;background:url('./navigation-arrow-3d.png?v=2') no-repeat center 57%/contain,radial-gradient(circle at 50% 70%,rgba(105,205,255,.46) 0 18%,rgba(69,166,255,.24) 34%,rgba(69,166,255,.10) 50%,transparent 72%) no-repeat center 70%/80% 58%!important;filter:drop-shadow(0 4px 7px rgba(0,0,0,.66)) drop-shadow(0 0 5px rgba(0,210,255,.22))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important}
+.user-marker-waze.radar-arrow3d-v190{width:var(--radar-arrow-w,52px)!important;height:var(--radar-arrow-h,61px)!important;background:url('./navigation-arrow-3d.png?v=3') no-repeat center 57%/contain,radial-gradient(circle at 50% 71%,rgba(135,220,255,.62) 0 20%,rgba(88,184,255,.34) 36%,rgba(88,184,255,.16) 54%,transparent 74%) no-repeat center 71%/86% 64%!important;filter:drop-shadow(0 4px 7px rgba(0,0,0,.66)) drop-shadow(0 0 7px rgba(0,210,255,.32))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important}
 .hazard-marker{width:28px!important;height:28px!important;filter:drop-shadow(0 2px 4px rgba(0,0,0,.75))!important}
 .hazard-marker svg{width:28px!important;height:28px!important}
 `;document.head.appendChild(s);}
 function sizeFor(a){let z=17;try{z=+a?.map?.getZoom?.()||17;}catch(_){}const nav=!!a?.navActive;let w;
- if(nav){if(z>=18.5)w=55;else if(z>=17.5)w=52;else if(z>=16.5)w=49;else if(z>=15.5)w=46;else if(z>=14)w=43;else w=39;}
- else {if(z>=18.5)w=50;else if(z>=17.5)w=47;else if(z>=16.5)w=44;else if(z>=15.5)w=41;else if(z>=14)w=38;else w=35;}
+ if(nav){if(z>=18.5)w=58;else if(z>=17.5)w=55;else if(z>=16.5)w=52;else if(z>=15.5)w=49;else if(z>=14)w=46;else w=42;}
+ else {if(z>=18.5)w=53;else if(z>=17.5)w=50;else if(z>=16.5)w=47;else if(z>=15.5)w=44;else if(z>=14)w=41;else w=38;}
  return[w,Math.round(w*1.17)];}
 function applyArrow(){const a=app();let el=null;try{el=a?.userMarker?.getElement?.()||null;}catch(_){}if(!el)return false;el.classList.remove('radar-arrow3d-v188','radar-arrow3d-v189');el.classList.add('radar-arrow3d-v190');const [w,h]=sizeFor(a);el.style.setProperty('--radar-arrow-w',w+'px');el.style.setProperty('--radar-arrow-h',h+'px');return true;}
 function install(){injectCss();const a=app();if(!a)return false;if(a.__navigationVisualV190Installed){applyArrow();return true;}a.__navigationVisualV190Installed=true;applyArrow();
