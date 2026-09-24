@@ -16,9 +16,9 @@ let target=null,shown=null,targetBearing=null,shownBearing=null,last=0,raf=0,ins
 function capture(a){if(!a?.navActive)return;const q=vehicle(a);if(!point(q))return;target=q.slice();const rb=roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)&&Number.isFinite(hb)?blend(hb,rb,.45):(Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing));if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
 function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.navActive||!a?.map||!point(target)||Date.now()<manualUntil)return;if(ts-last<32)return;last=ts;const s=Math.max(0,+a.currentSpeed||0),k=s>=80?.32:s>=45?.27:s>=15?.23:.20;shown=[shown[0]+(target[0]-shown[0])*k,shown[1]+(target[1]-shown[1])*k];if(Number.isFinite(targetBearing))shownBearing=Number.isFinite(shownBearing)?blend(shownBearing,targetBearing,.15):targetBearing;const cfg=profile(s);
  try{const cv=a.map.getCanvas?.(),h=Math.max(400,cv?.clientHeight||innerHeight||700),w=Math.max(280,cv?.clientWidth||innerWidth||390),side=Math.round(clamp(w*.05,18,42));
- /* Unica diferenca da V222: top sobe de 31% para 37%; bottom permanece 7.5%.
-    Isso baixa o ponto focal sem deslocar a coordenada GPS, sem mudar zoom/pitch/rotacao. */
- const top=Math.round(clamp(h*.37,180,h*.42)),bottom=Math.round(clamp(h*.075,42,72));
+ /* Ajuste V264: baixa mais o ponto focal da navegacao, no estilo Maps/Waze.
+    Apenas o enquadramento vertical muda; GPS, zoom, pitch e rotacao permanecem intactos. */
+ const top=Math.round(clamp(h*.46,220,h*.50)),bottom=Math.round(clamp(h*.065,38,64));
  a.followMode=true;a.map.jumpTo({center:shown,zoom:cfg.z,pitch:cfg.p,bearing:Number.isFinite(shownBearing)?shownBearing:0,padding:{top,left:side,right:side,bottom}});
  }catch(_){}}
 function install(){const a=app();if(!a?.map)return false;if(installed)return true;installed=true;window.__RADAR_SINGLE_CAMERA_OWNER='v223';
