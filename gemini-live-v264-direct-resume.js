@@ -10,7 +10,7 @@ const MAIN_ID='assistantMicBtn';
 const NAV_ID='navAssistantMicBtn';
 const RESUME_KEY='radarGeminiDirectV264ResumeHandle';
 const ACTIVE_KEY='radarGeminiDirectV264ShouldResume';
-const SYSTEM_TEXT='Você é Radar, o copiloto de voz do Radar Seguro RJ Pro. Responda em português do Brasil, de forma curta, natural e direta. O usuário pode estar dirigindo. Quando o motorista pedir uma rota, chame executar_comando_radar. Quando perguntar onde está, chame obter_localizacao_atual. Quando perguntar quanto falta, distância restante ou tempo para chegar, chame obter_status_rota. Quando pedir mercado, padaria, posto, farmácia ou outro lugar perto do destino, chame buscar_lugar_perto_destino. Quando pedir para cancelar, encerrar ou parar a rota, chame cancelar_rota_radar. Nunca diga que uma ação aconteceu antes da resposta da ferramenta. Nunca invente localização, rota, distância, tempo, estabelecimentos, trânsito, ocorrências ou fatos atuais.';
+const SYSTEM_TEXT='Você é Radar, o copiloto de voz do Radar Seguro RJ Pro. Responda em português do Brasil, de forma curta, natural e direta. O usuário pode estar dirigindo. Para qualquer pedido ligado ao aplicativo — criar rota, dizer onde o motorista está, informar quanto falta, procurar lugar perto do destino ou cancelar a rota — chame sempre executar_comando_radar passando a frase completa do motorista em comando. Nunca diga que uma ação aconteceu antes da resposta da ferramenta. Nunca invente localização, rota, distância, tempo, estabelecimentos, trânsito, ocorrências ou fatos atuais.';
 
 let ws=null,micStream=null,inputCtx=null,sourceNode=null,processor=null,sinkGain=null,outputCtx=null,outputCursor=0;
 let running=false,starting=false,reconnecting=false,setupReady=false,micSending=false,manualStop=false,userStarted=false,resumedConnection=false;
@@ -79,62 +79,122 @@ async function searchNearPoint(query,lon,lat,label){
   }))};
 }
 
-async function handleToolCall(tc){const calls=tc?.functionCalls||tc?.function_calls||[];if(!calls.length)return;const responses=[];for(const call of calls){const name=String(call?.name||''),id=call?.id||call?.callId;try{let args=call?.args??call?.arguments??{};if(typeof args==='string'){try{args=JSON.parse(args)}catch(_){args={comando:args}}}let result;
-if(name==='executar_comando_radar'){
-  const command=String(args?.comando??args?.command??'').trim();
-  const m=command.match(/(?:me\s+leve|me\s+leva|leve(?:-|\s)?me|navegue|quero\s+ir|ir|vá|va|bora|vamos|vamo|trace(?:\s+uma)?\s+rota)(?:\s+(?:para|pra|pro|até|ate|em))?\s+(.+)/i);
-  const destination=String(m?.[1]||command).replace(/[.!?]+$/,'').trim();
-  const va=window.VoiceAssistant;
-  if(!destination)result={ok:false,error:'Destino vazio'};
-  else if(typeof va?.routeTo!=='function')result={ok:false,error:'Fluxo original de rota indisponível'};
-  else{
-    const app=appRef(),originalShowRoutePanel=app?.showRoutePanel;
+async function handleToolCall(tc){
+  const calls=tc?.functionCalls||tc?.function_calls||[];
+  if(!calls.length)return;
+  const responses=[];
+
+  const normalize=text=>String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+
+  for(const call of calls){
+    const name=String(call?.name||''),id=call?.id||call?.callId;
     try{
-      if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=()=>{};
-      try{if(typeof RouteChoiceGuardV44!=='undefined')RouteChoiceGuardV44.allowStartUntil=Date.now()+8000}catch(_){}
-      result=await va.routeTo(destination,{fromGemini:true});
-    }finally{
-      if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=originalShowRoutePanel;
+      let args=call?.args??call?.arguments??{};
+      if(typeof args==='string'){try{args=JSON.parse(args)}catch(_){args={comando:args}}}
+      let result;
+
+      if(name==='executar_comando_radar'){
+        const command=String(args?.comando??args?.command??'').trim();
+        const n=normalize(command);
+        const app=appRef();
+        const va=assistantRef();
+
+        const wantsLocation=
+          /\b(onde eu estou|onde estou|minha localizacao|minha localização|que rua|qual rua|que bairro|qual bairro|em que lugar eu estou)\b/i.test(command);
+
+        const wantsCancel=
+          /\b(cancela|cancelar|cancele|encerra|encerrar|encerre|para a rota|parar a rota|pare a rota|sair da rota|finaliza a rota|finalizar a rota)\b/i.test(command);
+
+        const wantsRouteStatus=
+          /\b(quanto falta|falta quanto|quantos km faltam|quantos quilometros faltam|quantos quilômetros faltam|quanto tempo falta|falta quanto tempo|hora de chegada|chega que horas|distancia restante|distância restante)\b/i.test(command);
+
+        const nearDestinationMatch=command.match(/(?:tem|existe|ache|encontre|procure|quero)\s+(?:um|uma|algum|alguma)?\s*(mercado|padaria|posto(?: de combust[ií]vel)?|farm[aá]cia|restaurante|hospital|shopping|supermercado|banco|caixa eletr[oô]nico)\s+(?:perto|pr[oó]ximo|pr[oó]xima)\s+(?:do|da|ao|a)\s+(?:meu\s+)?destino/i);
+
+        if(wantsLocation){
+          let pos=null;
+          if(typeof va?.getCurrentAddress==='function'){
+            try{pos=await va.getCurrentAddress(true)}catch(_){}
+          }
+          if(pos&&Number.isFinite(Number(pos.lat))&&Number.isFinite(Number(pos.lon))){
+            result={
+              ok:true,
+              type:'location',
+              address:String(pos.label||''),
+              lat:Number(pos.lat),
+              lon:Number(pos.lon),
+              message:pos.label?'Você está em '+pos.label+'.':'GPS localizado; endereço ainda não identificado.'
+            };
+          }else{
+            const p=Array.isArray(app?.userPos)?app.userPos:null;
+            result=p&&p.length>=2&&Number.isFinite(Number(p[0]))&&Number.isFinite(Number(p[1]))
+              ? {ok:true,type:'location',address:'',lat:Number(p[1]),lon:Number(p[0]),message:'GPS localizado; endereço ainda não identificado.'}
+              : {ok:false,type:'location',error:'GPS ainda sem posição'};
+          }
+
+        }else if(wantsCancel){
+          if(!app?.route&&!app?.navActive){
+            result={ok:false,type:'cancel',error:'Não existe rota ativa'};
+          }else if(typeof app?.clearRoute!=='function'){
+            result={ok:false,type:'cancel',error:'Função de cancelamento indisponível'};
+          }else{
+            app.clearRoute();
+            await new Promise(r=>setTimeout(r,180));
+            const cancelled=!app.navActive&&!app.route;
+            result=cancelled
+              ? {ok:true,type:'cancel',cancelled:true,message:'Rota cancelada.'}
+              : {ok:false,type:'cancel',cancelled:false,error:'A rota não foi totalmente limpa'};
+          }
+
+        }else if(wantsRouteStatus){
+          if(!app?.route){
+            result={ok:false,type:'route_status',error:'Não existe rota ativa'};
+          }else if(typeof va?.routeContext!=='function'){
+            result={ok:false,type:'route_status',error:'Contexto de rota indisponível'};
+          }else{
+            const ctx=va.routeContext()||{};
+            result={ok:true,type:'route_status',...ctx};
+          }
+
+        }else if(nearDestinationMatch){
+          const q=nearDestinationMatch[1];
+          if(!Array.isArray(app?.destination)||app.destination.length<2){
+            result={ok:false,type:'poi_destination',error:'Destino da rota indisponível'};
+          }else{
+            result=await searchNearPoint(q,Number(app.destination[0]),Number(app.destination[1]),'destino da rota');
+            result.type='poi_destination';
+          }
+
+        }else{
+          const m=command.match(/(?:me\s+leve|me\s+leva|leve(?:-|\s)?me|navegue|quero\s+ir|ir|vá|va|bora|vamos|vamo|trace(?:\s+uma)?\s+rota)(?:\s+(?:para|pra|pro|até|ate|em))?\s+(.+)/i);
+          const destination=String(m?.[1]||command).replace(/[.!?]+$/,'').trim();
+
+          if(!destination){
+            result={ok:false,type:'route',error:'Destino vazio'};
+          }else if(typeof va?.routeTo!=='function'){
+            result={ok:false,type:'route',error:'Fluxo original de rota indisponível'};
+          }else{
+            const originalShowRoutePanel=app?.showRoutePanel;
+            try{
+              if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=()=>{};
+              try{if(typeof RouteChoiceGuardV44!=='undefined')RouteChoiceGuardV44.allowStartUntil=Date.now()+8000}catch(_){}
+              result=await va.routeTo(destination,{fromGemini:true});
+            }finally{
+              if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=originalShowRoutePanel;
+            }
+          }
+        }
+      }else{
+        result={ok:false,error:'Ferramenta não suportada nesta versão'};
+      }
+
+      responses.push({id,name,response:{result:result??null}});
+    }catch(e){
+      responses.push({id,name,response:{error:String(e?.message||e)}});
     }
   }
-}else if(name==='obter_localizacao_atual'){
-  const app=appRef(),va=assistantRef();
-  if(typeof va?.getCurrentAddress==='function'){
-    const pos=await va.getCurrentAddress(true);
-    if(pos&&Number.isFinite(Number(pos.lat))&&Number.isFinite(Number(pos.lon))){
-      result={ok:true,address:String(pos.label||''),lat:Number(pos.lat),lon:Number(pos.lon),source:'VoiceAssistant.getCurrentAddress'};
-    }else{
-      const p=Array.isArray(app?.userPos)?app.userPos:null;
-      result=p&&p.length>=2
-        ? {ok:true,address:'',lat:Number(p[1]),lon:Number(p[0]),source:'RadarApp.userPos',warning:'GPS obtido, endereço ainda não convertido'}
-        : {ok:false,error:'GPS ainda sem posição'};
-    }
-  }else{
-    const p=Array.isArray(app?.userPos)?app.userPos:null;
-    result=p&&p.length>=2
-      ? {ok:true,address:'',lat:Number(p[1]),lon:Number(p[0]),source:'RadarApp.userPos',warning:'Geocodificação indisponível'}
-      : {ok:false,error:'GPS ainda sem posição e geocodificação indisponível'};
-  }
-}else if(name==='obter_status_rota'){
-  const app=appRef(),va=assistantRef();
-  if(!app?.route)result={ok:false,error:'Não existe rota ativa'};
-  else if(typeof va?.routeContext!=='function')result={ok:false,error:'Contexto de rota indisponível'};
-  else result={ok:true,...(va.routeContext()||{})};
-}else if(name==='buscar_lugar_perto_destino'){
-  const app=appRef();
-  const q=String(args?.categoria??args?.query??args?.lugar??'').trim();
-  if(!Array.isArray(app?.destination)||app.destination.length<2)result={ok:false,error:'Destino da rota indisponível'};
-  else result=await searchNearPoint(q,Number(app.destination[0]),Number(app.destination[1]),'destino da rota');
-}else if(name==='cancelar_rota_radar'){
-  const app=appRef();
-  if(!app?.route&&!app?.navActive)result={ok:false,error:'Não existe rota ativa'};
-  else if(typeof app?.clearRoute!=='function')result={ok:false,error:'Função de cancelamento indisponível'};
-  else{
-    app.clearRoute();
-    result={ok:true,cancelled:true,message:'Rota cancelada'};
-  }
-}else result=await window.RadarAiToolsV224?.execute?.(name,args||{});
-responses.push({id,name,response:{result:result??null}})}catch(e){responses.push({id,name,response:{error:String(e?.message||e)}})}}if(responses.length)send({toolResponse:{functionResponses:responses}})}
+
+  if(responses.length)send({toolResponse:{functionResponses:responses}});
+}
 
 function handleServerMessage(m){
   if(m?.setupComplete!==undefined){
@@ -179,13 +239,17 @@ async function openSession({resume=false,auto=false}={}){
     ws.onopen=()=>{
       running=true;starting=false;reconnecting=false;
       setStatus(resumedConnection?'Gemini Live • enviando retomada…':'Gemini Live • conectando…');
-      const toolDecl=[
-        {name:'executar_comando_radar',description:'Executa no Radar Seguro um pedido de rota do motorista.',parameters:{type:'object',properties:{comando:{type:'string',description:'Frase objetiva do motorista, por exemplo: me leva para o Maracanã'}},required:['comando']}},
-        {name:'obter_localizacao_atual',description:'Consulta o GPS real do Radar e retorna a localização/endereço atual do motorista.',parameters:{type:'object',properties:{}}},
-        {name:'obter_status_rota',description:'Retorna destino, quilômetros ou metros restantes, tempo restante e próxima orientação da rota ativa.',parameters:{type:'object',properties:{}}},
-        {name:'buscar_lugar_perto_destino',description:'Procura um estabelecimento ou categoria perto do destino final da rota usando TomTom.',parameters:{type:'object',properties:{categoria:{type:'string',description:'Exemplo: mercado, padaria, posto de combustível, farmácia'}},required:['categoria']}},
-        {name:'cancelar_rota_radar',description:'Cancela e limpa a rota ativa do Radar Seguro, equivalente ao botão de cancelar navegação.',parameters:{type:'object',properties:{}}}
-      ];
+      const toolDecl=[{
+        name:'executar_comando_radar',
+        description:'Executa qualquer comando do motorista ligado ao Radar Seguro: criar rota, informar localização GPS atual, dizer quanto falta, procurar estabelecimento perto do destino ou cancelar a rota.',
+        parameters:{
+          type:'object',
+          properties:{
+            comando:{type:'string',description:'Frase completa do motorista, sem resumir. Exemplos: onde eu estou; quanto falta para chegar; tem uma padaria perto do meu destino; cancela a rota; me leva para o Maracanã.'}
+          },
+          required:['comando']
+        }
+      }];
       send({setup:{model:MODEL,generationConfig:{responseModalities:['AUDIO']},systemInstruction:{parts:[{text:SYSTEM_TEXT}]},tools:[{functionDeclarations:toolDecl}],sessionResumption:resumedConnection?{handle:resumeHandle}:{}}});
     };
     ws.onmessage=async e=>{try{handleServerMessage(JSON.parse(await readMessageData(e.data)))}catch(err){console.warn('Gemini Direct message',err)}};
