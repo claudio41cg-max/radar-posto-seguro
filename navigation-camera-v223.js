@@ -35,6 +35,10 @@ function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.map)ret
     Apenas o enquadramento vertical muda; GPS, zoom, pitch e rotacao permanecem intactos. */
  const top=Math.round(clamp(h*.56,270,h*.60)),bottom=Math.round(clamp(h*.040,24,46));
  a.followMode=true;a.map.jumpTo({center:shown,zoom:cfg.z,pitch:cfg.p,bearing:Number.isFinite(shownBearing)?shownBearing:0,padding:{top,left:side,right:side,bottom}});
+ const marker=a.userMarker;
+ if(marker?.getRotationAlignment?.()!=='viewport')marker?.setRotationAlignment?.('viewport');
+ if(marker?.getPitchAlignment?.()!=='viewport')marker?.setPitchAlignment?.('viewport');
+ if(marker?.getRotation?.()!==0)marker?.setRotation?.(0);
  }catch(_){}}
 function install(){const a=app();if(!a?.map)return false;if(installed)return true;installed=true;window.__RADAR_SINGLE_CAMERA_OWNER='v223';
  const originalUpdate=typeof a.updateCamera==='function'?a.updateCamera.bind(a):null;
