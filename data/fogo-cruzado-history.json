@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T00:32:36.829Z",
+  "generatedAt": "2026-09-24T05:16:17.900Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 195,
+  "count": 196,
   "occurrences": [
+    {
+      "id": "7ccf622d-bd75-4ded-b432-4f279059c5e9",
+      "documentNumber": 79184,
+      "date": "2026-09-23T21:00:00.000Z",
+      "address": "Vila Kennedy, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VILA KENNEDY",
+      "subNeighborhood": "",
+      "locality": "VILA KENNEDY",
+      "latitude": -22.8572405,
+      "longitude": -43.4892386,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "c202d237-937e-4d0d-9d95-1d5601895d12",
       "documentNumber": 79178,
@@ -247,12 +262,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
