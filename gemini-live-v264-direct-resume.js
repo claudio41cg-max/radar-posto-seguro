@@ -22,7 +22,7 @@ try{
   userStarted=localStorage.getItem(ACTIVE_KEY)==='1';
 }catch(_){}
 
-function appRef(){try{return typeof App!=='undefined'?App:window.App}catch(_){return window.App}}
+function appRef(){try{return window.RadarApp||window.App||(typeof App!=='undefined'?App:null)}catch(_){return window.RadarApp||window.App||null}}
 function assistantRef(){try{return typeof VoiceAssistant!=='undefined'?VoiceAssistant:window.VoiceAssistant}catch(_){return window.VoiceAssistant}}
 function voiceRef(){try{return typeof Voice!=='undefined'?Voice:window.Voice}catch(_){return window.Voice}}
 function toast(text,ms=3500){try{const a=appRef();if(a?.toast)return a.toast(text,ms)}catch(_){}console.log('[Gemini Direct v264]',text)}
@@ -99,11 +99,21 @@ if(name==='executar_comando_radar'){
   }
 }else if(name==='obter_localizacao_atual'){
   const app=appRef(),va=assistantRef();
-  if(!Array.isArray(app?.userPos)||app.userPos.length<2)result={ok:false,error:'GPS ainda sem posição'};
-  else if(typeof va?.getCurrentAddress!=='function')result={ok:false,error:'Geocodificação indisponível'};
-  else{
+  if(typeof va?.getCurrentAddress==='function'){
     const pos=await va.getCurrentAddress(true);
-    result={ok:true,address:pos?.label||'',lat:Number(pos?.lat),lon:Number(pos?.lon)};
+    if(pos&&Number.isFinite(Number(pos.lat))&&Number.isFinite(Number(pos.lon))){
+      result={ok:true,address:String(pos.label||''),lat:Number(pos.lat),lon:Number(pos.lon),source:'VoiceAssistant.getCurrentAddress'};
+    }else{
+      const p=Array.isArray(app?.userPos)?app.userPos:null;
+      result=p&&p.length>=2
+        ? {ok:true,address:'',lat:Number(p[1]),lon:Number(p[0]),source:'RadarApp.userPos',warning:'GPS obtido, endereço ainda não convertido'}
+        : {ok:false,error:'GPS ainda sem posição'};
+    }
+  }else{
+    const p=Array.isArray(app?.userPos)?app.userPos:null;
+    result=p&&p.length>=2
+      ? {ok:true,address:'',lat:Number(p[1]),lon:Number(p[0]),source:'RadarApp.userPos',warning:'Geocodificação indisponível'}
+      : {ok:false,error:'GPS ainda sem posição e geocodificação indisponível'};
   }
 }else if(name==='obter_status_rota'){
   const app=appRef(),va=assistantRef();
