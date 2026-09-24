@@ -10,17 +10,21 @@ const rad=d=>d*Math.PI/180,deg=r=>r*180/Math.PI;
 const bearing=(a,b)=>{if(!point(a)||!point(b))return null;const p1=rad(+a[1]),p2=rad(+b[1]),dl=rad(+b[0]-+a[0]),y=Math.sin(dl)*Math.cos(p2),x=Math.cos(p1)*Math.sin(p2)-Math.sin(p1)*Math.cos(p2)*Math.cos(dl);return(deg(Math.atan2(y,x))+360)%360};
 const blend=(a,b,t)=>{const d=(((b-a)+540)%360)-180;return(a+d*t+360)%360};
 function vehicle(a){for(const q of[a?.matchedUserPos,a?.userPos,a?.filteredPos,a?.rawUserPos])if(point(q))return q;return null}
-function roadBearing(a,p){const c=a?.route?.coords;if(!Array.isArray(c)||c.length<2)return null;const i=clamp(+a.routeProgressIndex||0,0,c.length-2),q=c[Math.min(c.length-1,i+2)];return point(q)?bearing(p,q):null}
+function roadBearing(a,p){const c=a?.route?.coords;if(!Array.isArray(c)||c.length<2)return null;const i=clamp(+a.routeProgressIndex||0,0,c.length-2);let meters=Math.max(45,Math.min(150,(+a.currentSpeed||0)*1.25)),d=0,last=c[i];for(let j=i+1;j<c.length;j++){const q=c[j];if(!point(last)||!point(q))continue;const dx=(q[0]-last[0])*111320*Math.cos(rad(q[1])),dy=(q[1]-last[1])*110574;d+=Math.hypot(dx,dy);if(d>=meters)return bearing(p,q);last=q;}return point(c[c.length-1])?bearing(p,c[c.length-1]):null}
 function profile(s){if(s<15)return{z:17.20,p:58};if(s<35)return{z:16.95,p:58};if(s<55)return{z:16.55,p:58};if(s<80)return{z:16.10,p:57};if(s<105)return{z:15.60,p:56};return{z:15.25,p:55}}
 let target=null,shown=null,targetBearing=null,shownBearing=null,last=0,lastFlat=0,raf=0,installed=false,manualUntil=0;
 function capture(a){if(!a?.navActive)return;const q=vehicle(a);if(!point(q))return;target=q.slice();const rb=roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing);if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
 function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.map)return;
  if(!a.navActive){
-   if(a.followMode&&ts-lastFlat>220){
+   if(ts-lastFlat>220){
      lastFlat=ts;
      try{
-       const b=Math.abs(+a.map.getBearing?.()||0),p=Math.abs(+a.map.getPitch?.()||0);
-       if(b>.5||p>.5)a.map.jumpTo({bearing:0,pitch:0});
+       const manuallyHeld=!!a.map.__mainManualHoldV168;
+       const stopped=(+a.currentSpeed||0)<3;
+       if(!manuallyHeld&&(a.followMode||stopped)){
+         const b=Math.abs(+a.map.getBearing?.()||0),p=Math.abs(+a.map.getPitch?.()||0);
+         if(b>.5||p>.5)a.map.jumpTo({bearing:0,pitch:0});
+       }
      }catch(_){}
    }
    return;
