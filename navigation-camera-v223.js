@@ -12,9 +12,20 @@ const blend=(a,b,t)=>{const d=(((b-a)+540)%360)-180;return(a+d*t+360)%360};
 function vehicle(a){for(const q of[a?.matchedUserPos,a?.userPos,a?.filteredPos,a?.rawUserPos])if(point(q))return q;return null}
 function roadBearing(a,p){const c=a?.route?.coords;if(!Array.isArray(c)||c.length<2)return null;const i=clamp(+a.routeProgressIndex||0,0,c.length-2),q=c[Math.min(c.length-1,i+2)];return point(q)?bearing(p,q):null}
 function profile(s){if(s<15)return{z:17.20,p:58};if(s<35)return{z:16.95,p:58};if(s<55)return{z:16.55,p:58};if(s<80)return{z:16.10,p:57};if(s<105)return{z:15.60,p:56};return{z:15.25,p:55}}
-let target=null,shown=null,targetBearing=null,shownBearing=null,last=0,raf=0,installed=false,manualUntil=0;
-function capture(a){if(!a?.navActive)return;const q=vehicle(a);if(!point(q))return;target=q.slice();const rb=roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)&&Number.isFinite(hb)?blend(hb,rb,.45):(Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing));if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
-function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.navActive||!a?.map||!point(target)||Date.now()<manualUntil)return;if(ts-last<32)return;last=ts;const s=Math.max(0,+a.currentSpeed||0),k=s>=80?.32:s>=45?.27:s>=15?.23:.20;shown=[shown[0]+(target[0]-shown[0])*k,shown[1]+(target[1]-shown[1])*k];if(Number.isFinite(targetBearing))shownBearing=Number.isFinite(shownBearing)?blend(shownBearing,targetBearing,.15):targetBearing;const cfg=profile(s);
+let target=null,shown=null,targetBearing=null,shownBearing=null,last=0,lastFlat=0,raf=0,installed=false,manualUntil=0;
+function capture(a){if(!a?.navActive)return;const q=vehicle(a);if(!point(q))return;target=q.slice();const rb=roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing);if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
+function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.map)return;
+ if(!a.navActive){
+   if(a.followMode&&ts-lastFlat>220){
+     lastFlat=ts;
+     try{
+       const b=Math.abs(+a.map.getBearing?.()||0),p=Math.abs(+a.map.getPitch?.()||0);
+       if(b>.5||p>.5)a.map.jumpTo({bearing:0,pitch:0});
+     }catch(_){}
+   }
+   return;
+ }
+ if(!point(target)||Date.now()<manualUntil)return;if(ts-last<32)return;last=ts;const s=Math.max(0,+a.currentSpeed||0),k=s>=80?.32:s>=45?.27:s>=15?.23:.20;shown=[shown[0]+(target[0]-shown[0])*k,shown[1]+(target[1]-shown[1])*k];if(Number.isFinite(targetBearing))shownBearing=Number.isFinite(shownBearing)?blend(shownBearing,targetBearing,.15):targetBearing;const cfg=profile(s);
  try{const cv=a.map.getCanvas?.(),h=Math.max(400,cv?.clientHeight||innerHeight||700),w=Math.max(280,cv?.clientWidth||innerWidth||390),side=Math.round(clamp(w*.05,18,42));
  /* Ajuste V264: baixa mais o ponto focal da navegacao, no estilo Maps/Waze.
     Apenas o enquadramento vertical muda; GPS, zoom, pitch e rotacao permanecem intactos. */
