@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T22:11:20.349Z",
+  "generatedAt": "2026-09-24T00:32:36.828Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 35,
-  "lastUpdate": "2026-09-23T17:46:37-03:00",
+  "count": 31,
+  "lastUpdate": "2026-09-23T19:26:20-03:00",
   "occurrences": [
     {
       "id": "c202d237-937e-4d0d-9d95-1d5601895d12",
@@ -248,12 +248,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -427,21 +427,6 @@
       ]
     },
     {
-      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
-      "documentNumber": 79096,
-      "date": "2026-09-17T22:00:00.000Z",
-      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
-      "neighborhood": "PRACA SECA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA CHACRINHA",
-      "latitude": -22.9018158988203,
-      "longitude": -43.36141036190782,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "8eaf6d19-9432-4d95-89bb-2fd8e853f1a3",
       "documentNumber": 79087,
       "date": "2026-09-17T22:00:00.000Z",
@@ -478,6 +463,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "4d8212ba-a7bb-4f41-9e84-e4aef3c1a753",
+      "documentNumber": 79096,
+      "date": "2026-09-17T22:00:00.000Z",
+      "address": "Comunidade da Chacrinha - Praça Seca, Rio de Janeiro - RJ, 22733-040, Brasil",
+      "neighborhood": "PRACA SECA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA CHACRINHA",
+      "latitude": -22.9018158988203,
+      "longitude": -43.36141036190782,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -553,89 +553,6 @@
       "reason": "Tiros a esmo",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "8de712cc-e984-46eb-aeab-a81c952341c0",
-      "documentNumber": 79076,
-      "date": "2026-09-16T23:15:00.000Z",
-      "address": "Barrão - Vila Kennedy, Rio de Janeiro - RJ, 21853-460, Brasil",
-      "neighborhood": "VILA KENNEDY",
-      "subNeighborhood": "",
-      "locality": "BARRAO (VILA KENNEDY)",
-      "latitude": -22.8529855,
-      "longitude": -43.4942364,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "d9d88c10-f89c-48cd-bde9-7508896ca1e7",
-      "documentNumber": 79078,
-      "date": "2026-09-16T22:00:00.000Z",
-      "address": "Via Light - Centro, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7581514,
-      "longitude": -43.4480864,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "6f0b05ea-6d83-410c-b88a-930ba8bf99fa",
-      "documentNumber": 79145,
-      "date": "2026-09-16T18:00:00.000Z",
-      "address": "Avenida Professor Manoel de Abreu - Maracanã, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MARACANA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9124771,
-      "longitude": -43.233908,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "855a2ac2-7933-48ea-b155-278733737920",
-      "documentNumber": 79075,
-      "date": "2026-09-16T18:00:00.000Z",
-      "address": "Taquara, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9229954,
-      "longitude": -43.3742313,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
