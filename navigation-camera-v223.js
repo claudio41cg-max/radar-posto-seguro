@@ -16,15 +16,11 @@ let target=null,shown=null,targetBearing=null,shownBearing=null,last=0,lastFlat=
 function capture(a){if(!a?.navActive)return;const q=vehicle(a);if(!point(q))return;target=q.slice();const rb=roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing);if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
 function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.map)return;
  if(!a.navActive){
-   if(ts-lastFlat>220){
+   if(ts-lastFlat>180){
      lastFlat=ts;
      try{
-       const manuallyHeld=!!a.map.__mainManualHoldV168;
-       const stopped=(+a.currentSpeed||0)<3;
-       if(!manuallyHeld&&(a.followMode||stopped)){
-         const b=Math.abs(+a.map.getBearing?.()||0),p=Math.abs(+a.map.getPitch?.()||0);
-         if(b>.5||p>.5)a.map.jumpTo({bearing:0,pitch:0});
-       }
+       const b=Math.abs(+a.map.getBearing?.()||0),p=Math.abs(+a.map.getPitch?.()||0);
+       if(b>.25||p>.25)a.map.jumpTo({bearing:0,pitch:0});
      }catch(_){}
    }
    return;
