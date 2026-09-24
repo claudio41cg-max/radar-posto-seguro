@@ -41,13 +41,13 @@ function capture(a){const q=vehicle(a);if(!point(q))return;
  target=q.slice();const match=window.RadarNavigationEngineV191?.match?.(),rb=match?.keepSnapped&&Number.isFinite(match.bearing)?match.bearing:roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing);if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
 function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.map)return;
  if(!a.navActive)return;
- if(!point(target)||Date.now()<manualUntil)return;if(ts-last<100)return;last=ts;const s=Math.max(0,+a.currentSpeed||0),k=s>=80?.62:s>=45?.55:s>=15?.48:.42;shown=[shown[0]+(target[0]-shown[0])*k,shown[1]+(target[1]-shown[1])*k];if(Number.isFinite(targetBearing))shownBearing=Number.isFinite(shownBearing)?blend(shownBearing,targetBearing,.34):targetBearing;const cfg=profile(s);
+ if(!point(target)||Date.now()<manualUntil)return;if(ts-last<220)return;last=ts;const s=Math.max(0,+a.currentSpeed||0),k=s>=80?.62:s>=45?.55:s>=15?.48:.42;shown=[shown[0]+(target[0]-shown[0])*k,shown[1]+(target[1]-shown[1])*k];if(Number.isFinite(targetBearing))shownBearing=Number.isFinite(shownBearing)?blend(shownBearing,targetBearing,.34):targetBearing;const cfg=profile(s);
  try{const cv=a.map.getCanvas?.(),h=Math.max(400,cv?.clientHeight||innerHeight||700),w=Math.max(280,cv?.clientWidth||innerWidth||390),side=Math.round(clamp(w*.05,18,42));
  /* Ajuste V264: baixa mais o ponto focal da navegacao, no estilo Maps/Waze.
     Apenas o enquadramento vertical muda; GPS, zoom, pitch e rotacao permanecem intactos. */
  const top=Math.round(clamp(h*.56,270,h*.60)),bottom=Math.round(clamp(h*.040,24,46));
  const newBearing=Number.isFinite(shownBearing)?shownBearing:0;
- if(distance(shown,a.map.getCenter?.()?.toArray?.())>.6||Math.abs((((newBearing-(a.map.getBearing?.()||0))+540)%360)-180)>.4||Math.abs((a.map.getZoom?.()||0)-cfg.z)>.02||Math.abs((a.map.getPitch?.()||0)-cfg.p)>.2){
+ if(distance(shown,a.map.getCenter?.()?.toArray?.())>2||Math.abs((((newBearing-(a.map.getBearing?.()||0))+540)%360)-180)>1.5||Math.abs((a.map.getZoom?.()||0)-cfg.z)>.05||Math.abs((a.map.getPitch?.()||0)-cfg.p)>.6){
    a.followMode=true;a.map.jumpTo({center:shown,zoom:cfg.z,pitch:cfg.p,bearing:newBearing,padding:{top,left:side,right:side,bottom}});
  }
  const marker=a.userMarker;
