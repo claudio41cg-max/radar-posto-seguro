@@ -25,11 +25,10 @@ function sizeFor(a){let z=17;try{z=+a?.map?.getZoom?.()||17;}catch(_){}const nav
  return[w,Math.round(w*1.17)];}
 function applyArrow(){const a=app();let el=null;try{el=a?.userMarker?.getElement?.()||null;}catch(_){}if(!el)return false;el.classList.remove('radar-arrow3d-v188','radar-arrow3d-v189');el.classList.add('radar-arrow3d-v190');const [w,h]=sizeFor(a);el.style.setProperty('--radar-arrow-w',w+'px');el.style.setProperty('--radar-arrow-h',h+'px');
  try{
-   if(a?.navActive){
-     a.userMarker?.setRotation?.(90);
-   }else if(Number.isFinite(+a?.currentBearing)&&(+a?.currentSpeed||0)>4){
-     a.userMarker?.setRotation?.((+a.currentBearing+90+360)%360);
-   }
+   // The PNG points east (90 degrees). MapLibre rotationAlignment:'map'
+   // expects a map bearing, so turn the artwork 90 degrees back to north.
+   const heading=window.RadarNavigationCameraV223?.heading?.();
+   if(Number.isFinite(heading))a.userMarker?.setRotation?.((heading-90+360)%360);
  }catch(_){}
  return true;}
 function install(){injectCss();const a=app();if(!a)return false;if(a.__navigationVisualV190Installed){applyArrow();return true;}a.__navigationVisualV190Installed=true;applyArrow();
