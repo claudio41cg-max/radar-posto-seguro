@@ -26,9 +26,9 @@ function sizeFor(a){let z=17;try{z=+a?.map?.getZoom?.()||17;}catch(_){}const nav
 function applyArrow(){const a=app();let el=null;try{el=a?.userMarker?.getElement?.()||null;}catch(_){}if(!el)return false;el.classList.remove('radar-arrow3d-v188','radar-arrow3d-v189');el.classList.add('radar-arrow3d-v190');const [w,h]=sizeFor(a);el.style.setProperty('--radar-arrow-w',w+'px');el.style.setProperty('--radar-arrow-h',h+'px');
  try{
    if(a?.navActive){
-     a.userMarker?.setRotation?.(-90);
+     a.userMarker?.setRotation?.(90);
    }else if(Number.isFinite(+a?.currentBearing)&&(+a?.currentSpeed||0)>4){
-     a.userMarker?.setRotation?.((+a.currentBearing-90+360)%360);
+     a.userMarker?.setRotation?.((+a.currentBearing+90+360)%360);
    }
  }catch(_){}
  return true;}
