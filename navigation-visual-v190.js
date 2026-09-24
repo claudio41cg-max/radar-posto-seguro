@@ -13,8 +13,9 @@ function routeBearing(a){
  return point(p)&&point(q)?bearing(p,q):null;
 }
 function injectCss(){if(document.getElementById('radar-v190-visual-css'))return;const s=document.createElement('style');s.id='radar-v190-visual-css';s.textContent=`
-.user-marker-waze.radar-arrow3d-v190{position:relative!important;isolation:isolate!important;width:var(--radar-arrow-w,56px)!important;height:var(--radar-arrow-h,66px)!important;background:url('./navigation-arrow-3d.png?v=6') no-repeat center 60%/contain!important;filter:drop-shadow(0 5px 8px rgba(0,0,0,.68))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important;overflow:visible!important}
-.user-marker-waze.radar-arrow3d-v190::before{content:'';position:absolute;left:50%;top:68%;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,rgba(145,230,255,.20) 0 32%,rgba(120,210,255,.12) 48%,rgba(120,210,255,.06) 62%,rgba(120,210,255,0) 78%);filter:blur(2.5px);transform:translate(-50%,-50%);z-index:-1;pointer-events:none}
+.user-marker-waze.radar-arrow3d-v190{position:relative!important;isolation:isolate!important;width:var(--radar-arrow-w,56px)!important;height:var(--radar-arrow-h,66px)!important;background:none!important;filter:drop-shadow(0 5px 8px rgba(0,0,0,.68))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important;overflow:visible!important}
+.user-marker-waze.radar-arrow3d-v190::before{content:'';position:absolute;left:50%;top:60%;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle,rgba(145,230,255,.22) 0 28%,rgba(120,210,255,.12) 46%,rgba(120,210,255,.05) 62%,rgba(120,210,255,0) 78%);filter:blur(2px);transform:translate(-50%,-50%);z-index:0;pointer-events:none}
+.user-marker-waze.radar-arrow3d-v190::after{content:'';position:absolute;inset:0;background:url('./navigation-arrow-3d.png?v=7') no-repeat center 60%/contain;z-index:1;pointer-events:none}
 .hazard-marker{width:28px!important;height:28px!important;filter:drop-shadow(0 2px 4px rgba(0,0,0,.75))!important}
 .hazard-marker svg{width:28px!important;height:28px!important}
 `;document.head.appendChild(s);}
@@ -24,10 +25,11 @@ function sizeFor(a){let z=17;try{z=+a?.map?.getZoom?.()||17;}catch(_){}const nav
  return[w,Math.round(w*1.17)];}
 function applyArrow(){const a=app();let el=null;try{el=a?.userMarker?.getElement?.()||null;}catch(_){}if(!el)return false;el.classList.remove('radar-arrow3d-v188','radar-arrow3d-v189');el.classList.add('radar-arrow3d-v190');const [w,h]=sizeFor(a);el.style.setProperty('--radar-arrow-w',w+'px');el.style.setProperty('--radar-arrow-h',h+'px');
  try{
-   let dir=null;
-   if(a?.navActive)dir=routeBearing(a);
-   if(!Number.isFinite(dir)&&Number.isFinite(+a?.currentBearing)&&(+a?.currentSpeed||0)>4)dir=(+a.currentBearing+360)%360;
-   if(Number.isFinite(dir))a.userMarker?.setRotation?.((dir-90+360)%360);
+   if(a?.navActive){
+     a.userMarker?.setRotation?.(-90);
+   }else if(Number.isFinite(+a?.currentBearing)&&(+a?.currentSpeed||0)>4){
+     a.userMarker?.setRotation?.((+a.currentBearing-90+360)%360);
+   }
  }catch(_){}
  return true;}
 function install(){injectCss();const a=app();if(!a)return false;if(a.__navigationVisualV190Installed){applyArrow();return true;}a.__navigationVisualV190Installed=true;applyArrow();
