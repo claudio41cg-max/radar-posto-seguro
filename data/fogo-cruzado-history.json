@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T10:06:48.592Z",
+  "generatedAt": "2026-09-24T14:59:10.492Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 196,
+  "count": 199,
   "occurrences": [
+    {
+      "id": "daed23c3-9041-40ea-b6d2-3f63e1716521",
+      "documentNumber": 79186,
+      "date": "2026-09-23T22:00:00.000Z",
+      "address": "Rua Visconde de Santa Isabel - Vila Isabel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VILA ISABEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9169511,
+      "longitude": -43.256768,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "7ccf622d-bd75-4ded-b432-4f279059c5e9",
       "documentNumber": 79184,
@@ -22,10 +42,47 @@
       "locality": "VILA KENNEDY",
       "latitude": -22.8572405,
       "longitude": -43.4892386,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "ad19642f-db3a-45ef-af4d-57c24e5f8d6f",
+      "documentNumber": 79188,
+      "date": "2026-09-23T11:40:00.000Z",
+      "address": "Rua Alcedina Moura Emerich - Manilha, Itaboraí - RJ, Brasil",
+      "neighborhood": "MANILHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.772382,
+      "longitude": -42.9246145,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "c202d237-937e-4d0d-9d95-1d5601895d12",
@@ -201,6 +258,21 @@
           "personType": "Agent"
         }
       ]
+    },
+    {
+      "id": "5b52b3e8-c32e-423e-85b1-e12d31d345c6",
+      "documentNumber": 79187,
+      "date": "2026-09-21T06:30:00.000Z",
+      "address": "Avenida Brasil - Cordovil, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8158921,
+      "longitude": -43.2895198,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "801f04a8-46e5-4649-b971-dd0feefb52ff",
