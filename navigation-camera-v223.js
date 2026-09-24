@@ -15,6 +15,24 @@ function profile(s){if(s<15)return{z:17.20,p:58};if(s<35)return{z:16.95,p:58};if
 let target=null,shown=null,targetBearing=null,shownBearing=null,last=0,raf=0,installed=false,manualUntil=0;
 let freeHeading=null,previousFree=null,previousFreeAt=0;
 let lastFreePoint=null,lastFreeHeading=null,lastFreeAt=0;
+function holdNavManual(a){
+ if(!a?.navActive)return;
+ manualUntil=Date.now()+10000;
+ a.followMode=false;
+ try{clearTimeout(a.manualFollowTimer)}catch(_){}
+ a.manualFollowTimer=setTimeout(()=>{
+   if(!a.navActive)return;
+   manualUntil=0;
+   a.followMode=true;
+   capture(a);
+ },10000);
+}
+function resumeNavFollow(a){
+ try{clearTimeout(a?.manualFollowTimer)}catch(_){}
+ manualUntil=0;
+ if(a)a.followMode=true;
+ capture(a);
+}
 function distance(a,b){if(!point(a)||!point(b))return Infinity;return Math.hypot((a[0]-b[0])*111320*Math.cos(rad(a[1])),(a[1]-b[1])*110574)}
 function followFree(a,force=false){
  if(!a?.map||!point(target)||!a.followMode||Date.now()<manualUntil)return;
@@ -61,8 +79,9 @@ function install(){const a=app();if(!a?.map)return false;if(installed)return tru
  const old=typeof a.handleGPS==='function'?a.handleGPS.bind(a):null;if(old)a.handleGPS=function(...args){const out=old(...args);capture(a);return out};
  const start=typeof a.startNavigation==='function'?a.startNavigation.bind(a):null;if(start)a.startNavigation=function(...args){target=shown=null;targetBearing=shownBearing=null;manualUntil=0;const out=start(...args);setTimeout(()=>capture(a),80);return out};
  const stop=typeof a.stopNavigation==='function'?a.stopNavigation.bind(a):null;if(stop)a.stopNavigation=function(...args){const out=stop(...args);this.followMode=true;lastFreePoint=null;capture(this);followFree(this,true);return out};
- ['dragstart','zoomstart','rotatestart','pitchstart'].forEach(ev=>a.map.on?.(ev,e=>{if(e?.originalEvent&&a.navActive)manualUntil=Date.now()+7000;}));
- ['navRecenterLeft','btnRecenter','locateBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{manualUntil=0;a.followMode=true;capture(a);if(!a.navActive)followFree(a,true);},true));capture(a);if(!raf)raf=requestAnimationFrame(frame);return true}
+ ['dragstart','zoomstart','rotatestart','pitchstart'].forEach(ev=>a.map.on?.(ev,e=>{if(e?.originalEvent&&a.navActive)holdNavManual(a);}));
+ ['zoomIn','zoomOut'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{if(a.navActive)holdNavManual(a);},true));
+ ['navRecenterLeft','btnRecenter','locateBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{resumeNavFollow(a);if(!a.navActive)followFree(a,true);},true));capture(a);if(!raf)raf=requestAnimationFrame(frame);return true}
 let n=0,t=setInterval(()=>{if(install()||++n>300)clearInterval(t)},100);
 window.RadarNavigationCameraV223={version:'223',heading:()=>app()?.navActive?shownBearing:freeHeading,refresh:()=>{manualUntil=0;capture(app())}};
 })();
