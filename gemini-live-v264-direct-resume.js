@@ -173,14 +173,14 @@ async function handleToolCall(tc){
           }else if(typeof va?.routeTo!=='function'){
             result={ok:false,type:'route',error:'Fluxo original de rota indisponível'};
           }else{
-            const originalShowRoutePanel=app?.showRoutePanel;
+            try{if(typeof RouteChoiceGuardV44!=='undefined')RouteChoiceGuardV44.allowStartUntil=Date.now()+8000}catch(_){}
+            result=await va.routeTo(destination,{fromGemini:true});
             try{
-              if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=()=>{};
-              try{if(typeof RouteChoiceGuardV44!=='undefined')RouteChoiceGuardV44.allowStartUntil=Date.now()+8000}catch(_){}
-              result=await va.routeTo(destination,{fromGemini:true});
-            }finally{
-              if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=originalShowRoutePanel;
-            }
+              if(result?.ok&&app?.route){
+                app.showRoutePanel?.();
+                app.toggleSheet?.(false);
+              }
+            }catch(_){}
           }
         }
       }else{
