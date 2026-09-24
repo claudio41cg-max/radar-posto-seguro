@@ -4,7 +4,7 @@
 if(window.__radarNavigationVisualV190)return;window.__radarNavigationVisualV190=true;
 const app=()=>{try{return window.RadarApp||window.App||null;}catch(_){return null;}};
 function injectCss(){if(document.getElementById('radar-v190-visual-css'))return;const s=document.createElement('style');s.id='radar-v190-visual-css';s.textContent=`
-.user-marker-waze.radar-arrow3d-v190{width:var(--radar-arrow-w,56px)!important;height:var(--radar-arrow-h,66px)!important;background:url('./navigation-arrow-3d.png?v=4') no-repeat center 60%/contain,radial-gradient(circle at 50% 76%,rgba(165,235,255,.78) 0 22%,rgba(100,195,255,.42) 38%,rgba(100,195,255,.22) 56%,transparent 76%) no-repeat center 76%/92% 70%!important;filter:drop-shadow(0 5px 8px rgba(0,0,0,.68)) drop-shadow(0 0 9px rgba(0,210,255,.40))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important}
+.user-marker-waze.radar-arrow3d-v190{width:var(--radar-arrow-w,56px)!important;height:var(--radar-arrow-h,66px)!important;background:url('./navigation-arrow-3d.png?v=5') no-repeat center 60%/contain,radial-gradient(circle,rgba(165,235,255,.78) 0 24%,rgba(100,195,255,.42) 40%,rgba(100,195,255,.18) 58%,transparent 76%) no-repeat center 78%/58% 58%!important;filter:drop-shadow(0 5px 8px rgba(0,0,0,.68)) drop-shadow(0 0 10px rgba(0,210,255,.42))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important}
 .hazard-marker{width:28px!important;height:28px!important;filter:drop-shadow(0 2px 4px rgba(0,0,0,.75))!important}
 .hazard-marker svg{width:28px!important;height:28px!important}
 `;document.head.appendChild(s);}
