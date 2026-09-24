@@ -7176,15 +7176,9 @@ const App = {
       this._firstGPS=true;
 
 
-      this.map.flyTo({
-
-        center:this.userPos,
-
-        zoom:16,
-
-        duration:700
-
-      });
+      if(!window.__radarNavigationCameraV223){
+        this.map.flyTo({center:this.userPos,zoom:16,duration:700});
+      }
 
 
       FuelModule.load(
@@ -7919,24 +7913,9 @@ const App = {
     }
 
 
-    if(
-      this.currentSpeed>4
-    ){
-
-      this.userMarker
-      .setRotation(
-        this.navActive
-        ? 90
-        : (this.currentBearing+90)
-      );
-
-    }else if(
-      this.navActive
-    ){
-
-      this.userMarker
-      .setRotation(90);
-
+    // The TomTom visual controller owns arrow rotation in this build.
+    if(!window.__radarNavigationVisualV190 && this.currentSpeed>4){
+      this.userMarker.setRotation(this.currentBearing);
     }
 
 
@@ -14730,5 +14709,3 @@ App.init();
 <script src="streetview-destination-v135.js?v=135"></script>
 </body>
 </html>
-
-

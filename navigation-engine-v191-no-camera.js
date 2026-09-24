@@ -24,7 +24,7 @@ async function load(){
     ficam bloqueadas. O v221 usa jumpTo e continua livre. Fora da navegacao, easeTo original
     permanece disponivel para a tela comum. */
  if(rawEase)m.easeTo=function(opts){
-   try{if((app()?.navActive)&&window.__RADAR_SINGLE_CAMERA_OWNER==='v221')return m;}catch(_){}
+   try{if((app()?.navActive)&&m.__radarV191InternalCameraDisabled)return m;}catch(_){}
    return rawEase(opts);
  };
 }

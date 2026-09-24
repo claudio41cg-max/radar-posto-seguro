@@ -14,6 +14,18 @@ function roadBearing(a,p){const c=a?.route?.coords;if(!Array.isArray(c)||c.lengt
 function profile(s){if(s<15)return{z:17.20,p:58};if(s<35)return{z:16.95,p:58};if(s<55)return{z:16.55,p:58};if(s<80)return{z:16.10,p:57};if(s<105)return{z:15.60,p:56};return{z:15.25,p:55}}
 let target=null,shown=null,targetBearing=null,shownBearing=null,last=0,raf=0,installed=false,manualUntil=0;
 let freeHeading=null,previousFree=null,previousFreeAt=0;
+let lastFreePoint=null,lastFreeHeading=null,lastFreeAt=0;
+function distance(a,b){if(!point(a)||!point(b))return Infinity;return Math.hypot((a[0]-b[0])*111320*Math.cos(rad(a[1])),(a[1]-b[1])*110574)}
+function followFree(a,force=false){
+ if(!a?.map||!point(target)||!a.followMode||Date.now()<manualUntil)return;
+ const angle=Number.isFinite(freeHeading)?freeHeading:0;
+ const turn=Number.isFinite(lastFreeHeading)?Math.abs((((angle-lastFreeHeading)+540)%360)-180):360;
+ const first=!point(lastFreePoint),zoom=a.map.getZoom?.();
+ if(!force&&!first&&distance(target,lastFreePoint)<3&&turn<6&&Date.now()-lastFreeAt<2500)return;
+ const options={center:target,bearing:angle,pitch:0};
+ if((first||force)&&Number.isFinite(zoom)&&zoom<13)options.zoom=16.3;
+ try{a.map.jumpTo(options);lastFreePoint=target.slice();lastFreeHeading=angle;lastFreeAt=Date.now()}catch(_){}
+}
 function capture(a){const q=vehicle(a);if(!point(q))return;
  if(!a.navActive){
    const now=Date.now(),speed=Math.max(0,+a.currentSpeed||0),accuracy=+a.currentAccuracy;
@@ -24,17 +36,20 @@ function capture(a){const q=vehicle(a);if(!point(q))return;
      if(Math.hypot(dx,dy)>=8&&now-previousFreeAt>=600)freeHeading=bearing(previousFree,q);
    }
    if(!point(previousFree)||Math.hypot((q[0]-previousFree[0])*111320*Math.cos(rad(q[1])),(q[1]-previousFree[1])*110574)>=8||now-previousFreeAt>8000){previousFree=q.slice();previousFreeAt=now;}
-   target=q.slice();targetBearing=freeHeading;shown=q.slice();shownBearing=freeHeading;return;
+   target=q.slice();targetBearing=freeHeading;shown=q.slice();shownBearing=freeHeading;followFree(a);return;
  }
- target=q.slice();const rb=roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing);if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
+ target=q.slice();const match=window.RadarNavigationEngineV191?.match?.(),rb=match?.keepSnapped&&Number.isFinite(match.bearing)?match.bearing:roadBearing(a,q),hb=Number.isFinite(+a.currentBearing)?(+a.currentBearing+360)%360:null;targetBearing=Number.isFinite(rb)?rb:(Number.isFinite(hb)?hb:targetBearing);if(!point(shown))shown=target.slice();if(!Number.isFinite(shownBearing))shownBearing=targetBearing;}
 function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.map)return;
- if(!a.navActive){if(point(target)&&a.followMode&&Date.now()>=manualUntil&&ts-last>100){last=ts;try{a.map.jumpTo({center:target,bearing:Number.isFinite(freeHeading)?freeHeading:0,pitch:0});}catch(_){}}return;}
- if(!point(target)||Date.now()<manualUntil)return;if(ts-last<32)return;last=ts;const s=Math.max(0,+a.currentSpeed||0),k=s>=80?.32:s>=45?.27:s>=15?.23:.20;shown=[shown[0]+(target[0]-shown[0])*k,shown[1]+(target[1]-shown[1])*k];if(Number.isFinite(targetBearing))shownBearing=Number.isFinite(shownBearing)?blend(shownBearing,targetBearing,.15):targetBearing;const cfg=profile(s);
+ if(!a.navActive)return;
+ if(!point(target)||Date.now()<manualUntil)return;if(ts-last<100)return;last=ts;const s=Math.max(0,+a.currentSpeed||0),k=s>=80?.62:s>=45?.55:s>=15?.48:.42;shown=[shown[0]+(target[0]-shown[0])*k,shown[1]+(target[1]-shown[1])*k];if(Number.isFinite(targetBearing))shownBearing=Number.isFinite(shownBearing)?blend(shownBearing,targetBearing,.34):targetBearing;const cfg=profile(s);
  try{const cv=a.map.getCanvas?.(),h=Math.max(400,cv?.clientHeight||innerHeight||700),w=Math.max(280,cv?.clientWidth||innerWidth||390),side=Math.round(clamp(w*.05,18,42));
  /* Ajuste V264: baixa mais o ponto focal da navegacao, no estilo Maps/Waze.
     Apenas o enquadramento vertical muda; GPS, zoom, pitch e rotacao permanecem intactos. */
  const top=Math.round(clamp(h*.56,270,h*.60)),bottom=Math.round(clamp(h*.040,24,46));
- a.followMode=true;a.map.jumpTo({center:shown,zoom:cfg.z,pitch:cfg.p,bearing:Number.isFinite(shownBearing)?shownBearing:0,padding:{top,left:side,right:side,bottom}});
+ const newBearing=Number.isFinite(shownBearing)?shownBearing:0;
+ if(distance(shown,a.map.getCenter?.()?.toArray?.())>.6||Math.abs((((newBearing-(a.map.getBearing?.()||0))+540)%360)-180)>.4||Math.abs((a.map.getZoom?.()||0)-cfg.z)>.02||Math.abs((a.map.getPitch?.()||0)-cfg.p)>.2){
+   a.followMode=true;a.map.jumpTo({center:shown,zoom:cfg.z,pitch:cfg.p,bearing:newBearing,padding:{top,left:side,right:side,bottom}});
+ }
  const marker=a.userMarker;
  if(marker?.getRotationAlignment?.()!=='viewport')marker?.setRotationAlignment?.('viewport');
  if(marker?.getPitchAlignment?.()!=='viewport')marker?.setPitchAlignment?.('viewport');
@@ -45,8 +60,9 @@ function install(){const a=app();if(!a?.map)return false;if(installed)return tru
  if(originalUpdate)a.updateCamera=function(...args){if(!this.navActive&&this.followMode){capture(this);return;}return originalUpdate(...args)};
  const old=typeof a.handleGPS==='function'?a.handleGPS.bind(a):null;if(old)a.handleGPS=function(...args){const out=old(...args);capture(a);return out};
  const start=typeof a.startNavigation==='function'?a.startNavigation.bind(a):null;if(start)a.startNavigation=function(...args){target=shown=null;targetBearing=shownBearing=null;manualUntil=0;const out=start(...args);setTimeout(()=>capture(a),80);return out};
+ const stop=typeof a.stopNavigation==='function'?a.stopNavigation.bind(a):null;if(stop)a.stopNavigation=function(...args){const out=stop(...args);this.followMode=true;lastFreePoint=null;capture(this);followFree(this,true);return out};
  ['dragstart','zoomstart','rotatestart','pitchstart'].forEach(ev=>a.map.on?.(ev,e=>{if(e?.originalEvent&&a.navActive)manualUntil=Date.now()+7000;}));
- ['navRecenterLeft','btnRecenter','locateBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{manualUntil=0;capture(a);},true));capture(a);if(!raf)raf=requestAnimationFrame(frame);return true}
+ ['navRecenterLeft','btnRecenter','locateBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>{manualUntil=0;a.followMode=true;capture(a);if(!a.navActive)followFree(a,true);},true));capture(a);if(!raf)raf=requestAnimationFrame(frame);return true}
 let n=0,t=setInterval(()=>{if(install()||++n>300)clearInterval(t)},100);
 window.RadarNavigationCameraV223={version:'223',heading:()=>app()?.navActive?shownBearing:freeHeading,refresh:()=>{manualUntil=0;capture(app())}};
 })();
