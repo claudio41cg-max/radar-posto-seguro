@@ -7926,8 +7926,8 @@ const App = {
       this.userMarker
       .setRotation(
         this.navActive
-        ? -90
-        : (this.currentBearing-90)
+        ? 90
+        : (this.currentBearing+90)
       );
 
     }else if(
@@ -7935,7 +7935,7 @@ const App = {
     ){
 
       this.userMarker
-      .setRotation(-90);
+      .setRotation(90);
 
     }
 
