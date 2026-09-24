@@ -5632,6 +5632,12 @@ const App = {
 
 
     const pauseFollow=()=>{
+      /* Fora da navegacao, este bloco continua sendo o unico dono
+         da pausa manual de 10 s. Na navegacao, a camera V223
+         controla sozinha a pausa para evitar dois timers concorrentes. */
+      if(this.navActive)
+        return;
+
       this.followMode=false;
 
 
