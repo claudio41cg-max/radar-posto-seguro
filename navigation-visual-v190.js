@@ -4,7 +4,7 @@
 if(window.__radarNavigationVisualV190)return;window.__radarNavigationVisualV190=true;
 const app=()=>{try{return window.RadarApp||window.App||null;}catch(_){return null;}};
 function injectCss(){if(document.getElementById('radar-v190-visual-css'))return;const s=document.createElement('style');s.id='radar-v190-visual-css';s.textContent=`
-.user-marker-waze.radar-arrow3d-v190{width:var(--radar-arrow-w,46px)!important;height:var(--radar-arrow-h,54px)!important;background:url('./navigation-arrow-v190.svg?v=190') no-repeat center/contain!important;filter:drop-shadow(0 4px 7px rgba(0,0,0,.66)) drop-shadow(0 0 4px rgba(0,210,255,.18))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important}
+.user-marker-waze.radar-arrow3d-v190{width:var(--radar-arrow-w,46px)!important;height:var(--radar-arrow-h,54px)!important;background:url('./navigation-arrow-3d.png?v=1') no-repeat center/contain!important;filter:drop-shadow(0 4px 7px rgba(0,0,0,.66)) drop-shadow(0 0 4px rgba(0,210,255,.18))!important;transform-origin:50% 61%!important;transition:width .16s linear,height .16s linear!important}
 .hazard-marker{width:28px!important;height:28px!important;filter:drop-shadow(0 2px 4px rgba(0,0,0,.75))!important}
 .hazard-marker svg{width:28px!important;height:28px!important}
 `;document.head.appendChild(s);}
