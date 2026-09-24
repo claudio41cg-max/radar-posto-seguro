@@ -10,7 +10,7 @@ const MAIN_ID='assistantMicBtn';
 const NAV_ID='navAssistantMicBtn';
 const RESUME_KEY='radarGeminiDirectV264ResumeHandle';
 const ACTIVE_KEY='radarGeminiDirectV264ShouldResume';
-const SYSTEM_TEXT='Você é Radar, o copiloto de voz do Radar Seguro RJ Pro. Responda em português do Brasil, de forma curta, natural e direta. O usuário pode estar dirigindo. Quando o motorista pedir uma rota, chame executar_comando_radar com a frase objetiva do pedido. Nunca diga que a rota foi iniciada antes da resposta da ferramenta. Nunca invente localização, rota, trânsito, ocorrências ou fatos atuais.';
+const SYSTEM_TEXT='Você é Radar, o copiloto de voz do Radar Seguro RJ Pro. Responda em português do Brasil, de forma curta, natural e direta. O usuário pode estar dirigindo. Quando o motorista pedir uma rota, chame executar_comando_radar. Quando perguntar onde está, chame obter_localizacao_atual. Quando perguntar quanto falta, distância restante ou tempo para chegar, chame obter_status_rota. Quando pedir mercado, padaria, posto, farmácia ou outro lugar perto do destino, chame buscar_lugar_perto_destino. Quando pedir para cancelar, encerrar ou parar a rota, chame cancelar_rota_radar. Nunca diga que uma ação aconteceu antes da resposta da ferramenta. Nunca invente localização, rota, distância, tempo, estabelecimentos, trânsito, ocorrências ou fatos atuais.';
 
 let ws=null,micStream=null,inputCtx=null,sourceNode=null,processor=null,sinkGain=null,outputCtx=null,outputCursor=0;
 let running=false,starting=false,reconnecting=false,setupReady=false,micSending=false,manualStop=false,userStarted=false,resumedConnection=false;
@@ -59,25 +59,72 @@ async function readMessageData(data){if(typeof data==='string')return data;if(da
 
 async function getToken(){const r=await fetch(TOKEN_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',cache:'no-store'});let d=null;try{d=await r.json()}catch(_){}if(!r.ok||!d?.ok||!d?.token||!d?.websocket)throw new Error('Falha ao obter token temporário'+(d?.detail?' • '+d.detail:''));return d}
 
-async function handleToolCall(tc){const calls=tc?.functionCalls||tc?.function_calls||[];if(!calls.length)return;const responses=[];for(const call of calls){const name=String(call?.name||''),id=call?.id||call?.callId;try{let args=call?.args??call?.arguments??{};if(typeof args==='string'){try{args=JSON.parse(args)}catch(_){args={comando:args}}}let result;if(name==='executar_comando_radar'){const command=String(args?.comando??args?.command??'').trim();const m=command.match(/(?:me\s+leve|me\s+leva|leve(?:-|\s)?me|navegue|quero\s+ir|ir|vá|va|bora|vamos|vamo|trace(?:\s+uma)?\s+rota)(?:\s+(?:para|pra|pro|até|ate|em))?\s+(.+)/i);const destination=String(m?.[1]||command).replace(/[.!?]+$/,'').trim();const va=window.VoiceAssistant;if(!destination)result={ok:false,error:'Destino vazio'};else if(typeof va?.routeTo!=='function')result={ok:false,error:'Fluxo original de rota indisponível'};else{
-  const app=appRef();
-  const originalShowRoutePanel=app?.showRoutePanel;
-  try{
-    if(app&&typeof originalShowRoutePanel==='function'){
-      app.showRoutePanel=()=>{};
-    }
+
+async function searchNearPoint(query,lon,lat,label){
+  const q=String(query||'').trim();
+  if(!q)return {ok:false,error:'Categoria vazia'};
+  if(!Number.isFinite(+lon)||!Number.isFinite(+lat))return {ok:false,error:'Coordenadas indisponíveis'};
+  const va=assistantRef();
+  const base=String(va?.aiEndpoint||'https://radar-seguro-ia-rj.claudio41cg.workers.dev').replace(/\/$/,'');
+  const path='/search/2/search/'+encodeURIComponent(q)+'.json?limit=5&language=pt-BR&lat='+Number(lat)+'&lon='+Number(lon)+'&radius=12000';
+  const r=await fetch(base+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
+  const d=r.ok?await r.json():null;
+  const items=Array.isArray(d?.results)?d.results.slice(0,3):[];
+  if(!items.length)return {ok:false,error:'Nenhum resultado encontrado',query:q,near:label};
+  return {ok:true,query:q,near:label,results:items.map(item=>({
+    name:item?.poi?.name||q,
+    address:item?.address?.freeformAddress||[item?.address?.streetName,item?.address?.municipalitySubdivision,item?.address?.municipality].filter(Boolean).join(', '),
+    lat:Number(item?.position?.lat),
+    lon:Number(item?.position?.lon)
+  }))};
+}
+
+async function handleToolCall(tc){const calls=tc?.functionCalls||tc?.function_calls||[];if(!calls.length)return;const responses=[];for(const call of calls){const name=String(call?.name||''),id=call?.id||call?.callId;try{let args=call?.args??call?.arguments??{};if(typeof args==='string'){try{args=JSON.parse(args)}catch(_){args={comando:args}}}let result;
+if(name==='executar_comando_radar'){
+  const command=String(args?.comando??args?.command??'').trim();
+  const m=command.match(/(?:me\s+leve|me\s+leva|leve(?:-|\s)?me|navegue|quero\s+ir|ir|vá|va|bora|vamos|vamo|trace(?:\s+uma)?\s+rota)(?:\s+(?:para|pra|pro|até|ate|em))?\s+(.+)/i);
+  const destination=String(m?.[1]||command).replace(/[.!?]+$/,'').trim();
+  const va=window.VoiceAssistant;
+  if(!destination)result={ok:false,error:'Destino vazio'};
+  else if(typeof va?.routeTo!=='function')result={ok:false,error:'Fluxo original de rota indisponível'};
+  else{
+    const app=appRef(),originalShowRoutePanel=app?.showRoutePanel;
     try{
-      if(typeof RouteChoiceGuardV44!=='undefined'){
-        RouteChoiceGuardV44.allowStartUntil=Date.now()+8000;
-      }
-    }catch(_){}
-    result=await va.routeTo(destination,{fromGemini:true});
-  }finally{
-    if(app&&typeof originalShowRoutePanel==='function'){
-      app.showRoutePanel=originalShowRoutePanel;
+      if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=()=>{};
+      try{if(typeof RouteChoiceGuardV44!=='undefined')RouteChoiceGuardV44.allowStartUntil=Date.now()+8000}catch(_){}
+      result=await va.routeTo(destination,{fromGemini:true});
+    }finally{
+      if(app&&typeof originalShowRoutePanel==='function')app.showRoutePanel=originalShowRoutePanel;
     }
   }
-}}else result=await window.RadarAiToolsV224?.execute?.(name,args||{});responses.push({id,name,response:{result:result??null}})}catch(e){responses.push({id,name,response:{error:String(e?.message||e)}})}}if(responses.length)send({toolResponse:{functionResponses:responses}})}
+}else if(name==='obter_localizacao_atual'){
+  const app=appRef(),va=assistantRef();
+  if(!Array.isArray(app?.userPos)||app.userPos.length<2)result={ok:false,error:'GPS ainda sem posição'};
+  else if(typeof va?.getCurrentAddress!=='function')result={ok:false,error:'Geocodificação indisponível'};
+  else{
+    const pos=await va.getCurrentAddress(true);
+    result={ok:true,address:pos?.label||'',lat:Number(pos?.lat),lon:Number(pos?.lon)};
+  }
+}else if(name==='obter_status_rota'){
+  const app=appRef(),va=assistantRef();
+  if(!app?.route)result={ok:false,error:'Não existe rota ativa'};
+  else if(typeof va?.routeContext!=='function')result={ok:false,error:'Contexto de rota indisponível'};
+  else result={ok:true,...(va.routeContext()||{})};
+}else if(name==='buscar_lugar_perto_destino'){
+  const app=appRef();
+  const q=String(args?.categoria??args?.query??args?.lugar??'').trim();
+  if(!Array.isArray(app?.destination)||app.destination.length<2)result={ok:false,error:'Destino da rota indisponível'};
+  else result=await searchNearPoint(q,Number(app.destination[0]),Number(app.destination[1]),'destino da rota');
+}else if(name==='cancelar_rota_radar'){
+  const app=appRef();
+  if(!app?.route&&!app?.navActive)result={ok:false,error:'Não existe rota ativa'};
+  else if(typeof app?.clearRoute!=='function')result={ok:false,error:'Função de cancelamento indisponível'};
+  else{
+    app.clearRoute();
+    result={ok:true,cancelled:true,message:'Rota cancelada'};
+  }
+}else result=await window.RadarAiToolsV224?.execute?.(name,args||{});
+responses.push({id,name,response:{result:result??null}})}catch(e){responses.push({id,name,response:{error:String(e?.message||e)}})}}if(responses.length)send({toolResponse:{functionResponses:responses}})}
 
 function handleServerMessage(m){
   if(m?.setupComplete!==undefined){
@@ -122,7 +169,13 @@ async function openSession({resume=false,auto=false}={}){
     ws.onopen=()=>{
       running=true;starting=false;reconnecting=false;
       setStatus(resumedConnection?'Gemini Live • enviando retomada…':'Gemini Live • conectando…');
-      const toolDecl=[{name:'executar_comando_radar',description:'Executa no Radar Seguro um pedido de rota do motorista.',parameters:{type:'object',properties:{comando:{type:'string',description:'Frase objetiva do motorista, por exemplo: me leva para o Maracanã'}},required:['comando']}}];
+      const toolDecl=[
+        {name:'executar_comando_radar',description:'Executa no Radar Seguro um pedido de rota do motorista.',parameters:{type:'object',properties:{comando:{type:'string',description:'Frase objetiva do motorista, por exemplo: me leva para o Maracanã'}},required:['comando']}},
+        {name:'obter_localizacao_atual',description:'Consulta o GPS real do Radar e retorna a localização/endereço atual do motorista.',parameters:{type:'object',properties:{}}},
+        {name:'obter_status_rota',description:'Retorna destino, quilômetros ou metros restantes, tempo restante e próxima orientação da rota ativa.',parameters:{type:'object',properties:{}}},
+        {name:'buscar_lugar_perto_destino',description:'Procura um estabelecimento ou categoria perto do destino final da rota usando TomTom.',parameters:{type:'object',properties:{categoria:{type:'string',description:'Exemplo: mercado, padaria, posto de combustível, farmácia'}},required:['categoria']}},
+        {name:'cancelar_rota_radar',description:'Cancela e limpa a rota ativa do Radar Seguro, equivalente ao botão de cancelar navegação.',parameters:{type:'object',properties:{}}}
+      ];
       send({setup:{model:MODEL,generationConfig:{responseModalities:['AUDIO']},systemInstruction:{parts:[{text:SYSTEM_TEXT}]},tools:[{functionDeclarations:toolDecl}],sessionResumption:resumedConnection?{handle:resumeHandle}:{}}});
     };
     ws.onmessage=async e=>{try{handleServerMessage(JSON.parse(await readMessageData(e.data)))}catch(err){console.warn('Gemini Direct message',err)}};
