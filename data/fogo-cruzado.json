@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T10:16:10.403Z",
+  "generatedAt": "2026-09-25T15:18:53.119Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,178 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 30,
-  "lastUpdate": "2026-09-25T07:13:07-03:00",
+  "count": 40,
+  "lastUpdate": "2026-09-25T11:28:13-03:00",
   "occurrences": [
+    {
+      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
+      "documentNumber": 79202,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
+      "neighborhood": "MANGUEIRA",
+      "subNeighborhood": "",
+      "locality": "MANGUEIRA",
+      "latitude": -22.90514541,
+      "longitude": -43.23489755,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
+      "documentNumber": 79209,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Nova Holanda (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-680, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
+      "latitude": -22.855,
+      "longitude": -43.243889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d59c9938-779b-45b1-b3a1-a7b19a2917b2",
+      "documentNumber": 79206,
+      "date": "2026-09-25T04:04:00.000Z",
+      "address": "Caju, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CAJU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8807991,
+      "longitude": -43.2278482,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "0fb2366d-475f-41b6-b191-7dfa7e994616",
+      "documentNumber": 79205,
+      "date": "2026-09-25T01:20:00.000Z",
+      "address": "Parque Alegria (Complexo do Caju) - Caju, Rio de Janeiro - RJ, 20920-460, Brasil",
+      "neighborhood": "CAJU",
+      "subNeighborhood": "",
+      "locality": "PARQUE ALEGRIA (COMPLEXO DO CAJU)",
+      "latitude": -22.88475296289994,
+      "longitude": -43.23004710717188,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2a1bdc77-dcdb-4102-8a1b-c023c1974b21",
+      "documentNumber": 79203,
+      "date": "2026-09-25T00:00:00.000Z",
+      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
+      "latitude": -22.892324971301786,
+      "longitude": -43.33377861518315,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "b362fd2b-05e0-4766-8efe-346d3a65f554",
+      "documentNumber": 79198,
+      "date": "2026-09-24T23:40:00.000Z",
+      "address": "Estrada Cabuçu de Baixo, Guaratiba, Rio de Janeiro, Rio de Janeiro, Brasil",
+      "neighborhood": "GUARATIBA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.949528,
+      "longitude": -43.5820267,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "54c7a640-76fa-4bdc-8d76-df5c07c76797",
+      "documentNumber": 79204,
+      "date": "2026-09-24T23:17:00.000Z",
+      "address": "Fonseca, Niterói - RJ, Brasil",
+      "neighborhood": "FONSECA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8813858,
+      "longitude": -43.0871384,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "432df133-3954-4df1-803d-6bb8d45e2122",
+      "documentNumber": 79207,
+      "date": "2026-09-24T21:00:00.000Z",
+      "address": "Rua Camarista Méier - Engenho de Dentro, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ENGENHO DE DENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9093332,
+      "longitude": -43.2967433,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "087b88aa-6d26-471a-9d15-993659f8825d",
+      "documentNumber": 79208,
+      "date": "2026-09-24T20:21:00.000Z",
+      "address": "Linha Amarela S/A - Lamsa - Linha Amarela - Água Santa, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9066933,
+      "longitude": -43.31013290000001,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "16c008f8-7532-4735-a44d-751b92ba9400",
       "documentNumber": 79195,
@@ -56,15 +225,15 @@
       "id": "2bb75c3e-6207-4919-921a-e876531fdbce",
       "documentNumber": 79194,
       "date": "2026-09-23T23:20:00.000Z",
-      "address": "R. João Raimundo, Pantanal, Vila São José, Duque de Caxias - RJ, 25041-400, Brasil",
+      "address": "Morro do Sossego - Vila São José, Pantanall Duque de Caxias - RJ, 25040-160, Brasil",
       "neighborhood": "VILA SAO JOSE",
       "subNeighborhood": "PANTANAL",
-      "locality": "",
-      "latitude": -22.7395987,
-      "longitude": -43.3221497,
+      "locality": "MORRO DO SOSSEGO",
+      "latitude": -22.742906670304876,
+      "longitude": -43.32206104051847,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
-      "agentPresence": false,
+      "agentPresence": true,
       "victims": [
         {
           "situation": "Dead",
@@ -72,7 +241,7 @@
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -115,15 +284,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
