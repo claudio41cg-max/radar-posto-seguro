@@ -7899,7 +7899,7 @@ const App = {
 
           element:el,
 
-          rotationAlignment:'map'
+          rotationAlignment:'viewport'
 
         })
         .setLngLat(
@@ -7920,8 +7920,27 @@ const App = {
 
 
     if(
+      this.navActive
+    ){
+
+      this.userMarker
+      .setRotationAlignment?.(
+        'viewport'
+      );
+
+      this.userMarker
+      .setRotation(
+        0
+      );
+
+    }else if(
       this.currentSpeed>4
     ){
+
+      this.userMarker
+      .setRotationAlignment?.(
+        'map'
+      );
 
       this.userMarker
       .setRotation(
