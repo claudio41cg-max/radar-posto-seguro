@@ -7899,7 +7899,7 @@ const App = {
 
           element:el,
 
-          rotationAlignment:'viewport'
+          rotationAlignment:'map'
 
         })
         .setLngLat(
@@ -7919,9 +7919,15 @@ const App = {
     }
 
 
-    // The TomTom visual controller owns arrow rotation in this build.
-    if(!window.__radarNavigationVisualV190 && this.currentSpeed>4){
-      this.userMarker.setRotation(this.currentBearing);
+    if(
+      this.currentSpeed>4
+    ){
+
+      this.userMarker
+      .setRotation(
+        this.currentBearing
+      );
+
     }
 
 
