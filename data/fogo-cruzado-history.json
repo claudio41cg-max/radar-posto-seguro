@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T00:34:59.801Z",
+  "generatedAt": "2026-09-25T05:18:38.353Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 201,
+  "count": 202,
   "occurrences": [
     {
       "id": "16c008f8-7532-4735-a44d-751b92ba9400",
@@ -26,6 +26,30 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "8cf225ca-50a4-4dd4-985c-b91922175879",
+      "documentNumber": 79197,
+      "date": "2026-09-24T04:30:00.000Z",
+      "address": "Morro do Céu, R. Artur Pereira da Mota, Caramujo, Niterói - RJ, 24140-500, Brasil",
+      "neighborhood": "CARAMUJO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CEU",
+      "latitude": -22.89336,
+      "longitude": -43.0699072,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "2bb75c3e-6207-4919-921a-e876531fdbce",
