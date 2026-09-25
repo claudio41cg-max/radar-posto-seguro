@@ -72,10 +72,6 @@ function frame(ts){raf=requestAnimationFrame(frame);const a=app();if(!a?.map)ret
  if(distance(shown,a.map.getCenter?.()?.toArray?.())>2||Math.abs((((newBearing-(a.map.getBearing?.()||0))+540)%360)-180)>1.5||Math.abs((a.map.getZoom?.()||0)-cfg.z)>.05||Math.abs((a.map.getPitch?.()||0)-cfg.p)>.6){
    a.followMode=true;a.map.jumpTo({center:shown,zoom:cfg.z,pitch:cfg.p,bearing:newBearing,padding:{top,left:side,right:side,bottom}});
  }
- const marker=a.userMarker;
- if(marker?.getRotationAlignment?.()!=='viewport')marker?.setRotationAlignment?.('viewport');
- if(marker?.getPitchAlignment?.()!=='viewport')marker?.setPitchAlignment?.('viewport');
- if(marker?.getRotation?.()!==0)marker?.setRotation?.(0);
  }catch(_){}}
 function install(){const a=app();if(!a?.map)return false;if(installed)return true;installed=true;window.__RADAR_SINGLE_CAMERA_OWNER='v223';
  const originalUpdate=typeof a.updateCamera==='function'?a.updateCamera.bind(a):null;
