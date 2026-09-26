@@ -5366,6 +5366,8 @@ const App = {
 
   currentBearing:0,
 
+  navRouteBearing:null,
+
   currentSpeed:0,
 
   currentAccuracy:999,
@@ -7140,6 +7142,9 @@ const App = {
       match.snapped
     ){
 
+      if(Number.isFinite(match.bearing))
+        this.navRouteBearing=match.bearing;
+
       this.routeProgressIndex=
         Math.max(
           this.routeProgressIndex,
@@ -7928,9 +7933,51 @@ const App = {
         'viewport'
       );
 
+      let routeBearing=
+        Number.isFinite(this.navRouteBearing)
+        ?
+        this.navRouteBearing
+        :
+        null;
+
+      if(
+        !Number.isFinite(routeBearing) &&
+        this.route?.coords?.length>1
+      ){
+
+        const i=
+          Math.max(
+            0,
+            Math.min(
+              this.route.coords.length-2,
+              this.routeProgressIndex||0
+            )
+          );
+
+        const a=
+          this.route.coords[i];
+
+        const b=
+          this.route.coords[i+1];
+
+        if(a&&b)
+          routeBearing=
+            Utils.bearing(
+              a,
+              b
+            );
+
+      }
+
+      if(
+        !Number.isFinite(routeBearing)
+      )
+        routeBearing=
+          this.currentBearing;
+
       this.userMarker
       .setRotation(
-        ((((window.RadarNavigationCameraV223?.heading?.() ?? this.currentBearing)-this.map.getBearing()+540)%360)-180)
+        ((((routeBearing-this.map.getBearing()+540)%360)-180))
       );
 
     }else if(
@@ -8986,6 +9033,8 @@ ${Utils.sanitize(item.display)}
       this.route=route;
 
       this.routeProgressIndex=0;
+
+      this.navRouteBearing=null;
 
       this.routeProgressMeters=0;
 
