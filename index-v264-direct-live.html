@@ -7930,7 +7930,7 @@ const App = {
 
       this.userMarker
       .setRotation(
-        0
+        ((((window.RadarNavigationCameraV223?.heading?.() ?? this.currentBearing)-this.map.getBearing()+540)%360)-180)
       );
 
     }else if(
