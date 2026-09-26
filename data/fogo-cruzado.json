@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T22:28:52.776Z",
+  "generatedAt": "2026-09-26T00:48:49.554Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,84 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 40,
-  "lastUpdate": "2026-09-25T17:56:59-03:00",
+  "count": 41,
+  "lastUpdate": "2026-09-25T21:15:34-03:00",
   "occurrences": [
+    {
+      "id": "988cdc16-27ac-42fd-9c9a-e2d2b3588034",
+      "documentNumber": 79221,
+      "date": "2026-09-25T20:53:00.000Z",
+      "address": "Rua Torres Homem, Morro dos Macacos - Vila Isabel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VILA ISABEL",
+      "subNeighborhood": "",
+      "locality": "MORRO DOS MACACOS",
+      "latitude": -22.9146107,
+      "longitude": -43.2494949,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "f07bcbe2-f083-4979-a70f-5df803c7d759",
+      "documentNumber": 79220,
+      "date": "2026-09-25T20:42:00.000Z",
+      "address": "Congo - Vila Kennedy, Rio de Janeiro - RJ, 21852-590, Brasil",
+      "neighborhood": "VILA KENNEDY",
+      "subNeighborhood": "",
+      "locality": "CONGO 1 (VILA KENNEDY)",
+      "latitude": -22.86177708,
+      "longitude": -43.49086725,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "8ea668b2-3701-4e14-8bcc-e52e12bf3d6c",
+      "documentNumber": 79218,
+      "date": "2026-09-25T19:50:00.000Z",
+      "address": "Morro do 18 (Complexo do 18) - Piedade, Rio de Janeiro - RJ, 20740-600, Brasil",
+      "neighborhood": "PIEDADE",
+      "subNeighborhood": "",
+      "locality": "MORRO DO 18 (COMPLEXO DO 18)",
+      "latitude": -22.905011856611303,
+      "longitude": -43.31769304011568,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2345382a-f9d0-4d89-9edd-5915f934660c",
+      "documentNumber": 79219,
+      "date": "2026-09-25T18:30:00.000Z",
+      "address": "Avenida Brasil - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.842479,
+      "longitude": -43.3728459,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
       "documentNumber": 79202,
@@ -38,21 +113,6 @@
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
       "latitude": -22.855,
       "longitude": -43.243889,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -237,11 +297,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
@@ -280,15 +340,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -683,61 +743,6 @@
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "0a3c0ea1-7fac-4f12-9f09-08b523b908a5",
-      "documentNumber": 79102,
-      "date": "2026-09-18T21:05:00.000Z",
-      "address": "Jardim Paraíso, Paraíso - Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "PARAISO",
-      "subNeighborhood": "JARDIM PARAISO",
-      "locality": "",
-      "latitude": -22.8209259,
-      "longitude": -43.591924,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "fe6cbfb9-839e-4675-a411-cbe4a1b110c2",
-      "documentNumber": 79101,
-      "date": "2026-09-18T15:00:00.000Z",
-      "address": "Estr. Curumau, Comunidade do Curumau - Taquara, Rio de Janeiro - RJ, 22723-010, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE CURUMAU",
-      "latitude": -22.915472181419915,
-      "longitude": -43.40190536137694,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "22d7f026-b795-4bf2-af0c-31aefc55b3fc",
-      "documentNumber": 79093,
-      "date": "2026-09-18T04:33:00.000Z",
-      "address": "Belford Roxo, RJ, Brasil",
-      "neighborhood": "NI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7605591,
-      "longitude": -43.4037201,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": [
         {
           "situation": "Dead",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T22:28:52.778Z",
+  "generatedAt": "2026-09-26T00:48:49.555Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,68 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 212,
+  "count": 216,
   "occurrences": [
+    {
+      "id": "988cdc16-27ac-42fd-9c9a-e2d2b3588034",
+      "documentNumber": 79221,
+      "date": "2026-09-25T20:53:00.000Z",
+      "address": "Rua Torres Homem, Morro dos Macacos - Vila Isabel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VILA ISABEL",
+      "subNeighborhood": "",
+      "locality": "MORRO DOS MACACOS",
+      "latitude": -22.9146107,
+      "longitude": -43.2494949,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "f07bcbe2-f083-4979-a70f-5df803c7d759",
+      "documentNumber": 79220,
+      "date": "2026-09-25T20:42:00.000Z",
+      "address": "Congo - Vila Kennedy, Rio de Janeiro - RJ, 21852-590, Brasil",
+      "neighborhood": "VILA KENNEDY",
+      "subNeighborhood": "",
+      "locality": "CONGO 1 (VILA KENNEDY)",
+      "latitude": -22.86177708,
+      "longitude": -43.49086725,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "8ea668b2-3701-4e14-8bcc-e52e12bf3d6c",
+      "documentNumber": 79218,
+      "date": "2026-09-25T19:50:00.000Z",
+      "address": "Morro do 18 (Complexo do 18) - Piedade, Rio de Janeiro - RJ, 20740-600, Brasil",
+      "neighborhood": "PIEDADE",
+      "subNeighborhood": "",
+      "locality": "MORRO DO 18 (COMPLEXO DO 18)",
+      "latitude": -22.905011856611303,
+      "longitude": -43.31769304011568,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2345382a-f9d0-4d89-9edd-5915f934660c",
+      "documentNumber": 79219,
+      "date": "2026-09-25T18:30:00.000Z",
+      "address": "Avenida Brasil - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.842479,
+      "longitude": -43.3728459,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
       "documentNumber": 79202,
@@ -236,11 +296,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
@@ -279,15 +339,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
