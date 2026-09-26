@@ -141,6 +141,25 @@ function installTransformRequest(map){
   return 'rewrite-only';
 }
 
+function disableSpriteDependencies(style){
+  try{delete style.sprite}catch(_){}
+  const layers=Array.isArray(style?.layers)?style.layers:[];
+  for(const layer of layers){
+    try{
+      if(layer?.layout&&Object.prototype.hasOwnProperty.call(layer.layout,'icon-image')){
+        delete layer.layout['icon-image'];
+      }
+      if(layer?.paint){
+        for(const k of ['background-pattern','fill-pattern','line-pattern']){
+          if(Object.prototype.hasOwnProperty.call(layer.paint,k))delete layer.paint[k];
+        }
+      }
+    }catch(_){}
+  }
+  setDiag('sprite','desativado');
+  return style;
+}
+
 async function fetchVectorStyle(mode='light'){
   const dark=mode==='dark';
   const mapStyle=dark?'basic_street-dark':'basic_street-light';
@@ -154,6 +173,7 @@ async function fetchVectorStyle(mode='light'){
   }
   const style=await r.json();
   setDiag('style','ok');
+  disableSpriteDependencies(style);
   const fixed=rewriteTomTomUrls(style);
   fixed.name=(fixed.name||'TomTom Orbis')+' • Radar Vector Test';
   return fixed;
@@ -229,7 +249,7 @@ const t=setInterval(async()=>{
 },100);
 
 window.RadarTomTomVectorTest={
-  version:'test-5-double-encoding',
+  version:'test-6-sprite-bypass',
   fetchVectorStyle,
   reload:async(mode='light')=>{
     const a=app();if(!a?.map)return false;
