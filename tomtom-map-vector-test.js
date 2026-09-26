@@ -44,9 +44,29 @@ function rewriteTomTomUrls(value){
   return value;
 }
 
+function installTransformRequest(map){
+  const transform=(url)=>{
+    const next=proxify(url);
+    return {url:next};
+  };
+  try{
+    if(typeof map?.setTransformRequest==='function'){
+      map.setTransformRequest(transform);
+      return 'setTransformRequest';
+    }
+  }catch(_){}
+  try{
+    if(map?._requestManager){
+      map._requestManager._transformRequest=transform;
+      return 'requestManager-fallback';
+    }
+  }catch(_){}
+  return 'rewrite-only';
+}
+
 async function fetchVectorStyle(mode='light'){
   const dark=mode==='dark';
-  const mapStyle=dark?'basic_street-dark-driving':'basic_street-light-driving';
+  const mapStyle=dark?'basic_street-dark':'basic_street-light';
   const path='/maps/orbis/assets/styles/0.*/style?apiVersion=1&map='+encodeURIComponent(mapStyle);
   const url=WORKER+'/v1/tomtom?path='+encodeURIComponent(path);
   const r=await fetch(url,{cache:'no-store'});
@@ -81,12 +101,25 @@ async function install(){
   badge('carregando');
   try{
     const mode=a.themeMode==='dark'?'dark':'light';
+    const transformMode=installTransformRequest(a.map);
     const style=await fetchVectorStyle(mode);
     a.__tomTomVectorTestStyle=style;
+    a.__tomTomVectorTransformMode=transformMode;
     a.map.setStyle(style,{diff:false});
     a.getThemeStyle=function(){return a.__tomTomVectorTestStyle||style;};
-    a.map.once?.('idle',()=>badge('ativo'));
-    setTimeout(()=>badge('ativo'),2500);
+    let rendered=false;
+    const markActive=()=>{
+      if(rendered)return;
+      rendered=true;
+      badge('ativo');
+    };
+    a.map.once?.('idle',markActive);
+    a.map.once?.('render',markActive);
+    a.map.once?.('error',e=>{
+      const msg=String(e?.error?.message||e?.message||'erro');
+      console.warn('Radar vetor recurso:',msg);
+      if(!rendered)badge('recurso');
+    });
     return true;
   }catch(e){
     console.warn('Radar teste vetorial TomTom:',e);
@@ -103,10 +136,11 @@ const t=setInterval(async()=>{
 },100);
 
 window.RadarTomTomVectorTest={
-  version:'test-1',
+  version:'test-2',
   fetchVectorStyle,
   reload:async(mode='light')=>{
     const a=app();if(!a?.map)return false;
+    installTransformRequest(a.map);
     const style=await fetchVectorStyle(mode);
     a.__tomTomVectorTestStyle=style;
     a.map.setStyle(style,{diff:false});
