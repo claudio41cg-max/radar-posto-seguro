@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T14:32:44.767Z",
+  "generatedAt": "2026-09-26T17:57:09.956Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,12 +10,12 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 217,
+  "count": 219,
   "occurrences": [
     {
-      "id": "5df06438-3b00-400d-9648-3afbf7cafed2",
-      "documentNumber": 79223,
-      "date": "2026-09-26T09:00:00.000Z",
+      "id": "1d48fb1e-c52f-4733-ba10-0e9dd4796f17",
+      "documentNumber": 79224,
+      "date": "2026-09-26T10:00:00.000Z",
       "address": "Complexo da Mangueirinha - Vila Centenario, Duque de Caxias - RJ, Brasil",
       "neighborhood": "CENTENARIO",
       "subNeighborhood": "",
@@ -31,6 +31,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "5df06438-3b00-400d-9648-3afbf7cafed2",
+      "documentNumber": 79223,
+      "date": "2026-09-26T04:00:00.000Z",
+      "address": "Morro dos Macacos, Vila Isabel, Rio de Janeiro - RJ, 20551-232, Brasil",
+      "neighborhood": "VILA ISABEL",
+      "subNeighborhood": "",
+      "locality": "MORRO DOS MACACOS",
+      "latitude": -22.91189634,
+      "longitude": -43.25524243,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "988cdc16-27ac-42fd-9c9a-e2d2b3588034",
@@ -93,6 +108,34 @@
       "victims": [
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "a53f63ce-56e3-4ead-bea2-23e31293b679",
+      "documentNumber": 79225,
+      "date": "2026-09-25T16:00:00.000Z",
+      "address": "Comunidade Parque Dois Irmãos R. André Rocha, Curicica, Rio de Janeiro - RJ, 22713-567, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
+      "latitude": -22.9516716,
+      "longitude": -43.3915417,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -321,11 +364,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
@@ -364,11 +407,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -651,12 +694,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T14:32:44.765Z",
+  "generatedAt": "2026-09-26T17:57:09.955Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,13 +10,13 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 42,
-  "lastUpdate": "2026-09-26T10:33:51-03:00",
+  "count": 44,
+  "lastUpdate": "2026-09-26T14:43:47-03:00",
   "occurrences": [
     {
-      "id": "5df06438-3b00-400d-9648-3afbf7cafed2",
-      "documentNumber": 79223,
-      "date": "2026-09-26T09:00:00.000Z",
+      "id": "1d48fb1e-c52f-4733-ba10-0e9dd4796f17",
+      "documentNumber": 79224,
+      "date": "2026-09-26T10:00:00.000Z",
       "address": "Complexo da Mangueirinha - Vila Centenario, Duque de Caxias - RJ, Brasil",
       "neighborhood": "CENTENARIO",
       "subNeighborhood": "",
@@ -32,6 +32,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "5df06438-3b00-400d-9648-3afbf7cafed2",
+      "documentNumber": 79223,
+      "date": "2026-09-26T04:00:00.000Z",
+      "address": "Morro dos Macacos, Vila Isabel, Rio de Janeiro - RJ, 20551-232, Brasil",
+      "neighborhood": "VILA ISABEL",
+      "subNeighborhood": "",
+      "locality": "MORRO DOS MACACOS",
+      "latitude": -22.91189634,
+      "longitude": -43.25524243,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "988cdc16-27ac-42fd-9c9a-e2d2b3588034",
@@ -99,15 +114,43 @@
       ]
     },
     {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
+      "id": "a53f63ce-56e3-4ead-bea2-23e31293b679",
+      "documentNumber": 79225,
+      "date": "2026-09-25T16:00:00.000Z",
+      "address": "Comunidade Parque Dois Irmãos R. André Rocha, Curicica, Rio de Janeiro - RJ, 22713-567, Brasil",
+      "neighborhood": "CURICICA",
       "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
+      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
+      "latitude": -22.9516716,
+      "longitude": -43.3915417,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
+      "documentNumber": 79202,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
+      "neighborhood": "MANGUEIRA",
+      "subNeighborhood": "",
+      "locality": "MANGUEIRA",
+      "latitude": -22.90514541,
+      "longitude": -43.23489755,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -129,15 +172,15 @@
       "victims": []
     },
     {
-      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
-      "documentNumber": 79202,
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
       "date": "2026-09-25T06:00:00.000Z",
-      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
-      "neighborhood": "MANGUEIRA",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
       "subNeighborhood": "",
-      "locality": "MANGUEIRA",
-      "latitude": -22.90514541,
-      "longitude": -43.23489755,
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -322,11 +365,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
@@ -365,11 +408,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -652,12 +695,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
