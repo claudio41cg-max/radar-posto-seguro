@@ -79,9 +79,20 @@ function cleanTomTomPath(raw){
   return null;
 }
 
+function preserveTemplateTokens(encoded){
+  return String(encoded)
+    .replace(/%7Bfontstack%7D/gi,'{fontstack}')
+    .replace(/%7Brange%7D/gi,'{range}')
+    .replace(/%7Bz%7D/gi,'{z}')
+    .replace(/%7Bx%7D/gi,'{x}')
+    .replace(/%7By%7D/gi,'{y}');
+}
+
 function proxify(raw){
   const path=cleanTomTomPath(raw);
-  return path?WORKER+'/v1/tomtom?path='+encodeURIComponent(path):raw;
+  if(!path)return raw;
+  const encoded=preserveTemplateTokens(encodeURIComponent(path));
+  return WORKER+'/v1/tomtom?path='+encoded;
 }
 
 function rewriteTomTomUrls(value){
@@ -204,7 +215,7 @@ const t=setInterval(async()=>{
 },100);
 
 window.RadarTomTomVectorTest={
-  version:'test-3-diag',
+  version:'test-4-placeholders',
   fetchVectorStyle,
   reload:async(mode='light')=>{
     const a=app();if(!a?.map)return false;
