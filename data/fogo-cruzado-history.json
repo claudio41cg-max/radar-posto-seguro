@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T10:11:30.714Z",
+  "generatedAt": "2026-09-26T14:32:44.767Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 216,
+  "count": 217,
   "occurrences": [
+    {
+      "id": "5df06438-3b00-400d-9648-3afbf7cafed2",
+      "documentNumber": 79223,
+      "date": "2026-09-26T09:00:00.000Z",
+      "address": "Complexo da Mangueirinha - Vila Centenario, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA MANGUEIRINHA",
+      "latitude": -22.772689,
+      "longitude": -43.3125635,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "988cdc16-27ac-42fd-9c9a-e2d2b3588034",
       "documentNumber": 79221,
@@ -67,10 +87,15 @@
       "locality": "",
       "latitude": -22.842479,
       "longitude": -43.3728459,
-      "reason": "Não identificado",
+      "reason": "Tentativa/Roubo",
       "policeAction": false,
-      "agentPresence": false,
-      "victims": []
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
@@ -296,11 +321,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
