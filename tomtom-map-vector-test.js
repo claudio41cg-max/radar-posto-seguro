@@ -59,22 +59,36 @@ function noteRequest(url,type){
 }
 
 
+function restoreTemplateTokens(s){
+  return String(s||'')
+    .replace(/%257Bfontstack%257D/gi,'{fontstack}')
+    .replace(/%257Brange%257D/gi,'{range}')
+    .replace(/%257Bz%257D/gi,'{z}')
+    .replace(/%257Bx%257D/gi,'{x}')
+    .replace(/%257By%257D/gi,'{y}')
+    .replace(/%7Bfontstack%7D/gi,'{fontstack}')
+    .replace(/%7Brange%7D/gi,'{range}')
+    .replace(/%7Bz%7D/gi,'{z}')
+    .replace(/%7Bx%7D/gi,'{x}')
+    .replace(/%7By%7D/gi,'{y}');
+}
+
 function cleanTomTomPath(raw){
-  let s=String(raw||'');
+  let s=restoreTemplateTokens(String(raw||''));
   try{
     if(/^https?:\/\//i.test(s)){
       const u=new URL(s);
       if(!/tomtom\.com$/i.test(u.hostname)&&!/\.tomtom\.com$/i.test(u.hostname))return null;
       u.searchParams.delete('key');
-      return u.pathname+(u.search||'');
+      return restoreTemplateTokens(u.pathname+(u.search||''));
     }
   }catch(_){}
   if(s.startsWith('/maps/')){
     try{
       const u=new URL('https://api.tomtom.com'+s);
       u.searchParams.delete('key');
-      return u.pathname+(u.search||'');
-    }catch(_){return s;}
+      return restoreTemplateTokens(u.pathname+(u.search||''));
+    }catch(_){return restoreTemplateTokens(s);}
   }
   return null;
 }
@@ -215,7 +229,7 @@ const t=setInterval(async()=>{
 },100);
 
 window.RadarTomTomVectorTest={
-  version:'test-4-placeholders',
+  version:'test-5-double-encoding',
   fetchVectorStyle,
   reload:async(mode='light')=>{
     const a=app();if(!a?.map)return false;
