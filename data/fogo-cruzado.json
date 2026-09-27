@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T13:06:31.094Z",
+  "generatedAt": "2026-09-27T17:41:50.496Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 40,
-  "lastUpdate": "2026-09-27T08:53:24-03:00",
+  "count": 41,
+  "lastUpdate": "2026-09-27T12:50:37-03:00",
   "occurrences": [
+    {
+      "id": "865d9a46-e82f-405b-9050-64ff50b2fe2d",
+      "documentNumber": 79234,
+      "date": "2026-09-27T10:00:00.000Z",
+      "address": "Ipuca, Jardim Catarina, São Gonçalo - RJ, 24716-455, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "IPUCA",
+      "latitude": -22.787651020356282,
+      "longitude": -43.01060672889074,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
       "documentNumber": 79232,
@@ -187,11 +211,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -212,21 +236,6 @@
       "victims": []
     },
     {
-      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
-      "documentNumber": 79202,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
-      "neighborhood": "MANGUEIRA",
-      "subNeighborhood": "",
-      "locality": "MANGUEIRA",
-      "latitude": -22.90514541,
-      "longitude": -43.23489755,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
       "documentNumber": 79209,
       "date": "2026-09-25T06:00:00.000Z",
@@ -236,6 +245,21 @@
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
       "latitude": -22.855,
       "longitude": -43.243889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
+      "documentNumber": 79202,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
+      "neighborhood": "MANGUEIRA",
+      "subNeighborhood": "",
+      "locality": "MANGUEIRA",
+      "latitude": -22.90514541,
+      "longitude": -43.23489755,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -420,11 +444,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },

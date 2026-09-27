@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T13:06:31.096Z",
+  "generatedAt": "2026-09-27T17:41:50.498Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,32 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 222,
+  "count": 223,
   "occurrences": [
+    {
+      "id": "865d9a46-e82f-405b-9050-64ff50b2fe2d",
+      "documentNumber": 79234,
+      "date": "2026-09-27T10:00:00.000Z",
+      "address": "Ipuca, Jardim Catarina, São Gonçalo - RJ, 24716-455, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "IPUCA",
+      "latitude": -22.787651020356282,
+      "longitude": -43.01060672889074,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
       "documentNumber": 79232,
@@ -186,11 +210,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -419,11 +443,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
