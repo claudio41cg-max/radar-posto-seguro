@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T17:41:50.498Z",
+  "generatedAt": "2026-09-27T20:26:49.864Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,47 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 223,
+  "count": 225,
   "occurrences": [
+    {
+      "id": "97ed93c6-dbc9-4296-afba-fff8bd665c75",
+      "documentNumber": 79237,
+      "date": "2026-09-27T14:36:00.000Z",
+      "address": "Congo (Vila Kennedy)- Vila Kennedy, Rio de Janeiro - RJ, 21852-590, Brasil",
+      "neighborhood": "VILA KENNEDY",
+      "subNeighborhood": "",
+      "locality": "CONGO 1 (VILA KENNEDY)",
+      "latitude": -22.86177708,
+      "longitude": -43.49086725,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7646595b-d308-43a3-8db8-e25c9c3f56dd",
+      "documentNumber": 79238,
+      "date": "2026-09-27T12:30:00.000Z",
+      "address": "Gamboa, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GAMBOA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8969588,
+      "longitude": -43.1908313,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "865d9a46-e82f-405b-9050-64ff50b2fe2d",
       "documentNumber": 79234,
@@ -206,15 +245,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -443,11 +482,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },

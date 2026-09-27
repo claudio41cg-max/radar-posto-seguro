@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T17:41:50.496Z",
+  "generatedAt": "2026-09-27T20:26:49.863Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,48 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 41,
-  "lastUpdate": "2026-09-27T12:50:37-03:00",
+  "count": 43,
+  "lastUpdate": "2026-09-27T16:32:47-03:00",
   "occurrences": [
+    {
+      "id": "97ed93c6-dbc9-4296-afba-fff8bd665c75",
+      "documentNumber": 79237,
+      "date": "2026-09-27T14:36:00.000Z",
+      "address": "Congo (Vila Kennedy)- Vila Kennedy, Rio de Janeiro - RJ, 21852-590, Brasil",
+      "neighborhood": "VILA KENNEDY",
+      "subNeighborhood": "",
+      "locality": "CONGO 1 (VILA KENNEDY)",
+      "latitude": -22.86177708,
+      "longitude": -43.49086725,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7646595b-d308-43a3-8db8-e25c9c3f56dd",
+      "documentNumber": 79238,
+      "date": "2026-09-27T12:30:00.000Z",
+      "address": "Gamboa, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GAMBOA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8969588,
+      "longitude": -43.1908313,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "865d9a46-e82f-405b-9050-64ff50b2fe2d",
       "documentNumber": 79234,
@@ -207,15 +246,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -236,21 +275,6 @@
       "victims": []
     },
     {
-      "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
-      "documentNumber": 79209,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Nova Holanda (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-680, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
-      "latitude": -22.855,
-      "longitude": -43.243889,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
       "documentNumber": 79202,
       "date": "2026-09-25T06:00:00.000Z",
@@ -260,6 +284,21 @@
       "locality": "MANGUEIRA",
       "latitude": -22.90514541,
       "longitude": -43.23489755,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
+      "documentNumber": 79209,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Nova Holanda (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-680, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
+      "latitude": -22.855,
+      "longitude": -43.243889,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -444,11 +483,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
