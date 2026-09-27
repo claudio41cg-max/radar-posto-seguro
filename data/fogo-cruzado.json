@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T23:29:48.236Z",
+  "generatedAt": "2026-09-27T01:42:21.981Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 44,
-  "lastUpdate": "2026-09-26T14:43:47-03:00",
+  "count": 39,
+  "lastUpdate": "2026-09-26T21:57:44-03:00",
   "occurrences": [
+    {
+      "id": "57a30b28-fa1b-4bf1-8f9d-8487f6bbac12",
+      "documentNumber": 79228,
+      "date": "2026-09-26T13:00:00.000Z",
+      "address": "Rua Alcedina Moura Emerich - Manilha, Itaboraí - RJ, Brasil",
+      "neighborhood": "MANILHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.772382,
+      "longitude": -42.9246145,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "1d48fb1e-c52f-4733-ba10-0e9dd4796f17",
       "documentNumber": 79224,
@@ -76,6 +96,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7a3d2575-7078-4e72-83e7-67427e1ee8c5",
+      "documentNumber": 79230,
+      "date": "2026-09-25T20:00:00.000Z",
+      "address": "Avenida Nilo Peçanha - Centro, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9064133,
+      "longitude": -43.1761697,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -365,11 +400,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -408,10 +443,6 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -421,6 +452,10 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -679,144 +714,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "6f2a59dc-d975-4e80-80a4-64e0c54b603e",
-      "documentNumber": 79116,
-      "date": "2026-09-19T20:00:00.000Z",
-      "address": "Rua Frei Martinho - Vargem Grande, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VARGEM GRANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9819638,
-      "longitude": -43.5031592,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "fd97319a-772b-4f0a-a6c9-e21b88b8d430",
-      "documentNumber": 79113,
-      "date": "2026-09-19T16:00:00.000Z",
-      "address": "Travessa Marquês - Barro Vermelho, São Gonçalo - RJ, Brasil",
-      "neighborhood": "BARRO VERMELHO I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8405811,
-      "longitude": -43.080525,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "b33f425f-f249-4ff4-bfb8-4c0f4b4d3bfb",
-      "documentNumber": 79103,
-      "date": "2026-09-19T06:00:00.000Z",
-      "address": "Nova América, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "NOVA AMERICA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7209052,
-      "longitude": -43.43798839999999,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "b73085d3-042e-489b-986c-c33236bf5285",
-      "documentNumber": 79104,
-      "date": "2026-09-19T05:00:00.000Z",
-      "address": "Rua João Henrique - Cordovil, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8265798,
-      "longitude": -43.3004059,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "258f938a-3d2e-47df-9ace-adf2289d7091",
-      "documentNumber": 79105,
-      "date": "2026-09-19T04:00:00.000Z",
-      "address": "Rua Tavares Belfort - Engenheiro Leal, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ENGENHEIRO LEAL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8759222,
-      "longitude": -43.3262474,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "2b6c975f-180e-4a36-aa7c-65449145f51b",
-      "documentNumber": 79106,
-      "date": "2026-09-19T02:30:00.000Z",
-      "address": "Morro do Tamanco - Jardim Paraíso, Vila São João, São João de Meriti - Rio de Janeiro, Brasil",
-      "neighborhood": "JARDIM PARAISO",
-      "subNeighborhood": "VILA SAO JOAO",
-      "locality": "MORRO DO TAMANCO",
-      "latitude": -22.762165636657198,
-      "longitude": -43.3433198556304,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "8cebb060-ebe6-47a6-af60-de80704dcf7b",
-      "documentNumber": 79112,
-      "date": "2026-09-19T02:00:00.000Z",
-      "address": "Rua Mario Daflon - Nova Cidade, São Gonçalo - RJ, Brasil",
-      "neighborhood": "NOVA CIDADES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8119952,
-      "longitude": -43.0227504,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }

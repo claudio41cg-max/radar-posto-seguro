@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T23:29:48.238Z",
+  "generatedAt": "2026-09-27T01:42:21.982Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 219,
+  "count": 221,
   "occurrences": [
+    {
+      "id": "57a30b28-fa1b-4bf1-8f9d-8487f6bbac12",
+      "documentNumber": 79228,
+      "date": "2026-09-26T13:00:00.000Z",
+      "address": "Rua Alcedina Moura Emerich - Manilha, Itaboraí - RJ, Brasil",
+      "neighborhood": "MANILHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.772382,
+      "longitude": -42.9246145,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "1d48fb1e-c52f-4733-ba10-0e9dd4796f17",
       "documentNumber": 79224,
@@ -75,6 +95,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7a3d2575-7078-4e72-83e7-67427e1ee8c5",
+      "documentNumber": 79230,
+      "date": "2026-09-25T20:00:00.000Z",
+      "address": "Avenida Nilo Peçanha - Centro, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9064133,
+      "longitude": -43.1761697,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -364,11 +399,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -407,10 +442,6 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -420,6 +451,10 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
