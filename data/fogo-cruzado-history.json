@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T20:26:49.864Z",
+  "generatedAt": "2026-09-27T23:21:04.821Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -31,12 +31,12 @@
       "id": "7646595b-d308-43a3-8db8-e25c9c3f56dd",
       "documentNumber": 79238,
       "date": "2026-09-27T12:30:00.000Z",
-      "address": "Gamboa, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua Pedro Ernesto - Gamboa, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "GAMBOA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.8969588,
-      "longitude": -43.1908313,
+      "latitude": -22.8963174,
+      "longitude": -43.1942514,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
