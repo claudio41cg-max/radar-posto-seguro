@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#07131f">
+<title>Radar Seguro RJ PRO • GPT + TomTom Vetor</title>
+<style>
+  html,body{margin:0;background:#07131f;color:#fff}
+  #hybridLoading{padding:24px;text-align:center;font-family:Arial,sans-serif;font-weight:800}
+  #vectorDiag{display:none!important}
+  #mapProviderVectorTest{left:18px!important;bottom:148px!important;opacity:.92!important}
+</style>
+</head>
+<body>
+<div id="hybridLoading">Carregando Radar híbrido: GPT + TomTom vetorial...</div>
+<script>
+(async()=>{
+  try{
+    const r=await fetch('./index.html?hybrid='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error('index '+r.status);
+    let h=await r.text();
+
+    const extra=
+      '<script>window.__RADAR_HYBRID_GPT_VECTOR=true;window.__RADAR_TEST_ENV="GPT-SUBSCRIPTION + TOMTOM-VECTOR";<\/script>'+
+      '<style>#vectorDiag{display:none!important}#mapProviderVectorTest{left:18px!important;bottom:148px!important;opacity:.92!important}</style>'+
+      '<script src="./tomtom-map-vector-test.js?v=6"><\/script>'+
+      '<script src="./main-map-manual-hold-v168.js?v=168"><\/script>'+
+      '<script src="./route-cancel-cleanup-v188.js?v=188"><\/script>';
+
+    h=/<\/body>/i.test(h)
+      ? h.replace(/<\/body>/i,extra+'</body>')
+      : h+extra;
+
+    document.open();
+    document.write(h);
+    document.close();
+  }catch(e){
+    const el=document.getElementById('hybridLoading');
+    if(el)el.textContent='Não consegui abrir o teste híbrido agora. Atualize a página.';
+    console.error(e);
+  }
+})();
+</script>
+</body>
+</html>
