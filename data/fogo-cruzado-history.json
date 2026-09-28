@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T07:42:49.462Z",
+  "generatedAt": "2026-09-28T16:02:21.146Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,122 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 225,
+  "count": 229,
   "occurrences": [
+    {
+      "id": "f8bf889a-c5b7-4bfd-a047-e007269ecf04",
+      "documentNumber": 79244,
+      "date": "2026-09-28T08:15:00.000Z",
+      "address": "Linha Vermelha - Parque das Missões, Duque de Caxias, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PARQUE DUQUE",
+      "subNeighborhood": "PARQUE DAS MISSÕES",
+      "locality": "",
+      "latitude": -22.8073535,
+      "longitude": -43.2794712,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "5a045ba2-50fd-45ee-94b9-a14f92d50b2e",
+      "documentNumber": 79241,
+      "date": "2026-09-28T01:00:00.000Z",
+      "address": "Vila do João (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21046-630, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "VILA DO JOAO (COMPLEXO DA MARE)",
+      "latitude": -22.87117627,
+      "longitude": -43.2410853,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9b4b5aef-6827-4a56-bf58-2a4d799f5661",
+      "documentNumber": 79242,
+      "date": "2026-09-27T23:25:00.000Z",
+      "address": "Quintal da Néia - Rua José dos Reis - Pilares, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PILARES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8845402,
+      "longitude": -43.2903891,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "aec82ba9-1824-46f0-9474-dcbaa8b37c33",
+      "documentNumber": 79243,
+      "date": "2026-09-27T20:00:00.000Z",
+      "address": "Rocinha, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ROCINHA",
+      "subNeighborhood": "",
+      "locality": "ROCINHA",
+      "latitude": -22.987941,
+      "longitude": -43.2480087,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "97ed93c6-dbc9-4296-afba-fff8bd665c75",
       "documentNumber": 79237,
@@ -92,12 +206,7 @@
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
+      "victims": []
     },
     {
       "id": "57a30b28-fa1b-4bf1-8f9d-8487f6bbac12",
@@ -249,15 +358,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -474,12 +583,12 @@
       "id": "2bb75c3e-6207-4919-921a-e876531fdbce",
       "documentNumber": 79194,
       "date": "2026-09-23T23:20:00.000Z",
-      "address": "Morro do Sossego - Vila São José, Pantanall Duque de Caxias - RJ, 25040-160, Brasil",
+      "address": "R. João Raimundo, Pantanal, Vila São José, Duque de Caxias - RJ, 25041-400, Brasil",
       "neighborhood": "VILA SAO JOSE",
       "subNeighborhood": "PANTANAL",
-      "locality": "MORRO DO SOSSEGO",
-      "latitude": -22.742906670304876,
-      "longitude": -43.32206104051847,
+      "locality": "",
+      "latitude": -22.7395093,
+      "longitude": -43.3223982,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": true,
@@ -529,7 +638,7 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -541,7 +650,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
