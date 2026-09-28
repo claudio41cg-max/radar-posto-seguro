@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T16:02:21.145Z",
+  "generatedAt": "2026-09-28T21:49:17.738Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 47,
-  "lastUpdate": "2026-09-28T12:34:39-03:00",
+  "count": 48,
+  "lastUpdate": "2026-09-28T16:38:16-03:00",
   "occurrences": [
+    {
+      "id": "89ef9a09-42a0-43a7-8031-d8d76b96adba",
+      "documentNumber": 79255,
+      "date": "2026-09-28T14:00:00.000Z",
+      "address": "Av. Cidade de Deus, Cidade de Deus, Rio de Janeiro - RJ, 22773-200, Brasil",
+      "neighborhood": "CIDADE DE DEUS",
+      "subNeighborhood": "",
+      "locality": "CIDADE DE DEUS",
+      "latitude": -22.95012991880426,
+      "longitude": -43.365573769281006,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "f8bf889a-c5b7-4bfd-a047-e007269ecf04",
       "documentNumber": 79244,
@@ -83,11 +103,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -359,15 +379,15 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
