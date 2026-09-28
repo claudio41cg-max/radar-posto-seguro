@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T23:21:04.821Z",
+  "generatedAt": "2026-09-28T01:45:56.871Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -41,6 +41,10 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
         {
           "situation": "Wounded",
           "personType": "Civilian"
@@ -233,27 +237,27 @@
     {
       "id": "a53f63ce-56e3-4ead-bea2-23e31293b679",
       "documentNumber": 79225,
-      "date": "2026-09-25T16:00:00.000Z",
+      "date": "2026-09-25T17:00:00.000Z",
       "address": "Comunidade Parque Dois Irmãos R. André Rocha, Curicica, Rio de Janeiro - RJ, 22713-567, Brasil",
       "neighborhood": "CURICICA",
       "subNeighborhood": "",
       "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
       "latitude": -22.9516716,
       "longitude": -43.3915417,
-      "reason": "Não identificado",
+      "reason": "Ataque a civis",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T23:21:04.820Z",
+  "generatedAt": "2026-09-28T01:45:56.870Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -11,7 +11,7 @@
     "days": 7
   },
   "count": 43,
-  "lastUpdate": "2026-09-27T19:26:56-03:00",
+  "lastUpdate": "2026-09-27T21:41:43-03:00",
   "occurrences": [
     {
       "id": "97ed93c6-dbc9-4296-afba-fff8bd665c75",
@@ -42,6 +42,10 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
         {
           "situation": "Wounded",
           "personType": "Civilian"
@@ -234,45 +238,30 @@
     {
       "id": "a53f63ce-56e3-4ead-bea2-23e31293b679",
       "documentNumber": 79225,
-      "date": "2026-09-25T16:00:00.000Z",
+      "date": "2026-09-25T17:00:00.000Z",
       "address": "Comunidade Parque Dois Irmãos R. André Rocha, Curicica, Rio de Janeiro - RJ, 22713-567, Brasil",
       "neighborhood": "CURICICA",
       "subNeighborhood": "",
       "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
       "latitude": -22.9516716,
       "longitude": -43.3915417,
-      "reason": "Não identificado",
+      "reason": "Ataque a civis",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
@@ -299,6 +288,21 @@
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
       "latitude": -22.855,
       "longitude": -43.243889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
