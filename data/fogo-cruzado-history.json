@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T13:57:59.987Z",
+  "generatedAt": "2026-09-29T19:16:37.974Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 231,
+  "count": 232,
   "occurrences": [
+    {
+      "id": "f58ac028-068f-424e-8f9a-66e739f75d2d",
+      "documentNumber": 79267,
+      "date": "2026-09-29T13:00:00.000Z",
+      "address": "Comunidade Asa Branca, R. Francisco de Paula, Barra Olímpica, Rio de Janeiro - RJ, 22775-120, Brasil",
+      "neighborhood": "BARRA OLIMPICA",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE ASA BRANCA",
+      "latitude": -22.9695263,
+      "longitude": -43.3961813,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "f441b152-b739-4e84-ac39-54adfe93f281",
       "documentNumber": 79257,
@@ -86,6 +106,22 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -115,22 +151,6 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -207,7 +227,7 @@
       "locality": "",
       "latitude": -22.8963174,
       "longitude": -43.1942514,
-      "reason": "Não identificado",
+      "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -294,7 +314,7 @@
       "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
       "latitude": -22.77109713586744,
       "longitude": -43.31377332024242,
-      "reason": "Ação policial",
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
@@ -409,20 +429,20 @@
       "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
       "latitude": -22.9516716,
       "longitude": -43.3915417,
-      "reason": "Ataque a civis",
+      "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -502,10 +522,15 @@
       "locality": "PARQUE ALEGRIA (COMPLEXO DO CAJU)",
       "latitude": -22.88475296289994,
       "longitude": -43.23004710717188,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "2a1bdc77-dcdb-4102-8a1b-c023c1974b21",
@@ -556,12 +581,12 @@
       "id": "432df133-3954-4df1-803d-6bb8d45e2122",
       "documentNumber": 79207,
       "date": "2026-09-24T21:00:00.000Z",
-      "address": "Rua Camarista Méier - Engenho de Dentro, Rio de Janeiro - RJ, Brasil",
+      "address": "R. Camarista Méier, Morro da Camarista (Complexo do Lins) - Engenho de Dentro, Rio de Janeiro - RJ, 20730-232, Brasil",
       "neighborhood": "ENGENHO DE DENTRO",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9093332,
-      "longitude": -43.2967433,
+      "locality": "MORRO DA CAMARISTA (COMPLEXO DO LINS)",
+      "latitude": -22.913720988740742,
+      "longitude": -43.297773268261714,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -576,12 +601,12 @@
       "id": "087b88aa-6d26-471a-9d15-993659f8825d",
       "documentNumber": 79208,
       "date": "2026-09-24T20:21:00.000Z",
-      "address": "Linha Amarela S/A - Lamsa - Linha Amarela - Água Santa, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "NI",
+      "address": "Linha Amarela, 9b - Manguinhos, Rio de Janeiro - RJ, 21040-360, Brasil",
+      "neighborhood": "MANGUINHOS",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.9066933,
-      "longitude": -43.31013290000001,
+      "latitude": -22.870579857783856,
+      "longitude": -43.24537242544555,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -603,7 +628,7 @@
       "address": "Vila Kennedy, Rio de Janeiro - RJ, 21850-480, Brasil",
       "neighborhood": "VILA KENNEDY",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "VILA KENNEDY",
       "latitude": -22.8572405,
       "longitude": -43.4892386,
       "reason": "Disputa",
@@ -639,12 +664,12 @@
       "id": "2bb75c3e-6207-4919-921a-e876531fdbce",
       "documentNumber": 79194,
       "date": "2026-09-23T23:20:00.000Z",
-      "address": "R. João Raimundo, Pantanal, Vila São José, Duque de Caxias - RJ, 25041-400, Brasil",
+      "address": "Morro do Sossego - Vila São José, Pantanal - Duque de Caxias - RJ, 25040-335, Brasil",
       "neighborhood": "VILA SAO JOSE",
       "subNeighborhood": "PANTANAL",
-      "locality": "",
-      "latitude": -22.7395093,
-      "longitude": -43.3223982,
+      "locality": "MORRO DO SOSSEGO",
+      "latitude": -22.742917054261515,
+      "longitude": -43.32282071965701,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": true,
@@ -694,15 +719,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -735,13 +760,13 @@
       "id": "c202d237-937e-4d0d-9d95-1d5601895d12",
       "documentNumber": 79178,
       "date": "2026-09-23T11:20:00.000Z",
-      "address": "Av. Prefeito Milton Rodrigues da Rocha, Manilha, Itaboraí - RJ, 24860-124, Brasil",
+      "address": "Av. Prefeito Milton Rodrigues da Rocha - Manilha, Itaboraí - RJ, 24855-264, Brasil",
       "neighborhood": "MANILHA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.775004781162714,
-      "longitude": -42.92217608360595,
-      "reason": "Homicidio/Tentativa",
+      "latitude": -22.7887975,
+      "longitude": -42.9116061,
+      "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
