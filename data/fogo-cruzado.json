@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T21:49:17.738Z",
+  "generatedAt": "2026-09-29T01:17:58.935Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,25 +10,25 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 48,
-  "lastUpdate": "2026-09-28T16:38:16-03:00",
+  "count": 39,
+  "lastUpdate": "2026-09-28T19:15:49-03:00",
   "occurrences": [
     {
       "id": "89ef9a09-42a0-43a7-8031-d8d76b96adba",
       "documentNumber": 79255,
       "date": "2026-09-28T14:00:00.000Z",
-      "address": "Av. Cidade de Deus, Cidade de Deus, Rio de Janeiro - RJ, 22773-200, Brasil",
+      "address": "Cidade de Deus, Estrada Marechal Miguel Salazar Mendes de Moraes, Cidade de Deus, Rio de Janeiro - RJ, 22770-330, Brasil",
       "neighborhood": "CIDADE DE DEUS",
       "subNeighborhood": "",
       "locality": "CIDADE DE DEUS",
-      "latitude": -22.95012991880426,
-      "longitude": -43.365573769281006,
+      "latitude": -22.94209047349096,
+      "longitude": -43.36628624454815,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -67,6 +67,34 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -81,34 +109,6 @@
         {
           "situation": "Wounded",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
         }
       ]
     },
@@ -393,6 +393,21 @@
       ]
     },
     {
+      "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
+      "documentNumber": 79209,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Nova Holanda (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-680, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
+      "latitude": -22.855,
+      "longitude": -43.243889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
       "documentNumber": 79210,
       "date": "2026-09-25T06:00:00.000Z",
@@ -417,21 +432,6 @@
       "locality": "MANGUEIRA",
       "latitude": -22.90514541,
       "longitude": -43.23489755,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
-      "documentNumber": 79209,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Nova Holanda (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-680, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
-      "latitude": -22.855,
-      "longitude": -43.243889,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -667,11 +667,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -782,151 +782,6 @@
       "latitude": -22.91,
       "longitude": -43.2575,
       "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "317504f6-38be-48fa-b7f2-be4cf4800470",
-      "documentNumber": 79147,
-      "date": "2026-09-21T18:00:00.000Z",
-      "address": "Comunidade Fernão Cardim - Engenho de Dentro, Rio de Janeiro - RJ, 20771-020, Brasil",
-      "neighborhood": "ENGENHO DE DENTRO",
-      "subNeighborhood": "",
-      "locality": "Comunidade FERNAO CARDIM",
-      "latitude": -22.88555202,
-      "longitude": -43.28747901,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "a259ffc2-e614-481d-8b4f-fd1797c6e8c4",
-      "documentNumber": 79146,
-      "date": "2026-09-21T17:50:00.000Z",
-      "address": "Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9324433,
-      "longitude": -43.2411073,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "16a11787-2024-4f59-a5f0-646b0b8ca5f2",
-      "documentNumber": 79140,
-      "date": "2026-09-21T17:00:00.000Z",
-      "address": "Morro do Cruz - Andaraí, Rio de Janeiro - RJ, 20530-530, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CRUZ",
-      "latitude": -22.930738,
-      "longitude": -43.251766,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "aa64da93-0f55-4307-aee7-673d652900ec",
-      "documentNumber": 79165,
-      "date": "2026-09-21T15:00:00.000Z",
-      "address": "Beira-Rio, Japeri - RJ, 26443-180, Brasil",
-      "neighborhood": "BEIRA RIO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6393432386323,
-      "longitude": -43.66761518037248,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "970ecceb-6c1f-4b3d-ae26-68e3b2e53660",
-      "documentNumber": 79127,
-      "date": "2026-09-21T08:00:00.000Z",
-      "address": "Rua Abrahão Jabour - Jacarepaguá, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9729943,
-      "longitude": -43.4089046,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "5b52b3e8-c32e-423e-85b1-e12d31d345c6",
-      "documentNumber": 79187,
-      "date": "2026-09-21T06:30:00.000Z",
-      "address": "Avenida Brasil - Cordovil, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8158921,
-      "longitude": -43.2895198,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "801f04a8-46e5-4649-b971-dd0feefb52ff",
-      "documentNumber": 79125,
-      "date": "2026-09-21T05:55:00.000Z",
-      "address": "Comunidade de Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8086939,
-      "longitude": -43.3071081,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "b3d2b551-b104-423d-b3d1-80aa96437b4c",
-      "documentNumber": 79114,
-      "date": "2026-09-21T02:50:00.000Z",
-      "address": "Rua do Monjolo, Pitangueiras, Rio de Janeiro, Rio de Janeiro, Brasil",
-      "neighborhood": "PITANGUEIRAS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8167096,
-      "longitude": -43.1804751,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "6e5117d1-2884-4144-a4c1-d2b7b4e2204e",
-      "documentNumber": 79117,
-      "date": "2026-09-21T01:45:00.000Z",
-      "address": "Comunidade Danon, Nova Iguaçu - RJ, 26270-080, Brasil",
-      "neighborhood": "DANON",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DANON",
-      "latitude": -22.77260584927679,
-      "longitude": -43.51081809717132,
-      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []

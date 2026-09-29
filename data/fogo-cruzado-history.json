@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T21:49:17.739Z",
+  "generatedAt": "2026-09-29T01:17:58.936Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -16,18 +16,18 @@
       "id": "89ef9a09-42a0-43a7-8031-d8d76b96adba",
       "documentNumber": 79255,
       "date": "2026-09-28T14:00:00.000Z",
-      "address": "Av. Cidade de Deus, Cidade de Deus, Rio de Janeiro - RJ, 22773-200, Brasil",
+      "address": "Cidade de Deus, Estrada Marechal Miguel Salazar Mendes de Moraes, Cidade de Deus, Rio de Janeiro - RJ, 22770-330, Brasil",
       "neighborhood": "CIDADE DE DEUS",
       "subNeighborhood": "",
       "locality": "CIDADE DE DEUS",
-      "latitude": -22.95012991880426,
-      "longitude": -43.365573769281006,
+      "latitude": -22.94209047349096,
+      "longitude": -43.36628624454815,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -66,6 +66,34 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -80,34 +108,6 @@
         {
           "situation": "Wounded",
           "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
         }
       ]
     },
@@ -666,11 +666,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
