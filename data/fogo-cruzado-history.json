@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T01:17:58.936Z",
+  "generatedAt": "2026-09-29T06:59:53.104Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 230,
+  "count": 231,
   "occurrences": [
+    {
+      "id": "f441b152-b739-4e84-ac39-54adfe93f281",
+      "documentNumber": 79257,
+      "date": "2026-09-28T22:00:00.000Z",
+      "address": "Jardim Sumaré, São João de Meriti - RJ, 25580-660, Brasil",
+      "neighborhood": "JARDIM SUMARE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7832509,
+      "longitude": -43.336763,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "89ef9a09-42a0-43a7-8031-d8d76b96adba",
       "documentNumber": 79255,
@@ -66,6 +86,50 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -80,34 +144,6 @@
         {
           "situation": "Wounded",
           "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
         }
       ]
     },
@@ -615,11 +651,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
@@ -662,15 +698,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
