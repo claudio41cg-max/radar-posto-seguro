@@ -1,16 +1,15 @@
 /* Radar Seguro RJ PRO — núcleo de navegação consolidado inspirado em SDKs maduros.
    Princípios:
-   1) TomTom é a única autoridade de rota/manobras.
-   2) Voz de manobra usa os announcement points retornados pela TomTom.
-   3) A lógica legada 350/120/35 é silenciada, sem afetar alertas Radar.
-   4) GPS/continuidade pertencem exclusivamente ao RadarGPS; este módulo não altera posição.
+   1) Rota pertence exclusivamente ao RadarRouting.
+   2) Este módulo consome a rota TomTom somente para guidance.
+   3) Voz de manobra usa os announcement points retornados pela TomTom.
+   4) GPS/continuidade pertencem exclusivamente ao RadarGPS.
 */
 (()=>{
 'use strict';
 if(window.__radarProfessionalCoreV1)return;
 window.__radarProfessionalCoreV1=true;
 
-const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const app=()=>{try{return window.RadarApp||window.App||null}catch(_){return null}};
 const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
 
@@ -136,57 +135,8 @@ function guidanceTick(){
   if(text)speakTomTom(text);
 }
 
-async function fetchTomTomAuthoritative(a,b){
-  const A=app();
-  if(!A)throw new Error('Radar indisponível');
-  const mode=A.transportMode==='motorcycle'?'motorcycle':'car';
-  const path='/routing/1/calculateRoute/'+a[1]+','+a[0]+':'+b[1]+','+b[0]+
-    '/json?traffic=true&travelMode='+encodeURIComponent(mode)+
-    '&instructionsType=text&language=pt-BR&routeType=fastest&avoid=unpavedRoads&computeTravelTimeFor=all&maxAlternatives=2';
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),9000);
-  try{
-    const r=await fetch(WORKER+'/v1/tomtom?path='+encodeURIComponent(path),{signal:controller.signal,cache:'no-store'});
-    if(!r.ok)throw new Error('TomTom HTTP '+r.status);
-    const j=await r.json();
-    if(!j.routes?.length)throw new Error('TomTom sem rota');
-    const rt=j.routes[0];
-    const coords=(rt.legs||[]).flatMap(leg=>(leg.points||[]).map(p=>[p.longitude,p.latitude]));
-    const steps=(rt.guidance?.instructions||[]).map(i=>({
-      name:i.street||i.roadNumbers?.[0]||'Siga pela via',
-      maneuver:{
-        type:i.maneuver||'',
-        modifier:typeof A.tomTomModifier==='function'?A.tomTomModifier(i.maneuver):'straight',
-        location:[i.point?.longitude,i.point?.latitude]
-      },
-      routeOffsetMeters:Number(i.routeOffsetInMeters)||0,
-      tomtomInstruction:i
-    }));
-    const route={
-      coords,
-      steps,
-      distance:Number(rt.summary?.lengthInMeters)||0,
-      duration:Number(rt.summary?.travelTimeInSeconds)||0,
-      trafficDelaySeconds:Number(rt.summary?.trafficDelayInSeconds||0),
-      liveTraffic:true,
-      engine:'tomtom',
-      routingVersion:'professional-v1',
-      tomtomRoute:rt
-    };
-    if(typeof A.prepareRouteGeometry==='function')A.prepareRouteGeometry(route);
-    return route;
-  }finally{clearTimeout(timeout);}
-}
-
-function installTomTomAuthority(a){
-  if(a.__professionalTomTomV1)return;
-  a.__professionalTomTomV1=true;
-  a.fetchTomTomRoute=fetchTomTomAuthoritative;
-  a.getRoute=async function(start,destination){
-    // Sem fallback silencioso: se TomTom falhar, o Radar avisa em vez de inventar outra rota.
-    return await fetchTomTomAuthoritative(start,destination);
-  };
-}
+/* A autoridade de rota foi movida para core/radar-routing-v1.js.
+   Este arquivo não cria, recalcula ou substitui rotas. */
 
 /* GPS continuity foi removida deste módulo.
    RadarGPS é agora o único dono de gps.position/gps.continuity.
@@ -195,7 +145,6 @@ function installTomTomAuthority(a){
 function install(){
   const a=app();
   if(!a?.map)return false;
-  installTomTomAuthority(a);
   wrapVoice();
   if(!window.__radarProfessionalGuidanceTimer){
     window.__radarProfessionalGuidanceTimer=setInterval(guidanceTick,220);
