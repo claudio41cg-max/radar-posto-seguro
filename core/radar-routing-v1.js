@@ -15,7 +15,10 @@
    - câmera;
    - persistência.
 
-   Regra: sem fallback silencioso para OSRM.
+   Estratégia de provedor:
+   - TomTom é a fonte principal;
+   - OSRM é contingência explícita, controlada por este mesmo módulo;
+   - nenhuma outra parte do app cria/substitui rota.
 */
 (()=>{'use strict';
 
@@ -34,7 +37,9 @@ const routeState=kernel.createDomain('routing',{
   lastError:null,
   activeRoute:null,
   origin:null,
-  destination:null
+  destination:null,
+  provider:null,
+  primaryError:null
 });
 
 let appRef=null;
@@ -106,6 +111,49 @@ function normalizeRoute(rt){
     engine:'tomtom',
     routingVersion:'routing-authority-v1',
     tomtomRoute:rt
+  };
+
+  window.RadarRouteProgress?.prepare?.(route);
+  return route;
+}
+
+function normalizeOSRMRoute(rt,primaryError=''){
+  const coords=(rt?.geometry?.coordinates||[])
+    .map(p=>[Number(p?.[0]),Number(p?.[1])])
+    .filter(validPoint);
+
+  if(coords.length<2){
+    throw new Error('OSRM retornou geometria inválida');
+  }
+
+  const steps=(rt?.legs||[])
+    .flatMap(leg=>leg?.steps||[])
+    .map(step=>({
+      name:step?.name||'Siga pela via',
+      maneuver:{
+        type:step?.maneuver?.type||'',
+        modifier:step?.maneuver?.modifier||'straight',
+        location:[
+          Number(step?.maneuver?.location?.[0]),
+          Number(step?.maneuver?.location?.[1])
+        ]
+      },
+      routeOffsetMeters:0,
+      osrmStep:step
+    }));
+
+  const route={
+    coords,
+    steps,
+    distance:Number(rt?.distance)||0,
+    duration:Number(rt?.duration)||0,
+    trafficDelaySeconds:0,
+    liveTraffic:false,
+    engine:'osrm',
+    provider:'OSRM',
+    routingVersion:'routing-authority-v1',
+    fallbackFrom:'tomtom',
+    primaryError:String(primaryError||'TomTom indisponível')
   };
 
   window.RadarRouteProgress?.prepare?.(route);
@@ -219,6 +267,113 @@ async function fetchTomTomRoute(origin,destination,options={}){
   }
 }
 
+
+async function fetchOSRMRoute(origin,destination,options={}){
+  if(!validPoint(origin)||!validPoint(destination)){
+    throw new Error('Origem ou destino inválido');
+  }
+
+  const via=validPoint(options.via)?options.via:null;
+  const points=[
+    origin,
+    ...(via?[via]:[]),
+    destination
+  ];
+
+  const coordText=points
+    .map(p=>Number(p[0]).toFixed(6)+','+Number(p[1]).toFixed(6))
+    .join(';');
+
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),8000);
+
+  try{
+    const response=await fetch(
+      'https://router.project-osrm.org/route/v1/driving/'+
+      coordText+
+      '?overview=full&geometries=geojson&steps=true&alternatives=false',
+      {
+        signal:controller.signal,
+        cache:'no-store'
+      }
+    );
+
+    if(!response.ok){
+      throw new Error('OSRM HTTP '+response.status);
+    }
+
+    const data=await response.json();
+    const route=data?.routes?.[0];
+
+    if(!route){
+      throw new Error('OSRM sem rota');
+    }
+
+    return route;
+
+  }finally{
+    clearTimeout(timeout);
+  }
+}
+
+async function fetchAuthoritativeRoute(origin,destination,options={},requestId=null){
+  let primaryError=null;
+
+  try{
+    const route=await fetchAuthoritativeRoute(
+      origin,
+      destination,
+      options,
+      requestId
+    );
+    route.provider='TomTom';
+    routeState.update({
+      provider:'tomtom',
+      primaryError:null
+    },{source:'provider:tomtom'});
+    return route;
+
+  }catch(error){
+    if(
+      error?.name==='AbortError'&&
+      requestId!=null&&
+      requestId!==generation
+    ){
+      throw error;
+    }
+
+    primaryError=String(error?.message||error);
+    console.warn('[RadarRouting] TomTom falhou; tentando contingência OSRM:',primaryError);
+
+    routeState.update({
+      provider:'osrm-fallback',
+      primaryError
+    },{source:'provider:fallback'});
+
+    const via=consumeViaPoint(options.via);
+
+    try{
+      const osrmRaw=await fetchOSRMRoute(
+        origin,
+        destination,
+        {via}
+      );
+
+      return normalizeOSRMRoute(
+        osrmRaw,
+        primaryError
+      );
+
+    }catch(fallbackError){
+      const fallbackMessage=String(fallbackError?.message||fallbackError);
+      throw new Error(
+        'TomTom: '+primaryError+
+        ' | OSRM: '+fallbackMessage
+      );
+    }
+  }
+}
+
 function applyRoute(route,{fit=true,recalculate=false}={}){
   const a=app();
   if(!a)throw new Error('Radar indisponível');
@@ -249,7 +404,9 @@ function applyRoute(route,{fit=true,recalculate=false}={}){
     activeRoute:route,
     origin:a.userPos?Array.from(a.userPos):null,
     destination:a.destination?Array.from(a.destination):null,
-    lastError:null
+    lastError:null,
+    provider:route.engine||route.provider||null,
+    primaryError:route.primaryError||null
   },{source:recalculate?'recalculate':'calculate'});
 
   kernel.emit(
@@ -351,10 +508,11 @@ async function recalculateRoute(){
   },{source:'recalculate'});
 
   try{
-    const newRoute=await fetchTomTomRoute(
+    const newRoute=await fetchAuthoritativeRoute(
       routeOrigin,
       a.destination,
-      {}
+      {},
+      requestId
     );
 
     if(requestId!==generation){
@@ -448,7 +606,7 @@ function bindApp(){
     fetchTomTomRoute(origin,destination,options);
 
   a.getRoute=(origin,destination,options={})=>
-    fetchTomTomRoute(origin,destination,options);
+    fetchAuthoritativeRoute(origin,destination,options);
 
   a.calculateRoute=(options)=>
     calculateRoute(options||{});
@@ -464,8 +622,10 @@ function bindApp(){
 }
 
 const api={
-  version:'1.0.0',
-  fetch:fetchTomTomRoute,
+  version:'1.1.0',
+  fetch:fetchAuthoritativeRoute,
+  fetchTomTom:fetchTomTomRoute,
+  fetchOSRM:fetchOSRMRoute,
   calculate:calculateRoute,
   recalculate:recalculateRoute,
   apply:applyRoute,
@@ -480,7 +640,7 @@ window.RadarRouting=Object.freeze(api);
 
 const registration=kernel.registerModule({
   name:'routing-authority-v1',
-  version:'1.0.0',
+  version:'1.1.0',
   owns:['navigation.route'],
 
   async start({resources}){
