@@ -13963,14 +13963,16 @@ window.RadarApp={
 document.addEventListener(
   'DOMContentLoaded',
   ()=>{
-    App.showRoutePreviewV43=()=>{
-      const routes=Array.isArray(App.routeAlternatives)&&App.routeAlternatives.length?App.routeAlternatives:[App.route];
-      return RoutePreviewV43.present(routes);
-    };
+    // ETAPA 1: prévia paralela de rotas desativada.
+    // A rota exibida deve vir da autoridade principal (TomTom), sem um segundo
+    // módulo reapresentando ou escolhendo alternativas por conta própria.
+    App.showRoutePreviewV43=()=>false;
     window.RadarApp=App;
 App.init();
-    setTimeout(()=>RouteChoiceGuardV44.init(),700);
-    setTimeout(()=>TrafficAssistantV40.init(),1200);
+    // ETAPA 1: módulos paralelos de rota desativados.
+    // RouteChoiceGuardV44 e TrafficAssistantV40 continuam definidos apenas
+    // para compatibilidade histórica, mas NÃO são inicializados.
+    // Isso impede timers, wrappers e recálculos concorrentes com a TomTom.
     setTimeout(()=>RadarVoicePickerV41.init(),500);
 
     const escapeFogoText=value=>String(value??'')
