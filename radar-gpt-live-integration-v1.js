@@ -137,8 +137,8 @@ function isOperationalCommand(text){
 
   return (
     /\b(rota|navegar|navegacao|iniciar navegacao|cancelar navegacao|cancelar rota|sair da rota|encerrar rota|trocar rota|recalcular rota)\b/.test(s)||
-    /\b(me leve|me leva|levar para|ir para|vamos para|quero ir|navegue para)\b/.test(s)||
-    /\b(onde fica)\b/.test(s)||
+    /\b(me leve|me leva|levar para|ir para|vamos para|quero ir|quero ir pra|quero ir para|navegue para|traca a rota|tracar rota)\b/.test(s)||
+    /\b(no caminho|na minha rota|pela minha rota|ao longo da rota|durante o caminho)\b/.test(s)||
     /\b(zoom|satelite|street view|mapa|comunidade|comunidades|postos|posto|radar proximo|radares proximos)\b/.test(s)
   );
 }
