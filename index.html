@@ -11870,10 +11870,238 @@ App.init();
   }catch(e){console.warn('v58 poi',e);VoiceAssistant.reply('Não consegui consultar esse lugar na TomTom agora.');}
   return true;
  }
+ function alongRouteQuery(q){
+  let n=norm(q).replace(/^radar[, ]*/,'').trim();
+  if(!/(no caminho|na minha rota|pela minha rota|ao longo da rota|durante o caminho|no trajeto)/.test(n))return '';
+
+  n=n
+   .replace(/\b(me leve|me leva|leve me|leva me|quero ir|quero parar|preciso parar|vamos|navegue|navegar|traca a rota|tracar rota)\b/g,' ')
+   .replace(/\b(para|pra|pro|ate|até|em|num|numa|no|na)\b/g,' ')
+   .replace(/\b(veja|ve|vê|procura|procurar|encontra|encontrar|ache|achar|tem|se tem)\b/g,' ')
+   .replace(/\b(no caminho|na minha rota|pela minha rota|ao longo da rota|durante o caminho|no trajeto)\b/g,' ')
+   .replace(/\b(mais proximo|mais proxima|mais perto|perto)\b/g,' ')
+   .replace(/\b(um|uma|o|a)\b/g,' ')
+   .replace(/\s+/g,' ')
+   .trim();
+
+  if(!n)return '';
+  if(/mcdonald|mc donald/.test(n))return 'McDonald’s';
+  if(/posto.*combustivel|posto.*gasolina|abastecer/.test(n))return 'posto de combustível';
+  if(/supermercado/.test(n))return 'supermercado';
+  if(/mercado/.test(n))return 'mercado';
+  if(/hospital|pronto atendimento|emergencia/.test(n))return 'hospital';
+  return n;
+ }
+
+ function wantsAlongRouteNavigation(q){
+  const n=norm(q);
+  return /\b(me leve|me leva|quero ir|quero parar|preciso parar|vamos para|navegue para|traca a rota|tracar rota)\b/.test(n);
+ }
+
+ async function tomtomSearchAround(query,lat,lon,radius=4500){
+  const path='/search/2/search/'+encodeURIComponent(query)+
+   '.json?lat='+Number(lat).toFixed(6)+
+   '&lon='+Number(lon).toFixed(6)+
+   '&radius='+Math.round(radius)+
+   '&limit=12&countrySet=BR&language=pt-BR';
+
+  const r=await fetch(WORKER+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
+  if(!r.ok)throw new Error('search '+r.status);
+  const d=await r.json();
+  return (d?.results||[]).filter(x=>
+   Number.isFinite(Number(x?.position?.lat))&&
+   Number.isFinite(Number(x?.position?.lon))
+  );
+ }
+
+ function scorePlaceOnRemainingRoute(item){
+  const route=App?.route;
+  const coords=route?.coords;
+  if(!Array.isArray(coords)||coords.length<2)return null;
+
+  const point=[
+   Number(item.position.lon),
+   Number(item.position.lat)
+  ];
+
+  const start=Math.max(0,Math.min(
+   Number(App.routeProgressIndex||0),
+   coords.length-2
+  ));
+
+  let bestDistance=Infinity;
+  let bestIndex=start;
+
+  for(let i=start;i<coords.length-1;i++){
+   const hit=Utils.pointToSegment(
+    point,
+    coords[i],
+    coords[i+1]
+   );
+
+   if(hit.distanceMeters<bestDistance){
+    bestDistance=hit.distanceMeters;
+    bestIndex=i;
+   }
+  }
+
+  const cumulative=route.cumulative||[];
+  const currentMeters=Math.max(0,Number(App.routeProgressMeters||0));
+  const routeMeters=Number(cumulative[bestIndex]||0);
+  const aheadMeters=Math.max(0,routeMeters-currentMeters);
+
+  if(bestDistance>2500)return null;
+
+  return {
+   item,
+   lateralMeters:bestDistance,
+   aheadMeters,
+   score:aheadMeters+bestDistance*4
+  };
+ }
+
+ async function findPlaceAlongRoute(query){
+  const route=App?.route;
+  const coords=route?.coords;
+
+  if(!App?.navActive||!Array.isArray(coords)||coords.length<2){
+   return null;
+  }
+
+  const start=Math.max(0,Math.min(
+   Number(App.routeProgressIndex||0),
+   coords.length-2
+  ));
+
+  const end=coords.length-1;
+  const fractions=[0.12,0.42,0.72];
+  const sampleIndexes=[start];
+
+  for(const fraction of fractions){
+   sampleIndexes.push(
+    Math.min(
+     end,
+     start+Math.round((end-start)*fraction)
+    )
+   );
+  }
+
+  const uniqueIndexes=[...new Set(sampleIndexes)];
+  const candidates=new Map();
+
+  for(const idx of uniqueIndexes){
+   const p=coords[idx];
+   if(!p)continue;
+
+   try{
+    const items=await tomtomSearchAround(
+     query,
+     p[1],
+     p[0],
+     4500
+    );
+
+    for(const item of items){
+     const lat=Number(item.position.lat);
+     const lon=Number(item.position.lon);
+     const key=String(item.id||'')||lat.toFixed(5)+','+lon.toFixed(5);
+     if(!candidates.has(key))candidates.set(key,item);
+    }
+   }catch(e){
+    console.warn('v58 busca ao longo da rota',e);
+   }
+  }
+
+  const ranked=[...candidates.values()]
+   .map(scorePlaceOnRemainingRoute)
+   .filter(Boolean)
+   .sort((a,b)=>a.score-b.score);
+
+  if(!ranked.length)return null;
+
+  const best=ranked[0];
+  const item=best.item;
+  return {
+   name:String(item?.poi?.name||query).trim(),
+   lon:Number(item.position.lon),
+   lat:Number(item.position.lat),
+   address:item?.address?.freeformAddress||
+    [item?.address?.streetName,item?.address?.municipalitySubdivision,item?.address?.municipality]
+     .filter(Boolean).join(', '),
+   lateralMeters:best.lateralMeters,
+   aheadMeters:best.aheadMeters
+  };
+ }
+
+ async function answerAlongRoutePlace(query,autoNavigate=false){
+  if(!App?.navActive||!App?.route?.coords?.length){
+   VoiceAssistant.reply('Você ainda não está em uma rota ativa. Posso procurar '+query+' perto de você.');
+   return answerNearestPlace(query);
+  }
+
+  try{
+   App.toast('Procurando '+query+' no seu caminho...',5000);
+
+   const found=await findPlaceAlongRoute(query);
+
+   if(!found){
+    VoiceAssistant.reply('Não encontrei '+query+' suficientemente perto da sua rota atual.');
+    return true;
+   }
+
+   pendingPlace={
+    ...found,
+    mode:'route-stop',
+    createdAt:Date.now()
+   };
+
+   let text='Encontrei '+found.name+' no seu caminho';
+   if(found.address)text+=' em '+found.address;
+   if(found.aheadMeters>0){
+    text+=', aproximadamente '+(
+     found.aheadMeters<1000
+      ?Math.max(50,Math.round(found.aheadMeters/50)*50)+' metros'
+      :(found.aheadMeters/1000).toFixed(1).replace('.',',')+' km'
+    )+' adiante';
+   }
+   text+='.';
+
+   if(autoNavigate){
+    VoiceAssistant.reply(text+' Vou incluir como parada na sua rota.');
+    return acceptPendingPlace();
+   }
+
+   VoiceAssistant.reply(text+' Quer incluir como parada na rota?');
+   return true;
+
+  }catch(e){
+   console.warn('v58 parada na rota',e);
+   VoiceAssistant.reply('Não consegui procurar esse local ao longo da rota agora.');
+   return true;
+  }
+ }
+
  async function acceptPendingPlace(){
   if(!pendingPlace||Date.now()-pendingPlace.createdAt>90000){pendingPlace=null;return false;}
   const p=pendingPlace;pendingPlace=null;
   try{
+   if(
+    p.mode==='route-stop'&&
+    App?.destination&&
+    App?.route&&
+    window.RadarRouteViaV115?.useViaPoint
+   ){
+    VoiceAssistant.reply('Certo. Vou incluir '+p.name+' como parada no caminho.');
+    const ok=await window.RadarRouteViaV115.useViaPoint({
+     lat:p.lat,
+     lon:p.lon,
+     label:p.name,
+     query:p.name
+    },false);
+    if(!ok)throw new Error('não foi possível inserir a parada');
+    return true;
+   }
+
    App.destination=[p.lon,p.lat];
    App.destinationName=p.name;
    App.destinationLabel=p.name;
@@ -11991,6 +12219,15 @@ App.init();
     // Portanto, quando a frase termina apenas em "mais próximo/mais perto", tratamos
     // isso como o mesmo pedido relativo à posição atual/casa, sem deixar outro fluxo decidir.
     command=normalizedCommand;
+
+    const alongQuery=alongRouteQuery(command);
+    if(alongQuery){
+      return answerAlongRoutePlace(
+        alongQuery,
+        wantsAlongRouteNavigation(command)
+      );
+    }
+
     const pq=nearestPlaceQuery(command);
     if(pq){
       let cleaned=norm(command)
@@ -12008,7 +12245,13 @@ App.init();
   return true;
  }
  if(!install()){let n=0,id=setInterval(()=>{if(install()||++n>80)clearInterval(id)},250)}
- window.RadarV58={resolvePlace,hideTrafficVisual,answerNearestPlace};
+ window.RadarV58={
+  resolvePlace,
+  hideTrafficVisual,
+  answerNearestPlace,
+  findPlaceAlongRoute,
+  answerAlongRoutePlace
+ };
  console.info('Radar v58 consolidação estrutural ativa');
 })();
 </script>
