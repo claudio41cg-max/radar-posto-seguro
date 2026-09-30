@@ -122,7 +122,9 @@ function isLocalRadarCommand(text){
     /\b(me leve|me leva|levar para|ir para|vamos para|quero ir|navegue para)\b/.test(s)||
     /\b(onde fica)\b/.test(s)||
     /\b(zoom|satelite|street view|mapa|comunidade|comunidades|postos|posto|radar proximo|radares proximos)\b/.test(s)||
-    /\b(qual minha velocidade|que velocidade|velocidade atual)\b/.test(s)
+    /\b(qual minha velocidade|que velocidade|velocidade atual)\b/.test(s)||
+    /\b(qual e a distancia|qual a distancia|distancia ate|distancia para|quanto falta|quantos km|quantos quilometros|tempo falta|quanto tempo falta|hora de chegada)\b/.test(s)||
+    /\b(destino final|onde fica o destino final|onde e o destino final|qual e o destino final|local final)\b/.test(s)
   );
 }
 
@@ -230,8 +232,8 @@ function context(){
     'Você é a voz inteligente do aplicativo Radar Seguro RJ PRO.',
     'Fale sempre em português brasileiro, de forma curta, natural e útil para um motorista.',
     'Os dados abaixo vêm do próprio aplicativo e devem ser tratados como o estado atual do Radar.',
-    'Quando o usuário fizer um comando operacional do mapa, localização ou rota, NÃO tente executar nem inventar a ação. O Radar local executará e responderá.',
-    'Não diga "aguarde", "estou verificando" ou "estou pesquisando" se o estado local já contém a resposta.',
+    'Quando o usuário fizer um comando operacional do mapa, localização, destino, distância, tempo restante, velocidade ou rota, NÃO responda usando coordenadas e NÃO diga que vai pesquisar. Fique em silêncio até receber um bloco RADAR_LOCAL_RESULT; então fale somente esse resultado de forma natural.',
+    'Não diga "aguarde", "estou verificando", "estou pesquisando", "estou pensando" ou frases semelhantes para comandos do Radar.',
     'Nunca invente ocorrência, trânsito, fiscalização, preço de combustível ou notícia atual.',
     'Não diga que é Gemini. Você é o assistente GPT Live do Radar Seguro.'
   ];
@@ -346,7 +348,7 @@ function startContextSync(){
 
   syncTimer=setInterval(
     ()=>syncContext(false),
-    1500
+    3000
   );
 }
 
@@ -448,27 +450,33 @@ function patchLocalAssistant(){
   */
   if(originalReply){
     va.reply=function(text,priority=true){
-      const spoken=
-        String(text||'').trim();
+      const spoken=String(text||'').trim();
 
       if(isUsefulLocalFact(spoken)){
         lastLocalFact=spoken;
       }
 
-      const result=
-        originalReply(
-          text,
-          priority
-        );
-
       if(active||starting){
-        setTimeout(
-          ()=>syncContext(true),
-          40
-        );
+        /*
+          GPT Live ativo:
+          - NÃO chama originalReply(), portanto não usa a voz TTS do Android;
+          - NÃO abre o toast preto com a resposta;
+          - entrega o fato confirmado ao GPT e pede que ELE fale.
+        */
+        if(spoken){
+          try{
+            window.RadarGPTLive?.speakContext?.(
+              'RADAR_LOCAL_RESULT: '+spoken+
+              '\nFale este resultado ao motorista agora, de forma curta e natural. Não mencione coordenadas se o endereço já estiver presente. Não diga que está pesquisando ou pensando.'
+            );
+          }catch{}
+        }
+
+        setTimeout(()=>syncContext(true),40);
+        return true;
       }
 
-      return result;
+      return originalReply(text,priority);
     };
   }
 
@@ -534,13 +542,17 @@ async function runLocalAction(text){
 
   try{
     /*
-      Cancela a resposta que o GPT poderia começar a gerar para a mesma fala.
-      A partir daqui, apenas o parser local assume este comando.
+      A frase operacional é assumida pelo Radar local.
+      Avisamos a sessão Live para não improvisar resposta enquanto o
+      parser resolve rua/destino/distância. Depois, va.reply() entrega
+      o resultado confirmado ao GPT para ser falado pela voz GPT.
     */
     try{
-      window.RadarGPTLive
-      ?.cancelResponse
-      ?.();
+      window.RadarGPTLive?.appendContext?.(
+        'RADAR_LOCAL_COMMAND: o aplicativo Radar está processando internamente o pedido "'+
+        String(text||'').slice(0,240)+
+        '". Não responda a este pedido ainda. Aguarde RADAR_LOCAL_RESULT.'
+      );
     }catch{}
 
     await Promise.resolve(
@@ -692,16 +704,14 @@ async function start(){
           active=false;
 
           stopContextSync();
-
           buttonState(false);
 
+          // Não despeja mensagem técnica enorme na tela do motorista.
+          console.warn('GPT Live:',detail);
+
           toast(
-            'GPT Live: '+
-            String(
-              detail||
-              'erro de conexão'
-            ),
-            5000
+            'GPT Live temporariamente indisponível.',
+            2800
           );
         }
 
