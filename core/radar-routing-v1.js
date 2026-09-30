@@ -147,26 +147,38 @@ async function fetchTomTomRoute(origin,destination,options={}){
   const mode=a.transportMode==='motorcycle'?'motorcycle':'car';
   const via=consumeViaPoint(options.via);
 
+  const pointText=p=>
+    Number(p[1]).toFixed(6)+','+
+    Number(p[0]).toFixed(6);
+
   const routePoints=via
-    ?origin[1]+','+origin[0]+':'+via[1]+','+via[0]+':'+destination[1]+','+destination[0]
-    :origin[1]+','+origin[0]+':'+destination[1]+','+destination[0];
+    ?pointText(origin)+':'+pointText(via)+':'+pointText(destination)
+    :pointText(origin)+':'+pointText(destination);
 
   /*
-    maxAlternatives=0:
-    esta autoridade pede somente a rota principal.
-    Nenhum módulo paralelo pode criar "segunda rota" por conta própria.
+    Mantém a autoridade única e maxAlternatives=0, mas usa o mesmo formato
+    de requisição TomTom que já era estável nas versões V223:
+    geometria explícita, guidance completo e announcement points.
   */
+  const params=new URLSearchParams({
+    traffic:'true',
+    travelMode:mode,
+    instructionsType:'text',
+    instructionAnnouncementPoints:'all',
+    language:'pt-BR',
+    routeType:'fastest',
+    avoid:'unpavedRoads',
+    routeRepresentation:'polyline',
+    computeTravelTimeFor:'all',
+    maxAlternatives:'0'
+  });
+
+  params.append('sectionType','speedLimit');
+
   const path=
     '/routing/1/calculateRoute/'+
     routePoints+
-    '/json?traffic=true'+
-    '&travelMode='+encodeURIComponent(mode)+
-    '&instructionsType=text'+
-    '&language=pt-BR'+
-    '&routeType=fastest'+
-    '&avoid=unpavedRoads'+
-    '&computeTravelTimeFor=all'+
-    '&maxAlternatives=0';
+    '/json?'+params.toString();
 
   if(activeController){
     try{activeController.abort()}catch(_){}
@@ -175,7 +187,7 @@ async function fetchTomTomRoute(origin,destination,options={}){
   const controller=new AbortController();
   activeController=controller;
 
-  const timeout=setTimeout(()=>controller.abort(),9000);
+  const timeout=setTimeout(()=>controller.abort(),12000);
 
   try{
     const response=await fetch(
