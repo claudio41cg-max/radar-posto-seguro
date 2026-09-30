@@ -402,7 +402,27 @@ function bindApp(){
   const a=window.RadarApp||window.App||null;
   if(!a)return false;
 
-  appRef=a;
+  /*
+    Durante o carregamento o index cria primeiro um RadarApp provisório
+    contendo apenas sendReport. Não podemos ligar a autoridade de rota
+    nesse objeto temporário, porque ele é substituído pelo App real no
+    DOMContentLoaded.
+  */
+  const ready=
+    typeof a.searchAddress==='function' &&
+    typeof a.drawRoute==='function' &&
+    typeof a.startNavigation==='function' &&
+    Object.prototype.hasOwnProperty.call(a,'userPos') &&
+    Object.prototype.hasOwnProperty.call(a,'destination');
+
+  if(!ready)return false;
+
+  /*
+    Se o objeto global foi substituído, reconecta a autoridade ao App real.
+  */
+  if(appRef!==a){
+    appRef=a;
+  }
 
   if(a.__radarRoutingAuthorityV1Bound)return true;
   a.__radarRoutingAuthorityV1Bound=true;
