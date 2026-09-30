@@ -3,7 +3,7 @@
    1) TomTom é a única autoridade de rota/manobras.
    2) Voz de manobra usa os announcement points retornados pela TomTom.
    3) A lógica legada 350/120/35 é silenciada, sem afetar alertas Radar.
-   4) Perda curta de GPS usa continuidade conservadora sem redesenhar rota/HUD a cada segundo.
+   4) GPS/continuidade pertencem exclusivamente ao RadarGPS; este módulo não altera posição.
 */
 (()=>{
 'use strict';
@@ -188,46 +188,14 @@ function installTomTomAuthority(a){
   };
 }
 
-function installGpsGapPolicy(a){
-  if(a.__professionalGpsGapV1)return;
-  a.__professionalGpsGapV1=true;
-  a.continueDuringGPSGap=function(){
-    if(!this.navActive||!this.route?.cumulative?.length||!this.lastGPSAt||this.rerouting)return;
-    const gapMs=Date.now()-this.lastGPSAt;
-    if(gapMs<=2200)return;
-    if(gapMs>8000||this.lastTrustedSpeed<6||this.currentAccuracy>50){
-      if(gapMs>8000)this.setGPSStatus?.(false,'GPS...');
-      return;
-    }
-    const speedMps=this.lastTrustedSpeed/3.6;
-    const advance=Math.min(45,speedMps*(gapMs/1000));
-    const total=this.route.cumulative[this.route.cumulative.length-1]||0;
-    const target=Math.min(total,this.lastTrustedProgressMeters+advance);
-    if(target<=this.routeProgressMeters+.5)return;
-    const index=this.findIndexForOffset(this.route,target);
-    const nextIndex=Math.min(index+1,this.route.coords.length-1);
-    const p0=this.route.coords[index],p1=this.route.coords[nextIndex];
-    if(!p0||!p1)return;
-    const d0=this.route.cumulative[index]||0;
-    const d1=this.route.cumulative[nextIndex]||d0;
-    const t=Math.max(0,Math.min(1,(target-d0)/Math.max(1,d1-d0)));
-    this.userPos=Utils.interpolatePoint(p0,p1,t);
-    this.routeProgressIndex=Math.max(this.routeProgressIndex,index);
-    this.routeProgressMeters=target;
-    this.currentBearing=Utils.bearing(p0,p1);
-    // Intencionalmente NÃO chama updateRemainingRouteLine/updateNavigation:
-    // evita re-renderização e voz duplicada enquanto o GPS real está ausente.
-    this.updateUserMarker?.();
-    this.updateSpeedUI?.();
-    this.setGPSStatus?.(true,'GPS EST.');
-  };
-}
+/* GPS continuity foi removida deste módulo.
+   RadarGPS é agora o único dono de gps.position/gps.continuity.
+   Este núcleo continua responsável apenas por rota TomTom + guidance. */
 
 function install(){
   const a=app();
   if(!a?.map)return false;
   installTomTomAuthority(a);
-  installGpsGapPolicy(a);
   wrapVoice();
   if(!window.__radarProfessionalGuidanceTimer){
     window.__radarProfessionalGuidanceTimer=setInterval(guidanceTick,220);
