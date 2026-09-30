@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T22:59:50.656Z",
+  "generatedAt": "2026-09-30T01:59:48.648Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 232,
+  "count": 233,
   "occurrences": [
+    {
+      "id": "cb2b04a6-d5d7-49da-b426-7e15fa701d41",
+      "documentNumber": 79272,
+      "date": "2026-09-29T15:00:00.000Z",
+      "address": "Camorim, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CAMORIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9693529,
+      "longitude": -43.4274676,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "f58ac028-068f-424e-8f9a-66e739f75d2d",
       "documentNumber": 79267,
@@ -114,26 +129,6 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -164,6 +159,26 @@
         {
           "situation": "Wounded",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -723,15 +738,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
