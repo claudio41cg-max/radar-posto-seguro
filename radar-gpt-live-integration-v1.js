@@ -43,6 +43,7 @@ let lastContextSignature='';
 let lastResolvedAddress='';
 let lastAddressPoint=null;
 let lastLocalFact='';
+let lastMentionedPlace='';
 let localCommandInFlight=false;
 
 function getLexical(name){
@@ -90,6 +91,37 @@ function normalizeText(text){
     .toLowerCase()
     .replace(/\s+/g,' ')
     .trim();
+}
+
+function extractMentionedPlace(text){
+  const raw=String(text||'').trim();
+  const match=raw.match(
+    /onde\s+(?:e\s+que\s+)?fica\s+(?:o\s+|a\s+)?(.+?)[?.!,;:]*$/i
+  );
+
+  if(!match)return '';
+
+  const place=String(match[1]||'')
+    .replace(/\s+/g,' ')
+    .trim();
+
+  if(
+    !place||
+    /^(meu destino|o destino|destino final|a minha rua|minha rua|meu bairro|minha localizacao)$/i.test(place)
+  ){
+    return '';
+  }
+
+  return place;
+}
+
+function refersToLastPlace(text){
+  const s=normalizeText(text);
+
+  return (
+    /\b(me leve|me leva|quero ir|vamos|navegue|ir)\b/.test(s)&&
+    /\b(la|ali|esse lugar|esse local|pra la|para la|ate la)\b/.test(s)
+  );
 }
 
 function isUsefulLocalFact(text){
@@ -785,10 +817,31 @@ async function handleFinalUserTranscript(text){
   }
 
   /*
+    "Onde fica X?" é conversa, não rota. Guardamos apenas o referente
+    para uma possível continuação explícita como "me leva pra lá".
+  */
+  const mentioned=extractMentionedPlace(phrase);
+  if(mentioned){
+    lastMentionedPlace=mentioned;
+    return;
+  }
+
+  let operationalPhrase=phrase;
+
+  if(
+    lastMentionedPlace&&
+    refersToLastPlace(phrase)
+  ){
+    operationalPhrase=
+      'me leva para '+
+      lastMentionedPlace;
+  }
+
+  /*
     Apenas comandos que realmente alteram o Radar seguem para o parser local.
   */
-  if(isOperationalCommand(phrase)){
-    await runOperationalAction(phrase);
+  if(isOperationalCommand(operationalPhrase)){
+    await runOperationalAction(operationalPhrase);
   }
 }
 
