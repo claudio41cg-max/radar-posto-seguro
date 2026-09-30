@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T01:59:48.646Z",
+  "generatedAt": "2026-09-30T08:19:43.463Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 35,
-  "lastUpdate": "2026-09-29T22:14:50-03:00",
+  "count": 37,
+  "lastUpdate": "2026-09-29T23:36:22-03:00",
   "occurrences": [
     {
       "id": "cb2b04a6-d5d7-49da-b426-7e15fa701d41",
@@ -122,42 +122,6 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Agent"
         },
@@ -170,6 +134,26 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -179,6 +163,22 @@
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -197,6 +197,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "6709cda6-e181-491f-b0fe-1efa96575b87",
+      "documentNumber": 79273,
+      "date": "2026-09-27T22:00:00.000Z",
+      "address": "Marechal Hermes, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARECHAL HERMES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8599085,
+      "longitude": -43.3697557,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "aec82ba9-1824-46f0-9474-dcbaa8b37c33",
@@ -296,6 +316,21 @@
       "latitude": -22.7561319,
       "longitude": -43.4607419,
       "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "f0e54ec1-c00e-436c-837c-ae95f23ba806",
+      "documentNumber": 79274,
+      "date": "2026-09-26T22:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Pavuna, Rio de Janeiro - RJ, 21520-001, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.81652595721024,
+      "longitude": -43.35801636001893,
+      "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -430,11 +465,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -442,6 +477,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
+      "documentNumber": 79202,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
+      "neighborhood": "MANGUEIRA",
+      "subNeighborhood": "",
+      "locality": "MANGUEIRA",
+      "latitude": -22.90514541,
+      "longitude": -43.23489755,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
@@ -468,21 +518,6 @@
       "locality": "VILA ALIANCA",
       "latitude": -22.86909773,
       "longitude": -43.47777013,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
-      "documentNumber": 79202,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
-      "neighborhood": "MANGUEIRA",
-      "subNeighborhood": "",
-      "locality": "MANGUEIRA",
-      "latitude": -22.90514541,
-      "longitude": -43.23489755,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -652,11 +687,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },

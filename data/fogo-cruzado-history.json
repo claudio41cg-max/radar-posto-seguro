@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T01:59:48.648Z",
+  "generatedAt": "2026-09-30T08:19:43.465Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 233,
+  "count": 235,
   "occurrences": [
     {
       "id": "cb2b04a6-d5d7-49da-b426-7e15fa701d41",
@@ -121,42 +121,6 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Agent"
         },
@@ -169,6 +133,26 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -178,6 +162,22 @@
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -196,6 +196,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "6709cda6-e181-491f-b0fe-1efa96575b87",
+      "documentNumber": 79273,
+      "date": "2026-09-27T22:00:00.000Z",
+      "address": "Marechal Hermes, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARECHAL HERMES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8599085,
+      "longitude": -43.3697557,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "aec82ba9-1824-46f0-9474-dcbaa8b37c33",
@@ -295,6 +315,21 @@
       "latitude": -22.7561319,
       "longitude": -43.4607419,
       "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "f0e54ec1-c00e-436c-837c-ae95f23ba806",
+      "documentNumber": 79274,
+      "date": "2026-09-26T22:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Pavuna, Rio de Janeiro - RJ, 21520-001, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.81652595721024,
+      "longitude": -43.35801636001893,
+      "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -449,11 +484,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -691,11 +726,11 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
