@@ -35,6 +35,7 @@ let originalToast=null;
 let originalScheduleHandsFree=null;
 let originalResumeHandsFree=null;
 let originalOnAssistantSpeechEnded=null;
+let originalHandle=null;
 
 let syncTimer=null;
 let addressTimer=null;
@@ -604,6 +605,32 @@ function patchLocalAssistant(){
     typeof va.onAssistantSpeechEnded==='function'
       ?va.onAssistantSpeechEnded.bind(va)
       :null;
+
+  originalHandle=
+    typeof va.handle==='function'
+      ?va.handle.bind(va)
+      :null;
+
+  /*
+    Com GPT Live ativo, somente este controlador pode entregar comandos
+    operacionais ao parser local. Qualquer evento atrasado do
+    SpeechRecognition antigo é descartado antes de processar a fala.
+  */
+  if(originalHandle){
+    va.handle=function(text,...rest){
+      if(
+        liveOwnsVoice()&&
+        !localCommandInFlight
+      ){
+        return true;
+      }
+
+      return originalHandle(
+        text,
+        ...rest
+      );
+    };
+  }
 
   if(originalReply){
     va.reply=function(text,priority=true){
