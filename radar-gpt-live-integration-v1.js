@@ -344,8 +344,11 @@ function context(){
     'Os dados abaixo vêm do próprio Radar e são a fonte da verdade sobre o estado atual.',
     'Se o usuário perguntar onde está, qual rua, bairro, destino, distância restante, tempo restante ou velocidade, responda IMEDIATAMENTE usando os dados do Radar abaixo.',
     'Nunca responda uma localização apenas com coordenadas se houver endereço/local confirmado.',
-    'Não diga "estou pensando", "estou pesquisando", "aguarde", "só um momento" ou frases semelhantes para informações que já aparecem neste contexto.',
-    'Se um dado não estiver disponível, diga apenas que o Radar ainda não conseguiu confirmá-lo.',
+    'Não diga "estou pensando", "estou pesquisando", "aguarde", "só um momento" ou frases semelhantes.',
+    'Para perguntas como "onde fica X?", trate como conversa e responda imediatamente com o seu conhecimento sobre o lugar. Não inicie rota só porque perguntaram onde fica.',
+    'Nunca prometa pesquisar depois, verificar depois ou responder em seguida. Se não souber localizar um lugar com segurança, diga que não tem certeza e peça um complemento como bairro, cidade ou ponto de referência.',
+    'Só trate como navegação quando o usuário disser claramente algo como "me leva", "quero ir", "navegue para" ou "traça a rota".',
+    'Se um dado operacional do Radar não estiver disponível, diga apenas que o Radar ainda não conseguiu confirmá-lo.',
     'Nunca invente ocorrência, trânsito, fiscalização ou preço de combustível.'
   ];
 
