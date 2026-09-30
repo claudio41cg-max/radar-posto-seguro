@@ -318,13 +318,17 @@ async function fetchOSRMRoute(origin,destination,options={}){
 
 async function fetchAuthoritativeRoute(origin,destination,options={},requestId=null){
   let primaryError=null;
+  const via=consumeViaPoint(options.via);
+  const providerOptions={
+    ...options,
+    via
+  };
 
   try{
-    const route=await fetchAuthoritativeRoute(
+    const route=await fetchTomTomRoute(
       origin,
       destination,
-      options,
-      requestId
+      providerOptions
     );
     route.provider='TomTom';
     routeState.update({
@@ -350,13 +354,11 @@ async function fetchAuthoritativeRoute(origin,destination,options={},requestId=n
       primaryError
     },{source:'provider:fallback'});
 
-    const via=consumeViaPoint(options.via);
-
     try{
       const osrmRaw=await fetchOSRMRoute(
         origin,
         destination,
-        {via}
+        providerOptions
       );
 
       return normalizeOSRMRoute(
@@ -446,7 +448,12 @@ async function calculateRoute(options={}){
   try{a.toast?.('Calculando melhor rota...')}catch(_){}
 
   try{
-    const route=await fetchTomTomRoute(origin,destination,options);
+    const route=await fetchAuthoritativeRoute(
+      origin,
+      destination,
+      options,
+      requestId
+    );
 
     /*
       Se outra solicitação começou depois, esta resposta ficou velha.
