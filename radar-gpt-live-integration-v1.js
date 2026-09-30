@@ -1197,9 +1197,31 @@ function bindLifecycle(){
   );
 
   window.addEventListener(
+    'pagehide',
+    ()=>{
+      /*
+        A página antiga não pode deixar um WebRTC vivo enquanto o Android
+        restaura/recarrega outra instância do Radar. Preservamos apenas a
+        intenção de manter o Live ligado; o transporte antigo é encerrado.
+      */
+      if(liveOwnsVoice()||liveWanted()){
+        resumeWanted=true;
+      }
+
+      active=false;
+      starting=false;
+      stopContextSync();
+
+      try{
+        window.RadarGPTLive?.stop?.();
+      }catch{}
+    }
+  );
+
+  window.addEventListener(
     'pageshow',
     ()=>{
-      if(liveOwnsVoice()||resumeWanted){
+      if(liveOwnsVoice()||resumeWanted||liveWanted()){
         resumeWanted=true;
         setTimeout(
           ()=>resumeLiveIfNeeded(),
