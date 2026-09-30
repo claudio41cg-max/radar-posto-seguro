@@ -23,7 +23,20 @@ function clearUi(a){try{document.body.classList.remove('nav-mode');}catch(_){}tr
  try{a?.hideTrafficLightHud?.();}catch(_){}
 }
 function clearState(a){if(!a)return;
- try{a.navActive=false;a.route=null;a.destination=null;a.routeAlternatives=[];a.routeProgressIndex=0;a.routeProgressMeters=0;a.lastTrustedProgressMeters=0;a.lastTrustedSpeed=0;a.routeStepIndex=0;a.activeGuidanceStep=-1;a.lastGuidanceStep=-1;a.announced={};a.rerouting=false;a.offRouteHits=0;a.lastArrivalAnnounced=false;a.followMode=true;}catch(_){}
+ // ETAPA 1: cancelamento agora também invalida a persistência salva.
+ // Primeiro chama o módulo oficial de persistência; depois usa fallback direto
+ // para impedir que uma rota antiga sobreviva a qualquer ordem de carregamento.
+ try{window.RadarNavigationPersistenceV134?.cancel?.();}catch(_){}
+ try{localStorage.removeItem('radar-nav-v134');localStorage.setItem('radar-nav-cancelled-v1',String(Date.now()));}catch(_){}
+ try{a.__routePersistenceBlocked=true;}catch(_){}
+
+ // Mata timers/estado residual dos módulos legados de rota.
+ // Eles não devem continuar trabalhando depois de um cancelamento.
+ try{if(window.TrafficAssistantV40?.timer){clearTimeout(window.TrafficAssistantV40.timer);window.TrafficAssistantV40.timer=null;}window.TrafficAssistantV40&&(window.TrafficAssistantV40.pending=null);}catch(_){}
+ try{window.RoutePreviewV43?.cancel?.();}catch(_){}
+ try{window.RouteChoiceGuardV44?.hide?.();}catch(_){}
+
+ try{a.navActive=false;a.navigating=false;a.navigationActive=false;a.routeActive=false;a.route=null;a.destination=null;a.routeAlternatives=[];a.routeProgressIndex=0;a.routeProgressMeters=0;a.lastTrustedProgressMeters=0;a.lastTrustedSpeed=0;a.routeStepIndex=0;a.activeGuidanceStep=-1;a.lastGuidanceStep=-1;a.announced={};a.rerouting=false;a.offRouteHits=0;a.lastArrivalAnnounced=false;a.followMode=true;}catch(_){}
  try{a.destinationMarker?.remove?.();a.destinationMarker=null;}catch(_){}
  try{window.RadarRouteChoiceLock=null;window.__radarRouteCancelledAt=Date.now();}catch(_){}
  stopVoice();clearUi(a);clearVisuals(a);
