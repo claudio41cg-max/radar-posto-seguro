@@ -471,6 +471,23 @@ function gpsDistanceMeters(a,b){
   return 2*R*Math.asin(Math.sqrt(x));
 }
 
+async function waitForRadarLocation(timeoutMs=7000){
+  const deadline=Date.now()+Math.max(1000,Number(timeoutMs||7000));
+
+  try{
+    window.RadarGPS?.resume?.();
+  }catch{}
+
+  while(Date.now()<deadline){
+    const gps=roundedGps(app());
+    if(gps)return gps;
+
+    await new Promise(resolve=>setTimeout(resolve,180));
+  }
+
+  return roundedGps(app());
+}
+
 async function refreshAddress(force=false){
   if(!liveOwnsVoice())return false;
 
@@ -1002,9 +1019,16 @@ async function start(){
     lastContextSignature='';
 
     /*
-      Antes de abrir a sessão Live, resolve a localização textual atual.
-      Assim o GPT já nasce sabendo rua/bairro/local, em vez de depender
-      de uma atualização de contexto posterior que pode chegar tarde.
+      Depois de reload/retorno do Android, o GPS modular pode levar alguns
+      instantes para repassar a posição canônica ao App. Não abrimos o Live
+      "cego": primeiro retomamos o RadarGPS e aguardamos userPos.
+    */
+    await waitForRadarLocation(7000);
+
+    /*
+      Com a posição canônica já disponível, resolve a localização textual
+      antes de abrir a sessão Live. Assim rua/bairro entram nas instruções
+      iniciais da própria sessão, e não somente numa atualização posterior.
     */
     await refreshAddress(true);
 
@@ -1137,8 +1161,11 @@ async function resumeLiveIfNeeded(){
       suspendLocalRecognizer();
       buttonState(true);
       startContextSync();
+
+      await waitForRadarLocation(7000);
       await refreshAddress(true);
       syncContext(true);
+
       resumeWanted=false;
       return true;
     }
@@ -1426,6 +1453,7 @@ window.RadarGPTLiveController={
   toggle,
   syncContext,
   refreshAddress,
+  waitForRadarLocation,
   suspendLocalRecognizer,
   isDirectStateQuestion,
   isOperationalCommand,
