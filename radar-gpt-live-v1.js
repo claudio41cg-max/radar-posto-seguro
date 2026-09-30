@@ -15,6 +15,8 @@
 const DEFAULT_BACKEND='https://turbo-engine-production.up.railway.app';
 const VOICES=new Set(['cove','juniper','maple','spruce','ember','vale','breeze','arbor','sol']);
 
+let lifecycleGeneration=0;
+
 const state={
   pc:null,
   stream:null,
@@ -123,6 +125,12 @@ function speakContext(content){
 }
 
 async function stop(){
+  /*
+    Invalida primeiro a sessão atual. Assim qualquer callback atrasado do
+    WebRTC/data channel antigo deixa de ter autoridade imediatamente.
+  */
+  lifecycleGeneration++;
+
   const pc=state.pc;
   const stream=state.stream;
   const channel=state.channel;
@@ -137,12 +145,32 @@ async function stop(){
   state.muted=false;
   state.queuedSessionUpdate=null;
 
-  try{channel?.close()}catch{}
-  try{pc?.close()}catch{}
+  try{
+    if(channel){
+      channel.onopen=null;
+      channel.onmessage=null;
+      channel.onerror=null;
+      channel.onclose=null;
+      channel.close();
+    }
+  }catch{}
+
+  try{
+    if(pc){
+      pc.ontrack=null;
+      pc.onconnectionstatechange=null;
+      pc.oniceconnectionstatechange=null;
+      pc.close();
+    }
+  }catch{}
+
   try{stream?.getTracks()?.forEach(t=>t.stop())}catch{}
 
   try{
     if(audio){
+      audio.onplaying=null;
+      audio.onpause=null;
+      audio.onended=null;
       audio.pause();
       audio.srcObject=null;
       audio.remove();
@@ -282,6 +310,8 @@ async function start(options={}){
 
   await stop();
 
+  const sessionId=++lifecycleGeneration;
+
   state.starting=true;
   emit('connecting');
 
@@ -342,6 +372,14 @@ async function start(options={}){
 
     document.body.appendChild(audio);
 
+    if(sessionId!==lifecycleGeneration){
+      try{stream.getTracks().forEach(t=>t.stop())}catch{}
+      try{channel.close()}catch{}
+      try{pc.close()}catch{}
+      try{audio.remove()}catch{}
+      return false;
+    }
+
     state.stream=stream;
     state.pc=pc;
     state.channel=channel;
@@ -352,6 +390,8 @@ async function start(options={}){
     }
 
     pc.ontrack=e=>{
+      if(sessionId!==lifecycleGeneration)return;
+
       const media=
         e.streams?.[0]||
         new MediaStream([e.track]);
@@ -379,6 +419,8 @@ async function start(options={}){
     };
 
     pc.onconnectionstatechange=()=>{
+      if(sessionId!==lifecycleGeneration)return;
+
       emit('connection',pc.connectionState);
 
       if(
@@ -394,12 +436,15 @@ async function start(options={}){
     };
 
     channel.onopen=()=>{
+      if(sessionId!==lifecycleGeneration)return;
       emit('channel-open');
       flushQueuedSessionUpdate();
     };
 
-    channel.onmessage=
-      e=>parseEvent(e.data);
+    channel.onmessage=e=>{
+      if(sessionId!==lifecycleGeneration)return;
+      parseEvent(e.data);
+    };
 
     const offer=
       await pc.createOffer();
@@ -453,10 +498,26 @@ async function start(options={}){
       );
     }
 
+    if(sessionId!==lifecycleGeneration){
+      try{channel.close()}catch{}
+      try{pc.close()}catch{}
+      try{stream.getTracks().forEach(t=>t.stop())}catch{}
+      try{audio.remove()}catch{}
+      return false;
+    }
+
     await pc.setRemoteDescription({
       type:'answer',
       sdp:data.sdp
     });
+
+    if(sessionId!==lifecycleGeneration){
+      try{channel.close()}catch{}
+      try{pc.close()}catch{}
+      try{stream.getTracks().forEach(t=>t.stop())}catch{}
+      try{audio.remove()}catch{}
+      return false;
+    }
 
     state.running=true;
     state.starting=false;
@@ -471,6 +532,14 @@ async function start(options={}){
   }catch(error){
     const message=
       String(error?.message||error);
+
+    /*
+      Uma tentativa antiga pode falhar depois de já ter sido substituída.
+      Nesse caso ela não pode derrubar nem sinalizar erro na sessão nova.
+    */
+    if(sessionId!==lifecycleGeneration){
+      return false;
+    }
 
     await stop();
     emit('error',message);
