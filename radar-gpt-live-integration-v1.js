@@ -2,83 +2,80 @@
 'use strict';
 
 /*
-  Radar GPT Live integration — Stage 2
-  Objetivos:
-  1) manter o contexto do GPT sincronizado com posição/rua/destino durante a sessão;
-  2) impedir que a mesma frase seja processada ao mesmo tempo pelo GPT e pelo parser local;
-  3) preservar respostas locais úteis ao motorista, sem silenciá-las.
+  Radar GPT Live integration — Stage 2C
+  Foco: eliminar a voz Android e a espera infinita do GPT em perguntas
+  que o próprio Radar já consegue responder localmente.
+
+  Regras:
+  - Perguntas de estado do Radar (onde estou, destino, distância, tempo,
+    velocidade) são resolvidas DIRETAMENTE neste módulo, sem passar pelo
+    parser legado e sem chamar Voice.speak/App.toast.
+  - O resultado confirmado é entregue ao GPT Live, que é a única voz.
+  - Comandos operacionais continuam usando VoiceAssistant.handle(), mas
+    a saída TTS/toast antiga é interceptada enquanto o comando local roda.
 */
 
 const VOICE_KEY='radar.gptLiveVoice.v1';
-
 const VOICES=[
-  ['cove','Cove'],
-  ['juniper','Juniper'],
-  ['maple','Maple'],
-  ['spruce','Spruce'],
-  ['ember','Ember'],
-  ['vale','Vale'],
-  ['breeze','Breeze'],
-  ['arbor','Arbor'],
-  ['sol','Sol']
+  ['cove','Cove'],['juniper','Juniper'],['maple','Maple'],
+  ['spruce','Spruce'],['ember','Ember'],['vale','Vale'],
+  ['breeze','Breeze'],['arbor','Arbor'],['sol','Sol']
 ];
 
 let active=false;
 let starting=false;
 let patched=false;
+let outputGuardsPatched=false;
 
 let originalReply=null;
 let originalAskAI=null;
 let originalGetCurrentAddress=null;
+let originalVoiceSpeak=null;
+let originalToast=null;
 
 let syncTimer=null;
 let lastContextSignature='';
 let lastResolvedAddress='';
 let lastLocalFact='';
+let lastSpokenLocalResult='';
+let lastSpokenLocalResultAt=0;
 let localCommandInFlight=false;
 
 function getLexical(name){
-  try{
-    return (0,eval)(
-      'typeof '+name+' !== "undefined" ? '+name+' : null'
-    );
-  }catch{
-    return null;
-  }
+  try{return (0,eval)('typeof '+name+' !== "undefined" ? '+name+' : null')}
+  catch{return null}
 }
 
 function assistant(){
-  return (
-    getLexical('VoiceAssistant')||
-    window.VoiceAssistant||
-    null
-  );
+  return getLexical('VoiceAssistant')||window.VoiceAssistant||null;
 }
 
 function app(){
-  return (
-    getLexical('App')||
-    window.App||
-    window.RadarApp||
-    null
+  return getLexical('App')||window.App||window.RadarApp||null;
+}
+
+function voiceObject(){
+  return getLexical('Voice')||window.Voice||null;
+}
+
+function liveOwnsVoice(){
+  return !!(
+    active||
+    starting||
+    window.RadarGPTLive?.state?.running||
+    window.RadarGPTLive?.state?.starting
   );
 }
 
-function voice(){
-  const saved=
-    String(
-      localStorage.getItem(VOICE_KEY)||
-      'cove'
-    ).trim();
-
-  return VOICES.some(v=>v[0]===saved)
-    ?saved
-    :'cove';
+function selectedVoice(){
+  const saved=String(localStorage.getItem(VOICE_KEY)||'cove').trim();
+  return VOICES.some(v=>v[0]===saved)?saved:'cove';
 }
 
-function toast(text,ms=3500){
+function uiToast(text,ms=3500){
   try{
-    app()?.toast?.(text,ms);
+    if(originalToast)originalToast(text,ms);
+    else app()?.toast?.(text,ms);
   }catch{}
 }
 
@@ -93,263 +90,161 @@ function normalizeText(text){
 
 function isUsefulLocalFact(text){
   const s=normalizeText(text);
-
   if(!s)return false;
+  return !/calma ai|aguarde|um momento|estou verificando|vou verificar|estou pesquisando|estou pensando|ainda estou aqui/.test(s);
+}
 
-  // Não perpetua respostas de espera/latência no contexto do GPT.
-  if(
-    /calma ai|aguarde|um momento|estou verificando|vou verificar|estou pesquisando|ainda estou aqui/.test(s)
-  ){
-    return false;
-  }
+function isLocationQuestion(s){
+  return /\b(onde estou|onde eu estou|qual rua|que rua|rua estou|minha localizacao|meu local|meu bairro|qual bairro)\b/.test(s);
+}
 
-  return true;
+function isDestinationQuestion(s){
+  return /\b(para onde estou indo|pra onde estou indo|qual destino|meu destino|destino atual|destino final|onde fica o destino final|onde e o destino final|qual e o destino final|local final)\b/.test(s);
+}
+
+function isDistanceQuestion(s){
+  return /\b(qual e a distancia|qual a distancia|distancia ate|distancia para|quanto falta|quantos km|quantos quilometros|distancia da rota)\b/.test(s);
+}
+
+function isTimeQuestion(s){
+  return /\b(quanto tempo falta|falta quanto tempo|tempo falta|hora de chegada|quanto falta para chegar|quanto falta pra chegar)\b/.test(s);
+}
+
+function isSpeedQuestion(s){
+  return /\b(qual minha velocidade|qual e minha velocidade|que velocidade|velocidade atual)\b/.test(s);
+}
+
+function isDirectStateQuestion(text){
+  const s=normalizeText(text);
+  return isLocationQuestion(s)||isDestinationQuestion(s)||isDistanceQuestion(s)||isTimeQuestion(s)||isSpeedQuestion(s);
 }
 
 function isLocalRadarCommand(text){
   const s=normalizeText(text);
-
   if(!s)return false;
 
-  /*
-    Somente comandos que dependem do estado local do Radar entram no parser local.
-    Perguntas gerais, conversa, notícias, clima etc. ficam exclusivamente com o GPT.
-  */
   return (
-    /\b(onde estou|onde eu estou|qual rua|que rua|rua estou|minha localizacao|meu local)\b/.test(s)||
-    /\b(para onde estou indo|pra onde estou indo|qual destino|meu destino|destino atual)\b/.test(s)||
+    isDirectStateQuestion(s)||
     /\b(rota|navegar|navegacao|iniciar navegacao|cancelar navegacao|cancelar rota|sair da rota|encerrar rota|trocar rota|recalcular rota)\b/.test(s)||
     /\b(me leve|me leva|levar para|ir para|vamos para|quero ir|navegue para)\b/.test(s)||
     /\b(onde fica)\b/.test(s)||
-    /\b(zoom|satelite|street view|mapa|comunidade|comunidades|postos|posto|radar proximo|radares proximos)\b/.test(s)||
-    /\b(qual minha velocidade|que velocidade|velocidade atual)\b/.test(s)||
-    /\b(qual e a distancia|qual a distancia|distancia ate|distancia para|quanto falta|quantos km|quantos quilometros|tempo falta|quanto tempo falta|hora de chegada)\b/.test(s)||
-    /\b(destino final|onde fica o destino final|onde e o destino final|qual e o destino final|local final)\b/.test(s)
+    /\b(zoom|satelite|street view|mapa|comunidade|comunidades|postos|posto|radar proximo|radares proximos)\b/.test(s)
   );
 }
 
-function streetFromUI(){
-  const candidates=[
-    document.getElementById('hudStreet')?.textContent,
-    document.getElementById('currentStreet')?.textContent,
-    document.getElementById('streetName')?.textContent,
-    app()?.currentStreet,
-    app()?.streetName
-  ];
-
-  for(const value of candidates){
-    const text=String(value||'').trim();
-
-    if(
-      text&&
-      !/^siga pela via$/i.test(text)&&
-      !/^pr[oó]ximo acesso$/i.test(text)&&
-      text!=='--'
-    ){
-      return text;
-    }
-  }
-
-  return '';
-}
-
 function destinationFromUI(){
+  const a=app();
   return String(
-    document.getElementById('destInput')
-    ?.value||
+    document.getElementById('destInput')?.value||
+    a?.destinationLabel||
+    a?.destinationName||
     ''
   ).trim();
 }
 
+function streetFromUI(){
+  const a=app();
+  const values=[
+    lastResolvedAddress,
+    a?.currentStreet,
+    a?.streetName,
+    document.getElementById('currentStreet')?.textContent,
+    document.getElementById('streetName')?.textContent
+  ];
+  for(const v of values){
+    const x=String(v||'').trim();
+    if(x&&x!=='--'&&!/^siga pela via$/i.test(x))return x;
+  }
+  return '';
+}
+
 function roundedGps(a){
-  if(
-    !Array.isArray(a?.userPos)||
-    a.userPos.length<2
-  ){
-    return null;
-  }
+  if(!Array.isArray(a?.userPos)||a.userPos.length<2)return null;
+  const lon=Number(a.userPos[0]),lat=Number(a.userPos[1]);
+  if(!Number.isFinite(lat)||!Number.isFinite(lon))return null;
+  return {lat:Number(lat.toFixed(4)),lon:Number(lon.toFixed(4))};
+}
 
-  const lon=Number(a.userPos[0]);
-  const lat=Number(a.userPos[1]);
+function routeRemaining(){
+  const a=app();
+  const route=a?.route;
+  if(!route)return null;
 
-  if(
-    !Number.isFinite(lat)||
-    !Number.isFinite(lon)
-  ){
-    return null;
-  }
+  const totalM=Number(route.distance??route.summary?.lengthInMeters);
+  const progressM=Math.max(0,Number(a.routeProgressMeters||0));
+  const remainingM=Number.isFinite(totalM)?Math.max(0,totalM-progressM):NaN;
 
-  // 4 casas: contexto útil sem mandar update a cada metro.
+  const totalSec=Number(route.duration??route.summary?.travelTimeInSeconds);
+  const ratio=Number.isFinite(totalM)&&totalM>0&&Number.isFinite(remainingM)
+    ?remainingM/totalM
+    :NaN;
+  const remainingSec=Number.isFinite(totalSec)&&Number.isFinite(ratio)
+    ?Math.max(0,totalSec*ratio)
+    :NaN;
+
   return {
-    lat:Number(lat.toFixed(4)),
-    lon:Number(lon.toFixed(4))
+    meters:remainingM,
+    seconds:remainingSec
   };
 }
 
 function contextData(){
   const a=app();
-  const gps=roundedGps(a);
-  const destination=destinationFromUI();
-  const street=
-    lastResolvedAddress||
-    streetFromUI();
-
-  const speed=
-    Number.isFinite(Number(a?.currentSpeed))
-    ?Math.round(Number(a.currentSpeed)/5)*5
-    :null;
-
-  const hudDistance=
-    String(
-      document.getElementById('hudDist')
-      ?.textContent||
-      ''
-    ).trim();
-
-  const eta=
-    String(
-      document.getElementById('sheetTime')
-      ?.textContent||
-      ''
-    ).trim();
-
+  const remaining=routeRemaining();
   return {
-    gps,
-    street,
-    destination,
+    gps:roundedGps(a),
+    street:streetFromUI(),
+    destination:destinationFromUI(),
     navActive:!!a?.navActive,
-    speed,
-    hudDistance,
-    eta,
+    speed:Number.isFinite(Number(a?.currentSpeed))?Math.round(Number(a.currentSpeed)):null,
+    remainingMeters:Number.isFinite(remaining?.meters)?Math.round(remaining.meters):null,
+    remainingMinutes:Number.isFinite(remaining?.seconds)?Math.max(1,Math.round(remaining.seconds/60)):null,
     localFact:lastLocalFact
   };
 }
 
 function context(){
   const d=contextData();
-
   const parts=[
     'Você é a voz inteligente do aplicativo Radar Seguro RJ PRO.',
-    'Fale sempre em português brasileiro, de forma curta, natural e útil para um motorista.',
-    'Os dados abaixo vêm do próprio aplicativo e devem ser tratados como o estado atual do Radar.',
-    'Quando o usuário fizer um comando operacional do mapa, localização, destino, distância, tempo restante, velocidade ou rota, NÃO responda usando coordenadas e NÃO diga que vai pesquisar. Fique em silêncio até receber um bloco RADAR_LOCAL_RESULT; então fale somente esse resultado de forma natural.',
-    'Não diga "aguarde", "estou verificando", "estou pesquisando", "estou pensando" ou frases semelhantes para comandos do Radar.',
-    'Nunca invente ocorrência, trânsito, fiscalização, preço de combustível ou notícia atual.',
-    'Não diga que é Gemini. Você é o assistente GPT Live do Radar Seguro.'
+    'Fale sempre em português brasileiro, de forma curta e natural.',
+    'Dados de localização, destino, distância, tempo e velocidade fornecidos pelo Radar são a fonte da verdade.',
+    'Quando o usuário perguntar onde está, qual é a rua, destino, distância, tempo restante ou velocidade, NÃO improvise, NÃO use apenas coordenadas e NÃO diga que está pensando/pesquisando. Espere RADAR_LOCAL_RESULT e fale exatamente esse resultado de forma natural.',
+    'Quando receber RADAR_LOCAL_RESULT, responda imediatamente e somente com essa informação.',
+    'Nunca invente ocorrência, trânsito, fiscalização ou preço de combustível.'
   ];
 
-  if(d.gps){
-    parts.push(
-      'GPS atual do app: latitude '+
-      d.gps.lat+
-      ', longitude '+
-      d.gps.lon+
-      '.'
-    );
-  }
-
-  if(d.street){
-    parts.push(
-      'Localização/endereço atual confirmado pelo Radar: '+
-      d.street+
-      '.'
-    );
-  }
-
-  if(d.destination){
-    parts.push(
-      'Destino atual exibido no Radar: '+
-      d.destination+
-      '.'
-    );
-  }else{
-    parts.push(
-      'O Radar não tem destino ativo neste momento.'
-    );
-  }
-
-  parts.push(
-    d.navActive
-    ?'A navegação do Radar está ativa.'
-    :'A navegação do Radar não está ativa.'
-  );
-
-  if(Number.isFinite(d.speed)){
-    parts.push(
-      'Velocidade aproximada indicada pelo Radar: '+
-      d.speed+
-      ' km/h.'
-    );
-  }
-
-  if(
-    d.navActive&&
-    d.hudDistance&&
-    d.hudDistance!=='-- m'
-  ){
-    parts.push(
-      'Distância indicada para a próxima manobra: '+
-      d.hudDistance+
-      '.'
-    );
-  }
-
-  if(
-    d.navActive&&
-    d.eta&&
-    !/^--/.test(d.eta)
-  ){
-    parts.push(
-      'Tempo/ETA exibido pelo Radar: '+
-      d.eta+
-      '.'
-    );
-  }
-
-  if(d.localFact){
-    parts.push(
-      'Última informação confirmada pelo módulo local do Radar: '+
-      d.localFact+
-      '.'
-    );
-  }
+  if(d.gps)parts.push('GPS atual do Radar: latitude '+d.gps.lat+', longitude '+d.gps.lon+'.');
+  if(d.street)parts.push('Endereço/local atual confirmado: '+d.street+'.');
+  if(d.destination)parts.push('Destino atual: '+d.destination+'.');
+  parts.push(d.navActive?'A navegação está ativa.':'A navegação não está ativa.');
+  if(Number.isFinite(d.speed))parts.push('Velocidade atual: '+d.speed+' km/h.');
+  if(Number.isFinite(d.remainingMeters))parts.push('Distância restante da rota: '+d.remainingMeters+' metros.');
+  if(Number.isFinite(d.remainingMinutes))parts.push('Tempo restante estimado: '+d.remainingMinutes+' minutos.');
+  if(d.localFact)parts.push('Último fato local confirmado: '+d.localFact+'.');
 
   return parts.join('\n');
 }
 
 function contextSignature(){
-  const d=contextData();
-
-  return JSON.stringify(d);
+  return JSON.stringify(contextData());
 }
 
 function syncContext(force=false){
-  if(!active&&!starting)return false;
-
+  if(!liveOwnsVoice())return false;
   const live=window.RadarGPTLive;
-
   if(!live?.updateContext)return false;
 
   const sig=contextSignature();
-
-  if(!force&&sig===lastContextSignature){
-    return false;
-  }
+  if(!force&&sig===lastContextSignature)return false;
 
   lastContextSignature=sig;
-
-  return live.updateContext(
-    context()
-  );
+  return live.updateContext(context());
 }
 
 function startContextSync(){
   stopContextSync();
-
-  syncTimer=setInterval(
-    ()=>syncContext(false),
-    3000
-  );
+  syncTimer=setInterval(()=>syncContext(false),3000);
 }
 
 function stopContextSync(){
@@ -359,120 +254,147 @@ function stopContextSync(){
   }
 }
 
-function buttonState(on,thinking=false){
-  const main=
-    document.getElementById('assistantMicBtn');
+async function speakLocalResult(text){
+  const spoken=String(text||'').trim();
+  if(!spoken)return false;
 
-  const nav=
-    document.getElementById('navAssistantMicBtn');
+  lastLocalFact=spoken;
 
-  if(main){
-    main.classList.toggle(
-      'listening',
-      !!on
-    );
+  const now=Date.now();
+  if(spoken===lastSpokenLocalResult&&now-lastSpokenLocalResultAt<1500)return true;
+  lastSpokenLocalResult=spoken;
+  lastSpokenLocalResultAt=now;
 
-    main.classList.toggle(
-      'radar-gpt-live-on',
-      !!on
-    );
-
-    main.setAttribute(
-      'aria-pressed',
-      on?'true':'false'
-    );
-
-    main.title=
-      thinking
-      ?'Conectando ao GPT Live...'
-      :on
-        ?'Desligar GPT Live'
-        :'Falar com o Radar usando GPT Live';
+  if(!liveOwnsVoice()){
+    return false;
   }
 
-  if(nav){
-    nav.classList.toggle(
-      'hands-free',
-      !!on
-    );
+  const live=window.RadarGPTLive;
+  if(!live?.speakContext)return false;
 
-    nav.classList.toggle(
-      'radar-gpt-live-on',
-      !!on
-    );
+  const ok=live.speakContext(
+    'RADAR_LOCAL_RESULT: '+spoken+
+    '\nFale isso agora ao motorista, em português brasileiro, sem acrescentar coordenadas, sem dizer que está pensando ou pesquisando.'
+  );
 
-    nav.setAttribute(
-      'aria-pressed',
-      on?'true':'false'
-    );
+  setTimeout(()=>syncContext(true),50);
+  return !!ok;
+}
 
-    nav.textContent=
-      on
-      ?'🟢 GPT Live'
-      :'🎙️ Radar';
+function patchOutputGuards(){
+  if(outputGuardsPatched)return;
 
-    nav.title=
-      on
-      ?'Desligar GPT Live'
-      :'Falar com o Radar usando GPT Live';
+  const a=app();
+  const v=voiceObject();
+
+  if(!a||!v)return;
+
+  outputGuardsPatched=true;
+
+  if(typeof v.speak==='function'){
+    originalVoiceSpeak=v.speak.bind(v);
+    v.speak=function(text,...rest){
+      if(localCommandInFlight&&liveOwnsVoice()){
+        const spoken=String(text||'').trim();
+        if(spoken)speakLocalResult(spoken);
+        return true;
+      }
+      return originalVoiceSpeak(text,...rest);
+    };
   }
+
+  if(typeof a.toast==='function'){
+    originalToast=a.toast.bind(a);
+    a.toast=function(text,...rest){
+      if(localCommandInFlight&&liveOwnsVoice()){
+        return true;
+      }
+      return originalToast(text,...rest);
+    };
+  }
+}
+
+async function resolveDirectStateQuestion(text){
+  const va=assistant();
+  const a=app();
+  const s=normalizeText(text);
+
+  if(isLocationQuestion(s)){
+    try{
+      const p=await va?.getCurrentAddress?.(true);
+      const label=String(p?.label||p?.address||p?.display_name||'').trim();
+      if(label){
+        lastResolvedAddress=label;
+
+        if(/\b(qual rua|que rua|rua estou|qual e minha rua|minha rua)\b/.test(s)){
+          const street=String(p?.street||'').trim();
+          const number=String(p?.number||'').trim();
+          return street
+            ?'Você está na '+street+(number?', número '+number:'')+'.'
+            :'Você está em '+label+'.';
+        }
+
+        return 'Você está em '+label+'.';
+      }
+    }catch(e){
+      console.warn('Radar localização local:',e);
+    }
+
+    const street=streetFromUI();
+    if(street)return 'Você está em '+street+'.';
+
+    return 'Ainda não consegui confirmar o nome da sua localização.';
+  }
+
+  if(isDestinationQuestion(s)){
+    const destination=destinationFromUI();
+    if(destination)return 'Seu destino é '+destination+'.';
+    return 'Não há um destino ativo no Radar neste momento.';
+  }
+
+  if(isDistanceQuestion(s)){
+    const r=routeRemaining();
+    if(!r||!Number.isFinite(r.meters))return 'Não há uma rota ativa com distância disponível neste momento.';
+    if(r.meters<1000){
+      return 'Faltam aproximadamente '+Math.max(10,Math.round(r.meters/10)*10)+' metros para o destino.';
+    }
+    const km=r.meters/1000;
+    return 'Faltam aproximadamente '+km.toFixed(km<10?1:0).replace('.',',')+' quilômetros para o destino.';
+  }
+
+  if(isTimeQuestion(s)){
+    const r=routeRemaining();
+    if(!r||!Number.isFinite(r.seconds))return 'Não há uma rota ativa com tempo restante disponível neste momento.';
+    return 'Faltam aproximadamente '+Math.max(1,Math.round(r.seconds/60))+' minutos para chegar ao destino.';
+  }
+
+  if(isSpeedQuestion(s)){
+    const speed=Number(a?.currentSpeed);
+    if(Number.isFinite(speed))return 'Sua velocidade atual é de aproximadamente '+Math.round(speed)+' quilômetros por hora.';
+    return 'Ainda não tenho uma leitura confiável da sua velocidade.';
+  }
+
+  return null;
 }
 
 function patchLocalAssistant(){
   if(patched)return;
-
   const va=assistant();
-
   if(!va)return;
 
   patched=true;
 
-  originalReply=
-    typeof va.reply==='function'
-    ?va.reply.bind(va)
-    :null;
+  originalReply=typeof va.reply==='function'?va.reply.bind(va):null;
+  originalAskAI=typeof va.askAI==='function'?va.askAI.bind(va):null;
+  originalGetCurrentAddress=typeof va.getCurrentAddress==='function'?va.getCurrentAddress.bind(va):null;
 
-  originalAskAI=
-    typeof va.askAI==='function'
-    ?va.askAI.bind(va)
-    :null;
-
-  originalGetCurrentAddress=
-    typeof va.getCurrentAddress==='function'
-    ?va.getCurrentAddress.bind(va)
-    :null;
-
-  /*
-    Stage 2:
-    NÃO silenciamos mais reply().
-    Se o módulo local sabe a resposta (rua, destino, comando etc.),
-    o usuário precisa ouvi-la normalmente.
-  */
   if(originalReply){
     va.reply=function(text,priority=true){
       const spoken=String(text||'').trim();
+      if(isUsefulLocalFact(spoken))lastLocalFact=spoken;
 
-      if(isUsefulLocalFact(spoken)){
-        lastLocalFact=spoken;
-      }
-
-      if(active||starting){
-        /*
-          GPT Live ativo:
-          - NÃO chama originalReply(), portanto não usa a voz TTS do Android;
-          - NÃO abre o toast preto com a resposta;
-          - entrega o fato confirmado ao GPT e pede que ELE fale.
-        */
-        if(spoken){
-          try{
-            window.RadarGPTLive?.speakContext?.(
-              'RADAR_LOCAL_RESULT: '+spoken+
-              '\nFale este resultado ao motorista agora, de forma curta e natural. Não mencione coordenadas se o endereço já estiver presente. Não diga que está pesquisando ou pensando.'
-            );
-          }catch{}
-        }
-
-        setTimeout(()=>syncContext(true),40);
+      if(liveOwnsVoice()){
+        speakLocalResult(spoken);
         return true;
       }
 
@@ -480,245 +402,151 @@ function patchLocalAssistant(){
     };
   }
 
-  /*
-    A IA antiga continua bloqueada enquanto GPT Live está ativo,
-    evitando duas IAs responderem à mesma pergunta.
-  */
   if(originalAskAI){
     va.askAI=async function(question,...rest){
-      if(active||starting){
-        return true;
-      }
-
-      return originalAskAI(
-        question,
-        ...rest
-      );
+      if(liveOwnsVoice())return true;
+      return originalAskAI(question,...rest);
     };
   }
 
-  /*
-    Captura o endereço resolvido pelo próprio Radar.
-    Assim a mesma informação que aparece na tarja local passa a fazer
-    parte do contexto vivo do GPT.
-  */
   if(originalGetCurrentAddress){
     va.getCurrentAddress=async function(...args){
-      const result=
-        await originalGetCurrentAddress(...args);
-
-      const text=
-        typeof result==='string'
-        ?result.trim()
-        :String(
-          result?.address||
-          result?.display_name||
-          result?.label||
-          ''
-        ).trim();
-
+      const result=await originalGetCurrentAddress(...args);
+      const text=String(result?.label||result?.address||result?.display_name||'').trim();
       if(text){
         lastResolvedAddress=text;
-
-        if(active||starting){
-          setTimeout(
-            ()=>syncContext(true),
-            20
-          );
-        }
+        if(liveOwnsVoice())setTimeout(()=>syncContext(true),20);
       }
-
       return result;
     };
   }
+
+  patchOutputGuards();
 }
 
 async function runLocalAction(text){
   const va=assistant();
-
   if(!va?.handle)return false;
+
+  const direct=await resolveDirectStateQuestion(text);
+  if(direct){
+    await speakLocalResult(direct);
+    return true;
+  }
 
   localCommandInFlight=true;
 
   try{
-    /*
-      A frase operacional é assumida pelo Radar local.
-      Avisamos a sessão Live para não improvisar resposta enquanto o
-      parser resolve rua/destino/distância. Depois, va.reply() entrega
-      o resultado confirmado ao GPT para ser falado pela voz GPT.
-    */
-    try{
-      window.RadarGPTLive?.appendContext?.(
-        'RADAR_LOCAL_COMMAND: o aplicativo Radar está processando internamente o pedido "'+
-        String(text||'').slice(0,240)+
-        '". Não responda a este pedido ainda. Aguarde RADAR_LOCAL_RESULT.'
-      );
-    }catch{}
-
-    await Promise.resolve(
-      va.handle(
-        String(text||'')
-      )
+    window.RadarGPTLive?.appendContext?.(
+      'RADAR_LOCAL_COMMAND: o Radar está executando internamente o pedido "'+
+      String(text||'').slice(0,240)+
+      '". Não responda por conta própria. Aguarde RADAR_LOCAL_RESULT.'
     );
 
+    await Promise.resolve(va.handle(String(text||'')));
     return true;
 
   }catch(error){
-    console.warn(
-      'Radar comando local:',
-      error
-    );
-
+    console.warn('Radar comando local:',error);
     return false;
 
   }finally{
     localCommandInFlight=false;
-
-    setTimeout(
-      ()=>syncContext(true),
-      60
-    );
+    setTimeout(()=>syncContext(true),80);
   }
 }
 
 async function handleFinalUserTranscript(text){
   const phrase=String(text||'').trim();
-
   if(!phrase)return;
 
-  /*
-    Regra central da Etapa 2:
-    - comando do Radar -> parser local apenas;
-    - conversa/pergunta geral -> GPT apenas.
-    Nunca os dois para a mesma fala.
-  */
   if(isLocalRadarCommand(phrase)){
     await runLocalAction(phrase);
     return;
   }
 
-  // Pergunta geral: não chama VoiceAssistant.handle().
-  // O GPT Live já recebeu o áudio e é o único responsável pela resposta.
+  // Perguntas gerais ficam exclusivamente com o GPT Live.
+}
+
+function buttonState(on,thinking=false){
+  const main=document.getElementById('assistantMicBtn');
+  const nav=document.getElementById('navAssistantMicBtn');
+
+  if(main){
+    main.classList.toggle('listening',!!on);
+    main.classList.toggle('radar-gpt-live-on',!!on);
+    main.setAttribute('aria-pressed',on?'true':'false');
+    main.title=thinking?'Conectando ao GPT Live...':on?'Desligar GPT Live':'Falar com o Radar usando GPT Live';
+  }
+
+  if(nav){
+    nav.classList.toggle('hands-free',!!on);
+    nav.classList.toggle('radar-gpt-live-on',!!on);
+    nav.setAttribute('aria-pressed',on?'true':'false');
+    nav.textContent=on?'🟢 GPT Live':'🎙️ Radar';
+    nav.title=on?'Desligar GPT Live':'Falar com o Radar usando GPT Live';
+  }
 }
 
 async function stop(){
   starting=false;
   active=false;
-
   stopContextSync();
 
-  try{
-    await window.RadarGPTLive
-    ?.stop
-    ?.();
-  }catch{}
+  try{await window.RadarGPTLive?.stop?.()}catch{}
 
   buttonState(false);
-
-  toast(
-    'GPT Live desligado.',
-    1800
-  );
+  uiToast('GPT Live desligado.',1600);
 }
 
 async function start(){
   if(starting||active)return;
 
   patchLocalAssistant();
+  patchOutputGuards();
 
-  const live=
-    window.RadarGPTLive;
-
+  const live=window.RadarGPTLive;
   if(!live?.start){
-    toast(
-      'GPT Live ainda não carregou.',
-      3500
-    );
-
+    uiToast('GPT Live ainda não carregou.',3000);
     return;
   }
 
   starting=true;
-
-  buttonState(
-    true,
-    true
-  );
-
-  toast(
-    'Conectando ao GPT Live...',
-    3500
-  );
+  buttonState(true,true);
+  uiToast('Conectando ao GPT Live...',2200);
 
   try{
     lastContextSignature='';
 
     await live.start({
-      voice:voice(),
+      voice:selectedVoice(),
       instructions:context(),
 
       onTranscript:event=>{
-        if(
-          !event?.final||
-          event.role!=='user'||
-          !event.text
-        ){
-          return;
-        }
-
-        handleFinalUserTranscript(
-          event.text
-        );
+        if(!event?.final||event.role!=='user'||!event.text)return;
+        handleFinalUserTranscript(event.text);
       },
 
       onState:(name,detail)=>{
         if(name==='live'){
           starting=false;
           active=true;
-
           buttonState(true);
-
           startContextSync();
           syncContext(true);
-
-          toast(
-            'GPT Live conectado. Pode falar normalmente.',
-            3200
-          );
-        }
-
-        else if(name==='user-speaking'){
+          uiToast('GPT Live conectado.',1800);
+        }else if(name==='user-speaking'){
           buttonState(true);
-        }
-
-        else if(name==='assistant-speaking'){
+        }else if(name==='assistant-speaking'){
           buttonState(true);
-        }
-
-        else if(name==='context-updated'){
-          // Atualização silenciosa do estado do Radar.
-        }
-
-        else if(name==='error'){
+        }else if(name==='error'){
           starting=false;
           active=false;
-
           stopContextSync();
           buttonState(false);
-
-          // Não despeja mensagem técnica enorme na tela do motorista.
           console.warn('GPT Live:',detail);
-
-          toast(
-            'GPT Live temporariamente indisponível.',
-            2800
-          );
-        }
-
-        else if(
-          name==='stopped'&&
-          !starting
-        ){
+          uiToast('GPT Live temporariamente indisponível.',2200);
+        }else if(name==='stopped'&&!starting){
           active=false;
           stopContextSync();
           buttonState(false);
@@ -729,184 +557,89 @@ async function start(){
   }catch(error){
     starting=false;
     active=false;
-
     stopContextSync();
-
     buttonState(false);
-
-    toast(
-      String(
-        error?.message||
-        'Não foi possível abrir o GPT Live.'
-      ),
-      5000
-    );
+    uiToast(String(error?.message||'Não foi possível abrir o GPT Live.'),3500);
   }
 }
 
 async function toggle(){
-  if(active||starting){
-    return stop();
-  }
-
-  return start();
+  return (active||starting)?stop():start();
 }
 
 function installPicker(){
-  if(
-    document.getElementById(
-      'radarGptVoice'
-    )
-  ){
-    return;
-  }
+  if(document.getElementById('radarGptVoice'))return;
 
-  const mic=
-    document.getElementById(
-      'assistantMicBtn'
-    );
-
+  const mic=document.getElementById('assistantMicBtn');
   if(!mic?.parentElement)return;
 
-  const select=
-    document.createElement('select');
-
-  select.id=
-    'radarGptVoice';
-
-  select.title=
-    'Voz do GPT Live';
-
-  select.setAttribute(
-    'aria-label',
-    'Voz do GPT Live'
-  );
-
-  select.innerHTML=
-    VOICES.map(
-      ([id,label])=>
-        '<option value="'+
-        id+
-        '" '+
-        (id===voice()?'selected':'')+
-        '>GPT '+
-        label+
-        '</option>'
-    ).join('');
+  const select=document.createElement('select');
+  select.id='radarGptVoice';
+  select.title='Voz do GPT Live';
+  select.setAttribute('aria-label','Voz do GPT Live');
+  select.innerHTML=VOICES.map(([id,label])=>
+    '<option value="'+id+'" '+(id===selectedVoice()?'selected':'')+'>GPT '+label+'</option>'
+  ).join('');
 
   select.onchange=async()=>{
-    localStorage.setItem(
-      VOICE_KEY,
-      select.value
-    );
-
+    localStorage.setItem(VOICE_KEY,select.value);
     if(active||starting){
       await stop();
       setTimeout(start,180);
     }
   };
 
-  mic.insertAdjacentElement(
-    'afterend',
-    select
-  );
+  mic.insertAdjacentElement('afterend',select);
 
-  const style=
-    document.createElement('style');
-
+  const style=document.createElement('style');
   style.textContent=`
     #radarGptVoice{
-      height:38px;
-      max-width:92px;
+      height:38px;max-width:92px;
       border:1px solid rgba(92,190,255,.5);
-      border-radius:11px;
-      background:#0b2437;
-      color:#dff7ff;
-      font-size:11px;
-      font-weight:800;
-      padding:0 6px
+      border-radius:11px;background:#0b2437;color:#dff7ff;
+      font-size:11px;font-weight:800;padding:0 6px
     }
-
     .radar-gpt-live-on{
-      box-shadow:
-        0 0 0 3px rgba(41,255,163,.22),
-        0 0 20px rgba(41,255,163,.45)!important
+      box-shadow:0 0 0 3px rgba(41,255,163,.22),0 0 20px rgba(41,255,163,.45)!important
     }
   `;
-
   document.head.appendChild(style);
 }
 
 function bindContextTriggers(){
-  const dest=
-    document.getElementById('destInput');
-
-  if(
-    dest&&
-    !dest.dataset.gptContextBound
-  ){
+  const dest=document.getElementById('destInput');
+  if(dest&&!dest.dataset.gptContextBound){
     dest.dataset.gptContextBound='1';
-
-    const update=
-      ()=>setTimeout(
-        ()=>syncContext(true),
-        40
-      );
-
-    dest.addEventListener(
-      'input',
-      update
-    );
-
-    dest.addEventListener(
-      'change',
-      update
-    );
+    const update=()=>setTimeout(()=>syncContext(true),50);
+    dest.addEventListener('input',update);
+    dest.addEventListener('change',update);
   }
 }
 
 function bind(){
   patchLocalAssistant();
+  patchOutputGuards();
   installPicker();
   bindContextTriggers();
 
-  [
-    'assistantMicBtn',
-    'navAssistantMicBtn'
-  ].forEach(id=>{
-    const el=
-      document.getElementById(id);
-
-    if(
-      !el||
-      el.dataset.gptLiveBound
-    ){
-      return;
-    }
+  ['assistantMicBtn','navAssistantMicBtn'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el||el.dataset.gptLiveBound)return;
 
     el.dataset.gptLiveBound='1';
-
-    el.addEventListener(
-      'click',
-      e=>{
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-
-        toggle();
-      },
-      true
-    );
+    el.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      toggle();
+    },true);
   });
 
   buttonState(false);
 }
 
 if(document.readyState==='loading'){
-  document.addEventListener(
-    'DOMContentLoaded',
-    ()=>setTimeout(bind,500)
-  );
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(bind,500));
 }else{
   setTimeout(bind,500);
 }
@@ -919,13 +652,10 @@ window.RadarGPTLiveController={
   toggle,
   syncContext,
   isLocalRadarCommand,
-  get active(){
-    return active;
-  },
-  get localCommandInFlight(){
-    return localCommandInFlight;
-  },
-  voice
+  resolveDirectStateQuestion,
+  get active(){return active},
+  get localCommandInFlight(){return localCommandInFlight},
+  voice:selectedVoice
 };
 
 })();
