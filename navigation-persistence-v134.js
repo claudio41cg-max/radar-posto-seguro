@@ -1,14 +1,305 @@
-/* Radar Seguro RJ PRO v134 — persistência de navegação, preferência visual e zoom confortável */
-(()=>{'use strict';if(window.__radarPersistenceV134)return;window.__radarPersistenceV134=true;
-const KEY='radar-nav-v134',THEME='radar-theme-choice';
+/* Radar Seguro RJ PRO v134 — persistência de navegação consolidada.
+   ETAPA 1:
+   - Cancelamento cria um "tombstone" persistente.
+   - Rota cancelada não pode ser salva/restaurada em visibilitychange/pageshow.
+   - clearRoute também cancela persistência.
+   - Retorno ao app NÃO força reroute automático.
+   - Uma nova rota válida reabre a persistência somente após calculateRoute/startNavigation.
+*/
+(()=>{'use strict';
+if(window.__radarPersistenceV134)return;
+window.__radarPersistenceV134=true;
+
+const KEY='radar-nav-v134';
+const CANCEL_KEY='radar-nav-cancelled-v1';
+const THEME='radar-theme-choice';
+
 const app=()=>window.RadarApp||window.App||null;
 const validRoute=r=>Array.isArray(r?.coords)&&r.coords.length>1;
-function destination(a){const d=a?.destination;if(Array.isArray(d))return d.slice(0,2);if(d)return{lon:d.lon??d.lng,lat:d.lat,label:d.label||d.name||''};return null;}
-function save(){const a=app();if(!a||!validRoute(a.route)||!a.destination)return;try{localStorage.setItem(KEY,JSON.stringify({ts:Date.now(),destination:destination(a),route:a.route,navActive:!!(a.navActive||a.navigating||a.navigationActive||a.routeActive)}));}catch(_){}}
-function clear(){try{localStorage.removeItem(KEY);}catch(_){}}
-function restore(){const a=app();if(!a||validRoute(a.route))return false;let s;try{s=JSON.parse(localStorage.getItem(KEY)||'null');}catch(_){return false;}if(!s||Date.now()-(+s.ts||0)>24*3600e3||!validRoute(s.route)||!s.destination)return false;a.destination=s.destination;a.route=s.route;a.navActive=s.navActive!==false;a.navigating=s.navActive!==false;a.navigationActive=s.navActive!==false;a.routeActive=true;try{a.drawRoute?.(a.route,false);}catch(_){try{a.drawRoute?.(a.route,true);}catch(__){}}for(const f of['updateRouteUI','updateNavigation','updateHUD'])try{a[f]?.();}catch(_){}setTimeout(()=>{try{window.RadarRouteTrafficV74?.refresh?.();}catch(_){}try{window.RadarHazardDeclutterV119?.apply?.();}catch(_){}},500);return true;}
-function themeValue(){const root=document.documentElement,body=document.body;const s=((root.dataset.theme||'')+' '+(body?.dataset?.theme||'')+' '+root.className+' '+(body?.className||'')).toLowerCase();if(/dark|night|noturno|escuro/.test(s))return'dark';if(/light|day|claro/.test(s))return'light';return null;}
-function rememberTheme(){const v=themeValue();if(v)try{localStorage.setItem(THEME,v);}catch(_){}}
-function applyTheme(){let v;try{v=localStorage.getItem(THEME);}catch(_){}if(!v)return;const root=document.documentElement,body=document.body;root.dataset.radarTheme=v;root.style.colorScheme=v;root.classList.toggle('radar-force-light',v==='light');root.classList.toggle('radar-force-dark',v==='dark');if(body){body.classList.toggle('radar-force-light',v==='light');body.classList.toggle('radar-force-dark',v==='dark');}}
-function bind(){const a=app();if(!a||a.__persistV134)return false;a.__persistV134=true;const oldDraw=typeof a.drawRoute==='function'?a.drawRoute.bind(a):null;if(oldDraw)a.drawRoute=function(...args){const out=oldDraw(...args);setTimeout(save,80);return out;};for(const n of['stopNavigation','cancelNavigation','endNavigation']){const old=typeof a[n]==='function'?a[n].bind(a):null;if(old)a[n]=function(...args){clear();return old(...args);};}document.addEventListener('click',e=>{const t=((e.target?.closest?.('button,[role="button"],a')?.textContent)||'').toLowerCase();if(/sair da rota|cancelar rota|encerrar rota|finalizar rota/.test(t))clear();if(/claro|escuro|dia|noite|tema/.test(t))setTimeout(()=>{rememberTheme();applyTheme();},120);},true);document.addEventListener('visibilitychange',()=>{if(document.hidden)save();else{applyTheme();setTimeout(()=>{if(!validRoute(app()?.route))restore();else{try{window.RadarNavRecoveryV128?.reroute?.('retorno ao aplicativo');}catch(_){}}},350);}});window.addEventListener('pagehide',save);window.addEventListener('pageshow',()=>{applyTheme();setTimeout(restore,300);});setInterval(save,5000);applyTheme();setTimeout(restore,500);return true;}
-let n=0,t=setInterval(()=>{if(bind()||++n>200)clearInterval(t);},200);window.RadarNavigationPersistenceV134={save,restore,clear,version:'134'};})();
+
+let blocked=false;
+
+function now(){return Date.now();}
+function readCancelTs(){
+  try{return Number(localStorage.getItem(CANCEL_KEY)||0)||0}catch(_){return 0}
+}
+function writeCancelTs(ts=now()){
+  try{localStorage.setItem(CANCEL_KEY,String(ts))}catch(_){}
+  return ts;
+}
+function clearCancelTs(){
+  try{localStorage.removeItem(CANCEL_KEY)}catch(_){}
+}
+function destination(a){
+  const d=a?.destination;
+  if(Array.isArray(d))return d.slice(0,2);
+  if(d)return{lon:d.lon??d.lng,lat:d.lat,label:d.label||d.name||''};
+  return null;
+}
+function isNavigationActive(a){
+  return !!(a?.navActive||a?.navigating||a?.navigationActive||a?.routeActive);
+}
+
+function clearStoredRoute(){
+  try{localStorage.removeItem(KEY)}catch(_){}
+}
+
+function cancel(){
+  blocked=true;
+  const ts=writeCancelTs();
+  clearStoredRoute();
+  try{
+    const a=app();
+    if(a){
+      a.__routeCancelledAt=ts;
+      a.__routePersistenceBlocked=true;
+    }
+  }catch(_){}
+  return true;
+}
+
+function armNewRoute(){
+  blocked=false;
+  clearCancelTs();
+  try{
+    const a=app();
+    if(a){
+      a.__routeCancelledAt=0;
+      a.__routePersistenceBlocked=false;
+    }
+  }catch(_){}
+}
+
+function save(){
+  const a=app();
+
+  if(
+    blocked ||
+    a?.__routePersistenceBlocked ||
+    !a ||
+    !validRoute(a.route) ||
+    !a.destination ||
+    !isNavigationActive(a)
+  ){
+    // Importante: se não há navegação ativa, não deixa snapshot antigo sobrevivendo.
+    clearStoredRoute();
+    return false;
+  }
+
+  const cancelTs=readCancelTs();
+  if(cancelTs>0){
+    clearStoredRoute();
+    return false;
+  }
+
+  try{
+    localStorage.setItem(
+      KEY,
+      JSON.stringify({
+        ts:now(),
+        destination:destination(a),
+        route:a.route,
+        navActive:true
+      })
+    );
+    return true;
+  }catch(_){
+    return false;
+  }
+}
+
+function clear(options={}){
+  clearStoredRoute();
+  if(options.cancel===true)return cancel();
+  return true;
+}
+
+function restore(){
+  const a=app();
+  if(!a||validRoute(a.route))return false;
+  if(blocked||a.__routePersistenceBlocked)return false;
+
+  const cancelTs=readCancelTs();
+
+  let s;
+  try{s=JSON.parse(localStorage.getItem(KEY)||'null')}
+  catch(_){return false}
+
+  if(!s)return false;
+
+  const savedTs=Number(s.ts||0)||0;
+
+  if(
+    cancelTs>0 ||
+    now()-savedTs>24*3600e3 ||
+    !validRoute(s.route) ||
+    !s.destination ||
+    s.navActive===false
+  ){
+    clearStoredRoute();
+    return false;
+  }
+
+  a.destination=s.destination;
+  a.route=s.route;
+  a.navActive=true;
+  a.navigating=true;
+  a.navigationActive=true;
+  a.routeActive=true;
+
+  try{a.drawRoute?.(a.route,false)}
+  catch(_){try{a.drawRoute?.(a.route,true)}catch(__){}}
+
+  for(const f of['updateRouteUI','updateNavigation','updateHUD']){
+    try{a[f]?.()}catch(_){}
+  }
+
+  setTimeout(()=>{
+    try{window.RadarRouteTrafficV74?.refresh?.()}catch(_){}
+    try{window.RadarHazardDeclutterV119?.apply?.()}catch(_){}
+  },500);
+
+  return true;
+}
+
+function themeValue(){
+  const root=document.documentElement,body=document.body;
+  const s=((root.dataset.theme||'')+' '+(body?.dataset?.theme||'')+' '+root.className+' '+(body?.className||'')).toLowerCase();
+  if(/dark|night|noturno|escuro/.test(s))return'dark';
+  if(/light|day|claro/.test(s))return'light';
+  return null;
+}
+function rememberTheme(){
+  const v=themeValue();
+  if(v)try{localStorage.setItem(THEME,v)}catch(_){}
+}
+function applyTheme(){
+  let v;
+  try{v=localStorage.getItem(THEME)}catch(_){}
+  if(!v)return;
+  const root=document.documentElement,body=document.body;
+  root.dataset.radarTheme=v;
+  root.style.colorScheme=v;
+  root.classList.toggle('radar-force-light',v==='light');
+  root.classList.toggle('radar-force-dark',v==='dark');
+  if(body){
+    body.classList.toggle('radar-force-light',v==='light');
+    body.classList.toggle('radar-force-dark',v==='dark');
+  }
+}
+
+function bind(){
+  const a=app();
+  if(!a||a.__persistV134)return false;
+  a.__persistV134=true;
+
+  // Estado cancelado deve sobreviver a refresh/reabertura.
+  if(readCancelTs()>0){
+    blocked=true;
+    a.__routePersistenceBlocked=true;
+    clearStoredRoute();
+  }
+
+  // Uma NOVA rota válida é o único evento que libera persistência novamente.
+  const oldCalculate=typeof a.calculateRoute==='function'?a.calculateRoute.bind(a):null;
+  if(oldCalculate){
+    a.calculateRoute=async function(...args){
+      const out=await oldCalculate(...args);
+      if(validRoute(this.route)&&this.destination)armNewRoute();
+      return out;
+    };
+  }
+
+  const oldStart=typeof a.startNavigation==='function'?a.startNavigation.bind(a):null;
+  if(oldStart){
+    a.startNavigation=function(...args){
+      if(validRoute(this.route)&&this.destination)armNewRoute();
+      const out=oldStart(...args);
+      setTimeout(save,80);
+      return out;
+    };
+  }
+
+  // Toda forma conhecida de encerrar a navegação é um cancelamento definitivo.
+  for(const n of['stopNavigation','cancelNavigation','endNavigation','clearRoute']){
+    const old=typeof a[n]==='function'?a[n].bind(a):null;
+    if(old){
+      a[n]=function(...args){
+        cancel();
+        return old(...args);
+      };
+    }
+  }
+
+  document.addEventListener('click',e=>{
+    const t=((e.target?.closest?.('button,[role="button"],a')?.textContent)||'').toLowerCase();
+    if(/sair da rota|cancelar rota|cancelar navega[cç][aã]o|encerrar rota|finalizar rota/.test(t))cancel();
+    if(/claro|escuro|dia|noite|tema/.test(t)){
+      setTimeout(()=>{rememberTheme();applyTheme()},120);
+    }
+  },true);
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){
+      if(!blocked)save();
+      return;
+    }
+
+    applyTheme();
+
+    // Importante: voltar ao app NÃO recalcula rota e NÃO ressuscita rota cancelada.
+    if(blocked||readCancelTs()>0){
+      clearStoredRoute();
+      return;
+    }
+
+    if(!validRoute(app()?.route)){
+      setTimeout(()=>restore(),350);
+    }
+  });
+
+  window.addEventListener('pagehide',()=>{
+    if(!blocked)save();
+    else clearStoredRoute();
+  });
+
+  window.addEventListener('pageshow',()=>{
+    applyTheme();
+    if(blocked||readCancelTs()>0){
+      clearStoredRoute();
+      return;
+    }
+    setTimeout(()=>restore(),300);
+  });
+
+  // Mantém snapshot somente enquanto há navegação ativa.
+  setInterval(()=>{
+    if(blocked||readCancelTs()>0){
+      clearStoredRoute();
+      return;
+    }
+    save();
+  },5000);
+
+  applyTheme();
+
+  if(!blocked&&readCancelTs()===0){
+    setTimeout(()=>restore(),500);
+  }
+
+  return true;
+}
+
+let n=0,t=setInterval(()=>{
+  if(bind()||++n>200)clearInterval(t);
+},200);
+
+window.RadarNavigationPersistenceV134={
+  save,
+  restore,
+  clear,
+  cancel,
+  armNewRoute,
+  version:'134-stage1'
+};
+})();
