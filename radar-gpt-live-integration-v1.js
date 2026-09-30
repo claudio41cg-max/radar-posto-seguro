@@ -344,11 +344,8 @@ function context(){
     'Os dados abaixo vêm do próprio Radar e são a fonte da verdade sobre o estado atual.',
     'Se o usuário perguntar onde está, qual rua, bairro, destino, distância restante, tempo restante ou velocidade, responda IMEDIATAMENTE usando os dados do Radar abaixo.',
     'Nunca responda uma localização apenas com coordenadas se houver endereço/local confirmado.',
-    'Não diga "estou pensando", "estou pesquisando", "aguarde", "só um momento" ou frases semelhantes.',
-    'Para perguntas como "onde fica X?", trate como conversa e responda imediatamente com o seu conhecimento sobre o lugar. Não inicie rota só porque perguntaram onde fica.',
-    'Nunca prometa pesquisar depois, verificar depois ou responder em seguida. Se não souber localizar um lugar com segurança, diga que não tem certeza e peça um complemento como bairro, cidade ou ponto de referência.',
-    'Só trate como navegação quando o usuário disser claramente algo como "me leva", "quero ir", "navegue para" ou "traça a rota".',
-    'Se um dado operacional do Radar não estiver disponível, diga apenas que o Radar ainda não conseguiu confirmá-lo.',
+    'Não diga "estou pensando", "estou pesquisando", "aguarde", "só um momento" ou frases semelhantes para informações que já aparecem neste contexto.',
+    'Se um dado não estiver disponível, diga apenas que o Radar ainda não conseguiu confirmá-lo.',
     'Nunca invente ocorrência, trânsito, fiscalização ou preço de combustível.'
   ];
 
@@ -469,23 +466,6 @@ function gpsDistanceMeters(a,b){
     Math.sin(dLon/2)**2;
 
   return 2*R*Math.asin(Math.sqrt(x));
-}
-
-async function waitForRadarLocation(timeoutMs=7000){
-  const deadline=Date.now()+Math.max(1000,Number(timeoutMs||7000));
-
-  try{
-    window.RadarGPS?.resume?.();
-  }catch{}
-
-  while(Date.now()<deadline){
-    const gps=roundedGps(app());
-    if(gps)return gps;
-
-    await new Promise(resolve=>setTimeout(resolve,180));
-  }
-
-  return roundedGps(app());
 }
 
 async function refreshAddress(force=false){
@@ -1019,16 +999,9 @@ async function start(){
     lastContextSignature='';
 
     /*
-      Depois de reload/retorno do Android, o GPS modular pode levar alguns
-      instantes para repassar a posição canônica ao App. Não abrimos o Live
-      "cego": primeiro retomamos o RadarGPS e aguardamos userPos.
-    */
-    await waitForRadarLocation(7000);
-
-    /*
-      Com a posição canônica já disponível, resolve a localização textual
-      antes de abrir a sessão Live. Assim rua/bairro entram nas instruções
-      iniciais da própria sessão, e não somente numa atualização posterior.
+      Antes de abrir a sessão Live, resolve a localização textual atual.
+      Assim o GPT já nasce sabendo rua/bairro/local, em vez de depender
+      de uma atualização de contexto posterior que pode chegar tarde.
     */
     await refreshAddress(true);
 
@@ -1161,11 +1134,8 @@ async function resumeLiveIfNeeded(){
       suspendLocalRecognizer();
       buttonState(true);
       startContextSync();
-
-      await waitForRadarLocation(7000);
       await refreshAddress(true);
       syncContext(true);
-
       resumeWanted=false;
       return true;
     }
@@ -1224,31 +1194,9 @@ function bindLifecycle(){
   );
 
   window.addEventListener(
-    'pagehide',
-    ()=>{
-      /*
-        A página antiga não pode deixar um WebRTC vivo enquanto o Android
-        restaura/recarrega outra instância do Radar. Preservamos apenas a
-        intenção de manter o Live ligado; o transporte antigo é encerrado.
-      */
-      if(liveOwnsVoice()||liveWanted()){
-        resumeWanted=true;
-      }
-
-      active=false;
-      starting=false;
-      stopContextSync();
-
-      try{
-        window.RadarGPTLive?.stop?.();
-      }catch{}
-    }
-  );
-
-  window.addEventListener(
     'pageshow',
     ()=>{
-      if(liveOwnsVoice()||resumeWanted||liveWanted()){
+      if(liveOwnsVoice()||resumeWanted){
         resumeWanted=true;
         setTimeout(
           ()=>resumeLiveIfNeeded(),
@@ -1453,7 +1401,6 @@ window.RadarGPTLiveController={
   toggle,
   syncContext,
   refreshAddress,
-  waitForRadarLocation,
   suspendLocalRecognizer,
   isDirectStateQuestion,
   isOperationalCommand,
