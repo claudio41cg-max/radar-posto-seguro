@@ -112,7 +112,31 @@ function normalizeRoute(rt){
   return route;
 }
 
-async function fetchTomTomRoute(origin,destination){
+function consumeViaPoint(explicitVia){
+  if(validPoint(explicitVia))return explicitVia;
+
+  const holder=window.RadarRouteViaV115;
+  const pending=holder?.state?.pending;
+
+  if(
+    pending&&
+    Number.isFinite(Number(pending.lon))&&
+    Number.isFinite(Number(pending.lat))
+  ){
+    const via=[Number(pending.lon),Number(pending.lat)];
+
+    try{
+      holder.state.current={...pending};
+      holder.state.pending=null;
+    }catch(_){}
+
+    return via;
+  }
+
+  return null;
+}
+
+async function fetchTomTomRoute(origin,destination,options={}){
   const a=app();
 
   if(!a)throw new Error('Radar indisponível');
@@ -121,6 +145,11 @@ async function fetchTomTomRoute(origin,destination){
   }
 
   const mode=a.transportMode==='motorcycle'?'motorcycle':'car';
+  const via=consumeViaPoint(options.via);
+
+  const routePoints=via
+    ?origin[1]+','+origin[0]+':'+via[1]+','+via[0]+':'+destination[1]+','+destination[0]
+    :origin[1]+','+origin[0]+':'+destination[1]+','+destination[0];
 
   /*
     maxAlternatives=0:
@@ -129,8 +158,7 @@ async function fetchTomTomRoute(origin,destination){
   */
   const path=
     '/routing/1/calculateRoute/'+
-    origin[1]+','+origin[0]+':'+
-    destination[1]+','+destination[0]+
+    routePoints+
     '/json?traffic=true'+
     '&travelMode='+encodeURIComponent(mode)+
     '&instructionsType=text'+
@@ -249,7 +277,7 @@ async function calculateRoute(options={}){
   try{a.toast?.('Calculando melhor rota...')}catch(_){}
 
   try{
-    const route=await fetchTomTomRoute(origin,destination);
+    const route=await fetchTomTomRoute(origin,destination,options);
 
     /*
       Se outra solicitação começou depois, esta resposta ficou velha.
@@ -313,7 +341,8 @@ async function recalculateRoute(){
   try{
     const newRoute=await fetchTomTomRoute(
       routeOrigin,
-      a.destination
+      a.destination,
+      {}
     );
 
     if(requestId!==generation){
@@ -383,11 +412,11 @@ function bindApp(){
     Todas as entradas passam por RadarRouting.
   */
   a.tomTomModifier=modifier;
-  a.fetchTomTomRoute=(origin,destination)=>
-    fetchTomTomRoute(origin,destination);
+  a.fetchTomTomRoute=(origin,destination,options={})=>
+    fetchTomTomRoute(origin,destination,options);
 
-  a.getRoute=(origin,destination)=>
-    fetchTomTomRoute(origin,destination);
+  a.getRoute=(origin,destination,options={})=>
+    fetchTomTomRoute(origin,destination,options);
 
   a.calculateRoute=(options)=>
     calculateRoute(options||{});
