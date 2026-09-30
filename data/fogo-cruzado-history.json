@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T14:59:04.983Z",
+  "generatedAt": "2026-09-30T19:55:37.723Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 238,
+  "count": 239,
   "occurrences": [
+    {
+      "id": "dec63c44-6429-4d51-b7b0-a3fdf60d1be7",
+      "documentNumber": 79283,
+      "date": "2026-09-30T14:45:00.000Z",
+      "address": "Av. das Américas - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-704, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -23.017058180360273,
+      "longitude": -43.47857432797266,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        }
+      ]
+    },
     {
       "id": "4752a047-40a5-4291-8df2-78c36d24915b",
       "documentNumber": 79276,
@@ -177,6 +197,34 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -201,10 +249,6 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -214,30 +258,6 @@
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -392,7 +412,12 @@
       "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "57a30b28-fa1b-4bf1-8f9d-8487f6bbac12",
@@ -548,11 +573,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -829,15 +854,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
