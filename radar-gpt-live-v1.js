@@ -102,13 +102,24 @@ function updateContext(instructions){
   return sendEvent(event);
 }
 
-function cancelResponse(){
-  /*
-    Usado quando o parser local assume um comando operacional.
-    Assim a mesma frase não continua sendo respondida simultaneamente
-    pelo GPT e pelo Radar local.
-  */
-  return sendEvent({type:'response.cancel'});
+function appendContext(content){
+  const text=String(content||'').trim().slice(0,4000);
+  if(!text)return false;
+  return sendEvent({
+    type:'session.context.append',
+    content:text
+  });
+}
+
+function requestResponse(){
+  return sendEvent({
+    type:'response.create'
+  });
+}
+
+function speakContext(content){
+  if(!appendContext(content))return false;
+  return requestResponse();
 }
 
 async function stop(){
@@ -501,7 +512,9 @@ window.RadarGPTLive={
   toggleMute,
   sendEvent,
   updateContext,
-  cancelResponse
+  appendContext,
+  requestResponse,
+  speakContext
 };
 
 })();
