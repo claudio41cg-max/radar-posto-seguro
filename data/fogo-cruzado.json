@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T08:19:43.463Z",
+  "generatedAt": "2026-09-30T14:59:04.982Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
-  "lastUpdate": "2026-09-29T23:36:22-03:00",
+  "count": 40,
+  "lastUpdate": "2026-09-30T09:17:59-03:00",
   "occurrences": [
+    {
+      "id": "4752a047-40a5-4291-8df2-78c36d24915b",
+      "documentNumber": 79276,
+      "date": "2026-09-30T06:12:00.000Z",
+      "address": "Comunidade Parque Dois Irmãos - Curicica, Rio de Janeiro - RJ, 22780-190, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.95105015,
+      "longitude": -43.39378358,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "cb2b04a6-d5d7-49da-b426-7e15fa701d41",
       "documentNumber": 79272,
@@ -49,6 +69,26 @@
       ]
     },
     {
+      "id": "724648f9-3711-4c45-b60f-ed25ba84fa6c",
+      "documentNumber": 79277,
+      "date": "2026-09-29T08:00:00.000Z",
+      "address": "Avenida Coronel Sisson - Vila Angelica, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "SANTA LUCIA",
+      "subNeighborhood": "VILA ANGELICA",
+      "locality": "",
+      "latitude": -22.6254299,
+      "longitude": -43.2066517,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "f441b152-b739-4e84-ac39-54adfe93f281",
       "documentNumber": 79257,
       "date": "2026-09-28T22:00:00.000Z",
@@ -64,6 +104,26 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "30215545-3894-46f6-8002-c91a9a72ba9e",
+      "documentNumber": 79275,
+      "date": "2026-09-28T17:00:00.000Z",
+      "address": "Escola Municipal Juliano Moreira - Estrada Rodrigues Caldas - Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9248613,
+      "longitude": -43.3875835,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -142,18 +202,6 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -179,6 +227,18 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -479,15 +539,15 @@
       ]
     },
     {
-      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
-      "documentNumber": 79202,
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
       "date": "2026-09-25T06:00:00.000Z",
-      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
-      "neighborhood": "MANGUEIRA",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
       "subNeighborhood": "",
-      "locality": "MANGUEIRA",
-      "latitude": -22.90514541,
-      "longitude": -43.23489755,
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -509,15 +569,15 @@
       "victims": []
     },
     {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
+      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
+      "documentNumber": 79202,
       "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
+      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
+      "neighborhood": "MANGUEIRA",
       "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
+      "locality": "MANGUEIRA",
+      "latitude": -22.90514541,
+      "longitude": -43.23489755,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
