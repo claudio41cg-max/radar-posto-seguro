@@ -45,6 +45,8 @@ let lastAddressPoint=null;
 let lastLocalFact='';
 let lastMentionedPlace='';
 let localCommandInFlight=false;
+let resumeWanted=false;
+let resumeInFlight=false;
 
 function getLexical(name){
   try{return (0,eval)('typeof '+name+' !== "undefined" ? '+name+' : null')}
@@ -75,6 +77,19 @@ function liveOwnsVoice(){
 function selectedVoice(){
   const saved=String(localStorage.getItem(VOICE_KEY)||'cove').trim();
   return VOICES.some(v=>v[0]===saved)?saved:'cove';
+}
+
+function liveTransportHealthy(){
+  const live=window.RadarGPTLive;
+  const state=live?.state;
+  const pcState=String(state?.pc?.connectionState||'');
+  const channelState=String(state?.channel?.readyState||'');
+
+  return !!(
+    state?.running&&
+    pcState==='connected'&&
+    channelState==='open'
+  );
 }
 
 function uiToast(text,ms=2500){
@@ -909,6 +924,8 @@ function buttonState(on,thinking=false){
 }
 
 async function stop(){
+  resumeWanted=false;
+  resumeInFlight=false;
   starting=false;
   active=false;
 
@@ -1078,6 +1095,97 @@ async function toggle(){
     :start();
 }
 
+async function resumeLiveIfNeeded(){
+  if(
+    document.hidden||
+    !resumeWanted||
+    resumeInFlight
+  ){
+    return false;
+  }
+
+  resumeInFlight=true;
+
+  try{
+    if(liveTransportHealthy()){
+      active=true;
+      starting=false;
+      suspendLocalRecognizer();
+      buttonState(true);
+      startContextSync();
+      await refreshAddress(true);
+      syncContext(true);
+      resumeWanted=false;
+      return true;
+    }
+
+    /*
+      O Android pode suspender o WebRTC em segundo plano sem descarregar
+      a página. Nesse caso o controlador ainda "acha" que está ativo.
+      Encerramos somente o transporte morto e abrimos uma sessão nova
+      usando selectedVoice(), que lê exatamente a voz salva no localStorage.
+    */
+    active=false;
+    starting=false;
+    stopContextSync();
+
+    try{
+      await window.RadarGPTLive?.stop?.();
+    }catch{}
+
+    await start();
+
+    resumeWanted=false;
+    return true;
+
+  }catch(error){
+    console.warn(
+      '[Radar GPT] retomada:',
+      error
+    );
+
+    return false;
+
+  }finally{
+    resumeInFlight=false;
+  }
+}
+
+function bindLifecycle(){
+  if(document.documentElement.dataset.gptLiveLifecycleBound)return;
+  document.documentElement.dataset.gptLiveLifecycleBound='1';
+
+  document.addEventListener(
+    'visibilitychange',
+    ()=>{
+      if(document.hidden){
+        if(liveOwnsVoice()){
+          resumeWanted=true;
+        }
+        return;
+      }
+
+      setTimeout(
+        ()=>resumeLiveIfNeeded(),
+        120
+      );
+    }
+  );
+
+  window.addEventListener(
+    'pageshow',
+    ()=>{
+      if(liveOwnsVoice()||resumeWanted){
+        resumeWanted=true;
+        setTimeout(
+          ()=>resumeLiveIfNeeded(),
+          120
+        );
+      }
+    }
+  );
+}
+
 function installPicker(){
   if(
     document.getElementById(
@@ -1195,6 +1303,7 @@ function bind(){
   patchOutputGuards();
   installPicker();
   bindContextTriggers();
+  bindLifecycle();
 
   [
     'assistantMicBtn',
