@@ -25,6 +25,17 @@ if(!kernel){
   return;
 }
 
+const Utils=window.RADAR_MAP_UTILS_V101?.Utils;
+if(
+  !Utils ||
+  typeof Utils.distanceKm!=='function' ||
+  typeof Utils.pointToSegment!=='function' ||
+  typeof Utils.angleDiff!=='function'
+){
+  console.error('[RadarRouteProgress] RADAR_MAP_UTILS_V101.Utils não disponível.');
+  return;
+}
+
 function app(){
   return window.RadarApp||window.App||null;
 }
@@ -403,7 +414,7 @@ function bindApp(){
 }
 
 const api={
-  version:'1.0.0',
+  version:'1.1.0',
   match:matchPositionToRoute,
   prepare:prepareRouteGeometry,
   findIndexForOffset,
@@ -415,7 +426,7 @@ window.RadarRouteProgress=Object.freeze(api);
 
 const registration=kernel.registerModule({
   name:'route-progress-v1',
-  version:'1.0.0',
+  version:'1.1.0',
   owns:['navigation.progress'],
 
   async start({resources}){
