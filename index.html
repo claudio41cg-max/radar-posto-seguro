@@ -13630,15 +13630,29 @@ App.init();
   return {street,number,postalCode,district,city,state,label:parts.join(', '),lon,lat};
  }
 
- function freshGps(){
-  return new Promise(resolve=>{
-   if(!navigator.geolocation){resolve(null);return;}
-   navigator.geolocation.getCurrentPosition(
-    p=>resolve({lat:Number(p.coords.latitude),lon:Number(p.coords.longitude),accuracy:Number(p.coords.accuracy||0)}),
-    ()=>{try{const p=App?.userPos;resolve(Array.isArray(p)?{lon:Number(p[0]),lat:Number(p[1]),accuracy:0}:null)}catch(e){resolve(null)}},
-    {enableHighAccuracy:true,maximumAge:0,timeout:8000}
-   );
-  });
+ async function freshGps(){
+  // GPS modular: consultas pontuais não abrem um segundo canal de geolocalização
+  // fora do RadarGPS e não alteram App.userPos.
+  try{
+   const fix=await window.RadarGPS?.fresh?.({
+    timeout:8000,
+    maximumAge:0,
+    fallbackAge:15000
+   });
+   if(fix)return {
+    lat:Number(fix.lat),
+    lon:Number(fix.lon),
+    accuracy:Number(fix.accuracy||0)
+   };
+  }catch(e){}
+  try{
+   const p=App?.userPos;
+   return Array.isArray(p)
+    ?{lon:Number(p[0]),lat:Number(p[1]),accuracy:0}
+    :null;
+  }catch(e){
+   return null;
+  }
  }
 
  function isLocationQuestion(q){
