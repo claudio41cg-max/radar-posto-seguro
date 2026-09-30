@@ -16,6 +16,7 @@
 */
 
 const VOICE_KEY='radar.gptLiveVoice.v1';
+const LIVE_WANTED_KEY='radar.gptLiveWanted.v1';
 const VOICES=[
   ['cove','Cove'],['juniper','Juniper'],['maple','Maple'],
   ['spruce','Spruce'],['ember','Ember'],['vale','Vale'],
@@ -77,6 +78,21 @@ function liveOwnsVoice(){
 function selectedVoice(){
   const saved=String(localStorage.getItem(VOICE_KEY)||'cove').trim();
   return VOICES.some(v=>v[0]===saved)?saved:'cove';
+}
+
+function liveWanted(){
+  try{
+    return localStorage.getItem(LIVE_WANTED_KEY)==='1';
+  }catch{
+    return false;
+  }
+}
+
+function setLiveWanted(value){
+  try{
+    if(value) localStorage.setItem(LIVE_WANTED_KEY,'1');
+    else localStorage.removeItem(LIVE_WANTED_KEY);
+  }catch{}
 }
 
 function liveTransportHealthy(){
@@ -923,7 +939,11 @@ function buttonState(on,thinking=false){
   }
 }
 
-async function stop(){
+async function stop({preserveWanted=false}={}){
+  if(!preserveWanted){
+    setLiveWanted(false);
+  }
+
   resumeWanted=false;
   resumeInFlight=false;
   starting=false;
@@ -1007,6 +1027,7 @@ async function start(){
         if(name==='live'){
           starting=false;
           active=true;
+          setLiveWanted(true);
 
           /*
             Garante novamente que nenhum SpeechRecognition local tenha
@@ -1091,7 +1112,7 @@ async function toggle(){
     active||
     starting
   )
-    ?stop()
+    ?stop({preserveWanted:false})
     :start();
 }
 
@@ -1232,7 +1253,7 @@ function installPicker(){
     );
 
     if(active||starting){
-      await stop();
+      await stop({preserveWanted:true});
       setTimeout(start,180);
     }
   };
@@ -1305,6 +1326,32 @@ function bind(){
   bindContextTriggers();
   bindLifecycle();
 
+  /*
+    Android/PWA pode recarregar a página ao voltar do segundo plano.
+    O estado "Live ligado" precisa sobreviver ao reload para impedir que
+    o assistente local/voz Android assuma no retorno.
+  */
+  if(
+    liveWanted()&&
+    !active&&
+    !starting
+  ){
+    suspendLocalRecognizer();
+
+    setTimeout(
+      ()=>{
+        if(
+          !document.hidden&&
+          !active&&
+          !starting
+        ){
+          start();
+        }
+      },
+      220
+    );
+  }
+
   [
     'assistantMicBtn',
     'navAssistantMicBtn'
@@ -1366,7 +1413,8 @@ window.RadarGPTLiveController={
     return localCommandInFlight;
   },
 
-  voice:selectedVoice
+  voice:selectedVoice,
+  liveWanted
 };
 
 })();
