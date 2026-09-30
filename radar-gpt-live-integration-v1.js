@@ -908,6 +908,13 @@ async function start(){
   try{
     lastContextSignature='';
 
+    /*
+      Antes de abrir a sessão Live, resolve a localização textual atual.
+      Assim o GPT já nasce sabendo rua/bairro/local, em vez de depender
+      de uma atualização de contexto posterior que pode chegar tarde.
+    */
+    await refreshAddress(true);
+
     await live.start({
       voice:selectedVoice(),
       instructions:context(),
