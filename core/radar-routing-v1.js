@@ -477,7 +477,18 @@ async function calculateRoute(options={}){
 
     console.error('[RadarRouting] cálculo:',error);
 
-    try{a.toast?.('Não foi possível calcular a rota.')}catch(_){}
+    const detail=String(error?.message||error||'Erro desconhecido')
+      .replace(/\s+/g,' ')
+      .trim()
+      .slice(0,180);
+
+    try{
+      a.toast?.(
+        'Falha de rota: '+detail,
+        12000
+      );
+    }catch(_){}
+
     return null;
   }
 }
@@ -554,7 +565,18 @@ async function recalculateRoute(){
 
     console.warn('[RadarRouting] recálculo:',error);
 
-    try{a.toast?.('Não foi possível atualizar a rota.')}catch(_){}
+    const detail=String(error?.message||error||'Erro desconhecido')
+      .replace(/\s+/g,' ')
+      .trim()
+      .slice(0,180);
+
+    try{
+      a.toast?.(
+        'Falha ao atualizar rota: '+detail,
+        12000
+      );
+    }catch(_){}
+
     return null;
 
   }finally{
