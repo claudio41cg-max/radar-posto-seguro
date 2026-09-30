@@ -11650,337 +11650,256 @@ ${Utils.sanitize(msg.text)}
 
 
 const TrafficAssistantV40={
+  /*
+    Compatibilidade após modularização de rota.
+    Este objeto NÃO calcula rota, NÃO cria alternativas e NÃO escreve
+    App.routeAlternatives. Ele só responde perguntas de trânsito usando
+    a rota canônica já criada por RadarRouting e o módulo de trânsito v131.
+  */
   timer:null,
   checking:false,
   pending:null,
-  lastAnnouncedAt:0,
   worker:'https://radar-seguro-ia-rj.claudio41cg.workers.dev',
 
   remainingSeconds(){
-    if(!App.route) return NaN;
-    const totalM=Number(App.route.distance ?? App.route.summary?.lengthInMeters);
-    const progressM=Math.max(0,Number(App.routeProgressMeters||0));
-    const remainingM=Number.isFinite(totalM)?Math.max(0,totalM-progressM):NaN;
-    const totalSec=Number(App.route.duration ?? App.route.summary?.travelTimeInSeconds);
-    if(!Number.isFinite(totalSec)) return NaN;
-    if(Number.isFinite(totalM) && totalM>0 && Number.isFinite(remainingM)) return totalSec*(remainingM/totalM);
+    if(!App.route)return NaN;
+
+    const totalM=Number(
+      App.route.distance ??
+      App.route.summary?.lengthInMeters
+    );
+
+    const progressM=Math.max(
+      0,
+      Number(App.routeProgressMeters||0)
+    );
+
+    const remainingM=Number.isFinite(totalM)
+      ?Math.max(0,totalM-progressM)
+      :NaN;
+
+    const totalSec=Number(
+      App.route.duration ??
+      App.route.summary?.travelTimeInSeconds
+    );
+
+    if(!Number.isFinite(totalSec))return NaN;
+
+    if(
+      Number.isFinite(totalM)&&
+      totalM>0&&
+      Number.isFinite(remainingM)
+    ){
+      return totalSec*(remainingM/totalM);
+    }
+
     return totalSec;
   },
 
-  trafficSourceId:'radar-overlay-traffic-v58',
-  trafficLayerOrange:'radar-overlay-traffic-orange-v58',
-  trafficLayerRed:'radar-overlay-traffic-red-v58',
-
-  routeTrafficPoints(route){
-    const out=[];
-    const legs=Array.isArray(route?.legs)?route.legs:[];
-    for(const leg of legs){
-      for(const pt of (leg?.points||[])){
-        const lat=Number(pt?.latitude ?? pt?.lat);
-        const lon=Number(pt?.longitude ?? pt?.lon ?? pt?.lng);
-        if(Number.isFinite(lat)&&Number.isFinite(lon)) out.push([lon,lat]);
-      }
-    }
-    if(!out.length){
-      for(const pt of (route?.points||[])){
-        const lat=Number(pt?.latitude ?? pt?.lat ?? pt?.[1]);
-        const lon=Number(pt?.longitude ?? pt?.lon ?? pt?.lng ?? pt?.[0]);
-        if(Number.isFinite(lat)&&Number.isFinite(lon)) out.push([lon,lat]);
-      }
-    }
-    return out;
-  },
-
-  trafficSections(route){
-    const all=[];
-    if(Array.isArray(route?.sections)) all.push(...route.sections);
-    for(const leg of (route?.legs||[])) if(Array.isArray(leg?.sections)) all.push(...leg.sections);
-    return all.filter(sec=>String(sec?.sectionType||'').toUpperCase()==='TRAFFIC' || sec?.simpleCategory || Number(sec?.delayInSeconds)>0);
-  },
-
-  trafficFeatureCollection(route){
-    const points=this.routeTrafficPoints(route);
-    const sections=this.trafficSections(route);
-    const features=[];
-    if(points.length<2) return {type:'FeatureCollection',features};
-    for(const sec of sections){
-      const a=Math.max(0,Number(sec?.startPointIndex)||0);
-      const b=Math.min(points.length-1,Number(sec?.endPointIndex));
-      if(!Number.isFinite(b)||b<=a) continue;
-      const coords=points.slice(a,b+1);
-      if(coords.length<2) continue;
-      const mag=Number(sec?.magnitudeOfDelay);
-      const delay=Number(sec?.delayInSeconds||0);
-      const cat=String(sec?.simpleCategory||'').toUpperCase();
-      let level='orange';
-      if(cat==='ROAD_CLOSURE' || cat==='JAM' && (mag>=3 || delay>=300) || mag>=3) level='red';
-      else if((Number.isFinite(mag)&&mag<=0) && delay<60) continue;
-      features.push({
-        type:'Feature',
-        properties:{level,delaySeconds:delay,category:cat},
-        geometry:{type:'LineString',coordinates:coords}
-      });
-    }
-    return {type:'FeatureCollection',features};
-  },
-
-  ensureTrafficLayers(){
-    const map=App.map;
-    if(!map || !map.getStyle || !map.isStyleLoaded?.()) return false;
-    try{
-      if(!map.getSource(this.trafficSourceId)){
-        map.addSource(this.trafficSourceId,{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-      }
-      if(!map.getLayer(this.trafficLayerOrange)){
-        map.addLayer({
-          id:this.trafficLayerOrange,
-          type:'line',
-          source:this.trafficSourceId,
-          filter:['==',['get','level'],'orange'],
-          paint:{'line-color':'#f59e0b','line-width':8,'line-opacity':0.95},
-          layout:{'line-cap':'round','line-join':'round'}
-        });
-      }
-      if(!map.getLayer(this.trafficLayerRed)){
-        map.addLayer({
-          id:this.trafficLayerRed,
-          type:'line',
-          source:this.trafficSourceId,
-          filter:['==',['get','level'],'red'],
-          paint:{'line-color':'#ef4444','line-width':9,'line-opacity':0.98},
-          layout:{'line-cap':'round','line-join':'round'}
-        });
-      }
-      return true;
-    }catch(e){
-      console.warn('Radar camada de trânsito:',e);
-      return false;
-    }
-  },
-
-  drawTrafficOverlay(route){
-    // v58: trânsito continua sendo consultado para ETA/rota/voz,
-    // porém o mapa não recebe malha colorida de trânsito.
-    try{
-      const src=App.map?.getSource(this.trafficSourceId);
-      if(src?.setData) src.setData({type:'FeatureCollection',features:[]});
-    }catch(e){}
-  },
-
-  clearTrafficOverlay(){
-    try{
-      const src=App.map?.getSource(this.trafficSourceId);
-      if(src?.setData) src.setData({type:'FeatureCollection',features:[]});
-    }catch(e){}
-  },
-
-  schedule(delay=60000){
-    clearTimeout(this.timer);
-    this.timer=setTimeout(()=>this.check(),delay);
-  },
-
   async getTrafficSnapshot(){
-    if(!App.route || !App.destination || !Array.isArray(App.userPos)) return null;
-    const [lon,lat]=App.userPos;
-    const [dlon,dlat]=App.destination;
-    const locations=lat+','+lon+':'+dlat+','+dlon;
-    const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=2';
-    const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),12000);
+    /*
+      Não chama calculateRoute da TomTom.
+      Usa somente o resumo da rota oficial já ativa.
+    */
+    if(!App.route)return null;
+
     try{
-      const response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});
-      if(!response.ok) throw new Error('TomTom traffic '+response.status);
-      const data=await response.json();
-      const route=data?.routes?.[0];
-      if(Array.isArray(data?.routes)) App.routeAlternatives=data.routes.slice(0,3);
-      if(!route) return null;
-      this.drawTrafficOverlay(route);
-      return {
-        travelSec:Number(route.summary?.travelTimeInSeconds),
-        delaySec:Number(route.summary?.trafficDelayInSeconds||0),
-        distanceM:Number(route.summary?.lengthInMeters)
-      };
-    }finally{ clearTimeout(timeout); }
+      window.RadarRouteTrafficV74?.refresh?.();
+    }catch(_){}
+
+    const totalSec=Number(
+      App.route.duration ??
+      App.route.summary?.travelTimeInSeconds
+    );
+
+    const delaySec=Number(
+      App.route.trafficDelaySeconds ??
+      App.route.summary?.trafficDelayInSeconds ??
+      0
+    );
+
+    const distanceM=Number(
+      App.route.distance ??
+      App.route.summary?.lengthInMeters
+    );
+
+    return {
+      travelSec:totalSec,
+      delaySec,
+      distanceM
+    };
   },
 
   async answerTrafficQuestion(){
-    if(App.route && App.destination){
-      try{
-        const info=await this.getTrafficSnapshot();
-        if(!info || !Number.isFinite(info.travelSec)) throw new Error('sem dados');
-        const mins=Math.max(1,Math.round(info.travelSec/60));
-        const delay=Math.max(0,Math.round(info.delaySec/60));
-        if(delay>=3) VoiceAssistant.reply('Sim. O TomTom indica cerca de '+delay+' minutos de atraso por trânsito na rota. O tempo atual estimado é '+mins+' minutos.');
-        else if(delay>0) VoiceAssistant.reply('Há uma pequena retenção na rota, com cerca de '+delay+' minuto'+(delay===1?'':'s')+' de atraso. O trajeto está estimado em '+mins+' minutos.');
-        else VoiceAssistant.reply('O TomTom não indica retenção relevante nessa rota agora. O trajeto está estimado em '+mins+' minutos.');
-        return true;
-      }catch(e){
-        console.warn('TomTom rota/voz:',e);
-        VoiceAssistant.reply('Não consegui consultar o trânsito real do TomTom agora. Tente novamente em instantes.');
+    if(App.route){
+      const info=await this.getTrafficSnapshot();
+
+      if(
+        info&&
+        Number.isFinite(info.travelSec)
+      ){
+        const mins=Math.max(
+          1,
+          Math.round(this.remainingSeconds()/60)
+        );
+
+        const delay=Math.max(
+          0,
+          Math.round(Number(info.delaySec||0)/60)
+        );
+
+        if(delay>=3){
+          VoiceAssistant.reply(
+            'O TomTom indica cerca de '+
+            delay+
+            ' minutos de atraso por trânsito. '+
+            'O tempo restante estimado é '+
+            mins+
+            ' minutos.'
+          );
+        }else if(delay>0){
+          VoiceAssistant.reply(
+            'Há uma pequena retenção na rota, com cerca de '+
+            delay+
+            ' minuto'+
+            (delay===1?'':'s')+
+            ' de atraso. O tempo restante estimado é '+
+            mins+
+            ' minutos.'
+          );
+        }else{
+          VoiceAssistant.reply(
+            'O TomTom não indica retenção relevante na rota agora. '+
+            'O tempo restante estimado é '+
+            mins+
+            ' minutos.'
+          );
+        }
+
         return true;
       }
     }
-    if(Array.isArray(App.userPos) && App.userPos.length>=2){
+
+    if(
+      Array.isArray(App.userPos)&&
+      App.userPos.length>=2
+    ){
       try{
         const [lon,lat]=App.userPos;
-        const path='/traffic/services/4/flowSegmentData/absolute/10/json?point='+lat+','+lon+'&unit=KMPH';
-        const r=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store'});
-        if(!r.ok) throw new Error('TomTom flow '+r.status);
-        const d=await r.json();
-        const f=d?.flowSegmentData;
-        const current=Number(f?.currentSpeed), free=Number(f?.freeFlowSpeed);
-        if(!Number.isFinite(current)||!Number.isFinite(free)||free<=0) throw new Error('fluxo incompleto');
+
+        const path=
+          '/traffic/services/4/flowSegmentData/absolute/10/json?point='+
+          lat+','+lon+
+          '&unit=KMPH';
+
+        const response=await fetch(
+          this.worker+
+          '/v1/tomtom?path='+
+          encodeURIComponent(path),
+          {cache:'no-store'}
+        );
+
+        if(!response.ok){
+          throw new Error(
+            'TomTom flow '+
+            response.status
+          );
+        }
+
+        const data=await response.json();
+        const flow=data?.flowSegmentData;
+
+        const current=Number(flow?.currentSpeed);
+        const free=Number(flow?.freeFlowSpeed);
+
+        if(
+          !Number.isFinite(current)||
+          !Number.isFinite(free)||
+          free<=0
+        ){
+          throw new Error('fluxo incompleto');
+        }
+
         const ratio=current/free;
-        if(f.roadClosure || ratio<=0.32) VoiceAssistant.reply('Na via em que você está agora, o TomTom indica trânsito bem lento ou parado.');
-        else if(ratio<0.70) VoiceAssistant.reply('Há trânsito moderado na via atual, segundo o TomTom.');
-        else VoiceAssistant.reply('O TomTom indica fluxo livre na via em que você está agora.');
-      }catch(e){
-        console.warn('TomTom via atual:',e);
-        VoiceAssistant.reply('Não consegui consultar o trânsito real do TomTom agora.');
+
+        if(flow.roadClosure||ratio<=.32){
+          VoiceAssistant.reply(
+            'Na via em que você está agora, o TomTom indica trânsito bem lento ou parado.'
+          );
+        }else if(ratio<.70){
+          VoiceAssistant.reply(
+            'Há trânsito moderado na via atual, segundo o TomTom.'
+          );
+        }else{
+          VoiceAssistant.reply(
+            'O TomTom indica fluxo livre na via em que você está agora.'
+          );
+        }
+
+      }catch(error){
+        console.warn(
+          'TomTom via atual:',
+          error
+        );
+
+        VoiceAssistant.reply(
+          'Não consegui consultar o trânsito real do TomTom agora.'
+        );
       }
+
       return true;
     }
-    VoiceAssistant.reply('Ainda não tenho sua localização. Aguarde o GPS e tente de novo.');
+
+    VoiceAssistant.reply(
+      'Ainda não tenho sua localização. Aguarde o GPS e tente novamente.'
+    );
+
     return true;
   },
 
   async answerRadarQuestion(){
     if(!App.route){
-      VoiceAssistant.reply('Trace uma rota primeiro para eu verificar os radares do caminho.');
+      VoiceAssistant.reply(
+        'Trace uma rota primeiro para eu verificar os radares do caminho.'
+      );
       return true;
     }
-    const candidates=[];
-    for(const key of ['radars','radares','speedCameras','radarData']){
-      if(Array.isArray(App[key])) candidates.push(...App[key]);
-    }
-    if(Array.isArray(window.RADARS)) candidates.push(...window.RADARS);
-    if(Array.isArray(window.RADARES)) candidates.push(...window.RADARES);
-    const pts=App.route?.geometry?.coordinates || App.route?.coordinates || App.route?.points || [];
-    if(!candidates.length || !Array.isArray(pts) || pts.length<2){
-      VoiceAssistant.reply('Eu ainda não consegui cruzar os radares cadastrados com essa rota. Vou continuar avisando os radares que o mapa detectar durante a navegação.');
-      return true;
-    }
-    const hav=(a,b)=>{
-      const R=6371000, toRad=x=>x*Math.PI/180;
-      const dLat=toRad(b[1]-a[1]), dLon=toRad(b[0]-a[0]);
-      const q=Math.sin(dLat/2)**2+Math.cos(toRad(a[1]))*Math.cos(toRad(b[1]))*Math.sin(dLon/2)**2;
-      return 2*R*Math.asin(Math.sqrt(q));
-    };
-    const near=candidates.filter(r=>{
-      const lon=Number(r.lon??r.lng??r.longitude??r.coordinates?.[0]);
-      const lat=Number(r.lat??r.latitude??r.coordinates?.[1]);
-      if(!Number.isFinite(lon)||!Number.isFinite(lat)) return false;
-      let best=Infinity;
-      for(let i=0;i<pts.length;i+=Math.max(1,Math.floor(pts.length/250))){
-        const p=pts[i]; if(Array.isArray(p)&&p.length>=2) best=Math.min(best,hav([lon,lat],[Number(p[0]),Number(p[1])]));
-      }
-      return best<=180;
-    });
-    const unique=[...new Set(near.map(r=>String(r.id??r.name??r.nome??((r.lat??r.latitude)+','+(r.lon??r.lng??r.longitude)))) )];
-    if(unique.length) VoiceAssistant.reply('Encontrei '+unique.length+' radar'+(unique.length===1?'':'es')+' cadastrado'+(unique.length===1?'':'s')+' próximo'+(unique.length===1?'':'s')+' da sua rota. Durante a navegação eu aviso conforme você se aproxima.');
-    else VoiceAssistant.reply('Não encontrei radar cadastrado próximo dessa rota. Isso não garante que não existam outros radares no caminho.');
+
+    VoiceAssistant.reply(
+      'Vou continuar avisando os radares detectados durante a navegação.'
+    );
+
     return true;
   },
 
-  async check(){
-    clearTimeout(this.timer);
-    this.timer=null;
-    if(this.checking || !App.navActive || !App.route || !App.destination || !Array.isArray(App.userPos)){
-      if(App.navActive) this.schedule(75000);
-      return;
-    }
-    if(document.visibilityState!=='visible'){
-      this.schedule(75000);
-      return;
-    }
+  check(){
+    // Desativado: não existe mais verificação paralela de rota.
+    return false;
+  },
 
-    this.checking=true;
-    try{
-      const [lon,lat]=App.userPos;
-      const [dlon,dlat]=App.destination;
-      const locations=lat+','+lon+':'+dlat+','+dlon;
-      const path='/routing/1/calculateRoute/'+locations+'/json?traffic=true&routeType=fastest&travelMode=car&language=pt-BR&computeTravelTimeFor=all&maxAlternatives=2';
-      const controller=new AbortController();
-      const timeout=setTimeout(()=>controller.abort(),12000);
-      let response;
-      try{
-        response=await fetch(this.worker+'/v1/tomtom?path='+encodeURIComponent(path),{cache:'no-store',signal:controller.signal});
-      }finally{ clearTimeout(timeout); }
-      if(!response.ok) throw new Error('TomTom traffic '+response.status);
-      const data=await response.json();
-      const route=data?.routes?.[0];
-      if(Array.isArray(data?.routes)) App.routeAlternatives=data.routes.slice(0,3);
-      if(route) this.drawTrafficOverlay(route);
-      const freshSec=Number(route?.summary?.travelTimeInSeconds);
-      const trafficDelay=Number(route?.summary?.trafficDelayInSeconds||0);
-      const currentSec=this.remainingSeconds();
-      if(!Number.isFinite(freshSec) || !Number.isFinite(currentSec) || currentSec<180) return;
-
-      const saving=currentSec-freshSec;
-      const minimum=Math.max(120,currentSec*.10);
-      const now=Date.now();
-      if(saving>=minimum && now-this.lastAnnouncedAt>5*60*1000){
-        this.pending={createdAt:now,savingSec:saving,trafficDelay};
-        this.lastAnnouncedAt=now;
-        const minutes=Math.max(2,Math.round(saving/60));
-        const congestion=trafficDelay>=180 ? 'Há retenção no trajeto atual. ' : '';
-        Voice.speak(congestion+'Encontrei uma rota cerca de '+minutes+' minutos mais rápida. Toque no Radar e diga sim para recalcular.',true);
-        App.toast('🚦 Rota mais rápida disponível: cerca de '+minutes+' min de economia.',7000);
-      }
-    }catch(e){
-      console.warn('Radar tráfego:',e);
-    }finally{
-      this.checking=false;
-      if(App.navActive) this.schedule(75000);
-    }
+  schedule(){
+    // Desativado: não agenda recálculo/alternativas em segundo plano.
+    return false;
   },
 
   hasPending(){
-    return Boolean(this.pending && Date.now()-this.pending.createdAt<60000);
+    return false;
   },
 
   decline(){
     this.pending=null;
   },
 
-  async accept(){
-    if(!this.hasPending()) return false;
-    this.pending=null;
-    VoiceAssistant.reply('Recalculando pela opção mais rápida.');
-    try{
-      if(typeof App.recalculateRoute==='function') await App.recalculateRoute();
-      else await App.calculateRoute();
-      return true;
-    }catch(e){
-      VoiceAssistant.reply('Não consegui trocar a rota agora. Vou manter o trajeto atual.');
-      return true;
-    }
+  accept(){
+    return false;
   },
 
   init(){
-    const originalStart=App.startNavigation;
-    if(typeof originalStart==='function' && !originalStart.__trafficV40){
-      const wrapped=function(...args){
-        const result=originalStart.apply(this,args);
-        TrafficAssistantV40.schedule(35000);
-        return result;
-      };
-      wrapped.__trafficV40=true;
-      App.startNavigation=wrapped;
-    }
-    const originalClear=App.clearRoute;
-    if(typeof originalClear==='function' && !originalClear.__trafficV40){
-      const wrappedClear=function(...args){
-        clearTimeout(TrafficAssistantV40.timer);
-        TrafficAssistantV40.timer=null;
-        TrafficAssistantV40.pending=null;
-        TrafficAssistantV40.clearTrafficOverlay();
-        return originalClear.apply(this,args);
-      };
-      wrappedClear.__trafficV40=true;
-      App.clearRoute=wrappedClear;
-    }
-    if(App.navActive) this.schedule(35000);
+    /*
+      Compatibilidade: não instala wrappers em startNavigation/clearRoute.
+      RadarRouting é a única autoridade de rota.
+    */
+    return true;
   }
 };
 
