@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T16:32:13.268Z",
+  "generatedAt": "2026-10-01T21:15:39.739Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 241,
+  "count": 244,
   "occurrences": [
+    {
+      "id": "382b5bb1-6ed6-486e-af19-a25e84a6d60c",
+      "documentNumber": 79300,
+      "date": "2026-10-01T10:30:00.000Z",
+      "address": "Coelho Neto, Rio de Janeiro - RJ, 21510-440, Brasil",
+      "neighborhood": "COELHO NETO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8322319334163,
+      "longitude": -43.35048187544974,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "db5d6b15-5f55-44d2-8197-7ae6f03a9203",
       "documentNumber": 79286,
@@ -28,6 +48,46 @@
       "victims": []
     },
     {
+      "id": "dfec79d3-713f-4a3b-9894-43f8a8a0cb66",
+      "documentNumber": 79295,
+      "date": "2026-09-30T22:30:00.000Z",
+      "address": "R. Vinte e Um - Barroco, Distrito de Itaipuaçu, Maricá - RJ, 24900-000, Brasil",
+      "neighborhood": "BARROCO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.965572278300424,
+      "longitude": -42.98021725643353,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "20555e5f-ab5c-467d-b06f-ab889506b48e",
+      "documentNumber": 79296,
+      "date": "2026-09-30T17:27:00.000Z",
+      "address": "Rua Lucídio Lago - Méier, Rio de Janeiro - RJ, 20780-020, Brasil",
+      "neighborhood": "MEIER",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8998424664135,
+      "longitude": -43.274747556074814,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "12856c4b-0f63-4752-af60-eb45ed861838",
       "documentNumber": 79288,
       "date": "2026-09-30T16:30:00.000Z",
@@ -42,11 +102,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -236,34 +296,6 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -293,6 +325,34 @@
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -374,7 +434,7 @@
     {
       "id": "7646595b-d308-43a3-8db8-e25c9c3f56dd",
       "documentNumber": 79238,
-      "date": "2026-09-27T12:30:00.000Z",
+      "date": "2026-09-27T11:00:00.000Z",
       "address": "Rua Pedro Ernesto - Gamboa, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "GAMBOA",
       "subNeighborhood": "",
@@ -556,7 +616,12 @@
       "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "8ea668b2-3701-4e14-8bcc-e52e12bf3d6c",
@@ -612,11 +677,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
