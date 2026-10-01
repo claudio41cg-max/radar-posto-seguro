@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T23:39:35.209Z",
+  "generatedAt": "2026-10-01T02:28:57.824Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 41,
+  "count": 37,
   "lastUpdate": "2026-09-30T16:23:02-03:00",
   "occurrences": [
     {
@@ -198,26 +198,6 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -250,6 +230,10 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -259,6 +243,22 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -564,6 +564,21 @@
       ]
     },
     {
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
       "documentNumber": 79202,
       "date": "2026-09-25T06:00:00.000Z",
@@ -588,21 +603,6 @@
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
       "latitude": -22.855,
       "longitude": -43.243889,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -750,102 +750,6 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "2bb75c3e-6207-4919-921a-e876531fdbce",
-      "documentNumber": 79194,
-      "date": "2026-09-23T23:20:00.000Z",
-      "address": "Morro do Sossego - Vila São José, Pantanal - Duque de Caxias - RJ, 25040-335, Brasil",
-      "neighborhood": "VILA SAO JOSE",
-      "subNeighborhood": "PANTANAL",
-      "locality": "MORRO DO SOSSEGO",
-      "latitude": -22.742917054261515,
-      "longitude": -43.32282071965701,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "daed23c3-9041-40ea-b6d2-3f63e1716521",
-      "documentNumber": 79186,
-      "date": "2026-09-23T22:00:00.000Z",
-      "address": "Rua Visconde de Santa Isabel - Vila Isabel, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VILA ISABEL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9169511,
-      "longitude": -43.256768,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "7ccf622d-bd75-4ded-b432-4f279059c5e9",
-      "documentNumber": 79184,
-      "date": "2026-09-23T21:00:00.000Z",
-      "address": "Vila Kennedy, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VILA KENNEDY",
-      "subNeighborhood": "",
-      "locality": "VILA KENNEDY",
-      "latitude": -22.8572405,
-      "longitude": -43.4892386,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c202d237-937e-4d0d-9d95-1d5601895d12",
-      "documentNumber": 79178,
-      "date": "2026-09-23T11:20:00.000Z",
-      "address": "Av. Prefeito Milton Rodrigues da Rocha - Manilha, Itaboraí - RJ, 24855-264, Brasil",
-      "neighborhood": "MANILHA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7887975,
-      "longitude": -42.9116061,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
