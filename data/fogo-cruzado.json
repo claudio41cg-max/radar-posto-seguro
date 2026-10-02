@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T18:03:55.511Z",
+  "generatedAt": "2026-10-02T22:06:19.671Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 41,
-  "lastUpdate": "2026-10-02T12:45:37-03:00",
+  "count": 42,
+  "lastUpdate": "2026-10-02T18:58:32-03:00",
   "occurrences": [
+    {
+      "id": "af151427-ba39-4f96-b891-95a62fb2b345",
+      "documentNumber": 79317,
+      "date": "2026-10-02T16:37:00.000Z",
+      "address": "Rua Vanádio, Coelho da Rocha, São João de Meriti, Rio de Janeiro, Brasil",
+      "neighborhood": "COELHO DA ROCHA",
+      "subNeighborhood": "PARQUE ALIAN",
+      "locality": "",
+      "latitude": -22.768876,
+      "longitude": -43.386466,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "67d62ad7-94e8-429d-8b2b-eafa0fd89d3f",
       "documentNumber": 79316,
