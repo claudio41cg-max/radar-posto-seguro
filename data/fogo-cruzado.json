@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T21:15:39.738Z",
+  "generatedAt": "2026-10-02T00:51:04.254Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,17 +10,32 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 42,
-  "lastUpdate": "2026-10-01T17:11:16-03:00",
+  "count": 37,
+  "lastUpdate": "2026-10-01T21:47:48-03:00",
   "occurrences": [
+    {
+      "id": "843a3e6f-c65f-466f-8291-ee12c6c54287",
+      "documentNumber": 79301,
+      "date": "2026-10-01T16:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Pavuna, Rio de Janeiro - RJ, 21520-001, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.811153478692358,
+      "longitude": -43.361589062426766,
+      "reason": "Tentativa/Roubo de cargas",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "382b5bb1-6ed6-486e-af19-a25e84a6d60c",
       "documentNumber": 79300,
       "date": "2026-10-01T10:30:00.000Z",
-      "address": "Coelho Neto, Rio de Janeiro - RJ, 21510-440, Brasil",
+      "address": "Comunidade do Guaxi, Coelho Neto, Rio de Janeiro - RJ, 21510-440, Brasil",
       "neighborhood": "COELHO NETO",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "COMUNIDADE DA GUAXI",
       "latitude": -22.8322319334163,
       "longitude": -43.35048187544974,
       "reason": "Ação policial",
@@ -52,12 +67,12 @@
       "id": "dfec79d3-713f-4a3b-9894-43f8a8a0cb66",
       "documentNumber": 79295,
       "date": "2026-09-30T22:30:00.000Z",
-      "address": "R. Vinte e Um - Barroco, Distrito de Itaipuaçu, Maricá - RJ, 24900-000, Brasil",
-      "neighborhood": "BARROCO",
+      "address": "R. Vinte e Um - Recanto de Itaipuaçu, Maricá - RJ, Brasil",
+      "neighborhood": "RECANTO DE ITAIPUACU",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.965572278300424,
-      "longitude": -42.98021725643353,
+      "latitude": -22.9612905,
+      "longitude": -43.004021,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
@@ -103,11 +118,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -297,6 +312,34 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -326,34 +369,6 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -485,21 +500,6 @@
       ]
     },
     {
-      "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
-      "documentNumber": 79232,
-      "date": "2026-09-26T22:00:00.000Z",
-      "address": "Nova Iguaçu - RJ, 26262-070, Brasil",
-      "neighborhood": "NI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7561319,
-      "longitude": -43.4607419,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "f0e54ec1-c00e-436c-837c-ae95f23ba806",
       "documentNumber": 79274,
       "date": "2026-09-26T22:00:00.000Z",
@@ -518,6 +518,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
+      "documentNumber": 79232,
+      "date": "2026-09-26T22:00:00.000Z",
+      "address": "Nova Iguaçu - RJ, 26262-070, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7561319,
+      "longitude": -43.4607419,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "1d48fb1e-c52f-4733-ba10-0e9dd4796f17",
@@ -654,15 +669,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -746,119 +761,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "b362fd2b-05e0-4766-8efe-346d3a65f554",
-      "documentNumber": 79198,
-      "date": "2026-09-24T23:40:00.000Z",
-      "address": "Estrada Cabuçu de Baixo, Guaratiba, Rio de Janeiro, Rio de Janeiro, Brasil",
-      "neighborhood": "GUARATIBA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.949528,
-      "longitude": -43.5820267,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "54c7a640-76fa-4bdc-8d76-df5c07c76797",
-      "documentNumber": 79204,
-      "date": "2026-09-24T23:17:00.000Z",
-      "address": "Fonseca, Niterói - RJ, Brasil",
-      "neighborhood": "FONSECA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8813858,
-      "longitude": -43.0871384,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "432df133-3954-4df1-803d-6bb8d45e2122",
-      "documentNumber": 79207,
-      "date": "2026-09-24T21:00:00.000Z",
-      "address": "R. Camarista Méier, Morro da Camarista (Complexo do Lins) - Engenho de Dentro, Rio de Janeiro - RJ, 20730-232, Brasil",
-      "neighborhood": "ENGENHO DE DENTRO",
-      "subNeighborhood": "",
-      "locality": "MORRO DA CAMARISTA (COMPLEXO DO LINS)",
-      "latitude": -22.913720988740742,
-      "longitude": -43.297773268261714,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "087b88aa-6d26-471a-9d15-993659f8825d",
-      "documentNumber": 79208,
-      "date": "2026-09-24T20:21:00.000Z",
-      "address": "Linha Amarela, 9b - Manguinhos, Rio de Janeiro - RJ, 21040-360, Brasil",
-      "neighborhood": "MANGUINHOS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.870579857783856,
-      "longitude": -43.24537242544555,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "16c008f8-7532-4735-a44d-751b92ba9400",
-      "documentNumber": 79195,
-      "date": "2026-09-24T20:00:00.000Z",
-      "address": "Vila Kennedy, Rio de Janeiro - RJ, 21850-480, Brasil",
-      "neighborhood": "VILA KENNEDY",
-      "subNeighborhood": "",
-      "locality": "VILA KENNEDY",
-      "latitude": -22.8572405,
-      "longitude": -43.4892386,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "8cf225ca-50a4-4dd4-985c-b91922175879",
-      "documentNumber": 79197,
-      "date": "2026-09-24T04:30:00.000Z",
-      "address": "Morro do Céu, R. Artur Pereira da Mota, Caramujo, Niterói - RJ, 24140-500, Brasil",
-      "neighborhood": "CARAMUJO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CEU",
-      "latitude": -22.89336,
-      "longitude": -43.0699072,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }

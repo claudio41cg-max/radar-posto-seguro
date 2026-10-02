@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T21:15:39.739Z",
+  "generatedAt": "2026-10-02T00:51:04.268Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,16 +10,31 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 244,
+  "count": 245,
   "occurrences": [
+    {
+      "id": "843a3e6f-c65f-466f-8291-ee12c6c54287",
+      "documentNumber": 79301,
+      "date": "2026-10-01T16:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Pavuna, Rio de Janeiro - RJ, 21520-001, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.811153478692358,
+      "longitude": -43.361589062426766,
+      "reason": "Tentativa/Roubo de cargas",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "382b5bb1-6ed6-486e-af19-a25e84a6d60c",
       "documentNumber": 79300,
       "date": "2026-10-01T10:30:00.000Z",
-      "address": "Coelho Neto, Rio de Janeiro - RJ, 21510-440, Brasil",
+      "address": "Comunidade do Guaxi, Coelho Neto, Rio de Janeiro - RJ, 21510-440, Brasil",
       "neighborhood": "COELHO NETO",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "COMUNIDADE DA GUAXI",
       "latitude": -22.8322319334163,
       "longitude": -43.35048187544974,
       "reason": "Ação policial",
@@ -51,12 +66,12 @@
       "id": "dfec79d3-713f-4a3b-9894-43f8a8a0cb66",
       "documentNumber": 79295,
       "date": "2026-09-30T22:30:00.000Z",
-      "address": "R. Vinte e Um - Barroco, Distrito de Itaipuaçu, Maricá - RJ, 24900-000, Brasil",
-      "neighborhood": "BARROCO",
+      "address": "R. Vinte e Um - Recanto de Itaipuaçu, Maricá - RJ, Brasil",
+      "neighborhood": "RECANTO DE ITAIPUACU",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.965572278300424,
-      "longitude": -42.98021725643353,
+      "latitude": -22.9612905,
+      "longitude": -43.004021,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
@@ -102,11 +117,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -296,6 +311,34 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
@@ -325,34 +368,6 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -673,15 +688,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
