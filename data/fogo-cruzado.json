@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T00:51:04.254Z",
+  "generatedAt": "2026-10-02T06:19:21.358Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
-  "lastUpdate": "2026-10-01T21:47:48-03:00",
+  "count": 38,
+  "lastUpdate": "2026-10-01T22:57:01-03:00",
   "occurrences": [
     {
       "id": "843a3e6f-c65f-466f-8291-ee12c6c54287",
@@ -118,14 +118,29 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "0bfaba56-f2b9-4d10-9f92-a7ca5d72206b",
+      "documentNumber": 79302,
+      "date": "2026-09-30T15:00:00.000Z",
+      "address": "Caonze, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "CAONZE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.768471,
+      "longitude": -43.4416018,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "dec63c44-6429-4d51-b7b0-a3fdf60d1be7",
@@ -312,19 +327,7 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -368,11 +371,23 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -500,6 +515,21 @@
       ]
     },
     {
+      "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
+      "documentNumber": 79232,
+      "date": "2026-09-26T22:00:00.000Z",
+      "address": "Nova Iguaçu - RJ, 26262-070, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7561319,
+      "longitude": -43.4607419,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "f0e54ec1-c00e-436c-837c-ae95f23ba806",
       "documentNumber": 79274,
       "date": "2026-09-26T22:00:00.000Z",
@@ -518,21 +548,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
-      "documentNumber": 79232,
-      "date": "2026-09-26T22:00:00.000Z",
-      "address": "Nova Iguaçu - RJ, 26262-070, Brasil",
-      "neighborhood": "NI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7561319,
-      "longitude": -43.4607419,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "1d48fb1e-c52f-4733-ba10-0e9dd4796f17",
@@ -683,21 +698,6 @@
       ]
     },
     {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
       "documentNumber": 79202,
       "date": "2026-09-25T06:00:00.000Z",
@@ -722,6 +722,21 @@
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
       "latitude": -22.855,
       "longitude": -43.243889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
+      "date": "2026-09-25T06:00:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,

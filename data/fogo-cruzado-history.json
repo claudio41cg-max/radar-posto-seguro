@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T00:51:04.268Z",
+  "generatedAt": "2026-10-02T06:19:21.360Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 245,
+  "count": 246,
   "occurrences": [
     {
       "id": "843a3e6f-c65f-466f-8291-ee12c6c54287",
@@ -117,14 +117,29 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "0bfaba56-f2b9-4d10-9f92-a7ca5d72206b",
+      "documentNumber": 79302,
+      "date": "2026-09-30T15:00:00.000Z",
+      "address": "Caonze, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "CAONZE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.768471,
+      "longitude": -43.4416018,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "dec63c44-6429-4d51-b7b0-a3fdf60d1be7",
@@ -311,19 +326,7 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -367,11 +370,23 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
