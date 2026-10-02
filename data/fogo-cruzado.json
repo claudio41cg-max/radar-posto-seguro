@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T06:19:21.358Z",
+  "generatedAt": "2026-10-02T12:49:19.906Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 38,
-  "lastUpdate": "2026-10-01T22:57:01-03:00",
+  "count": 40,
+  "lastUpdate": "2026-10-02T09:26:32-03:00",
   "occurrences": [
+    {
+      "id": "4a272f7d-6cc3-4ff4-bb1d-1e043812e032",
+      "documentNumber": 79314,
+      "date": "2026-10-01T19:00:00.000Z",
+      "address": "Comunidade da Jaqueira - Vila São José, Duque de Caxias - RJ, 25040-410, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA JAQUEIRA",
+      "latitude": -22.749522395709732,
+      "longitude": -43.326622075115964,
+      "reason": "Ataque a civis",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "843a3e6f-c65f-466f-8291-ee12c6c54287",
       "documentNumber": 79301,
@@ -118,11 +142,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -175,6 +199,26 @@
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "1aa1ad49-4e2a-4124-a29b-83fa1ffbff12",
+      "documentNumber": 79307,
+      "date": "2026-09-29T18:43:00.000Z",
+      "address": "Pantanal, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7472326,
+      "longitude": -43.3173933,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Dead",
@@ -331,27 +375,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -371,7 +395,23 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -388,6 +428,10 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -684,29 +728,29 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
     },
     {
-      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
-      "documentNumber": 79202,
+      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
+      "documentNumber": 79210,
       "date": "2026-09-25T06:00:00.000Z",
-      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
-      "neighborhood": "MANGUEIRA",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
+      "neighborhood": "BANGU",
       "subNeighborhood": "",
-      "locality": "MANGUEIRA",
-      "latitude": -22.90514541,
-      "longitude": -43.23489755,
+      "locality": "VILA ALIANCA",
+      "latitude": -22.86909773,
+      "longitude": -43.47777013,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -728,15 +772,15 @@
       "victims": []
     },
     {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
+      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
+      "documentNumber": 79202,
       "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
+      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
+      "neighborhood": "MANGUEIRA",
       "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
+      "locality": "MANGUEIRA",
+      "latitude": -22.90514541,
+      "longitude": -43.23489755,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,

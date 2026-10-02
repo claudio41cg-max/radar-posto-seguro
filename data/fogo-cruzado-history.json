@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T06:19:21.360Z",
+  "generatedAt": "2026-10-02T12:49:19.907Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,32 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 246,
+  "count": 248,
   "occurrences": [
+    {
+      "id": "4a272f7d-6cc3-4ff4-bb1d-1e043812e032",
+      "documentNumber": 79314,
+      "date": "2026-10-01T19:00:00.000Z",
+      "address": "Comunidade da Jaqueira - Vila São José, Duque de Caxias - RJ, 25040-410, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA JAQUEIRA",
+      "latitude": -22.749522395709732,
+      "longitude": -43.326622075115964,
+      "reason": "Ataque a civis",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "843a3e6f-c65f-466f-8291-ee12c6c54287",
       "documentNumber": 79301,
@@ -117,11 +141,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -174,6 +198,26 @@
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "1aa1ad49-4e2a-4124-a29b-83fa1ffbff12",
+      "documentNumber": 79307,
+      "date": "2026-09-29T18:43:00.000Z",
+      "address": "Pantanal, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7472326,
+      "longitude": -43.3173933,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Dead",
@@ -330,27 +374,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -370,7 +394,23 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -387,6 +427,10 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -703,15 +747,15 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
