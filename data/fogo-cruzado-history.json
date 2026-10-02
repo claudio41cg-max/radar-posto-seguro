@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T12:49:19.907Z",
+  "generatedAt": "2026-10-02T18:03:55.513Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 248,
+  "count": 249,
   "occurrences": [
+    {
+      "id": "67d62ad7-94e8-429d-8b2b-eafa0fd89d3f",
+      "documentNumber": 79316,
+      "date": "2026-10-02T11:30:00.000Z",
+      "address": "R. Aiera - Vila Kosmos, Rio de Janeiro - RJ, 21220-020, Brasil",
+      "neighborhood": "VILA KOSMOS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.852058036970718,
+      "longitude": -43.30620239114758,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "4a272f7d-6cc3-4ff4-bb1d-1e043812e032",
       "documentNumber": 79314,
@@ -141,11 +156,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
