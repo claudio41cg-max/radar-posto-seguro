@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T19:16:01.811Z",
+  "generatedAt": "2026-10-03T22:10:16.277Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -11,7 +11,7 @@
     "days": 7
   },
   "count": 36,
-  "lastUpdate": "2026-10-03T15:21:23-03:00",
+  "lastUpdate": "2026-10-03T17:44:13-03:00",
   "occurrences": [
     {
       "id": "59c01fc9-c4f1-40f1-9bb1-2ba15742add0",
@@ -320,12 +320,12 @@
       "id": "1aa1ad49-4e2a-4124-a29b-83fa1ffbff12",
       "documentNumber": 79307,
       "date": "2026-09-29T18:43:00.000Z",
-      "address": "Pantanal, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "SAO JOSE",
-      "subNeighborhood": "",
+      "address": "Pantanal, Vila São José - Duque de Caxias - RJ, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "PANTANAL",
       "locality": "",
-      "latitude": -22.7472326,
-      "longitude": -43.3173933,
+      "latitude": -22.744650151966443,
+      "longitude": -43.32144880003051,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
