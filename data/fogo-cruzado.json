@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T22:06:19.671Z",
+  "generatedAt": "2026-10-03T01:06:51.521Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 42,
-  "lastUpdate": "2026-10-02T18:58:32-03:00",
+  "count": 32,
+  "lastUpdate": "2026-10-02T19:52:08-03:00",
   "occurrences": [
+    {
+      "id": "e8461ebd-f5bb-42b9-a738-c17616df1c09",
+      "documentNumber": 79320,
+      "date": "2026-10-02T19:28:00.000Z",
+      "address": "R. Af - Jardim Anhangá, Duque de Caxias - RJ, 25265-184, Brasil",
+      "neighborhood": "JARDIM ANHANGA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6530568,
+      "longitude": -43.2389003,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "af151427-ba39-4f96-b891-95a62fb2b345",
       "documentNumber": 79317,
@@ -172,11 +187,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -405,7 +420,39 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -421,30 +468,6 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -453,15 +476,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -653,199 +668,6 @@
       "locality": "MORRO DOS MACACOS",
       "latitude": -22.91189634,
       "longitude": -43.25524243,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "988cdc16-27ac-42fd-9c9a-e2d2b3588034",
-      "documentNumber": 79221,
-      "date": "2026-09-25T20:53:00.000Z",
-      "address": "Rua Torres Homem, Morro dos Macacos - Vila Isabel, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VILA ISABEL",
-      "subNeighborhood": "",
-      "locality": "MORRO DOS MACACOS",
-      "latitude": -22.9146107,
-      "longitude": -43.2494949,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "f07bcbe2-f083-4979-a70f-5df803c7d759",
-      "documentNumber": 79220,
-      "date": "2026-09-25T20:42:00.000Z",
-      "address": "Congo - Vila Kennedy, Rio de Janeiro - RJ, 21852-590, Brasil",
-      "neighborhood": "VILA KENNEDY",
-      "subNeighborhood": "",
-      "locality": "CONGO 1 (VILA KENNEDY)",
-      "latitude": -22.86177708,
-      "longitude": -43.49086725,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "7a3d2575-7078-4e72-83e7-67427e1ee8c5",
-      "documentNumber": 79230,
-      "date": "2026-09-25T20:00:00.000Z",
-      "address": "Avenida Nilo Peçanha - Centro, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9064133,
-      "longitude": -43.1761697,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8ea668b2-3701-4e14-8bcc-e52e12bf3d6c",
-      "documentNumber": 79218,
-      "date": "2026-09-25T19:50:00.000Z",
-      "address": "Morro do 18 (Complexo do 18) - Piedade, Rio de Janeiro - RJ, 20740-600, Brasil",
-      "neighborhood": "PIEDADE",
-      "subNeighborhood": "",
-      "locality": "MORRO DO 18 (COMPLEXO DO 18)",
-      "latitude": -22.905011856611303,
-      "longitude": -43.31769304011568,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "2345382a-f9d0-4d89-9edd-5915f934660c",
-      "documentNumber": 79219,
-      "date": "2026-09-25T18:30:00.000Z",
-      "address": "Avenida Brasil - Guadalupe, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GUADALUPE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.842479,
-      "longitude": -43.3728459,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a53f63ce-56e3-4ead-bea2-23e31293b679",
-      "documentNumber": 79225,
-      "date": "2026-09-25T17:00:00.000Z",
-      "address": "Comunidade Parque Dois Irmãos R. André Rocha, Curicica, Rio de Janeiro - RJ, 22713-567, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
-      "latitude": -22.9516716,
-      "longitude": -43.3915417,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8476736d-6b5c-45a0-ad36-dab67ff04be7",
-      "documentNumber": 79210,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-030, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.86909773,
-      "longitude": -43.47777013,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4e7cfc61-7fc7-48e7-a60e-daffe7f4fbe6",
-      "documentNumber": 79209,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Nova Holanda (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-680, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
-      "latitude": -22.855,
-      "longitude": -43.243889,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4ee0929a-b3d2-4547-93be-b975d1bd037d",
-      "documentNumber": 79202,
-      "date": "2026-09-25T06:00:00.000Z",
-      "address": "Mangueira, Rio de Janeiro - RJ, 20943-000, Brasil",
-      "neighborhood": "MANGUEIRA",
-      "subNeighborhood": "",
-      "locality": "MANGUEIRA",
-      "latitude": -22.90514541,
-      "longitude": -43.23489755,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "0fb2366d-475f-41b6-b191-7dfa7e994616",
-      "documentNumber": 79205,
-      "date": "2026-09-25T01:20:00.000Z",
-      "address": "Parque Alegria (Complexo do Caju) - Caju, Rio de Janeiro - RJ, 20920-460, Brasil",
-      "neighborhood": "CAJU",
-      "subNeighborhood": "",
-      "locality": "PARQUE ALEGRIA (COMPLEXO DO CAJU)",
-      "latitude": -22.88475296289994,
-      "longitude": -43.23004710717188,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "2a1bdc77-dcdb-4102-8a1b-c023c1974b21",
-      "documentNumber": 79203,
-      "date": "2026-09-25T00:00:00.000Z",
-      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
-      "latitude": -22.892324971301786,
-      "longitude": -43.33377861518315,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
