@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T11:57:18.508Z",
+  "generatedAt": "2026-10-03T16:08:20.284Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 32,
-  "lastUpdate": "2026-10-02T19:52:08-03:00",
+  "count": 35,
+  "lastUpdate": "2026-10-03T11:56:13-03:00",
   "occurrences": [
     {
       "id": "e8461ebd-f5bb-42b9-a738-c17616df1c09",
@@ -44,6 +44,21 @@
       "victims": []
     },
     {
+      "id": "d1306ada-ce29-40cc-a428-319bf380fc5b",
+      "documentNumber": 79325,
+      "date": "2026-10-02T15:00:00.000Z",
+      "address": "Estrada Adam Blummer - Jardim Esmeralda, Magé - RJ, 25903-587, Brasil",
+      "neighborhood": "JARDIM ESMERALDA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.61059940963941,
+      "longitude": -43.034361402736444,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "67d62ad7-94e8-429d-8b2b-eafa0fd89d3f",
       "documentNumber": 79316,
       "date": "2026-10-02T11:30:00.000Z",
@@ -57,6 +72,41 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "14b010a5-b1fa-429e-9f9b-e79281aff400",
+      "documentNumber": 79323,
+      "date": "2026-10-02T00:00:00.000Z",
+      "address": "Barbuda, Magé - RJ, 25900-826, Brasil",
+      "neighborhood": "BARBUDA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6685907,
+      "longitude": -43.0331039,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "5dd243e6-7c62-44af-81d3-f64dcd201944",
+      "documentNumber": 79324,
+      "date": "2026-10-02T00:00:00.000Z",
+      "address": "Queimados - RJ, 26383-140, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7087393,
+      "longitude": -43.5614777,
+      "reason": "Disparo Acidental",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
     },
     {
       "id": "4a272f7d-6cc3-4ff4-bb1d-1e043812e032",
@@ -187,11 +237,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -424,6 +474,18 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -436,11 +498,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -468,15 +526,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
