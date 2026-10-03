@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T16:08:20.284Z",
+  "generatedAt": "2026-10-03T19:16:01.811Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 35,
-  "lastUpdate": "2026-10-03T11:56:13-03:00",
+  "count": 36,
+  "lastUpdate": "2026-10-03T15:21:23-03:00",
   "occurrences": [
+    {
+      "id": "59c01fc9-c4f1-40f1-9bb1-2ba15742add0",
+      "documentNumber": 79326,
+      "date": "2026-10-03T14:55:00.000Z",
+      "address": "Complexo do Lins - Lins de Vasconcelos, Rio de Janeiro - RJ, 20725-140, Brasil",
+      "neighborhood": "LINS DE VASCONCELOS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO LINS",
+      "latitude": -22.91534468,
+      "longitude": -43.28452174,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "e8461ebd-f5bb-42b9-a738-c17616df1c09",
       "documentNumber": 79320,
@@ -237,11 +252,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -474,18 +489,6 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
@@ -498,7 +501,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -527,6 +534,14 @@
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -654,21 +669,6 @@
       ]
     },
     {
-      "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
-      "documentNumber": 79232,
-      "date": "2026-09-26T22:00:00.000Z",
-      "address": "Nova Iguaçu - RJ, 26262-070, Brasil",
-      "neighborhood": "NI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7561319,
-      "longitude": -43.4607419,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "f0e54ec1-c00e-436c-837c-ae95f23ba806",
       "documentNumber": 79274,
       "date": "2026-09-26T22:00:00.000Z",
@@ -687,6 +687,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "52431763-7d54-40da-9f29-f7466d93bbd5",
+      "documentNumber": 79232,
+      "date": "2026-09-26T22:00:00.000Z",
+      "address": "Nova Iguaçu - RJ, 26262-070, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7561319,
+      "longitude": -43.4607419,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "1d48fb1e-c52f-4733-ba10-0e9dd4796f17",
