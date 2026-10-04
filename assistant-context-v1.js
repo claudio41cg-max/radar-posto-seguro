@@ -102,7 +102,12 @@
     try {
       const path = `/search/2/reverseGeocode/${gps.lat},${gps.lon}.json?language=pt-BR&radius=80`;
       const url = `${WORKER_BASE}/v1/tomtom?path=${encodeURIComponent(path)}`;
-      const r = await fetch(url, { cache: 'no-store' });
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      const r = await fetch(url, {
+        cache: 'no-store',
+        signal: controller.signal
+      }).finally(() => clearTimeout(timer));
       if (!r.ok) throw new Error('reverse');
       const data = await r.json();
       const a = data?.addresses?.[0]?.address || {};
