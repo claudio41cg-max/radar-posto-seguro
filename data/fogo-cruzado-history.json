@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T12:48:22.997Z",
+  "generatedAt": "2026-10-04T17:05:14.801Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,90 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 255,
+  "count": 259,
   "occurrences": [
+    {
+      "id": "064e04e2-b2ba-43c0-9cf9-e81d22607b4e",
+      "documentNumber": 79350,
+      "date": "2026-10-04T03:00:00.000Z",
+      "address": "Rua Araújo, Comunidade Parque Doradouro - São José, Belford Roxo - RJ, 25010-440, Brasil",
+      "neighborhood": "SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE GOTADOURO",
+      "latitude": -22.732301050369976,
+      "longitude": -43.33084132488507,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "a1e6d323-9139-4cee-8d29-37d667298a81",
+      "documentNumber": 79347,
+      "date": "2026-10-04T01:09:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, 21235-000, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8586183,
+      "longitude": -43.3146286,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "1cb5d2d2-a0a7-4e0d-a37a-7619f1f018bd",
+      "documentNumber": 79345,
+      "date": "2026-10-04T01:00:00.000Z",
+      "address": "Centenario, Duque de Caxias - RJ, 25030-040, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7740843,
+      "longitude": -43.3105087,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "fc06d671-a00a-4267-9b3d-9d8ee305e97b",
+      "documentNumber": 79349,
+      "date": "2026-10-03T15:00:00.000Z",
+      "address": "Av. Abílio Augusto Távora, Comunidade Danon - Danon, Nova Iguaçu - RJ, 26270-310, Brasil",
+      "neighborhood": "DANON",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DANON",
+      "latitude": -22.77004814897691,
+      "longitude": -43.50968958227844,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "59c01fc9-c4f1-40f1-9bb1-2ba15742add0",
       "documentNumber": 79326,
@@ -484,60 +566,60 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
