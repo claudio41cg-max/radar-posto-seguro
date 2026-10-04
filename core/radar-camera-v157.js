@@ -11,7 +11,7 @@ function update(app,Utils){
   app.lastCameraUpdate=now;
 
   if(!app.navActive){
-    app.map.easeTo({
+    window.RadarMapMotionV157.easeTo(app.map,{
       center:app.userPos,
       zoom:app.map.getZoom(),
       pitch:0,
@@ -77,7 +77,7 @@ function update(app,Utils){
     targetBearing=app.map.getBearing();
   }
 
-  app.map.easeTo({
+  window.RadarMapMotionV157.easeTo(app.map,{
     center,
     zoom,
     pitch:62,
