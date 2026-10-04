@@ -225,35 +225,42 @@ function bind(){
     clearStoredRoute();
   }
 
-  // Uma NOVA rota válida é o único evento que libera persistência novamente.
-  const oldCalculate=typeof a.calculateRoute==='function'?a.calculateRoute.bind(a):null;
-  if(oldCalculate){
-    a.calculateRoute=async function(...args){
-      const out=await oldCalculate(...args);
-      if(validRoute(this.route)&&this.destination)armNewRoute();
-      return out;
-    };
-  }
+  /*
+    Persistência agora reage a eventos oficiais.
+    Nenhuma função de rota/navegação é mais substituída por wrapper.
+  */
+  const kernel=window.RadarKernel;
 
-  const oldStart=typeof a.startNavigation==='function'?a.startNavigation.bind(a):null;
-  if(oldStart){
-    a.startNavigation=function(...args){
-      if(validRoute(this.route)&&this.destination)armNewRoute();
-      const out=oldStart(...args);
-      setTimeout(save,80);
-      return out;
-    };
-  }
+  if(kernel?.on){
+    kernel.on('route:calculated',()=>{
+      const current=app();
+      if(validRoute(current?.route)&&current?.destination){
+        armNewRoute();
+      }
+    });
 
-  // Toda forma conhecida de encerrar a navegação é um cancelamento definitivo.
-  for(const n of['stopNavigation','cancelNavigation','endNavigation','clearRoute']){
-    const old=typeof a[n]==='function'?a[n].bind(a):null;
-    if(old){
-      a[n]=function(...args){
-        cancel();
-        return old(...args);
-      };
-    }
+    kernel.on('route:recalculated',()=>{
+      const current=app();
+      if(validRoute(current?.route)&&current?.destination){
+        armNewRoute();
+      }
+    });
+
+    kernel.on('navigation:started',()=>{
+      const current=app();
+      if(validRoute(current?.route)&&current?.destination){
+        armNewRoute();
+        setTimeout(save,80);
+      }
+    });
+
+    kernel.on('navigation:stopped',()=>{
+      cancel();
+    });
+
+    kernel.on('navigation:cleared',()=>{
+      cancel();
+    });
   }
 
   document.addEventListener('click',e=>{
@@ -325,6 +332,6 @@ window.RadarNavigationPersistenceV134={
   clear,
   cancel,
   armNewRoute,
-  version:'134-stage2-routing-authority'
+  version:'134-stage3-events'
 };
 })();
