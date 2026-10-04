@@ -885,7 +885,7 @@ const App = {
       this.userPos;
 
 
-    this.map.easeTo({
+    window.RadarMapMotionV157.easeTo(this.map,{
 
       center,
 
