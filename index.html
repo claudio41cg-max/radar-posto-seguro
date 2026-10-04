@@ -5444,6 +5444,8 @@ const App = {
 
   routeHazards:[],
 
+  hazardFetchController:null,
+
   chatMessages:[],
 
   fogoRecentOccurrences:[],
@@ -8435,12 +8437,36 @@ node["highway"="traffic_signals"](${bbox});
 out body;`;
 
 
+    const routeRef=this.route;
+
+    if(this.hazardFetchController){
+      try{
+        this.hazardFetchController.abort();
+      }catch(_){}
+    }
+
+    const controller=
+      new AbortController();
+
+    this.hazardFetchController=
+      controller;
+
+    const timeout=
+      setTimeout(
+        ()=>controller.abort(),
+        12000
+      );
+
     try{
 
       const r=
         await fetch(
           'https://overpass-api.de/api/interpreter?data='+
-          encodeURIComponent(query)
+          encodeURIComponent(query),
+          {
+            signal:controller.signal,
+            cache:'no-store'
+          }
         );
 
 
@@ -8452,6 +8478,14 @@ out body;`;
 
       const data=
         await r.json();
+
+
+      if(
+        controller.signal.aborted||
+        this.route!==routeRef
+      ){
+        return;
+      }
 
 
       for(
@@ -8569,10 +8603,23 @@ out body;`;
 
     }catch(e){
 
-      console.warn(
-        'Falha ao obter elementos da rota.',
-        e
-      );
+      if(e?.name!=='AbortError'){
+        console.warn(
+          'Falha ao obter elementos da rota.',
+          e
+        );
+      }
+
+    }finally{
+
+      clearTimeout(timeout);
+
+      if(
+        this.hazardFetchController===
+        controller
+      ){
+        this.hazardFetchController=null;
+      }
 
     }
 
