@@ -40,6 +40,7 @@
 <script src="./core/radar-arrow-v157.js?v=157"></script>
 <script src="./core/radar-camera-v157.js?v=157"></script>
 <script src="./core/radar-map-controller-v157.js?v=157"></script>
+<script src="./core/radar-map-motion-v157.js?v=157"></script>
 <script src="./core/radar-traffic-visual-v157.js?v=157"></script>
 <script src="./core/radar-route-view-v157.js?v=157"></script>
 <script src="./core/radar-offroute-v157.js?v=157"></script>
@@ -519,7 +520,6 @@
 <script src="./community-map-style-v95.js?v=154"></script>
 
 <!-- Radar runtime v121: carregamento direto, independente do service worker -->
-<script>window.RADAR_RUNTIME_BUILD='155';</script>
 <script src="./route-via-v115.js?v=117"></script>
 <script src="./route-traffic-v74.js?v=134"></script>
 <!-- ETAPA 2B: route-alternatives-v116 desativado.
@@ -530,9 +530,6 @@
 <!-- Arquitetura modular: route-choice-policy-v132 desativado.\n     Ele monkeypatchava Voice/toast para alternativas antigas; RadarRouting é a única autoridade de rota. -->
 <!-- Arquitetura modular: route-safety-v133 desativado.\n     Ele monkeypatchava drawRoute e dependia de alternativas legadas. -->
 <script src="navigation-persistence-v134.js?v=134-stage1"></script>
-<script>
-(()=>{let n=0,t=setInterval(()=>{const a=window.RadarApp||window.App,m=a?.map;if(!m){if(++n>100)clearInterval(t);return;}clearInterval(t);if(m.__zoomComfortV134)return;m.__zoomComfortV134=true;const oe=m.easeTo?.bind(m);if(oe)m.easeTo=o=>oe({...o,zoom:Number.isFinite(o?.zoom)?Math.min(17.2,o.zoom+.35):o?.zoom});},200);})();
-</script>
 <!-- ETAPA 2B: route-choice-final-v135 desativado junto com o gerador legado de alternativas. -->
 <script src="streetview-destination-v135.js?v=135"></script>
 <script src="./radar-gpt-bridge-v1.js?v=1"></script>
