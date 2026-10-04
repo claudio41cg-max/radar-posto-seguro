@@ -130,22 +130,21 @@
     return null;
   }
 
-  function getLiveGps(timeout = 7000) {
-    return new Promise((resolve) => {
-      if (!navigator.geolocation) return resolve(currentGpsFromApp());
-      let done = false;
-      const finish = (gps) => { if (!done) { done = true; resolve(gps || currentGpsFromApp()); } };
-      const timer = setTimeout(() => finish(null), timeout + 500);
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          clearTimeout(timer);
-          const gps = posToGps(pos);
-          finish(gps);
-        },
-        () => { clearTimeout(timer); finish(null); },
-        { enableHighAccuracy: true, maximumAge: 3000, timeout }
-      );
-    });
+  async function getLiveGps(timeout = 7000) {
+    try {
+      const gps = window.RadarGPS;
+      if (gps?.fresh) {
+        const fix = await gps.fresh({
+          timeout,
+          maximumAge: 3000,
+          fallbackAge: 15000
+        });
+        const normalized = posToGps(fix);
+        if (normalized) return normalized;
+      }
+    } catch (_) {}
+
+    return currentGpsFromApp();
   }
 
   function nearbyCachedLocation(gps) {
