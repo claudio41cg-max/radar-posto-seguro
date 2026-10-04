@@ -50,6 +50,11 @@ function start(app,deps={}){
 
   app.recenter?.();
   app.updateNavigation?.();
+
+  try{
+    window.RadarKernel?.emit?.('navigation:started',{app});
+  }catch(_){}
+
   return true;
 }
 
@@ -81,6 +86,10 @@ function stop(app,deps={}){
   }catch(error){
     console.warn('[RadarNavigationLifecycle] reset-camera:',error);
   }
+
+  try{
+    window.RadarKernel?.emit?.('navigation:stopped',{app});
+  }catch(_){}
 
   return true;
 }
@@ -125,6 +134,10 @@ function clear(app,deps={}){
 
   el('wazeSheet')?.classList.remove('show');
 
+  try{
+    window.RadarKernel?.emit?.('navigation:cleared',{app});
+  }catch(_){}
+
   return true;
 }
 
@@ -132,7 +145,7 @@ window.RadarNavigationLifecycle={
   start,
   stop,
   clear,
-  version:'1'
+  version:'1.1.0-events'
 };
 
 })();
