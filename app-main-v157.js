@@ -476,75 +476,11 @@ const App = {
 ========================================================= */
 
   pointAhead(distanceMeters){
-
-    if(
-      !this.route?.coords?.length ||
-      !this.route.cumulative?.length
-    )
-      return this.userPos;
-
-
-    const target=
-      this.routeProgressMeters+
-      distanceMeters;
-
-
-    const idx=
-      this.findIndexForOffset(
-        this.route,
-        target
-      );
-
-
-    const a=
-      this.route.coords[idx];
-
-
-    const b=
-      this.route.coords[
-        Math.min(
-          idx+1,
-          this.route.coords.length-1
-        )
-      ];
-
-
-    const aDist=
-      this.route.cumulative[idx]||0;
-
-
-    const bDist=
-      this.route.cumulative[
-        Math.min(
-          idx+1,
-          this.route.cumulative.length-1
-        )
-      ]||aDist;
-
-
-    const span=
-      Math.max(
-        1,
-        bDist-aDist
-      );
-
-
-    const t=
-      Math.max(
-        0,
-        Math.min(
-          1,
-          (target-aDist)/span
-        )
-      );
-
-
-    return Utils.interpolatePoint(
-      a,
-      b,
-      t
+    return window.RadarLookAheadV157.pointAhead(
+      this,
+      Utils,
+      distanceMeters
     );
-
   },
 
 
