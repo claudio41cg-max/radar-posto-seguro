@@ -346,63 +346,11 @@
     return true;
   }
 
-  function installMapLibreTrafficGuard() {
-    const ml = window.maplibregl;
-    const proto = ml?.Map?.prototype;
-    if (!proto || proto.__radarNoGlobalTrafficV76) return Boolean(proto);
-    proto.__radarNoGlobalTrafficV76 = true;
-
-    const originalAddSource = proto.addSource;
-    const originalAddLayer = proto.addLayer;
-
-    proto.addSource = function radarAddSource(id, source, ...rest) {
-      if (String(id || '').toLowerCase() === 'tomtom-traffic') return this;
-      return originalAddSource.call(this, id, source, ...rest);
-    };
-
-    proto.addLayer = function radarAddLayer(layer, beforeId, ...rest) {
-      const id = String(layer?.id || '').toLowerCase();
-      const source = String(layer?.source || '').toLowerCase();
-      if (id === 'tomtom-traffic-flow' || source === 'tomtom-traffic') return this;
-      return originalAddLayer.call(this, layer, beforeId, ...rest);
-    };
-
-    return true;
-  }
-
-  let mapGuardTries = 0;
-  const mapGuardTimer = setInterval(() => {
-    mapGuardTries += 1;
-    installMapLibreTrafficGuard();
-    removeGlobalTrafficLayer();
-    if (mapGuardTries > 240) clearInterval(mapGuardTimer);
-  }, 50);
-
-  window.fetch = function radarProtectedFetch(input, init) {
-    const method = String(init?.method || (input instanceof Request ? input.method : 'GET')).toUpperCase();
-
-    // v76: nunca entrega ao mapa os tiles do overlay global de trânsito.
-    // As consultas flowSegmentData usadas para colorir SOMENTE a rota continuam permitidas.
-    if (method === 'GET' && isGlobalTrafficTile(input)) {
-      return Promise.resolve(new Response(null, { status: 204, headers: { 'Cache-Control': 'no-store' } }));
-    }
-
-    if (method === 'POST' && isWorkerAI(input)) {
-      const next = cloneInitFromRequest(input, init);
-      next.method = 'POST';
-      next.headers = new Headers(next.headers || {});
-      next.headers.set('Content-Type', 'application/json');
-      return normalizeAIBody(next.body).then(({ body, question }) => {
-        next.body = body;
-        return nativeFetch(AI_CHAT, next).then((r) => normalizeAIResponse(r, question));
-      });
-    }
-    if (!isTomTomUrl(input) || method !== 'GET') return nativeFetch(input, init);
-    const next = cloneInitFromRequest(input, init);
-    delete next.mode;
-    delete next.credentials;
-    return nativeFetch(buildProxyUrl(input), next);
-  };
+  /*
+    O Radar não altera mais window.fetch nem MapLibre.Map.prototype.
+    O proxy TomTom é usado explicitamente pelos módulos que precisam dele,
+    e a antiga camada global de trânsito é desligada no App.
+  */
 
   function improveAssistant() {
     const assistant = getAssistant();
@@ -447,7 +395,7 @@
     proxyBase: `${WORKER_BASE}/v1/tomtom`,
     aiBase: AI_CHAT,
     protected: true,
-    version: '76-no-global-traffic',
+    version: '77-explicit-proxy',
     buildProxyUrl,
     removeGlobalTrafficLayer,
     clearConversation() {
