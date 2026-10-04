@@ -21,6 +21,7 @@
 <script src="./map-theme-v156.js?v=156"></script>
 <script src="./search-v156.js?v=156"></script>
 <script src="./hazards-v156.js?v=156"></script>
+<script src="./community-outdoor-v156.js?v=156"></script>
 <script src="./core/radar-kernel-v1.js?v=1"></script>
 <script src="./core/radar-gps-v1.js?v=2"></script>
 <script src="./core/radar-route-progress-v1.js?v=2"></script>
@@ -6854,150 +6855,16 @@ const App = {
 ========================================================= */
 
   updateCommunityBillboard(){
-
-    if(
-      !this.navActive ||
-      !this.userPos
-    ){
-
-      this.removeCommunityBillboard();
-
-      return;
-
-    }
-
-
-    let best=null;
-
-    let bestScore=
-      Infinity;
-
-
-    for(
-      const area
-      of rawAreas
-    ){
-
-      const d=
-        distanceToCommunityKm(
-          this.userPos,
-          area
-        );
-
-
-      if(d>.45)
-        continue;
-
-
-      const onRoute=
-        this.routeNearCommunity(
-          area
-        );
-
-
-      const score=
-        d-
-        (
-          onRoute
-          ?
-          .22
-          :
-          0
-        );
-
-
-      if(
-        score<bestScore
-      ){
-
-        best=area;
-
-        bestScore=score;
-
-      }
-
-    }
-
-
-    if(
-      !best
-    ){
-
-      this.removeCommunityBillboard();
-
-      return;
-
-    }
-
-
-    this.removeCommunityBillboard();
-
-
-    const hud=
-      document.getElementById(
-        'communityBillboardHud'
-      );
-
-    const directionBearing=
-      Utils.bearing(this.userPos,best.c);
-
-    const relative=
-      (directionBearing-this.currentBearing+360)%360;
-
-    const arrow=
-      relative>0 && relative<180
-      ? '→'
-      : '←';
-
-    const distance=Math.max(
-      0,
-      Math.round(distanceToCommunityKm(this.userPos,best)*1000)
+    return window.RadarCommunityOutdoorV156.update(
+      this,
+      Utils,
+      rawAreas,
+      distanceToCommunityKm
     );
-
-    hud.innerHTML=
-`
-<div class="community-billboard">
-<small>COMUNIDADE AO LADO</small>
-${Utils.sanitize(
-  best.name.toUpperCase().startsWith('COMUNIDADE ')
-  ? best.name
-  : 'COMUNIDADE '+best.name
-)}
-<span class="community-direction">${arrow} ${distance} m</span>
-</div>
-`;
-
-    hud.classList.add('show');
-
-    this.communityBillboardMarker=hud;
-
-
-    this.nearestCommunityName=
-      best.name;
-
   },
 
-
   removeCommunityBillboard(){
-
-    if(
-      this.communityBillboardMarker
-    ){
-
-      try{
-
-        this.communityBillboardMarker.classList.remove('show');
-        this.communityBillboardMarker.innerHTML='';
-
-      }catch(e){}
-
-    }
-
-
-    this.communityBillboardMarker=null;
-
-    this.nearestCommunityName=null;
-
+    return window.RadarCommunityOutdoorV156.remove(this);
   },
 
 
