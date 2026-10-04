@@ -31,6 +31,7 @@
 <script src="./core/radar-routing-v1.js?v=1"></script>
 <script src="./core/radar-guidance-v1.js?v=1"></script>
 <script src="./core/radar-navigation-lifecycle-v1.js?v=1"></script>
+<script src="./core/radar-arrow-v157.js?v=157"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 
@@ -5183,94 +5184,9 @@ const App = {
 
 
   updateUserMarker(){
-
-    if(
-      !this.userPos
-    )
-      return;
-
-
-    if(
-      !this.userMarker
-    ){
-
-      const el=
-        document.createElement('div');
-
-
-      el.className=
-        'user-marker-waze';
-
-
-      this.userMarker=
-        new maplibregl.Marker({
-
-          element:el,
-
-          rotationAlignment:'map'
-
-        })
-        .setLngLat(
-          this.userPos
-        )
-        .addTo(
-          this.map
-        );
-
-    }else{
-
-      this.userMarker
-      .setLngLat(
-        this.userPos
-      );
-
-    }
-
-
-    if(
-      this.currentSpeed>4
-    ){
-
-      let markerBearing=
-        this.currentBearing;
-
-      /*
-        Durante a navegação, a câmera já se orienta pelo rumo da rota à frente.
-        A seta deve usar a mesma referência visual para não parecer atravessada
-        quando o heading bruto do GPS divergir alguns graus da geometria da via.
-        Fora da navegação, continua usando o rumo real do GPS.
-      */
-      if(
-        this.navActive &&
-        this.route
-      ){
-
-        const ahead=
-          this.pointAhead(72);
-
-        if(ahead){
-
-          markerBearing=
-            Utils.bearing(
-              this.userPos,
-              ahead
-            );
-
-        }
-
-      }
-
-
-      this.userMarker
-      .setRotation(
-        markerBearing
-      );
-
-    }
-
-
+    const updated=window.RadarArrowV157.update(this,Utils);
     this.updateCamera();
-
+    return updated;
   },
 
 
