@@ -406,23 +406,7 @@ const App = {
   },
 
   setGPSStatus(ok,text){
-
-    const e=
-      document.getElementById(
-        'gpsBadge'
-      );
-
-
-    e.textContent=text;
-
-
-    e.style.background=
-      ok
-      ?
-      '#059669'
-      :
-      '#475569';
-
+    return window.RadarUIRuntimeV157.setGPSStatus(this,ok,text);
   },
 
 
@@ -497,34 +481,7 @@ const App = {
 
 
   updateSpeedUI(){
-
-    const val=
-      Math.max(
-        0,
-        Math.round(
-          this.currentSpeed
-        )
-      );
-
-
-    document
-    .getElementById(
-      'speedVal'
-    )
-    .textContent=val;
-
-
-    document
-    .getElementById(
-      'speedometerBox'
-    )
-    .classList
-    .toggle(
-      'speed-alert',
-      this.speedAlertEnabled &&
-      val>80
-    );
-
+    return window.RadarUIRuntimeV157.updateSpeed(this);
   },
 
 
@@ -863,102 +820,17 @@ const App = {
 ========================================================= */
 
   showRoutePanel(){
-
-    const sheet=
-      document.getElementById(
-        'wazeSheet'
-      );
-
-
-    sheet.classList.add(
-      'show'
-    );
-
-
-    sheet.classList.add(
-      'expanded'
-    );
-
-
-    this.sheetExpanded=true;
-
-
-    document
-    .getElementById(
-      'sheetToggleBtn'
-    )
-    .textContent=
-      'Recolher ▾';
-
+    return window.RadarUIRuntimeV157.showRoutePanel(this);
   },
 
 
   toggleSheet(force=null){
-
-    this.sheetExpanded=
-      force!==null
-      ?
-      force
-      :
-      !this.sheetExpanded;
-
-
-    document
-    .getElementById(
-      'wazeSheet'
-    )
-    .classList.toggle(
-      'expanded',
-      this.sheetExpanded
-    );
-
-
-    document
-    .getElementById(
-      'sheetToggleBtn'
-    )
-    .textContent=
-      this.sheetExpanded
-      ?
-      'Recolher ▾'
-      :
-      'Opções ▴';
-
+    return window.RadarUIRuntimeV157.toggleSheet(this,force);
   },
 
 
   toast(text,time=3200){
-
-    const e=
-      document.getElementById(
-        'toast'
-      );
-
-
-    e.textContent=text;
-
-    e.classList.add(
-      'show'
-    );
-
-
-    clearTimeout(
-      this._toastTimer
-    );
-
-
-    this._toastTimer=
-      setTimeout(
-        ()=>{
-
-          e.classList.remove(
-            'show'
-          );
-
-        },
-        time
-      );
-
+    return window.RadarUIRuntimeV157.toast(this,text,time);
   },
 
 
@@ -976,42 +848,7 @@ const App = {
 ========================================================= */
 
   shareRide(){
-
-    if(
-      !this.destination
-    ){
-
-      this.toast(
-        'Calcule uma rota primeiro.'
-      );
-
-      return;
-
-    }
-
-
-    const destinationText=
-      document
-      .getElementById(
-        'destInput'
-      )
-      .value;
-
-
-    const text=
-      encodeURIComponent(
-`🛡️ Radar Seguro RJ PRO
-Destino: ${destinationText}
-Google Maps: https://www.google.com/maps?q=${this.destination[1]},${this.destination[0]}`
-      );
-
-
-    window.open(
-      'https://api.whatsapp.com/send?text='+
-      text,
-      '_blank'
-    );
-
+    return window.RadarUIRuntimeV157.shareRide(this);
   },
 
 
