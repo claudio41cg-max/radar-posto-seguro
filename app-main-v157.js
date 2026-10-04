@@ -740,78 +740,7 @@ const App = {
 
 
   recenter(){
-
-    if(
-      !this.userPos
-    ){
-
-      this.toast(
-        'Obtendo localização...'
-      );
-
-      this.startGPS();
-
-      return;
-
-    }
-
-
-    this.followMode=true;
-
-
-    clearTimeout(
-      this.manualFollowTimer
-    );
-
-
-    const center=
-      (
-        this.navActive &&
-        this.route
-      )
-      ?
-      Utils.interpolatePoint(
-        this.userPos,
-        this.pointAhead(105)||
-        this.userPos,
-        .36
-      )
-      :
-      this.userPos;
-
-
-    window.RadarMapMotionV157.easeTo(this.map,{
-
-      center,
-
-      zoom:
-        this.navActive
-        ?
-        Math.max(16.6,Math.min(18.05,this.map.getZoom()))
-        :
-        16.3,
-
-      pitch:
-        this.navActive
-        ?
-        62
-        :
-        0,
-
-      bearing:
-        (
-          this.navActive &&
-          this.currentSpeed>5
-        )
-        ?
-        this.currentBearing
-        :
-        0,
-
-      duration:720
-
-    });
-
+    return window.RadarRecenterV157.recenter(this,Utils);
   },
 
 
