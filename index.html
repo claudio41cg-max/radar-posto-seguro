@@ -10369,32 +10369,11 @@ ${Utils.sanitize(msg.text)}
       'pagehide',
       ()=>{
 
-        if(
-          this.GPSWatch!=null
-        ){
-
-          navigator
-          .geolocation
-          .clearWatch(
-            this.GPSWatch
-          );
-
-          this.GPSWatch=null;
-
-        }
-
-
-        if(this.gpsContinuityTimer){
-
-          clearInterval(
-            this.gpsContinuityTimer
-          );
-
-          this.gpsContinuityTimer=null;
-
-        }
-
-
+        /*
+          O ciclo de vida do GPS pertence exclusivamente ao RadarGPS.
+          Aqui mantemos apenas recursos que ainda são responsabilidade
+          direta do App legado.
+        */
         try{
 
           this.mqttClient?.end();
@@ -10404,17 +10383,10 @@ ${Utils.sanitize(msg.text)}
       }
     );
 
-    window.addEventListener(
-      'pageshow',
-      ()=>this.resumeGPS()
-    );
-
     document.addEventListener(
       'visibilitychange',
       ()=>{
         if(document.visibilityState==='visible'){
-
-          this.resumeGPS();
 
           VoiceAssistant
           .resumeHandsFree();
@@ -10423,8 +10395,6 @@ ${Utils.sanitize(msg.text)}
 
           VoiceAssistant
           .suspendHandsFree();
-
-          this.suspendIdleGPS();
 
         }
       }
