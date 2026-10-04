@@ -275,7 +275,7 @@ function bind(app,deps={}){
           app.followMode=false;
   
   
-          app.map.easeTo({
+          window.RadarMapMotionV157.easeTo(app.map,{
   
             bearing:0,
   
