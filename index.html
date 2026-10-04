@@ -6604,9 +6604,39 @@ const App = {
       this.currentSpeed>4
     ){
 
+      let markerBearing=
+        this.currentBearing;
+
+      /*
+        Durante a navegação, a câmera já se orienta pelo rumo da rota à frente.
+        A seta deve usar a mesma referência visual para não parecer atravessada
+        quando o heading bruto do GPS divergir alguns graus da geometria da via.
+        Fora da navegação, continua usando o rumo real do GPS.
+      */
+      if(
+        this.navActive &&
+        this.route
+      ){
+
+        const ahead=
+          this.pointAhead(72);
+
+        if(ahead){
+
+          markerBearing=
+            Utils.bearing(
+              this.userPos,
+              ahead
+            );
+
+        }
+
+      }
+
+
       this.userMarker
       .setRotation(
-        this.currentBearing
+        markerBearing
       );
 
     }
