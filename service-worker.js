@@ -2,7 +2,7 @@ const CACHE_NAME = 'radar-seguro-rj-v155-swfix';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
-const CORE_SHELL = ['./index.html','./manifest.json','./app-shell-v97.css?v=97','./voice-ui-v98.css?v=98','./legacy-inline-v99.css?v=99','./tomtom-proxy-client.js?v=69','./app-config-v100.js?v=107','./map-utils-v101.js?v=101','./assistant-context-v1.js?v=112','./route-via-v115.js?v=123','./route-traffic-v74.js?v=131','./route-style-v127.js?v=131','./navigation-recovery-v128.js?v=132','./route-alternatives-v116.js?v=133','./route-safety-v133.js?v=133','./route-choice-policy-v132.js?v=132','./hazard-declutter-v119.js?v=133','./traffic-clean-v75.js'];
+const CORE_SHELL = ["./index.html","./manifest.json","./app-shell-v97.css?v=97","./voice-ui-v98.css?v=98","./legacy-inline-v99.css?v=99","./tomtom-proxy-client.js?v=69","./app-config-v100.js?v=107","./map-utils-v101.js?v=101","./assistant-context-v1.js?v=112","./community-index-preload.js?v=154","./community-geometries-preload.js?v=154","./core/radar-kernel-v1.js?v=1","./core/radar-gps-v1.js?v=2","./core/radar-route-progress-v1.js?v=2","./core/radar-routing-v1.js?v=1","./core/radar-guidance-v1.js?v=1","./core/radar-navigation-lifecycle-v1.js?v=1","./route-via-v115.js?v=117","./route-traffic-v74.js?v=134","./hazard-declutter-v119.js?v=135","./route-style-v127.js?v=134","./navigation-persistence-v134.js?v=134-stage1","./streetview-destination-v135.js?v=135","./radar-gpt-bridge-v1.js?v=1","./radar-gpt-live-v1.js?v=stage2c","./radar-gpt-live-integration-v1.js?v=stage11-stable"];
 const OPTIONAL_SHELL = [
   './streetview-destination-v135.js?v=135',
   './route-choice-final-v135.js?v=135',
