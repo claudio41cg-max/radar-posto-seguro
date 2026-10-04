@@ -138,7 +138,7 @@ function normalizeOSRMRoute(rt,primaryError=''){
           Number(step?.maneuver?.location?.[1])
         ]
       },
-      routeOffsetMeters:0,
+      routeOffsetMeters:null,
       osrmStep:step
     }));
 
