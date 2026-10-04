@@ -50,6 +50,26 @@ function app(){
   return appRef||window.RadarApp||window.App||null;
 }
 
+function reportRouteSideEffectError(stage,error){
+  console.warn(
+    '[RadarRouting] '+stage+':',
+    error
+  );
+
+  try{
+    kernel.emit(
+      'routing:side-effect-error',
+      {
+        stage,
+        message:String(
+          error?.message||
+          error
+        )
+      }
+    );
+  }catch(_){}
+}
+
 function modifier(type){
   const t=String(type||'').toUpperCase();
   if(t.includes('LEFT'))return 'left';
@@ -392,13 +412,42 @@ function applyRoute(route,{fit=true,recalculate=false}={}){
     console.warn('[RadarRouting] drawRoute:',error);
   }
 
-  try{a.renderDestinationFlag?.()}catch(_){}
-  try{a.updateRouteSummary?.()}catch(_){}
+  try{
+    a.renderDestinationFlag?.();
+  }catch(error){
+    reportRouteSideEffectError(
+      'render-destination',
+      error
+    );
+  }
+
+  try{
+    a.updateRouteSummary?.();
+  }catch(error){
+    reportRouteSideEffectError(
+      'update-route-summary',
+      error
+    );
+  }
 
   if(!recalculate){
-    try{a.checkDestinationCommunity?.()}catch(_){}
+    try{
+      a.checkDestinationCommunity?.();
+    }catch(error){
+      reportRouteSideEffectError(
+        'check-destination-community',
+        error
+      );
+    }
   }else{
-    try{a.fetchHazardsAlongRoute?.()}catch(_){}
+    try{
+      a.fetchHazardsAlongRoute?.();
+    }catch(error){
+      reportRouteSideEffectError(
+        'fetch-route-hazards',
+        error
+      );
+    }
   }
 
   routeState.update({
