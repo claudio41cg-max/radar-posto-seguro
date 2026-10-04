@@ -364,39 +364,7 @@ const App = {
   },
 
   runAdaptiveGPSTasks(force=false){
-
-    const now=Date.now();
-
-    const moving=
-      this.currentSpeed>=3;
-
-    /*
-      Mantém as tarefas críticas da navegação em tempo real,
-      mas reduz repetições de alertas, perigos e camadas quando
-      o veículo está parado ou fora do modo de navegação.
-    */
-    const interval=
-      this.navActive
-      ?
-      (moving ? 1200 : 4000)
-      :
-      (moving ? 2500 : 7000);
-
-    if(
-      !force &&
-      this._lastGPSAuxAt &&
-      now-this._lastGPSAuxAt<interval
-    )
-      return;
-
-    this._lastGPSAuxAt=now;
-
-    this.checkCommunityDanger();
-
-    this.updateCommunityBillboard();
-
-    this.renderHazards();
-
+    return window.RadarGPSAuxV157.run(this,force);
   },
 
 
