@@ -931,6 +931,21 @@ function create(deps={}){
   conversationHistory:[],
 
   async getCurrentAddress(force=false){
+    if(window.RadarPOIAssistantV157?.getCurrentAddress){
+      try{
+        const place=await window.RadarPOIAssistantV157.getCurrentAddress(force);
+        if(place){
+          if(place.label){
+            this.lastKnownAddress=place.label;
+            this.lastKnownAddressAt=Date.now();
+          }
+          return place;
+        }
+      }catch(error){
+        console.warn('[VoiceAssistant] POI current address fallback:',error);
+      }
+    }
+
     if(!Array.isArray(App.userPos) || App.userPos.length<2) return null;
     const lon=Number(App.userPos[0]), lat=Number(App.userPos[1]);
     if(!Number.isFinite(lat)||!Number.isFinite(lon)) return null;
@@ -3306,6 +3321,18 @@ function create(deps={}){
       this.normalize(
         command
       );
+
+    if(window.RadarPOIAssistantV157?.handle){
+      try{
+        const poiHandled=
+          await window.RadarPOIAssistantV157.handle(command);
+
+        if(poiHandled!==false)
+          return;
+      }catch(error){
+        console.warn('[VoiceAssistant] POI handler falhou:',error);
+      }
+    }
 
     const trafficQuestionV41=/\b(?:transito|engarrafamento|engarrafado|retencao|congestionamento|congestionado|travado|travada|lento|lenta|fluxo)\b/.test(normalized);
     if(trafficQuestionV41 && typeof TrafficAssistantV40!=='undefined'){
