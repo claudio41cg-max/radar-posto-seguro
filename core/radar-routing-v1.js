@@ -468,11 +468,50 @@ function applyRoute(route,{fit=true,recalculate=false}={}){
   return route;
 }
 
+function currentRouteOrigin(a,fallback=null){
+  const accuracy=Math.max(0,Number(a?.currentAccuracy||999));
+
+  if(validPoint(a?.rawUserPos)&&accuracy<=90){
+    return [
+      Number(a.rawUserPos[0]),
+      Number(a.rawUserPos[1])
+    ];
+  }
+
+  if(validPoint(a?.filteredPos)){
+    return [
+      Number(a.filteredPos[0]),
+      Number(a.filteredPos[1])
+    ];
+  }
+
+  if(validPoint(a?.rawUserPos)){
+    return [
+      Number(a.rawUserPos[0]),
+      Number(a.rawUserPos[1])
+    ];
+  }
+
+  if(validPoint(a?.userPos)){
+    return [
+      Number(a.userPos[0]),
+      Number(a.userPos[1])
+    ];
+  }
+
+  return validPoint(fallback)
+    ?[Number(fallback[0]),Number(fallback[1])]
+    :null;
+}
+
 async function calculateRoute(options={}){
   const a=app();
   if(!a)return null;
 
-  const origin=options.origin||a.userPos;
+  const origin=validPoint(options.origin)
+    ?options.origin
+    :currentRouteOrigin(a,a.userPos);
+
   const destination=options.destination||a.destination;
 
   if(!validPoint(origin)){
