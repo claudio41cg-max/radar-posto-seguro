@@ -382,7 +382,8 @@ function add(app,Utils,deps){
   
         app.map.on('click','community-fill',app._communityClickHandler);
   
-        app.setCommunityVisibility(
+        setVisibility(
+          app,
           app.communityVisible
         );
   
