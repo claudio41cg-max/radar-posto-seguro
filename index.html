@@ -94,22 +94,6 @@
 </div>
 
 
-<div class="traffic-light-hud" id="trafficLightHud">
-
-  <div class="traffic-light-visual">
-    <div class="traffic-light-dot red" id="tlRed"></div>
-    <div class="traffic-light-dot yellow" id="tlYellow"></div>
-    <div class="traffic-light-dot green" id="tlGreen"></div>
-  </div>
-
-  <div class="traffic-light-info">
-    <b id="tlTitle">🚦 Semáforo à frente</b>
-    <span id="tlInfo">Estado do sinal não disponível</span>
-  </div>
-
-</div>
-
-
 <div class="current-road-pill" id="currentRoadPill">
   Via atual
 </div>
@@ -5454,13 +5438,6 @@ const App = {
 
   lastGuidanceStep:-1,
 
-  trafficFlowCache:{},
-
-  trafficFlowBusy:false,
-
-  trafficStopSince:0,
-
-
 /* =========================================================
    INIT
 ========================================================= */
@@ -6430,8 +6407,6 @@ const App = {
     this.checkCommunityDanger();
 
     this.updateCommunityBillboard();
-
-    this.updateTrafficLightHUD();
 
     this.renderHazards();
 
@@ -8344,15 +8319,6 @@ ${Utils.sanitize(
 
     this.routeHazards=[];
 
-
-    document
-    .getElementById(
-      'trafficLightHud'
-    )
-    .classList.remove(
-      'show'
-    );
-
   },
 
 
@@ -8742,305 +8708,10 @@ fill="#22c55e"/>
 
 
 /* =========================================================
-   SEMÁFORO
+   SEMÁFOROS DA ROTA
+   Os símbolos continuam vindo do OpenStreetMap/Overpass.
+   Não existe inferência local de estado vermelho/amarelo/verde.
 ========================================================= */
-
-  trafficFlowKey(point){
-
-    return point[1].toFixed(5)+
-      ','+
-      point[0].toFixed(5);
-
-  },
-
-
-  clearTrafficLights(){
-
-    ['tlRed','tlYellow','tlGreen']
-    .forEach(id=>
-      document
-      .getElementById(id)
-      ?.classList.remove('active')
-    );
-
-  },
-
-
-  async refreshTrafficFlow(hazard){
-
-    if(this.trafficFlowBusy)
-      return;
-
-    const key=
-      this.trafficFlowKey(
-        hazard.coords
-      );
-
-    const cached=
-      this.trafficFlowCache[key];
-
-    if(
-      cached &&
-      Date.now()-cached.time<30000
-    )
-      return;
-
-    this.trafficFlowBusy=true;
-
-    try{
-
-      const path=
-        '/traffic/services/4/flowSegmentData/absolute/10/json?'+
-        new URLSearchParams({
-          point:
-            hazard.coords[1]+
-            ','+
-            hazard.coords[0],
-          unit:'KMPH',
-          openLr:'false'
-        });
-
-      const r=await fetch(
-        'https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path='+
-        encodeURIComponent(path),
-        {
-          cache:'no-store'
-        }
-      );
-
-      if(!r.ok)
-        throw new Error(
-          'TomTom Traffic '+
-          r.status
-        );
-
-      const j=await r.json();
-      const f=j.flowSegmentData||{};
-      const current=
-        Number(f.currentSpeed);
-      const free=
-        Number(f.freeFlowSpeed);
-      const confidence=
-        Number(f.confidence);
-
-      let state='moderate';
-
-      if(
-        f.roadClosure ||
-        (
-          current<=8 &&
-          free>=18
-        ) ||
-        (
-          free>0 &&
-          current/free<=.22
-        )
-      ){
-
-        state='stopped';
-
-      }else if(
-        free>0 &&
-        current/free>=.72 &&
-        current>=16
-      ){
-
-        state='free';
-
-      }
-
-      this.trafficFlowCache[key]={
-        time:Date.now(),
-        state,
-        current:
-          Number.isFinite(current)
-          ?Math.round(current)
-          :null,
-        free:
-          Number.isFinite(free)
-          ?Math.round(free)
-          :null,
-        confidence:
-          Number.isFinite(confidence)
-          ?confidence
-          :0,
-        roadClosure:!!f.roadClosure
-      };
-
-      this.updateTrafficLightHUD();
-
-    }catch(e){
-
-      console.warn(
-        'Fluxo TomTom indisponível.',
-        e
-      );
-
-    }finally{
-
-      this.trafficFlowBusy=false;
-
-    }
-
-  },
-
-
-  updateTrafficLightHUD(){
-
-    const hud=
-      document.getElementById(
-        'trafficLightHud'
-      );
-
-    this.clearTrafficLights();
-
-    if(
-      !this.navActive ||
-      !this.userPos
-    ){
-
-      hud.classList.remove('show');
-      this.trafficStopSince=0;
-      return;
-
-    }
-
-    let best=null;
-    let bestDist=Infinity;
-
-    for(const h of this.routeHazards){
-
-      if(h.type!=='semaforo')
-        continue;
-
-      if(
-        h.routeIndex<
-        this.routeProgressIndex-3
-      )
-        continue;
-
-      const d=
-        Utils.distanceKm(
-          this.userPos,
-          h.coords
-        )*1000;
-
-      if(
-        d<bestDist &&
-        d<=240
-      ){
-
-        best=h;
-        bestDist=d;
-
-      }
-
-    }
-
-    if(!best){
-
-      hud.classList.remove('show');
-      this.trafficStopSince=0;
-      return;
-
-    }
-
-    hud.classList.add('show');
-
-    document
-    .getElementById('tlTitle')
-    .textContent=
-      '🚦 Semáforo à frente';
-
-    const nearSignal=
-      bestDist>=6 &&
-      bestDist<=58;
-
-    if(
-      nearSignal &&
-      this.currentSpeed<2.2
-    ){
-
-      if(!this.trafficStopSince)
-        this.trafficStopSince=
-          Date.now();
-
-    }else{
-
-      this.trafficStopSince=0;
-
-    }
-
-    this.refreshTrafficFlow(best);
-
-    const key=
-      this.trafficFlowKey(
-        best.coords
-      );
-
-    const flow=
-      this.trafficFlowCache[key];
-
-    let state=
-      flow?.state||
-      'unknown';
-
-    if(
-      this.trafficStopSince &&
-      Date.now()-
-      this.trafficStopSince>3000
-    )
-      state='stopped';
-
-    const info=
-      document.getElementById(
-        'tlInfo'
-      );
-
-    if(state==='stopped'){
-
-      document
-      .getElementById('tlRed')
-      .classList.add('active');
-
-      info.textContent=
-        flow?.roadClosure
-        ?
-        `Trecho bloqueado • ${Math.round(bestDist)} m`
-        :
-        `Possível retenção • ${Math.round(bestDist)} m`;
-
-    }else if(state==='free'){
-
-      document
-      .getElementById('tlGreen')
-      .classList.add('active');
-
-      info.textContent=
-        `Fluxo livre • ${Math.round(bestDist)} m`;
-
-    }else if(state==='moderate'){
-
-      document
-      .getElementById('tlYellow')
-      .classList.add('active');
-
-      info.textContent=
-        `Fluxo moderado • ${Math.round(bestDist)} m`;
-
-    }else{
-
-      /*
-        SEM DADO CONFIÁVEL:
-        NÃO MOSTRA LUZ BRANCA
-        NEM INVENTA UMA COR.
-      */
-      info.textContent=
-        `Analisando o fluxo • ${Math.round(bestDist)} m`;
-
-    }
-
-  },
 
 
 /* =========================================================
