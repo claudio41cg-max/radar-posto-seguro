@@ -72,16 +72,29 @@
   }
 
   async function browserGps() {
-    const fromApp = appGps();
-    if (fromApp) return fromApp;
-    if (!navigator.geolocation) return null;
-    return new Promise((resolve) => {
-      navigator.geolocation.getCurrentPosition(
-        (p) => resolve({ lat: p.coords.latitude, lon: p.coords.longitude }),
-        () => resolve(null),
-        { enableHighAccuracy: true, maximumAge: 10000, timeout: 7000 }
-      );
-    });
+    try {
+      const gps = window.RadarGPS;
+      if (gps?.fresh) {
+        const fix = await gps.fresh({
+          timeout: 7000,
+          maximumAge: 10000,
+          fallbackAge: 15000
+        });
+
+        if (
+          fix &&
+          Number.isFinite(Number(fix.lat)) &&
+          Number.isFinite(Number(fix.lon))
+        ) {
+          return {
+            lat: Number(fix.lat),
+            lon: Number(fix.lon)
+          };
+        }
+      }
+    } catch (_) {}
+
+    return appGps();
   }
 
   async function reverseAddress(gps) {
