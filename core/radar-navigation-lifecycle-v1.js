@@ -23,8 +23,6 @@ function resetNavigationState(app){
   app.lastTrustedSpeed=0;
   app.routeStepIndex=0;
   app.activeGuidanceStep=-1;
-  app.lastGuidanceStep=-1;
-  app.announced={};
   app.lastArrivalAnnounced=false;
 }
 
