@@ -10883,6 +10883,7 @@ App.init();
       .replace(/"/g,'&quot;')
       .replace(/'/g,'&#039;');
 
+    let lastFogoRefreshAt=0;
     const loadFogoCruzado=async()=>{
       try{
         const response=await fetch(
@@ -11232,6 +11233,8 @@ App.init();
           source:feed.source||null
         };
 
+        lastFogoRefreshAt=Date.now();
+
         return true;
       }catch(error){
         App.fogoFeedError=true;
@@ -11248,9 +11251,29 @@ App.init();
     else
       App.map?.once('load',loadFogoCruzado);
 
+    const FOGO_REFRESH_MS=
+      15*60*1000;
+
     setInterval(
-      loadFogoCruzado,
-      5*60*1000
+      ()=>{
+        if(document.visibilityState!=='visible')
+          return;
+
+        loadFogoCruzado();
+      },
+      FOGO_REFRESH_MS
+    );
+
+    document.addEventListener(
+      'visibilitychange',
+      ()=>{
+        if(
+          document.visibilityState==='visible' &&
+          Date.now()-lastFogoRefreshAt>=FOGO_REFRESH_MS
+        ){
+          loadFogoCruzado();
+        }
+      }
     );
   }
 );
