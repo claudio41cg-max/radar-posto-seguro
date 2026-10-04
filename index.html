@@ -5479,6 +5479,20 @@ const App = {
 
   init(){
 
+    try{
+      const savedTheme=
+        localStorage.getItem(
+          'radar.mapTheme.v1'
+        );
+
+      if(
+        ['auto','light','dark','sat']
+        .includes(savedTheme)
+      ){
+        this.themeMode=savedTheme;
+      }
+    }catch(_){}
+
     this.createMap();
 
     this.bindEvents();
@@ -9414,6 +9428,13 @@ fill="#22c55e"/>
   setTheme(mode){
 
     this.themeMode=mode;
+
+    try{
+      localStorage.setItem(
+        'radar.mapTheme.v1',
+        mode
+      );
+    }catch(_){}
 
     this.applyThemeStyle();
 
