@@ -6,6 +6,24 @@ const SHARED_TOKEN_KEY='meuIngles.turboToken.v1';
 const SESSION_KEY='radar.gptSession.v1';
 let loginPromise=null;
 
+function migrateLegacyAuth(){
+  try{
+    const legacy=
+      localStorage.getItem(TOKEN_KEY)||
+      localStorage.getItem(SHARED_TOKEN_KEY)||
+      '';
+
+    if(legacy&&!sessionStorage.getItem(TOKEN_KEY)){
+      sessionStorage.setItem(TOKEN_KEY,legacy);
+    }
+
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(SHARED_TOKEN_KEY);
+  }catch(_){}
+}
+
+migrateLegacyAuth();
+
 function injectLogin(){
   if(document.getElementById('radarTurboLogin'))return;
   const style=document.createElement('style');
@@ -58,8 +76,11 @@ function login(){
         const r=await fetch(TURBO+'/__turbo/panel-login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username:user.value.trim(),password:pass.value}),signal:controller.signal}).finally(()=>clearTimeout(timer));
         const d=await r.json().catch(()=>({}));
         if(!r.ok||!d.ok||!d.token)throw new Error(d.error||'Não foi possível entrar.');
-        localStorage.setItem(TOKEN_KEY,d.token);
-        localStorage.setItem(SHARED_TOKEN_KEY,d.token);
+        sessionStorage.setItem(TOKEN_KEY,d.token);
+        try{
+          localStorage.removeItem(TOKEN_KEY);
+          localStorage.removeItem(SHARED_TOKEN_KEY);
+        }catch(_){}
         pass.value=''; cleanup(); resolve(d.token);
       }catch(e){error.textContent=e?.message||String(e)}
       finally{enter.disabled=false;enter.textContent='Entrar'}
@@ -72,7 +93,7 @@ function login(){
 }
 
 async function token(){
-  return localStorage.getItem(TOKEN_KEY)||localStorage.getItem(SHARED_TOKEN_KEY)||login();
+  return sessionStorage.getItem(TOKEN_KEY)||login();
 }
 
 async function ask(message,retry=true){
@@ -83,7 +104,7 @@ async function ask(message,retry=true){
     method:'POST',
     headers:{'content-type':'application/json','authorization':'Bearer '+auth},
     body:JSON.stringify({
-      sessionId:localStorage.getItem(SESSION_KEY)||null,
+      sessionId:sessionStorage.getItem(SESSION_KEY)||null,
       project:{key:'radar-seguro',name:'Radar Seguro RJ PRO',repo:'claudio41cg-max/radar-posto-seguro'},
       message:String(message||'')
     }),
@@ -91,16 +112,28 @@ async function ask(message,retry=true){
   }).finally(()=>clearTimeout(timer));
   const d=await r.json().catch(()=>({}));
   if(r.status===401&&retry){
-    localStorage.removeItem(TOKEN_KEY);localStorage.removeItem(SHARED_TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
+    try{
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(SHARED_TOKEN_KEY);
+    }catch(_){}
     return ask(message,false);
   }
   if(!r.ok||!d.ok)throw new Error(d.error||'GPT indisponível.');
-  if(d.sessionId)localStorage.setItem(SESSION_KEY,d.sessionId);
+  if(d.sessionId)sessionStorage.setItem(SESSION_KEY,d.sessionId);
   return String(d.reply||'').trim();
 }
 
 window.radarTurboAuth=token;
 window.radarTurboBase=TURBO;
 window.radarGptAsk=ask;
-window.radarGptLogout=()=>{localStorage.removeItem(TOKEN_KEY);localStorage.removeItem(SHARED_TOKEN_KEY);localStorage.removeItem(SESSION_KEY)};
+window.radarGptLogout=()=>{
+  sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(SESSION_KEY);
+  try{
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(SHARED_TOKEN_KEY);
+    localStorage.removeItem(SESSION_KEY);
+  }catch(_){}
+};
 })();
