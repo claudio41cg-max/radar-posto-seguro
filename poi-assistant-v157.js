@@ -30,7 +30,6 @@ const App=serviceProxy(()=>window.RadarApp);
 const VoiceAssistant=serviceProxy(()=>window.VoiceAssistant);
 const Utils=window.RADAR_MAP_UTILS_V101?.Utils;
 
-{
  const WORKER='https://radar-seguro-ia-rj.claudio41cg.workers.dev';
  const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
  const hav=(a,b)=>{const R=6371000,rad=x=>x*Math.PI/180,dlat=rad(b[1]-a[1]),dlon=rad(b[0]-a[0]);const q=Math.sin(dlat/2)**2+Math.cos(rad(a[1]))*Math.cos(rad(b[1]))*Math.sin(dlon/2)**2;return 2*R*Math.asin(Math.sqrt(q));};
@@ -420,9 +419,9 @@ async function handle(command){
       const n=norm(command);
       if(pendingPlace&&Date.now()-pendingPlace.createdAt<=90000){
         if(/^(sim|pode|pode sim|quero|vai|vamos|inicia|iniciar|comece|comeca|começar|beleza)$/.test(n))return acceptPendingPlace();
-        if(/^(nao|não|cancela|cancelar|deixa|deixa pra la|deixa pra lá)$/.test(n)){pendingPlace=null;this.reply('Tudo bem. Não vou mudar sua rota.');return;}
+        if(/^(nao|não|cancela|cancelar|deixa|deixa pra la|deixa pra lá)$/.test(n)){pendingPlace=null;VoiceAssistant.reply('Tudo bem. Não vou mudar sua rota.');return;}
       }
-      if(isLocationQuestion(command)){const p=await this.getCurrentAddress(true);this.reply(formatCurrentPlace(p,command));return;}
+      if(isLocationQuestion(command)){const p=await getCurrentAddress(true);VoiceAssistant.reply(formatCurrentPlace(p,command));return;}
       let normalizedCommand=norm(command).replace(/[.,!?;:]+$/g,'').trim();
       // Sem a palavra "casa", reconhecimento de voz pode entregar pontuação ou pequenas
       // variações no fim. Convertemos qualquer final "mais perto/mais próximo" para a
