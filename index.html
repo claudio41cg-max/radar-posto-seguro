@@ -37,6 +37,7 @@
 <script src="./core/radar-camera-v157.js?v=157"></script>
 <script src="./core/radar-map-controller-v157.js?v=157"></script>
 <script src="./core/radar-route-view-v157.js?v=157"></script>
+<script src="./core/radar-offroute-v157.js?v=157"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 
@@ -1168,124 +1169,12 @@ const App = {
 ========================================================= */
 
   isRoundaboutSoon(){
-
-    const guidance=
-      this.getUpcomingGuidance();
-
-
-    if(
-      !guidance?.step
-    )
-      return false;
-
-
-    return (
-      this.isRoundaboutStep(
-        guidance.step
-      ) &&
-      guidance.distance<=180
-    );
-
+    return window.RadarOffRouteV157.isRoundaboutSoon(this);
   },
 
 
   checkOffRoute(match){
-
-    if(
-      !this.navActive ||
-      !this.route ||
-      !this.userPos ||
-      this.rerouting
-    )
-      return;
-
-
-    if(this.currentSpeed<4){
-
-      this.offRouteHits=0;
-
-      return;
-
-    }
-
-
-    /*
-      UMA LEITURA RUIM NÃO PODE
-      FORÇAR RECÁLCULO.
-    */
-    if(this.currentAccuracy>55)
-      return;
-
-
-    let threshold=
-      Math.max(
-        28,
-        Math.min(
-          48,
-          24+
-          this.currentAccuracy*.38
-        )
-      );
-
-
-    if(this.isRoundaboutSoon())
-      threshold=60;
-
-
-    if(match.distance>threshold){
-
-      this.offRouteHits++;
-
-    }else{
-
-      this.offRouteHits=0;
-
-      return;
-
-    }
-
-
-    const now=
-      Date.now();
-
-
-    if(
-      now-
-      this.lastRerouteAt<
-      2500
-    )
-      return;
-
-
-    const requiredHits=
-      this.currentAccuracy<=20
-      ?
-      2
-      :
-      3;
-
-
-    const clearlyAway=
-      match.distance>
-      Math.max(
-        75,
-        this.currentAccuracy*2+
-        30
-      );
-
-
-    if(
-      clearlyAway ||
-      this.offRouteHits>=
-      requiredHits
-    ){
-
-      this.offRouteHits=0;
-
-      this.recalculateRoute();
-
-    }
-
+    return window.RadarOffRouteV157.check(this,match);
   },
 
   async recalculateRoute(){
