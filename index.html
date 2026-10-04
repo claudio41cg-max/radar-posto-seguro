@@ -1979,14 +1979,14 @@ const VoiceAssistant = {
 
       const response=
         await fetch(
-          this.aiEndpoint,
+          this.aiEndpoint+'/v1/chat',
           {
             method:'POST',
             headers:{
               'Content-Type':'application/json'
             },
             body:JSON.stringify({
-              pergunta:(()=>{
+              message:(()=>{
                 const context=[];
                 if(Array.isArray(App.userPos) && App.userPos.length>=2)
                   context.push('GPS atual: latitude '+Number(App.userPos[1]).toFixed(5)+', longitude '+Number(App.userPos[0]).toFixed(5)+(this.lastKnownAddress?' — '+this.lastKnownAddress:''));
@@ -1999,9 +1999,15 @@ const VoiceAssistant = {
                 }else if(App.route){
                   context.push('Trânsito TomTom indisponível nesta consulta. Se perguntarem sobre trânsito, diga que não foi possível consultar dados reais agora; nunca invente.');
                 }
-                if(this.conversationHistory.length) context.push('Conversa recente: '+this.conversationHistory.slice(-6).join(' | '));
                 return text+(context.length?'\n\nContexto confiável fornecido pelo Radar:\n'+context.join('\n'):'');
-              })()
+              })(),
+              history:this.conversationHistory
+                .filter(item=>item&&typeof item==='object')
+                .slice(-6)
+                .map(item=>({
+                  role:item.role==='radar'?'model':'user',
+                  text:String(item.text||'')
+                }))
             }),
             signal:controller.signal
           }
@@ -2020,14 +2026,14 @@ const VoiceAssistant = {
 
       if(!response.ok)
         throw new Error(
-          data.erro||
+          data.error||
           'Falha na consulta da inteligência.'
         );
 
 
       const answer=
         String(
-          data.resposta||''
+          data.reply||''
         )
         .trim();
 
@@ -5736,63 +5742,35 @@ const App = {
 
   addTomTomTrafficLayer(){
 
+    /*
+      A camada global de trânsito foi aposentada.
+      O Radar usa somente o trânsito real aplicado ao trecho da rota
+      por route-traffic-v74.js, evitando sobreposição e disputa visual.
+    */
     try{
+
+      if(
+        this.map.getLayer(
+          'tomtom-traffic-flow'
+        )
+      )
+        this.map.removeLayer(
+          'tomtom-traffic-flow'
+        );
 
       if(
         this.map.getSource(
           'tomtom-traffic'
         )
       )
-        return;
-
-
-      this.map.addSource(
-        'tomtom-traffic',
-        {
-
-          type:'raster',
-
-          tiles:[
-            'https://radar-seguro-ia-rj.claudio41cg.workers.dev/v1/tomtom?path=/traffic/map/4/tile/flow/relative/{z}/{x}/{y}.png%3FtileSize%3D256'
-          ],
-
-          tileSize:256,
-
-          minzoom:0,
-
-          maxzoom:22
-
-        }
-      );
-
-
-      this.map.addLayer({
-
-        id:'tomtom-traffic-flow',
-
-        type:'raster',
-
-        source:'tomtom-traffic',
-
-        paint:{
-
-          'raster-opacity':.72,
-
-          'raster-fade-duration':250
-
-        }
-
-      });
-
+        this.map.removeSource(
+          'tomtom-traffic'
+        );
 
     }catch(e){
 
-      /*
-        SE A TOMTOM FALHAR,
-        O MAPA PRINCIPAL CONTINUA FUNCIONANDO.
-      */
       console.warn(
-        'Camada de trânsito TomTom indisponível.',
+        'Falha ao limpar camada global de trânsito.',
         e
       );
 
