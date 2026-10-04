@@ -458,6 +458,15 @@ async function start(options={}){
         DEFAULT_BACKEND
       );
 
+    const startController=
+      new AbortController();
+
+    const startTimeout=
+      setTimeout(
+        ()=>startController.abort(),
+        20000
+      );
+
     const response=
       await fetch(
         backend+'/__turbo/voice/start',
@@ -471,8 +480,11 @@ async function start(options={}){
             sdp:pc.localDescription?.sdp||'',
             voice:state.voice,
             instructions:state.lastInstructions
-          })
+          }),
+          signal:startController.signal
         }
+      ).finally(
+        ()=>clearTimeout(startTimeout)
       );
 
     const data=
