@@ -721,6 +721,12 @@ const registration=kernel.registerModule({
 
     resources.listen(window,'pagehide',()=>stop());
 
+    resources.listen(window,'pageshow',()=>{
+      if(document.visibilityState==='visible'){
+        resume();
+      }
+    });
+
     return api;
   },
 
