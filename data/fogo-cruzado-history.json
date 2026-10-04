@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T17:05:14.801Z",
+  "generatedAt": "2026-10-04T20:05:10.654Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 259,
+  "count": 260,
   "occurrences": [
+    {
+      "id": "6638e5d4-2133-4ebc-9740-ed3b95262eb6",
+      "documentNumber": 79351,
+      "date": "2026-10-04T10:00:00.000Z",
+      "address": "Rua Basileu Eugênio Leal - Adrianópolis, Nova Iguaçu, RJ, Brasil",
+      "neighborhood": "ADRIANOPOLIS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.677316473647466,
+      "longitude": -43.52507560475465,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "064e04e2-b2ba-43c0-9cf9-e81d22607b4e",
       "documentNumber": 79350,
@@ -63,12 +83,12 @@
       "id": "1cb5d2d2-a0a7-4e0d-a37a-7619f1f018bd",
       "documentNumber": 79345,
       "date": "2026-10-04T01:00:00.000Z",
-      "address": "Centenario, Duque de Caxias - RJ, 25030-040, Brasil",
+      "address": "Corte 8 (Complexo da Mangueirinha) - Vila Centenario, Duque de Caxias - RJ, 25030-050, Brasil",
       "neighborhood": "CENTENARIO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7740843,
-      "longitude": -43.3105087,
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.77095968425896,
+      "longitude": -43.30980255,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
