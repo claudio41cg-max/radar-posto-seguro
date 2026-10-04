@@ -22,6 +22,7 @@
 <script src="./search-v156.js?v=156"></script>
 <script src="./hazards-v156.js?v=156"></script>
 <script src="./community-outdoor-v156.js?v=156"></script>
+<script src="./community-alerts-v156.js?v=156"></script>
 <script src="./core/radar-kernel-v1.js?v=1"></script>
 <script src="./core/radar-gps-v1.js?v=2"></script>
 <script src="./core/radar-route-progress-v1.js?v=2"></script>
@@ -6510,343 +6511,31 @@ const App = {
 ========================================================= */
 
   routeNearCommunity(area){
-
-    if(
-      !this.route?.coords?.length
-    )
-      return false;
-
-
-    const limit=
-      riskRadius(area)+.08;
-
-
-    const start=
-      this.routeProgressIndex;
-
-
-    const end=
-      Math.min(
-        this.route.coords.length-1,
-        start+500
-      );
-
-
-    for(
-      let i=start;
-      i<end;
-      i+=5
-    ){
-
-      const d=
-        Utils.distanceKm(
-          this.route.coords[i],
-          area.c
-        );
-
-
-      if(
-        d<=limit
-      )
-        return true;
-
-    }
-
-
-    return false;
-
+    return window.RadarCommunityAlertsV156.routeNear(
+      this,
+      Utils,
+      riskRadius,
+      area
+    );
   },
-
 
   checkCommunityDanger(){
-
-    if(
-      !this.userPos
-    )
-      return;
-
-
-    let nearest=null;
-
-    let nearestDistance=
-      Infinity;
-
-
-    rawAreas.forEach(area=>{
-
-      const d=
-        Utils.distanceKm(
-          this.userPos,
-          area.c
-        );
-
-
-      if(
-        d<nearestDistance
-      ){
-
-        nearestDistance=d;
-
-        nearest=area;
-
-      }
-
-
-      const previous=
-        this.lastCommunityDistance[
-          area.name
-        ];
-
-
-      this.lastCommunityDistance[
-        area.name
-      ]=d;
-
-
-      /*
-        JÁ PASSOU E ESTÁ SE AFASTANDO.
-      */
-      if(
-        previous!=null &&
-        d>previous &&
-        d>
-        riskRadius(area)+.35
-      ){
-
-        delete
-          this.nearbyCommunityAlerted[
-            area.name
-          ];
-
-
-        delete
-          this.insideCommunityAlerted[
-            area.name
-          ];
-
-      }
-
-    });
-
-
-    if(
-      !nearest
-    )
-      return;
-
-
-    const radius=
-      riskRadius(nearest);
-
-
-    const sign=
-      document.getElementById(
-        'communitySign'
-      );
-
-
-    const tag=
-      document.getElementById(
-        'hudDangerTag'
-      );
-
-
-    const nearLimit=
-      radius+.22;
-
-
-    /*
-      PASSANDO PERTO.
-    */
-    if(
-      nearestDistance<=nearLimit &&
-      nearestDistance>radius
-    ){
-
-      tag.textContent=
-        '⚠ '+
-        nearest.name.toUpperCase();
-
-
-      tag.classList.add(
-        'active'
-      );
-
-
-      if(
-        !this.nearbyCommunityAlerted[
-          nearest.name
-        ]
-      ){
-
-        this.nearbyCommunityAlerted[
-          nearest.name
-        ]=true;
-
-
-        sign.textContent=
-          '⚠ Comunidade próxima: '+
-          nearest.name;
-
-
-        sign.classList.add(
-          'show'
-        );
-
-
-        setTimeout(
-          ()=>{
-
-            sign.classList.remove(
-              'show'
-            );
-
-          },
-          4200
-        );
-
-
-        if(
-          this.navActive &&
-          this.currentSpeed>5
-        ){
-
-          Voice.speak(
-            'Atenção. Comunidade próxima: '+
-            nearest.name+
-            '.'
-          );
-
-        }
-
-      }
-
-    }else{
-
-      tag.classList.remove(
-        'active'
-      );
-
-    }
-
-
-    /*
-      ENTROU NO PERÍMETRO.
-    */
-    if(
-      nearestDistance<=radius &&
-      !this.insideCommunityAlerted[
-        nearest.name
-      ]
-    ){
-
-      this.insideCommunityAlerted[
-        nearest.name
-      ]=true;
-
-
-      const banner=
-        document.getElementById(
-          'dangerBanner'
-        );
-
-
-      document
-      .getElementById(
-        'dangerBannerText'
-      )
-      .textContent=
-        '⚠ Você entrou na área marcada de '+
-        nearest.name+
-        '. Fique atento.';
-
-
-      banner.classList.add(
-        'show'
-      );
-
-
-      if(
-        this.navActive
-      ){
-
-        Voice.speak(
-          'Atenção. Você entrou na área marcada de '+
-          nearest.name+
-          '.',
-          true
-        );
-
-      }
-
-
-      setTimeout(
-        ()=>{
-
-          banner.classList.remove(
-            'show'
-          );
-
-        },
-        6500
-      );
-
-    }
-
+    return window.RadarCommunityAlertsV156.checkDanger(
+      this,
+      Utils,
+      riskRadius,
+      rawAreas,
+      Voice
+    );
   },
 
-
   checkDestinationCommunity(){
-
-    if(
-      !this.destination
-    )
-      return;
-
-
-    for(
-      const area
-      of rawAreas
-    ){
-
-      if(
-        area.name!=='Carobinha (Campo Grande)' &&
-        area.name!=='Barbante (Inhoaíba)' &&
-        area.name!=='Cesarão (Santa Cruz)' &&
-        area.name!=='Comunidade do Rola (Santa Cruz)' &&
-        area.name!=='Comunidade de Antares (Santa Cruz)' &&
-        area.name!=='Pantanal (Santa Cruz)' &&
-        area.name!=='Comunidade do Aço (Santa Cruz)' &&
-        area.name!=='Nova Sepetiba'
-      )
-        continue;
-
-      const d=
-        Utils.distanceKm(
-          this.destination,
-          area.c
-        );
-
-
-      if(
-        d<=
-        riskRadius(area)+.08
-      ){
-
-        this.toast(
-          '⚠ Destino próximo de '+
-          area.name+
-          '.',
-          5000
-        );
-
-
-        return;
-
-      }
-
-    }
-
+    return window.RadarCommunityAlertsV156.checkDestination(
+      this,
+      Utils,
+      riskRadius,
+      rawAreas
+    );
   },
 
 
