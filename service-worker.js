@@ -1,8 +1,7 @@
-const CACHE_NAME = 'radar-seguro-rj-v154';
+const CACHE_NAME = 'radar-seguro-rj-v155-swfix';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
-const V122_SCRIPTS = '<script src="./route-via-v115.js?v=123"></script>\n<script src="./route-traffic-v74.js?v=131"></script>\n<script src="./route-alternatives-v116.js?v=133','./route-safety-v133.js?v=133"></script>\n<script src="./hazard-declutter-v119.js?v=133"></script>\n<script src="./route-choice-policy-v132.js?v=132"></script>';
 const CORE_SHELL = ['./index.html','./manifest.json','./app-shell-v97.css?v=97','./voice-ui-v98.css?v=98','./legacy-inline-v99.css?v=99','./tomtom-proxy-client.js?v=69','./app-config-v100.js?v=107','./map-utils-v101.js?v=101','./assistant-context-v1.js?v=112','./route-via-v115.js?v=123','./route-traffic-v74.js?v=131','./route-style-v127.js?v=131','./navigation-recovery-v128.js?v=132','./route-alternatives-v116.js?v=133','./route-safety-v133.js?v=133','./route-choice-policy-v132.js?v=132','./hazard-declutter-v119.js?v=133','./traffic-clean-v75.js'];
 const OPTIONAL_SHELL = [
   './streetview-destination-v135.js?v=135',
@@ -21,7 +20,18 @@ function isStaticCommunityData(url){if(url.origin!==self.location.origin)return 
 async function cacheFirstStatic(request){const cache=await caches.open(CACHE_NAME);const cached=await cache.match(request);if(cached)return cached;const response=await fetch(request,{cache:'no-store'});if(response.ok)await cache.put(request,response.clone());return response;}
 async function buildCleanOpenFreeMapStyle(request){const response=await fetch(request,{cache:'no-store'});if(!response.ok)return response;const style=await response.json();if(Array.isArray(style.layers)){for(const layer of style.layers){if(layer?.type!=='line')continue;const id=String(layer.id||'').toLowerCase(),sourceLayer=String(layer['source-layer']||'').toLowerCase(),roadLayer=sourceLayer.includes('transportation')||/road|street|highway|motorway|trunk|primary|secondary|tertiary/.test(id);if(!roadLayer)continue;layer.paint=layer.paint||{};const isCasing=/case|casing|outline/.test(id);layer.paint['line-color']=isCasing?'#cbd5e1':'#94a3b8';layer.paint['line-opacity']=0.56;}}return new Response(JSON.stringify(style),{status:200,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=86400'}});}
 async function cleanOpenFreeMapStyle(request){const cache=await caches.open(CACHE_NAME);const cached=await cache.match(request);if(cached)return cached;try{const cleaned=await buildCleanOpenFreeMapStyle(request);if(cleaned.ok)await cache.put(request,cleaned.clone());return cleaned;}catch(_){return fetch(request,{cache:'no-store'});}}
-async function injectV122(response){if(!response?.ok)return response;const type=String(response.headers.get('content-type')||'');if(!type.includes('text/html'))return response;let html=await response.text();html=html.replace(/<script src="\.\/route-via-v115\.js\?v=(?:115|116)"><\/script>/g,'');html=html.replace(/<script src="\.\/route-traffic-v74\.js(?:\?v=\d+)?"><\/script>/g,'');html=html.replace(/<script src="\.\/route-alternatives-v116\.js(?:\?v=\d+)?"><\/script>/g,'');html=html.replace(/<script src="\.\/hazard-declutter-v119\.js(?:\?v=\d+)?"><\/script>/g,'');html=html.replace('</body>',V122_SCRIPTS+'\n</body>');const headers=new Headers(response.headers);headers.set('Content-Type','text/html; charset=utf-8');headers.set('Cache-Control','no-cache');return new Response(html,{status:response.status,statusText:response.statusText,headers});}
-async function navigationNetworkFirst(request){try{const raw=await fetchWithTimeout(request,{cache:'no-store'});const response=await injectV122(raw);if(response&&response.ok){const cache=await caches.open(CACHE_NAME);cache.put('./index.html',response.clone()).catch(()=>{});}return response;}catch(_){const cached=(await caches.match(request))||(await caches.match('./index.html'));return cached||Response.error();}}
+async function navigationNetworkFirst(request){
+  try{
+    const response=await fetchWithTimeout(request,{cache:'no-store'});
+    if(response&&response.ok){
+      const cache=await caches.open(CACHE_NAME);
+      cache.put('./index.html',response.clone()).catch(()=>{});
+    }
+    return response;
+  }catch(_){
+    const cached=(await caches.match(request))||(await caches.match('./index.html'));
+    return cached||Response.error();
+  }
+}
 async function liveFileNetworkFirst(request){const cache=await caches.open(CACHE_NAME);try{const response=await fetchWithTimeout(request,{cache:'no-store'});if(response&&response.ok)await cache.put(request,response.clone());return response;}catch(_){return (await cache.match(request))||Response.error();}}
 self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method==='GET'&&url.hostname===OPENFREEMAP_HOST&&/\/styles\/(?:liberty|dark)\/?$/i.test(url.pathname)){event.respondWith(cleanOpenFreeMapStyle(event.request));return;}if(event.request.method==='GET'&&isTrafficMapTile(url)){event.respondWith(new Response(null,{status:204,headers:{'Cache-Control':'no-store'}}));return;}if(url.origin===RADAR_WORKER&&(url.pathname==='/'||url.pathname==='/v1/chat')&&event.request.method==='POST'){event.respondWith(aiChatProxyRequest(event.request));return;}if(url.hostname==='api.tomtom.com'){event.respondWith(tomTomProxyRequest(event.request));return;}if(url.origin!==self.location.origin)return;if(event.request.method==='GET'&&isStaticCommunityData(url)){event.respondWith(cacheFirstStatic(event.request));return;}const isNav=event.request.mode==='navigate'||url.pathname.endsWith('/')||url.pathname.endsWith('/index.html');if(isNav){event.respondWith(navigationNetworkFirst(event.request));return;}const liveFile=/\.(?:js|json|html|css)$/.test(url.pathname)||url.pathname.includes('/data/');if(liveFile){event.respondWith(liveFileNetworkFirst(event.request));return;}event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request)));});
