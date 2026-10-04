@@ -25,6 +25,7 @@
 <script src="./community-alerts-v156.js?v=156"></script>
 <script src="./community-layers-v156.js?v=156"></script>
 <script src="./ui-events-v157.js?v=157"></script>
+<script src="./voice/voice-engine-v157.js?v=157"></script>
 <script src="./voice/voice-assistant-v157.js?v=157"></script>
 <script src="./core/radar-kernel-v1.js?v=1"></script>
 <script src="./core/radar-gps-v1.js?v=2"></script>
@@ -548,116 +549,9 @@ const communityBridgesGeoJSON=COMMUNITY_GEOMETRY.communityBridgesGeoJSON;
    VOZ
 ========================================================= */
 
-const Voice = {
-
-  enabled:true,
-
-  queue:[],
-
-  speaking:false,
-
-
-  clear(){
-
-    if(
-      'speechSynthesis'
-      in window
-    ){
-
-      speechSynthesis.cancel();
-
-    }
-
-    this.queue=[];
-
-    this.speaking=false;
-
-  },
-
-
-  speak(text,priority=false){
-
-    if(
-      !this.enabled ||
-      !('speechSynthesis' in window)
-    )
-      return;
-
-
-    if(
-      typeof VoiceAssistant!==
-      'undefined'
-    )
-      VoiceAssistant.pauseForSpeech();
-
-
-    if(priority){
-
-      this.clear();
-
-    }
-
-
-    if(
-      this.queue.includes(text)
-    )
-      return;
-
-
-    this.queue.push(text);
-
-    this.process();
-
-  },
-
-
-  process(){
-
-    if(
-      this.speaking ||
-      !this.queue.length
-    )
-      return;
-
-
-    const text=
-      this.queue.shift();
-
-
-    const u=
-      new SpeechSynthesisUtterance(text);
-
-
-    u.lang='pt-BR';
-
-    u.rate=1.04;
-
-    this.speaking=true;
-
-
-    u.onend=
-      ()=>{
-        this.speaking=false;
-        const noMoreSpeech=!this.queue.length;
-        if(noMoreSpeech && typeof VoiceAssistant!=='undefined'){
-          VoiceAssistant.onAssistantSpeechEnded(text);
-        }
-        setTimeout(()=>this.process(),120);
-      };
-
-    u.onerror=
-      ()=>{
-        this.speaking=false;
-        if(typeof VoiceAssistant!=='undefined') VoiceAssistant.cancelFollowUpWindow();
-        setTimeout(()=>this.process(),120);
-      };
-
-
-    speechSynthesis.speak(u);
-
-  }
-
-};
+const Voice=window.RadarVoiceEngineV157.create({
+  getAssistant:()=>VoiceAssistant
+});
 
 
 /* =========================================================
