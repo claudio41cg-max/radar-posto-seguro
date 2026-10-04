@@ -54,7 +54,8 @@ function login(){
     const submit=async()=>{
       error.textContent=''; enter.disabled=true; enter.textContent='Entrando...';
       try{
-        const r=await fetch(TURBO+'/__turbo/panel-login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username:user.value.trim(),password:pass.value})});
+        const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),12000);
+        const r=await fetch(TURBO+'/__turbo/panel-login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({username:user.value.trim(),password:pass.value}),signal:controller.signal}).finally(()=>clearTimeout(timer));
         const d=await r.json().catch(()=>({}));
         if(!r.ok||!d.ok||!d.token)throw new Error(d.error||'Não foi possível entrar.');
         localStorage.setItem(TOKEN_KEY,d.token);
@@ -76,6 +77,8 @@ async function token(){
 
 async function ask(message,retry=true){
   const auth=await token();
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),25000);
   const r=await fetch(TURBO+'/__turbo/chat',{
     method:'POST',
     headers:{'content-type':'application/json','authorization':'Bearer '+auth},
@@ -83,8 +86,9 @@ async function ask(message,retry=true){
       sessionId:localStorage.getItem(SESSION_KEY)||null,
       project:{key:'radar-seguro',name:'Radar Seguro RJ PRO',repo:'claudio41cg-max/radar-posto-seguro'},
       message:String(message||'')
-    })
-  });
+    }),
+    signal:controller.signal
+  }).finally(()=>clearTimeout(timer));
   const d=await r.json().catch(()=>({}));
   if(r.status===401&&retry){
     localStorage.removeItem(TOKEN_KEY);localStorage.removeItem(SHARED_TOKEN_KEY);
