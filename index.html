@@ -18,6 +18,7 @@
 <script src="./assistant-context-v1.js?v=112"></script>
 <script src="./fuel-module-v156.js?v=156"></script>
 <script src="./mqtt-chat-v156.js?v=156"></script>
+<script src="./map-theme-v156.js?v=156"></script>
 <script src="./core/radar-kernel-v1.js?v=1"></script>
 <script src="./core/radar-gps-v1.js?v=2"></script>
 <script src="./core/radar-route-progress-v1.js?v=2"></script>
@@ -4542,19 +4543,7 @@ const App = {
 
   init(){
 
-    try{
-      const savedTheme=
-        localStorage.getItem(
-          'radar.mapTheme.v1'
-        );
-
-      if(
-        ['auto','light','dark','sat']
-        .includes(savedTheme)
-      ){
-        this.themeMode=savedTheme;
-      }
-    }catch(_){}
+    window.RadarMapThemeV156.load(this);
 
     this.createMap();
 
@@ -4576,63 +4565,32 @@ const App = {
   },
 
 
-  getThemeStyle(mode){
-
-    if(
-      mode==='sat'
-    )
-      return satelliteStyle();
-
-    if(
-      mode==='dark' ||
-      (
-        mode==='auto' &&
-        this.automaticThemeNow()==='dark'
-      )
-    )
-      return darkStyle();
-
-
-    /*
-      Auto e Vetorial usam a base vetorial nítida.
-    */
-    return STYLE_VECTOR;
-
+  getThemeStyle(){
+    return window.RadarMapThemeV156.getStyle(this,{
+      styleVector:STYLE_VECTOR,
+      satelliteStyle,
+      darkStyle
+    });
   },
 
   automaticThemeNow(){
-
-    const hour=new Date().getHours();
-
-    return hour>=6 && hour<18
-      ? 'light'
-      : 'dark';
-
+    return window.RadarMapThemeV156.automaticNow();
   },
 
   refreshAutomaticTheme(){
-
-    if(this.themeMode!=='auto')
-      return;
-
-    const wanted=this.automaticThemeNow();
-
-    if(this.appliedTheme!==wanted)
-      this.applyThemeStyle();
-
+    return window.RadarMapThemeV156.refresh(this,{
+      styleVector:STYLE_VECTOR,
+      satelliteStyle,
+      darkStyle
+    });
   },
 
   applyThemeStyle(){
-
-    this.appliedTheme=
-      this.themeMode==='auto'
-      ? this.automaticThemeNow()
-      : this.themeMode;
-
-    this.map.setStyle(
-      this.getThemeStyle(this.themeMode)
-    );
-
+    return window.RadarMapThemeV156.apply(this,{
+      styleVector:STYLE_VECTOR,
+      satelliteStyle,
+      darkStyle
+    });
   },
 
 
@@ -8033,27 +7991,11 @@ fill="#22c55e"/>
 
 
   setTheme(mode){
-
-    this.themeMode=mode;
-
-    try{
-      localStorage.setItem(
-        'radar.mapTheme.v1',
-        mode
-      );
-    }catch(_){}
-
-    this.applyThemeStyle();
-
-
-    document
-    .getElementById(
-      'mapAppearanceModal'
-    )
-    .classList.remove(
-      'show'
-    );
-
+    return window.RadarMapThemeV156.set(this,mode,{
+      styleVector:STYLE_VECTOR,
+      satelliteStyle,
+      darkStyle
+    });
   },
 
 
