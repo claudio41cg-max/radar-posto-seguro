@@ -18,6 +18,7 @@
 <script src="./core/radar-route-progress-v1.js?v=2"></script>
 <script src="./core/radar-routing-v1.js?v=1"></script>
 <script src="./core/radar-guidance-v1.js?v=1"></script>
+<script src="./core/radar-navigation-lifecycle-v1.js?v=1"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.16.0/dist/maplibre-gl.css">
 
@@ -9057,238 +9058,36 @@ fill="#22c55e"/>
 ========================================================= */
 
   startNavigation(){
-
-    if(
-      !this.route
-    ){
-
-      this.toast(
-        'Calcule uma rota primeiro.'
-      );
-
-      return;
-
-    }
-
-
-    this.navActive=true;
-
-    this.followMode=true;
-
-    this.routeProgressIndex=0;
-
-    this.routeProgressMeters=0;
-
-    this.lastTrustedProgressMeters=0;
-
-    this.lastTrustedSpeed=0;
-
-    this.routeStepIndex=0;
-
-    this.activeGuidanceStep=-1;
-
-    this.lastGuidanceStep=-1;
-
-    this.announced={};
-
-    this.lastArrivalAnnounced=false;
-
-
-    document.body
-    .classList.add(
-      'nav-mode'
+    return window.RadarNavigationLifecycle?.start?.(
+      this,
+      {
+        speak:(text,priority)=>Voice.speak(text,priority),
+        stopAssistant:()=>VoiceAssistant.stopHandsFree(false),
+        clearVoice:()=>Voice.clear()
+      }
     );
-
-
-    document
-    .getElementById(
-      'wazeHud'
-    )
-    .classList.add(
-      'show'
-    );
-
-
-    document
-    .getElementById(
-      'mainTopbar'
-    )
-    .classList.add(
-      'hide-nav'
-    );
-
-
-    document
-    .getElementById(
-      'mainBottomActions'
-    )
-    .classList.add(
-      'hide-nav'
-    );
-
-
-    this.toggleSheet(false);
-
-
-    this.fetchHazardsAlongRoute();
-
-
-    if(!window.__RADAR_GEMINI_ROUTE_STARTING){
-      Voice.speak(
-        'Iniciando Radar Seguro.',
-        true
-      );
-    }
-
-
-    this.recenter();
-
-    this.updateNavigation();
-
   },
 
 
   stopNavigation(){
-
-    this.navActive=false;
-
-    this.followMode=false;
-
-    this.offRouteHits=0;
-
-    this.rerouting=false;
-
-
-    this.removeCommunityBillboard();
-
-    this.clearHazards();
-
-    VoiceAssistant
-    .stopHandsFree(false);
-
-    Voice.clear();
-
-
-    document.body
-    .classList.remove(
-      'nav-mode'
+    return window.RadarNavigationLifecycle?.stop?.(
+      this,
+      {
+        stopAssistant:()=>VoiceAssistant.stopHandsFree(false),
+        clearVoice:()=>Voice.clear()
+      }
     );
-
-
-    document
-    .getElementById(
-      'wazeHud'
-    )
-    .classList.remove(
-      'show'
-    );
-
-
-    document
-    .getElementById(
-      'mainTopbar'
-    )
-    .classList.remove(
-      'hide-nav'
-    );
-
-
-    document
-    .getElementById(
-      'mainBottomActions'
-    )
-    .classList.remove(
-      'hide-nav'
-    );
-
-
-    this.map.easeTo({
-
-      pitch:0,
-
-      bearing:0,
-
-      duration:500
-
-    });
-
   },
 
 
   clearRoute(){
-
-    this.stopNavigation();
-
-
-    try{
-
-      if(
-        this.map.getLayer(
-          'route-main'
-        )
-      )
-        this.map.removeLayer(
-          'route-main'
-        );
-
-
-      if(
-        this.map.getLayer(
-          'route-outline'
-        )
-      )
-        this.map.removeLayer(
-          'route-outline'
-        );
-
-
-      if(
-        this.map.getSource(
-          'route'
-        )
-      )
-        this.map.removeSource(
-          'route'
-        );
-
-    }catch(e){}
-
-
-    if(
-      this.destinationMarker
-    ){
-
-      this.destinationMarker
-      .remove();
-
-      this.destinationMarker=null;
-
-    }
-
-
-    this.route=null;
-
-    this.destination=null;
-
-    this.routeProgressIndex=0;
-
-    this.routeProgressMeters=0;
-
-    this.lastTrustedProgressMeters=0;
-
-    this.lastTrustedSpeed=0;
-
-    this.routeStepIndex=0;
-
-
-    document
-    .getElementById(
-      'wazeSheet'
-    )
-    .classList.remove(
-      'show'
+    return window.RadarNavigationLifecycle?.clear?.(
+      this,
+      {
+        stopAssistant:()=>VoiceAssistant.stopHandsFree(false),
+        clearVoice:()=>Voice.clear()
+      }
     );
-
   },
 
 
