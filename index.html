@@ -1669,91 +1669,7 @@ App.init();
 
 
 
-<script id="radar-canonical-gps-diagnostics-v59">
-/* RADAR_CANONICAL_GPS_DIAGNOSTICS_V59 — compatibilidade após modularização GPS.
-   IMPORTANTE:
-   - não abre um segundo getCurrentPosition por conta própria;
-   - não sobrescreve App.userPos;
-   - não monkeypatcha VoiceAssistant;
-   - toda leitura canônica vem de RadarGPS.
-*/
-(()=>{
- 'use strict';
-
- function valid(lat,lon){
-   return Number.isFinite(Number(lat))&&
-          Number.isFinite(Number(lon))&&
-          Math.abs(Number(lat))<=90&&
-          Math.abs(Number(lon))<=180;
- }
-
- function fromPos(pos,label){
-   if(Array.isArray(pos)&&pos.length>=2&&valid(pos[1],pos[0])){
-     return {lat:Number(pos[1]),lon:Number(pos[0]),source:label};
-   }
-   if(pos&&typeof pos==='object'){
-     const lat=Number(pos.lat??pos.latitude??pos.coords?.latitude);
-     const lon=Number(pos.lon??pos.lng??pos.longitude??pos.coords?.longitude);
-     if(valid(lat,lon))return {lat,lon,source:label};
-   }
-   return null;
- }
-
- function appCandidates(){
-   const out=[];
-   try{
-     [
-       ['userPos',App?.userPos],
-       ['filteredPos',App?.filteredPos],
-       ['rawUserPos',App?.rawUserPos],
-       ['lastPosition',App?.lastPosition],
-       ['gpsPosition',App?.gpsPosition]
-     ].forEach(([k,v])=>{
-       const p=fromPos(v,k);
-       if(p)out.push(p);
-     });
-   }catch(_){}
-   return out;
- }
-
- async function canonicalGps(force=true){
-   const gps=window.RadarGPS;
-   if(!gps)return appCandidates()[0]||null;
-
-   const fix=force
-     ?await gps.fresh({timeout:8000,maximumAge:0,fallbackAge:15000})
-     :gps.last(15000);
-
-   return fix
-     ?{...fix,source:force?'radar-gps-fresh':'radar-gps-last'}
-     :(appCandidates()[0]||null);
- }
-
- window.RadarCanonicalGPS={
-   get:canonicalGps,
-   candidates:appCandidates,
-   last:()=>window.RadarGPS?.last?.(15000)||null
- };
-
- window.RadarDebug59={
-   async report(){
-     const fresh=await canonicalGps(false);
-     const candidates=appCandidates();
-     const data={
-       fresh,
-       candidates,
-       gpsModule:window.RadarGPS?.state?.()||null,
-       kernel:window.RadarKernel?.diagnostics?.()||null
-     };
-     console.table(candidates);
-     console.log('RADAR DEBUG V59',data);
-     return data;
-   }
- };
-
- console.info('Radar v59 compatível com RadarGPS; sem escrita em App.userPos.');
-})();
-</script>
+<script src="./core/radar-diagnostics-v157.js?v=157"></script>
 
 <script src="./community-panel-v93.js?v=93"></script>
 <script src="./barbante-visual-v94.js?v=94"></script>
@@ -1780,24 +1696,7 @@ App.init();
 <script src="./radar-gpt-live-v1.js?v=stage2c"></script>
 <script src="./radar-gpt-live-integration-v1.js?v=stage11-stable"></script>
 
-<script id="radar-pwa-registration-v155">
-(()=>{
-  'use strict';
-
-  if(!('serviceWorker' in navigator))return;
-
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker
-      .register('./service-worker.js',{scope:'./',updateViaCache:'none'})
-      .then(registration=>{
-        registration.update().catch(()=>{});
-      })
-      .catch(error=>{
-        console.warn('[Radar PWA] falha ao registrar Service Worker:',error);
-      });
-  },{once:true});
-})();
-</script>
+<script src="./pwa-registration-v157.js?v=157"></script>
 </body>
 </html>
 
