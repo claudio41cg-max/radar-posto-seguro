@@ -13,6 +13,7 @@ window.__radarPersistenceV134=true;
 const KEY='radar-nav-v134';
 const CANCEL_KEY='radar-nav-cancelled-v1';
 const THEME='radar-theme-choice';
+const MAX_RESTORE_AGE_MS=30*60*1000;
 
 const app=()=>window.RadarApp||window.App||null;
 const validRoute=r=>Array.isArray(r?.coords)&&r.coords.length>1;
@@ -131,7 +132,7 @@ function restore(){
 
   if(
     cancelTs>0 ||
-    now()-savedTs>24*3600e3 ||
+    now()-savedTs>MAX_RESTORE_AGE_MS ||
     !validRoute(s.route) ||
     !s.destination ||
     s.navActive===false
@@ -141,14 +142,38 @@ function restore(){
   }
 
   a.destination=s.destination;
-  a.route=s.route;
+
+  /*
+    A rota salva não entra mais diretamente no App.
+    RadarRouting volta a ser a única autoridade para aplicar a rota
+    e sincronizar routeState com a interface.
+  */
+  const routing=window.RadarRouting;
+  if(!routing?.apply){
+    return false;
+  }
+
+  try{
+    routing.apply(
+      s.route,
+      {
+        fit:false,
+        recalculate:false
+      }
+    );
+  }catch(error){
+    console.warn(
+      '[RadarPersistence] falha ao restaurar rota:',
+      error
+    );
+    clearStoredRoute();
+    return false;
+  }
+
   a.navActive=true;
   a.navigating=true;
   a.navigationActive=true;
   a.routeActive=true;
-
-  try{a.drawRoute?.(a.route,false)}
-  catch(_){try{a.drawRoute?.(a.route,true)}catch(__){}}
 
   for(const f of['updateRouteUI','updateNavigation','updateHUD']){
     try{a[f]?.()}catch(_){}
@@ -300,6 +325,6 @@ window.RadarNavigationPersistenceV134={
   clear,
   cancel,
   armNewRoute,
-  version:'134-stage1'
+  version:'134-stage2-routing-authority'
 };
 })();
