@@ -6,7 +6,7 @@ A regra é resolver **um item por vez**, testar na rua e só então marcar como 
 ## Pendentes
 
 ### N1 — Câmera/mapa não gira acompanhando a seta
-**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE DE RUA
+**Status:** REABERTO APÓS TESTE DE RUA — CAUSA IDENTIFICADA
 
 Teste real: a seta muda de direção, mas o mapa/câmera não acompanha a curva para recolocar o carro visualmente de frente.
 
@@ -27,6 +27,29 @@ Falta validar na rua:
 - curva lenta;
 - rotatória;
 - saída de rotatória.
+
+### N6 — Bearing preso à rota antiga quando o carro sai da rota
+**Status:** ABERTO — identificado por vídeo de teste real
+
+Sintoma observado:
+- ao entrar propositalmente numa rua fora da rota, a seta/câmera continuam usando o bearing da rota antiga;
+- isso pode fazer o carro parecer voltar, o mapa parecer invertido ou uma conversão à esquerda parecer estar à direita;
+- o problema acontece antes/durante o recálculo, não porque a nova rota herda o progresso antigo.
+
+Causa confirmada no código:
+- quando o map matching perde o snap, `matchConfidence` cai;
+- mesmo assim `RadarArrowV157.routeBearing(...)` continua usando `routeProgressIndex` da rota ativa;
+- a câmera usa esse mesmo bearing;
+- `resetProgress()` do roteamento está correto e zera o progresso quando a nova rota é aplicada.
+
+Referência profissional:
+- OsmAnd projeta/balanceia posição e bearing enquanto a posição está adequadamente correlacionada à rota;
+- quando há desvio/recálculo, não deve continuar forçando a orientação da rota antiga como verdade do veículo.
+
+Correção desejada:
+- usar bearing da rota somente quando o match estiver confiável;
+- quando perder o snap ou entrar em off-route/recalc, usar bearing real/filtrado do movimento;
+- voltar ao bearing da rota somente após o novo match ficar confiável novamente.
 
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
