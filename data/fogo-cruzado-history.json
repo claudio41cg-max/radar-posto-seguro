@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T07:43:16.394Z",
+  "generatedAt": "2026-10-05T16:25:20.536Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,91 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 260,
+  "count": 263,
   "occurrences": [
+    {
+      "id": "eece6588-9365-4d3c-82ce-706d88d22aec",
+      "documentNumber": 79354,
+      "date": "2026-10-05T06:00:00.000Z",
+      "address": "Estrada do Pacheco - Pacheco, São Gonçalo - RJ, Brasil",
+      "neighborhood": "PACHECO I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8244475,
+      "longitude": -42.9695679,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "dc6a78db-c9a1-4371-91bc-633d695750ff",
+      "documentNumber": 79356,
+      "date": "2026-10-05T04:00:00.000Z",
+      "address": "Rua Pacoti - Jardim Anhangá, Duque de Caxias - RJ, 25264-015",
+      "neighborhood": "JARDIM ANHANGA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.646007867849832,
+      "longitude": -43.232292431487956,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c78f9553-f7a5-4780-bc7b-c420abacfa58",
+      "documentNumber": 79352,
+      "date": "2026-10-04T17:00:00.000Z",
+      "address": "Gogó da Ema (Chapadão) - Rua das Estrelas - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "GOGO DA EMA (COMPLEXO DO CHAPADAO)",
+      "latitude": -22.8309973,
+      "longitude": -43.3800041,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "6638e5d4-2133-4ebc-9740-ed3b95262eb6",
       "documentNumber": 79351,
@@ -133,12 +216,12 @@
       "id": "e8461ebd-f5bb-42b9-a738-c17616df1c09",
       "documentNumber": 79320,
       "date": "2026-10-02T19:28:00.000Z",
-      "address": "R. Af - Jardim Anhangá, Duque de Caxias - RJ, 25265-184, Brasil",
+      "address": "Cotia, Jardim Anhangá - Duque de Caxias - RJ, 25264-665, Brasil",
       "neighborhood": "JARDIM ANHANGA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.6530568,
-      "longitude": -43.2389003,
+      "latitude": -22.65197744358702,
+      "longitude": -43.23681240397363,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -148,7 +231,7 @@
       "id": "af151427-ba39-4f96-b891-95a62fb2b345",
       "documentNumber": 79317,
       "date": "2026-10-02T16:37:00.000Z",
-      "address": "Rua Vanádio, Coelho da Rocha, São João de Meriti, Rio de Janeiro, Brasil",
+      "address": "Parque Alian, Coelho da Rocha - São João de Meriti, Rio de Janeiro, Brasil",
       "neighborhood": "COELHO DA ROCHA",
       "subNeighborhood": "PARQUE ALIAN",
       "locality": "",
