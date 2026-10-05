@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T16:25:20.534Z",
+  "generatedAt": "2026-10-05T22:52:33.650Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 33,
-  "lastUpdate": "2026-10-05T12:36:41-03:00",
+  "count": 34,
+  "lastUpdate": "2026-10-05T18:14:19-03:00",
   "occurrences": [
+    {
+      "id": "1381c9e2-f543-4d05-b484-e21dded0de2a",
+      "documentNumber": 79358,
+      "date": "2026-10-05T17:50:00.000Z",
+      "address": "Avenida Ernani Cardoso - Campinho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CAMPINHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8828428,
+      "longitude": -43.3412538,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "eece6588-9365-4d3c-82ce-706d88d22aec",
       "documentNumber": 79354,
@@ -27,6 +42,10 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -43,7 +62,7 @@
       "locality": "",
       "latitude": -22.646007867849832,
       "longitude": -43.232292431487956,
-      "reason": "Não identificado",
+      "reason": "Ataque a civis",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -85,7 +104,7 @@
       "id": "c78f9553-f7a5-4780-bc7b-c420abacfa58",
       "documentNumber": 79352,
       "date": "2026-10-04T17:00:00.000Z",
-      "address": "Gogó da Ema (Chapadão) - Rua das Estrelas - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua das Estrelas, Gogó da Ema (Chapadão) - Guadalupe, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "GUADALUPE",
       "subNeighborhood": "",
       "locality": "GOGO DA EMA (COMPLEXO DO CHAPADAO)",
@@ -97,30 +116,10 @@
       "victims": []
     },
     {
-      "id": "6638e5d4-2133-4ebc-9740-ed3b95262eb6",
-      "documentNumber": 79351,
-      "date": "2026-10-04T10:00:00.000Z",
-      "address": "Rua Basileu Eugênio Leal - Adrianópolis, Nova Iguaçu, RJ, Brasil",
-      "neighborhood": "ADRIANOPOLIS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.677316473647466,
-      "longitude": -43.52507560475465,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "064e04e2-b2ba-43c0-9cf9-e81d22607b4e",
       "documentNumber": 79350,
       "date": "2026-10-04T03:00:00.000Z",
-      "address": "Rua Araújo, Comunidade Parque Doradouro - São José, Belford Roxo - RJ, 25010-440, Brasil",
+      "address": "Rua Araújo, Comunidade Parque Gotadouro - São José, Belford Roxo - RJ, 25010-440, Brasil",
       "neighborhood": "SAO JOSE",
       "subNeighborhood": "",
       "locality": "Comunidade PARQUE GOTADOURO",
@@ -152,7 +151,7 @@
       "id": "1cb5d2d2-a0a7-4e0d-a37a-7619f1f018bd",
       "documentNumber": 79345,
       "date": "2026-10-04T01:00:00.000Z",
-      "address": "Corte 8 (Complexo da Mangueirinha) - Vila Centenario, Duque de Caxias - RJ, 25030-050, Brasil",
+      "address": "Corte 8 (Complexo da Mangueirinha) - Vila Centenario, Centenário - Duque de Caxias - RJ, 25030-050, Brasil",
       "neighborhood": "CENTENARIO",
       "subNeighborhood": "VILA CENTENARIO",
       "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
@@ -162,6 +161,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "6638e5d4-2133-4ebc-9740-ed3b95262eb6",
+      "documentNumber": 79351,
+      "date": "2026-10-04T00:00:00.000Z",
+      "address": "Rua Basileu Eugênio Leal - Adrianópolis, Nova Iguaçu, RJ, Brasil",
+      "neighborhood": "ADRIANOPOLIS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.677316473647466,
+      "longitude": -43.52507560475465,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "fc06d671-a00a-4267-9b3d-9d8ee305e97b",
@@ -259,6 +278,26 @@
       "victims": []
     },
     {
+      "id": "5dd243e6-7c62-44af-81d3-f64dcd201944",
+      "documentNumber": 79324,
+      "date": "2026-10-02T00:00:00.000Z",
+      "address": "Queimados - RJ, 26321-024, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.70105448366486,
+      "longitude": -43.57656467768972,
+      "reason": "Disparo Acidental",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
+    },
+    {
       "id": "14b010a5-b1fa-429e-9f9b-e79281aff400",
       "documentNumber": 79323,
       "date": "2026-10-02T00:00:00.000Z",
@@ -272,26 +311,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "5dd243e6-7c62-44af-81d3-f64dcd201944",
-      "documentNumber": 79324,
-      "date": "2026-10-02T00:00:00.000Z",
-      "address": "Queimados - RJ, 26383-140, Brasil",
-      "neighborhood": "NI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7087393,
-      "longitude": -43.5614777,
-      "reason": "Disparo Acidental",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
     },
     {
       "id": "4a272f7d-6cc3-4ff4-bb1d-1e043812e032",
@@ -473,7 +492,7 @@
       "address": "Comunidade Parque Dois Irmãos - Curicica, Rio de Janeiro - RJ, 22780-190, Brasil",
       "neighborhood": "CURICICA",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
       "latitude": -22.95105015,
       "longitude": -43.39378358,
       "reason": "Operação policial",
@@ -496,7 +515,7 @@
       "locality": "",
       "latitude": -22.744650151966443,
       "longitude": -43.32144880003051,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Tortura",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -545,7 +564,7 @@
       "id": "724648f9-3711-4c45-b60f-ed25ba84fa6c",
       "documentNumber": 79277,
       "date": "2026-09-29T08:00:00.000Z",
-      "address": "Avenida Coronel Sisson - Vila Angelica, Duque de Caxias - RJ, Brasil",
+      "address": "Avenida Coronel Sisson - Vila Angelica, Santa Lucia - Duque de Caxias - RJ, Brasil",
       "neighborhood": "SANTA LUCIA",
       "subNeighborhood": "VILA ANGELICA",
       "locality": "",
@@ -605,7 +624,7 @@
       "id": "89ef9a09-42a0-43a7-8031-d8d76b96adba",
       "documentNumber": 79255,
       "date": "2026-09-28T14:00:00.000Z",
-      "address": "Cidade de Deus, Estrada Marechal Miguel Salazar Mendes de Moraes, Cidade de Deus, Rio de Janeiro - RJ, 22770-330, Brasil",
+      "address": "Cidade de Deus, Cidade de Deus - Rio de Janeiro - RJ, 22770-330, Brasil",
       "neighborhood": "CIDADE DE DEUS",
       "subNeighborhood": "",
       "locality": "CIDADE DE DEUS",
@@ -625,7 +644,7 @@
       "id": "f8bf889a-c5b7-4bfd-a047-e007269ecf04",
       "documentNumber": 79244,
       "date": "2026-09-28T08:15:00.000Z",
-      "address": "Linha Vermelha - Parque das Missões, Duque de Caxias, Rio de Janeiro - RJ, Brasil",
+      "address": "Linha Vermelha - Parque das Missões, Parque Duque - Duque de Caxias, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "PARQUE DUQUE",
       "subNeighborhood": "PARQUE DAS MISSÕES",
       "locality": "",
