@@ -4,16 +4,20 @@ const TURBO='https://turbo-engine-production.up.railway.app';
 const TOKEN_KEY='radar.turboToken.v1';
 const SHARED_TOKEN_KEY='meuIngles.turboToken.v1';
 const SESSION_KEY='radar.gptSession.v1';
+const PERSIST_TOKEN_KEY='radar.turboPersistentToken.v2';
 let loginPromise=null;
 
 function migrateLegacyAuth(){
   try{
     const legacy=
+      localStorage.getItem(PERSIST_TOKEN_KEY)||
       localStorage.getItem(TOKEN_KEY)||
       localStorage.getItem(SHARED_TOKEN_KEY)||
+      sessionStorage.getItem(TOKEN_KEY)||
       '';
 
-    if(legacy&&!sessionStorage.getItem(TOKEN_KEY)){
+    if(legacy){
+      localStorage.setItem(PERSIST_TOKEN_KEY,legacy);
       sessionStorage.setItem(TOKEN_KEY,legacy);
     }
 
@@ -78,6 +82,7 @@ function login(){
         if(!r.ok||!d.ok||!d.token)throw new Error(d.error||'Não foi possível entrar.');
         sessionStorage.setItem(TOKEN_KEY,d.token);
         try{
+          localStorage.setItem(PERSIST_TOKEN_KEY,d.token);
           localStorage.removeItem(TOKEN_KEY);
           localStorage.removeItem(SHARED_TOKEN_KEY);
         }catch(_){}
@@ -93,7 +98,23 @@ function login(){
 }
 
 async function token(){
-  return sessionStorage.getItem(TOKEN_KEY)||login();
+  let saved='';
+
+  try{
+    saved=
+      localStorage.getItem(PERSIST_TOKEN_KEY)||
+      sessionStorage.getItem(TOKEN_KEY)||
+      '';
+  }catch(_){
+    saved=sessionStorage.getItem(TOKEN_KEY)||'';
+  }
+
+  if(saved){
+    try{sessionStorage.setItem(TOKEN_KEY,saved)}catch(_){}
+    return saved;
+  }
+
+  return login();
 }
 
 async function ask(message,retry=true){
@@ -114,6 +135,7 @@ async function ask(message,retry=true){
   if(r.status===401&&retry){
     sessionStorage.removeItem(TOKEN_KEY);
     try{
+      localStorage.removeItem(PERSIST_TOKEN_KEY);
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(SHARED_TOKEN_KEY);
     }catch(_){}
@@ -131,6 +153,7 @@ window.radarGptLogout=()=>{
   sessionStorage.removeItem(TOKEN_KEY);
   sessionStorage.removeItem(SESSION_KEY);
   try{
+    localStorage.removeItem(PERSIST_TOKEN_KEY);
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(SHARED_TOKEN_KEY);
     localStorage.removeItem(SESSION_KEY);
