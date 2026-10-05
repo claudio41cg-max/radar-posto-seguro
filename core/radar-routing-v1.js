@@ -504,6 +504,75 @@ function currentRouteOrigin(a,fallback=null){
     :null;
 }
 
+function validateFreshRouteAgainstCurrentPosition(a,route,currentPoint){
+  if(
+    !validPoint(currentPoint)||
+    !route?.coords?.length
+  ){
+    return {
+      valid:false,
+      reason:'missing-position-or-route',
+      match:null
+    };
+  }
+
+  const tempApp={
+    ...a,
+    route,
+    routeProgressIndex:0,
+    routeProgressMeters:0
+  };
+
+  let match=null;
+
+  try{
+    match=window.RadarRouteProgress?.match?.(
+      currentPoint,
+      1,
+      tempApp
+    )||null;
+  }catch(error){
+    console.warn(
+      '[RadarRouting] validação da rota recalculada:',
+      error
+    );
+  }
+
+  if(!match){
+    return {
+      valid:false,
+      reason:'match-unavailable',
+      match:null
+    };
+  }
+
+  const accuracy=Math.max(
+    5,
+    Math.min(
+      80,
+      Number(a.currentAccuracy||80)
+    )
+  );
+
+  const acceptanceDistance=Math.min(
+    85,
+    Math.max(
+      32,
+      24+accuracy*.65
+    )
+  );
+
+  const valid=
+    match.snapped||
+    Number(match.distance||999)<=acceptanceDistance;
+
+  return {
+    valid,
+    reason:valid?'current-position-compatible':'route-arrived-stale',
+    match
+  };
+}
+
 async function calculateRoute(options={}){
   const a=app();
   if(!a)return null;
@@ -598,62 +667,131 @@ async function recalculateRoute(){
   try{window.Voice?.clear?.()}catch(_){}
   try{a.toast?.('Atualizando rota...')}catch(_){}
 
-  const routeOrigin=
-    a.filteredPos||
-    a.rawUserPos||
-    a.userPos;
-
   const requestId=++generation;
+  const maxAttempts=2;
 
   routeState.update({
     status:'recalculating',
     requestId,
-    origin:Array.from(routeOrigin),
+    origin:currentRouteOrigin(a,a.userPos),
     destination:Array.from(a.destination),
     lastError:null
   },{source:'recalculate'});
 
   try{
-    const newRoute=await fetchAuthoritativeRoute(
-      routeOrigin,
-      a.destination,
-      {},
-      requestId
-    );
+    for(let attempt=0;attempt<maxAttempts;attempt++){
+      const routeOrigin=
+        currentRouteOrigin(
+          a,
+          a.userPos
+        );
 
-    if(requestId!==generation){
-      return null;
+      if(!validPoint(routeOrigin)){
+        throw new Error(
+          'Posição atual indisponível para recálculo'
+        );
+      }
+
+      const newRoute=
+        await fetchAuthoritativeRoute(
+          routeOrigin,
+          a.destination,
+          {},
+          requestId
+        );
+
+      if(requestId!==generation){
+        return null;
+      }
+
+      const currentPoint=
+        currentRouteOrigin(
+          a,
+          routeOrigin
+        );
+
+      const freshness=
+        validateFreshRouteAgainstCurrentPosition(
+          a,
+          newRoute,
+          currentPoint
+        );
+
+      if(!freshness.valid){
+        kernel.emit(
+          'route:stale-recalculation-discarded',
+          {
+            attempt:attempt+1,
+            distance:Number(
+              freshness.match?.distance||999
+            ),
+            currentPoint,
+            routeOrigin
+          }
+        );
+
+        if(attempt<maxAttempts-1){
+          routeState.update({
+            status:'recalculating',
+            origin:Array.from(currentPoint),
+            lastError:null
+          },{
+            source:'recalculate-refresh-origin'
+          });
+
+          continue;
+        }
+
+        throw new Error(
+          'Rota recalculada ficou desatualizada antes de ser aplicada'
+        );
+      }
+
+      applyRoute(
+        newRoute,
+        {
+          fit:false,
+          recalculate:true
+        }
+      );
+
+      try{a.toast?.('Rota atualizada.')}catch(_){}
+
+      setTimeout(()=>{
+        try{a.updateNavigation?.()}catch(_){}
+      },350);
+
+      return newRoute;
     }
 
-    applyRoute(
-      newRoute,
-      {
-        fit:false,
-        recalculate:true
-      }
-    );
-
-    try{a.toast?.('Rota atualizada.')}catch(_){}
-
-    setTimeout(()=>{
-      try{a.updateNavigation?.()}catch(_){}
-    },350);
-
-    return newRoute;
+    return null;
 
   }catch(error){
-    if(error?.name==='AbortError'&&requestId!==generation){
+    if(
+      error?.name==='AbortError'&&
+      requestId!==generation
+    ){
       return null;
     }
 
     routeState.update({
       status:'error',
-      lastError:String(error?.message||error)
+      lastError:String(
+        error?.message||error
+      )
     },{source:'recalculate'});
 
-    console.warn('[RadarRouting] recálculo:',error);
+    console.warn(
+      '[RadarRouting] recálculo:',
+      error
+    );
 
-    const detail=String(error?.message||error||'Erro desconhecido')
+    const detail=
+      String(
+        error?.message||
+        error||
+        'Erro desconhecido'
+      )
       .replace(/\s+/g,' ')
       .trim()
       .slice(0,180);
@@ -739,7 +877,7 @@ function bindApp(){
 }
 
 const api={
-  version:'1.1.0',
+  version:'1.2.0',
   fetch:fetchAuthoritativeRoute,
   fetchTomTom:fetchTomTomRoute,
   fetchOSRM:fetchOSRMRoute,
@@ -757,7 +895,7 @@ window.RadarRouting=Object.freeze(api);
 
 const registration=kernel.registerModule({
   name:'routing-authority-v1',
-  version:'1.1.0',
+  version:'1.2.0',
   owns:['navigation.route'],
 
   async start({resources}){
