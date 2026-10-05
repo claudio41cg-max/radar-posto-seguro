@@ -6,7 +6,7 @@ A regra é resolver **um item por vez**, testar na rua e só então marcar como 
 ## Pendentes
 
 ### N1 — Câmera/mapa não gira acompanhando a seta
-**Status:** ABERTO — prioridade máxima
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE DE RUA
 
 Teste real: a seta muda de direção, mas o mapa/câmera não acompanha a curva para recolocar o carro visualmente de frente.
 
@@ -16,10 +16,17 @@ Hipóteses já identificadas:
 - com velocidade abaixo de 5 km/h a câmera mantém o bearing anterior;
 - o recenter ainda usa `currentBearing`, diferente do bearing profissional da seta.
 
-Objetivo:
-- seta e câmera consumirem a mesma referência direcional da rota;
-- manter a câmera girando suavemente em curvas e rotatórias;
-- preservar follow mode e permitir norte/manual quando o usuário pedir.
+Correção aplicada:
+- câmera e seta agora consomem a mesma referência direcional da rota;
+- o look-ahead ficou responsável pelo centro/antecipação visual, não pela rotação;
+- removido o congelamento antigo do bearing em baixa velocidade quando existe rota ativa;
+- preservado follow mode e o controle manual/norte do usuário.
+
+Falta validar na rua:
+- curva de 90 graus;
+- curva lenta;
+- rotatória;
+- saída de rotatória.
 
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
