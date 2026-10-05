@@ -29,7 +29,7 @@ Falta validar na rua:
 - saída de rotatória.
 
 ### N6 — Bearing preso à rota antiga quando o carro sai da rota
-**Status:** ABERTO — identificado por vídeo de teste real
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE DE RUA
 
 Sintoma observado:
 - ao entrar propositalmente numa rua fora da rota, a seta/câmera continuam usando o bearing da rota antiga;
@@ -46,10 +46,16 @@ Referência profissional:
 - OsmAnd projeta/balanceia posição e bearing enquanto a posição está adequadamente correlacionada à rota;
 - quando há desvio/recálculo, não deve continuar forçando a orientação da rota antiga como verdade do veículo.
 
-Correção desejada:
-- usar bearing da rota somente quando o match estiver confiável;
-- quando perder o snap ou entrar em off-route/recalc, usar bearing real/filtrado do movimento;
-- voltar ao bearing da rota somente após o novo match ficar confiável novamente.
+Correção aplicada:
+- bearing da rota só é usado quando `matchConfidence > 0`;
+- ao perder o snap ou entrar em recálculo, `routeBearing()` retorna `null`;
+- seta e câmera então caem para o bearing real/filtrado do movimento;
+- quando o novo match volta a ficar confiável, a orientação da rota volta automaticamente.
+
+Falta validar na rua:
+- sair de propósito da rota;
+- observar se mapa/seta seguem a rua real durante o desvio;
+- confirmar recálculo e retorno à nova rota.
 
 ### N7 — Navegação totalmente muda
 **Status:** ABERTO — causa identificada no código
