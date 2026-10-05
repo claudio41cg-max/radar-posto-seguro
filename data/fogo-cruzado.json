@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T23:00:58.459Z",
+  "generatedAt": "2026-10-05T01:48:16.915Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 36,
+  "count": 30,
   "lastUpdate": "2026-10-04T14:59:22-03:00",
   "occurrences": [
     {
@@ -176,21 +176,6 @@
       "victims": []
     },
     {
-      "id": "14b010a5-b1fa-429e-9f9b-e79281aff400",
-      "documentNumber": 79323,
-      "date": "2026-10-02T00:00:00.000Z",
-      "address": "Barbuda, Magé - RJ, 25900-826, Brasil",
-      "neighborhood": "BARBUDA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6685907,
-      "longitude": -43.0331039,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "5dd243e6-7c62-44af-81d3-f64dcd201944",
       "documentNumber": 79324,
       "date": "2026-10-02T00:00:00.000Z",
@@ -209,6 +194,21 @@
           "personType": "Agent"
         }
       ]
+    },
+    {
+      "id": "14b010a5-b1fa-429e-9f9b-e79281aff400",
+      "documentNumber": 79323,
+      "date": "2026-10-02T00:00:00.000Z",
+      "address": "Barbuda, Magé - RJ, 25900-826, Brasil",
+      "neighborhood": "BARBUDA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6685907,
+      "longitude": -43.0331039,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "4a272f7d-6cc3-4ff4-bb1d-1e043812e032",
@@ -339,11 +339,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -577,6 +577,22 @@
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
@@ -608,149 +624,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "9b4b5aef-6827-4a56-bf58-2a4d799f5661",
-      "documentNumber": 79242,
-      "date": "2026-09-27T23:25:00.000Z",
-      "address": "Quintal da Néia - Rua José dos Reis - Pilares, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PILARES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8845402,
-      "longitude": -43.2903891,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "6709cda6-e181-491f-b0fe-1efa96575b87",
-      "documentNumber": 79273,
-      "date": "2026-09-27T22:00:00.000Z",
-      "address": "Marechal Hermes, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MARECHAL HERMES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8599085,
-      "longitude": -43.3697557,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "aec82ba9-1824-46f0-9474-dcbaa8b37c33",
-      "documentNumber": 79243,
-      "date": "2026-09-27T20:00:00.000Z",
-      "address": "Rocinha, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ROCINHA",
-      "subNeighborhood": "",
-      "locality": "ROCINHA",
-      "latitude": -22.987941,
-      "longitude": -43.2480087,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "97ed93c6-dbc9-4296-afba-fff8bd665c75",
-      "documentNumber": 79237,
-      "date": "2026-09-27T14:36:00.000Z",
-      "address": "Congo (Vila Kennedy)- Vila Kennedy, Rio de Janeiro - RJ, 21852-590, Brasil",
-      "neighborhood": "VILA KENNEDY",
-      "subNeighborhood": "",
-      "locality": "CONGO 1 (VILA KENNEDY)",
-      "latitude": -22.86177708,
-      "longitude": -43.49086725,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "7646595b-d308-43a3-8db8-e25c9c3f56dd",
-      "documentNumber": 79238,
-      "date": "2026-09-27T11:00:00.000Z",
-      "address": "Rua Pedro Ernesto - Gamboa, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GAMBOA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8963174,
-      "longitude": -43.1942514,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "865d9a46-e82f-405b-9050-64ff50b2fe2d",
-      "documentNumber": 79234,
-      "date": "2026-09-27T10:00:00.000Z",
-      "address": "Ipuca, Jardim Catarina, São Gonçalo - RJ, 24716-455, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "IPUCA",
-      "latitude": -22.787651020356282,
-      "longitude": -43.01060672889074,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
