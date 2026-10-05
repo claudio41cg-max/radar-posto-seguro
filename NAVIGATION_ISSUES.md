@@ -79,6 +79,34 @@ Correção futura:
 - validar fala de início, manobras, chegada e recálculo;
 - manter motor de voz separado da lógica de guidance.
 
+### N8 — Recálculo chega atrasado e aplica rota já velha
+**Status:** ABERTO — causa identificada no segundo vídeo de teste
+
+Sintoma observado:
+- ao sair da rota, o app demora para estabilizar uma nova rota;
+- "Rota atualizada" aparece várias vezes;
+- se o carro passa da conversão sugerida antes da resposta chegar, o app aplica uma rota que já ficou desatualizada;
+- em seguida perde o match de novo e entra em novo recálculo;
+- isso faz a orientação/mapa alternar entre esquerda/direita e parecer perdido.
+
+Causas confirmadas no código:
+- `recalculateRoute()` usa primeiro `filteredPos`, mesmo existindo `currentRouteOrigin()` que prefere GPS cru recente quando a precisão está boa;
+- durante o cálculo o carro continua avançando;
+- quando a resposta chega, a nova rota é aplicada sem validar se a posição atual do carro ainda está perto do começo dessa rota;
+- não existe hoje um descarte/recalculo imediato de resposta "velha" por deslocamento significativo do veículo.
+
+Referência profissional:
+- OsmAnd mantém a localização atual no processo de recálculo;
+- ao aplicar a nova rota, reposiciona/valida a rota contra a localização mais recente;
+- não trata cegamente o ponto inicial antigo como se ainda fosse a posição do carro.
+
+Correção desejada:
+- iniciar recálculo com a posição GPS mais fresca/confiável;
+- ao receber a rota, comparar a posição atual com o início/segmento inicial da rota calculada;
+- se o carro já avançou demais ou passou da conversão inicial, descartar a resposta velha e recalcular imediatamente a partir da posição atual;
+- evitar loop de "rota atualizada" seguido de novo off-route;
+- manter câmera/seta no bearing real enquanto a nova rota ainda não estiver validada.
+
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
 
