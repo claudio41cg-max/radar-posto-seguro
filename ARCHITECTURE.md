@@ -8,6 +8,33 @@ O aplicativo deve ser modular. Cada domínio tem um único dono. Alterações em
 
 **Um domínio = um dono.**
 
+## Regra de referência profissional
+
+Antes de corrigir qualquer comportamento importante de navegação, pesquisar como pelo menos um navegador GPS profissional/open source maduro resolve o mesmo problema.
+
+Priorizar referências como:
+- Organic Maps;
+- OsmAnd;
+- Navit;
+- outros projetos maduros equivalentes quando forem mais adequados ao problema.
+
+A regra não é copiar código cegamente. É:
+1. identificar o comportamento/algoritmo usado por aplicativos consolidados;
+2. entender por que ele funciona;
+3. adaptar o mesmo princípio ao Radar;
+4. respeitar a arquitetura modular e a linguagem do Radar;
+5. alterar somente o módulo dono;
+6. testar o resultado no Radar.
+
+Exemplos:
+- seta: estudar como apps profissionais derivam bearing e snap-to-road;
+- câmera: estudar follow mode, rotação, look-ahead e auto-zoom;
+- map matching: estudar projeção no segmento, continuidade e direção;
+- off-route: estudar tolerância, persistência e critérios de recálculo;
+- rotatórias: estudar progresso por geometria/segmento e mudança de manobra.
+
+**Não improvisar uma solução isolada sem antes comparar com uma referência profissional quando houver uma referência madura disponível.**
+
 Antes de alterar código:
 1. identificar o domínio;
 2. editar apenas o módulo dono;
