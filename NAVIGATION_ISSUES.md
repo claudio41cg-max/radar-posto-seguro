@@ -80,7 +80,7 @@ Correção futura:
 - manter motor de voz separado da lógica de guidance.
 
 ### N8 — Recálculo chega atrasado e aplica rota já velha
-**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE DE RUA
+**Status:** CORRIGIDO EM CÓDIGO — SEGUNDA ETAPA APLICADA, AGUARDANDO TESTE DE RUA
 
 Sintoma observado:
 - ao sair da rota, o app demora para estabilizar uma nova rota;
@@ -101,17 +101,21 @@ Referência profissional:
 - não trata cegamente o ponto inicial antigo como se ainda fosse a posição do carro.
 
 Correção aplicada:
-- o recálculo passou a usar `currentRouteOrigin()` para escolher a posição mais fresca/confiável;
+- o recálculo usa `currentRouteOrigin()` para escolher a posição mais fresca/confiável;
 - quando a resposta chega, a posição atual do carro é comparada com a rota recebida usando o próprio `RadarRouteProgress`;
 - se a rota não encaixa mais na posição atual, ela é descartada antes de `applyRoute()`;
-- o módulo tenta uma segunda vez imediatamente a partir da posição atualizada;
-- a rota velha não é desenhada nem anunciada como válida.
+- respostas envelhecidas deixaram de virar erro imediatamente;
+- o Radar permanece em estado de recálculo por uma janela controlada de 15 segundos, renovando silenciosamente a origem conforme o carro anda;
+- só uma rota ainda compatível com a posição atual é aplicada;
+- se a janela expirar sem rota válida, o ciclo termina sem mostrar uma falsa falha e o detector off-route pode iniciar outro ciclo com posição mais recente;
+- erros reais do provedor continuam aparecendo normalmente.
 
 Falta validar na rua:
 - sair de propósito da rota;
 - continuar andando durante o recálculo;
 - passar por uma conversão enquanto a rota está sendo calculada;
-- confirmar que o app não aplica rota vencida nem entra em loop de "Rota atualizada".
+- confirmar que não aparece mais "Falha ao atualizar rota" apenas porque a resposta envelheceu;
+- confirmar que o app estabiliza uma nova rota sem alternar repetidamente esquerda/direita.
 
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
