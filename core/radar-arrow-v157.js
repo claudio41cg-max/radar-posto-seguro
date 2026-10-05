@@ -21,6 +21,12 @@ function blendBearing(from,to,weight){
 }
 
 function routeBearing(app,Utils){
+  const confidence=Number(app.matchConfidence||0);
+
+  if(app.rerouting||confidence<=0){
+    return null;
+  }
+
   const route=app.route;
   const coords=route?.coords;
   const cumulative=route?.cumulative;
@@ -134,7 +140,7 @@ function update(app,Utils){
 window.RadarArrowV157=Object.freeze({
   update,
   routeBearing,
-  version:'157.1'
+  version:'157.2'
 });
 
 })();
