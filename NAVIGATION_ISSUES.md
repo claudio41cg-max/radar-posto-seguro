@@ -80,7 +80,7 @@ Correção futura:
 - manter motor de voz separado da lógica de guidance.
 
 ### N8 — Recálculo chega atrasado e aplica rota já velha
-**Status:** ABERTO — causa identificada no segundo vídeo de teste
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE DE RUA
 
 Sintoma observado:
 - ao sair da rota, o app demora para estabilizar uma nova rota;
@@ -100,12 +100,18 @@ Referência profissional:
 - ao aplicar a nova rota, reposiciona/valida a rota contra a localização mais recente;
 - não trata cegamente o ponto inicial antigo como se ainda fosse a posição do carro.
 
-Correção desejada:
-- iniciar recálculo com a posição GPS mais fresca/confiável;
-- ao receber a rota, comparar a posição atual com o início/segmento inicial da rota calculada;
-- se o carro já avançou demais ou passou da conversão inicial, descartar a resposta velha e recalcular imediatamente a partir da posição atual;
-- evitar loop de "rota atualizada" seguido de novo off-route;
-- manter câmera/seta no bearing real enquanto a nova rota ainda não estiver validada.
+Correção aplicada:
+- o recálculo passou a usar `currentRouteOrigin()` para escolher a posição mais fresca/confiável;
+- quando a resposta chega, a posição atual do carro é comparada com a rota recebida usando o próprio `RadarRouteProgress`;
+- se a rota não encaixa mais na posição atual, ela é descartada antes de `applyRoute()`;
+- o módulo tenta uma segunda vez imediatamente a partir da posição atualizada;
+- a rota velha não é desenhada nem anunciada como válida.
+
+Falta validar na rua:
+- sair de propósito da rota;
+- continuar andando durante o recálculo;
+- passar por uma conversão enquanto a rota está sendo calculada;
+- confirmar que o app não aplica rota vencida nem entra em loop de "Rota atualizada".
 
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
