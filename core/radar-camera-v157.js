@@ -1,4 +1,9 @@
-/* Radar Seguro RJ PRO — câmera de navegação v157 */
+/* Radar Seguro RJ PRO — câmera de navegação v157
+   Referência profissional:
+   - follow mode mantém mapa ligado à posição;
+   - direção do mapa e direção do veículo usam a mesma referência de rota;
+   - look-ahead continua responsável por centro/antecipação visual, não pelo bearing.
+*/
 (()=>{'use strict';
 
 if(window.RadarCameraV157)return;
@@ -54,9 +59,8 @@ function update(app,Utils){
   }
 
   let center=app.userPos;
-  let targetBearing=app.currentBearing;
 
-  if(app.route&&app.currentSpeed>4){
+  if(app.route){
     const ahead=app.pointAhead(lookAhead);
 
     if(ahead){
@@ -65,15 +69,37 @@ function update(app,Utils){
         ahead,
         .38
       );
-
-      targetBearing=Utils.bearing(
-        app.userPos,
-        ahead
-      );
     }
   }
 
-  if(app.currentSpeed<5){
+  /*
+    A rotação da câmera usa a mesma referência de rota da seta.
+    Isso evita que a seta vire por um critério e o mapa permaneça
+    apontando por outro.
+  */
+  let targetBearing=Number(app.currentBearing||0);
+
+  if(app.route){
+    const routeBearing=
+      window.RadarArrowV157?.routeBearing?.(
+        app,
+        Utils
+      );
+
+    if(Number.isFinite(routeBearing)){
+      targetBearing=routeBearing;
+    }
+  }
+
+  /*
+    Em navegação ativa e com rota válida, não congelar o bearing
+    só porque a velocidade caiu numa esquina/rotatória.
+    Se não houver referência de rota, aí sim preservamos o bearing atual.
+  */
+  if(
+    app.currentSpeed<3&&
+    !app.route
+  ){
     targetBearing=app.map.getBearing();
   }
 
@@ -91,7 +117,7 @@ function update(app,Utils){
 
 window.RadarCameraV157=Object.freeze({
   update,
-  version:'157'
+  version:'157.1'
 });
 
 })();
