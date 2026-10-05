@@ -51,6 +51,28 @@ Correção desejada:
 - quando perder o snap ou entrar em off-route/recalc, usar bearing real/filtrado do movimento;
 - voltar ao bearing da rota somente após o novo match ficar confiável novamente.
 
+### N7 — Navegação totalmente muda
+**Status:** ABERTO — causa identificada no código
+
+Sintoma observado no teste real:
+- nenhuma fala de "vire à direita/esquerda";
+- nenhuma distância para manobra;
+- nenhuma orientação de rua;
+- nenhum aviso de recálculo;
+- navegação inteira permaneceu muda.
+
+Causa confirmada:
+- `voice/voice-engine-v157.js` cria normalmente o motor de fala com `enabled:true`;
+- em `app-main-v157.js`, esse motor fica em uma variável local `const Voice`;
+- `core/radar-guidance-v1.js` tenta falar usando `window.Voice?.speak(...)`;
+- não existe atualmente uma atribuição `window.Voice = Voice`;
+- por causa do optional chaining (`?.`), a falha não gera erro visível: a orientação simplesmente não fala.
+
+Correção futura:
+- conectar o guidance ao motor de voz por dependência explícita/API, preferencialmente sem depender de global;
+- validar fala de início, manobras, chegada e recálculo;
+- manter motor de voz separado da lógica de guidance.
+
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
 
