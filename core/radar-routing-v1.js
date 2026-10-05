@@ -668,7 +668,9 @@ async function recalculateRoute(){
   try{a.toast?.('Atualizando rota...')}catch(_){}
 
   const requestId=++generation;
-  const maxAttempts=2;
+  const startedAt=Date.now();
+  const maxRefreshWindowMs=15000;
+  let staleRefreshCount=0;
 
   routeState.update({
     status:'recalculating',
@@ -679,7 +681,10 @@ async function recalculateRoute(){
   },{source:'recalculate'});
 
   try{
-    for(let attempt=0;attempt<maxAttempts;attempt++){
+    while(
+      requestId===generation&&
+      Date.now()-startedAt<=maxRefreshWindowMs
+    ){
       const routeOrigin=
         currentRouteOrigin(
           a,
@@ -718,10 +723,12 @@ async function recalculateRoute(){
         );
 
       if(!freshness.valid){
+        staleRefreshCount++;
+
         kernel.emit(
           'route:stale-recalculation-discarded',
           {
-            attempt:attempt+1,
+            refresh:staleRefreshCount,
             distance:Number(
               freshness.match?.distance||999
             ),
@@ -730,21 +737,20 @@ async function recalculateRoute(){
           }
         );
 
-        if(attempt<maxAttempts-1){
-          routeState.update({
-            status:'recalculating',
-            origin:Array.from(currentPoint),
-            lastError:null
-          },{
-            source:'recalculate-refresh-origin'
-          });
+        routeState.update({
+          status:'recalculating',
+          origin:Array.from(currentPoint),
+          lastError:null
+        },{
+          source:'recalculate-refresh-origin'
+        });
 
-          continue;
-        }
-
-        throw new Error(
-          'Rota recalculada ficou desatualizada antes de ser aplicada'
-        );
+        /*
+          A resposta envelheceu enquanto o carro avançava.
+          Não tratar isso como erro do usuário/provedor: simplesmente
+          renovar a origem e continuar no estado de recálculo.
+        */
+        continue;
       }
 
       applyRoute(
@@ -764,6 +770,17 @@ async function recalculateRoute(){
       return newRoute;
     }
 
+    routeState.update({
+      status:'recalculating',
+      lastError:null
+    },{source:'recalculate-window-expired'});
+
+    /*
+      Se o carro continuou se movendo e nenhuma resposta conseguiu
+      estabilizar dentro da janela, não exibir uma falsa "falha".
+      O detector off-route poderá disparar um novo ciclo com posição
+      ainda mais recente.
+    */
     return null;
 
   }catch(error){
@@ -877,7 +894,7 @@ function bindApp(){
 }
 
 const api={
-  version:'1.2.0',
+  version:'1.3.0',
   fetch:fetchAuthoritativeRoute,
   fetchTomTom:fetchTomTomRoute,
   fetchOSRM:fetchOSRMRoute,
@@ -895,7 +912,7 @@ window.RadarRouting=Object.freeze(api);
 
 const registration=kernel.registerModule({
   name:'routing-authority-v1',
-  version:'1.2.0',
+  version:'1.3.0',
   owns:['navigation.route'],
 
   async start({resources}){
