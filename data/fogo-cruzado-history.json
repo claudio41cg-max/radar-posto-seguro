@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T10:04:39.418Z",
+  "generatedAt": "2026-10-06T16:41:48.331Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,58 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 264,
+  "count": 267,
   "occurrences": [
+    {
+      "id": "42665072-e1fa-45db-bcee-79bd66ccd6bd",
+      "documentNumber": 79363,
+      "date": "2026-10-06T10:00:00.000Z",
+      "address": "Vila Sapê- Curicica, Rio de Janeiro - RJ, 22775-400, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.95051047,
+      "longitude": -43.37547407,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "266ecfc4-e725-4671-88a5-b079484c0246",
+      "documentNumber": 79362,
+      "date": "2026-10-06T01:44:00.000Z",
+      "address": "Comunidade Massapê - Santa Cruz da Serra, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "SANTA CRUZ DA SERRA",
+      "subNeighborhood": "",
+      "locality": "Comunidade MASSAPE",
+      "latitude": -22.64437658848786,
+      "longitude": -43.27378513465577,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "06945009-1cbd-41f4-899b-f461e5ae9834",
+      "documentNumber": 79360,
+      "date": "2026-10-05T21:00:00.000Z",
+      "address": "Rua Luísa Barata - Barata - Realengo, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "REALENGO",
+      "subNeighborhood": "",
+      "locality": "BARATA",
+      "latitude": -22.8885889,
+      "longitude": -43.4418482,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "1381c9e2-f543-4d05-b484-e21dded0de2a",
       "documentNumber": 79358,
@@ -455,11 +505,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
