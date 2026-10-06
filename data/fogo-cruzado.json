@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T16:41:48.329Z",
+  "generatedAt": "2026-10-06T21:16:31.682Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,14 +10,49 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 32,
-  "lastUpdate": "2026-10-06T13:23:50-03:00",
+  "count": 34,
+  "lastUpdate": "2026-10-06T18:01:33-03:00",
   "occurrences": [
+    {
+      "id": "711ff76e-d70b-4aad-8dd0-bd7b0e87ed1c",
+      "documentNumber": 79366,
+      "date": "2026-10-06T15:50:00.000Z",
+      "address": "Comunidade Grão Pará e Guacha - Jardim Paraíso, Nova Iguaçu - RJ, 26297-318, Brasil",
+      "neighborhood": "PARAISO",
+      "subNeighborhood": "JARDIM PARAISO",
+      "locality": "Comunidade GRAO PARA E GUACHA",
+      "latitude": -22.81933063,
+      "longitude": -43.59348334,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "ff9184f2-f76a-4181-a6b6-967cccd1f084",
+      "documentNumber": 79365,
+      "date": "2026-10-06T15:00:00.000Z",
+      "address": "BR-101 - Jardim Catarina, São Gonçalo - RJ, 24110-233, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.79069314682588,
+      "longitude": -42.99792229416503,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "42665072-e1fa-45db-bcee-79bd66ccd6bd",
       "documentNumber": 79363,
       "date": "2026-10-06T10:00:00.000Z",
-      "address": "Vila Sapê- Curicica, Rio de Janeiro - RJ, 22775-400, Brasil",
+      "address": "Vila Sapê - Curicica, Rio de Janeiro - RJ, 22775-400, Brasil",
       "neighborhood": "CURICICA",
       "subNeighborhood": "",
       "locality": "Comunidade VILA SAPE",
@@ -491,11 +526,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
