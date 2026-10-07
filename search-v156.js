@@ -181,14 +181,22 @@ function render(app,Utils,results){
         '<div class="suggest-primary">'+Utils.sanitize(item.name)+'</div>'+
         '<div class="suggest-secondary">'+Utils.sanitize(item.display)+'</div>';
 
-      div.onclick=()=>{
+      div.onclick=async()=>{
         const input=document.getElementById('destInput');
         if(input)input.value=item.display;
 
         app.destination=[item.lon,item.lat];
         box.classList.remove('show');
-        app.showRoutePanel();
-        app.calculateRoute();
+
+        const route=
+          await app.calculateRoute();
+
+        if(
+          route&&
+          app.route
+        ){
+          app.showRoutePanel();
+        }
       };
 
       box.appendChild(div);
