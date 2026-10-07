@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T21:16:31.684Z",
+  "generatedAt": "2026-10-07T00:45:58.593Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -540,11 +540,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
