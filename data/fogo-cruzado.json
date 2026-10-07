@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T06:33:14.393Z",
+  "generatedAt": "2026-10-07T13:48:19.645Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 30,
-  "lastUpdate": "2026-10-06T21:47:31-03:00",
+  "count": 31,
+  "lastUpdate": "2026-10-07T09:35:52-03:00",
   "occurrences": [
     {
       "id": "711ff76e-d70b-4aad-8dd0-bd7b0e87ed1c",
@@ -62,6 +62,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "ba7ddfe9-d26a-415b-9297-377266cbf538",
+      "documentNumber": 79370,
+      "date": "2026-10-06T09:13:00.000Z",
+      "address": "Avenida Isabel de Paula - Suruí, Magé - RJ, Brasil",
+      "neighborhood": "SURUI (CENTRO)",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6595862,
+      "longitude": -43.1282874,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "266ecfc4-e725-4671-88a5-b079484c0246",
