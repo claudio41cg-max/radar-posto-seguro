@@ -655,10 +655,31 @@ function getFresh(options={}){
   });
 }
 
+function isRealRadarApp(candidate){
+  return !!(
+    candidate&&
+    typeof candidate.setGPSStatus==='function'&&
+    typeof candidate.updateUserMarker==='function'&&
+    typeof candidate.runAdaptiveGPSTasks==='function'
+  );
+}
+
 function bindApp(){
   const candidate=window.RadarApp||window.App||null;
-  if(!candidate)return false;
-  if(candidate.__radarGpsModuleV2Bound)return true;
+
+  /*
+    app-main cria um RadarApp provisório antes do DOMContentLoaded.
+    Nunca prender o GPS nesse placeholder: o dono real precisa ser o
+    App completo, já com UI/mapa/fachadas disponíveis.
+  */
+  if(!isRealRadarApp(candidate))return false;
+
+  if(
+    appRef===candidate&&
+    candidate.__radarGpsModuleV2Bound
+  ){
+    return true;
+  }
 
   appRef=candidate;
   candidate.__radarGpsModuleV2Bound=true;
@@ -681,7 +702,7 @@ function bindApp(){
 }
 
 const api={
-  version:'2.0.0',
+  version:'2.1.0',
   start:startTracking,
   stop,
   resume,
@@ -701,13 +722,22 @@ window.RadarGPS=Object.freeze(api);
 
 const registration=kernel.registerModule({
   name:'gps-v1',
-  version:'2.0.0',
+  version:'2.1.0',
   owns:['gps.position','gps.continuity'],
 
   async start({resources}){
     const id=resources.interval(()=>{
       if(bindApp()){
         clearInterval(id);
+
+        /*
+          Padrão de app de navegação: ao entrar em estado ativo e com o
+          App real pronto, o provedor de localização começa imediatamente.
+          Não depender de refresh/pageshow para criar o primeiro watch.
+        */
+        if(document.visibilityState==='visible'){
+          startTracking();
+        }
       }
     },100);
 
