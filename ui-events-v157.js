@@ -187,9 +187,15 @@ function bind(app,deps={}){
           }
   
   
-          app.showRoutePanel();
-  
-          app.calculateRoute();
+          const route=
+            await app.calculateRoute();
+
+          if(
+            route&&
+            app.route
+          ){
+            app.showRoutePanel();
+          }
   
         }
       );
