@@ -117,6 +117,33 @@ Falta validar na rua:
 - confirmar que não aparece mais "Falha ao atualizar rota" apenas porque a resposta envelheceu;
 - confirmar que o app estabiliza uma nova rota sem alternar repetidamente esquerda/direita.
 
+### N9 — GPS não inicia na primeira abertura
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE
+
+Sintoma:
+- ao abrir o Radar, o GPS podia permanecer sem localização;
+- após atualizar a página, o GPS passava a funcionar.
+
+Causa confirmada:
+- o módulo GPS podia se vincular ao `window.RadarApp` provisório criado antes do `DOMContentLoaded`;
+- o módulo também não iniciava `watchPosition()` automaticamente quando o App real ficava pronto;
+- o primeiro rastreamento dependia de um evento posterior como `pageshow`/retomada.
+
+Referência profissional:
+- OsmAnd ativa `requestLocationUpdates()` quando o provedor de localização entra/retoma o estado ativo;
+- o GPS não depende de um refresh manual para começar.
+
+Correção aplicada:
+- o GPS agora só se vincula ao App real, validando as APIs esperadas;
+- o placeholder inicial é ignorado;
+- assim que o App real está pronto e a página está visível, `startTracking()` é chamado automaticamente;
+- os fluxos de resume/visibility continuam preservados.
+
+Falta validar:
+- abrir o Radar do zero sem atualizar a página;
+- confirmar que aparece GPS ativo e posição correta;
+- fechar/reabrir ou voltar do segundo plano e confirmar retomada automática.
+
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
 
