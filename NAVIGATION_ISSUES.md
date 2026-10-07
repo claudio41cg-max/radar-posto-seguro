@@ -142,6 +142,28 @@ Correção aplicada:
 Validação real:
 - GPS passou a iniciar corretamente já na primeira abertura, sem precisar atualizar a página.
 
+### N10 — Fluxo manual abre navegação antes de a rota ficar pronta
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE
+
+Sintoma:
+- após digitar um endereço ou tocar numa sugestão, o painel de navegação podia aparecer antes de `App.route` existir;
+- se o usuário tocasse em iniciar nesse intervalo, o app respondia como se ainda faltasse uma rota/destino.
+
+Causa confirmada:
+- `ui-events-v157.js` chamava `showRoutePanel()` e disparava `calculateRoute()` sem `await`;
+- `search-v156.js` fazia o mesmo ao tocar numa sugestão.
+
+Correção aplicada:
+- os dois fluxos agora aguardam `await app.calculateRoute()`;
+- o painel só abre quando a rota retornou e `app.route` está disponível;
+- o botão de iniciar não fica acessível antes da rota estar pronta.
+
+Falta validar:
+- digitar endereço e tocar em pesquisar;
+- escolher uma sugestão;
+- confirmar que o painel só aparece depois da rota pronta;
+- iniciar navegação e confirmar que não aparece mais mensagem pedindo destino/rota.
+
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
 
