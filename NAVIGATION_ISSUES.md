@@ -118,7 +118,7 @@ Falta validar na rua:
 - confirmar que o app estabiliza uma nova rota sem alternar repetidamente esquerda/direita.
 
 ### N9 — GPS não inicia na primeira abertura
-**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE
+**Status:** CONCLUÍDO — VALIDADO EM TESTE REAL
 
 Sintoma:
 - ao abrir o Radar, o GPS podia permanecer sem localização;
@@ -139,10 +139,8 @@ Correção aplicada:
 - assim que o App real está pronto e a página está visível, `startTracking()` é chamado automaticamente;
 - os fluxos de resume/visibility continuam preservados.
 
-Falta validar:
-- abrir o Radar do zero sem atualizar a página;
-- confirmar que aparece GPS ativo e posição correta;
-- fechar/reabrir ou voltar do segundo plano e confirmar retomada automática.
+Validação real:
+- GPS passou a iniciar corretamente já na primeira abertura, sem precisar atualizar a página.
 
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
