@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T19:34:44.343Z",
+  "generatedAt": "2026-10-07T23:45:34.739Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,58 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 270,
+  "count": 274,
   "occurrences": [
+    {
+      "id": "ccd14db9-7339-4664-b362-f99a4f7f20ab",
+      "documentNumber": 79374,
+      "date": "2026-10-07T20:25:00.000Z",
+      "address": "Vila Maria Helena - Santa Cruz da Serra, Duque de Caxias - RJ, 25265-008, Brasil",
+      "neighborhood": "SANTA CRUZ DA SERRA",
+      "subNeighborhood": "VILA MARIA HELENA",
+      "locality": "",
+      "latitude": -22.66571575,
+      "longitude": -43.27851798,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7e75b472-55aa-4275-83a5-3adb66b427e7",
+      "documentNumber": 79371,
+      "date": "2026-10-07T16:00:00.000Z",
+      "address": "Estrada do Engenho, Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-340, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.866892949567834,
+      "longitude": -43.470419860539245,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "1d55531b-dd5e-4812-a643-401b502621bc",
+      "documentNumber": 79372,
+      "date": "2026-10-07T13:15:00.000Z",
+      "address": "Comunidade do Barro Vermelho, Pantanal - Campo Eliseos, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "CAMPOS ELISEOS",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.7473722,
+      "longitude": -43.3124828,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "711ff76e-d70b-4aad-8dd0-bd7b0e87ed1c",
       "documentNumber": 79366,
@@ -133,6 +183,26 @@
       "victims": []
     },
     {
+      "id": "616f25d6-e63d-4b8d-94ec-6ef34c0f9d99",
+      "documentNumber": 79373,
+      "date": "2026-10-05T12:00:00.000Z",
+      "address": "Rua das Safiras - Rocha Miranda, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ROCHA MIRANDA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8522813,
+      "longitude": -43.3539083,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "eece6588-9365-4d3c-82ce-706d88d22aec",
       "documentNumber": 79354,
       "date": "2026-10-05T06:00:00.000Z",
@@ -147,11 +217,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -560,11 +630,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
