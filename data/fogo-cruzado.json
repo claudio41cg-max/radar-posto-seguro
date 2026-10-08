@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T23:45:34.738Z",
+  "generatedAt": "2026-10-08T03:00:18.304Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,22 +10,67 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 35,
-  "lastUpdate": "2026-10-07T20:36:52-03:00",
+  "count": 32,
+  "lastUpdate": "2026-10-07T22:03:17-03:00",
   "occurrences": [
+    {
+      "id": "12e2711f-8533-4180-b3e6-f6b7fa239d4b",
+      "documentNumber": 79376,
+      "date": "2026-10-07T21:10:00.000Z",
+      "address": "Avenida Canal das Taxas - Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -23.0254488,
+      "longitude": -43.480887,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "ccd14db9-7339-4664-b362-f99a4f7f20ab",
       "documentNumber": 79374,
       "date": "2026-10-07T20:25:00.000Z",
-      "address": "Vila Maria Helena - Santa Cruz da Serra, Duque de Caxias - RJ, 25265-008, Brasil",
+      "address": "Comunidade Massapê - Santa Cruz da Serra, Duque de Caxias - RJ, Brasil",
       "neighborhood": "SANTA CRUZ DA SERRA",
-      "subNeighborhood": "VILA MARIA HELENA",
-      "locality": "",
-      "latitude": -22.66571575,
-      "longitude": -43.27851798,
+      "subNeighborhood": "",
+      "locality": "Comunidade MASSAPE",
+      "latitude": -22.64437658848786,
+      "longitude": -43.27378513465577,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "9c65f580-ef9a-464e-8a1b-2c723fb7fe5f",
+      "documentNumber": 79377,
+      "date": "2026-10-07T19:52:00.000Z",
+      "address": "R. Novo Jardim - Curicica, Rio de Janeiro - RJ, 22710-175, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.945096792947886,
+      "longitude": -43.37855622261709,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a22c550b-5dd3-4e46-a43a-67d18ac89053",
+      "documentNumber": 79375,
+      "date": "2026-10-07T19:00:00.000Z",
+      "address": "Viaduto Compositor Wilson Batista - Quintino Bocaiúva, Rio de Janeiro - RJ, 21380-010, Brasil",
+      "neighborhood": "QUINTINO BOCAIUVA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.888936792175443,
+      "longitude": -43.31626455541785,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -218,11 +263,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -560,125 +605,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "dfec79d3-713f-4a3b-9894-43f8a8a0cb66",
-      "documentNumber": 79295,
-      "date": "2026-09-30T22:30:00.000Z",
-      "address": "R. Vinte e Um - Recanto de Itaipuaçu, Maricá - RJ, Brasil",
-      "neighborhood": "RECANTO DE ITAIPUACU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9612905,
-      "longitude": -43.004021,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "20555e5f-ab5c-467d-b06f-ab889506b48e",
-      "documentNumber": 79296,
-      "date": "2026-09-30T17:27:00.000Z",
-      "address": "Rua Lucídio Lago - Méier, Rio de Janeiro - RJ, 20780-020, Brasil",
-      "neighborhood": "MEIER",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8998424664135,
-      "longitude": -43.274747556074814,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "12856c4b-0f63-4752-af60-eb45ed861838",
-      "documentNumber": 79288,
-      "date": "2026-09-30T16:30:00.000Z",
-      "address": "Vilar dos Teles, São João de Meriti - RJ, Brasil",
-      "neighborhood": "VILAR DOS TELES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.772296,
-      "longitude": -43.3632538,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "0bfaba56-f2b9-4d10-9f92-a7ca5d72206b",
-      "documentNumber": 79302,
-      "date": "2026-09-30T15:00:00.000Z",
-      "address": "Caonze, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "CAONZE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.768471,
-      "longitude": -43.4416018,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "dec63c44-6429-4d51-b7b0-a3fdf60d1be7",
-      "documentNumber": 79283,
-      "date": "2026-09-30T14:45:00.000Z",
-      "address": "Av. das Américas - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-704, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -23.017058180360273,
-      "longitude": -43.47857432797266,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "4752a047-40a5-4291-8df2-78c36d24915b",
-      "documentNumber": 79276,
-      "date": "2026-09-30T06:12:00.000Z",
-      "address": "Comunidade Parque Dois Irmãos - Curicica, Rio de Janeiro - RJ, 22780-190, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
-      "latitude": -22.95105015,
-      "longitude": -43.39378358,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }
