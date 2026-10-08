@@ -163,7 +163,7 @@ Validação real:
 - rota criada normalmente;
 - navegação iniciada sem voltar a pedir destino/rota.
 
-### N11 — GPT Live ouve o pedido de rota, mas não executa `routeTo()`
+### N11 — GPT Live e executor local respondem ao mesmo pedido de rota
 **Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE
 
 Sintoma:
@@ -186,6 +186,36 @@ Falta validar:
 - confirmar que o destino é pesquisado;
 - confirmar que a rota é criada e iniciada;
 - confirmar que o comando não duplica.
+
+### N12 — Dupla autoridade no pedido de rota do GPT Live
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE
+
+Sintoma:
+- o Radar local encontrava e iniciava a rota;
+- ao mesmo tempo, o GPT Live respondia usando o contexto antigo e dizia que não havia destino/rota;
+- para o usuário parecia haver "duas pessoas" com respostas conflitantes.
+
+Causa confirmada:
+- o comando operacional era executado pelo parser local, mas o GPT Live continuava livre para responder ao mesmo áudio antes de a ação terminar;
+- o contexto do GPT ainda refletia o estado anterior durante essa janela.
+
+Correção arquitetural:
+- comandos operacionais passam a ter uma única autoridade: o executor local do Radar;
+- ao detectar o comando, a resposta espontânea do GPT é cancelada com `response.cancel`;
+- o comando é executado de forma serializada;
+- o estado do Radar é sincronizado somente depois da execução;
+- o GPT recebe um resultado operacional já confirmado e apenas comunica esse resultado;
+- comandos antigos não podem produzir confirmação atrasada se um comando mais novo chegar.
+
+Arquivos:
+- `radar-gpt-live-v1.js`: expõe cancelamento explícito de resposta;
+- `radar-gpt-live-integration-v1.js`: coordena comando -> execução -> sincronização -> resposta única.
+
+Falta validar:
+- pedir uma rota por voz;
+- confirmar que a rota é encontrada/iniciada;
+- confirmar que o GPT não diz mais simultaneamente que não existe destino;
+- repetir com outro destino e confirmar ausência de resposta duplicada.
 
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
