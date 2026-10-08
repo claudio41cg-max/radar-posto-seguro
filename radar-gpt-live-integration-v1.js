@@ -46,6 +46,7 @@ let lastAddressPoint=null;
 let lastLocalFact='';
 let lastMentionedPlace='';
 let localCommandInFlight=false;
+let operationalCommandSeq=0;
 let resumeWanted=false;
 let resumeInFlight=false;
 
@@ -802,9 +803,23 @@ function patchLocalAssistant(){
 
 async function runOperationalAction(text){
   const va=assistant();
+  const live=window.RadarGPTLive;
+
   if(!va?.handle)return false;
 
+  const commandId=++operationalCommandSeq;
+
+  /*
+    Autoridade única:
+    ao reconhecer um comando operacional, qualquer resposta espontânea do GPT
+    sobre o estado antigo perde autoridade imediatamente.
+  */
+  try{
+    live?.cancelResponse?.();
+  }catch{}
+
   localCommandInFlight=true;
+  lastLocalFact='';
 
   try{
     await Promise.resolve(
@@ -812,6 +827,46 @@ async function runOperationalAction(text){
         String(text||'')
       )
     );
+
+    /*
+      Um comando mais novo substitui o anterior. Nunca deixar uma ação antiga
+      produzir confirmação atrasada no GPT Live.
+    */
+    if(commandId!==operationalCommandSeq){
+      return true;
+    }
+
+    syncContext(true);
+
+    const fact=String(lastLocalFact||'').trim();
+    const d=contextData();
+
+    const resultText=
+      fact||
+      (
+        d.destination&&d.navActive
+          ?'Rota para '+d.destination+' iniciada.'
+          :'A ação foi executada pelo Radar.'
+      );
+
+    /*
+      O GPT não decide o resultado. Ele recebe o resultado já confirmado pelo
+      executor local e apenas o comunica ao motorista em uma frase curta.
+    */
+    if(
+      liveOwnsVoice()&&
+      live?.speakContext
+    ){
+      live.speakContext(
+        [
+          'RESULTADO OPERACIONAL CONFIRMADO PELO RADAR:',
+          resultText,
+          'O estado abaixo já foi atualizado pelo aplicativo.',
+          'Não reavalie, não contradiga e não diga que falta destino se o Radar confirmou a rota.',
+          'Responda ao motorista em uma única frase curta apenas comunicando este resultado.'
+        ].join('\n')
+      );
+    }
 
     return true;
 
@@ -821,15 +876,27 @@ async function runOperationalAction(text){
       error
     );
 
+    if(
+      commandId===operationalCommandSeq&&
+      liveOwnsVoice()&&
+      live?.speakContext
+    ){
+      syncContext(true);
+      live.speakContext(
+        [
+          'RESULTADO OPERACIONAL CONFIRMADO PELO RADAR:',
+          'Não foi possível concluir esse comando agora.',
+          'Responda ao motorista em uma única frase curta, sem inventar outro estado.'
+        ].join('\n')
+      );
+    }
+
     return false;
 
   }finally{
-    localCommandInFlight=false;
-
-    setTimeout(
-      ()=>syncContext(true),
-      80
-    );
+    if(commandId===operationalCommandSeq){
+      localCommandInFlight=false;
+    }
   }
 }
 
@@ -872,7 +939,12 @@ async function handleFinalUserTranscript(text){
     Apenas comandos que realmente alteram o Radar seguem para o parser local.
   */
   if(isOperationalCommand(operationalPhrase)){
+    /*
+      A partir daqui o GPT Live deixa de responder livremente a esta fala.
+      O executor local assume o comando e devolve um único resultado confirmado.
+    */
     await runOperationalAction(operationalPhrase);
+    return;
   }
 }
 
