@@ -163,6 +163,30 @@ Validação real:
 - rota criada normalmente;
 - navegação iniciada sem voltar a pedir destino/rota.
 
+### N11 — GPT Live ouve o pedido de rota, mas não executa `routeTo()`
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE
+
+Sintoma:
+- o GPT Live ouvia pedidos como "me leve para...";
+- podia responder, mas o Radar deixava de procurar o destino e criar a rota.
+
+Causa confirmada:
+- o transporte tratava `turn.done` como principal evento de fala final do usuário;
+- a API Realtime atual publica a transcrição final em `conversation.item.input_audio_transcription.completed`;
+- esse evento oficial não era tratado pelo Radar, então o parser operacional podia nunca receber a frase final.
+
+Correção aplicada:
+- suporte ao evento oficial `conversation.item.input_audio_transcription.completed`;
+- suporte a delta oficial e fallback por `conversation.item.done`;
+- compatibilidade preservada com eventos antigos;
+- deduplicação por item/texto para evitar executar o mesmo comando duas vezes.
+
+Falta validar:
+- dizer "me leve para [local]";
+- confirmar que o destino é pesquisado;
+- confirmar que a rota é criada e iniciada;
+- confirmar que o comando não duplica.
+
 ### N2 — Map matching: reforçar continuidade e direção
 **Status:** PENDENTE
 
