@@ -122,6 +122,12 @@ function requestResponse(){
   });
 }
 
+function cancelResponse(){
+  return sendEvent({
+    type:'response.cancel'
+  });
+}
+
 function speakContext(content){
   if(!appendContext(content))return false;
   return requestResponse();
@@ -689,6 +695,7 @@ window.RadarGPTLive={
   updateContext,
   appendContext,
   requestResponse,
+  cancelResponse,
   speakContext
 };
 
