@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T03:00:18.305Z",
+  "generatedAt": "2026-10-08T10:23:21.283Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,32 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 277,
+  "count": 278,
   "occurrences": [
+    {
+      "id": "6c947f5e-ea41-438f-9def-28777bd5b600",
+      "documentNumber": 79379,
+      "date": "2026-10-07T22:00:00.000Z",
+      "address": "Linha Amarela - Inhaúma, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "INHAUMA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.881087,
+      "longitude": -43.2815617,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "12e2711f-8533-4180-b3e6-f6b7fa239d4b",
       "documentNumber": 79376,
