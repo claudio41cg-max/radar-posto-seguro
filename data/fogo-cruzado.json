@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T17:33:42.867Z",
+  "generatedAt": "2026-10-08T22:22:53.748Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,54 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 35,
-  "lastUpdate": "2026-10-08T13:19:41-03:00",
+  "count": 39,
+  "lastUpdate": "2026-10-08T19:19:28-03:00",
   "occurrences": [
+    {
+      "id": "aea1ae48-9495-4af4-9747-9eec1fd9399f",
+      "documentNumber": 79386,
+      "date": "2026-10-08T18:00:00.000Z",
+      "address": "R. Almira,  - Itanhangá, Rio de Janeiro - RJ, 22753-720, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.974305682560974,
+      "longitude": -43.33214531349445,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "11b78f5b-cd78-4c50-bd7a-6bda5353b9f2",
+      "documentNumber": 79387,
+      "date": "2026-10-08T14:00:00.000Z",
+      "address": "Rua Rio do Pau - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8136207,
+      "longitude": -43.3822172,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "c416b0e1-5e27-4d54-b93d-5746384032b6",
+      "documentNumber": 79388,
+      "date": "2026-10-08T13:00:00.000Z",
+      "address": "Rua Alice - Laranjeiras, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "LARANJEIRAS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9354529,
+      "longitude": -43.194781,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "8ee7c863-4ba4-4d85-8917-8ab862adfc49",
       "documentNumber": 79382,
@@ -117,14 +162,29 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "71e2dbc4-cc32-408d-9a77-8a76d511908e",
+      "documentNumber": 79385,
+      "date": "2026-10-07T17:00:00.000Z",
+      "address": "Jaconé, Maricá - RJ, 24900-970, Brasil",
+      "neighborhood": "JACONE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.935491592077625,
+      "longitude": -42.657440367964355,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "7e75b472-55aa-4275-83a5-3adb66b427e7",
@@ -331,11 +391,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
