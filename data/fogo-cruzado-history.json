@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T10:23:21.283Z",
+  "generatedAt": "2026-10-08T17:33:42.869Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 278,
+  "count": 280,
   "occurrences": [
+    {
+      "id": "8ee7c863-4ba4-4d85-8917-8ab862adfc49",
+      "documentNumber": 79382,
+      "date": "2026-10-07T22:30:00.000Z",
+      "address": "Rua Clara - Pilar, Duque de Caxias - RJ, 25233-400, Brasil",
+      "neighborhood": "PILAR",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.705612243836732,
+      "longitude": -43.29906494932387,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "6c947f5e-ea41-438f-9def-28777bd5b600",
       "documentNumber": 79379,
@@ -40,10 +60,10 @@
       "id": "12e2711f-8533-4180-b3e6-f6b7fa239d4b",
       "documentNumber": 79376,
       "date": "2026-10-07T21:10:00.000Z",
-      "address": "Avenida Canal das Taxas - Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
+      "address": "Comunidade do Terreirão - Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "RECREIO DOS BANDEIRANTES",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "Comunidade DO TERREIRAO",
       "latitude": -23.0254488,
       "longitude": -43.480887,
       "reason": "Não identificado",
@@ -94,7 +114,16 @@
       "reason": "Tentativa/Roubo",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "7e75b472-55aa-4275-83a5-3adb66b427e7",
@@ -130,6 +159,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "31642c4d-de79-4c0b-aa18-c77432608ab0",
+      "documentNumber": 79383,
+      "date": "2026-10-07T03:07:00.000Z",
+      "address": "Parque Paulista, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "CIDADE PARQUE PAULISTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6459139,
+      "longitude": -43.2569864,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "711ff76e-d70b-4aad-8dd0-bd7b0e87ed1c",
