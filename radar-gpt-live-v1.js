@@ -29,7 +29,10 @@ const state={
   onTranscript:null,
   onState:null,
   lastInstructions:'',
-  queuedSessionUpdate:null
+  queuedSessionUpdate:null,
+  lastFinalUserTranscript:'',
+  lastFinalUserTranscriptAt:0,
+  lastFinalUserItemId:''
 };
 
 function emit(name,detail){
@@ -180,6 +183,39 @@ async function stop(){
   emit('stopped');
 }
 
+function emitFinalUserTranscript(text,itemId=''){
+  const transcript=String(text||'').trim();
+  if(!transcript)return false;
+
+  const now=Date.now();
+  const sameItem=
+    itemId&&
+    state.lastFinalUserItemId&&
+    itemId===state.lastFinalUserItemId;
+
+  const sameRecentText=
+    transcript===state.lastFinalUserTranscript&&
+    now-state.lastFinalUserTranscriptAt<2500;
+
+  if(sameItem||sameRecentText){
+    return false;
+  }
+
+  state.lastFinalUserTranscript=transcript;
+  state.lastFinalUserTranscriptAt=now;
+  state.lastFinalUserItemId=String(itemId||'');
+
+  try{
+    state.onTranscript?.({
+      role:'user',
+      text:transcript,
+      final:true
+    });
+  }catch{}
+
+  return true;
+}
+
 function parseEvent(raw){
   let event;
 
@@ -246,18 +282,54 @@ function parseEvent(raw){
     return;
   }
 
+  /*
+    OpenAI Realtime oficial:
+    a transcrição final do áudio do usuário chega neste evento.
+    Mantemos também os eventos legados abaixo para compatibilidade.
+  */
+  if(type==='conversation.item.input_audio_transcription.completed'){
+    emitFinalUserTranscript(
+      event?.transcript,
+      event?.item_id
+    );
+    emit('user-stopped');
+    return;
+  }
+
+  if(type==='conversation.item.input_audio_transcription.delta'){
+    const text=String(event?.delta||'');
+    if(text){
+      try{
+        state.onTranscript?.({
+          role:'user',
+          text,
+          final:false,
+          delta:true
+        });
+      }catch{}
+    }
+    return;
+  }
+
   if(type==='turn.done'){
     const role=event?.turn?.role;
     const text=String(event?.turn?.transcript||'').trim();
 
     if(text&&(role==='user'||role==='assistant')){
-      try{
-        state.onTranscript?.({
-          role,
+      if(role==='user'){
+        emitFinalUserTranscript(
           text,
-          final:true
-        });
-      }catch{}
+          event?.turn?.id||event?.item_id||''
+        );
+      }else{
+        try{
+          state.onTranscript?.({
+            role,
+            text,
+            final:true
+          });
+        }catch{}
+      }
     }
 
     emit(
@@ -285,6 +357,28 @@ function parseEvent(raw){
       }catch{}
     }
 
+    return;
+  }
+
+  /*
+    Compatibilidade adicional com o item finalizado da API oficial.
+    Só promove a fala do usuário a final se houver transcript em input_audio.
+  */
+  if(type==='conversation.item.done'&&event?.item?.role==='user'){
+    const content=Array.isArray(event?.item?.content)
+      ?event.item.content
+      :[];
+
+    const transcript=content
+      .map(part=>String(part?.transcript||part?.text||'').trim())
+      .filter(Boolean)
+      .join(' ')
+      .trim();
+
+    emitFinalUserTranscript(
+      transcript,
+      event?.item?.id||''
+    );
     return;
   }
 
