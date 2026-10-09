@@ -58,6 +58,29 @@ const Voice=window.RadarVoiceEngineV157.create({
   getAssistant:()=>VoiceAssistant
 });
 
+/*
+  Guidance recebe a voz por contrato explícito.
+  Não expõe Voice globalmente e mantém guidance como única autoridade
+  das manobras de navegação.
+*/
+window.RadarGuidance?.setSpeaker?.(
+  (text,priority)=>{
+    if(
+      !Voice.enabled||
+      !('speechSynthesis' in window)
+    ){
+      return false;
+    }
+
+    Voice.speak(
+      text,
+      priority
+    );
+
+    return true;
+  }
+);
+
 
 /* =========================================================
    ASSISTENTE DE VOZ LOCAL E GRATUITA
