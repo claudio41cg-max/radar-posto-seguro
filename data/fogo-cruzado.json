@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T09:31:49.604Z",
+  "generatedAt": "2026-10-09T16:29:46.036Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,20 +10,94 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
-  "lastUpdate": "2026-10-09T01:14:44-03:00",
+  "count": 42,
+  "lastUpdate": "2026-10-09T11:09:54-03:00",
   "occurrences": [
+    {
+      "id": "57ac69ce-8fe2-4046-9682-32476167a183",
+      "documentNumber": 79398,
+      "date": "2026-10-09T06:05:00.000Z",
+      "address": "Comunidade do Dique - Gramacho, Duque de Caxias - RJ, 25050-170, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO DIQUE",
+      "latitude": -22.74893635,
+      "longitude": -43.29262467,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "4a411a50-b7c7-4ebc-a414-a9499df395c5",
+      "documentNumber": 79395,
+      "date": "2026-10-09T04:57:00.000Z",
+      "address": "Rua Tremembé - Freguesia (Ilha do Governador), Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "FREGUESIA (ILHA)",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7903747,
+      "longitude": -43.1787136,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "76b5ebc0-7c99-421f-ab89-4e50e1ddaaad",
+      "documentNumber": 79394,
+      "date": "2026-10-09T04:23:00.000Z",
+      "address": "Batan - Realengo, Rio de Janeiro - RJ, 21730-410, Brasil",
+      "neighborhood": "REALENGO",
+      "subNeighborhood": "",
+      "locality": "BATAN",
+      "latitude": -22.86244519,
+      "longitude": -43.42516286,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9af0a054-ac55-4b27-9994-f45222dd6caa",
+      "documentNumber": 79399,
+      "date": "2026-10-08T22:00:00.000Z",
+      "address": "Itanhangá, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9870599,
+      "longitude": -43.3076592,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "47a73958-fda5-4c4f-9e35-334f638c831c",
       "documentNumber": 79392,
       "date": "2026-10-08T20:00:00.000Z",
-      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua Itapuã - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "VICENTE DE CARVALHO",
       "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.8627778,
-      "longitude": -43.3152778,
-      "reason": "Homicidio/Tentativa",
+      "locality": "",
+      "latitude": -22.8572904,
+      "longitude": -43.312221,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -37,27 +111,60 @@
       "id": "aea1ae48-9495-4af4-9747-9eec1fd9399f",
       "documentNumber": 79386,
       "date": "2026-10-08T18:00:00.000Z",
-      "address": "R. Almira,  - Itanhangá, Rio de Janeiro - RJ, 22753-720, Brasil",
+      "address": "Rua Nova - Rio das Pedras, Itanhangá, Rio de Janeiro - RJ, 22753-703, Brasil",
       "neighborhood": "ITANHANGA",
       "subNeighborhood": "",
       "locality": "RIO DAS PEDRAS",
-      "latitude": -22.974305682560974,
-      "longitude": -43.33214531349445,
-      "reason": "Não identificado",
+      "latitude": -22.973140508883603,
+      "longitude": -43.332847120346074,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "0252b9c9-88b3-4eee-a420-427d89a1dc44",
+      "documentNumber": 79401,
+      "date": "2026-10-08T16:00:00.000Z",
+      "address": "Trevo das Margaridas - Avenida Brasil - Irajá, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8203769,
+      "longitude": -43.3202405,
+      "reason": "Tentativa/Roubo de cargas",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "11b78f5b-cd78-4c50-bd7a-6bda5353b9f2",
       "documentNumber": 79387,
       "date": "2026-10-08T14:00:00.000Z",
-      "address": "Rua Rio do Pau - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua do Pau - Pavuna, Rio de Janeiro - RJ, 21655-615, Brasil",
       "neighborhood": "PAVUNA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.8136207,
-      "longitude": -43.3822172,
+      "latitude": -22.814778595801574,
+      "longitude": -43.38164290972317,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -197,11 +304,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
