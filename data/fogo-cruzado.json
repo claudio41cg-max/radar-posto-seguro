@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T16:29:46.036Z",
+  "generatedAt": "2026-10-09T21:10:15.395Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 42,
-  "lastUpdate": "2026-10-09T11:09:54-03:00",
+  "count": 44,
+  "lastUpdate": "2026-10-09T18:06:59-03:00",
   "occurrences": [
+    {
+      "id": "0240116c-c7ae-4f4d-a90c-50cdd2c5eadd",
+      "documentNumber": 79404,
+      "date": "2026-10-09T17:40:00.000Z",
+      "address": "Comunidade Grão Pará - Jardim Paraíso, Paraíso, Nova Iguaçu - RJ, 26297-318, Brasil",
+      "neighborhood": "PARAISO",
+      "subNeighborhood": "JARDIM PARAISO",
+      "locality": "Comunidade GRAO PARA E GUACHA",
+      "latitude": -22.81933063,
+      "longitude": -43.59348334,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "0e013539-738d-45b6-a5f8-a32c22992763",
+      "documentNumber": 79402,
+      "date": "2026-10-09T13:00:00.000Z",
+      "address": "R. Luísa de Carvalho - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-250, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.851787530899173,
+      "longitude": -43.31864288945068,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "57ac69ce-8fe2-4046-9682-32476167a183",
       "documentNumber": 79398,
@@ -304,11 +339,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -382,7 +417,7 @@
       "id": "711ff76e-d70b-4aad-8dd0-bd7b0e87ed1c",
       "documentNumber": 79366,
       "date": "2026-10-06T15:50:00.000Z",
-      "address": "Comunidade Grão Pará e Guacha - Jardim Paraíso, Nova Iguaçu - RJ, 26297-318, Brasil",
+      "address": "Comunidade Grão Pará e Guacha - Jardim Paraíso, Paraíso - Nova Iguaçu - RJ, 26297-318, Brasil",
       "neighborhood": "PARAISO",
       "subNeighborhood": "JARDIM PARAISO",
       "locality": "Comunidade GRAO PARA E GUACHA",
@@ -522,7 +557,7 @@
       "id": "eece6588-9365-4d3c-82ce-706d88d22aec",
       "documentNumber": 79354,
       "date": "2026-10-05T06:00:00.000Z",
-      "address": "Estrada do Pacheco - Pacheco, São Gonçalo - RJ, Brasil",
+      "address": "Estrada do Pacheco - Pacheco I, São Gonçalo - RJ, Brasil",
       "neighborhood": "PACHECO I",
       "subNeighborhood": "",
       "locality": "",
