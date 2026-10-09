@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T22:22:53.750Z",
+  "generatedAt": "2026-10-09T02:29:33.130Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 284,
+  "count": 286,
   "occurrences": [
+    {
+      "id": "47a73958-fda5-4c4f-9e35-334f638c831c",
+      "documentNumber": 79392,
+      "date": "2026-10-08T20:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8627778,
+      "longitude": -43.3152778,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "aea1ae48-9495-4af4-9747-9eec1fd9399f",
       "documentNumber": 79386,
@@ -52,6 +72,21 @@
       "locality": "",
       "latitude": -22.9354529,
       "longitude": -43.194781,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "0001df86-4669-4422-a925-6de92f9769ee",
+      "documentNumber": 79389,
+      "date": "2026-10-08T09:00:00.000Z",
+      "address": "Morro do Adeus - Complexo do Alemão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "COMPLEXO DO ALEMAO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ADEUS (COMPLEXO DO ALEMAO)",
+      "latitude": -22.8648338,
+      "longitude": -43.2617645,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,

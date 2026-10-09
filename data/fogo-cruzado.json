@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T22:22:53.748Z",
+  "generatedAt": "2026-10-09T02:29:33.128Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
-  "lastUpdate": "2026-10-08T19:19:28-03:00",
+  "count": 37,
+  "lastUpdate": "2026-10-08T23:01:46-03:00",
   "occurrences": [
+    {
+      "id": "47a73958-fda5-4c4f-9e35-334f638c831c",
+      "documentNumber": 79392,
+      "date": "2026-10-08T20:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8627778,
+      "longitude": -43.3152778,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "aea1ae48-9495-4af4-9747-9eec1fd9399f",
       "documentNumber": 79386,
@@ -53,6 +73,21 @@
       "locality": "",
       "latitude": -22.9354529,
       "longitude": -43.194781,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "0001df86-4669-4422-a925-6de92f9769ee",
+      "documentNumber": 79389,
+      "date": "2026-10-08T09:00:00.000Z",
+      "address": "Morro do Adeus - Complexo do Alemão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "COMPLEXO DO ALEMAO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ADEUS (COMPLEXO DO ALEMAO)",
+      "latitude": -22.8648338,
+      "longitude": -43.2617645,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -659,80 +694,6 @@
           "personType": "Agent"
         }
       ]
-    },
-    {
-      "id": "4a272f7d-6cc3-4ff4-bb1d-1e043812e032",
-      "documentNumber": 79314,
-      "date": "2026-10-01T19:00:00.000Z",
-      "address": "Comunidade da Jaqueira - Vila São José, Duque de Caxias - RJ, 25040-410, Brasil",
-      "neighborhood": "VILA SAO JOSE",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA JAQUEIRA",
-      "latitude": -22.749522395709732,
-      "longitude": -43.326622075115964,
-      "reason": "Ataque a civis",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "843a3e6f-c65f-466f-8291-ee12c6c54287",
-      "documentNumber": 79301,
-      "date": "2026-10-01T16:00:00.000Z",
-      "address": "Av. Pastor Martin Luther King Jr. - Pavuna, Rio de Janeiro - RJ, 21520-001, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.811153478692358,
-      "longitude": -43.361589062426766,
-      "reason": "Tentativa/Roubo de cargas",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "382b5bb1-6ed6-486e-af19-a25e84a6d60c",
-      "documentNumber": 79300,
-      "date": "2026-10-01T10:30:00.000Z",
-      "address": "Comunidade do Guaxi, Coelho Neto, Rio de Janeiro - RJ, 21510-440, Brasil",
-      "neighborhood": "COELHO NETO",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DA GUAXI",
-      "latitude": -22.8322319334163,
-      "longitude": -43.35048187544974,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "db5d6b15-5f55-44d2-8197-7ae6f03a9203",
-      "documentNumber": 79286,
-      "date": "2026-10-01T00:20:00.000Z",
-      "address": "Comunidade Morro do Campinho - Campinho, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CAMPINHO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CAMPINHO (COMPLEXO DO FUBA)",
-      "latitude": -22.8863009,
-      "longitude": -43.3389215,
-      "reason": "Tiros a esmo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
