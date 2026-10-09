@@ -35,6 +35,7 @@ let routeRef=null;
 let events=[];
 let lastSpeakAt=0;
 let lastArrivalAt=0;
+let speakerRef=null;
 
 function app(){
   return appRef||window.RadarApp||window.App||null;
@@ -332,14 +333,28 @@ function instructionText(event,progress){
   );
 }
 
+function setSpeaker(fn){
+  speakerRef=
+    typeof fn==='function'
+      ?fn
+      :null;
+
+  return !!speakerRef;
+}
+
 function speak(text,priority=true){
-  if(!text)return false;
+  if(!text||!speakerRef)return false;
 
   try{
-    window.Voice?.speak?.(
-      text,
-      priority
-    );
+    const accepted=
+      speakerRef(
+        text,
+        priority
+      )===true;
+
+    if(!accepted){
+      return false;
+    }
 
     lastSpeakAt=Date.now();
 
@@ -418,6 +433,23 @@ function announceDue(a){
 
   const chosen=sameTurn[0];
 
+  const text=instructionText(
+    chosen,
+    progress
+  );
+
+  if(!text)return;
+
+  const spoken=
+    speak(
+      text,
+      true
+    );
+
+  if(!spoken){
+    return;
+  }
+
   for(const event of events){
     if(
       event.index===chosen.index&&
@@ -426,13 +458,6 @@ function announceDue(a){
       event.spoken=true;
     }
   }
-
-  const text=instructionText(
-    chosen,
-    progress
-  );
-
-  if(text)speak(text,true);
 }
 
 function updateHUD(a,guidance){
@@ -517,13 +542,18 @@ function announceArrival(a){
     Number(a.currentSpeed||0)<12&&
     Date.now()-lastArrivalAt>3000
   ){
+    const spoken=
+      speak(
+        'Você chegou ao seu destino.',
+        true
+      );
+
+    if(!spoken){
+      return;
+    }
+
     a.lastArrivalAnnounced=true;
     lastArrivalAt=Date.now();
-
-    speak(
-      'Você chegou ao seu destino.',
-      true
-    );
 
     try{
       a.toast?.(
@@ -629,7 +659,8 @@ function bindApp(){
 }
 
 const api={
-  version:'1.0.0',
+  version:'1.1.0',
+  setSpeaker,
   update,
   repeat,
   rebuild:rebuildEvents,
@@ -655,7 +686,7 @@ window.RadarGuidance=Object.freeze(api);
 const registration=
   kernel.registerModule({
     name:'guidance-v1',
-    version:'1.0.0',
+    version:'1.1.0',
     owns:['navigation.guidance'],
 
     async start({resources}){
