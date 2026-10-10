@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T00:56:44.218Z",
+  "generatedAt": "2026-10-10T06:55:59.436Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,54 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 41,
-  "lastUpdate": "2026-10-09T20:50:33-03:00",
+  "count": 45,
+  "lastUpdate": "2026-10-09T23:09:04-03:00",
   "occurrences": [
+    {
+      "id": "379acac2-b3fd-412a-aa0d-cf3a9f9f8998",
+      "documentNumber": 79411,
+      "date": "2026-10-09T22:30:00.000Z",
+      "address": "Viaduto Prefeito Negrão de Lima - Madureira, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8764821,
+      "longitude": -43.3351852,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "3675f491-f84e-4f88-a7ef-5b58c32d594e",
+      "documentNumber": 79410,
+      "date": "2026-10-09T21:30:00.000Z",
+      "address": "Curral das Éguas - Magalhães Bastos, Rio de Janeiro - RJ, 21735-035, Brasil",
+      "neighborhood": "MAGALHAES BASTOS",
+      "subNeighborhood": "",
+      "locality": "Comunidade CURRAL DAS EGUAS",
+      "latitude": -22.870928282334425,
+      "longitude": -43.41883807176481,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "1f0a0cd2-b616-446c-b759-028cf979a4af",
+      "documentNumber": 79412,
+      "date": "2026-10-09T20:40:00.000Z",
+      "address": "Fonseca, Niterói - RJ, Brasil",
+      "neighborhood": "FONSECA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8813858,
+      "longitude": -43.0871384,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "d359ecdf-0d4c-4ff8-b29c-1decb0a67503",
       "documentNumber": 79408,
@@ -27,6 +72,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "9cd772c7-bef7-48bf-a3e7-67b8449a3b98",
+      "documentNumber": 79409,
+      "date": "2026-10-09T18:00:00.000Z",
+      "address": "R. Herberth, Morro da Caixa d'Água do Vilar - Vilar dos Teles, São João de Meriti - RJ, 25570-070, Brasil",
+      "neighborhood": "VILAR DOS TELES",
+      "subNeighborhood": "",
+      "locality": "CAIXA DAGUA DO VILAR",
+      "latitude": -22.77163857136885,
+      "longitude": -43.35716445038478,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "0240116c-c7ae-4f4d-a90c-50cdd2c5eadd",
@@ -384,11 +449,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
