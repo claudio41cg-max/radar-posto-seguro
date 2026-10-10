@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T21:10:15.397Z",
+  "generatedAt": "2026-10-10T00:56:44.220Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 293,
+  "count": 296,
   "occurrences": [
+    {
+      "id": "d359ecdf-0d4c-4ff8-b29c-1decb0a67503",
+      "documentNumber": 79408,
+      "date": "2026-10-09T20:20:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "0240116c-c7ae-4f4d-a90c-50cdd2c5eadd",
       "documentNumber": 79404,
@@ -25,6 +40,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "b5f184b2-a220-4a0e-a3ad-376863c3081e",
+      "documentNumber": 79406,
+      "date": "2026-10-09T17:17:00.000Z",
+      "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
+      "neighborhood": "VILA MARGARIDA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO SEM TERRA",
+      "latitude": -22.875306614846412,
+      "longitude": -43.792335948774735,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -46,6 +76,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "d9193fee-ee31-4d49-8c72-c4dc6b97f1d4",
+      "documentNumber": 79407,
+      "date": "2026-10-09T12:00:00.000Z",
+      "address": "Rua Pereira Nunes - Tijuca, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9238523,
+      "longitude": -43.2362815,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "57ac69ce-8fe2-4046-9682-32476167a183",
@@ -338,11 +383,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
