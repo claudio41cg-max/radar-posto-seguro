@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T13:31:54.118Z",
+  "generatedAt": "2026-10-10T17:57:20.643Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 300,
+  "count": 301,
   "occurrences": [
+    {
+      "id": "c506d0c5-ff10-48ac-8c45-6bac5ea8738a",
+      "documentNumber": 79416,
+      "date": "2026-10-10T02:00:00.000Z",
+      "address": "Danon, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "DANON",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DANON",
+      "latitude": -22.7718993,
+      "longitude": -43.5017855,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "379acac2-b3fd-412a-aa0d-cf3a9f9f8998",
       "documentNumber": 79411,
@@ -25,7 +40,12 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "3675f491-f84e-4f88-a7ef-5b58c32d594e",
