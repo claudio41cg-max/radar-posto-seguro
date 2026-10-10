@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T17:57:20.643Z",
+  "generatedAt": "2026-10-10T21:31:48.475Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 301,
+  "count": 303,
   "occurrences": [
+    {
+      "id": "f44654e9-9bc3-4964-b372-654946ef6fc7",
+      "documentNumber": 79418,
+      "date": "2026-10-10T17:30:00.000Z",
+      "address": "Conjunto da Marinha - Marapicu, Nova Iguaçu - RJ, 26295-021, Brasil",
+      "neighborhood": "MARAPICU",
+      "subNeighborhood": "",
+      "locality": "CONJUNTO DA MARINHA",
+      "latitude": -22.795322102202363,
+      "longitude": -43.5804958875885,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "fbaa01ec-81fe-4595-b092-b7ac5c8a8773",
+      "documentNumber": 79417,
+      "date": "2026-10-10T13:00:00.000Z",
+      "address": "Favelinha Renascer (Chácara do Tanque) - Tanque, Rio de Janeiro - RJ, 22733-240, Brasil",
+      "neighborhood": "TANQUE",
+      "subNeighborhood": "",
+      "locality": "FAVELINHA DA RENASCER (OU CHACARA DO TANQUE)",
+      "latitude": -22.915556,
+      "longitude": -43.3625,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "c506d0c5-ff10-48ac-8c45-6bac5ea8738a",
       "documentNumber": 79416,
