@@ -126,6 +126,7 @@ function clear(app,deps={}){
 
   app.route=null;
   app.destination=null;
+  app.destinationInfo=null;
   app.routeProgressIndex=0;
   app.routeProgressMeters=0;
   app.lastTrustedProgressMeters=0;
