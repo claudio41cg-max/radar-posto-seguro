@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T18:00:25.837Z",
+  "generatedAt": "2026-10-11T21:46:40.748Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 307,
+  "count": 308,
   "occurrences": [
+    {
+      "id": "0029c4ed-6ce7-48f0-a66f-8c72e29fcfe3",
+      "documentNumber": 79429,
+      "date": "2026-10-11T10:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-540, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.788953872484267,
+      "longitude": -43.00017083713829,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
       "documentNumber": 79424,
@@ -50,15 +65,15 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         }
       ]

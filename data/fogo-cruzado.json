@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T18:00:25.836Z",
+  "generatedAt": "2026-10-11T21:46:40.746Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 50,
-  "lastUpdate": "2026-10-11T14:22:08-03:00",
+  "count": 51,
+  "lastUpdate": "2026-10-11T16:40:27-03:00",
   "occurrences": [
+    {
+      "id": "0029c4ed-6ce7-48f0-a66f-8c72e29fcfe3",
+      "documentNumber": 79429,
+      "date": "2026-10-11T10:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-540, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.788953872484267,
+      "longitude": -43.00017083713829,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
+      "documentNumber": 79424,
+      "date": "2026-10-11T05:00:00.000Z",
+      "address": "Rua Embaú - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE COLUMBIA",
+      "latitude": -22.811657,
+      "longitude": -43.3394558,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
       "documentNumber": 79425,
@@ -36,33 +66,18 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         }
       ]
-    },
-    {
-      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
-      "documentNumber": 79424,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "Rua Embaú - Pavuna, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE COLUMBIA",
-      "latitude": -22.811657,
-      "longitude": -43.3394558,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
