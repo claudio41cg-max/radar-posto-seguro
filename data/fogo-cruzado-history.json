@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T00:23:53.996Z",
+  "generatedAt": "2026-10-11T06:19:00.759Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 304,
+  "count": 305,
   "occurrences": [
+    {
+      "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
+      "documentNumber": 79421,
+      "date": "2026-10-10T20:00:00.000Z",
+      "address": "Parque Paulista, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "CIDADE PARQUE PAULISTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6459139,
+      "longitude": -43.2569864,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "e3eb677e-b9c2-4cda-b00e-40736578d84d",
       "documentNumber": 79419,
@@ -31,7 +46,7 @@
       "id": "f44654e9-9bc3-4964-b372-654946ef6fc7",
       "documentNumber": 79418,
       "date": "2026-10-10T17:30:00.000Z",
-      "address": "Conjunto da Marinha - Marapicu, Nova Iguaçu - RJ, 26295-021, Brasil",
+      "address": " Conjunto da Marinha - Marapicu, Nova Iguaçu - RJ, 26295-021, Brasil",
       "neighborhood": "MARAPICU",
       "subNeighborhood": "",
       "locality": "CONJUNTO DA MARINHA",
@@ -40,7 +55,24 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "fbaa01ec-81fe-4595-b092-b7ac5c8a8773",
@@ -513,11 +545,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
