@@ -17,6 +17,7 @@ function create(){
     userMarker:null,
     destinationMarker:null,
     destination:null,
+    destinationInfo:null,
     route:null,
     routeProgressIndex:0,
     routeProgressMeters:0,
