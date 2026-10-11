@@ -173,6 +173,16 @@ function bind(app,deps={}){
                 r[0].lon,
                 r[0].lat
               ];
+
+              app.destinationInfo={
+                name:String(r[0].name||'').trim(),
+                display:String(r[0].display||'').trim(),
+                phone:String(r[0].phone||'').trim(),
+                url:String(r[0].url||'').trim(),
+                categories:Array.isArray(r[0].categories)
+                  ?r[0].categories.slice(0,6)
+                  :[]
+              };
   
   
               input.value=
