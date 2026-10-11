@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T21:31:48.475Z",
+  "generatedAt": "2026-10-11T00:23:53.996Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 303,
+  "count": 304,
   "occurrences": [
+    {
+      "id": "e3eb677e-b9c2-4cda-b00e-40736578d84d",
+      "documentNumber": 79419,
+      "date": "2026-10-10T18:00:00.000Z",
+      "address": "Santa Teresa, Belford Roxo - RJ, Brasil",
+      "neighborhood": "SANTA TEREZA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.741442,
+      "longitude": -43.3449457,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "f44654e9-9bc3-4964-b372-654946ef6fc7",
       "documentNumber": 79418,
@@ -498,11 +513,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

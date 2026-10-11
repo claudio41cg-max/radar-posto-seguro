@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T21:31:48.474Z",
+  "generatedAt": "2026-10-11T00:23:53.994Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 48,
-  "lastUpdate": "2026-10-10T17:56:10-03:00",
+  "count": 47,
+  "lastUpdate": "2026-10-10T21:00:49-03:00",
   "occurrences": [
+    {
+      "id": "e3eb677e-b9c2-4cda-b00e-40736578d84d",
+      "documentNumber": 79419,
+      "date": "2026-10-10T18:00:00.000Z",
+      "address": "Santa Teresa, Belford Roxo - RJ, Brasil",
+      "neighborhood": "SANTA TEREZA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.741442,
+      "longitude": -43.3449457,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "f44654e9-9bc3-4964-b372-654946ef6fc7",
       "documentNumber": 79418,
@@ -499,11 +514,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -866,41 +881,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "fc06d671-a00a-4267-9b3d-9d8ee305e97b",
-      "documentNumber": 79349,
-      "date": "2026-10-03T15:00:00.000Z",
-      "address": "Av. Abílio Augusto Távora, Comunidade Danon - Danon, Nova Iguaçu - RJ, 26270-310, Brasil",
-      "neighborhood": "DANON",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DANON",
-      "latitude": -22.77004814897691,
-      "longitude": -43.50968958227844,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "59c01fc9-c4f1-40f1-9bb1-2ba15742add0",
-      "documentNumber": 79326,
-      "date": "2026-10-03T14:55:00.000Z",
-      "address": "Complexo do Lins - Lins de Vasconcelos, Rio de Janeiro - RJ, 20725-140, Brasil",
-      "neighborhood": "LINS DE VASCONCELOS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO LINS",
-      "latitude": -22.91534468,
-      "longitude": -43.28452174,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
