@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radar-seguro-rj-v157-full-shell';
+const CACHE_NAME = 'radar-seguro-rj-v157-clean-shell';
 const RADAR_WORKER = 'https://radar-seguro-ia-rj.claudio41cg.workers.dev';
 const OPENFREEMAP_HOST = 'tiles.openfreemap.org';
 const NETWORK_TIMEOUT_MS = 4500;
@@ -64,12 +64,12 @@ const CORE_SHELL = [
   './pwa-registration-v157.js?v=157'
 ];
 const OPTIONAL_SHELL = [
-  './streetview-destination-v135.js?v=135',
-  './route-choice-final-v135.js?v=135',
-  './navigation-persistence-v134.js?v=135',
-  './route-safety-v133.js?v=135',
-  './hazard-declutter-v119.js?v=135',
-  './route-alternatives-v116.js?v=135','./icon-192-1.png','./icon-512-1.png','./community-index-preload.js?v=151','./community-geometries-preload.js?v=151','./community-data-loader.js','./community-runtime-v83.js','./community-panel-v93.js','./community-map-style-v95.js?v=151','./data/community-datasets.json','./data/community-index.json','./data/community-geometries.json'];
+  './icon-192-1.png',
+  './icon-512-1.png',
+  './data/community-datasets.json',
+  './data/community-index.json',
+  './data/community-geometries.json'
+];
 self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE_NAME);await Promise.all(CORE_SHELL.map(file=>cache.add(file)));await Promise.allSettled(OPTIONAL_SHELL.map(file=>cache.add(file)));})());self.skipWaiting();});
 self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('radar-seguro-rj-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});clients.forEach(c=>c.postMessage({type:'RADAR_BUILD',build:'155'}));})());});
 function fetchWithTimeout(request,options={},timeout=NETWORK_TIMEOUT_MS){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeout);return fetch(request,{...options,signal:controller.signal}).finally(()=>clearTimeout(timer));}
