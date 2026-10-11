@@ -58,7 +58,7 @@ Falta validar na rua:
 - confirmar recálculo e retorno à nova rota.
 
 ### N7 — Navegação totalmente muda
-**Status:** ABERTO — causa identificada no código
+**Status:** CORRIGIDO EM CÓDIGO — AGUARDANDO TESTE DE RUA
 
 Sintoma observado no teste real:
 - nenhuma fala de "vire à direita/esquerda";
@@ -68,16 +68,20 @@ Sintoma observado no teste real:
 - navegação inteira permaneceu muda.
 
 Causa confirmada:
-- `voice/voice-engine-v157.js` cria normalmente o motor de fala com `enabled:true`;
-- em `app-main-v157.js`, esse motor fica em uma variável local `const Voice`;
-- `core/radar-guidance-v1.js` tenta falar usando `window.Voice?.speak(...)`;
-- não existe atualmente uma atribuição `window.Voice = Voice`;
-- por causa do optional chaining (`?.`), a falha não gera erro visível: a orientação simplesmente não fala.
+- o motor de voz existia somente na composição local;
+- o guidance não recebia uma dependência válida para falar;
+- a chamada opcional ocultava a falha e a navegação permanecia muda.
 
-Correção futura:
-- conectar o guidance ao motor de voz por dependência explícita/API, preferencialmente sem depender de global;
-- validar fala de início, manobras, chegada e recálculo;
-- manter motor de voz separado da lógica de guidance.
+Correção aplicada:
+- `app-main-v157.js` injeta explicitamente o motor local com `RadarGuidance.setSpeaker(...)`;
+- `core/radar-guidance-v1.js` usa essa dependência sem expor `window.Voice`;
+- guidance permanece como única autoridade das falas de navegação.
+
+Falta validar na rua:
+- fala de início da navegação;
+- avisos antecipado, principal e de confirmação;
+- conversões à direita e à esquerda;
+- recálculo e chegada.
 
 ### N8 — Recálculo chega atrasado e aplica rota já velha
 **Status:** CORRIGIDO EM CÓDIGO — SEGUNDA ETAPA APLICADA, AGUARDANDO TESTE DE RUA
