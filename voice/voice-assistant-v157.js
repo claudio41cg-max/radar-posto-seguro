@@ -1711,6 +1711,16 @@ function create(deps={}){
         result.lat
       ];
 
+      App.destinationInfo={
+        name:String(result.name||'').trim(),
+        display:String(result.display||'').trim(),
+        phone:String(result.phone||'').trim(),
+        url:String(result.url||'').trim(),
+        categories:Array.isArray(result.categories)
+          ?result.categories.slice(0,6)
+          :[]
+      };
+
 
       document
       .getElementById(
