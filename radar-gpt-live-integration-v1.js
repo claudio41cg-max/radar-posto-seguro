@@ -215,6 +215,8 @@ function destinationFromState(a=app()){
     a.destination.length>=2;
 
   const current=String(
+    a?.destinationInfo?.display||
+    a?.destinationInfo?.name||
     a?.destinationLabel||
     a?.destinationName||
     document.getElementById('destInput')?.value||
@@ -275,10 +277,18 @@ function routeSnapshot(a=app()){
   const remaining=routeRemaining();
   const guidance=nextGuidanceFromState(a);
 
+  const info=a?.destinationInfo||{};
+
   return {
     routeActive:!!route,
     navigationActive:!!a?.navActive,
     destination:destinationFromState(a),
+    destinationName:String(info.name||'').trim(),
+    destinationPhone:String(info.phone||'').trim(),
+    destinationUrl:String(info.url||'').trim(),
+    destinationCategories:Array.isArray(info.categories)
+      ?info.categories.filter(Boolean).slice(0,6)
+      :[],
     provider:String(
       route?.provider||
       route?.engine||
@@ -405,6 +415,10 @@ function contextData(){
     destination:route.destination,
     navActive:route.navigationActive,
     routeProvider:route.provider,
+    destinationName:route.destinationName,
+    destinationPhone:route.destinationPhone,
+    destinationUrl:route.destinationUrl,
+    destinationCategories:route.destinationCategories,
     nextManeuver:route.nextManeuver,
     nextStreet:route.nextStreet,
     nextManeuverMeters:route.nextManeuverMeters,
@@ -500,6 +514,38 @@ function context(){
     parts.push(
       'PROVEDOR DA ROTA: '+
       d.routeProvider+
+      '.'
+    );
+  }
+
+  if(d.destinationName){
+    parts.push(
+      'NOME DO DESTINO/ESTABELECIMENTO: '+
+      d.destinationName+
+      '.'
+    );
+  }
+
+  if(d.destinationPhone){
+    parts.push(
+      'TELEFONE DO DESTINO CONFIRMADO PELO PROVEDOR: '+
+      d.destinationPhone+
+      '.'
+    );
+  }
+
+  if(Array.isArray(d.destinationCategories)&&d.destinationCategories.length){
+    parts.push(
+      'CATEGORIAS DO DESTINO: '+
+      d.destinationCategories.join(', ')+
+      '.'
+    );
+  }
+
+  if(d.destinationUrl){
+    parts.push(
+      'SITE DO DESTINO CONFIRMADO PELO PROVEDOR: '+
+      d.destinationUrl+
       '.'
     );
   }
