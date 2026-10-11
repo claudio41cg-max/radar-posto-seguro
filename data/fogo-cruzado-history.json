@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T13:04:26.485Z",
+  "generatedAt": "2026-10-11T18:00:25.837Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,12 +10,12 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 306,
+  "count": 307,
   "occurrences": [
     {
       "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
       "documentNumber": 79424,
-      "date": "2026-10-11T09:12:00.000Z",
+      "date": "2026-10-11T05:00:00.000Z",
       "address": "Rua Embaú - Pavuna, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "PAVUNA",
       "subNeighborhood": "",
@@ -26,6 +26,42 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
+      "documentNumber": 79425,
+      "date": "2026-10-11T05:00:00.000Z",
+      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GARDENIA AZUL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9582037,
+      "longitude": -43.3529536,
+      "reason": "Outro",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
     },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
@@ -560,11 +596,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
