@@ -45,6 +45,7 @@ let lastResolvedAddress='';
 let lastAddressPoint=null;
 let lastLocalFact='';
 let lastMentionedPlace='';
+let lastRouteDestinationLabel='';
 let localCommandInFlight=false;
 let operationalCommandSeq=0;
 let resumeWanted=false;
@@ -207,15 +208,94 @@ function isOperationalCommand(text){
   );
 }
 
-function destinationFromUI(){
-  const a=app();
+function destinationFromState(a=app()){
+  const hasRoute=!!a?.route;
+  const hasDestination=
+    Array.isArray(a?.destination)&&
+    a.destination.length>=2;
 
-  return String(
-    document.getElementById('destInput')?.value||
+  const current=String(
     a?.destinationLabel||
     a?.destinationName||
+    document.getElementById('destInput')?.value||
     ''
   ).trim();
+
+  if(current&&(hasRoute||hasDestination)){
+    lastRouteDestinationLabel=current;
+  }
+
+  if(!hasRoute&&!hasDestination){
+    lastRouteDestinationLabel='';
+    return '';
+  }
+
+  return current||lastRouteDestinationLabel||'';
+}
+
+function nextGuidanceFromState(a=app()){
+  if(!a?.route)return null;
+
+  try{
+    const guidance=
+      window.RadarGuidance?.getUpcoming?.(a)||
+      a.getUpcomingGuidance?.()||
+      null;
+
+    const step=guidance?.step;
+    if(!step)return null;
+
+    const maneuver=String(
+      window.RadarGuidance?.maneuverText?.(step)||
+      a.maneuverText?.(step)||
+      ''
+    ).trim();
+
+    const street=String(
+      step?.name||
+      ''
+    ).trim();
+
+    const distance=Number(guidance?.distance);
+
+    return {
+      maneuver,
+      street,
+      distanceMeters:Number.isFinite(distance)
+        ?Math.max(0,Math.round(distance))
+        :null
+    };
+  }catch(_){
+    return null;
+  }
+}
+
+function routeSnapshot(a=app()){
+  const route=a?.route||null;
+  const remaining=routeRemaining();
+  const guidance=nextGuidanceFromState(a);
+
+  return {
+    routeActive:!!route,
+    navigationActive:!!a?.navActive,
+    destination:destinationFromState(a),
+    provider:String(
+      route?.provider||
+      route?.engine||
+      ''
+    ).trim(),
+    remainingMeters:Number.isFinite(remaining?.meters)
+      ?Math.round(remaining.meters)
+      :null,
+    remainingMinutes:Number.isFinite(remaining?.seconds)
+      ?Math.max(1,Math.round(remaining.seconds/60))
+      :null,
+    nextManeuver:guidance?.maneuver||'',
+    nextStreet:guidance?.street||'',
+    nextManeuverMeters:Number.isFinite(guidance?.distanceMeters)
+      ?guidance.distanceMeters
+      :null
+  };
 }
 
 function streetFromUI(){
@@ -316,22 +396,23 @@ function routeRemaining(){
 
 function contextData(){
   const a=app();
-  const remaining=routeRemaining();
+  const route=routeSnapshot(a);
 
   return {
     gps:roundedGps(a),
     street:streetFromUI(),
-    destination:destinationFromUI(),
-    navActive:!!a?.navActive,
+    routeActive:route.routeActive,
+    destination:route.destination,
+    navActive:route.navigationActive,
+    routeProvider:route.provider,
+    nextManeuver:route.nextManeuver,
+    nextStreet:route.nextStreet,
+    nextManeuverMeters:route.nextManeuverMeters,
     speed:Number.isFinite(Number(a?.currentSpeed))
       ?Math.round(Number(a.currentSpeed))
       :null,
-    remainingMeters:Number.isFinite(remaining?.meters)
-      ?Math.round(remaining.meters)
-      :null,
-    remainingMinutes:Number.isFinite(remaining?.seconds)
-      ?Math.max(1,Math.round(remaining.seconds/60))
-      :null,
+    remainingMeters:route.remainingMeters,
+    remainingMinutes:route.remainingMinutes,
     localFact:lastLocalFact
   };
 }
@@ -341,13 +422,16 @@ function context(){
 
   const parts=[
     'Você é a voz inteligente do aplicativo Radar Seguro RJ PRO.',
-    'Fale sempre em português brasileiro, de forma curta e natural.',
-    'Os dados abaixo vêm do próprio Radar e são a fonte da verdade sobre o estado atual.',
-    'Se o usuário perguntar onde está, qual rua, bairro, destino, distância restante, tempo restante ou velocidade, responda IMEDIATAMENTE usando os dados do Radar abaixo.',
+    'Fale sempre em português brasileiro, de forma natural, útil e relativamente curta.',
+    'Para navegação, localização, destino, distância, tempo, velocidade e próxima manobra, os dados abaixo do Radar são a fonte da verdade.',
+    'Se o Radar indicar routeActive=true, existe uma rota ativa. Nunca diga que não há rota apenas porque o nome textual do destino está vazio.',
+    'Se o usuário perguntar onde está, para onde está indo, quanto falta, qual a próxima rua ou próxima manobra, responda IMEDIATAMENTE usando o snapshot abaixo.',
     'Nunca responda uma localização apenas com coordenadas se houver endereço/local confirmado.',
-    'Não diga "estou pensando", "estou pesquisando", "aguarde", "só um momento" ou frases semelhantes para informações que já aparecem neste contexto.',
-    'Se um dado não estiver disponível, diga apenas que o Radar ainda não conseguiu confirmá-lo.',
-    'Nunca invente ocorrência, trânsito, fiscalização ou preço de combustível.'
+    'Para perguntas gerais do dia a dia que não dependam do estado do Radar, converse normalmente e use seu conhecimento geral.',
+    'Você pode manter uma conversa natural, responder perguntas gerais, explicar assuntos e fazer comentários úteis sem transformar tudo em resposta de GPS.',
+    'Não invente fatos locais ou atuais que precisem de consulta externa, como telefone/horário atual de estabelecimento, ocorrência, trânsito em tempo real, fiscalização ou preço de combustível.',
+    'Quando um fato local/atual não estiver no contexto do Radar, diga de forma simples que não consegue confirmá-lo naquele momento.',
+    'Não diga "estou pensando", "estou pesquisando", "aguarde" ou frases semelhantes para informações que já aparecem neste contexto.'
   ];
 
   if(d.gps){
@@ -372,23 +456,67 @@ function context(){
     );
   }
 
-  if(d.destination){
+  if(d.routeActive){
     parts.push(
-      'DESTINO ATUAL: '+
-      d.destination+
-      '.'
+      'ROTA ATIVA NO RADAR: SIM.'
     );
+
+    if(d.destination){
+      parts.push(
+        'DESTINO ATUAL: '+
+        d.destination+
+        '.'
+      );
+    }else{
+      parts.push(
+        'Existe uma rota ativa, mas o nome textual do destino ainda não foi confirmado.'
+      );
+    }
   }else{
     parts.push(
-      'Não há destino ativo.'
+      'ROTA ATIVA NO RADAR: NÃO.'
     );
+
+    if(d.destination){
+      parts.push(
+        'Destino selecionado, ainda sem rota ativa: '+
+        d.destination+
+        '.'
+      );
+    }else{
+      parts.push(
+        'Não há rota nem destino ativos.'
+      );
+    }
   }
 
   parts.push(
     d.navActive
-      ?'A navegação está ativa.'
-      :'A navegação não está ativa.'
+      ?'A navegação guiada está ativa.'
+      :'A navegação guiada ainda não está ativa.'
   );
+
+  if(d.routeProvider){
+    parts.push(
+      'PROVEDOR DA ROTA: '+
+      d.routeProvider+
+      '.'
+    );
+  }
+
+  if(d.nextManeuver){
+    let next='PRÓXIMA MANOBRA: '+d.nextManeuver;
+
+    if(d.nextStreet){
+      next+=' em '+d.nextStreet;
+    }
+
+    if(Number.isFinite(d.nextManeuverMeters)){
+      next+=' a aproximadamente '+d.nextManeuverMeters+' metros';
+    }
+
+    parts.push(next+'.');
+  }
 
   if(Number.isFinite(d.speed)){
     parts.push(
@@ -844,8 +972,12 @@ async function runOperationalAction(text){
     const resultText=
       fact||
       (
-        d.destination&&d.navActive
-          ?'Rota para '+d.destination+' iniciada.'
+        d.routeActive
+          ?(
+            d.destination
+              ?'Rota para '+d.destination+' iniciada.'
+              :'Rota criada e ativa no Radar.'
+          )
           :'A ação foi executada pelo Radar.'
       );
 
