@@ -54,7 +54,12 @@ async function geocodeTomTom(app,q,signal){
       display:
         x.address?.freeformAddress||
         x.poi?.name||
-        'Destino'
+        'Destino',
+      phone:String(x.poi?.phone||'').trim(),
+      url:String(x.poi?.url||'').trim(),
+      categories:Array.isArray(x.poi?.categories)
+        ?x.poi.categories.filter(Boolean).slice(0,6)
+        :[]
     }))
     .filter(x=>
       Number.isFinite(x.lat)&&
@@ -186,6 +191,15 @@ function render(app,Utils,results){
         if(input)input.value=item.display;
 
         app.destination=[item.lon,item.lat];
+        app.destinationInfo={
+          name:String(item.name||'').trim(),
+          display:String(item.display||'').trim(),
+          phone:String(item.phone||'').trim(),
+          url:String(item.url||'').trim(),
+          categories:Array.isArray(item.categories)
+            ?item.categories.slice(0,6)
+            :[]
+        };
         box.classList.remove('show');
 
         const route=
