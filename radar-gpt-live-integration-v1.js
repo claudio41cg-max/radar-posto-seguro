@@ -996,11 +996,22 @@ async function runOperationalAction(text){
   lastLocalFact='';
 
   try{
-    await Promise.resolve(
-      va.handle(
-        String(text||'')
-      )
-    );
+    // Evita que uma operação local sem conclusão deixe o GPT Live esperando para sempre.
+    // O limite não cancela o cálculo: apenas devolve o controle e informa a falha.
+    let commandTimer;
+    try{
+      await Promise.race([
+        Promise.resolve().then(()=>va.handle(String(text||''))),
+        new Promise((_,reject)=>{
+          commandTimer=setTimeout(
+            ()=>reject(new Error('RADAR_COMMAND_TIMEOUT')),
+            25000
+          );
+        })
+      ]);
+    }finally{
+      clearTimeout(commandTimer);
+    }
 
     /*
       Um comando mais novo substitui o anterior. Nunca deixar uma ação antiga
