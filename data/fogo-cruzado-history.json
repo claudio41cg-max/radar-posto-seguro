@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T06:19:00.759Z",
+  "generatedAt": "2026-10-11T13:04:26.485Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 305,
+  "count": 306,
   "occurrences": [
+    {
+      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
+      "documentNumber": 79424,
+      "date": "2026-10-11T09:12:00.000Z",
+      "address": "Rua Embaú - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE COLUMBIA",
+      "latitude": -22.811657,
+      "longitude": -43.3394558,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
       "documentNumber": 79421,
