@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T21:46:40.748Z",
+  "generatedAt": "2026-10-12T00:45:01.682Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,32 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 308,
+  "count": 310,
   "occurrences": [
+    {
+      "id": "853b5268-24db-43a6-9bb3-c70c91572c31",
+      "documentNumber": 79430,
+      "date": "2026-10-11T15:00:00.000Z",
+      "address": "Rua Clarimundo de Melo - Quintino Bocaiúva, Rio de Janeiro - RJ, 21311-282, Brasil",
+      "neighborhood": "QUINTINO BOCAIUVA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.89228172066775,
+      "longitude": -43.32362257871247,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "0029c4ed-6ce7-48f0-a66f-8c72e29fcfe3",
       "documentNumber": 79429,
@@ -26,6 +50,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "f59063a9-10b2-40f6-843f-b0e43c93fe32",
+      "documentNumber": 79432,
+      "date": "2026-10-11T08:00:00.000Z",
+      "address": "Estr. Santa Eugênia - Paciência, Rio de Janeiro - RJ, 23585-430, Brasil",
+      "neighborhood": "PACIENCIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.934797740355013,
+      "longitude": -43.63617396812286,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
@@ -65,11 +109,15 @@
           "personType": "Agent"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
           "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
@@ -127,7 +175,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -695,7 +743,7 @@
       "locality": "Comunidade GRAO PARA E GUACHA",
       "latitude": -22.81933063,
       "longitude": -43.59348334,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -840,11 +888,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

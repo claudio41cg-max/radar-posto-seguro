@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T21:46:40.746Z",
+  "generatedAt": "2026-10-12T00:45:01.681Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 51,
-  "lastUpdate": "2026-10-11T16:40:27-03:00",
+  "count": 49,
+  "lastUpdate": "2026-10-11T21:01:37-03:00",
   "occurrences": [
+    {
+      "id": "853b5268-24db-43a6-9bb3-c70c91572c31",
+      "documentNumber": 79430,
+      "date": "2026-10-11T15:00:00.000Z",
+      "address": "Rua Clarimundo de Melo - Quintino Bocaiúva, Rio de Janeiro - RJ, 21311-282, Brasil",
+      "neighborhood": "QUINTINO BOCAIUVA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.89228172066775,
+      "longitude": -43.32362257871247,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "0029c4ed-6ce7-48f0-a66f-8c72e29fcfe3",
       "documentNumber": 79429,
@@ -29,19 +53,24 @@
       "victims": []
     },
     {
-      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
-      "documentNumber": 79424,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "Rua Embaú - Pavuna, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PAVUNA",
+      "id": "f59063a9-10b2-40f6-843f-b0e43c93fe32",
+      "documentNumber": 79432,
+      "date": "2026-10-11T08:00:00.000Z",
+      "address": "Estr. Santa Eugênia - Paciência, Rio de Janeiro - RJ, 23585-430, Brasil",
+      "neighborhood": "PACIENCIA",
       "subNeighborhood": "",
-      "locality": "Comunidade PARQUE COLUMBIA",
-      "latitude": -22.811657,
-      "longitude": -43.3394558,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
+      "locality": "",
+      "latitude": -22.934797740355013,
+      "longitude": -43.63617396812286,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
@@ -66,11 +95,15 @@
           "personType": "Agent"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
           "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
@@ -78,6 +111,21 @@
           "personType": "Agent"
         }
       ]
+    },
+    {
+      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
+      "documentNumber": 79424,
+      "date": "2026-10-11T05:00:00.000Z",
+      "address": "Rua Embaú - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE COLUMBIA",
+      "latitude": -22.811657,
+      "longitude": -43.3394558,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
@@ -128,7 +176,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -696,7 +744,7 @@
       "locality": "Comunidade GRAO PARA E GUACHA",
       "latitude": -22.81933063,
       "longitude": -43.59348334,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -841,11 +889,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -894,88 +942,6 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c78f9553-f7a5-4780-bc7b-c420abacfa58",
-      "documentNumber": 79352,
-      "date": "2026-10-04T17:00:00.000Z",
-      "address": "Rua das Estrelas, Gogó da Ema (Chapadão) - Guadalupe, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GUADALUPE",
-      "subNeighborhood": "",
-      "locality": "GOGO DA EMA (COMPLEXO DO CHAPADAO)",
-      "latitude": -22.8309973,
-      "longitude": -43.3800041,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "064e04e2-b2ba-43c0-9cf9-e81d22607b4e",
-      "documentNumber": 79350,
-      "date": "2026-10-04T03:00:00.000Z",
-      "address": "Rua Araújo, Comunidade Parque Gotadouro - São José, Belford Roxo - RJ, 25010-440, Brasil",
-      "neighborhood": "SAO JOSE",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE GOTADOURO",
-      "latitude": -22.732301050369976,
-      "longitude": -43.33084132488507,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1cb5d2d2-a0a7-4e0d-a37a-7619f1f018bd",
-      "documentNumber": 79345,
-      "date": "2026-10-04T01:00:00.000Z",
-      "address": "Corte 8 (Complexo da Mangueirinha) - Vila Centenario, Centenário - Duque de Caxias - RJ, 25030-050, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "VILA CENTENARIO",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.77095968425896,
-      "longitude": -43.30980255,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "6638e5d4-2133-4ebc-9740-ed3b95262eb6",
-      "documentNumber": 79351,
-      "date": "2026-10-04T00:00:00.000Z",
-      "address": "Rua Basileu Eugênio Leal - Adrianópolis, Nova Iguaçu, RJ, Brasil",
-      "neighborhood": "ADRIANOPOLIS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.677316473647466,
-      "longitude": -43.52507560475465,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
