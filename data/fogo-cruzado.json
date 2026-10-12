@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T06:36:44.121Z",
+  "generatedAt": "2026-10-12T16:02:26.600Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 49,
-  "lastUpdate": "2026-10-11T21:01:37-03:00",
+  "count": 51,
+  "lastUpdate": "2026-10-12T12:55:59-03:00",
   "occurrences": [
+    {
+      "id": "19cabc6f-099d-402d-9161-905ca3d8378c",
+      "documentNumber": 79433,
+      "date": "2026-10-12T06:51:00.000Z",
+      "address": "Comunidade Furquim Mendes - Vigário Geral, Rio de Janeiro - RJ, 21240-800, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "FURQUIM MENDES",
+      "latitude": -22.805109646920855,
+      "longitude": -43.316591602460726,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "a38d190b-106a-4c75-85a1-715acc87d881",
+      "documentNumber": 79434,
+      "date": "2026-10-12T04:48:00.000Z",
+      "address": "Costa Barros, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8246094,
+      "longitude": -43.3726806,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "853b5268-24db-43a6-9bb3-c70c91572c31",
       "documentNumber": 79430,
@@ -41,12 +71,12 @@
       "id": "0029c4ed-6ce7-48f0-a66f-8c72e29fcfe3",
       "documentNumber": 79429,
       "date": "2026-10-11T10:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-540, Brasil",
+      "address": "Rua Expedicionário Moisés de Oliveira - Jardim Catarina, São Gonçalo - RJ, Brasil",
       "neighborhood": "JARDIM CATARINA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.788953872484267,
-      "longitude": -43.00017083713829,
+      "latitude": -22.7869864,
+      "longitude": -43.0026863,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -91,19 +121,19 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
@@ -176,15 +206,15 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
