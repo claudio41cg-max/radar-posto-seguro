@@ -566,9 +566,10 @@ function announceArrival(a){
 function update(){
   const a=app();
 
+  // HUD lê a rota calculada, independente do estado transitório de navActive.
+  // Anúncios falados continuam condicionados à navegação ativa.
   if(
-    !a?.navActive||
-    !a.route||
+    !a?.route||
     !a.userPos||
     a.rerouting
   ){
