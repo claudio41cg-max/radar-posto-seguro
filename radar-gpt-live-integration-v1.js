@@ -662,6 +662,13 @@ async function refreshAddress(force=false){
     return false;
   }
 
+  // Ao mudar de posição, o endereço antigo deixa de ser um fato atual.
+  if(lastAddressPoint&&gpsDistanceMeters(lastAddressPoint,gps)>=45){
+    lastResolvedAddress='';
+    lastAddressPoint=null;
+    syncContext(true);
+  }
+
   try{
     const result=
       await va.getCurrentAddress(true);
@@ -763,20 +770,15 @@ function patchOutputGuards(){
 
     v.speak=function(text,...rest){
       /*
-        Só bloqueia TTS Android que nasce de um comando local enquanto
-        GPT Live está ativo. Guidance/alertas continuam independentes.
+        Enquanto GPT Live está ativo, ele é o único canal de fala.
+        O motor local permanece disponível quando o Live é desligado.
       */
-      if(
-        localCommandInFlight&&
-        liveOwnsVoice()
-      ){
+      if(liveOwnsVoice()){
         const spoken=String(text||'').trim();
-
-        if(isUsefulLocalFact(spoken)){
+        if(localCommandInFlight&&isUsefulLocalFact(spoken)){
           lastLocalFact=spoken;
           syncContext(true);
         }
-
         return true;
       }
 
@@ -1099,7 +1101,11 @@ async function handleFinalUserTranscript(text){
     Não chamamos parser local e não criamos uma segunda resposta.
   */
   if(isDirectStateQuestion(phrase)){
+    // Snapshot renovado a cada pergunta, inclusive quando o carro está em movimento.
     syncContext(true);
+    if(isLocationQuestion(normalize(phrase))){
+      refreshAddress(true).catch(()=>{});
+    }
     return;
   }
 
@@ -1237,6 +1243,8 @@ async function start(){
     Assim não existem dois microfones interpretando a mesma frase.
   */
   suspendLocalRecognizer();
+  // Encerra qualquer fala Android anterior antes de entregar o áudio ao Live.
+  try{voiceObject()?.clear?.()}catch(_){}
 
   const live=window.RadarGPTLive;
 
