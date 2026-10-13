@@ -43,6 +43,7 @@ let addressTimer=null;
 let lastContextSignature='';
 let lastResolvedAddress='';
 let lastAddressPoint=null;
+let addressRequestSeq=0;
 let lastLocalFact='';
 let lastMentionedPlace='';
 let lastRouteDestinationLabel='';
@@ -309,30 +310,13 @@ function routeSnapshot(a=app()){
 }
 
 function streetFromUI(){
-  const a=app();
-
-  const values=[
-    lastResolvedAddress,
-    ...(lastAddressPoint ? [assistant()?.lastKnownAddress] : []),
-    a?.currentStreet,
-    a?.streetName,
-    document.getElementById('currentStreet')?.textContent,
-    document.getElementById('streetName')?.textContent
-  ];
-
-  for(const value of values){
-    const text=String(value||'').trim();
-
-    if(
-      text&&
-      text!=='--'&&
-      !/^siga pela via$/i.test(text)
-    ){
-      return text;
-    }
-  }
-
-  return '';
+  // Um endereço só é atual quando confirmado junto de uma posição GPS próxima.
+  // Texto do HUD e lastKnownAddress não garantem atualização em movimento.
+  const gps=roundedGps(app());
+  if(!gps||!lastAddressPoint||!lastResolvedAddress)return '';
+  return gpsDistanceMeters(gps,lastAddressPoint)<=120
+    ?lastResolvedAddress
+    :'';
 }
 
 function roundedGps(a){
@@ -669,9 +653,22 @@ async function refreshAddress(force=false){
     syncContext(true);
   }
 
+  const requestId=++addressRequestSeq;
   try{
-    const result=
-      await va.getCurrentAddress(true);
+    const result=await va.getCurrentAddress(true);
+    // A consulta pode ter capturado um GPS diferente de App.userPos.
+    // Usar a posição que veio com o endereço, não a posição anterior.
+    const point={
+      lat:Number(result?.lat),
+      lon:Number(result?.lon)
+    };
+    const validPoint=Number.isFinite(point.lat)&&Number.isFinite(point.lon);
+    const now=roundedGps(app());
+    if(requestId!==addressRequestSeq||
+       !validPoint||
+       (now&&gpsDistanceMeters(point,now)>180)){
+      return false;
+    }
 
     const text=String(
       result?.label||
@@ -682,7 +679,7 @@ async function refreshAddress(force=false){
 
     if(text){
       lastResolvedAddress=text;
-      lastAddressPoint=gps;
+      lastAddressPoint=point;
       syncContext(true);
       return true;
     }
