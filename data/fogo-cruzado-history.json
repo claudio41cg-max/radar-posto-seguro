@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T17:48:49.125Z",
+  "generatedAt": "2026-10-13T21:58:53.521Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,32 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 319,
+  "count": 322,
   "occurrences": [
+    {
+      "id": "810037dc-1aaf-4ff9-b512-993611a1a155",
+      "documentNumber": 79449,
+      "date": "2026-10-13T14:15:00.000Z",
+      "address": "Av. Nova Aurora - Nova Aurora, Belford Roxo - RJ, 26155-070, Brasil",
+      "neighborhood": "NOVA AURORA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.722330001691166,
+      "longitude": -43.39899286835654,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "33e488a0-d648-42e5-8b76-5431abb7e0e2",
       "documentNumber": 79447,
@@ -22,7 +46,7 @@
       "locality": "MORRO DO PREVENTORIO",
       "latitude": -22.93426724,
       "longitude": -43.09835005,
-      "reason": "Rebelião/Fuga de presos",
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -58,6 +82,26 @@
       "victims": []
     },
     {
+      "id": "8c5b580e-fce9-4819-89ea-71f8cdc1cb7e",
+      "documentNumber": 79451,
+      "date": "2026-10-12T20:00:00.000Z",
+      "address": "Shangrilá, Belford Roxo - RJ, 26127-370, Brasil",
+      "neighborhood": "SHANGRI LA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.723688821088487,
+      "longitude": -43.41113259073791,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "fa0c98ab-b6be-41ed-aff2-cf0d69a886a2",
       "documentNumber": 79441,
       "date": "2026-10-12T16:20:00.000Z",
@@ -70,6 +114,26 @@
       "reason": "Briga",
       "policeAction": false,
       "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "8da34bac-8f1b-45ba-bac3-a9cd05f913d3",
+      "documentNumber": 79450,
+      "date": "2026-10-12T15:00:00.000Z",
+      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21215-430, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DOURADOS",
+      "latitude": -22.828150245410775,
+      "longitude": -43.30031355080224,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Dead",
@@ -131,7 +195,7 @@
       "id": "15ef3c3b-0e05-41c8-92a6-3f1e6e076f3c",
       "documentNumber": 79439,
       "date": "2026-10-11T22:00:00.000Z",
-      "address": "Rua Carlinda Dutra - Porto Novo, São Gonçalo - RJ, Brasil",
+      "address": "Rua Carlinda Dutra, Morro do Cruzeiro - Porto Novo, São Gonçalo - RJ, Brasil",
       "neighborhood": "PORTO NOVO",
       "subNeighborhood": "",
       "locality": "MORRO DO CRUZEIRO",
@@ -162,19 +226,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -248,15 +312,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Agent"
         },
         {
