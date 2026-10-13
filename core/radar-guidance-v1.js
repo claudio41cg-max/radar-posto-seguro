@@ -631,7 +631,9 @@ function repeat(){
 
 function bindApp(){
   const a=window.RadarApp||window.App||null;
-  if(!a)return false;
+  // app-main publica um RadarApp provisório antes do DOMContentLoaded.
+  // Não vincular guidance a esse objeto; aguardar o App real com init/rota.
+  if(!a||typeof a.init!=='function'||typeof a.updateRouteSummary!=='function')return false;
 
   appRef=a;
 
