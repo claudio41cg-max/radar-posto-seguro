@@ -774,6 +774,11 @@ function patchOutputGuards(){
         O motor local permanece disponível quando o Live é desligado.
       */
       if(liveOwnsVoice()){
+        // Manobras TomTom têm seu próprio canal, coordenado com o áudio GPT.
+        // Apenas conversa local é bloqueada enquanto o Live está conectado.
+        if(rest[1]==='navigation'){
+          return originalVoiceSpeak(text,...rest);
+        }
         const spoken=String(text||'').trim();
         if(localCommandInFlight&&isUsefulLocalFact(spoken)){
           lastLocalFact=spoken;
