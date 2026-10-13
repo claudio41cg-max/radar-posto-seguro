@@ -313,7 +313,7 @@ function streetFromUI(){
 
   const values=[
     lastResolvedAddress,
-    assistant()?.lastKnownAddress,
+    ...(lastAddressPoint ? [assistant()?.lastKnownAddress] : []),
     a?.currentStreet,
     a?.streetName,
     document.getElementById('currentStreet')?.textContent,
@@ -1103,7 +1103,7 @@ async function handleFinalUserTranscript(text){
   if(isDirectStateQuestion(phrase)){
     // Snapshot renovado a cada pergunta, inclusive quando o carro está em movimento.
     syncContext(true);
-    if(isLocationQuestion(normalize(phrase))){
+    if(isLocationQuestion(normalizeText(phrase))){
       refreshAddress(true).catch(()=>{});
     }
     return;
