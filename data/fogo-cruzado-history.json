@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T22:52:00.689Z",
+  "generatedAt": "2026-10-13T03:14:07.330Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 316,
+  "count": 317,
   "occurrences": [
+    {
+      "id": "2e2a48c8-5760-4917-9a0c-84f903494282",
+      "documentNumber": 79444,
+      "date": "2026-10-12T23:08:00.000Z",
+      "address": "Manguinhos, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MANGUINHOS",
+      "subNeighborhood": "",
+      "locality": "MANGUINHOS (COMPLEXO DE MANGUINHOS)",
+      "latitude": -22.8825193,
+      "longitude": -43.2442626,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fa0c98ab-b6be-41ed-aff2-cf0d69a886a2",
       "documentNumber": 79441,
@@ -117,19 +132,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -223,11 +238,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
@@ -293,19 +308,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -781,11 +796,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

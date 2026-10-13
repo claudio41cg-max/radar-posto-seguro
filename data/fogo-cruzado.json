@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T22:52:00.686Z",
+  "generatedAt": "2026-10-13T03:14:07.328Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-10-12T18:41:24-03:00",
+  "count": 51,
+  "lastUpdate": "2026-10-12T23:44:33-03:00",
   "occurrences": [
+    {
+      "id": "2e2a48c8-5760-4917-9a0c-84f903494282",
+      "documentNumber": 79444,
+      "date": "2026-10-12T23:08:00.000Z",
+      "address": "Manguinhos, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MANGUINHOS",
+      "subNeighborhood": "",
+      "locality": "MANGUINHOS (COMPLEXO DE MANGUINHOS)",
+      "latitude": -22.8825193,
+      "longitude": -43.2442626,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fa0c98ab-b6be-41ed-aff2-cf0d69a886a2",
       "documentNumber": 79441,
@@ -118,19 +133,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -209,11 +224,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
@@ -294,19 +309,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -782,11 +797,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -940,133 +955,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "06945009-1cbd-41f4-899b-f461e5ae9834",
-      "documentNumber": 79360,
-      "date": "2026-10-05T21:00:00.000Z",
-      "address": "Rua Luísa Barata - Barata - Realengo, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "REALENGO",
-      "subNeighborhood": "",
-      "locality": "BARATA",
-      "latitude": -22.8885889,
-      "longitude": -43.4418482,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1381c9e2-f543-4d05-b484-e21dded0de2a",
-      "documentNumber": 79358,
-      "date": "2026-10-05T17:50:00.000Z",
-      "address": "Avenida Ernani Cardoso - Campinho, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CAMPINHO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8828428,
-      "longitude": -43.3412538,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "616f25d6-e63d-4b8d-94ec-6ef34c0f9d99",
-      "documentNumber": 79373,
-      "date": "2026-10-05T12:00:00.000Z",
-      "address": "Rua das Safiras - Rocha Miranda, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ROCHA MIRANDA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8522813,
-      "longitude": -43.3539083,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "eece6588-9365-4d3c-82ce-706d88d22aec",
-      "documentNumber": 79354,
-      "date": "2026-10-05T06:00:00.000Z",
-      "address": "Estrada do Pacheco - Pacheco I, São Gonçalo - RJ, Brasil",
-      "neighborhood": "PACHECO I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8244475,
-      "longitude": -42.9695679,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "dc6a78db-c9a1-4371-91bc-633d695750ff",
-      "documentNumber": 79356,
-      "date": "2026-10-05T04:00:00.000Z",
-      "address": "Rua Pacoti - Jardim Anhangá, Duque de Caxias - RJ, 25264-015",
-      "neighborhood": "JARDIM ANHANGA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.646007867849832,
-      "longitude": -43.232292431487956,
-      "reason": "Ataque a civis",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }
