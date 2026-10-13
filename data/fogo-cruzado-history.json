@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T10:43:34.465Z",
+  "generatedAt": "2026-10-13T17:48:49.125Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,16 +10,46 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 317,
+  "count": 319,
   "occurrences": [
+    {
+      "id": "33e488a0-d648-42e5-8b76-5431abb7e0e2",
+      "documentNumber": 79447,
+      "date": "2026-10-13T09:00:00.000Z",
+      "address": "Morro do Preventório - Charitas, Niterói - RJ, 24370-480, Brasil",
+      "neighborhood": "CHARITAS",
+      "subNeighborhood": "",
+      "locality": "MORRO DO PREVENTORIO",
+      "latitude": -22.93426724,
+      "longitude": -43.09835005,
+      "reason": "Rebelião/Fuga de presos",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "864ee1a6-0f9c-45ce-baf4-62fda1e3f9d8",
+      "documentNumber": 79445,
+      "date": "2026-10-13T05:42:00.000Z",
+      "address": "Conjunto da Marinha - Ipiranga, Nova Iguaçu - RJ, 26293-546, Brasil",
+      "neighborhood": "IPIRANGA",
+      "subNeighborhood": "",
+      "locality": "CONJUNTO DA MARINHA",
+      "latitude": -22.796509,
+      "longitude": -43.577524,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "2e2a48c8-5760-4917-9a0c-84f903494282",
       "documentNumber": 79444,
       "date": "2026-10-12T23:08:00.000Z",
-      "address": "Manguinhos, Rio de Janeiro - RJ, Brasil",
+      "address": "Mandela, Manguinhos, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "MANGUINHOS",
       "subNeighborhood": "",
-      "locality": "MANGUINHOS (COMPLEXO DE MANGUINHOS)",
+      "locality": "MANDELA (COMPLEXO DE MANGUINHOS)",
       "latitude": -22.8825193,
       "longitude": -43.2442626,
       "reason": "Não identificado",
@@ -51,12 +81,12 @@
       "id": "a614706d-4242-41bb-ad1c-a2361150f025",
       "documentNumber": 79440,
       "date": "2026-10-12T08:00:00.000Z",
-      "address": "Morro da Fé - Penha Circular, Rio de Janeiro - RJ, 21210-270, Brasil",
+      "address": "Morro da Fé, Penha Circular, Rio de Janeiro - RJ, 21211-470, Brasil",
       "neighborhood": "PENHA CIRCULAR",
       "subNeighborhood": "",
       "locality": "MORRO DA FE (COMPLEXO DA PENHA)",
-      "latitude": -22.84466841,
-      "longitude": -43.29477785,
+      "latitude": -22.845277033026417,
+      "longitude": -43.29689323221898,
       "reason": "Tentativa/Roubo",
       "policeAction": true,
       "agentPresence": true,
@@ -72,7 +102,7 @@
       "locality": "FURQUIM MENDES",
       "latitude": -22.805109646920855,
       "longitude": -43.316591602460726,
-      "reason": "Disparo Acidental",
+      "reason": "Disputa",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
@@ -121,30 +151,30 @@
       "id": "0ed36103-3d4b-463d-8ab8-08213c63f23c",
       "documentNumber": 79437,
       "date": "2026-10-11T21:00:00.000Z",
-      "address": "Manguinhos, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua Sizenando Nabuco, Morro do Amorim - Manguinhos, Rio de Janeiro - RJ, 21041-250, Brasil",
       "neighborhood": "MANGUINHOS",
       "subNeighborhood": "",
       "locality": "MORRO DO AMORIM (COMPLEXO DE MANGUINHOS)",
-      "latitude": -22.8825193,
-      "longitude": -43.2442626,
+      "latitude": -22.874590230275516,
+      "longitude": -43.24955561865956,
       "reason": "Ataque a civis",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -177,42 +207,22 @@
       "id": "0029c4ed-6ce7-48f0-a66f-8c72e29fcfe3",
       "documentNumber": 79429,
       "date": "2026-10-11T10:00:00.000Z",
-      "address": "Rua Expedicionário Moisés de Oliveira - Jardim Catarina, São Gonçalo - RJ, Brasil",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24110-233, Brasil",
       "neighborhood": "JARDIM CATARINA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.7869864,
-      "longitude": -43.0026863,
-      "reason": "Ação policial",
+      "latitude": -22.78815645788595,
+      "longitude": -43.00212715684998,
+      "reason": "Sequestro/Cárcere Privado",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
     },
     {
-      "id": "f59063a9-10b2-40f6-843f-b0e43c93fe32",
-      "documentNumber": 79432,
-      "date": "2026-10-11T08:00:00.000Z",
-      "address": "Estr. Santa Eugênia - Paciência, Rio de Janeiro - RJ, 23585-430, Brasil",
-      "neighborhood": "PACIENCIA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.934797740355013,
-      "longitude": -43.63617396812286,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
       "documentNumber": 79424,
       "date": "2026-10-11T05:00:00.000Z",
-      "address": "Rua Embaú - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "PAVUNA",
       "subNeighborhood": "",
       "locality": "Comunidade PARQUE COLUMBIA",
@@ -227,22 +237,22 @@
       "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
       "documentNumber": 79425,
       "date": "2026-10-11T05:00:00.000Z",
-      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
+      "address": "R. Guilherme Moreira - Gardênia Azul, Rio de Janeiro - RJ, 22765-220, Brasil",
       "neighborhood": "GARDENIA AZUL",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.9582037,
-      "longitude": -43.3529536,
+      "latitude": -22.95389731109883,
+      "longitude": -43.3504460028192,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
@@ -288,7 +298,7 @@
       "locality": "",
       "latitude": -22.741442,
       "longitude": -43.3449457,
-      "reason": "Operação policial",
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -320,7 +330,7 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -341,15 +351,35 @@
       "victims": []
     },
     {
+      "id": "f59063a9-10b2-40f6-843f-b0e43c93fe32",
+      "documentNumber": 79432,
+      "date": "2026-10-10T08:00:00.000Z",
+      "address": "Estr. Santa Eugênia, Jardim Sete de Abril - Paciência, Rio de Janeiro - RJ, 23520-560, Brasil",
+      "neighborhood": "PACIENCIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.932775714025894,
+      "longitude": -43.63593430991662,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "c506d0c5-ff10-48ac-8c45-6bac5ea8738a",
       "documentNumber": 79416,
       "date": "2026-10-10T02:00:00.000Z",
-      "address": "Danon, Nova Iguaçu - RJ, Brasil",
+      "address": "Comunidade Danon, Nova Iguaçu - RJ, 26270-360, Brasil",
       "neighborhood": "DANON",
       "subNeighborhood": "",
       "locality": "COMUNIDADE DANON",
-      "latitude": -22.7718993,
-      "longitude": -43.5017855,
+      "latitude": -22.774444926360875,
+      "longitude": -43.50907464845658,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
@@ -448,8 +478,8 @@
       "neighborhood": "PARAISO",
       "subNeighborhood": "JARDIM PARAISO",
       "locality": "Comunidade GRAO PARA E GUACHA",
-      "latitude": -22.81933063,
-      "longitude": -43.59348334,
+      "latitude": -22.82238343402306,
+      "longitude": -43.594288781139404,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -796,11 +826,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
