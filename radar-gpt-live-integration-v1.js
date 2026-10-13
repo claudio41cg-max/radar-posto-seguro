@@ -1106,11 +1106,25 @@ async function handleFinalUserTranscript(text){
     Não chamamos parser local e não criamos uma segunda resposta.
   */
   if(isDirectStateQuestion(phrase)){
-    // Snapshot renovado a cada pergunta, inclusive quando o carro está em movimento.
+    // Pergunta operacional usa um snapshot novo, não uma resposta
+    // espontânea baseada no contexto anterior do modelo.
+    try{window.RadarGPTLive?.cancelResponse?.()}catch(_){}
     syncContext(true);
     if(isLocationQuestion(normalizeText(phrase))){
-      refreshAddress(true).catch(()=>{});
+      await refreshAddress(true).catch(()=>{});
+      syncContext(true);
     }
+    const d=contextData();
+    window.RadarGPTLive?.speakContext?.([
+      'Pergunta atual do motorista: '+phrase,
+      'ESTADO ATUAL CONFIRMADO DO RADAR:',
+      'Rota calculada: '+(d.routeActive?'sim':'não'),
+      'Destino: '+(d.destination||'não confirmado'),
+      'Local atual: '+(d.street||'endereço não confirmado'),
+      'Distância restante em metros: '+(d.remainingMeters??'indisponível'),
+      'Tempo restante em minutos: '+(d.remainingMinutes??'indisponível'),
+      'Responda diretamente à pergunta usando somente esses fatos. Não diga aguarde nem invente informações.'
+    ].join('\n'));
     return;
   }
 
