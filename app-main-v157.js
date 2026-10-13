@@ -55,7 +55,12 @@ const communityBridgesGeoJSON=COMMUNITY_GEOMETRY.communityBridgesGeoJSON;
 ========================================================= */
 
 const Voice=window.RadarVoiceEngineV157.create({
-  getAssistant:()=>VoiceAssistant
+  getAssistant:()=>VoiceAssistant,
+  // Enquanto a orientação local fala, o áudio remoto do GPT não pode concorrer.
+  onSpeechState:(speaking)=>{
+    const audio=window.RadarGPTLive?.state?.audio;
+    if(audio)audio.muted=!!speaking;
+  }
 });
 
 /*
@@ -74,7 +79,8 @@ window.RadarGuidance?.setSpeaker?.(
 
     Voice.speak(
       text,
-      priority
+      priority,
+      'navigation'
     );
 
     return true;
