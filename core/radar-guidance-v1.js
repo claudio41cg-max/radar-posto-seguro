@@ -579,6 +579,13 @@ function update(){
     getUpcomingGuidance(a);
 
   if(!guidance?.step){
+    // Sem manobra fornecida pela rota, não deixar o HUD com "-- m" enganoso.
+    const dist=document.getElementById('hudDist');
+    const street=document.getElementById('hudStreet');
+    const arrow=document.getElementById('hudArrow');
+    if(dist)dist.textContent='—';
+    if(street)street.textContent='Orientações indisponíveis';
+    if(arrow)arrow.textContent='↑';
     return false;
   }
 
