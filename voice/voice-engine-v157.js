@@ -7,6 +7,9 @@ function create(deps={}){
   const getAssistant=typeof deps.getAssistant==='function'
     ?deps.getAssistant
     :()=>null;
+  const onSpeechState=typeof deps.onSpeechState==='function'
+    ?deps.onSpeechState
+    :()=>{};
 
   return {
     enabled:true,
@@ -20,6 +23,7 @@ function create(deps={}){
 
       this.queue=[];
       this.speaking=false;
+      onSpeechState(false);
     },
 
     speak(text,priority=false){
@@ -44,8 +48,10 @@ function create(deps={}){
       utterance.lang='pt-BR';
       utterance.rate=1.04;
       this.speaking=true;
+      onSpeechState(true);
 
       utterance.onend=()=>{
+        onSpeechState(false);
         this.speaking=false;
         const noMoreSpeech=!this.queue.length;
         if(noMoreSpeech){
@@ -55,6 +61,7 @@ function create(deps={}){
       };
 
       utterance.onerror=()=>{
+        onSpeechState(false);
         this.speaking=false;
         getAssistant()?.cancelFollowUpWindow?.();
         setTimeout(()=>this.process(),120);
