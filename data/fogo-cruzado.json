@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T06:04:05.315Z",
+  "generatedAt": "2026-10-14T11:41:32.657Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -11,7 +11,7 @@
     "days": 7
   },
   "count": 52,
-  "lastUpdate": "2026-10-13T21:53:16-03:00",
+  "lastUpdate": "2026-10-14T07:45:36-03:00",
   "occurrences": [
     {
       "id": "a42da3a7-39da-47ed-a169-727b65feb3ce",
@@ -247,19 +247,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
