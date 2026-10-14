@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T15:58:53.839Z",
+  "generatedAt": "2026-10-14T20:08:37.496Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,19 +10,54 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 53,
-  "lastUpdate": "2026-10-14T10:47:45-03:00",
+  "count": 57,
+  "lastUpdate": "2026-10-14T16:25:55-03:00",
   "occurrences": [
+    {
+      "id": "3b2ce689-e792-4bf3-a6e9-0a942ecfa207",
+      "documentNumber": 79461,
+      "date": "2026-10-14T13:45:00.000Z",
+      "address": "Cordovil, Rio de Janeiro - RJ, 21250-500, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8245262,
+      "longitude": -43.3004665,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "596b838a-2dde-4e5e-8199-b8a7c22b1d4b",
+      "documentNumber": 79458,
+      "date": "2026-10-13T22:00:00.000Z",
+      "address": "Tv. Estr. de Ferro - Rodilândia, Nova Iguaçu - RJ, 26083-320, Brasil",
+      "neighborhood": "RODILANDIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.73955957089445,
+      "longitude": -43.511075545675226,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "a42da3a7-39da-47ed-a169-727b65feb3ce",
       "documentNumber": 79452,
       "date": "2026-10-13T20:30:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21831-440, Brasil",
+      "address": "Rua Nelson da Fonseca, Sarapuí - Senador Camará, Rio de Janeiro - RJ, 21831-440, Brasil",
       "neighborhood": "SENADOR CAMARA",
       "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.895833,
-      "longitude": -43.4825,
+      "locality": "",
+      "latitude": -22.891671961306603,
+      "longitude": -43.486609144210824,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
@@ -97,6 +132,21 @@
       "locality": "CONJUNTO DA MARINHA",
       "latitude": -22.796509,
       "longitude": -43.577524,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
+      "documentNumber": 79460,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.795235754324885,
+      "longitude": -43.00055052974716,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -280,6 +330,26 @@
       ]
     },
     {
+      "id": "13c647f0-faeb-4174-8a9d-7ff43b9f74f6",
+      "documentNumber": 79459,
+      "date": "2026-10-11T19:00:00.000Z",
+      "address": "Manoel Reis I, Nilópolis - RJ, 26510-618, Brasil",
+      "neighborhood": "MANOEL REIS I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.81612298204391,
+      "longitude": -43.42419912110609,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "853b5268-24db-43a6-9bb3-c70c91572c31",
       "documentNumber": 79430,
       "date": "2026-10-11T15:00:00.000Z",
@@ -319,21 +389,6 @@
       "victims": []
     },
     {
-      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
-      "documentNumber": 79424,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE COLUMBIA",
-      "latitude": -22.811657,
-      "longitude": -43.3394558,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
       "documentNumber": 79425,
       "date": "2026-10-11T05:00:00.000Z",
@@ -352,19 +407,19 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
@@ -372,6 +427,21 @@
           "personType": "Agent"
         }
       ]
+    },
+    {
+      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
+      "documentNumber": 79424,
+      "date": "2026-10-11T05:00:00.000Z",
+      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE COLUMBIA",
+      "latitude": -22.811657,
+      "longitude": -43.3394558,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
@@ -926,11 +996,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
