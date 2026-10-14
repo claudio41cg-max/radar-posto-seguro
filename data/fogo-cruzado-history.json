@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T20:08:37.498Z",
+  "generatedAt": "2026-10-14T23:17:00.588Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 328,
+  "count": 330,
   "occurrences": [
+    {
+      "id": "20b98471-37bf-495b-aefe-75d13a1712af",
+      "documentNumber": 79463,
+      "date": "2026-10-14T18:50:00.000Z",
+      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8997546,
+      "longitude": -43.2285397,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "c20b205b-4cfc-4e17-8fea-e33d503d148b",
+      "documentNumber": 79462,
+      "date": "2026-10-14T18:05:00.000Z",
+      "address": "Cordovil, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8239006,
+      "longitude": -43.3010908,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "3b2ce689-e792-4bf3-a6e9-0a942ecfa207",
       "documentNumber": 79461,
@@ -421,19 +451,19 @@
           "personType": "Agent"
         },
         {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Agent"
         },
         {
@@ -995,11 +1025,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
