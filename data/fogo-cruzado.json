@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T11:41:32.657Z",
+  "generatedAt": "2026-10-14T15:58:53.839Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-10-14T07:45:36-03:00",
+  "count": 53,
+  "lastUpdate": "2026-10-14T10:47:45-03:00",
   "occurrences": [
     {
       "id": "a42da3a7-39da-47ed-a169-727b65feb3ce",
@@ -34,6 +34,21 @@
       ]
     },
     {
+      "id": "1c8e8842-8960-4177-af3d-520030e21e59",
+      "documentNumber": 79456,
+      "date": "2026-10-13T16:00:00.000Z",
+      "address": "Nova Aurora, Belford Roxo - RJ, 26155-290, Brasil",
+      "neighborhood": "NOVA AURORA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7215235810289,
+      "longitude": -43.40289642701416,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "810037dc-1aaf-4ff9-b512-993611a1a155",
       "documentNumber": 79449,
       "date": "2026-10-13T14:15:00.000Z",
@@ -43,16 +58,16 @@
       "locality": "",
       "latitude": -22.722330001691166,
       "longitude": -43.39899286835654,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -106,12 +121,12 @@
       "id": "8c5b580e-fce9-4819-89ea-71f8cdc1cb7e",
       "documentNumber": 79451,
       "date": "2026-10-12T20:00:00.000Z",
-      "address": "Shangrilá, Belford Roxo - RJ, 26127-370, Brasil",
+      "address": "Shangrilá, Belford Roxo - RJ, 26127-120, Brasil",
       "neighborhood": "SHANGRI LA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.723688821088487,
-      "longitude": -43.41113259073791,
+      "latitude": -22.722694574936202,
+      "longitude": -43.41434243952776,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -146,12 +161,12 @@
       "id": "8da34bac-8f1b-45ba-bac3-a9cd05f913d3",
       "documentNumber": 79450,
       "date": "2026-10-12T15:00:00.000Z",
-      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21215-430, Brasil",
+      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
       "neighborhood": "CORDOVIL",
       "subNeighborhood": "",
       "locality": "Comunidade DOURADOS",
-      "latitude": -22.828150245410775,
-      "longitude": -43.30031355080224,
+      "latitude": -22.82650326,
+      "longitude": -43.29951507,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
@@ -251,15 +266,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -304,6 +319,21 @@
       "victims": []
     },
     {
+      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
+      "documentNumber": 79424,
+      "date": "2026-10-11T05:00:00.000Z",
+      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE COLUMBIA",
+      "latitude": -22.811657,
+      "longitude": -43.3394558,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
       "documentNumber": 79425,
       "date": "2026-10-11T05:00:00.000Z",
@@ -330,11 +360,11 @@
           "personType": "Agent"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
@@ -342,21 +372,6 @@
           "personType": "Agent"
         }
       ]
-    },
-    {
-      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
-      "documentNumber": 79424,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE COLUMBIA",
-      "latitude": -22.811657,
-      "longitude": -43.3394558,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
@@ -911,11 +926,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
