@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T21:58:53.518Z",
+  "generatedAt": "2026-10-14T01:05:40.423Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 56,
-  "lastUpdate": "2026-10-13T18:24:37-03:00",
+  "count": 52,
+  "lastUpdate": "2026-10-13T21:53:16-03:00",
   "occurrences": [
+    {
+      "id": "a42da3a7-39da-47ed-a169-727b65feb3ce",
+      "documentNumber": 79452,
+      "date": "2026-10-13T20:30:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21831-440, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.895833,
+      "longitude": -43.4825,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "810037dc-1aaf-4ff9-b512-993611a1a155",
       "documentNumber": 79449,
@@ -227,19 +247,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -306,11 +326,11 @@
           "personType": "Agent"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
@@ -891,11 +911,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -960,91 +980,6 @@
       "locality": "",
       "latitude": -22.6459139,
       "longitude": -43.2569864,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "711ff76e-d70b-4aad-8dd0-bd7b0e87ed1c",
-      "documentNumber": 79366,
-      "date": "2026-10-06T15:50:00.000Z",
-      "address": "Comunidade Grão Pará e Guacha - Jardim Paraíso, Paraíso - Nova Iguaçu - RJ, 26297-318, Brasil",
-      "neighborhood": "PARAISO",
-      "subNeighborhood": "JARDIM PARAISO",
-      "locality": "Comunidade GRAO PARA E GUACHA",
-      "latitude": -22.81933063,
-      "longitude": -43.59348334,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "ff9184f2-f76a-4181-a6b6-967cccd1f084",
-      "documentNumber": 79365,
-      "date": "2026-10-06T15:00:00.000Z",
-      "address": "BR-101 - Jardim Catarina, São Gonçalo - RJ, 24110-233, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.79069314682588,
-      "longitude": -42.99792229416503,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "42665072-e1fa-45db-bcee-79bd66ccd6bd",
-      "documentNumber": 79363,
-      "date": "2026-10-06T10:00:00.000Z",
-      "address": "Vila Sapê - Curicica, Rio de Janeiro - RJ, 22775-400, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA SAPE",
-      "latitude": -22.95051047,
-      "longitude": -43.37547407,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "ba7ddfe9-d26a-415b-9297-377266cbf538",
-      "documentNumber": 79370,
-      "date": "2026-10-06T09:13:00.000Z",
-      "address": "Avenida Isabel de Paula - Suruí, Magé - RJ, Brasil",
-      "neighborhood": "SURUI (CENTRO)",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6595862,
-      "longitude": -43.1282874,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "266ecfc4-e725-4671-88a5-b079484c0246",
-      "documentNumber": 79362,
-      "date": "2026-10-06T01:44:00.000Z",
-      "address": "Comunidade Massapê - Santa Cruz da Serra, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "SANTA CRUZ DA SERRA",
-      "subNeighborhood": "",
-      "locality": "Comunidade MASSAPE",
-      "latitude": -22.64437658848786,
-      "longitude": -43.27378513465577,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
