@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T06:20:50.533Z",
+  "generatedAt": "2026-10-15T11:43:42.735Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 332,
+  "count": 334,
   "occurrences": [
+    {
+      "id": "9c112047-cf20-4183-a0a7-ec8b20c2f060",
+      "documentNumber": 79468,
+      "date": "2026-10-15T05:00:00.000Z",
+      "address": "Vila do João (Complexo da Maré) - Maré, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "VILA DO JOAO (COMPLEXO DA MARE)",
+      "latitude": -22.8735209,
+      "longitude": -43.2373768,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "8236cf73-6b67-4411-88ea-4c493e3a3b39",
+      "documentNumber": 79467,
+      "date": "2026-10-15T02:00:00.000Z",
+      "address": "Parque Paulista, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "SANTA CRUZ DA SERRA",
+      "subNeighborhood": "",
+      "locality": "Comunidade MASSAPE",
+      "latitude": -22.6459139,
+      "longitude": -43.2569864,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
       "documentNumber": 79464,
@@ -485,19 +515,19 @@
           "personType": "Agent"
         },
         {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Agent"
         }
       ]
