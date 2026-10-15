@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T01:31:54.241Z",
+  "generatedAt": "2026-10-15T06:20:50.533Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 331,
+  "count": 332,
   "occurrences": [
     {
       "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
@@ -22,6 +22,21 @@
       "locality": "",
       "latitude": -22.8997546,
       "longitude": -43.2285397,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
+      "documentNumber": 79465,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
+      "neighborhood": "PARQUE FLORA",
+      "subNeighborhood": "",
+      "locality": "BURACO DO BOI",
+      "latitude": -22.707769,
+      "longitude": -43.451663,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,

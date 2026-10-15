@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T01:31:54.239Z",
+  "generatedAt": "2026-10-15T06:20:50.530Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 50,
-  "lastUpdate": "2026-10-14T21:46:53-03:00",
+  "count": 51,
+  "lastUpdate": "2026-10-14T23:08:35-03:00",
   "occurrences": [
+    {
+      "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
+      "documentNumber": 79465,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
+      "neighborhood": "PARQUE FLORA",
+      "subNeighborhood": "",
+      "locality": "BURACO DO BOI",
+      "latitude": -22.707769,
+      "longitude": -43.451663,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
       "documentNumber": 79464,
