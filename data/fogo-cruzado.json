@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T15:45:27.850Z",
+  "generatedAt": "2026-10-15T19:27:21.729Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,49 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 54,
-  "lastUpdate": "2026-10-15T12:24:56-03:00",
+  "count": 58,
+  "lastUpdate": "2026-10-15T16:20:11-03:00",
   "occurrences": [
+    {
+      "id": "83d06f8d-5411-4dc4-8363-77ebd310f5b1",
+      "documentNumber": 79476,
+      "date": "2026-10-15T14:00:00.000Z",
+      "address": "R. Gen. Venâncio Flores, 411 - Leblon, Rio de Janeiro - RJ, 22441-090, Brasil",
+      "neighborhood": "LEBLON",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.983535474286292,
+      "longitude": -43.22554739866607,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "2bb97ac8-591a-4437-9aa7-6e15f4c138ba",
+      "documentNumber": 79473,
+      "date": "2026-10-15T10:00:00.000Z",
+      "address": "Estrada dos Bandeirantes - Vargem Grande, Rio de Janeiro - RJ, 22785-091, Brasil",
+      "neighborhood": "VARGEM GRANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.99239699913482,
+      "longitude": -43.506091994594485,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "9c112047-cf20-4183-a0a7-ec8b20c2f060",
       "documentNumber": 79468,
@@ -60,15 +100,30 @@
       "id": "8236cf73-6b67-4411-88ea-4c493e3a3b39",
       "documentNumber": 79467,
       "date": "2026-10-15T02:00:00.000Z",
-      "address": "Comunidade Massapê - Santa Cruz da Serra, Duque de Caxias - RJ, Brasil",
+      "address": "Av. dos Coqueiros, Comunidade Massapê - Santa Cruz da Serra, Duque de Caxias - RJ, Brasil",
       "neighborhood": "SANTA CRUZ DA SERRA",
       "subNeighborhood": "",
       "locality": "Comunidade MASSAPE",
-      "latitude": -22.64437658848786,
-      "longitude": -43.27378513465577,
+      "latitude": -22.645356860687713,
+      "longitude": -43.272079249722296,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
+      "documentNumber": 79477,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Comunidade da Linha - Pavuna, Rio de Janeiro - RJ, 21520-290, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA LINHA",
+      "latitude": -22.80992415701191,
+      "longitude": -43.37267045098334,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -96,7 +151,7 @@
       "locality": "BURACO DO BOI",
       "latitude": -22.707769,
       "longitude": -43.451663,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -156,7 +211,7 @@
       "locality": "",
       "latitude": -22.73955957089445,
       "longitude": -43.511075545675226,
-      "reason": "Não identificado",
+      "reason": "Tentativa/Roubo",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -250,6 +305,21 @@
       "locality": "CONJUNTO DA MARINHA",
       "latitude": -22.796509,
       "longitude": -43.577524,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
+      "documentNumber": 79474,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
+      "neighborhood": "CHACARAS RIO PETROPOLIS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO VAI QUEM QUER",
+      "latitude": -22.664561547727303,
+      "longitude": -43.292487620390396,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -536,11 +606,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
