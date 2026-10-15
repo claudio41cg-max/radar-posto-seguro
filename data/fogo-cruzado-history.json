@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T23:17:00.588Z",
+  "generatedAt": "2026-10-15T01:31:54.241Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 330,
+  "count": 331,
   "occurrences": [
+    {
+      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
+      "documentNumber": 79464,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8997546,
+      "longitude": -43.2285397,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "20b98471-37bf-495b-aefe-75d13a1712af",
       "documentNumber": 79463,
@@ -455,15 +470,15 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T23:17:00.586Z",
+  "generatedAt": "2026-10-15T01:31:54.239Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 59,
-  "lastUpdate": "2026-10-14T18:55:53-03:00",
+  "count": 50,
+  "lastUpdate": "2026-10-14T21:46:53-03:00",
   "occurrences": [
+    {
+      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
+      "documentNumber": 79464,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8997546,
+      "longitude": -43.2285397,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "20b98471-37bf-495b-aefe-75d13a1712af",
       "documentNumber": 79463,
@@ -419,21 +434,6 @@
       "victims": []
     },
     {
-      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
-      "documentNumber": 79424,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE COLUMBIA",
-      "latitude": -22.811657,
-      "longitude": -43.3394558,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
       "documentNumber": 79425,
       "date": "2026-10-11T05:00:00.000Z",
@@ -456,15 +456,15 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
@@ -472,6 +472,21 @@
           "personType": "Agent"
         }
       ]
+    },
+    {
+      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
+      "documentNumber": 79424,
+      "date": "2026-10-11T05:00:00.000Z",
+      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE COLUMBIA",
+      "latitude": -22.811657,
+      "longitude": -43.3394558,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
@@ -917,184 +932,6 @@
       "locality": "MORRO DO ADEUS (COMPLEXO DO ALEMAO)",
       "latitude": -22.8648338,
       "longitude": -43.2617645,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "8ee7c863-4ba4-4d85-8917-8ab862adfc49",
-      "documentNumber": 79382,
-      "date": "2026-10-07T22:30:00.000Z",
-      "address": "Rua Clara - Pilar, Duque de Caxias - RJ, 25233-400, Brasil",
-      "neighborhood": "PILAR",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.705612243836732,
-      "longitude": -43.29906494932387,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "6c947f5e-ea41-438f-9def-28777bd5b600",
-      "documentNumber": 79379,
-      "date": "2026-10-07T22:00:00.000Z",
-      "address": "Linha Amarela - Inhaúma, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "INHAUMA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.881087,
-      "longitude": -43.2815617,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "12e2711f-8533-4180-b3e6-f6b7fa239d4b",
-      "documentNumber": 79376,
-      "date": "2026-10-07T21:10:00.000Z",
-      "address": "Comunidade do Terreirão - Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO TERREIRAO",
-      "latitude": -23.0254488,
-      "longitude": -43.480887,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "ccd14db9-7339-4664-b362-f99a4f7f20ab",
-      "documentNumber": 79374,
-      "date": "2026-10-07T20:25:00.000Z",
-      "address": "Comunidade Massapê - Santa Cruz da Serra, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "SANTA CRUZ DA SERRA",
-      "subNeighborhood": "",
-      "locality": "Comunidade MASSAPE",
-      "latitude": -22.64437658848786,
-      "longitude": -43.27378513465577,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "9c65f580-ef9a-464e-8a1b-2c723fb7fe5f",
-      "documentNumber": 79377,
-      "date": "2026-10-07T19:52:00.000Z",
-      "address": "R. Novo Jardim - Curicica, Rio de Janeiro - RJ, 22710-175, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.945096792947886,
-      "longitude": -43.37855622261709,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "a22c550b-5dd3-4e46-a43a-67d18ac89053",
-      "documentNumber": 79375,
-      "date": "2026-10-07T19:00:00.000Z",
-      "address": "Viaduto Compositor Wilson Batista - Quintino Bocaiúva, Rio de Janeiro - RJ, 21380-010, Brasil",
-      "neighborhood": "QUINTINO BOCAIUVA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.888936792175443,
-      "longitude": -43.31626455541785,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "71e2dbc4-cc32-408d-9a77-8a76d511908e",
-      "documentNumber": 79385,
-      "date": "2026-10-07T17:00:00.000Z",
-      "address": "Jaconé, Maricá - RJ, 24900-970, Brasil",
-      "neighborhood": "JACONE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.935491592077625,
-      "longitude": -42.657440367964355,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "7e75b472-55aa-4275-83a5-3adb66b427e7",
-      "documentNumber": 79371,
-      "date": "2026-10-07T16:00:00.000Z",
-      "address": "Estrada do Engenho, Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-340, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.866892949567834,
-      "longitude": -43.470419860539245,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "1d55531b-dd5e-4812-a643-401b502621bc",
-      "documentNumber": 79372,
-      "date": "2026-10-07T13:15:00.000Z",
-      "address": "Comunidade do Barro Vermelho, Pantanal - Campo Eliseos, Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "CAMPOS ELISEOS",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.7473722,
-      "longitude": -43.3124828,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "31642c4d-de79-4c0b-aa18-c77432608ab0",
-      "documentNumber": 79383,
-      "date": "2026-10-07T03:07:00.000Z",
-      "address": "Parque Paulista, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "CIDADE PARQUE PAULISTA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6459139,
-      "longitude": -43.2569864,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
