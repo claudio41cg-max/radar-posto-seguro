@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T11:43:42.735Z",
+  "generatedAt": "2026-10-15T15:45:27.852Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 334,
+  "count": 335,
   "occurrences": [
     {
       "id": "9c112047-cf20-4183-a0a7-ec8b20c2f060",
@@ -20,23 +20,51 @@
       "neighborhood": "MARE",
       "subNeighborhood": "",
       "locality": "VILA DO JOAO (COMPLEXO DA MARE)",
-      "latitude": -22.8735209,
-      "longitude": -43.2373768,
+      "latitude": -22.87117627,
+      "longitude": -43.2410853,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
     },
     {
+      "id": "ff739f5d-6f8f-487f-85a3-912aff0f5c91",
+      "documentNumber": 79469,
+      "date": "2026-10-15T04:07:00.000Z",
+      "address": "Caluge, Itaboraí - RJ, Brasil",
+      "neighborhood": "CALUGE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7679284,
+      "longitude": -42.8559701,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "8236cf73-6b67-4411-88ea-4c493e3a3b39",
       "documentNumber": 79467,
       "date": "2026-10-15T02:00:00.000Z",
-      "address": "Parque Paulista, Duque de Caxias - RJ, Brasil",
+      "address": "Comunidade Massapê - Santa Cruz da Serra, Duque de Caxias - RJ, Brasil",
       "neighborhood": "SANTA CRUZ DA SERRA",
       "subNeighborhood": "",
       "locality": "Comunidade MASSAPE",
-      "latitude": -22.6459139,
-      "longitude": -43.2569864,
+      "latitude": -22.64437658848786,
+      "longitude": -43.27378513465577,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
@@ -401,11 +429,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -511,23 +539,23 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         }
       ]
