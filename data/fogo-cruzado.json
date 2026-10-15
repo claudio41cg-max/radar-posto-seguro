@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T19:27:21.729Z",
+  "generatedAt": "2026-10-15T22:38:35.164Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -115,12 +115,12 @@
       "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
       "documentNumber": 79477,
       "date": "2026-10-15T00:00:00.000Z",
-      "address": "Comunidade da Linha - Pavuna, Rio de Janeiro - RJ, 21520-290, Brasil",
-      "neighborhood": "PAVUNA",
+      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
+      "neighborhood": "ENGENHEIRO BELFORD",
       "subNeighborhood": "",
       "locality": "Comunidade DA LINHA",
-      "latitude": -22.80992415701191,
-      "longitude": -43.37267045098334,
+      "latitude": -22.8103846,
+      "longitude": -43.3787441,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
