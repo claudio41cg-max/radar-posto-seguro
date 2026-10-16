@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T21:36:48.401Z",
+  "generatedAt": "2026-10-16T23:50:43.180Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-10-16T18:17:41-03:00",
+  "count": 57,
+  "lastUpdate": "2026-10-16T20:49:18-03:00",
   "occurrences": [
+    {
+      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
+      "documentNumber": 79497,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fc7afaf0-3f3a-44d4-8ffa-464f5ae4ec48",
       "documentNumber": 79490,
@@ -24,6 +39,21 @@
       "latitude": -22.864856,
       "longitude": -43.2516132,
       "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "26f67555-cd85-463a-af22-4993a2795b78",
+      "documentNumber": 79489,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
+      "neighborhood": "MARIA PAULA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.885649979493987,
+      "longitude": -43.04086591186522,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -41,21 +71,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "26f67555-cd85-463a-af22-4993a2795b78",
-      "documentNumber": 79489,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885649979493987,
-      "longitude": -43.04086591186522,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     },
     {
@@ -77,6 +92,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "247e67b8-1298-40d2-b33d-32ff0f84d9fc",
+      "documentNumber": 79495,
+      "date": "2026-10-15T22:00:00.000Z",
+      "address": "Cabuís, Nilópolis - RJ, Brasil",
+      "neighborhood": "CABUIS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8067006,
+      "longitude": -43.4018998,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "83d06f8d-5411-4dc4-8363-77ebd310f5b1",
@@ -656,19 +686,19 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
