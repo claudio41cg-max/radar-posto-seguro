@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T22:38:35.220Z",
+  "generatedAt": "2026-10-16T00:49:00.445Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -499,19 +499,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -605,23 +605,23 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Agent"
         },
         {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T22:38:35.164Z",
+  "generatedAt": "2026-10-16T00:49:00.442Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 58,
-  "lastUpdate": "2026-10-15T16:20:11-03:00",
+  "count": 51,
+  "lastUpdate": "2026-10-15T21:32:44-03:00",
   "occurrences": [
     {
       "id": "83d06f8d-5411-4dc4-8363-77ebd310f5b1",
@@ -127,21 +127,6 @@
       "victims": []
     },
     {
-      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
-      "documentNumber": 79464,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8997546,
-      "longitude": -43.2285397,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
       "documentNumber": 79465,
       "date": "2026-10-14T21:10:00.000Z",
@@ -152,6 +137,21 @@
       "latitude": -22.707769,
       "longitude": -43.451663,
       "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
+      "documentNumber": 79464,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8997546,
+      "longitude": -43.2285397,
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -500,19 +500,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -577,21 +577,6 @@
       "victims": []
     },
     {
-      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
-      "documentNumber": 79424,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE COLUMBIA",
-      "latitude": -22.811657,
-      "longitude": -43.3394558,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
       "documentNumber": 79425,
       "date": "2026-10-11T05:00:00.000Z",
@@ -606,23 +591,23 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Agent"
         },
         {
@@ -630,6 +615,21 @@
           "personType": "Agent"
         }
       ]
+    },
+    {
+      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
+      "documentNumber": 79424,
+      "date": "2026-10-11T05:00:00.000Z",
+      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE COLUMBIA",
+      "latitude": -22.811657,
+      "longitude": -43.3394558,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
@@ -951,134 +951,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "9af0a054-ac55-4b27-9994-f45222dd6caa",
-      "documentNumber": 79399,
-      "date": "2026-10-08T22:00:00.000Z",
-      "address": "Itanhangá, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ITANHANGA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9870599,
-      "longitude": -43.3076592,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "47a73958-fda5-4c4f-9e35-334f638c831c",
-      "documentNumber": 79392,
-      "date": "2026-10-08T20:00:00.000Z",
-      "address": "Rua Itapuã - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8572904,
-      "longitude": -43.312221,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "aea1ae48-9495-4af4-9747-9eec1fd9399f",
-      "documentNumber": 79386,
-      "date": "2026-10-08T18:00:00.000Z",
-      "address": "Rua Nova - Rio das Pedras, Itanhangá, Rio de Janeiro - RJ, 22753-703, Brasil",
-      "neighborhood": "ITANHANGA",
-      "subNeighborhood": "",
-      "locality": "RIO DAS PEDRAS",
-      "latitude": -22.973140508883603,
-      "longitude": -43.332847120346074,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "0252b9c9-88b3-4eee-a420-427d89a1dc44",
-      "documentNumber": 79401,
-      "date": "2026-10-08T16:00:00.000Z",
-      "address": "Trevo das Margaridas - Avenida Brasil - Irajá, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "IRAJA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8203769,
-      "longitude": -43.3202405,
-      "reason": "Tentativa/Roubo de cargas",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "11b78f5b-cd78-4c50-bd7a-6bda5353b9f2",
-      "documentNumber": 79387,
-      "date": "2026-10-08T14:00:00.000Z",
-      "address": "Rua do Pau - Pavuna, Rio de Janeiro - RJ, 21655-615, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.814778595801574,
-      "longitude": -43.38164290972317,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "c416b0e1-5e27-4d54-b93d-5746384032b6",
-      "documentNumber": 79388,
-      "date": "2026-10-08T13:00:00.000Z",
-      "address": "Rua Alice - Laranjeiras, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "LARANJEIRAS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9354529,
-      "longitude": -43.194781,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "0001df86-4669-4422-a925-6de92f9769ee",
-      "documentNumber": 79389,
-      "date": "2026-10-08T09:00:00.000Z",
-      "address": "Morro do Adeus - Complexo do Alemão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "COMPLEXO DO ALEMAO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ADEUS (COMPLEXO DO ALEMAO)",
-      "latitude": -22.8648338,
-      "longitude": -43.2617645,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
