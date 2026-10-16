@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T14:43:52.616Z",
+  "generatedAt": "2026-10-16T18:26:03.769Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 340,
+  "count": 342,
   "occurrences": [
+    {
+      "id": "fc7afaf0-3f3a-44d4-8ffa-464f5ae4ec48",
+      "documentNumber": 79490,
+      "date": "2026-10-16T12:40:00.000Z",
+      "address": "Av. Nova York - Bonsucesso, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BONSUCESSO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.864856,
+      "longitude": -43.2516132,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "26f67555-cd85-463a-af22-4993a2795b78",
+      "documentNumber": 79489,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
+      "neighborhood": "MARIA PAULA I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.885649979493987,
+      "longitude": -43.04086591186522,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "2db8055f-7c10-4023-b52d-922d40491fef",
       "documentNumber": 79488,
