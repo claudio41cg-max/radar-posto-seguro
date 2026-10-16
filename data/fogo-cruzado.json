@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T18:26:03.767Z",
+  "generatedAt": "2026-10-16T21:36:48.401Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,17 +10,17 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 54,
-  "lastUpdate": "2026-10-16T15:07:41-03:00",
+  "count": 55,
+  "lastUpdate": "2026-10-16T18:17:41-03:00",
   "occurrences": [
     {
       "id": "fc7afaf0-3f3a-44d4-8ffa-464f5ae4ec48",
       "documentNumber": 79490,
       "date": "2026-10-16T12:40:00.000Z",
-      "address": "Av. Nova York - Bonsucesso, Rio de Janeiro - RJ, Brasil",
+      "address": "Av. Nova York - Cidade dos Aliados - Bonsucesso, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "BONSUCESSO",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "CIDADE DOS ALIADOS",
       "latitude": -22.864856,
       "longitude": -43.2516132,
       "reason": "Tentativa/Roubo",
@@ -29,11 +29,26 @@
       "victims": []
     },
     {
+      "id": "b5249d22-f464-437a-87d5-568d14630bf0",
+      "documentNumber": 79494,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "26f67555-cd85-463a-af22-4993a2795b78",
       "documentNumber": 79489,
       "date": "2026-10-16T12:00:00.000Z",
       "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA I",
+      "neighborhood": "MARIA PAULA",
       "subNeighborhood": "",
       "locality": "",
       "latitude": -22.885649979493987,
