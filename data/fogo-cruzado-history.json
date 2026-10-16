@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T09:54:02.346Z",
+  "generatedAt": "2026-10-16T14:43:52.616Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 339,
+  "count": 340,
   "occurrences": [
+    {
+      "id": "2db8055f-7c10-4023-b52d-922d40491fef",
+      "documentNumber": 79488,
+      "date": "2026-10-16T02:30:00.000Z",
+      "address": "Morro do Santo Cristo - Fonseca, Niterói - RJ, 24130-308, Brasil",
+      "neighborhood": "FONSECA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO SANTO CRISTO (COMPLEXO DO SANTO CRISTO)",
+      "latitude": -22.876769777555676,
+      "longitude": -43.0903831011946,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "83d06f8d-5411-4dc4-8363-77ebd310f5b1",
       "documentNumber": 79476,
@@ -617,11 +637,11 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
