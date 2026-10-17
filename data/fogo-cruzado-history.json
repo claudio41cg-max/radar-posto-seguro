@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T13:58:23.248Z",
+  "generatedAt": "2026-10-17T16:59:30.296Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 349,
+  "count": 351,
   "occurrences": [
+    {
+      "id": "a778b59f-d704-440c-81e5-46d0ab39d52b",
+      "documentNumber": 79510,
+      "date": "2026-10-17T10:30:00.000Z",
+      "address": "Vila do Pinheiro - Maré, Rio de Janeiro - RJ, 21046-185, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "VILA DO PINHEIRO (COMPLEXO DA MARE)",
+      "latitude": -22.86742212,
+      "longitude": -43.23812972,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "4d1c1f90-6020-40db-8c00-f700d8db33eb",
       "documentNumber": 79504,
@@ -135,7 +150,7 @@
     {
       "id": "2db8055f-7c10-4023-b52d-922d40491fef",
       "documentNumber": 79488,
-      "date": "2026-10-16T02:30:00.000Z",
+      "date": "2026-10-16T00:59:00.000Z",
       "address": "Morro do Santo Cristo - Fonseca, Niterói - RJ, 24130-308, Brasil",
       "neighborhood": "FONSECA",
       "subNeighborhood": "",
@@ -279,6 +294,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "660d9fa1-9e54-46d1-83a0-363d878998eb",
+      "documentNumber": 79511,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Estrada da Paciência - Paciência, Rio de Janeiro - RJ, 23580-140, Brasil",
+      "neighborhood": "PACIENCIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9154261,
+      "longitude": -43.6304149,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
@@ -658,11 +693,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
