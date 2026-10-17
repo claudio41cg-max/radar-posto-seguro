@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T10:51:57.299Z",
+  "generatedAt": "2026-10-17T13:58:23.248Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 347,
+  "count": 349,
   "occurrences": [
+    {
+      "id": "4d1c1f90-6020-40db-8c00-f700d8db33eb",
+      "documentNumber": 79504,
+      "date": "2026-10-17T03:00:00.000Z",
+      "address": "Av. do Contorno - Parada Morabi, Duque de Caxias - RJ, 25265-340, Brasil",
+      "neighborhood": "PARADA MORABI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.66267747600141,
+      "longitude": -43.22656669546417,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "da680799-71b7-4947-8401-6c278a37278c",
       "documentNumber": 79500,
@@ -55,6 +70,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
+      "documentNumber": 79507,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6426898,
+      "longitude": -43.2238197,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -628,11 +658,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {

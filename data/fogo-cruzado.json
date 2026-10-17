@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T10:51:57.297Z",
+  "generatedAt": "2026-10-17T13:58:23.246Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 47,
-  "lastUpdate": "2026-10-16T23:44:11-03:00",
+  "count": 49,
+  "lastUpdate": "2026-10-17T09:49:36-03:00",
   "occurrences": [
+    {
+      "id": "4d1c1f90-6020-40db-8c00-f700d8db33eb",
+      "documentNumber": 79504,
+      "date": "2026-10-17T03:00:00.000Z",
+      "address": "Av. do Contorno - Parada Morabi, Duque de Caxias - RJ, 25265-340, Brasil",
+      "neighborhood": "PARADA MORABI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.66267747600141,
+      "longitude": -43.22656669546417,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "da680799-71b7-4947-8401-6c278a37278c",
       "documentNumber": 79500,
@@ -23,6 +38,21 @@
       "locality": "",
       "latitude": -22.84950590803049,
       "longitude": -43.357079918385296,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
+      "documentNumber": 79507,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6426898,
+      "longitude": -43.2238197,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -74,21 +104,6 @@
       "victims": []
     },
     {
-      "id": "26f67555-cd85-463a-af22-4993a2795b78",
-      "documentNumber": 79489,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885649979493987,
-      "longitude": -43.04086591186522,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "b5249d22-f464-437a-87d5-568d14630bf0",
       "documentNumber": 79494,
       "date": "2026-10-16T12:00:00.000Z",
@@ -101,6 +116,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "26f67555-cd85-463a-af22-4993a2795b78",
+      "documentNumber": 79489,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
+      "neighborhood": "MARIA PAULA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.885649979493987,
+      "longitude": -43.04086591186522,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -436,21 +466,6 @@
       "victims": []
     },
     {
-      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
-      "documentNumber": 79460,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.795235754324885,
-      "longitude": -43.00055052974716,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
       "documentNumber": 79474,
       "date": "2026-10-13T00:00:00.000Z",
@@ -460,6 +475,21 @@
       "locality": "Comunidade DO VAI QUEM QUER",
       "latitude": -22.664561547727303,
       "longitude": -43.292487620390396,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
+      "documentNumber": 79460,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.795235754324885,
+      "longitude": -43.00055052974716,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -629,11 +659,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
