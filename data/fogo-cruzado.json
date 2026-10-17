@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T23:50:43.180Z",
+  "generatedAt": "2026-10-17T01:37:24.392Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 57,
-  "lastUpdate": "2026-10-16T20:49:18-03:00",
+  "count": 46,
+  "lastUpdate": "2026-10-16T22:22:35-03:00",
   "occurrences": [
     {
       "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
@@ -26,6 +26,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
+      "documentNumber": 79499,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Complexo do Salgueiro - Porto do Rosa, São Gonçalo - RJ, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.7959312,
+      "longitude": -43.0393139,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -44,21 +59,6 @@
       "victims": []
     },
     {
-      "id": "26f67555-cd85-463a-af22-4993a2795b78",
-      "documentNumber": 79489,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885649979493987,
-      "longitude": -43.04086591186522,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "b5249d22-f464-437a-87d5-568d14630bf0",
       "documentNumber": 79494,
       "date": "2026-10-16T12:00:00.000Z",
@@ -71,6 +71,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "26f67555-cd85-463a-af22-4993a2795b78",
+      "documentNumber": 79489,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
+      "neighborhood": "MARIA PAULA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.885649979493987,
+      "longitude": -43.04086591186522,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -222,21 +237,6 @@
       "victims": []
     },
     {
-      "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
-      "documentNumber": 79465,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
-      "neighborhood": "PARQUE FLORA",
-      "subNeighborhood": "",
-      "locality": "BURACO DO BOI",
-      "latitude": -22.707769,
-      "longitude": -43.451663,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
       "documentNumber": 79464,
       "date": "2026-10-14T21:10:00.000Z",
@@ -247,6 +247,21 @@
       "latitude": -22.8997546,
       "longitude": -43.2285397,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
+      "documentNumber": 79465,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
+      "neighborhood": "PARQUE FLORA",
+      "subNeighborhood": "",
+      "locality": "BURACO DO BOI",
+      "latitude": -22.707769,
+      "longitude": -43.451663,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -406,21 +421,6 @@
       "victims": []
     },
     {
-      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
-      "documentNumber": 79474,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
-      "neighborhood": "CHACARAS RIO PETROPOLIS",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO VAI QUEM QUER",
-      "latitude": -22.664561547727303,
-      "longitude": -43.292487620390396,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
       "documentNumber": 79460,
       "date": "2026-10-13T00:00:00.000Z",
@@ -430,6 +430,21 @@
       "locality": "",
       "latitude": -22.795235754324885,
       "longitude": -43.00055052974716,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
+      "documentNumber": 79474,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
+      "neighborhood": "CHACARAS RIO PETROPOLIS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO VAI QUEM QUER",
+      "latitude": -22.664561547727303,
+      "longitude": -43.292487620390396,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -599,15 +614,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -686,11 +701,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
@@ -837,215 +852,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "379acac2-b3fd-412a-aa0d-cf3a9f9f8998",
-      "documentNumber": 79411,
-      "date": "2026-10-09T22:30:00.000Z",
-      "address": "Viaduto Prefeito Negrão de Lima - Madureira, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8764821,
-      "longitude": -43.3351852,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "3675f491-f84e-4f88-a7ef-5b58c32d594e",
-      "documentNumber": 79410,
-      "date": "2026-10-09T21:30:00.000Z",
-      "address": "Curral das Éguas - Magalhães Bastos, Rio de Janeiro - RJ, 21735-035, Brasil",
-      "neighborhood": "MAGALHAES BASTOS",
-      "subNeighborhood": "",
-      "locality": "Comunidade CURRAL DAS EGUAS",
-      "latitude": -22.870928282334425,
-      "longitude": -43.41883807176481,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "1f0a0cd2-b616-446c-b759-028cf979a4af",
-      "documentNumber": 79412,
-      "date": "2026-10-09T20:40:00.000Z",
-      "address": "Fonseca, Niterói - RJ, Brasil",
-      "neighborhood": "FONSECA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8813858,
-      "longitude": -43.0871384,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "d359ecdf-0d4c-4ff8-b29c-1decb0a67503",
-      "documentNumber": 79408,
-      "date": "2026-10-09T20:20:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "9cd772c7-bef7-48bf-a3e7-67b8449a3b98",
-      "documentNumber": 79409,
-      "date": "2026-10-09T18:00:00.000Z",
-      "address": "R. Herberth, Morro da Caixa d'Água do Vilar - Vilar dos Teles, São João de Meriti - RJ, 25570-070, Brasil",
-      "neighborhood": "VILAR DOS TELES",
-      "subNeighborhood": "",
-      "locality": "CAIXA DAGUA DO VILAR",
-      "latitude": -22.77163857136885,
-      "longitude": -43.35716445038478,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "0240116c-c7ae-4f4d-a90c-50cdd2c5eadd",
-      "documentNumber": 79404,
-      "date": "2026-10-09T17:40:00.000Z",
-      "address": "Comunidade Grão Pará - Jardim Paraíso, Paraíso, Nova Iguaçu - RJ, 26297-318, Brasil",
-      "neighborhood": "PARAISO",
-      "subNeighborhood": "JARDIM PARAISO",
-      "locality": "Comunidade GRAO PARA E GUACHA",
-      "latitude": -22.82238343402306,
-      "longitude": -43.594288781139404,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "b5f184b2-a220-4a0e-a3ad-376863c3081e",
-      "documentNumber": 79406,
-      "date": "2026-10-09T17:17:00.000Z",
-      "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
-      "neighborhood": "VILA MARGARIDA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO SEM TERRA",
-      "latitude": -22.875306614846412,
-      "longitude": -43.792335948774735,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "0e013539-738d-45b6-a5f8-a32c22992763",
-      "documentNumber": 79402,
-      "date": "2026-10-09T13:00:00.000Z",
-      "address": "R. Luísa de Carvalho - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-250, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.851787530899173,
-      "longitude": -43.31864288945068,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "d9193fee-ee31-4d49-8c72-c4dc6b97f1d4",
-      "documentNumber": 79407,
-      "date": "2026-10-09T12:00:00.000Z",
-      "address": "Rua Pereira Nunes - Tijuca, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9238523,
-      "longitude": -43.2362815,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "57ac69ce-8fe2-4046-9682-32476167a183",
-      "documentNumber": 79398,
-      "date": "2026-10-09T06:05:00.000Z",
-      "address": "Comunidade do Dique - Gramacho, Duque de Caxias - RJ, 25050-170, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO DIQUE",
-      "latitude": -22.74893635,
-      "longitude": -43.29262467,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "4a411a50-b7c7-4ebc-a414-a9499df395c5",
-      "documentNumber": 79395,
-      "date": "2026-10-09T04:57:00.000Z",
-      "address": "Rua Tremembé - Freguesia (Ilha do Governador), Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "FREGUESIA (ILHA)",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7903747,
-      "longitude": -43.1787136,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "76b5ebc0-7c99-421f-ab89-4e50e1ddaaad",
-      "documentNumber": 79394,
-      "date": "2026-10-09T04:23:00.000Z",
-      "address": "Batan - Realengo, Rio de Janeiro - RJ, 21730-410, Brasil",
-      "neighborhood": "REALENGO",
-      "subNeighborhood": "",
-      "locality": "BATAN",
-      "latitude": -22.86244519,
-      "longitude": -43.42516286,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }

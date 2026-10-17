@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T23:50:43.183Z",
+  "generatedAt": "2026-10-17T01:37:24.393Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 345,
+  "count": 346,
   "occurrences": [
     {
       "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
@@ -25,6 +25,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
+      "documentNumber": 79499,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Complexo do Salgueiro - Porto do Rosa, São Gonçalo - RJ, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.7959312,
+      "longitude": -43.0393139,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -598,15 +613,15 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -700,11 +715,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Agent"
         },
         {
