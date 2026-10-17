@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T21:30:13.852Z",
+  "generatedAt": "2026-10-17T23:20:38.840Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 353,
+  "count": 354,
   "occurrences": [
     {
       "id": "02d21279-c458-4d91-b42f-e18f2f03bbc6",
@@ -23,6 +23,21 @@
       "latitude": -22.8636832,
       "longitude": -43.2480472,
       "reason": "Arrastão",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "7e0fbc13-b811-4054-9768-ddebd81fbea4",
+      "documentNumber": 79515,
+      "date": "2026-10-17T16:58:00.000Z",
+      "address": "Complexo de Manguinhos - Manguinhos, Rio de Janeiro - RJ, 21865-470, Brasil",
+      "neighborhood": "MANGUINHOS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DE MANGUINHOS",
+      "latitude": -22.88179012748614,
+      "longitude": -43.245485464545645,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -728,11 +743,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {

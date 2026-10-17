@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T21:30:13.850Z",
+  "generatedAt": "2026-10-17T23:20:38.838Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 53,
-  "lastUpdate": "2026-10-17T18:15:03-03:00",
+  "count": 54,
+  "lastUpdate": "2026-10-17T19:26:53-03:00",
   "occurrences": [
     {
       "id": "02d21279-c458-4d91-b42f-e18f2f03bbc6",
@@ -24,6 +24,21 @@
       "latitude": -22.8636832,
       "longitude": -43.2480472,
       "reason": "Arrastão",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "7e0fbc13-b811-4054-9768-ddebd81fbea4",
+      "documentNumber": 79515,
+      "date": "2026-10-17T16:58:00.000Z",
+      "address": "Complexo de Manguinhos - Manguinhos, Rio de Janeiro - RJ, 21865-470, Brasil",
+      "neighborhood": "MANGUINHOS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DE MANGUINHOS",
+      "latitude": -22.88179012748614,
+      "longitude": -43.245485464545645,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -109,21 +124,6 @@
       "victims": []
     },
     {
-      "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
-      "documentNumber": 79507,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6426898,
-      "longitude": -43.2238197,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
       "documentNumber": 79497,
       "date": "2026-10-16T19:00:00.000Z",
@@ -133,6 +133,21 @@
       "locality": "Comunidade DO BARRO VERMELHO",
       "latitude": -22.74787062,
       "longitude": -43.31411117,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
+      "documentNumber": 79507,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6426898,
+      "longitude": -43.2238197,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -154,21 +169,6 @@
       "victims": []
     },
     {
-      "id": "26f67555-cd85-463a-af22-4993a2795b78",
-      "documentNumber": 79489,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885649979493987,
-      "longitude": -43.04086591186522,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "b5249d22-f464-437a-87d5-568d14630bf0",
       "documentNumber": 79494,
       "date": "2026-10-16T12:00:00.000Z",
@@ -181,6 +181,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "26f67555-cd85-463a-af22-4993a2795b78",
+      "documentNumber": 79489,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
+      "neighborhood": "MARIA PAULA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.885649979493987,
+      "longitude": -43.04086591186522,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -317,6 +332,21 @@
       "victims": []
     },
     {
+      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
+      "documentNumber": 79477,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
+      "neighborhood": "ENGENHEIRO BELFORD",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA LINHA",
+      "latitude": -22.8103846,
+      "longitude": -43.3787441,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "660d9fa1-9e54-46d1-83a0-363d878998eb",
       "documentNumber": 79511,
       "date": "2026-10-15T00:00:00.000Z",
@@ -335,21 +365,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
-      "documentNumber": 79477,
-      "date": "2026-10-15T00:00:00.000Z",
-      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
-      "neighborhood": "ENGENHEIRO BELFORD",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA LINHA",
-      "latitude": -22.8103846,
-      "longitude": -43.3787441,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
@@ -536,21 +551,6 @@
       "victims": []
     },
     {
-      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
-      "documentNumber": 79460,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.795235754324885,
-      "longitude": -43.00055052974716,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
       "documentNumber": 79474,
       "date": "2026-10-13T00:00:00.000Z",
@@ -560,6 +560,21 @@
       "locality": "Comunidade DO VAI QUEM QUER",
       "latitude": -22.664561547727303,
       "longitude": -43.292487620390396,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
+      "documentNumber": 79460,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.795235754324885,
+      "longitude": -43.00055052974716,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -729,11 +744,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
