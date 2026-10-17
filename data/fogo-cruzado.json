@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T01:37:24.392Z",
+  "generatedAt": "2026-10-17T06:15:42.487Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 46,
-  "lastUpdate": "2026-10-16T22:22:35-03:00",
+  "count": 47,
+  "lastUpdate": "2026-10-16T23:44:11-03:00",
   "occurrences": [
+    {
+      "id": "da680799-71b7-4947-8401-6c278a37278c",
+      "documentNumber": 79500,
+      "date": "2026-10-16T22:11:00.000Z",
+      "address": "Honório Gurgel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "HONORIO GURGEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.84950590803049,
+      "longitude": -43.357079918385296,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
       "documentNumber": 79497,
@@ -59,21 +74,6 @@
       "victims": []
     },
     {
-      "id": "b5249d22-f464-437a-87d5-568d14630bf0",
-      "documentNumber": 79494,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "26f67555-cd85-463a-af22-4993a2795b78",
       "documentNumber": 79489,
       "date": "2026-10-16T12:00:00.000Z",
@@ -86,6 +86,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "b5249d22-f464-437a-87d5-568d14630bf0",
+      "documentNumber": 79494,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
