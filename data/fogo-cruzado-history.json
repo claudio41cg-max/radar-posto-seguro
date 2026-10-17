@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T19:11:47.869Z",
+  "generatedAt": "2026-10-17T21:30:13.852Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 351,
+  "count": 353,
   "occurrences": [
+    {
+      "id": "02d21279-c458-4d91-b42f-e18f2f03bbc6",
+      "documentNumber": 79513,
+      "date": "2026-10-17T17:00:00.000Z",
+      "address": "Avenida Brasil - Bonsucesso, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BONSUCESSO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8636832,
+      "longitude": -43.2480472,
+      "reason": "Arrastão",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "8d081b4e-64b7-4375-809c-d1ae63eb5bce",
+      "documentNumber": 79512,
+      "date": "2026-10-17T15:00:00.000Z",
+      "address": "Rua Mario Larrúbia - Campo Grande, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CAMPO GRANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9520218,
+      "longitude": -43.5637629,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "a778b59f-d704-440c-81e5-46d0ab39d52b",
       "documentNumber": 79510,
@@ -693,11 +728,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {

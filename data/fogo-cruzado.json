@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T19:11:47.867Z",
+  "generatedAt": "2026-10-17T21:30:13.850Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 51,
-  "lastUpdate": "2026-10-17T12:11:24-03:00",
+  "count": 53,
+  "lastUpdate": "2026-10-17T18:15:03-03:00",
   "occurrences": [
+    {
+      "id": "02d21279-c458-4d91-b42f-e18f2f03bbc6",
+      "documentNumber": 79513,
+      "date": "2026-10-17T17:00:00.000Z",
+      "address": "Avenida Brasil - Bonsucesso, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BONSUCESSO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8636832,
+      "longitude": -43.2480472,
+      "reason": "Arrastão",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "8d081b4e-64b7-4375-809c-d1ae63eb5bce",
+      "documentNumber": 79512,
+      "date": "2026-10-17T15:00:00.000Z",
+      "address": "Rua Mario Larrúbia - Campo Grande, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CAMPO GRANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9520218,
+      "longitude": -43.5637629,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "a778b59f-d704-440c-81e5-46d0ab39d52b",
       "documentNumber": 79510,
@@ -74,21 +109,6 @@
       "victims": []
     },
     {
-      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
-      "documentNumber": 79497,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.74787062,
-      "longitude": -43.31411117,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
       "documentNumber": 79507,
       "date": "2026-10-16T19:00:00.000Z",
@@ -98,6 +118,21 @@
       "locality": "",
       "latitude": -22.6426898,
       "longitude": -43.2238197,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
+      "documentNumber": 79497,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -119,21 +154,6 @@
       "victims": []
     },
     {
-      "id": "b5249d22-f464-437a-87d5-568d14630bf0",
-      "documentNumber": 79494,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "26f67555-cd85-463a-af22-4993a2795b78",
       "documentNumber": 79489,
       "date": "2026-10-16T12:00:00.000Z",
@@ -146,6 +166,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "b5249d22-f464-437a-87d5-568d14630bf0",
+      "documentNumber": 79494,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -282,21 +317,6 @@
       "victims": []
     },
     {
-      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
-      "documentNumber": 79477,
-      "date": "2026-10-15T00:00:00.000Z",
-      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
-      "neighborhood": "ENGENHEIRO BELFORD",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA LINHA",
-      "latitude": -22.8103846,
-      "longitude": -43.3787441,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "660d9fa1-9e54-46d1-83a0-363d878998eb",
       "documentNumber": 79511,
       "date": "2026-10-15T00:00:00.000Z",
@@ -317,18 +337,18 @@
       ]
     },
     {
-      "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
-      "documentNumber": 79465,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
-      "neighborhood": "PARQUE FLORA",
+      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
+      "documentNumber": 79477,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
+      "neighborhood": "ENGENHEIRO BELFORD",
       "subNeighborhood": "",
-      "locality": "BURACO DO BOI",
-      "latitude": -22.707769,
-      "longitude": -43.451663,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
+      "locality": "Comunidade DA LINHA",
+      "latitude": -22.8103846,
+      "longitude": -43.3787441,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -342,6 +362,21 @@
       "latitude": -22.8997546,
       "longitude": -43.2285397,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
+      "documentNumber": 79465,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
+      "neighborhood": "PARQUE FLORA",
+      "subNeighborhood": "",
+      "locality": "BURACO DO BOI",
+      "latitude": -22.707769,
+      "longitude": -43.451663,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -501,21 +536,6 @@
       "victims": []
     },
     {
-      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
-      "documentNumber": 79474,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
-      "neighborhood": "CHACARAS RIO PETROPOLIS",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO VAI QUEM QUER",
-      "latitude": -22.664561547727303,
-      "longitude": -43.292487620390396,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
       "documentNumber": 79460,
       "date": "2026-10-13T00:00:00.000Z",
@@ -525,6 +545,21 @@
       "locality": "",
       "latitude": -22.795235754324885,
       "longitude": -43.00055052974716,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
+      "documentNumber": 79474,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
+      "neighborhood": "CHACARAS RIO PETROPOLIS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO VAI QUEM QUER",
+      "latitude": -22.664561547727303,
+      "longitude": -43.292487620390396,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -694,11 +729,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
