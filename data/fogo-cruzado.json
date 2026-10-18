@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T23:20:38.838Z",
+  "generatedAt": "2026-10-18T01:12:09.026Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 54,
-  "lastUpdate": "2026-10-17T19:26:53-03:00",
+  "count": 49,
+  "lastUpdate": "2026-10-17T21:45:29-03:00",
   "occurrences": [
     {
       "id": "02d21279-c458-4d91-b42f-e18f2f03bbc6",
@@ -24,6 +24,21 @@
       "latitude": -22.8636832,
       "longitude": -43.2480472,
       "reason": "Arrastão",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "decce640-4982-45e1-817c-8067a252acb2",
+      "documentNumber": 79517,
+      "date": "2026-10-17T17:00:00.000Z",
+      "address": "Avenida Brasil - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.842479,
+      "longitude": -43.3728459,
+      "reason": "Tentativa/Roubo de cargas",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -109,6 +124,21 @@
       "victims": []
     },
     {
+      "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
+      "documentNumber": 79507,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6426898,
+      "longitude": -43.2238197,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
       "documentNumber": 79499,
       "date": "2026-10-16T19:00:00.000Z",
@@ -139,21 +169,6 @@
       "victims": []
     },
     {
-      "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
-      "documentNumber": 79507,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6426898,
-      "longitude": -43.2238197,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "fc7afaf0-3f3a-44d4-8ffa-464f5ae4ec48",
       "documentNumber": 79490,
       "date": "2026-10-16T12:40:00.000Z",
@@ -164,6 +179,21 @@
       "latitude": -22.864856,
       "longitude": -43.2516132,
       "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "26f67555-cd85-463a-af22-4993a2795b78",
+      "documentNumber": 79489,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
+      "neighborhood": "MARIA PAULA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.885649979493987,
+      "longitude": -43.04086591186522,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -181,21 +211,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "26f67555-cd85-463a-af22-4993a2795b78",
-      "documentNumber": 79489,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885649979493987,
-      "longitude": -43.04086591186522,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     },
     {
@@ -367,21 +382,6 @@
       ]
     },
     {
-      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
-      "documentNumber": 79464,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8997546,
-      "longitude": -43.2285397,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
       "documentNumber": 79465,
       "date": "2026-10-14T21:10:00.000Z",
@@ -392,6 +392,21 @@
       "latitude": -22.707769,
       "longitude": -43.451663,
       "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
+      "documentNumber": 79464,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8997546,
+      "longitude": -43.2285397,
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -551,21 +566,6 @@
       "victims": []
     },
     {
-      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
-      "documentNumber": 79474,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
-      "neighborhood": "CHACARAS RIO PETROPOLIS",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO VAI QUEM QUER",
-      "latitude": -22.664561547727303,
-      "longitude": -43.292487620390396,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
       "documentNumber": 79460,
       "date": "2026-10-13T00:00:00.000Z",
@@ -575,6 +575,21 @@
       "locality": "",
       "latitude": -22.795235754324885,
       "longitude": -43.00055052974716,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
+      "documentNumber": 79474,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
+      "neighborhood": "CHACARAS RIO PETROPOLIS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO VAI QUEM QUER",
+      "latitude": -22.664561547727303,
+      "longitude": -43.292487620390396,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -740,11 +755,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -835,23 +850,23 @@
           "personType": "Agent"
         },
         {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Agent"
         }
       ]
@@ -869,118 +884,6 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "e22e7b91-d65e-4d7a-a787-9a9d26c38385",
-      "documentNumber": 79421,
-      "date": "2026-10-10T20:00:00.000Z",
-      "address": "Parque Paulista, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "CIDADE PARQUE PAULISTA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6459139,
-      "longitude": -43.2569864,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "e3eb677e-b9c2-4cda-b00e-40736578d84d",
-      "documentNumber": 79419,
-      "date": "2026-10-10T18:00:00.000Z",
-      "address": "Santa Teresa, Belford Roxo - RJ, Brasil",
-      "neighborhood": "SANTA TEREZA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.741442,
-      "longitude": -43.3449457,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "f44654e9-9bc3-4964-b372-654946ef6fc7",
-      "documentNumber": 79418,
-      "date": "2026-10-10T17:30:00.000Z",
-      "address": " Conjunto da Marinha - Marapicu, Nova Iguaçu - RJ, 26295-021, Brasil",
-      "neighborhood": "MARAPICU",
-      "subNeighborhood": "",
-      "locality": "CONJUNTO DA MARINHA",
-      "latitude": -22.795322102202363,
-      "longitude": -43.5804958875885,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "fbaa01ec-81fe-4595-b092-b7ac5c8a8773",
-      "documentNumber": 79417,
-      "date": "2026-10-10T13:00:00.000Z",
-      "address": "Favelinha Renascer (Chácara do Tanque) - Tanque, Rio de Janeiro - RJ, 22733-240, Brasil",
-      "neighborhood": "TANQUE",
-      "subNeighborhood": "",
-      "locality": "FAVELINHA DA RENASCER (OU CHACARA DO TANQUE)",
-      "latitude": -22.915556,
-      "longitude": -43.3625,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "f59063a9-10b2-40f6-843f-b0e43c93fe32",
-      "documentNumber": 79432,
-      "date": "2026-10-10T08:00:00.000Z",
-      "address": "Estr. Santa Eugênia, Jardim Sete de Abril - Paciência, Rio de Janeiro - RJ, 23520-560, Brasil",
-      "neighborhood": "PACIENCIA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.932775714025894,
-      "longitude": -43.63593430991662,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c506d0c5-ff10-48ac-8c45-6bac5ea8738a",
-      "documentNumber": 79416,
-      "date": "2026-10-10T02:00:00.000Z",
-      "address": "Comunidade Danon, Nova Iguaçu - RJ, 26270-360, Brasil",
-      "neighborhood": "DANON",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DANON",
-      "latitude": -22.774444926360875,
-      "longitude": -43.50907464845658,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
       "victims": []
     }
   ]

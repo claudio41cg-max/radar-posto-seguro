@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T23:20:38.840Z",
+  "generatedAt": "2026-10-18T01:12:09.028Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 354,
+  "count": 355,
   "occurrences": [
     {
       "id": "02d21279-c458-4d91-b42f-e18f2f03bbc6",
@@ -23,6 +23,21 @@
       "latitude": -22.8636832,
       "longitude": -43.2480472,
       "reason": "Arrastão",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "decce640-4982-45e1-817c-8067a252acb2",
+      "documentNumber": 79517,
+      "date": "2026-10-17T17:00:00.000Z",
+      "address": "Avenida Brasil - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.842479,
+      "longitude": -43.3728459,
+      "reason": "Tentativa/Roubo de cargas",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -739,11 +754,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -849,23 +864,23 @@
           "personType": "Agent"
         },
         {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
           "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Agent"
         }
       ]
