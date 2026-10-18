@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T19:35:11.973Z",
+  "generatedAt": "2026-10-18T21:48:00.746Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-10-18T15:06:47-03:00",
+  "count": 56,
+  "lastUpdate": "2026-10-18T18:14:35-03:00",
   "occurrences": [
+    {
+      "id": "aae9c0eb-d361-4597-921b-ca05aa58ae1e",
+      "documentNumber": 79525,
+      "date": "2026-10-18T16:08:00.000Z",
+      "address": "Rua Figueiredo Rocha - Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8066018,
+      "longitude": -43.3127416,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "11040e04-b822-4a12-a80b-619923944ccf",
       "documentNumber": 79523,
@@ -219,21 +234,6 @@
       "victims": []
     },
     {
-      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
-      "documentNumber": 79497,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.74787062,
-      "longitude": -43.31411117,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
       "documentNumber": 79499,
       "date": "2026-10-16T19:00:00.000Z",
@@ -246,6 +246,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
+      "documentNumber": 79497,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {

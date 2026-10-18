@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T19:35:11.974Z",
+  "generatedAt": "2026-10-18T21:48:00.748Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 361,
+  "count": 362,
   "occurrences": [
+    {
+      "id": "aae9c0eb-d361-4597-921b-ca05aa58ae1e",
+      "documentNumber": 79525,
+      "date": "2026-10-18T16:08:00.000Z",
+      "address": "Rua Figueiredo Rocha - Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
+      "latitude": -22.8066018,
+      "longitude": -43.3127416,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "11040e04-b822-4a12-a80b-619923944ccf",
       "documentNumber": 79523,
