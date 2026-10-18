@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T17:30:11.690Z",
+  "generatedAt": "2026-10-18T19:35:11.973Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -11,7 +11,7 @@
     "days": 7
   },
   "count": 55,
-  "lastUpdate": "2026-10-18T12:56:32-03:00",
+  "lastUpdate": "2026-10-18T15:06:47-03:00",
   "occurrences": [
     {
       "id": "11040e04-b822-4a12-a80b-619923944ccf",
@@ -77,12 +77,12 @@
       "id": "7e02533a-70f9-4b5f-bf2b-3b42d86ed4cd",
       "documentNumber": 79518,
       "date": "2026-10-17T22:10:00.000Z",
-      "address": "Morro do Cajueiro (Complexo do Cajueiro) - Madureira, Rio de Janeiro - RJ, 21360-060, Brasil",
+      "address": "Rua Tatuí, Morro do Cajueiro (Complexo do Cajueiro) - Madureira, Rio de Janeiro - RJ, 21360-060, Brasil",
       "neighborhood": "MADUREIRA",
       "subNeighborhood": "",
       "locality": "MORRO DO CAJUEIRO (COMPLEXO DO CAJUEIRO)",
-      "latitude": -22.86465862,
-      "longitude": -43.33657044,
+      "latitude": -22.864088617144063,
+      "longitude": -43.33680972422789,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
