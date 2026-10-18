@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T10:52:40.228Z",
+  "generatedAt": "2026-10-18T14:28:16.772Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,58 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 355,
+  "count": 359,
   "occurrences": [
+    {
+      "id": "20539586-f7b8-4a74-a338-af77699b154c",
+      "documentNumber": 79521,
+      "date": "2026-10-18T10:46:00.000Z",
+      "address": "Comunidade do Lixão - Centro, Duque de Caxias - RJ, 25030-350, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7957272,
+      "longitude": -43.3090067,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "cffe7d66-eca5-43f8-8e67-010912426175",
+      "documentNumber": 79519,
+      "date": "2026-10-17T23:30:00.000Z",
+      "address": "Av. Min Edgard Romero - Madureira, Rio de Janeiro - RJ, 21360-110, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.864575652578896,
+      "longitude": -43.33388710323751,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7e02533a-70f9-4b5f-bf2b-3b42d86ed4cd",
+      "documentNumber": 79518,
+      "date": "2026-10-17T22:10:00.000Z",
+      "address": "Morro do Cajueiro (Complexo do Cajueiro) - Madureira, Rio de Janeiro - RJ, 21360-060, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CAJUEIRO (COMPLEXO DO CAJUEIRO)",
+      "latitude": -22.86465862,
+      "longitude": -43.33657044,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "02d21279-c458-4d91-b42f-e18f2f03bbc6",
       "documentNumber": 79513,
@@ -118,6 +168,21 @@
       "latitude": -22.84950590803049,
       "longitude": -43.357079918385296,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "28317372-9f11-4536-b828-75d77cef0bb5",
+      "documentNumber": 79520,
+      "date": "2026-10-16T21:00:00.000Z",
+      "address": "Tijuca, Rio de Janeiro - RJ, 20510-230, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.93122576911425,
+      "longitude": -43.236724818119065,
+      "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -754,11 +819,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
