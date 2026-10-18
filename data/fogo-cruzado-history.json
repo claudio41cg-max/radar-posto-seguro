@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T14:28:16.772Z",
+  "generatedAt": "2026-10-18T17:30:11.693Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,38 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 359,
+  "count": 361,
   "occurrences": [
+    {
+      "id": "11040e04-b822-4a12-a80b-619923944ccf",
+      "documentNumber": 79523,
+      "date": "2026-10-18T12:00:00.000Z",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "720c5c6a-af08-4d02-b953-665f347dcce1",
+      "documentNumber": 79522,
+      "date": "2026-10-18T11:31:00.000Z",
+      "address": "Comunidade Furquim Mendes - Vigário Geral, Rio de Janeiro - RJ, 21240-800, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "FURQUIM MENDES",
+      "latitude": -22.805109646920855,
+      "longitude": -43.316591602460726,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "20539586-f7b8-4a74-a338-af77699b154c",
       "documentNumber": 79521,
@@ -819,11 +849,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -933,19 +963,19 @@
           "personType": "Agent"
         },
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Agent"
         }
       ]
