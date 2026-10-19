@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T23:43:08.760Z",
+  "generatedAt": "2026-10-19T01:48:25.956Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 56,
+  "count": 49,
   "lastUpdate": "2026-10-18T18:14:35-03:00",
   "occurrences": [
     {
@@ -249,21 +249,6 @@
       "victims": []
     },
     {
-      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
-      "documentNumber": 79497,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.74787062,
-      "longitude": -43.31411117,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
       "documentNumber": 79507,
       "date": "2026-10-16T19:00:00.000Z",
@@ -273,6 +258,21 @@
       "locality": "",
       "latitude": -22.6426898,
       "longitude": -43.2238197,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
+      "documentNumber": 79497,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -457,21 +457,6 @@
       "victims": []
     },
     {
-      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
-      "documentNumber": 79477,
-      "date": "2026-10-15T00:00:00.000Z",
-      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
-      "neighborhood": "ENGENHEIRO BELFORD",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA LINHA",
-      "latitude": -22.8103846,
-      "longitude": -43.3787441,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "660d9fa1-9e54-46d1-83a0-363d878998eb",
       "documentNumber": 79511,
       "date": "2026-10-15T00:00:00.000Z",
@@ -490,6 +475,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
+      "documentNumber": 79477,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
+      "neighborhood": "ENGENHEIRO BELFORD",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA LINHA",
+      "latitude": -22.8103846,
+      "longitude": -43.3787441,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
@@ -676,21 +676,6 @@
       "victims": []
     },
     {
-      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
-      "documentNumber": 79460,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.795235754324885,
-      "longitude": -43.00055052974716,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
       "documentNumber": 79474,
       "date": "2026-10-13T00:00:00.000Z",
@@ -700,6 +685,21 @@
       "locality": "Comunidade DO VAI QUEM QUER",
       "latitude": -22.664561547727303,
       "longitude": -43.292487620390396,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
+      "documentNumber": 79460,
+      "date": "2026-10-13T00:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.795235754324885,
+      "longitude": -43.00055052974716,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -828,172 +828,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "15ef3c3b-0e05-41c8-92a6-3f1e6e076f3c",
-      "documentNumber": 79439,
-      "date": "2026-10-11T22:00:00.000Z",
-      "address": "Rua Carlinda Dutra, Morro do Cruzeiro - Porto Novo, São Gonçalo - RJ, Brasil",
-      "neighborhood": "PORTO NOVO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CRUZEIRO",
-      "latitude": -22.8229192,
-      "longitude": -43.0722513,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "0ed36103-3d4b-463d-8ab8-08213c63f23c",
-      "documentNumber": 79437,
-      "date": "2026-10-11T21:00:00.000Z",
-      "address": "Rua Sizenando Nabuco, Morro do Amorim - Manguinhos, Rio de Janeiro - RJ, 21041-250, Brasil",
-      "neighborhood": "MANGUINHOS",
-      "subNeighborhood": "",
-      "locality": "MORRO DO AMORIM (COMPLEXO DE MANGUINHOS)",
-      "latitude": -22.874590230275516,
-      "longitude": -43.24955561865956,
-      "reason": "Ataque a civis",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "13c647f0-faeb-4174-8a9d-7ff43b9f74f6",
-      "documentNumber": 79459,
-      "date": "2026-10-11T19:00:00.000Z",
-      "address": "Manoel Reis I, Nilópolis - RJ, 26510-618, Brasil",
-      "neighborhood": "MANOEL REIS I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.81612298204391,
-      "longitude": -43.42419912110609,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "853b5268-24db-43a6-9bb3-c70c91572c31",
-      "documentNumber": 79430,
-      "date": "2026-10-11T15:00:00.000Z",
-      "address": "Rua Clarimundo de Melo - Quintino Bocaiúva, Rio de Janeiro - RJ, 21311-282, Brasil",
-      "neighborhood": "QUINTINO BOCAIUVA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.89228172066775,
-      "longitude": -43.32362257871247,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "0029c4ed-6ce7-48f0-a66f-8c72e29fcfe3",
-      "documentNumber": 79429,
-      "date": "2026-10-11T10:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24110-233, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.78815645788595,
-      "longitude": -43.00212715684998,
-      "reason": "Sequestro/Cárcere Privado",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "3e695b17-b8f2-4144-9362-54d6d70f8e39",
-      "documentNumber": 79425,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "R. Guilherme Moreira - Gardênia Azul, Rio de Janeiro - RJ, 22765-220, Brasil",
-      "neighborhood": "GARDENIA AZUL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.95389731109883,
-      "longitude": -43.3504460028192,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "6c64f9ce-426f-4724-ae48-a60564d1ef5b",
-      "documentNumber": 79424,
-      "date": "2026-10-11T05:00:00.000Z",
-      "address": "Comunidade Parque Colúmbia - Pavuna, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARQUE COLUMBIA",
-      "latitude": -22.811657,
-      "longitude": -43.3394558,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
