@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T17:54:33.716Z",
+  "generatedAt": "2026-10-20T21:30:47.099Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 371,
+  "count": 374,
   "occurrences": [
+    {
+      "id": "1605dc3b-50dc-48fc-980b-2ab344390fa6",
+      "documentNumber": 79553,
+      "date": "2026-10-20T17:02:00.000Z",
+      "address": "Rua São Carlos - Estácio, Rio de Janeiro - RJ, 20250-052, Brasil",
+      "neighborhood": "ESTACIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.913945457411447,
+      "longitude": -43.20406818674585,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "fcc5d825-347b-459c-8552-8ed2c413ce60",
       "documentNumber": 79547,
@@ -26,6 +46,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "d03a8617-75f6-4e4f-ba45-8585542afb22",
+      "documentNumber": 79551,
+      "date": "2026-10-20T10:00:00.000Z",
+      "address": "Comunidade Santa Maria - Jacarepaguá, Rio de Janeiro - RJ, 22723-240, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE SANTA MARIA",
+      "latitude": -22.9146816,
+      "longitude": -43.4206295,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "92e3a899-959e-4ee8-af65-ee213efda69f",
@@ -101,6 +141,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "1be8063e-e1a1-4f6b-a51d-a8ece5cb90a3",
+      "documentNumber": 79549,
+      "date": "2026-10-19T15:00:00.000Z",
+      "address": "Buraco do Boi - Barreto, Niterói - RJ, 24110-814, Brasil",
+      "neighborhood": "BARRETO",
+      "subNeighborhood": "",
+      "locality": "BURACO DO BOI",
+      "latitude": -22.86790246,
+      "longitude": -43.10790926,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "74ead151-7275-4252-a434-bba1cfbafa66",

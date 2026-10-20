@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T17:54:33.714Z",
+  "generatedAt": "2026-10-20T21:30:47.098Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 50,
-  "lastUpdate": "2026-10-20T13:29:40-03:00",
+  "count": 53,
+  "lastUpdate": "2026-10-20T18:03:29-03:00",
   "occurrences": [
+    {
+      "id": "1605dc3b-50dc-48fc-980b-2ab344390fa6",
+      "documentNumber": 79553,
+      "date": "2026-10-20T17:02:00.000Z",
+      "address": "Rua São Carlos - Estácio, Rio de Janeiro - RJ, 20250-052, Brasil",
+      "neighborhood": "ESTACIO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.913945457411447,
+      "longitude": -43.20406818674585,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "fcc5d825-347b-459c-8552-8ed2c413ce60",
       "documentNumber": 79547,
@@ -27,6 +47,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "d03a8617-75f6-4e4f-ba45-8585542afb22",
+      "documentNumber": 79551,
+      "date": "2026-10-20T10:00:00.000Z",
+      "address": "Comunidade Santa Maria - Jacarepaguá, Rio de Janeiro - RJ, 22723-240, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE SANTA MARIA",
+      "latitude": -22.9146816,
+      "longitude": -43.4206295,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "92e3a899-959e-4ee8-af65-ee213efda69f",
@@ -102,6 +142,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "1be8063e-e1a1-4f6b-a51d-a8ece5cb90a3",
+      "documentNumber": 79549,
+      "date": "2026-10-19T15:00:00.000Z",
+      "address": "Buraco do Boi - Barreto, Niterói - RJ, 24110-814, Brasil",
+      "neighborhood": "BARRETO",
+      "subNeighborhood": "",
+      "locality": "BURACO DO BOI",
+      "latitude": -22.86790246,
+      "longitude": -43.10790926,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "74ead151-7275-4252-a434-bba1cfbafa66",
@@ -361,6 +416,21 @@
       "victims": []
     },
     {
+      "id": "12addb53-01be-4b15-81db-a7766a2082e9",
+      "documentNumber": 79531,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6426898,
+      "longitude": -43.2238197,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
       "documentNumber": 79497,
       "date": "2026-10-16T19:00:00.000Z",
@@ -388,21 +458,6 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "12addb53-01be-4b15-81db-a7766a2082e9",
-      "documentNumber": 79531,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6426898,
-      "longitude": -43.2238197,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
       "victims": []
     },
     {
@@ -614,21 +669,6 @@
       "victims": []
     },
     {
-      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
-      "documentNumber": 79477,
-      "date": "2026-10-15T00:00:00.000Z",
-      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
-      "neighborhood": "ENGENHEIRO BELFORD",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA LINHA",
-      "latitude": -22.8103846,
-      "longitude": -43.3787441,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "660d9fa1-9e54-46d1-83a0-363d878998eb",
       "documentNumber": 79511,
       "date": "2026-10-15T00:00:00.000Z",
@@ -649,18 +689,18 @@
       ]
     },
     {
-      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
-      "documentNumber": 79464,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
+      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
+      "documentNumber": 79477,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
+      "neighborhood": "ENGENHEIRO BELFORD",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8997546,
-      "longitude": -43.2285397,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
+      "locality": "Comunidade DA LINHA",
+      "latitude": -22.8103846,
+      "longitude": -43.3787441,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -674,6 +714,21 @@
       "latitude": -22.707769,
       "longitude": -43.451663,
       "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
+      "documentNumber": 79464,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8997546,
+      "longitude": -43.2285397,
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
