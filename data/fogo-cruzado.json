@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T23:45:37.102Z",
+  "generatedAt": "2026-10-20T02:08:48.723Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-10-19T20:04:18-03:00",
+  "count": 46,
+  "lastUpdate": "2026-10-19T22:01:20-03:00",
   "occurrences": [
+    {
+      "id": "6932aefc-6a9f-464d-ba53-9f1055029e26",
+      "documentNumber": 79534,
+      "date": "2026-10-19T20:00:00.000Z",
+      "address": "Av. Brasil - Penha, Rio de Janeiro - RJ, 21021-090, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.83380839809242,
+      "longitude": -43.26430338941041,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "74ead151-7275-4252-a434-bba1cfbafa66",
       "documentNumber": 79529,
@@ -770,131 +790,6 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "2e2a48c8-5760-4917-9a0c-84f903494282",
-      "documentNumber": 79444,
-      "date": "2026-10-12T23:08:00.000Z",
-      "address": "Mandela, Manguinhos, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MANGUINHOS",
-      "subNeighborhood": "",
-      "locality": "MANDELA (COMPLEXO DE MANGUINHOS)",
-      "latitude": -22.8825193,
-      "longitude": -43.2442626,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "8c5b580e-fce9-4819-89ea-71f8cdc1cb7e",
-      "documentNumber": 79451,
-      "date": "2026-10-12T20:00:00.000Z",
-      "address": "Shangrilá, Belford Roxo - RJ, 26127-120, Brasil",
-      "neighborhood": "SHANGRI LA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.722694574936202,
-      "longitude": -43.41434243952776,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "fa0c98ab-b6be-41ed-aff2-cf0d69a886a2",
-      "documentNumber": 79441,
-      "date": "2026-10-12T16:20:00.000Z",
-      "address": "R. Baldraco - Cachambi, Rio de Janeiro - RJ, 20780-220, Brasil",
-      "neighborhood": "CACHAMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.894076897166563,
-      "longitude": -43.27225956336823,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8da34bac-8f1b-45ba-bac3-a9cd05f913d3",
-      "documentNumber": 79450,
-      "date": "2026-10-12T15:00:00.000Z",
-      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DOURADOS",
-      "latitude": -22.82650326,
-      "longitude": -43.29951507,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a614706d-4242-41bb-ad1c-a2361150f025",
-      "documentNumber": 79440,
-      "date": "2026-10-12T08:00:00.000Z",
-      "address": "Morro da Fé, Penha Circular, Rio de Janeiro - RJ, 21211-470, Brasil",
-      "neighborhood": "PENHA CIRCULAR",
-      "subNeighborhood": "",
-      "locality": "MORRO DA FE (COMPLEXO DA PENHA)",
-      "latitude": -22.845277033026417,
-      "longitude": -43.29689323221898,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "19cabc6f-099d-402d-9161-905ca3d8378c",
-      "documentNumber": 79433,
-      "date": "2026-10-12T06:51:00.000Z",
-      "address": "Comunidade Furquim Mendes - Vigário Geral, Rio de Janeiro - RJ, 21240-800, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "FURQUIM MENDES",
-      "latitude": -22.805109646920855,
-      "longitude": -43.316591602460726,
-      "reason": "Disputa",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a38d190b-106a-4c75-85a1-715acc87d881",
-      "documentNumber": 79434,
-      "date": "2026-10-12T04:48:00.000Z",
-      "address": "Costa Barros, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8246094,
-      "longitude": -43.3726806,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
       "victims": []
     }
   ]

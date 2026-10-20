@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T23:45:37.103Z",
+  "generatedAt": "2026-10-20T02:08:48.725Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 366,
+  "count": 367,
   "occurrences": [
+    {
+      "id": "6932aefc-6a9f-464d-ba53-9f1055029e26",
+      "documentNumber": 79534,
+      "date": "2026-10-19T20:00:00.000Z",
+      "address": "Av. Brasil - Penha, Rio de Janeiro - RJ, 21021-090, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.83380839809242,
+      "longitude": -43.26430338941041,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "74ead151-7275-4252-a434-bba1cfbafa66",
       "documentNumber": 79529,
