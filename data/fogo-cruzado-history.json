@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T07:40:49.210Z",
+  "generatedAt": "2026-10-20T17:54:33.716Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,18 +10,88 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 367,
+  "count": 371,
   "occurrences": [
+    {
+      "id": "fcc5d825-347b-459c-8552-8ed2c413ce60",
+      "documentNumber": 79547,
+      "date": "2026-10-20T10:30:00.000Z",
+      "address": "Praça Onze de Junho - Centro, Rio de Janeiro - RJ, 20091-060, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9066521,
+      "longitude": -43.1957906,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "92e3a899-959e-4ee8-af65-ee213efda69f",
+      "documentNumber": 79544,
+      "date": "2026-10-20T09:30:00.000Z",
+      "address": "Mangueira, Mangueira - Rio de Janeiro - RJ, 20943-000, Brasil",
+      "neighborhood": "MANGUEIRA",
+      "subNeighborhood": "",
+      "locality": "MANGUEIRA",
+      "latitude": -22.905412247287845,
+      "longitude": -43.23469370211487,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "c90b877d-9688-42d4-8811-5b3312290576",
+      "documentNumber": 79541,
+      "date": "2026-10-20T09:00:00.000Z",
+      "address": "Comunidade Cascatinha - Vargem Grande, Rio de Janeiro - RJ, 22783-415, Brasil",
+      "neighborhood": "VARGEM GRANDE",
+      "subNeighborhood": "",
+      "locality": "Comunidade CASCATINHA",
+      "latitude": -22.978969129667732,
+      "longitude": -43.480523418804644,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "a6c9e42c-8c1b-4a2f-a295-9e368b7540a7",
+      "documentNumber": 79539,
+      "date": "2026-10-20T08:14:00.000Z",
+      "address": "Morro do Urubu (Complexo do Urubu) - Piedade, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PIEDADE",
+      "subNeighborhood": "",
+      "locality": "MORRO DO URUBU (COMPLEXO DO URUBU)",
+      "latitude": -22.87657404,
+      "longitude": -43.30422326,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        }
+      ]
+    },
     {
       "id": "6932aefc-6a9f-464d-ba53-9f1055029e26",
       "documentNumber": 79534,
       "date": "2026-10-19T20:00:00.000Z",
-      "address": "Av. Brasil - Penha, Rio de Janeiro - RJ, 21021-090, Brasil",
+      "address": "Av. Brasil - Penha, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "PENHA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.83380839809242,
-      "longitude": -43.26430338941041,
+      "latitude": -22.830134939874352,
+      "longitude": -43.27056362959519,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
