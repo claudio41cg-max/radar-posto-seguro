@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T04:32:03.919Z",
+  "generatedAt": "2026-10-21T09:32:20.812Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 46,
-  "lastUpdate": "2026-10-20T21:08:48-03:00",
+  "count": 47,
+  "lastUpdate": "2026-10-21T06:21:34-03:00",
   "occurrences": [
+    {
+      "id": "f965a811-6fc4-4c82-b8e3-6e11b6a68028",
+      "documentNumber": 79556,
+      "date": "2026-10-21T04:54:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-430, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.860558330276074,
+      "longitude": -43.31652059476989,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "1605dc3b-50dc-48fc-980b-2ab344390fa6",
       "documentNumber": 79553,
