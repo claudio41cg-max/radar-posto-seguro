@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T18:52:51.743Z",
+  "generatedAt": "2026-10-21T22:14:44.812Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,37 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 48,
-  "lastUpdate": "2026-10-21T14:52:47-03:00",
+  "count": 50,
+  "lastUpdate": "2026-10-21T17:30:12-03:00",
   "occurrences": [
+    {
+      "id": "5afb0867-312b-4fef-910e-0d411a4198c6",
+      "documentNumber": 79561,
+      "date": "2026-10-21T15:00:00.000Z",
+      "address": " Rua Eneida Gomes - Jardim Amendoeira, São Gonçalo - RJ, 24730-100, Brasil",
+      "neighborhood": "JARDIM AMENDOEIRA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.830548169718938,
+      "longitude": -42.98669781534363,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "65f4447f-8ad8-4828-aa00-311060926c1d",
       "documentNumber": 79557,
@@ -32,6 +60,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "de8a93e8-2856-467d-9f71-b52d15541a0d",
+      "documentNumber": 79560,
+      "date": "2026-10-21T10:00:00.000Z",
+      "address": "Comunidade Ana Clara - Cangulo, Duque de Caxias - RJ, 25221-110, Brasil",
+      "neighborhood": "CANGULO",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE ANA CLARA",
+      "latitude": -22.699194235000558,
+      "longitude": -43.23697735301588,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "f965a811-6fc4-4c82-b8e3-6e11b6a68028",
@@ -560,21 +603,6 @@
       "victims": []
     },
     {
-      "id": "26f67555-cd85-463a-af22-4993a2795b78",
-      "documentNumber": 79489,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885649979493987,
-      "longitude": -43.04086591186522,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "b5249d22-f464-437a-87d5-568d14630bf0",
       "documentNumber": 79494,
       "date": "2026-10-16T12:00:00.000Z",
@@ -587,6 +615,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "26f67555-cd85-463a-af22-4993a2795b78",
+      "documentNumber": 79489,
+      "date": "2026-10-16T12:00:00.000Z",
+      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
+      "neighborhood": "MARIA PAULA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.885649979493987,
+      "longitude": -43.04086591186522,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
