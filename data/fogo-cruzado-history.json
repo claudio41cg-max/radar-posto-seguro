@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T14:36:23.998Z",
+  "generatedAt": "2026-10-21T18:52:51.745Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 376,
+  "count": 377,
   "occurrences": [
+    {
+      "id": "65f4447f-8ad8-4828-aa00-311060926c1d",
+      "documentNumber": 79557,
+      "date": "2026-10-21T11:30:00.000Z",
+      "address": "R. São Clemente - Botafogo, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BOTAFOGO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9508671,
+      "longitude": -43.1936229,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "f965a811-6fc4-4c82-b8e3-6e11b6a68028",
       "documentNumber": 79556,
