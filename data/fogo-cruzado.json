@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T21:30:47.098Z",
+  "generatedAt": "2026-10-21T00:04:15.958Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 53,
+  "count": 45,
   "lastUpdate": "2026-10-20T18:03:29-03:00",
   "occurrences": [
     {
@@ -27,6 +27,10 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
         {
           "situation": "Wounded",
           "personType": "Civilian"
@@ -416,6 +420,21 @@
       "victims": []
     },
     {
+      "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
+      "documentNumber": 79499,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Complexo do Salgueiro - Porto do Rosa, São Gonçalo - RJ, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.7959312,
+      "longitude": -43.0393139,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "12addb53-01be-4b15-81db-a7766a2082e9",
       "documentNumber": 79531,
       "date": "2026-10-16T19:00:00.000Z",
@@ -443,21 +462,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
-      "documentNumber": 79499,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Complexo do Salgueiro - Porto do Rosa, São Gonçalo - RJ, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
-      "latitude": -22.7959312,
-      "longitude": -43.0393139,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     },
     {
@@ -669,6 +673,21 @@
       "victims": []
     },
     {
+      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
+      "documentNumber": 79477,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
+      "neighborhood": "ENGENHEIRO BELFORD",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA LINHA",
+      "latitude": -22.8103846,
+      "longitude": -43.3787441,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "660d9fa1-9e54-46d1-83a0-363d878998eb",
       "documentNumber": 79511,
       "date": "2026-10-15T00:00:00.000Z",
@@ -689,18 +708,18 @@
       ]
     },
     {
-      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
-      "documentNumber": 79477,
-      "date": "2026-10-15T00:00:00.000Z",
-      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
-      "neighborhood": "ENGENHEIRO BELFORD",
+      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
+      "documentNumber": 79464,
+      "date": "2026-10-14T21:10:00.000Z",
+      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "SAO CRISTOVAO",
       "subNeighborhood": "",
-      "locality": "Comunidade DA LINHA",
-      "latitude": -22.8103846,
-      "longitude": -43.3787441,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
+      "locality": "",
+      "latitude": -22.8997546,
+      "longitude": -43.2285397,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -714,21 +733,6 @@
       "latitude": -22.707769,
       "longitude": -43.451663,
       "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
-      "documentNumber": 79464,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8997546,
-      "longitude": -43.2285397,
-      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -773,145 +777,6 @@
       "locality": "",
       "latitude": -22.8245262,
       "longitude": -43.3004665,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "596b838a-2dde-4e5e-8199-b8a7c22b1d4b",
-      "documentNumber": 79458,
-      "date": "2026-10-13T22:00:00.000Z",
-      "address": "Tv. Estr. de Ferro - Rodilândia, Nova Iguaçu - RJ, 26083-320, Brasil",
-      "neighborhood": "RODILANDIA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.73955957089445,
-      "longitude": -43.511075545675226,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a42da3a7-39da-47ed-a169-727b65feb3ce",
-      "documentNumber": 79452,
-      "date": "2026-10-13T20:30:00.000Z",
-      "address": "Rua Nelson da Fonseca, Sarapuí - Senador Camará, Rio de Janeiro - RJ, 21831-440, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.891671961306603,
-      "longitude": -43.486609144210824,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1c8e8842-8960-4177-af3d-520030e21e59",
-      "documentNumber": 79456,
-      "date": "2026-10-13T16:00:00.000Z",
-      "address": "Nova Aurora, Belford Roxo - RJ, 26155-290, Brasil",
-      "neighborhood": "NOVA AURORA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7215235810289,
-      "longitude": -43.40289642701416,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "810037dc-1aaf-4ff9-b512-993611a1a155",
-      "documentNumber": 79449,
-      "date": "2026-10-13T14:15:00.000Z",
-      "address": "Av. Nova Aurora - Nova Aurora, Belford Roxo - RJ, 26155-070, Brasil",
-      "neighborhood": "NOVA AURORA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.722330001691166,
-      "longitude": -43.39899286835654,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "33e488a0-d648-42e5-8b76-5431abb7e0e2",
-      "documentNumber": 79447,
-      "date": "2026-10-13T09:00:00.000Z",
-      "address": "Morro do Preventório - Charitas, Niterói - RJ, 24370-480, Brasil",
-      "neighborhood": "CHARITAS",
-      "subNeighborhood": "",
-      "locality": "MORRO DO PREVENTORIO",
-      "latitude": -22.93426724,
-      "longitude": -43.09835005,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "864ee1a6-0f9c-45ce-baf4-62fda1e3f9d8",
-      "documentNumber": 79445,
-      "date": "2026-10-13T05:42:00.000Z",
-      "address": "Conjunto da Marinha - Ipiranga, Nova Iguaçu - RJ, 26293-546, Brasil",
-      "neighborhood": "IPIRANGA",
-      "subNeighborhood": "",
-      "locality": "CONJUNTO DA MARINHA",
-      "latitude": -22.796509,
-      "longitude": -43.577524,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4cd22476-b9a5-42b0-a2f1-18a16d57acfc",
-      "documentNumber": 79474,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Comunidade do Vai Quem Quer - Chácaras Rio Petrópolis, Duque de Caxias - RJ, 25243-423, Brasil",
-      "neighborhood": "CHACARAS RIO PETROPOLIS",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO VAI QUEM QUER",
-      "latitude": -22.664561547727303,
-      "longitude": -43.292487620390396,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "6bf71e76-17dd-447a-920c-a10a522d11e0",
-      "documentNumber": 79460,
-      "date": "2026-10-13T00:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24715-642, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.795235754324885,
-      "longitude": -43.00055052974716,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
