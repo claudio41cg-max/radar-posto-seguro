@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T00:04:15.959Z",
+  "generatedAt": "2026-10-21T04:32:03.921Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 374,
+  "count": 375,
   "occurrences": [
     {
       "id": "1605dc3b-50dc-48fc-980b-2ab344390fa6",
@@ -35,6 +35,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "dc43fd10-7dc0-43b2-a020-cb582864e933",
+      "documentNumber": 79555,
+      "date": "2026-10-20T17:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr.  - Acari, Rio de Janeiro - RJ, 21530-014, Brasil",
+      "neighborhood": "ACARI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.82532791896826,
+      "longitude": -43.34874944683532,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "fcc5d825-347b-459c-8552-8ed2c413ce60",

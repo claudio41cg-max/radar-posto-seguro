@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T00:04:15.958Z",
+  "generatedAt": "2026-10-21T04:32:03.919Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 45,
-  "lastUpdate": "2026-10-20T18:03:29-03:00",
+  "count": 46,
+  "lastUpdate": "2026-10-20T21:08:48-03:00",
   "occurrences": [
     {
       "id": "1605dc3b-50dc-48fc-980b-2ab344390fa6",
@@ -36,6 +36,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "dc43fd10-7dc0-43b2-a020-cb582864e933",
+      "documentNumber": 79555,
+      "date": "2026-10-20T17:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr.  - Acari, Rio de Janeiro - RJ, 21530-014, Brasil",
+      "neighborhood": "ACARI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.82532791896826,
+      "longitude": -43.34874944683532,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "fcc5d825-347b-459c-8552-8ed2c413ce60",
@@ -420,18 +435,18 @@
       "victims": []
     },
     {
-      "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
-      "documentNumber": 79499,
+      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
+      "documentNumber": 79497,
       "date": "2026-10-16T19:00:00.000Z",
-      "address": "Complexo do Salgueiro - Porto do Rosa, São Gonçalo - RJ, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
-      "latitude": -22.7959312,
-      "longitude": -43.0393139,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
+      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -450,18 +465,18 @@
       "victims": []
     },
     {
-      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
-      "documentNumber": 79497,
+      "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
+      "documentNumber": 79499,
       "date": "2026-10-16T19:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.74787062,
-      "longitude": -43.31411117,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
+      "address": "Complexo do Salgueiro - Porto do Rosa, São Gonçalo - RJ, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.7959312,
+      "longitude": -43.0393139,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -673,21 +688,6 @@
       "victims": []
     },
     {
-      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
-      "documentNumber": 79477,
-      "date": "2026-10-15T00:00:00.000Z",
-      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
-      "neighborhood": "ENGENHEIRO BELFORD",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA LINHA",
-      "latitude": -22.8103846,
-      "longitude": -43.3787441,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "660d9fa1-9e54-46d1-83a0-363d878998eb",
       "documentNumber": 79511,
       "date": "2026-10-15T00:00:00.000Z",
@@ -706,6 +706,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "ee5407f5-b2e7-4728-802c-30df519b2611",
+      "documentNumber": 79477,
+      "date": "2026-10-15T00:00:00.000Z",
+      "address": "Comunidade da Linha - Engenheiro Belford, São João de Meriti - RJ, 25520-170, Brasil",
+      "neighborhood": "ENGENHEIRO BELFORD",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA LINHA",
+      "latitude": -22.8103846,
+      "longitude": -43.3787441,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
