@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T10:32:05.010Z",
+  "generatedAt": "2026-10-22T15:32:25.256Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,73 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 380,
+  "count": 384,
   "occurrences": [
+    {
+      "id": "ac84139b-1da3-434c-91d3-d34320eb55f3",
+      "documentNumber": 79567,
+      "date": "2026-10-22T06:15:00.000Z",
+      "address": "Rua Maricá - Campinho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CAMPINHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8882297,
+      "longitude": -43.3443665,
+      "reason": "Operação policial",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "d24ce6d0-1668-415e-af44-7e4a10ddf8a4",
+      "documentNumber": 79563,
+      "date": "2026-10-22T00:01:00.000Z",
+      "address": "Itaipu - Belford Roxo - RJ, 26153-022, Brasil",
+      "neighborhood": "ITAIPU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7188069,
+      "longitude": -43.4231985,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "72b2c059-9466-49b2-8bf9-88702024a20e",
+      "documentNumber": 79564,
+      "date": "2026-10-21T23:40:00.000Z",
+      "address": "Rua Doralice, Santa Cruz da Serra, Duque de Caxias, Rio de Janeiro, Brasil",
+      "neighborhood": "SANTA CRUZ DA SERRA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.642968,
+      "longitude": -43.280173,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "1c4bf353-1e18-4a00-97d1-085e2a7798da",
+      "documentNumber": 79566,
+      "date": "2026-10-21T22:00:00.000Z",
+      "address": "Rua Sampaio Corrêa - Colônia Juliano Moreira - Jacarepaguá, Rio de Janeiro - RJ, 22713-550, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "COLONIA JULIANO MOREIRA",
+      "latitude": -22.9376948,
+      "longitude": -43.3933531,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "5afb0867-312b-4fef-910e-0d411a4198c6",
       "documentNumber": 79561,
@@ -27,12 +92,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
         },
         {
           "situation": "Wounded",
