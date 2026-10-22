@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T00:42:54.984Z",
+  "generatedAt": "2026-10-22T05:26:11.820Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 45,
-  "lastUpdate": "2026-10-21T17:30:12-03:00",
+  "count": 46,
+  "lastUpdate": "2026-10-21T23:36:44-03:00",
   "occurrences": [
     {
       "id": "5afb0867-312b-4fef-910e-0d411a4198c6",
@@ -72,6 +72,21 @@
       "latitude": -22.699194235000558,
       "longitude": -43.23697735301588,
       "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "bc9519f2-6b46-423e-8756-93950bbeb64d",
+      "documentNumber": 79562,
+      "date": "2026-10-21T08:00:00.000Z",
+      "address": "Comunidade Para Pedro - Colégio, Rio de Janeiro - RJ, 21235-290, Brasil",
+      "neighborhood": "COLEGIO",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARA PEDRO",
+      "latitude": -22.838926229254493,
+      "longitude": -43.333652439999994,
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
