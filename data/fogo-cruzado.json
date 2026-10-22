@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T22:14:44.812Z",
+  "generatedAt": "2026-10-22T00:42:54.984Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 50,
+  "count": 45,
   "lastUpdate": "2026-10-21T17:30:12-03:00",
   "occurrences": [
     {
@@ -28,12 +28,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
@@ -513,21 +513,6 @@
       "victims": []
     },
     {
-      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
-      "documentNumber": 79497,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.74787062,
-      "longitude": -43.31411117,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "12addb53-01be-4b15-81db-a7766a2082e9",
       "documentNumber": 79531,
       "date": "2026-10-16T19:00:00.000Z",
@@ -555,6 +540,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
+      "documentNumber": 79497,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -795,81 +795,6 @@
       "locality": "Comunidade DA LINHA",
       "latitude": -22.8103846,
       "longitude": -43.3787441,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "45526b81-a880-47dc-8e69-a9e344e6c985",
-      "documentNumber": 79464,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8997546,
-      "longitude": -43.2285397,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "a3466083-8c3c-4107-9b42-838c1465b5ef",
-      "documentNumber": 79465,
-      "date": "2026-10-14T21:10:00.000Z",
-      "address": "Buraco do Boi - Parque Flora, Nova Iguaçu - RJ, 26040-200, Brasil",
-      "neighborhood": "PARQUE FLORA",
-      "subNeighborhood": "",
-      "locality": "BURACO DO BOI",
-      "latitude": -22.707769,
-      "longitude": -43.451663,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "20b98471-37bf-495b-aefe-75d13a1712af",
-      "documentNumber": 79463,
-      "date": "2026-10-14T18:50:00.000Z",
-      "address": "Rua São Luiz Gonzaga - São Cristóvão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "SAO CRISTOVAO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8997546,
-      "longitude": -43.2285397,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "c20b205b-4cfc-4e17-8fea-e33d503d148b",
-      "documentNumber": 79462,
-      "date": "2026-10-14T18:05:00.000Z",
-      "address": "Cordovil, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8239006,
-      "longitude": -43.3010908,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "3b2ce689-e792-4bf3-a6e9-0a942ecfa207",
-      "documentNumber": 79461,
-      "date": "2026-10-14T13:45:00.000Z",
-      "address": "Cordovil, Rio de Janeiro - RJ, 21250-500, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8245262,
-      "longitude": -43.3004665,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
