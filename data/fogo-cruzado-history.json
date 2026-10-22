@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T15:32:25.256Z",
+  "generatedAt": "2026-10-22T19:23:44.966Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 384,
+  "count": 386,
   "occurrences": [
     {
       "id": "ac84139b-1da3-434c-91d3-d34320eb55f3",
@@ -22,10 +22,54 @@
       "locality": "",
       "latitude": -22.8882297,
       "longitude": -43.3443665,
-      "reason": "Operação policial",
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "a8702e9a-51c5-4808-901b-c260bc6743df",
+      "documentNumber": 79569,
+      "date": "2026-10-22T05:00:00.000Z",
+      "address": "Rua Quarentena, Comunidade Cova do Boi - São Bento, Duque de Caxias - RJ, 25040-005, Brasil",
+      "neighborhood": "SAO BENTO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.734454077504754,
+      "longitude": -43.30777147037067,
+      "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "01612cbd-913b-439f-b23c-50f3ebbdd472",
+      "documentNumber": 79570,
+      "date": "2026-10-22T04:00:00.000Z",
+      "address": "R. Oitenta - Jardim Atlântico Leste, Maricá - RJ, 24900-970, Brasil",
+      "neighborhood": "JARDIM ATLANTICO LESTE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.960807,
+      "longitude": -42.929833,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "d24ce6d0-1668-415e-af44-7e4a10ddf8a4",
@@ -97,11 +141,11 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -150,7 +194,7 @@
       "locality": "Comunidade PARA PEDRO",
       "latitude": -22.838926229254493,
       "longitude": -43.333652439999994,
-      "reason": "Operação policial",
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
