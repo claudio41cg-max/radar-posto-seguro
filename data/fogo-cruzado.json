@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T19:23:44.964Z",
+  "generatedAt": "2026-10-22T22:40:04.371Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-10-22T15:22:57-03:00",
+  "count": 53,
+  "lastUpdate": "2026-10-22T18:19:28-03:00",
   "occurrences": [
+    {
+      "id": "59795c61-b434-43d8-ae1e-ef54ac03ae23",
+      "documentNumber": 79572,
+      "date": "2026-10-22T15:10:00.000Z",
+      "address": "Estr. Miguel Couto - Miguel Couto, Nova Iguaçu - RJ, 26153-130, Brasil",
+      "neighborhood": "MIGUEL COUTO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.708499760410188,
+      "longitude": -43.42386653196796,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "ac84139b-1da3-434c-91d3-d34320eb55f3",
       "documentNumber": 79567,
@@ -137,16 +157,16 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
           "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
