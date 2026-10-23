@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T15:52:03.125Z",
+  "generatedAt": "2026-10-23T19:34:40.128Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 48,
-  "lastUpdate": "2026-10-23T09:21:02-03:00",
+  "count": 50,
+  "lastUpdate": "2026-10-23T16:16:48-03:00",
   "occurrences": [
+    {
+      "id": "cd32d5c4-044e-4d76-8ca6-c6ef369a205f",
+      "documentNumber": 79581,
+      "date": "2026-10-23T08:56:00.000Z",
+      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.81949929,
+      "longitude": -43.36693375,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "420c5c02-68a4-4eb8-a745-fcf55f2b6230",
       "documentNumber": 79576,
@@ -126,11 +150,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -169,6 +193,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "5e1a004a-d8e2-4416-8865-c88e7caab45b",
+      "documentNumber": 79578,
+      "date": "2026-10-22T00:00:00.000Z",
+      "address": "Cidade Parque Paulista, Duque de Caxias - RJ, 25261-420, Brasil",
+      "neighborhood": "CIDADE PARQUE PAULISTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.643770541368625,
+      "longitude": -43.26078241139318,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "72b2c059-9466-49b2-8bf9-88702024a20e",
@@ -220,12 +264,12 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Agent"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
