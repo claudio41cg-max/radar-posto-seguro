@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T05:55:11.051Z",
+  "generatedAt": "2026-10-23T11:27:23.754Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,37 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 45,
-  "lastUpdate": "2026-10-22T18:19:28-03:00",
+  "count": 46,
+  "lastUpdate": "2026-10-23T05:34:05-03:00",
   "occurrences": [
+    {
+      "id": "6b836587-169d-471a-94d2-0fee228c9b39",
+      "documentNumber": 79574,
+      "date": "2026-10-22T20:00:00.000Z",
+      "address": "Rua André Rocha - Biquinha, Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9297337,
+      "longitude": -43.3742609,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "59795c61-b434-43d8-ae1e-ef54ac03ae23",
       "documentNumber": 79572,
@@ -63,11 +91,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -157,16 +185,16 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
         }
       ]
     },
@@ -672,21 +700,6 @@
       "victims": []
     },
     {
-      "id": "12addb53-01be-4b15-81db-a7766a2082e9",
-      "documentNumber": 79531,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6426898,
-      "longitude": -43.2238197,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
       "documentNumber": 79497,
       "date": "2026-10-16T19:00:00.000Z",
@@ -696,6 +709,21 @@
       "locality": "Comunidade DO BARRO VERMELHO",
       "latitude": -22.74787062,
       "longitude": -43.31411117,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "12addb53-01be-4b15-81db-a7766a2082e9",
+      "documentNumber": 79531,
+      "date": "2026-10-16T19:00:00.000Z",
+      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6426898,
+      "longitude": -43.2238197,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,

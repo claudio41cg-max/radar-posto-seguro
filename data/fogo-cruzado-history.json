@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T05:55:11.052Z",
+  "generatedAt": "2026-10-23T11:27:23.756Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,36 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 387,
+  "count": 388,
   "occurrences": [
+    {
+      "id": "6b836587-169d-471a-94d2-0fee228c9b39",
+      "documentNumber": 79574,
+      "date": "2026-10-22T20:00:00.000Z",
+      "address": "Rua André Rocha - Biquinha, Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9297337,
+      "longitude": -43.3742609,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "59795c61-b434-43d8-ae1e-ef54ac03ae23",
       "documentNumber": 79572,
@@ -62,11 +90,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -156,16 +184,16 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
         }
       ]
     },
