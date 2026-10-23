@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T11:27:23.756Z",
+  "generatedAt": "2026-10-23T15:52:03.126Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 388,
+  "count": 390,
   "occurrences": [
+    {
+      "id": "420c5c02-68a4-4eb8-a745-fcf55f2b6230",
+      "documentNumber": 79576,
+      "date": "2026-10-23T04:36:00.000Z",
+      "address": "Rua Juranda - Curicica, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9439916,
+      "longitude": -43.3813987,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "a25b7d2c-d441-4654-9b76-2793bc3dae51",
+      "documentNumber": 79575,
+      "date": "2026-10-23T04:24:00.000Z",
+      "address": "Comunidade do Vai Quem Quer - Chácaras Rio-Petrópolis, Duque de Caxias - RJ, 25243-150, Brasil",
+      "neighborhood": "CHACARAS RIO PETROPOLIS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO VAI QUEM QUER",
+      "latitude": -22.66769695,
+      "longitude": -43.29536637,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "6b836587-169d-471a-94d2-0fee228c9b39",
       "documentNumber": 79574,
@@ -78,7 +113,7 @@
     {
       "id": "a8702e9a-51c5-4808-901b-c260bc6743df",
       "documentNumber": 79569,
-      "date": "2026-10-22T05:00:00.000Z",
+      "date": "2026-10-22T05:20:00.000Z",
       "address": "Rua Quarentena, Comunidade Cova do Boi - São Bento, Duque de Caxias - RJ, 25040-005, Brasil",
       "neighborhood": "SAO BENTO",
       "subNeighborhood": "",
@@ -189,11 +224,11 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
