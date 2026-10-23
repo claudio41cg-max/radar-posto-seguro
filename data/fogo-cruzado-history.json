@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T19:34:40.130Z",
+  "generatedAt": "2026-10-23T22:34:43.486Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -440,7 +440,7 @@
       "locality": "Comunidade CASCATINHA",
       "latitude": -22.978969129667732,
       "longitude": -43.480523418804644,
-      "reason": "Operação policial",
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
