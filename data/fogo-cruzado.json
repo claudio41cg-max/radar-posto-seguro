@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T01:00:04.414Z",
+  "generatedAt": "2026-10-24T05:39:36.349Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -126,11 +126,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -195,6 +195,30 @@
       ]
     },
     {
+      "id": "5e1a004a-d8e2-4416-8865-c88e7caab45b",
+      "documentNumber": 79578,
+      "date": "2026-10-22T05:20:00.000Z",
+      "address": "Rua Quarentena - São Bento, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "SAO BENTO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7329828,
+      "longitude": -43.3067935,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "01612cbd-913b-439f-b23c-50f3ebbdd472",
       "documentNumber": 79570,
       "date": "2026-10-22T04:00:00.000Z",
@@ -228,26 +252,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "5e1a004a-d8e2-4416-8865-c88e7caab45b",
-      "documentNumber": 79578,
-      "date": "2026-10-22T00:00:00.000Z",
-      "address": "Cidade Parque Paulista, Duque de Caxias - RJ, 25261-420, Brasil",
-      "neighborhood": "CIDADE PARQUE PAULISTA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.643770541368625,
-      "longitude": -43.26078241139318,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     },
     {
       "id": "72b2c059-9466-49b2-8bf9-88702024a20e",
@@ -299,16 +303,16 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Agent"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
