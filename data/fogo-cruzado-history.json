@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T22:34:43.486Z",
+  "generatedAt": "2026-10-24T01:00:04.415Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 392,
+  "count": 394,
   "occurrences": [
+    {
+      "id": "88863601-bfbb-4bec-a05f-04d62b77c18b",
+      "documentNumber": 79586,
+      "date": "2026-10-23T18:30:00.000Z",
+      "address": "Estr. do Piaí - Sepetiba, Rio de Janeiro - RJ, 23530-611, Brasil",
+      "neighborhood": "SEPETIBA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.970324314373155,
+      "longitude": -43.68979675527881,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "18c96bfa-c01c-4f3e-b646-6e6321738bed",
+      "documentNumber": 79587,
+      "date": "2026-10-23T18:00:00.000Z",
+      "address": "R. Antônio João - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.82657773733483,
+      "longitude": -43.30042706103111,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "cd32d5c4-044e-4d76-8ca6-c6ef369a205f",
       "documentNumber": 79581,
@@ -90,11 +125,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -263,16 +298,16 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T22:34:43.483Z",
+  "generatedAt": "2026-10-24T01:00:04.414Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 50,
-  "lastUpdate": "2026-10-23T18:05:55-03:00",
+  "count": 41,
+  "lastUpdate": "2026-10-23T21:03:55-03:00",
   "occurrences": [
+    {
+      "id": "88863601-bfbb-4bec-a05f-04d62b77c18b",
+      "documentNumber": 79586,
+      "date": "2026-10-23T18:30:00.000Z",
+      "address": "Estr. do Piaí - Sepetiba, Rio de Janeiro - RJ, 23530-611, Brasil",
+      "neighborhood": "SEPETIBA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.970324314373155,
+      "longitude": -43.68979675527881,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "18c96bfa-c01c-4f3e-b646-6e6321738bed",
+      "documentNumber": 79587,
+      "date": "2026-10-23T18:00:00.000Z",
+      "address": "R. Antônio João - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.82657773733483,
+      "longitude": -43.30042706103111,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "cd32d5c4-044e-4d76-8ca6-c6ef369a205f",
       "documentNumber": 79581,
@@ -91,11 +126,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -264,16 +299,16 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
           "situation": "Dead",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
         }
       ]
     },
@@ -732,176 +767,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "da680799-71b7-4947-8401-6c278a37278c",
-      "documentNumber": 79500,
-      "date": "2026-10-16T22:11:00.000Z",
-      "address": "Honório Gurgel, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "HONORIO GURGEL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.84950590803049,
-      "longitude": -43.357079918385296,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "28317372-9f11-4536-b828-75d77cef0bb5",
-      "documentNumber": 79520,
-      "date": "2026-10-16T21:00:00.000Z",
-      "address": "Tijuca, Rio de Janeiro - RJ, 20530-080, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.93830035928807,
-      "longitude": -43.24659545343798,
-      "reason": "Outro",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "deb78823-fd5f-45fb-8875-37d813dc8a75",
-      "documentNumber": 79497,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho, Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.74787062,
-      "longitude": -43.31411117,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "c3b5df4e-2c03-4068-b79f-373fe5ba818a",
-      "documentNumber": 79499,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Complexo do Salgueiro - Porto do Rosa, São Gonçalo - RJ, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
-      "latitude": -22.7959312,
-      "longitude": -43.0393139,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "12addb53-01be-4b15-81db-a7766a2082e9",
-      "documentNumber": 79531,
-      "date": "2026-10-16T19:00:00.000Z",
-      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6426898,
-      "longitude": -43.2238197,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "699a88c8-d6f2-44bd-8b26-c35a035562d9",
-      "documentNumber": 79530,
-      "date": "2026-10-16T18:00:00.000Z",
-      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6426898,
-      "longitude": -43.2238197,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "95b324f1-6108-4be7-8912-ebbdf194ba63",
-      "documentNumber": 79507,
-      "date": "2026-10-16T17:00:00.000Z",
-      "address": "Imbariê, Duque de Caxias - RJ, 25266-462, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6426898,
-      "longitude": -43.2238197,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "fc7afaf0-3f3a-44d4-8ffa-464f5ae4ec48",
-      "documentNumber": 79490,
-      "date": "2026-10-16T12:40:00.000Z",
-      "address": "Av. Nova York - Cidade dos Aliados - Bonsucesso, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BONSUCESSO",
-      "subNeighborhood": "",
-      "locality": "CIDADE DOS ALIADOS",
-      "latitude": -22.864856,
-      "longitude": -43.2516132,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "26f67555-cd85-463a-af22-4993a2795b78",
-      "documentNumber": 79489,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Maria Paula, Niterói - RJ, 24325-220, Brasil",
-      "neighborhood": "MARIA PAULA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885649979493987,
-      "longitude": -43.04086591186522,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "b5249d22-f464-437a-87d5-568d14630bf0",
-      "documentNumber": 79494,
-      "date": "2026-10-16T12:00:00.000Z",
-      "address": "Morro da Lagartixa (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA LAGARTIXA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "2db8055f-7c10-4023-b52d-922d40491fef",
-      "documentNumber": 79488,
-      "date": "2026-10-16T00:59:00.000Z",
-      "address": "Morro do Santo Cristo - Fonseca, Niterói - RJ, 24130-308, Brasil",
-      "neighborhood": "FONSECA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO SANTO CRISTO (COMPLEXO DO SANTO CRISTO)",
-      "latitude": -22.876769777555676,
-      "longitude": -43.0903831011946,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }
