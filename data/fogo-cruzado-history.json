@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T23:47:36.788Z",
+  "generatedAt": "2026-10-25T01:43:59.582Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 394,
+  "count": 396,
   "occurrences": [
+    {
+      "id": "09ca37e0-377b-4643-b53f-fc7cb05282ce",
+      "documentNumber": 79597,
+      "date": "2026-10-24T17:50:00.000Z",
+      "address": "Fonseca, Niterói - RJ, Brasil",
+      "neighborhood": "FONSECA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8813858,
+      "longitude": -43.0871384,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "d7c0e7ed-153a-4663-9608-dcac74edeef0",
+      "documentNumber": 79596,
+      "date": "2026-10-24T16:00:00.000Z",
+      "address": "Complexo do Chapadão - Pavuna, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.823392484725293,
+      "longitude": -43.38063027473572,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "88863601-bfbb-4bec-a05f-04d62b77c18b",
       "documentNumber": 79586,
@@ -303,11 +338,11 @@
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",

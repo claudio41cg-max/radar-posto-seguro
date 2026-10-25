@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T23:47:36.786Z",
+  "generatedAt": "2026-10-25T01:43:59.581Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 41,
-  "lastUpdate": "2026-10-24T17:47:46-03:00",
+  "count": 36,
+  "lastUpdate": "2026-10-24T21:15:32-03:00",
   "occurrences": [
+    {
+      "id": "09ca37e0-377b-4643-b53f-fc7cb05282ce",
+      "documentNumber": 79597,
+      "date": "2026-10-24T17:50:00.000Z",
+      "address": "Fonseca, Niterói - RJ, Brasil",
+      "neighborhood": "FONSECA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8813858,
+      "longitude": -43.0871384,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "d7c0e7ed-153a-4663-9608-dcac74edeef0",
+      "documentNumber": 79596,
+      "date": "2026-10-24T16:00:00.000Z",
+      "address": "Complexo do Chapadão - Pavuna, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "PAVUNA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.823392484725293,
+      "longitude": -43.38063027473572,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "88863601-bfbb-4bec-a05f-04d62b77c18b",
       "documentNumber": 79586,
@@ -171,16 +206,16 @@
       "victims": []
     },
     {
-      "id": "a8702e9a-51c5-4808-901b-c260bc6743df",
-      "documentNumber": 79569,
+      "id": "5e1a004a-d8e2-4416-8865-c88e7caab45b",
+      "documentNumber": 79578,
       "date": "2026-10-22T05:20:00.000Z",
-      "address": "Rua Quarentena, Comunidade Cova do Boi - São Bento, Duque de Caxias - RJ, 25040-005, Brasil",
+      "address": "Rua Quarentena - São Bento, Duque de Caxias - RJ, Brasil",
       "neighborhood": "SAO BENTO",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.734454077504754,
-      "longitude": -43.30777147037067,
-      "reason": "Homicidio/Tentativa",
+      "latitude": -22.7329828,
+      "longitude": -43.3067935,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -195,16 +230,16 @@
       ]
     },
     {
-      "id": "5e1a004a-d8e2-4416-8865-c88e7caab45b",
-      "documentNumber": 79578,
+      "id": "a8702e9a-51c5-4808-901b-c260bc6743df",
+      "documentNumber": 79569,
       "date": "2026-10-22T05:20:00.000Z",
-      "address": "Rua Quarentena - São Bento, Duque de Caxias - RJ, Brasil",
+      "address": "Rua Quarentena, Comunidade Cova do Boi - São Bento, Duque de Caxias - RJ, 25040-005, Brasil",
       "neighborhood": "SAO BENTO",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.7329828,
-      "longitude": -43.3067935,
-      "reason": "Disputa",
+      "latitude": -22.734454077504754,
+      "longitude": -43.30777147037067,
+      "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -304,11 +339,11 @@
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
@@ -655,121 +690,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "cffe7d66-eca5-43f8-8e67-010912426175",
-      "documentNumber": 79519,
-      "date": "2026-10-17T23:30:00.000Z",
-      "address": "Av. Min Edgard Romero - Madureira, Rio de Janeiro - RJ, 21360-110, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.864575652578896,
-      "longitude": -43.33388710323751,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "7e02533a-70f9-4b5f-bf2b-3b42d86ed4cd",
-      "documentNumber": 79518,
-      "date": "2026-10-17T22:10:00.000Z",
-      "address": "Rua Tatuí, Morro do Cajueiro (Complexo do Cajueiro) - Madureira, Rio de Janeiro - RJ, 21360-060, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CAJUEIRO (COMPLEXO DO CAJUEIRO)",
-      "latitude": -22.864088617144063,
-      "longitude": -43.33680972422789,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "decce640-4982-45e1-817c-8067a252acb2",
-      "documentNumber": 79517,
-      "date": "2026-10-17T17:00:00.000Z",
-      "address": "Avenida Brasil - Guadalupe, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GUADALUPE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.842479,
-      "longitude": -43.3728459,
-      "reason": "Tentativa/Roubo de cargas",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "7e0fbc13-b811-4054-9768-ddebd81fbea4",
-      "documentNumber": 79515,
-      "date": "2026-10-17T16:58:00.000Z",
-      "address": "Complexo de Manguinhos - Manguinhos, Rio de Janeiro - RJ, 21865-470, Brasil",
-      "neighborhood": "MANGUINHOS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DE MANGUINHOS",
-      "latitude": -22.88179012748614,
-      "longitude": -43.245485464545645,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "8d081b4e-64b7-4375-809c-d1ae63eb5bce",
-      "documentNumber": 79512,
-      "date": "2026-10-17T15:00:00.000Z",
-      "address": "R. Mario Larrúbia, Jardim Peruche - Campo Grande, Rio de Janeiro - RJ, 23040-300, Brasil",
-      "neighborhood": "CAMPO GRANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.95112424839739,
-      "longitude": -43.5636051003789,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a778b59f-d704-440c-81e5-46d0ab39d52b",
-      "documentNumber": 79510,
-      "date": "2026-10-17T10:30:00.000Z",
-      "address": "Vila do Pinheiro - Maré, Rio de Janeiro - RJ, 21046-185, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "VILA DO PINHEIRO (COMPLEXO DA MARE)",
-      "latitude": -22.86742212,
-      "longitude": -43.23812972,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "4d1c1f90-6020-40db-8c00-f700d8db33eb",
-      "documentNumber": 79504,
-      "date": "2026-10-17T03:00:00.000Z",
-      "address": "Av. do Contorno - Parada Morabi, Duque de Caxias - RJ, 25265-340, Brasil",
-      "neighborhood": "PARADA MORABI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.66267747600141,
-      "longitude": -43.22656669546417,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
