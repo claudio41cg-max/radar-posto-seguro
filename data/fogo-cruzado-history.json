@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T19:17:37.590Z",
+  "generatedAt": "2026-10-25T21:52:11.111Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 396,
+  "count": 397,
   "occurrences": [
+    {
+      "id": "93c916d2-7401-4bdc-8a17-9af3995f7556",
+      "documentNumber": 79601,
+      "date": "2026-10-24T22:00:00.000Z",
+      "address": "Morro do Castro, São Gonçalo - RJ, 24410-540, Brasil",
+      "neighborhood": "MORRO DO CASTRO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO CASTRO",
+      "latitude": -22.866564420000007,
+      "longitude": -43.06912448344237,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "09ca37e0-377b-4643-b53f-fc7cb05282ce",
       "documentNumber": 79597,
@@ -160,11 +175,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -219,11 +234,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
