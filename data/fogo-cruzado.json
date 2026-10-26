@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T14:07:32.781Z",
+  "generatedAt": "2026-10-26T19:52:20.990Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,14 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 34,
-  "lastUpdate": "2026-10-26T09:01:16-03:00",
+  "count": 36,
+  "lastUpdate": "2026-10-26T16:21:48-03:00",
   "occurrences": [
+    {
+      "id": "58f1e222-dc48-4447-9e15-54e563322128",
+      "documentNumber": 79606,
+      "date": "2026-10-26T02:00:00.000Z",
+      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.81949929,
+      "longitude": -43.36693375,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "abdde4c1-52fd-4f72-8c12-0a5086b0e8df",
+      "documentNumber": 79604,
+      "date": "2026-10-25T23:19:00.000Z",
+      "address": "Av. Dr. Mario Guimarães - Centro, Nova Iguaçu - RJ, 26255-160, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.76038019197422,
+      "longitude": -43.45400775493955,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "dc306750-d337-422c-851a-e8e5c9779299",
       "documentNumber": 79603,
       "date": "2026-10-25T22:00:00.000Z",
-      "address": "Comunidade da Fazendinha - Rua Antônio Austregésilo - Complexo do Alemão, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua Antônio Austregésilo, Comunidade da Fazendinha - Complexo do Alemão, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "COMPLEXO DO ALEMAO",
       "subNeighborhood": "",
       "locality": "Comunidade DA FAZENDINHA (COMPLEXO DO 18)",
@@ -37,7 +67,7 @@
       "id": "93c916d2-7401-4bdc-8a17-9af3995f7556",
       "documentNumber": 79601,
       "date": "2026-10-24T22:00:00.000Z",
-      "address": "Morro do Castro, São Gonçalo - RJ, 24410-540, Brasil",
+      "address": "Morro do Castro, Morro do Castro - São Gonçalo - RJ, 24410-540, Brasil",
       "neighborhood": "MORRO DO CASTRO",
       "subNeighborhood": "",
       "locality": "MORRO DO CASTRO",
@@ -220,11 +250,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -398,11 +428,11 @@
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
