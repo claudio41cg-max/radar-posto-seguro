@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T19:52:20.992Z",
+  "generatedAt": "2026-10-26T23:44:18.771Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 401,
+  "count": 402,
   "occurrences": [
+    {
+      "id": "58e656e4-a192-48f0-9725-1453829dcb20",
+      "documentNumber": 79607,
+      "date": "2026-10-26T06:00:00.000Z",
+      "address": "Rodovia RJ 113 - Adrianópolis, Nova Iguaçu - RJ, 26050-000, Brasil",
+      "neighborhood": "ADRIANOPOLIS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.660543970597352,
+      "longitude": -43.51310375899964,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "58f1e222-dc48-4447-9e15-54e563322128",
       "documentNumber": 79606,
@@ -249,11 +269,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -427,11 +447,11 @@
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
