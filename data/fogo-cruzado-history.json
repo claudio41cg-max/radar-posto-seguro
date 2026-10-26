@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T07:02:52.948Z",
+  "generatedAt": "2026-10-26T14:07:32.783Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 397,
+  "count": 399,
   "occurrences": [
+    {
+      "id": "dc306750-d337-422c-851a-e8e5c9779299",
+      "documentNumber": 79603,
+      "date": "2026-10-25T22:00:00.000Z",
+      "address": "Comunidade da Fazendinha - Rua Antônio Austregésilo - Complexo do Alemão, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "COMPLEXO DO ALEMAO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA FAZENDINHA (COMPLEXO DO 18)",
+      "latitude": -22.8657949,
+      "longitude": -43.2767301,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "93c916d2-7401-4bdc-8a17-9af3995f7556",
       "documentNumber": 79601,
@@ -41,6 +61,30 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "1ca6cee6-02cc-414d-9786-16896db06742",
+      "documentNumber": 79602,
+      "date": "2026-10-24T17:30:00.000Z",
+      "address": "Xavantes, Belford Roxo - RJ, Brasil",
+      "neighborhood": "XAVANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7375441,
+      "longitude": -43.3987237,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "d7c0e7ed-153a-4663-9608-dcac74edeef0",
