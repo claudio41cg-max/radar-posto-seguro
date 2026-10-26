@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T23:37:37.792Z",
+  "generatedAt": "2026-10-26T01:48:10.337Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
+  "count": 32,
   "lastUpdate": "2026-10-25T17:15:37-03:00",
   "occurrences": [
     {
@@ -176,11 +176,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -235,11 +235,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -614,98 +614,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "87795219-6521-4645-9b77-45d5ee9bf5ef",
-      "documentNumber": 79528,
-      "date": "2026-10-18T18:23:00.000Z",
-      "address": "Comunidade Beira-Rio -  Centro de Engenheiro Pedreira, Japeri - RJ, 26445-000, Brasil",
-      "neighborhood": "CENTRO DE ENGENHEIRO PEDREIRA",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE BEIRA-RIO",
-      "latitude": -22.67584806,
-      "longitude": -43.60729266,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "aae9c0eb-d361-4597-921b-ca05aa58ae1e",
-      "documentNumber": 79525,
-      "date": "2026-10-18T16:08:00.000Z",
-      "address": "Rua Figueiredo Rocha - Vigário Geral (Complexo de Israel), Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DE VIGARIO GERAL (COMPLEXO DE ISRAEL)",
-      "latitude": -22.8066018,
-      "longitude": -43.3127416,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "11040e04-b822-4a12-a80b-619923944ccf",
-      "documentNumber": 79523,
-      "date": "2026-10-18T12:00:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "720c5c6a-af08-4d02-b953-665f347dcce1",
-      "documentNumber": 79522,
-      "date": "2026-10-18T11:31:00.000Z",
-      "address": "Comunidade Furquim Mendes - Vigário Geral, Rio de Janeiro - RJ, 21240-800, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "FURQUIM MENDES",
-      "latitude": -22.805109646920855,
-      "longitude": -43.316591602460726,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "20539586-f7b8-4a74-a338-af77699b154c",
-      "documentNumber": 79521,
-      "date": "2026-10-18T10:46:00.000Z",
-      "address": "Comunidade do Lixão - Centro, Duque de Caxias - RJ, 25030-350, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO LIXAO",
-      "latitude": -22.7957272,
-      "longitude": -43.3090067,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
