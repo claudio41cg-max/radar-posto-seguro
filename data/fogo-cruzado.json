@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T08:18:20.224Z",
+  "generatedAt": "2026-10-27T14:37:51.656Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 34,
-  "lastUpdate": "2026-10-26T18:15:29-03:00",
+  "count": 36,
+  "lastUpdate": "2026-10-27T11:27:21-03:00",
   "occurrences": [
+    {
+      "id": "8e7e8695-57b7-45e7-b0e0-6477e1afa39e",
+      "documentNumber": 79610,
+      "date": "2026-10-27T07:00:00.000Z",
+      "address": "Morro da Pedreira (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-200, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA PEDREIRA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.82312466,
+      "longitude": -43.35986703,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "868f66cd-be84-480e-9170-b36a71db3ebe",
+      "documentNumber": 79609,
+      "date": "2026-10-27T04:46:00.000Z",
+      "address": "Rua Juranda - Curicica, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9439916,
+      "longitude": -43.3813987,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "58e656e4-a192-48f0-9725-1453829dcb20",
       "documentNumber": 79607,
@@ -46,7 +76,16 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "abdde4c1-52fd-4f72-8c12-0a5086b0e8df",
@@ -266,11 +305,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
