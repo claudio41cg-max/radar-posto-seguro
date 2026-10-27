@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T19:41:02.580Z",
+  "generatedAt": "2026-10-27T23:14:55.779Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,49 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
-  "lastUpdate": "2026-10-27T14:27:21-03:00",
+  "count": 39,
+  "lastUpdate": "2026-10-27T18:32:25-03:00",
   "occurrences": [
+    {
+      "id": "74dc645e-1016-4631-8c10-372024e60607",
+      "documentNumber": 79613,
+      "date": "2026-10-27T16:00:00.000Z",
+      "address": "Travessa Herdy - Cubango, Niterói - RJ, Brasil",
+      "neighborhood": "CUBANGO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ABACAXI",
+      "latitude": -22.8905722,
+      "longitude": -43.0957712,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "ec516ad7-0ac2-422c-ac6a-db727b84dd19",
+      "documentNumber": 79614,
+      "date": "2026-10-27T12:00:00.000Z",
+      "address": "Jardim Iguaçu, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "JARDIM IGUACU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.742049,
+      "longitude": -43.4704991,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "4db55303-471d-4f8f-9a0d-279fcf8acad4",
       "documentNumber": 79612,
@@ -325,15 +365,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
