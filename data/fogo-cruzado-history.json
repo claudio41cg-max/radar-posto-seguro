@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T15:29:30.951Z",
+  "generatedAt": "2026-10-28T20:30:04.975Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 411,
+  "count": 414,
   "occurrences": [
     {
       "id": "d5ab096e-1a1b-485f-8610-7ab622b18d2d",
@@ -28,6 +28,26 @@
       "victims": []
     },
     {
+      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
+      "documentNumber": 79623,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8012659,
+      "longitude": -43.0418587,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "11bf74fd-d7ec-4d36-817c-4f2a5e221f51",
       "documentNumber": 79616,
       "date": "2026-10-28T06:46:00.000Z",
@@ -38,6 +58,21 @@
       "latitude": -22.8988986,
       "longitude": -43.2724188,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "86e0bf7d-a889-4f4b-8a99-ffa3d77a33fa",
+      "documentNumber": 79622,
+      "date": "2026-10-28T02:00:00.000Z",
+      "address": "Comunidade do Piraque - Guaratiba, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUARATIBA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO PIRAQUE",
+      "latitude": -22.9954147,
+      "longitude": -43.6100149,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -56,6 +91,30 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "8919508b-ada9-4696-9038-fdd5d2f1a439",
+      "documentNumber": 79621,
+      "date": "2026-10-27T20:00:00.000Z",
+      "address": "Av. Schultz Wenk - Cordovil, Rio de Janeiro - RJ, 21012-220, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.82480233926544,
+      "longitude": -43.29292905272388,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -429,15 +488,15 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -611,7 +670,7 @@
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         },
         {
           "situation": "Dead",
@@ -619,7 +678,7 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
