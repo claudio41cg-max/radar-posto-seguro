@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T23:14:55.780Z",
+  "generatedAt": "2026-10-28T02:21:13.544Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 407,
+  "count": 408,
   "occurrences": [
+    {
+      "id": "ccabe874-7c81-4498-8559-08bc172a3b40",
+      "documentNumber": 79615,
+      "date": "2026-10-27T19:30:00.000Z",
+      "address": "Quitungo-Guaporé, Estrada do Quitungo - Brás de Pina, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "QUITUNGO-GUAPORE",
+      "latitude": -22.8313548,
+      "longitude": -43.3022253,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "74dc645e-1016-4631-8c10-372024e60607",
       "documentNumber": 79613,
@@ -364,11 +379,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -451,11 +466,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -546,7 +561,7 @@
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
@@ -554,7 +569,7 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },

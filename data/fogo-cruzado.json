@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T23:14:55.779Z",
+  "generatedAt": "2026-10-28T02:21:13.543Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
-  "lastUpdate": "2026-10-27T18:32:25-03:00",
+  "count": 33,
+  "lastUpdate": "2026-10-27T20:56:56-03:00",
   "occurrences": [
+    {
+      "id": "ccabe874-7c81-4498-8559-08bc172a3b40",
+      "documentNumber": 79615,
+      "date": "2026-10-27T19:30:00.000Z",
+      "address": "Quitungo-Guaporé, Estrada do Quitungo - Brás de Pina, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "QUITUNGO-GUAPORE",
+      "latitude": -22.8313548,
+      "longitude": -43.3022253,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "74dc645e-1016-4631-8c10-372024e60607",
       "documentNumber": 79613,
@@ -365,11 +380,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -452,11 +467,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -547,7 +562,7 @@
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         },
         {
           "situation": "Dead",
@@ -555,7 +570,7 @@
         },
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -623,135 +638,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "1605dc3b-50dc-48fc-980b-2ab344390fa6",
-      "documentNumber": 79553,
-      "date": "2026-10-20T17:02:00.000Z",
-      "address": "Rua São Carlos - Estácio, Rio de Janeiro - RJ, 20250-052, Brasil",
-      "neighborhood": "ESTACIO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.913945457411447,
-      "longitude": -43.20406818674585,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "dc43fd10-7dc0-43b2-a020-cb582864e933",
-      "documentNumber": 79555,
-      "date": "2026-10-20T17:00:00.000Z",
-      "address": "Av. Pastor Martin Luther King Jr.  - Acari, Rio de Janeiro - RJ, 21530-014, Brasil",
-      "neighborhood": "ACARI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.82532791896826,
-      "longitude": -43.34874944683532,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "fcc5d825-347b-459c-8552-8ed2c413ce60",
-      "documentNumber": 79547,
-      "date": "2026-10-20T10:30:00.000Z",
-      "address": "Praça Onze de Junho - Centro, Rio de Janeiro - RJ, 20091-060, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9066521,
-      "longitude": -43.1957906,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "d03a8617-75f6-4e4f-ba45-8585542afb22",
-      "documentNumber": 79551,
-      "date": "2026-10-20T10:00:00.000Z",
-      "address": "Comunidade Santa Maria - Jacarepaguá, Rio de Janeiro - RJ, 22723-240, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE SANTA MARIA",
-      "latitude": -22.9146816,
-      "longitude": -43.4206295,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "92e3a899-959e-4ee8-af65-ee213efda69f",
-      "documentNumber": 79544,
-      "date": "2026-10-20T09:30:00.000Z",
-      "address": "Mangueira, Mangueira - Rio de Janeiro - RJ, 20943-000, Brasil",
-      "neighborhood": "MANGUEIRA",
-      "subNeighborhood": "",
-      "locality": "MANGUEIRA",
-      "latitude": -22.905412247287845,
-      "longitude": -43.23469370211487,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "c90b877d-9688-42d4-8811-5b3312290576",
-      "documentNumber": 79541,
-      "date": "2026-10-20T09:00:00.000Z",
-      "address": "Comunidade Cascatinha - Vargem Grande, Rio de Janeiro - RJ, 22783-415, Brasil",
-      "neighborhood": "VARGEM GRANDE",
-      "subNeighborhood": "",
-      "locality": "Comunidade CASCATINHA",
-      "latitude": -22.978969129667732,
-      "longitude": -43.480523418804644,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a6c9e42c-8c1b-4a2f-a295-9e368b7540a7",
-      "documentNumber": 79539,
-      "date": "2026-10-20T08:14:00.000Z",
-      "address": "Morro do Urubu (Complexo do Urubu) - Piedade, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PIEDADE",
-      "subNeighborhood": "",
-      "locality": "MORRO DO URUBU (COMPLEXO DO URUBU)",
-      "latitude": -22.87657404,
-      "longitude": -43.30422326,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        }
-      ]
     }
   ]
 }
