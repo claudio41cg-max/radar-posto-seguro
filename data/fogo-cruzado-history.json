@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T08:43:45.283Z",
+  "generatedAt": "2026-10-28T15:29:30.951Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,58 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 408,
+  "count": 411,
   "occurrences": [
+    {
+      "id": "d5ab096e-1a1b-485f-8610-7ab622b18d2d",
+      "documentNumber": 79619,
+      "date": "2026-10-28T11:49:00.000Z",
+      "address": "Avenida Ministro Edgard Romero - Madureira, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8687528,
+      "longitude": -43.335148,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "11bf74fd-d7ec-4d36-817c-4f2a5e221f51",
+      "documentNumber": 79616,
+      "date": "2026-10-28T06:46:00.000Z",
+      "address": "R. Miguel Fernandes - Méier, Rio de Janeiro - RJ, 20780-060, Brasil",
+      "neighborhood": "MEIER",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8988986,
+      "longitude": -43.2724188,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "75cfdd98-a17c-44ae-bea3-906d4f7fb33d",
+      "documentNumber": 79620,
+      "date": "2026-10-27T22:00:00.000Z",
+      "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
+      "neighborhood": "VILA MARGARIDA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO SEM TERRA",
+      "latitude": -22.875830521250382,
+      "longitude": -43.79280801756136,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "ccabe874-7c81-4498-8559-08bc172a3b40",
       "documentNumber": 79615,
@@ -31,7 +81,7 @@
       "id": "74dc645e-1016-4631-8c10-372024e60607",
       "documentNumber": 79613,
       "date": "2026-10-27T16:00:00.000Z",
-      "address": "Travessa Herdy - Cubango, Niterói - RJ, Brasil",
+      "address": "Travessa Herdy, Morro do Abacaxi - Cubango, Niterói - RJ, Brasil",
       "neighborhood": "CUBANGO",
       "subNeighborhood": "",
       "locality": "MORRO DO ABACAXI",
@@ -71,7 +121,7 @@
       "id": "4db55303-471d-4f8f-9a0d-279fcf8acad4",
       "documentNumber": 79612,
       "date": "2026-10-27T11:00:00.000Z",
-      "address": "Dique - Gramacho, Duque de Caxias - RJ, 25050-170, Brasil",
+      "address": "Comunidade do Dique - Gramacho, Duque de Caxias - RJ, 25050-170, Brasil",
       "neighborhood": "GRAMACHO",
       "subNeighborhood": "",
       "locality": "Comunidade DO DIQUE",
@@ -383,11 +433,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -442,11 +492,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -466,11 +516,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
