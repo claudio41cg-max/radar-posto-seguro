@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T05:57:47.721Z",
+  "generatedAt": "2026-10-29T12:48:42.971Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,59 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 36,
-  "lastUpdate": "2026-10-28T20:58:20-03:00",
+  "count": 39,
+  "lastUpdate": "2026-10-29T08:37:29-03:00",
   "occurrences": [
+    {
+      "id": "861173cc-a25d-4125-92b9-105855bfa868",
+      "documentNumber": 79631,
+      "date": "2026-10-29T07:00:00.000Z",
+      "address": "Comunidade do JJ - Tomás Coelho, Rio de Janeiro - RJ, 21370-460, Brasil",
+      "neighborhood": "TOMAS COELHO",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DO JJ",
+      "latitude": -22.865185896330377,
+      "longitude": -43.31065010394612,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9bed1aed-99b1-4ce4-b711-6f97d76206f1",
+      "documentNumber": 79629,
+      "date": "2026-10-29T06:20:00.000Z",
+      "address": "Morro da Serrinha - Vaz Lobo, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8641667,
+      "longitude": -43.3238889,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d458f216-4b34-4b69-b97d-a8062c5d21b2",
+      "documentNumber": 79628,
+      "date": "2026-10-29T06:00:00.000Z",
+      "address": "Vila Vintém - Padre Miguel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PADRE MIGUEL",
+      "subNeighborhood": "",
+      "locality": "VILA VINTEM",
+      "latitude": -22.8710072,
+      "longitude": -43.4430577,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "51318e63-1938-41dd-8c7f-9f70c397189d",
       "documentNumber": 79627,
@@ -83,26 +133,6 @@
       "victims": []
     },
     {
-      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
-      "documentNumber": 79623,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8012659,
-      "longitude": -43.0418587,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "49ece848-33f5-415a-82ba-559605a00daf",
       "documentNumber": 79624,
       "date": "2026-10-28T10:00:00.000Z",
@@ -122,6 +152,26 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
+      "documentNumber": 79623,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8012659,
+      "longitude": -43.0418587,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -654,11 +704,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
