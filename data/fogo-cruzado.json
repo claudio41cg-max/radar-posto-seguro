@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T20:30:04.974Z",
+  "generatedAt": "2026-10-29T00:18:16.354Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,63 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
-  "lastUpdate": "2026-10-28T15:25:51-03:00",
+  "count": 36,
+  "lastUpdate": "2026-10-28T20:58:20-03:00",
   "occurrences": [
+    {
+      "id": "51318e63-1938-41dd-8c7f-9f70c397189d",
+      "documentNumber": 79627,
+      "date": "2026-10-28T20:30:00.000Z",
+      "address": "Comunidade da Coroa (Trajano) - Pilares, Rio de Janeiro - RJ, 20755-100, Brasil",
+      "neighborhood": "PILARES",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA COROA (OU TRAJANO)",
+      "latitude": -22.88484745,
+      "longitude": -43.2943946,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "bf353c47-d0f3-4e35-ac44-1f356768f6d0",
+      "documentNumber": 79625,
+      "date": "2026-10-28T18:45:00.000Z",
+      "address": "Rua Guaiba - Brás de Pina, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8363611,
+      "longitude": -43.2946259,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "f4f57f52-b94e-426b-8c00-531a1ad452a4",
+      "documentNumber": 79626,
+      "date": "2026-10-28T15:00:00.000Z",
+      "address": "Comunidade do Terreirão - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22795-150, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO TERREIRAO",
+      "latitude": -23.02478446,
+      "longitude": -43.47595282,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "d5ab096e-1a1b-485f-8610-7ab622b18d2d",
       "documentNumber": 79619,
@@ -44,6 +98,30 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "49ece848-33f5-415a-82ba-559605a00daf",
+      "documentNumber": 79624,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Conjunto Cesar Maia - Vargem Pequena, Rio de Janeiro - RJ, 22783-116, Brasil",
+      "neighborhood": "VARGEM PEQUENA",
+      "subNeighborhood": "",
+      "locality": "CONJUNTO CESAR MAIA",
+      "latitude": -22.9907925,
+      "longitude": -43.4329033,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -489,11 +567,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -552,11 +630,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -615,134 +693,6 @@
       "locality": "",
       "latitude": -22.7188069,
       "longitude": -43.4231985,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "72b2c059-9466-49b2-8bf9-88702024a20e",
-      "documentNumber": 79564,
-      "date": "2026-10-21T23:40:00.000Z",
-      "address": "Rua Doralice, Santa Cruz da Serra, Duque de Caxias, Rio de Janeiro, Brasil",
-      "neighborhood": "SANTA CRUZ DA SERRA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.642968,
-      "longitude": -43.280173,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "1c4bf353-1e18-4a00-97d1-085e2a7798da",
-      "documentNumber": 79566,
-      "date": "2026-10-21T22:00:00.000Z",
-      "address": "Rua Sampaio Corrêa - Colônia Juliano Moreira - Jacarepaguá, Rio de Janeiro - RJ, 22713-550, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "COLONIA JULIANO MOREIRA",
-      "latitude": -22.9376948,
-      "longitude": -43.3933531,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "5afb0867-312b-4fef-910e-0d411a4198c6",
-      "documentNumber": 79561,
-      "date": "2026-10-21T15:00:00.000Z",
-      "address": " Rua Eneida Gomes - Jardim Amendoeira, São Gonçalo - RJ, 24730-100, Brasil",
-      "neighborhood": "JARDIM AMENDOEIRA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.830548169718938,
-      "longitude": -42.98669781534363,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "65f4447f-8ad8-4828-aa00-311060926c1d",
-      "documentNumber": 79557,
-      "date": "2026-10-21T11:30:00.000Z",
-      "address": "R. São Clemente - Botafogo, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BOTAFOGO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9508671,
-      "longitude": -43.1936229,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "de8a93e8-2856-467d-9f71-b52d15541a0d",
-      "documentNumber": 79560,
-      "date": "2026-10-21T10:00:00.000Z",
-      "address": "Comunidade Ana Clara - Cangulo, Duque de Caxias - RJ, 25221-110, Brasil",
-      "neighborhood": "CANGULO",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE ANA CLARA",
-      "latitude": -22.699194235000558,
-      "longitude": -43.23697735301588,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "bc9519f2-6b46-423e-8756-93950bbeb64d",
-      "documentNumber": 79562,
-      "date": "2026-10-21T08:00:00.000Z",
-      "address": "Comunidade Para Pedro - Colégio, Rio de Janeiro - RJ, 21235-290, Brasil",
-      "neighborhood": "COLEGIO",
-      "subNeighborhood": "",
-      "locality": "Comunidade PARA PEDRO",
-      "latitude": -22.838926229254493,
-      "longitude": -43.333652439999994,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "f965a811-6fc4-4c82-b8e3-6e11b6a68028",
-      "documentNumber": 79556,
-      "date": "2026-10-21T04:54:00.000Z",
-      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-430, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.860558330276074,
-      "longitude": -43.31652059476989,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,

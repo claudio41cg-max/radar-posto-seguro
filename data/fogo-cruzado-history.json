@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T20:30:04.975Z",
+  "generatedAt": "2026-10-29T00:18:16.355Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,62 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 414,
+  "count": 418,
   "occurrences": [
+    {
+      "id": "51318e63-1938-41dd-8c7f-9f70c397189d",
+      "documentNumber": 79627,
+      "date": "2026-10-28T20:30:00.000Z",
+      "address": "Comunidade da Coroa (Trajano) - Pilares, Rio de Janeiro - RJ, 20755-100, Brasil",
+      "neighborhood": "PILARES",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA COROA (OU TRAJANO)",
+      "latitude": -22.88484745,
+      "longitude": -43.2943946,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "bf353c47-d0f3-4e35-ac44-1f356768f6d0",
+      "documentNumber": 79625,
+      "date": "2026-10-28T18:45:00.000Z",
+      "address": "Rua Guaiba - Brás de Pina, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8363611,
+      "longitude": -43.2946259,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "f4f57f52-b94e-426b-8c00-531a1ad452a4",
+      "documentNumber": 79626,
+      "date": "2026-10-28T15:00:00.000Z",
+      "address": "Comunidade do Terreirão - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22795-150, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO TERREIRAO",
+      "latitude": -23.02478446,
+      "longitude": -43.47595282,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "d5ab096e-1a1b-485f-8610-7ab622b18d2d",
       "documentNumber": 79619,
@@ -43,6 +97,30 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "49ece848-33f5-415a-82ba-559605a00daf",
+      "documentNumber": 79624,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Conjunto Cesar Maia - Vargem Pequena, Rio de Janeiro - RJ, 22783-116, Brasil",
+      "neighborhood": "VARGEM PEQUENA",
+      "subNeighborhood": "",
+      "locality": "CONJUNTO CESAR MAIA",
+      "latitude": -22.9907925,
+      "longitude": -43.4329033,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -488,11 +566,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -551,11 +629,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
