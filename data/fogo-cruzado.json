@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T18:40:10.252Z",
+  "generatedAt": "2026-10-29T22:59:45.270Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 41,
-  "lastUpdate": "2026-10-29T15:36:22-03:00",
+  "count": 43,
+  "lastUpdate": "2026-10-29T18:55:06-03:00",
   "occurrences": [
+    {
+      "id": "86075820-eb0f-44f9-bba9-9d6fd156ceda",
+      "documentNumber": 79639,
+      "date": "2026-10-29T16:00:00.000Z",
+      "address": "Parque União (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21044-030, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "PARQUE UNIAO (COMPLEXO DA MARE)",
+      "latitude": -22.85115502,
+      "longitude": -43.24390164,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "2231090c-4f3f-4a50-a583-078dcefac11f",
       "documentNumber": 79633,
@@ -27,6 +42,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "d26cdc7e-a1d8-4089-9062-f50282dd4d7e",
+      "documentNumber": 79640,
+      "date": "2026-10-29T10:30:00.000Z",
+      "address": "Av. Governador Leonel de Moura Brizola - Centro, Duque de Caxias - RJ, 25010-007, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.794692693707713,
+      "longitude": -43.30575033705721,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "e388c912-81b8-4ba8-907a-ef402329bb98",
@@ -657,11 +692,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
