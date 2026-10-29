@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T12:48:42.971Z",
+  "generatedAt": "2026-10-29T18:40:10.252Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 39,
-  "lastUpdate": "2026-10-29T08:37:29-03:00",
+  "count": 41,
+  "lastUpdate": "2026-10-29T15:36:22-03:00",
   "occurrences": [
+    {
+      "id": "2231090c-4f3f-4a50-a583-078dcefac11f",
+      "documentNumber": 79633,
+      "date": "2026-10-29T13:00:00.000Z",
+      "address": "Morro do Amor - Venda Velha, São João de Meriti - RJ, 25580-310, Brasil",
+      "neighborhood": "VENDA VELHA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO AMOR",
+      "latitude": -22.781209,
+      "longitude": -43.347688,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "e388c912-81b8-4ba8-907a-ef402329bb98",
+      "documentNumber": 79632,
+      "date": "2026-10-29T10:00:00.000Z",
+      "address": "Morro da Primavera  - Cavalcanti, Rio de Janeiro - RJ, 21370-280, Brasil",
+      "neighborhood": "CAVALCANTI",
+      "subNeighborhood": "",
+      "locality": "MORRO DA PRIMAVERA",
+      "latitude": -22.86902669,
+      "longitude": -43.31696145,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "861173cc-a25d-4125-92b9-105855bfa868",
       "documentNumber": 79631,
@@ -37,16 +72,21 @@
       "id": "9bed1aed-99b1-4ce4-b711-6f97d76206f1",
       "documentNumber": 79629,
       "date": "2026-10-29T06:20:00.000Z",
-      "address": "Morro da Serrinha - Vaz Lobo, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
+      "address": "Morro da Serrinha - Vaz Lobo, Rio de Janeiro - RJ, 21360-320, Brasil",
+      "neighborhood": "VAZ LOBO",
       "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.8641667,
-      "longitude": -43.3238889,
-      "reason": "Operação policial",
+      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
+      "latitude": -22.86651325,
+      "longitude": -43.32711774,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "d458f216-4b34-4b69-b97d-a8062c5d21b2",
@@ -617,11 +657,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -704,11 +744,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
