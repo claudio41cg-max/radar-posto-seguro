@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T22:59:45.272Z",
+  "generatedAt": "2026-10-30T02:30:35.331Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 425,
+  "count": 426,
   "occurrences": [
+    {
+      "id": "8c4c5139-e88b-4fd0-9959-d68b0a7864ee",
+      "documentNumber": 79641,
+      "date": "2026-10-29T17:00:00.000Z",
+      "address": "Morro do Santo Cristo (Complexo do Santo Cristo) - Fonseca, Niterói - RJ, 24130-308, Brasil",
+      "neighborhood": "FONSECA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO SANTO CRISTO (COMPLEXO DO SANTO CRISTO)",
+      "latitude": -22.876769777555676,
+      "longitude": -43.0903831011946,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "86075820-eb0f-44f9-bba9-9d6fd156ceda",
       "documentNumber": 79639,
@@ -31,9 +51,9 @@
       "id": "2231090c-4f3f-4a50-a583-078dcefac11f",
       "documentNumber": 79633,
       "date": "2026-10-29T13:00:00.000Z",
-      "address": "Morro do Amor - Venda Velha, São João de Meriti - RJ, 25580-310, Brasil",
+      "address": "Morro do Amor - Jardim Iris, Venda Velha - São João de Meriti - RJ, 25580-310, Brasil",
       "neighborhood": "VENDA VELHA",
-      "subNeighborhood": "",
+      "subNeighborhood": "JARDIM IRIS",
       "locality": "MORRO DO AMOR",
       "latitude": -22.781209,
       "longitude": -43.347688,
@@ -115,12 +135,7 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
+      "victims": []
     },
     {
       "id": "d458f216-4b34-4b69-b97d-a8062c5d21b2",
