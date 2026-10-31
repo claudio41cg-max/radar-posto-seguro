@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T19:52:04.728Z",
+  "generatedAt": "2026-10-31T22:51:55.292Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -17,7 +17,7 @@
       "id": "60be2376-6fe4-47f1-a851-60dc07ba75e2",
       "documentNumber": 79649,
       "date": "2026-10-31T03:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Duque de Caxias - RJ, 25040-160, Brasil",
+      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho - Duque de Caxias - RJ, 25040-160, Brasil",
       "neighborhood": "GRAMACHO",
       "subNeighborhood": "PANTANAL",
       "locality": "Comunidade DO BARRO VERMELHO",
@@ -27,6 +27,10 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -267,26 +271,6 @@
       "victims": []
     },
     {
-      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
-      "documentNumber": 79623,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8012659,
-      "longitude": -43.0418587,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "49ece848-33f5-415a-82ba-559605a00daf",
       "documentNumber": 79624,
       "date": "2026-10-28T10:00:00.000Z",
@@ -306,6 +290,26 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
+      "documentNumber": 79623,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8012659,
+      "longitude": -43.0418587,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
