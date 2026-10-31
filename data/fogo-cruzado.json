@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T23:52:20.736Z",
+  "generatedAt": "2026-10-31T05:19:26.337Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
+  "count": 32,
   "lastUpdate": "2026-10-30T14:13:11-03:00",
   "occurrences": [
     {
@@ -597,100 +597,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "88863601-bfbb-4bec-a05f-04d62b77c18b",
-      "documentNumber": 79586,
-      "date": "2026-10-23T18:30:00.000Z",
-      "address": "Estr. do Piaí - Sepetiba, Rio de Janeiro - RJ, 23530-611, Brasil",
-      "neighborhood": "SEPETIBA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.970324314373155,
-      "longitude": -43.68979675527881,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "18c96bfa-c01c-4f3e-b646-6e6321738bed",
-      "documentNumber": 79587,
-      "date": "2026-10-23T18:00:00.000Z",
-      "address": "R. Antônio João - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.82657773733483,
-      "longitude": -43.30042706103111,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "cd32d5c4-044e-4d76-8ca6-c6ef369a205f",
-      "documentNumber": 79581,
-      "date": "2026-10-23T08:56:00.000Z",
-      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.81949929,
-      "longitude": -43.36693375,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "420c5c02-68a4-4eb8-a745-fcf55f2b6230",
-      "documentNumber": 79576,
-      "date": "2026-10-23T04:36:00.000Z",
-      "address": "Rua Juranda - Curicica, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9439916,
-      "longitude": -43.3813987,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a25b7d2c-d441-4654-9b76-2793bc3dae51",
-      "documentNumber": 79575,
-      "date": "2026-10-23T04:24:00.000Z",
-      "address": "Comunidade do Vai Quem Quer - Chácaras Rio-Petrópolis, Duque de Caxias - RJ, 25243-150, Brasil",
-      "neighborhood": "CHACARAS RIO PETROPOLIS",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO VAI QUEM QUER",
-      "latitude": -22.66769695,
-      "longitude": -43.29536637,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     }
   ]
 }
