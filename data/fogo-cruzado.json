@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T10:58:29.382Z",
+  "generatedAt": "2026-10-31T16:00:21.852Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,53 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 32,
-  "lastUpdate": "2026-10-30T14:13:11-03:00",
+  "count": 34,
+  "lastUpdate": "2026-10-31T12:13:23-03:00",
   "occurrences": [
+    {
+      "id": "60be2376-6fe4-47f1-a851-60dc07ba75e2",
+      "documentNumber": 79649,
+      "date": "2026-10-31T03:00:00.000Z",
+      "address": "Comunidade do Barro Vermelho - Pantanal, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "063a367e-9a5c-4f1d-b63f-8d163ad4027d",
+      "documentNumber": 79651,
+      "date": "2026-10-30T23:00:00.000Z",
+      "address": "Krypton Bebidas - Loja de bebidas - Estrada Rodrigues Caldas - Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9242244,
+      "longitude": -43.3846745,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "8c4c5139-e88b-4fd0-9959-d68b0a7864ee",
       "documentNumber": 79641,
@@ -223,6 +267,26 @@
       "victims": []
     },
     {
+      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
+      "documentNumber": 79623,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8012659,
+      "longitude": -43.0418587,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "49ece848-33f5-415a-82ba-559605a00daf",
       "documentNumber": 79624,
       "date": "2026-10-28T10:00:00.000Z",
@@ -242,26 +306,6 @@
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
-      "documentNumber": 79623,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8012659,
-      "longitude": -43.0418587,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
