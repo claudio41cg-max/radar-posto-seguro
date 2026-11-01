@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T22:51:55.292Z",
+  "generatedAt": "2026-11-01T01:32:02.021Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 34,
-  "lastUpdate": "2026-10-31T13:30:51-03:00",
+  "count": 33,
+  "lastUpdate": "2026-10-31T21:38:07-03:00",
   "occurrences": [
+    {
+      "id": "f290cb2a-65b9-49c3-bb6b-7f10438100b3",
+      "documentNumber": 79654,
+      "date": "2026-10-31T21:37:00.000Z",
+      "address": "R. Prof. Câncio Póvoa - Morro do Campinho (Complexo do Campinho)- Cascadura, Rio de Janeiro - RJ, 21311-150, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8940921,
+      "longitude": -43.3347693,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "82d88088-080c-4b52-832f-8af8fb05c978",
+      "documentNumber": 79653,
+      "date": "2026-10-31T10:00:00.000Z",
+      "address": "Rua José Giuponi, 145, Comunidade Do Dique, São João de Meriti - Rio de Janeiro, Brasil",
+      "neighborhood": "JARDIM METROPOLE",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO DICK",
+      "latitude": -22.76033784429523,
+      "longitude": -43.339188918471336,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "60be2376-6fe4-47f1-a851-60dc07ba75e2",
       "documentNumber": 79649,
@@ -28,14 +58,29 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "9ff45cfd-e89b-4c61-a01a-10305bf72e5c",
+      "documentNumber": 79647,
+      "date": "2026-10-31T00:23:00.000Z",
+      "address": "Estr. dos Teixeiras - Realengo, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "REALENGO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.904718,
+      "longitude": -43.4257336,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "063a367e-9a5c-4f1d-b63f-8d163ad4027d",
@@ -52,11 +97,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -563,80 +608,6 @@
       "latitude": -22.8657949,
       "longitude": -43.2767301,
       "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "93c916d2-7401-4bdc-8a17-9af3995f7556",
-      "documentNumber": 79601,
-      "date": "2026-10-24T22:00:00.000Z",
-      "address": "Morro do Castro, Morro do Castro - São Gonçalo - RJ, 24410-540, Brasil",
-      "neighborhood": "MORRO DO CASTRO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO CASTRO",
-      "latitude": -22.866564420000007,
-      "longitude": -43.06912448344237,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "09ca37e0-377b-4643-b53f-fc7cb05282ce",
-      "documentNumber": 79597,
-      "date": "2026-10-24T17:50:00.000Z",
-      "address": "Fonseca, Niterói - RJ, Brasil",
-      "neighborhood": "FONSECA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8813858,
-      "longitude": -43.0871384,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "1ca6cee6-02cc-414d-9786-16896db06742",
-      "documentNumber": 79602,
-      "date": "2026-10-24T17:30:00.000Z",
-      "address": "Xavantes, Belford Roxo - RJ, Brasil",
-      "neighborhood": "XAVANTES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7375441,
-      "longitude": -43.3987237,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "d7c0e7ed-153a-4663-9608-dcac74edeef0",
-      "documentNumber": 79596,
-      "date": "2026-10-24T16:00:00.000Z",
-      "address": "Complexo do Chapadão - Pavuna, Rio de Janeiro - RJ, 21650-020, Brasil",
-      "neighborhood": "PAVUNA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.823392484725293,
-      "longitude": -43.38063027473572,
-      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
