@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T19:29:51.463Z",
+  "generatedAt": "2026-11-01T22:59:33.208Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 431,
+  "count": 433,
   "occurrences": [
     {
       "id": "f290cb2a-65b9-49c3-bb6b-7f10438100b3",
@@ -43,6 +43,41 @@
       "victims": []
     },
     {
+      "id": "77ef20f1-4359-43ca-a164-69b04e3a353b",
+      "documentNumber": 79661,
+      "date": "2026-10-31T07:35:00.000Z",
+      "address": "Vila Leopoldina - Gramacho, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "VILA LEOPOLDINA",
+      "locality": "",
+      "latitude": -22.7600138,
+      "longitude": -43.3077331,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9d42797c-da8f-401d-b8de-4e7804a32c38",
+      "documentNumber": 79660,
+      "date": "2026-10-31T07:00:00.000Z",
+      "address": "Comunidade da Jaqueira - Vila São José, Duque de Caxias - RJ, 25040-610, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA JAQUEIRA",
+      "latitude": -22.746791575398262,
+      "longitude": -43.32838160422973,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "60be2376-6fe4-47f1-a851-60dc07ba75e2",
       "documentNumber": 79649,
       "date": "2026-10-31T03:00:00.000Z",
@@ -57,11 +92,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
