@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T09:38:34.103Z",
+  "generatedAt": "2026-11-02T19:49:31.106Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,39 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 37,
-  "lastUpdate": "2026-11-02T06:21:17-03:00",
+  "count": 48,
+  "lastUpdate": "2026-11-02T16:20:49-03:00",
   "occurrences": [
+    {
+      "id": "d588f7b9-4670-44f8-97e4-bf0e5550930b",
+      "documentNumber": 79677,
+      "date": "2026-11-02T13:10:00.000Z",
+      "address": "Baixa do Sapateiro (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-140, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "BAIXA DO SAPATEIRO (COMPLEXO DA MARE)",
+      "latitude": -22.8613469,
+      "longitude": -43.2420588,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "37d18c5b-3e13-49b8-ac74-e2601ecbcbdd",
+      "documentNumber": 79676,
+      "date": "2026-11-02T10:00:00.000Z",
+      "address": "Rua do Jacaré - Lins de Vasconcelos, Rio de Janeiro - RJ, 20725-080, Brasil",
+      "neighborhood": "LINS DE VASCONCELOS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.91399336200699,
+      "longitude": -43.281588186101324,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "ad7fa1de-6a2f-4746-bca1-0e9b6797d022",
       "documentNumber": 79665,
@@ -38,6 +68,106 @@
       ]
     },
     {
+      "id": "a71e4303-b0a0-4104-a813-ac1265b97fff",
+      "documentNumber": 79681,
+      "date": "2026-11-02T04:00:00.000Z",
+      "address": "Comunidade do Guandu - Guandu, Japeri - RJ, 26420-130, Brasil",
+      "neighborhood": "GUANDU",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO GUANDU",
+      "latitude": -22.685739679174677,
+      "longitude": -43.63457797580493,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "290a2597-f233-4c66-9ea4-759c9441fd5a",
+      "documentNumber": 79680,
+      "date": "2026-11-02T03:00:00.000Z",
+      "address": "Comunidade do Ferroviário - Centro de Japeri, Japeri - RJ, 26445-010, Brasil",
+      "neighborhood": "CENTRO DE JAPERI",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DO FERROVIÁRIO",
+      "latitude": -22.676671269091166,
+      "longitude": -43.61709286202405,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
+      "documentNumber": 79666,
+      "date": "2026-11-02T02:00:00.000Z",
+      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GARDENIA AZUL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9582037,
+      "longitude": -43.3529536,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
+      "documentNumber": 79679,
+      "date": "2026-11-02T02:00:00.000Z",
+      "address": "Comunidade do São Jorge - São Jorge, Japeri - RJ, 26453-090, Brasil",
+      "neighborhood": "SAO JORGE",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DO SAO JORGE",
+      "latitude": -22.670376176523714,
+      "longitude": -43.6155250324896,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "ca28bec1-a80e-4527-82b4-1a301f217a11",
+      "documentNumber": 79675,
+      "date": "2026-11-01T22:00:00.000Z",
+      "address": "Rio das Pedras - Jacarepaguá, Rio de Janeiro - RJ, 22753-737, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.974708761378366,
+      "longitude": -43.3328467674851,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c30e419c-46a2-402e-9bab-b1d0fbe5d414",
+      "documentNumber": 79670,
+      "date": "2026-11-01T16:00:00.000Z",
+      "address": "Bom Retiro, São Gonçalo - RJ, 24722-360, Brasil",
+      "neighborhood": "BOM RETIRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7967273,
+      "longitude": -42.96054910000001,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
       "documentNumber": 79662,
       "date": "2026-11-01T15:00:00.000Z",
@@ -50,6 +180,26 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "3b3bbcc4-b21b-450d-974a-eb12e5eb755d",
+      "documentNumber": 79669,
+      "date": "2026-11-01T15:00:00.000Z",
+      "address": "Apollo III, São Gonçalo - RJ, 24727-133, Brasil",
+      "neighborhood": "APOLLO III",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.783359332077953,
+      "longitude": -42.943831420114826,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Wounded",
@@ -93,6 +243,46 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "56197b4f-ae9c-4db3-8943-e699dad1be7b",
+      "documentNumber": 79671,
+      "date": "2026-11-01T13:00:00.000Z",
+      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
+      "neighborhood": "BOA VISTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8154984,
+      "longitude": -43.0702753,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "1d70fa74-07e9-44b1-9a67-b52ddb3d646c",
+      "documentNumber": 79667,
+      "date": "2026-11-01T00:00:00.000Z",
+      "address": "Rua Caituba, Cabeça de Porco - Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "Comunidade NOVA AURORA (CABECA DE PORCO)",
+      "latitude": -22.9168984,
+      "longitude": -43.3758415,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -216,11 +406,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -435,26 +625,6 @@
       "victims": []
     },
     {
-      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
-      "documentNumber": 79623,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8012659,
-      "longitude": -43.0418587,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "49ece848-33f5-415a-82ba-559605a00daf",
       "documentNumber": 79624,
       "date": "2026-10-28T10:00:00.000Z",
@@ -474,6 +644,26 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
+      "documentNumber": 79623,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8012659,
+      "longitude": -43.0418587,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
