@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T22:59:33.206Z",
+  "generatedAt": "2026-11-02T02:19:35.715Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,69 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 35,
-  "lastUpdate": "2026-11-01T19:54:33-03:00",
+  "count": 36,
+  "lastUpdate": "2026-11-01T21:54:21-03:00",
   "occurrences": [
+    {
+      "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
+      "documentNumber": 79662,
+      "date": "2026-11-01T15:00:00.000Z",
+      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
+      "neighborhood": "BOA VISTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8134189,
+      "longitude": -43.0626713,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "8e4f04fb-3cf3-44b0-8d36-e8b2fc8eafe1",
+      "documentNumber": 79664,
+      "date": "2026-11-01T13:37:00.000Z",
+      "address": "Bom Retiro, São Gonçalo - RJ, 24722-360, Brasil",
+      "neighborhood": "BOM RETIRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.79047619884831,
+      "longitude": -42.957545025903336,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "7cd37e7e-67c2-41be-96ca-cec823c86f30",
+      "documentNumber": 79663,
+      "date": "2026-11-01T13:20:00.000Z",
+      "address": "Apollo III, São Gonçalo - RJ, 24727-181, Brasil",
+      "neighborhood": "APOLLO III",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.783255453416913,
+      "longitude": -42.94340227095253,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "f290cb2a-65b9-49c3-bb6b-7f10438100b3",
       "documentNumber": 79654,
@@ -93,11 +153,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -351,6 +411,26 @@
       "victims": []
     },
     {
+      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
+      "documentNumber": 79623,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8012659,
+      "longitude": -43.0418587,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "49ece848-33f5-415a-82ba-559605a00daf",
       "documentNumber": 79624,
       "date": "2026-10-28T10:00:00.000Z",
@@ -370,26 +450,6 @@
         },
         {
           "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
-      "documentNumber": 79623,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8012659,
-      "longitude": -43.0418587,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -613,41 +673,6 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "abdde4c1-52fd-4f72-8c12-0a5086b0e8df",
-      "documentNumber": 79604,
-      "date": "2026-10-25T23:19:00.000Z",
-      "address": "Av. Dr. Mario Guimarães - Centro, Nova Iguaçu - RJ, 26255-160, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.76038019197422,
-      "longitude": -43.45400775493955,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "dc306750-d337-422c-851a-e8e5c9779299",
-      "documentNumber": 79603,
-      "date": "2026-10-25T22:00:00.000Z",
-      "address": "Rua Antônio Austregésilo, Comunidade da Fazendinha - Complexo do Alemão, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "COMPLEXO DO ALEMAO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA FAZENDINHA (COMPLEXO DO 18)",
-      "latitude": -22.8657949,
-      "longitude": -43.2767301,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
