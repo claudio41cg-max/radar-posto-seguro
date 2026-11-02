@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T02:19:35.715Z",
+  "generatedAt": "2026-11-02T09:38:34.103Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 36,
-  "lastUpdate": "2026-11-01T21:54:21-03:00",
+  "count": 37,
+  "lastUpdate": "2026-11-02T06:21:17-03:00",
   "occurrences": [
+    {
+      "id": "ad7fa1de-6a2f-4746-bca1-0e9b6797d022",
+      "documentNumber": 79665,
+      "date": "2026-11-02T05:00:00.000Z",
+      "address": "Rua Aricuri - Campo Grande, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CAMPO GRANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8920649,
+      "longitude": -43.568372,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
       "documentNumber": 79662,
@@ -153,11 +177,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -192,11 +216,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
