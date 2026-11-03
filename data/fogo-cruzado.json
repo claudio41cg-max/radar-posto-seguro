@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T16:38:04.798Z",
+  "generatedAt": "2026-11-03T22:03:46.048Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 51,
-  "lastUpdate": "2026-11-03T12:45:28-03:00",
+  "count": 52,
+  "lastUpdate": "2026-11-03T18:23:03-03:00",
   "occurrences": [
+    {
+      "id": "c5b0030a-8427-4478-b6d3-9c26934d4f23",
+      "documentNumber": 79698,
+      "date": "2026-11-03T14:00:00.000Z",
+      "address": "Rua Orélia - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8457187,
+      "longitude": -43.3768595,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "1cbe6925-b3ab-45ad-b0fa-2f978e7232bc",
       "documentNumber": 79693,
