@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T19:49:31.107Z",
+  "generatedAt": "2026-11-03T01:51:11.437Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 448,
+  "count": 451,
   "occurrences": [
     {
       "id": "d588f7b9-4670-44f8-97e4-bf0e5550930b",
@@ -127,6 +127,26 @@
       "victims": []
     },
     {
+      "id": "0341e686-246c-408b-87ef-41a3dd7ea6c3",
+      "documentNumber": 79683,
+      "date": "2026-11-02T00:00:00.000Z",
+      "address": "Km 32, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "KM 32",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.852393,
+      "longitude": -43.6111323,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "ca28bec1-a80e-4527-82b4-1a301f217a11",
       "documentNumber": 79675,
       "date": "2026-11-01T22:00:00.000Z",
@@ -145,6 +165,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "b5f79190-6aff-4e8e-8fe6-e20d7ee4e97c",
+      "documentNumber": 79684,
+      "date": "2026-11-01T18:59:00.000Z",
+      "address": "Santa Eugenia, Nova Iguaçu - RJ, 26286-270, Brasil",
+      "neighborhood": "SANTA EUGENIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.750145738532098,
+      "longitude": -43.46843224054489,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "c30e419c-46a2-402e-9bab-b1d0fbe5d414",
@@ -302,6 +337,21 @@
       "victims": []
     },
     {
+      "id": "df525f1b-a70d-4460-b646-96332e54225d",
+      "documentNumber": 79685,
+      "date": "2026-10-31T15:58:00.000Z",
+      "address": "Corte 8 (Complexo da Mangueirinha) - Centenario, Duque de Caxias - RJ, 25030-050, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "",
+      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
+      "latitude": -22.77095968425896,
+      "longitude": -43.30980255,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "82d88088-080c-4b52-832f-8af8fb05c978",
       "documentNumber": 79653,
       "date": "2026-10-31T10:00:00.000Z",
@@ -366,11 +416,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -405,11 +455,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
