@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T08:40:10.278Z",
+  "generatedAt": "2026-11-03T16:38:04.798Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,79 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 49,
-  "lastUpdate": "2026-11-02T22:54:12-03:00",
+  "count": 51,
+  "lastUpdate": "2026-11-03T12:45:28-03:00",
   "occurrences": [
+    {
+      "id": "1cbe6925-b3ab-45ad-b0fa-2f978e7232bc",
+      "documentNumber": 79693,
+      "date": "2026-11-03T10:40:00.000Z",
+      "address": "Comunidade Nova Brasília - Engenhoca, Niterói - RJ, 24110-491, Brasil",
+      "neighborhood": "ENGENHOCA",
+      "subNeighborhood": "",
+      "locality": "Comunidade NOVA BRASILIA",
+      "latitude": -22.868884,
+      "longitude": -43.091615,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
+      "documentNumber": 79692,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Avenida Chrisóstomo Pimentel de Oliveira - Complexo do Chapadão - Anchieta, Rio de Janeiro - RJ, 21655-160, Brasil",
+      "neighborhood": "ANCHIETA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.82108,
+      "longitude": -43.3971453,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "85f18d4c-bc53-4637-bbf1-36da2fc68191",
+      "documentNumber": 79691,
+      "date": "2026-11-03T04:22:00.000Z",
+      "address": "Itamar - Cidade de Deus, Rio de Janeiro - RJ, 22773-200, Brasil",
+      "neighborhood": "CIDADE DE DEUS",
+      "subNeighborhood": "",
+      "locality": "CIDADE DE DEUS",
+      "latitude": -22.953392759422236,
+      "longitude": -43.35955688145561,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9dce5002-0357-49b7-abdf-64d4650340d9",
+      "documentNumber": 79695,
+      "date": "2026-11-03T00:07:00.000Z",
+      "address": "Parada Morabi, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "PARADA MORABI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6651554,
+      "longitude": -43.2279653,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "5f8b83a9-9963-4321-853b-669fba29d11e",
       "documentNumber": 79686,
@@ -118,21 +188,6 @@
       "victims": []
     },
     {
-      "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
-      "documentNumber": 79679,
-      "date": "2026-11-02T02:00:00.000Z",
-      "address": "Comunidade do São Jorge - São Jorge, Japeri - RJ, 26453-090, Brasil",
-      "neighborhood": "SAO JORGE",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DO SAO JORGE",
-      "latitude": -22.670376176523714,
-      "longitude": -43.6155250324896,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
       "documentNumber": 79666,
       "date": "2026-11-02T02:00:00.000Z",
@@ -145,6 +200,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
+      "documentNumber": 79679,
+      "date": "2026-11-02T02:00:00.000Z",
+      "address": "Comunidade do São Jorge - São Jorge, Japeri - RJ, 26453-090, Brasil",
+      "neighborhood": "SAO JORGE",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DO SAO JORGE",
+      "latitude": -22.670376176523714,
+      "longitude": -43.6155250324896,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -183,46 +253,6 @@
       "victims": []
     },
     {
-      "id": "c30e419c-46a2-402e-9bab-b1d0fbe5d414",
-      "documentNumber": 79670,
-      "date": "2026-11-01T16:00:00.000Z",
-      "address": "Bom Retiro, São Gonçalo - RJ, 24722-360, Brasil",
-      "neighborhood": "BOM RETIRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7967273,
-      "longitude": -42.96054910000001,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "3b3bbcc4-b21b-450d-974a-eb12e5eb755d",
-      "documentNumber": 79669,
-      "date": "2026-11-01T15:00:00.000Z",
-      "address": "Apollo III, São Gonçalo - RJ, 24727-133, Brasil",
-      "neighborhood": "APOLLO III",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.783359332077953,
-      "longitude": -42.943831420114826,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
       "documentNumber": 79662,
       "date": "2026-11-01T15:00:00.000Z",
@@ -239,6 +269,26 @@
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "fc4e3ddd-4ff3-40b1-9b41-b920ee6a7e8c",
+      "documentNumber": 79694,
+      "date": "2026-11-01T15:00:00.000Z",
+      "address": "Rua Carlos Brandão - Granjas Cabuçu, Itaboraí - RJ, Brasil",
+      "neighborhood": "GRANJAS CABUCU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7950824,
+      "longitude": -42.9197396,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -275,26 +325,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "56197b4f-ae9c-4db3-8943-e699dad1be7b",
-      "documentNumber": 79671,
-      "date": "2026-11-01T13:00:00.000Z",
-      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
-      "neighborhood": "BOA VISTA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8154984,
-      "longitude": -43.0702753,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": [
         {
           "situation": "Wounded",
@@ -417,11 +447,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

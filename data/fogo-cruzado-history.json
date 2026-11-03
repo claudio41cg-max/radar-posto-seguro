@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T08:40:10.280Z",
+  "generatedAt": "2026-11-03T16:38:04.799Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,78 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 452,
+  "count": 457,
   "occurrences": [
+    {
+      "id": "1cbe6925-b3ab-45ad-b0fa-2f978e7232bc",
+      "documentNumber": 79693,
+      "date": "2026-11-03T10:40:00.000Z",
+      "address": "Comunidade Nova Brasília - Engenhoca, Niterói - RJ, 24110-491, Brasil",
+      "neighborhood": "ENGENHOCA",
+      "subNeighborhood": "",
+      "locality": "Comunidade NOVA BRASILIA",
+      "latitude": -22.868884,
+      "longitude": -43.091615,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
+      "documentNumber": 79692,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Avenida Chrisóstomo Pimentel de Oliveira - Complexo do Chapadão - Anchieta, Rio de Janeiro - RJ, 21655-160, Brasil",
+      "neighborhood": "ANCHIETA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.82108,
+      "longitude": -43.3971453,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "85f18d4c-bc53-4637-bbf1-36da2fc68191",
+      "documentNumber": 79691,
+      "date": "2026-11-03T04:22:00.000Z",
+      "address": "Itamar - Cidade de Deus, Rio de Janeiro - RJ, 22773-200, Brasil",
+      "neighborhood": "CIDADE DE DEUS",
+      "subNeighborhood": "",
+      "locality": "CIDADE DE DEUS",
+      "latitude": -22.953392759422236,
+      "longitude": -43.35955688145561,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9dce5002-0357-49b7-abdf-64d4650340d9",
+      "documentNumber": 79695,
+      "date": "2026-11-03T00:07:00.000Z",
+      "address": "Parada Morabi, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "PARADA MORABI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6651554,
+      "longitude": -43.2279653,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "5f8b83a9-9963-4321-853b-669fba29d11e",
       "documentNumber": 79686,
@@ -262,6 +332,26 @@
       ]
     },
     {
+      "id": "fc4e3ddd-4ff3-40b1-9b41-b920ee6a7e8c",
+      "documentNumber": 79694,
+      "date": "2026-11-01T15:00:00.000Z",
+      "address": "Rua Carlos Brandão - Granjas Cabuçu, Itaboraí - RJ, Brasil",
+      "neighborhood": "GRANJAS CABUCU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7950824,
+      "longitude": -42.9197396,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
+    },
+    {
       "id": "8e4f04fb-3cf3-44b0-8d36-e8b2fc8eafe1",
       "documentNumber": 79664,
       "date": "2026-11-01T13:37:00.000Z",
@@ -436,11 +526,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
