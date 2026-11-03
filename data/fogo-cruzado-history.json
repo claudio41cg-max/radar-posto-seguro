@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T01:51:11.437Z",
+  "generatedAt": "2026-11-03T08:40:10.280Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 451,
+  "count": 452,
   "occurrences": [
+    {
+      "id": "5f8b83a9-9963-4321-853b-669fba29d11e",
+      "documentNumber": 79686,
+      "date": "2026-11-02T20:00:00.000Z",
+      "address": "Ramos, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "RAMOS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8502757,
+      "longitude": -43.2565495,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "d588f7b9-4670-44f8-97e4-bf0e5550930b",
       "documentNumber": 79677,
