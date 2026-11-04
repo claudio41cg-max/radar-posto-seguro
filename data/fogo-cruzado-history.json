@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T22:03:46.050Z",
+  "generatedAt": "2026-11-04T02:09:13.654Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 458,
+  "count": 459,
   "occurrences": [
     {
       "id": "c5b0030a-8427-4478-b6d3-9c26934d4f23",
@@ -541,9 +541,29 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "1f8b83e1-6cd0-4c2a-9f8f-718742e75dd8",
+      "documentNumber": 79702,
+      "date": "2026-10-31T03:00:00.000Z",
+      "address": "Rod. Pres. Dutra, Riachão, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "RIACHAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7390975,
+      "longitude": -43.5316351,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"

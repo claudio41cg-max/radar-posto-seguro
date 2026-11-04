@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T22:03:46.048Z",
+  "generatedAt": "2026-11-04T02:09:13.653Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-11-03T18:23:03-03:00",
+  "count": 45,
+  "lastUpdate": "2026-11-03T21:43:31-03:00",
   "occurrences": [
     {
       "id": "c5b0030a-8427-4478-b6d3-9c26934d4f23",
@@ -268,26 +268,6 @@
       "victims": []
     },
     {
-      "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
-      "documentNumber": 79662,
-      "date": "2026-11-01T15:00:00.000Z",
-      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
-      "neighborhood": "BOA VISTA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8134189,
-      "longitude": -43.0626713,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "fc4e3ddd-4ff3-40b1-9b41-b920ee6a7e8c",
       "documentNumber": 79694,
       "date": "2026-11-01T15:00:00.000Z",
@@ -304,6 +284,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
+      "documentNumber": 79662,
+      "date": "2026-11-01T15:00:00.000Z",
+      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
+      "neighborhood": "BOA VISTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8134189,
+      "longitude": -43.0626713,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -448,6 +448,26 @@
       "victims": []
     },
     {
+      "id": "1f8b83e1-6cd0-4c2a-9f8f-718742e75dd8",
+      "documentNumber": 79702,
+      "date": "2026-10-31T03:00:00.000Z",
+      "address": "Rod. Pres. Dutra, Riachão, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "RIACHAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7390975,
+      "longitude": -43.5316351,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "60be2376-6fe4-47f1-a851-60dc07ba75e2",
       "documentNumber": 79649,
       "date": "2026-10-31T03:00:00.000Z",
@@ -462,11 +482,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -720,26 +740,6 @@
       "victims": []
     },
     {
-      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
-      "documentNumber": 79623,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8012659,
-      "longitude": -43.0418587,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "49ece848-33f5-415a-82ba-559605a00daf",
       "documentNumber": 79624,
       "date": "2026-10-28T10:00:00.000Z",
@@ -759,6 +759,26 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
+      "documentNumber": 79623,
+      "date": "2026-10-28T10:00:00.000Z",
+      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
+      "neighborhood": "PORTO DO ROSA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8012659,
+      "longitude": -43.0418587,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -791,155 +811,6 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "75cfdd98-a17c-44ae-bea3-906d4f7fb33d",
-      "documentNumber": 79620,
-      "date": "2026-10-27T22:00:00.000Z",
-      "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
-      "neighborhood": "VILA MARGARIDA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO SEM TERRA",
-      "latitude": -22.875830521250382,
-      "longitude": -43.79280801756136,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8919508b-ada9-4696-9038-fdd5d2f1a439",
-      "documentNumber": 79621,
-      "date": "2026-10-27T20:00:00.000Z",
-      "address": "Av. Schultz Wenk - Cordovil, Rio de Janeiro - RJ, 21012-220, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.82480233926544,
-      "longitude": -43.29292905272388,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "ccabe874-7c81-4498-8559-08bc172a3b40",
-      "documentNumber": 79615,
-      "date": "2026-10-27T19:30:00.000Z",
-      "address": "Quitungo-Guaporé, Estrada do Quitungo - Brás de Pina, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BRAS DE PINA",
-      "subNeighborhood": "",
-      "locality": "QUITUNGO-GUAPORE",
-      "latitude": -22.8313548,
-      "longitude": -43.3022253,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "74dc645e-1016-4631-8c10-372024e60607",
-      "documentNumber": 79613,
-      "date": "2026-10-27T16:00:00.000Z",
-      "address": "Travessa Herdy, Morro do Abacaxi - Cubango, Niterói - RJ, Brasil",
-      "neighborhood": "CUBANGO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ABACAXI",
-      "latitude": -22.8905722,
-      "longitude": -43.0957712,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "ec516ad7-0ac2-422c-ac6a-db727b84dd19",
-      "documentNumber": 79614,
-      "date": "2026-10-27T12:00:00.000Z",
-      "address": "Jardim Iguaçu, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "JARDIM IGUACU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.742049,
-      "longitude": -43.4704991,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "4db55303-471d-4f8f-9a0d-279fcf8acad4",
-      "documentNumber": 79612,
-      "date": "2026-10-27T11:00:00.000Z",
-      "address": "Comunidade do Dique - Gramacho, Duque de Caxias - RJ, 25050-170, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO DIQUE",
-      "latitude": -22.74893635,
-      "longitude": -43.29262467,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8e7e8695-57b7-45e7-b0e0-6477e1afa39e",
-      "documentNumber": 79610,
-      "date": "2026-10-27T07:00:00.000Z",
-      "address": "Morro da Pedreira (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-200, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA PEDREIRA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.82312466,
-      "longitude": -43.35986703,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "868f66cd-be84-480e-9170-b36a71db3ebe",
-      "documentNumber": 79609,
-      "date": "2026-10-27T04:46:00.000Z",
-      "address": "Rua Juranda - Curicica, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9439916,
-      "longitude": -43.3813987,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
