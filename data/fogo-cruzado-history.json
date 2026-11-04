@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T09:24:18.284Z",
+  "generatedAt": "2026-11-04T17:26:40.292Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,115 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 459,
+  "count": 465,
   "occurrences": [
+    {
+      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
+      "documentNumber": 79707,
+      "date": "2026-11-03T22:00:00.000Z",
+      "address": "Maricá - RJ, 24900-880, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9198203,
+      "longitude": -42.8205872,
+      "reason": "Suicídio",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "5ed42d4c-8117-4891-bad4-547837c0bd24",
+      "documentNumber": 79704,
+      "date": "2026-11-03T20:39:00.000Z",
+      "address": "Comunidade do Canal - Vargem Grande, Rio de Janeiro - RJ, 22785-620, Brasil",
+      "neighborhood": "VARGEM GRANDE",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DO CANAL",
+      "latitude": -22.993908202794533,
+      "longitude": -43.49636536585868,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "95dc937d-211a-481c-b381-88ae85346fa1",
+      "documentNumber": 79706,
+      "date": "2026-11-03T18:50:00.000Z",
+      "address": "Rua Sebastião Haroldo de Souza, Morro da Coruja - Vila Lage, São Gonçalo - RJ, 24426-330, Brasil",
+      "neighborhood": "VILA LAGE",
+      "subNeighborhood": "",
+      "locality": "MORRO DA CORUJA",
+      "latitude": -22.848047,
+      "longitude": -43.0877244,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "56f5886b-e0e3-4a05-bcca-002c7f31731a",
+      "documentNumber": 79711,
+      "date": "2026-11-03T15:00:00.000Z",
+      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22780-084, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9625029,
+      "longitude": -43.3993006,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "8529d3b7-e385-45e4-a29f-64bffc76a3bd",
+      "documentNumber": 79709,
+      "date": "2026-11-03T15:00:00.000Z",
+      "address": "Rua Gen. Gomes de Castro - Padre Miguel, Rio de Janeiro - RJ, 21721-000, Brasil",
+      "neighborhood": "PADRE MIGUEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8719246,
+      "longitude": -43.4481168,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "c5b0030a-8427-4478-b6d3-9c26934d4f23",
       "documentNumber": 79698,
@@ -98,6 +205,26 @@
       "victims": []
     },
     {
+      "id": "40583075-ec37-4ee1-b5d3-fd5dda3bc2b7",
+      "documentNumber": 79710,
+      "date": "2026-11-03T00:00:00.000Z",
+      "address": "Irajá, Rio de Janeiro - RJ, 21235-110, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.842739671170925,
+      "longitude": -43.323424600893084,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "5f8b83a9-9963-4321-853b-669fba29d11e",
       "documentNumber": 79686,
       "date": "2026-11-02T20:00:00.000Z",
@@ -151,7 +278,7 @@
       "id": "ad7fa1de-6a2f-4746-bca1-0e9b6797d022",
       "documentNumber": 79665,
       "date": "2026-11-02T05:00:00.000Z",
-      "address": "Rua Aricuri - Campo Grande, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua Aricuri, Parque Francisco José - Campo Grande, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "CAMPO GRANDE",
       "subNeighborhood": "",
       "locality": "",
@@ -430,13 +557,13 @@
       "id": "1d70fa74-07e9-44b1-9a67-b52ddb3d646c",
       "documentNumber": 79667,
       "date": "2026-11-01T00:00:00.000Z",
-      "address": "Rua Caituba, Cabeça de Porco - Taquara, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua Caituba, Comunidade Nova Aurora (Cabeça de Porco) - Taquara, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "TAQUARA",
       "subNeighborhood": "",
       "locality": "Comunidade NOVA AURORA (CABECA DE PORCO)",
       "latitude": -22.9168984,
       "longitude": -43.3758415,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -502,7 +629,7 @@
       "latitude": -22.7600138,
       "longitude": -43.3077331,
       "reason": "Tentativa/Roubo",
-      "policeAction": true,
+      "policeAction": false,
       "agentPresence": true,
       "victims": [
         {
@@ -527,6 +654,26 @@
       "victims": []
     },
     {
+      "id": "1f8b83e1-6cd0-4c2a-9f8f-718742e75dd8",
+      "documentNumber": 79702,
+      "date": "2026-10-31T05:00:00.000Z",
+      "address": "Rod. Pres. Dutra, Riachão, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "RIACHAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7390975,
+      "longitude": -43.5316351,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "60be2376-6fe4-47f1-a851-60dc07ba75e2",
       "documentNumber": 79649,
       "date": "2026-10-31T03:00:00.000Z",
@@ -541,29 +688,9 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
           "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1f8b83e1-6cd0-4c2a-9f8f-718742e75dd8",
-      "documentNumber": 79702,
-      "date": "2026-10-31T03:00:00.000Z",
-      "address": "Rod. Pres. Dutra, Riachão, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "RIACHAO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7390975,
-      "longitude": -43.5316351,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
+        },
         {
           "situation": "Dead",
           "personType": "Civilian"
