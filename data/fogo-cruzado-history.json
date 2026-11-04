@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T17:26:40.292Z",
+  "generatedAt": "2026-11-04T22:49:03.120Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 465,
+  "count": 466,
   "occurrences": [
+    {
+      "id": "40583075-ec37-4ee1-b5d3-fd5dda3bc2b7",
+      "documentNumber": 79710,
+      "date": "2026-11-04T06:00:00.000Z",
+      "address": "Irajá, Rio de Janeiro - RJ, 21235-113, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8349,
+      "longitude": -43.3265,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
       "documentNumber": 79707,
@@ -29,6 +49,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "e53dd85a-c8de-4068-bd83-5f134b158fe3",
+      "documentNumber": 79713,
+      "date": "2026-11-03T21:00:00.000Z",
+      "address": "Estrada do Camboatá, Floresta do Camboatá - Deodoro, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "DEODORO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8448917,
+      "longitude": -43.3841672,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
@@ -106,15 +146,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -153,12 +193,12 @@
       "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
       "documentNumber": 79692,
       "date": "2026-11-03T08:00:00.000Z",
-      "address": "Avenida Chrisóstomo Pimentel de Oliveira - Complexo do Chapadão - Anchieta, Rio de Janeiro - RJ, 21655-160, Brasil",
-      "neighborhood": "ANCHIETA",
+      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "COSTA BARROS",
       "subNeighborhood": "",
       "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.82108,
-      "longitude": -43.3971453,
+      "latitude": -22.82326393,
+      "longitude": -43.37707903,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -176,9 +216,9 @@
       "address": "Itamar - Cidade de Deus, Rio de Janeiro - RJ, 22773-200, Brasil",
       "neighborhood": "CIDADE DE DEUS",
       "subNeighborhood": "",
-      "locality": "CIDADE DE DEUS",
-      "latitude": -22.953392759422236,
-      "longitude": -43.35955688145561,
+      "locality": "",
+      "latitude": -22.95349002599571,
+      "longitude": -43.36077190922544,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -203,26 +243,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "40583075-ec37-4ee1-b5d3-fd5dda3bc2b7",
-      "documentNumber": 79710,
-      "date": "2026-11-03T00:00:00.000Z",
-      "address": "Irajá, Rio de Janeiro - RJ, 21235-110, Brasil",
-      "neighborhood": "IRAJA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.842739671170925,
-      "longitude": -43.323424600893084,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     },
     {
       "id": "5f8b83a9-9963-4321-853b-669fba29d11e",
@@ -393,7 +413,7 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -663,7 +683,7 @@
       "locality": "",
       "latitude": -22.7390975,
       "longitude": -43.5316351,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Briga",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
