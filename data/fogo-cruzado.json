@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T18:18:36.474Z",
+  "generatedAt": "2026-11-05T23:42:20.667Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,15 +10,50 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 48,
-  "lastUpdate": "2026-11-05T14:31:09-03:00",
+  "count": 53,
+  "lastUpdate": "2026-11-05T18:08:22-03:00",
   "occurrences": [
+    {
+      "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
+      "documentNumber": 79726,
+      "date": "2026-11-05T17:54:00.000Z",
+      "address": "Rua Dr. Augusto Figueiredo - Bangu, Vila Aliança, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.8742041,
+      "longitude": -43.473073,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "615785f1-3023-4fe9-916a-4df826f26f29",
+      "documentNumber": 79725,
+      "date": "2026-11-05T15:00:00.000Z",
+      "address": "Vila Ipiranga - Fonseca, Niterói - RJ, 24130-209, Brasil",
+      "neighborhood": "FONSECA",
+      "subNeighborhood": "",
+      "locality": "VILA IPIRANGA",
+      "latitude": -22.8788556,
+      "longitude": -43.09226994,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "5857054b-62fc-40a1-aea4-1ac066cafcb0",
       "documentNumber": 79721,
       "date": "2026-11-05T12:10:00.000Z",
-      "address": "Complexo da Pedreira - Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "NI",
+      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "COSTA BARROS",
       "subNeighborhood": "",
       "locality": "COMPLEXO DA PEDREIRA",
       "latitude": -22.82425288,
@@ -40,10 +75,30 @@
       "longitude": -43.2037626955542,
       "reason": "Tentativa/Roubo",
       "policeAction": false,
-      "agentPresence": false,
+      "agentPresence": true,
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "13ac8b14-c672-4b71-9cba-e19386bdd82c",
+      "documentNumber": 79727,
+      "date": "2026-11-05T09:00:00.000Z",
+      "address": "Estr. Rio São Paulo, 149 - Km 32, Nova Iguaçu - RJ, 26298-566",
+      "neighborhood": "KM 32",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.848903703683007,
+      "longitude": -43.60388592343789,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -67,16 +122,65 @@
       "id": "8a61a92d-e8e1-4501-908f-effac448109f",
       "documentNumber": 79720,
       "date": "2026-11-05T00:00:00.000Z",
-      "address": "Santa Teresa, Belford Roxo - RJ, 26193-615, Brasil",
+      "address": "Santa Teresa, Belford Roxo - RJ, 26110-163, Brasil",
       "neighborhood": "SANTA TEREZA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.7506076,
-      "longitude": -43.3392942,
+      "latitude": -22.75291996466968,
+      "longitude": -43.35664419070384,
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "10967528-ae4c-4273-be45-6fd2968106a3",
+      "documentNumber": 79723,
+      "date": "2026-11-05T00:00:00.000Z",
+      "address": "Avenida Maracanã - Maracanã, Rio de Janeiro - RJ, 20550-140, Brasil",
+      "neighborhood": "MARACANA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.91552982624212,
+      "longitude": -43.22931318741397,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "3a72c940-5161-4ecf-a897-efc26ad79f39",
+      "documentNumber": 79724,
+      "date": "2026-11-04T08:29:00.000Z",
+      "address": "R. Profa. Luiza Vieira Silva - Figueira, Magé - RJ, 25903-587, Brasil",
+      "neighborhood": "FIGUEIRA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.70553474106021,
+      "longitude": -43.15754698897349,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "40583075-ec37-4ee1-b5d3-fd5dda3bc2b7",
@@ -188,11 +292,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -216,11 +320,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -415,21 +519,6 @@
       "victims": []
     },
     {
-      "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
-      "documentNumber": 79679,
-      "date": "2026-11-02T02:00:00.000Z",
-      "address": "Comunidade do São Jorge - São Jorge, Japeri - RJ, 26453-090, Brasil",
-      "neighborhood": "SAO JORGE",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DO SAO JORGE",
-      "latitude": -22.670376176523714,
-      "longitude": -43.6155250324896,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
       "documentNumber": 79666,
       "date": "2026-11-02T02:00:00.000Z",
@@ -442,6 +531,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
+      "documentNumber": 79679,
+      "date": "2026-11-02T02:00:00.000Z",
+      "address": "Comunidade do São Jorge - São Jorge, Japeri - RJ, 26453-090, Brasil",
+      "neighborhood": "SAO JORGE",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DO SAO JORGE",
+      "latitude": -22.670376176523714,
+      "longitude": -43.6155250324896,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -733,11 +837,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
