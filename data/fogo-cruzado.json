@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T22:49:03.118Z",
+  "generatedAt": "2026-11-05T02:52:22.642Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-11-04T16:47:13-03:00",
+  "count": 44,
+  "lastUpdate": "2026-11-04T20:43:39-03:00",
   "occurrences": [
     {
       "id": "40583075-ec37-4ee1-b5d3-fd5dda3bc2b7",
@@ -127,11 +127,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -629,11 +629,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -668,11 +668,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -815,149 +815,6 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "51318e63-1938-41dd-8c7f-9f70c397189d",
-      "documentNumber": 79627,
-      "date": "2026-10-28T20:30:00.000Z",
-      "address": "Comunidade da Coroa (Trajano) - Pilares, Rio de Janeiro - RJ, 20755-100, Brasil",
-      "neighborhood": "PILARES",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA COROA (OU TRAJANO)",
-      "latitude": -22.88484745,
-      "longitude": -43.2943946,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "bf353c47-d0f3-4e35-ac44-1f356768f6d0",
-      "documentNumber": 79625,
-      "date": "2026-10-28T18:45:00.000Z",
-      "address": "Rua Guaiba - Brás de Pina, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BRAS DE PINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8363611,
-      "longitude": -43.2946259,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "f4f57f52-b94e-426b-8c00-531a1ad452a4",
-      "documentNumber": 79626,
-      "date": "2026-10-28T15:00:00.000Z",
-      "address": "Comunidade do Terreirão - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22795-150, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO TERREIRAO",
-      "latitude": -23.02478446,
-      "longitude": -43.47595282,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "d5ab096e-1a1b-485f-8610-7ab622b18d2d",
-      "documentNumber": 79619,
-      "date": "2026-10-28T11:49:00.000Z",
-      "address": "Avenida Ministro Edgard Romero - Madureira, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8687528,
-      "longitude": -43.335148,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "49ece848-33f5-415a-82ba-559605a00daf",
-      "documentNumber": 79624,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Conjunto Cesar Maia - Vargem Pequena, Rio de Janeiro - RJ, 22783-116, Brasil",
-      "neighborhood": "VARGEM PEQUENA",
-      "subNeighborhood": "",
-      "locality": "CONJUNTO CESAR MAIA",
-      "latitude": -22.9907925,
-      "longitude": -43.4329033,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c6ea5627-3fed-4797-a198-4d8e6e1560ed",
-      "documentNumber": 79623,
-      "date": "2026-10-28T10:00:00.000Z",
-      "address": "Porto do Rosa, São Gonçalo - RJ, 24470-090, Brasil",
-      "neighborhood": "PORTO DO ROSA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8012659,
-      "longitude": -43.0418587,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "11bf74fd-d7ec-4d36-817c-4f2a5e221f51",
-      "documentNumber": 79616,
-      "date": "2026-10-28T06:46:00.000Z",
-      "address": "R. Miguel Fernandes - Méier, Rio de Janeiro - RJ, 20780-060, Brasil",
-      "neighborhood": "MEIER",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8988986,
-      "longitude": -43.2724188,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "86e0bf7d-a889-4f4b-8a99-ffa3d77a33fa",
-      "documentNumber": 79622,
-      "date": "2026-10-28T02:00:00.000Z",
-      "address": "Comunidade do Piraque - Guaratiba, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GUARATIBA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO PIRAQUE",
-      "latitude": -22.9954147,
-      "longitude": -43.6100149,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
       "victims": []
     }
   ]
