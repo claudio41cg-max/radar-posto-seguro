@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T10:41:54.536Z",
+  "generatedAt": "2026-11-05T18:18:36.474Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,74 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 44,
-  "lastUpdate": "2026-11-04T20:43:39-03:00",
+  "count": 48,
+  "lastUpdate": "2026-11-05T14:31:09-03:00",
   "occurrences": [
+    {
+      "id": "5857054b-62fc-40a1-aea4-1ac066cafcb0",
+      "documentNumber": 79721,
+      "date": "2026-11-05T12:10:00.000Z",
+      "address": "Complexo da Pedreira - Rio de Janeiro - RJ, 21515-580, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.82425288,
+      "longitude": -43.36809439,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "b29a3d28-d315-4a4b-9864-79f5243f4346",
+      "documentNumber": 79722,
+      "date": "2026-11-05T12:00:00.000Z",
+      "address": "Av. Epitácio Pessoa, Fonte da Saudade - Lagoa, Rio de Janeiro - RJ, 22471-220, Brasil",
+      "neighborhood": "LAGOA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.964377015288314,
+      "longitude": -43.2037626955542,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "6ce46e5c-da6d-4331-8774-2664adad5131",
+      "documentNumber": 79718,
+      "date": "2026-11-05T05:49:00.000Z",
+      "address": "Morro do Andaraí - Andaraí, Rio de Janeiro - RJ, 20541-240, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.93296722,
+      "longitude": -43.25643623,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "8a61a92d-e8e1-4501-908f-effac448109f",
+      "documentNumber": 79720,
+      "date": "2026-11-05T00:00:00.000Z",
+      "address": "Santa Teresa, Belford Roxo - RJ, 26193-615, Brasil",
+      "neighborhood": "SANTA TEREZA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7506076,
+      "longitude": -43.3392942,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "40583075-ec37-4ee1-b5d3-fd5dda3bc2b7",
       "documentNumber": 79710,
@@ -123,11 +188,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -151,11 +216,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -606,7 +671,7 @@
       "longitude": -43.5316351,
       "reason": "Briga",
       "policeAction": false,
-      "agentPresence": false,
+      "agentPresence": true,
       "victims": [
         {
           "situation": "Dead",
@@ -668,11 +733,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
