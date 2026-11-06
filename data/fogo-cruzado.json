@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T11:35:03.139Z",
+  "generatedAt": "2026-11-06T18:22:01.132Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,23 +10,132 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 46,
-  "lastUpdate": "2026-11-05T22:46:48-03:00",
+  "count": 52,
+  "lastUpdate": "2026-11-06T14:31:48-03:00",
   "occurrences": [
     {
-      "id": "e25f3285-9b8d-47b2-a561-6686a24da6ca",
-      "documentNumber": 79729,
-      "date": "2026-11-05T21:00:00.000Z",
-      "address": "Buraco Quente - Trindade, São Gonçalo - RJ, 24457-370, Brasil",
-      "neighborhood": "TRINDADE",
+      "id": "65bf1c7a-655a-4791-bbb7-f56219d949c4",
+      "documentNumber": 79737,
+      "date": "2026-11-06T09:48:00.000Z",
+      "address": "Rua Guaraúna - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-010, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
       "subNeighborhood": "",
-      "locality": "BURACO QUENTE",
-      "latitude": -22.7979723,
-      "longitude": -43.0134477,
-      "reason": "Tentativa/Roubo",
+      "locality": "",
+      "latitude": -22.8540279,
+      "longitude": -43.3151814,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "cc146a01-c744-42cd-a13e-5d4b35c01e9f",
+      "documentNumber": 79731,
+      "date": "2026-11-06T08:34:00.000Z",
+      "address": "Jardim Novo - Realengo, Rio de Janeiro - RJ, 21760-000, Brasil",
+      "neighborhood": "REALENGO",
+      "subNeighborhood": "JARDIM NOVO",
+      "locality": "",
+      "latitude": -22.89122085328802,
+      "longitude": -43.418290389747156,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "20321576-bd12-41e3-a1d3-029c247a39f6",
+      "documentNumber": 79734,
+      "date": "2026-11-06T05:30:00.000Z",
+      "address": "Morro do 18 (Complexo do 18) - Água Santa, Rio de Janeiro - RJ, 20740-600, Brasil",
+      "neighborhood": "AGUA SANTA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO 18 (COMPLEXO DO 18)",
+      "latitude": -22.905011856611303,
+      "longitude": -43.31769304011568,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "e110f26e-31e2-4592-bd43-d5ea45676195",
+      "documentNumber": 79733,
+      "date": "2026-11-06T04:38:00.000Z",
+      "address": "Morro da Covanca - Tanque, Rio de Janeiro - RJ, 22735-020, Brasil",
+      "neighborhood": "TANQUE",
+      "subNeighborhood": "",
+      "locality": "MORRO DA COVANCA",
+      "latitude": -22.91453531221287,
+      "longitude": -43.344235155542,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "083a183c-513f-4fc7-8b76-73c5795909a1",
+      "documentNumber": 79732,
+      "date": "2026-11-06T00:20:00.000Z",
+      "address": "Morro do Dendê - Tauá, Rio de Janeiro - RJ, 21922-490, Brasil",
+      "neighborhood": "TAUA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO DENDE",
+      "latitude": -22.802039,
+      "longitude": -43.184899,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "de5f20f5-b67c-43c0-bb33-d57739463825",
+      "documentNumber": 79739,
+      "date": "2026-11-05T21:00:00.000Z",
+      "address": "R. Valicia, 8 - Carmo, Queimados - RJ, 26381-312, Brasil",
+      "neighborhood": "CARMO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.690846204040117,
+      "longitude": -43.56265275792933,
+      "reason": "Briga",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "e25f3285-9b8d-47b2-a561-6686a24da6ca",
+      "documentNumber": 79729,
+      "date": "2026-11-05T19:00:00.000Z",
+      "address": "Rua Benjamin Constant - Neves, São Gonçalo - RJ, 24425-640, Brasil",
+      "neighborhood": "NEVES I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.85351782924157,
+      "longitude": -43.091222291232306,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
         {
           "situation": "Wounded",
           "personType": "Civilian"
@@ -121,14 +230,14 @@
     {
       "id": "10967528-ae4c-4273-be45-6fd2968106a3",
       "documentNumber": 79723,
-      "date": "2026-11-05T00:00:00.000Z",
-      "address": "Avenida Maracanã - Maracanã, Rio de Janeiro - RJ, 20550-140, Brasil",
-      "neighborhood": "MARACANA",
+      "date": "2026-11-05T01:20:00.000Z",
+      "address": "Av. Maracanã - Tijuca, Rio de Janeiro - RJ, 20511-000, Brasil",
+      "neighborhood": "TIJUCA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.91552982624212,
-      "longitude": -43.22931318741397,
-      "reason": "Ação policial",
+      "latitude": -22.93307454114324,
+      "longitude": -43.24283719259032,
+      "reason": "Briga",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
@@ -161,8 +270,8 @@
     {
       "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
       "documentNumber": 79726,
-      "date": "2026-11-04T17:54:00.000Z",
-      "address": "Rua Dr. Augusto Figueiredo - Bangu, Vila Aliança, Rio de Janeiro - RJ, Brasil",
+      "date": "2026-11-04T16:45:00.000Z",
+      "address": "Rua Dr. Augusto Figueiredo - Vila Aliança, Bangu, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "BANGU",
       "subNeighborhood": "",
       "locality": "VILA ALIANCA",
@@ -193,11 +302,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -312,11 +421,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -539,21 +648,6 @@
       "victims": []
     },
     {
-      "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
-      "documentNumber": 79666,
-      "date": "2026-11-02T02:00:00.000Z",
-      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GARDENIA AZUL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9582037,
-      "longitude": -43.3529536,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
       "documentNumber": 79679,
       "date": "2026-11-02T02:00:00.000Z",
@@ -566,6 +660,21 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
+      "documentNumber": 79666,
+      "date": "2026-11-02T02:00:00.000Z",
+      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GARDENIA AZUL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9582037,
+      "longitude": -43.3529536,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
