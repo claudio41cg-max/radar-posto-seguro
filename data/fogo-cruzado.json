@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T18:22:01.132Z",
+  "generatedAt": "2026-11-06T23:17:22.630Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,20 +10,20 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-11-06T14:31:48-03:00",
+  "count": 53,
+  "lastUpdate": "2026-11-06T18:17:15-03:00",
   "occurrences": [
     {
       "id": "65bf1c7a-655a-4791-bbb7-f56219d949c4",
       "documentNumber": 79737,
       "date": "2026-11-06T09:48:00.000Z",
-      "address": "Rua Guaraúna - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-010, Brasil",
+      "address": "Rua Guaraúna - Loteamento Parque Celeste - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-010, Brasil",
       "neighborhood": "VICENTE DE CARVALHO",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "LOTEAMENTO PARQUE CELESTE",
       "latitude": -22.8540279,
       "longitude": -43.3151814,
-      "reason": "Operação policial",
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -97,6 +97,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
+      "documentNumber": 79740,
+      "date": "2026-11-06T00:00:00.000Z",
+      "address": "R. Mal. Floriano - Vila Sapê, Imbariê, Duque de Caxias - RJ, 25275-254, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "VILA SAPE",
+      "locality": "",
+      "latitude": -22.649608268791187,
+      "longitude": -43.218419653443114,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "de5f20f5-b67c-43c0-bb33-d57739463825",
@@ -302,11 +317,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -328,26 +343,6 @@
         {
           "situation": "Wounded",
           "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
-      "documentNumber": 79707,
-      "date": "2026-11-03T22:00:00.000Z",
-      "address": "Maricá - RJ, 24900-880, Brasil",
-      "neighborhood": "NI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9198203,
-      "longitude": -42.8205872,
-      "reason": "Suicídio",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
         }
       ]
     },
@@ -505,6 +500,26 @@
         {
           "situation": "Dead",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
+      "documentNumber": 79707,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
+      "neighborhood": "BALNEARIO BAMBUI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.94219966644062,
+      "longitude": -42.76012644850468,
+      "reason": "Suicídio",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -927,11 +942,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
