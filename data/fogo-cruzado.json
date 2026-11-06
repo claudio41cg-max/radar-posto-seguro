@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T23:42:20.667Z",
+  "generatedAt": "2026-11-06T03:42:03.184Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,26 +10,26 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 53,
-  "lastUpdate": "2026-11-05T18:08:22-03:00",
+  "count": 46,
+  "lastUpdate": "2026-11-05T22:46:48-03:00",
   "occurrences": [
     {
-      "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
-      "documentNumber": 79726,
-      "date": "2026-11-05T17:54:00.000Z",
-      "address": "Rua Dr. Augusto Figueiredo - Bangu, Vila Aliança, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BANGU",
+      "id": "e25f3285-9b8d-47b2-a561-6686a24da6ca",
+      "documentNumber": 79729,
+      "date": "2026-11-05T21:00:00.000Z",
+      "address": "Buraco Quente - Trindade, São Gonçalo - RJ, 24457-370, Brasil",
+      "neighborhood": "TRINDADE",
       "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.8742041,
-      "longitude": -43.473073,
-      "reason": "Homicidio/Tentativa",
+      "locality": "BURACO QUENTE",
+      "latitude": -22.7979723,
+      "longitude": -43.0134477,
+      "reason": "Tentativa/Roubo",
       "policeAction": false,
-      "agentPresence": true,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
@@ -119,6 +119,26 @@
       "victims": []
     },
     {
+      "id": "10967528-ae4c-4273-be45-6fd2968106a3",
+      "documentNumber": 79723,
+      "date": "2026-11-05T00:00:00.000Z",
+      "address": "Avenida Maracanã - Maracanã, Rio de Janeiro - RJ, 20550-140, Brasil",
+      "neighborhood": "MARACANA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.91552982624212,
+      "longitude": -43.22931318741397,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "8a61a92d-e8e1-4501-908f-effac448109f",
       "documentNumber": 79720,
       "date": "2026-11-05T00:00:00.000Z",
@@ -139,22 +159,22 @@
       ]
     },
     {
-      "id": "10967528-ae4c-4273-be45-6fd2968106a3",
-      "documentNumber": 79723,
-      "date": "2026-11-05T00:00:00.000Z",
-      "address": "Avenida Maracanã - Maracanã, Rio de Janeiro - RJ, 20550-140, Brasil",
-      "neighborhood": "MARACANA",
+      "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
+      "documentNumber": 79726,
+      "date": "2026-11-04T17:54:00.000Z",
+      "address": "Rua Dr. Augusto Figueiredo - Bangu, Vila Aliança, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BANGU",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.91552982624212,
-      "longitude": -43.22931318741397,
-      "reason": "Ação policial",
-      "policeAction": true,
+      "locality": "VILA ALIANCA",
+      "latitude": -22.8742041,
+      "longitude": -43.473073,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
       "agentPresence": true,
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -278,34 +298,6 @@
       ]
     },
     {
-      "id": "8529d3b7-e385-45e4-a29f-64bffc76a3bd",
-      "documentNumber": 79709,
-      "date": "2026-11-03T15:00:00.000Z",
-      "address": "Rua Gen. Gomes de Castro - Padre Miguel, Rio de Janeiro - RJ, 21721-000, Brasil",
-      "neighborhood": "PADRE MIGUEL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8719246,
-      "longitude": -43.4481168,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "56f5886b-e0e3-4a05-bcca-002c7f31731a",
       "documentNumber": 79711,
       "date": "2026-11-03T15:00:00.000Z",
@@ -321,6 +313,34 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "8529d3b7-e385-45e4-a29f-64bffc76a3bd",
+      "documentNumber": 79709,
+      "date": "2026-11-03T15:00:00.000Z",
+      "address": "Rua Gen. Gomes de Castro - Padre Miguel, Rio de Janeiro - RJ, 21721-000, Brasil",
+      "neighborhood": "PADRE MIGUEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8719246,
+      "longitude": -43.4481168,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -584,26 +604,6 @@
       "victims": []
     },
     {
-      "id": "fc4e3ddd-4ff3-40b1-9b41-b920ee6a7e8c",
-      "documentNumber": 79694,
-      "date": "2026-11-01T15:00:00.000Z",
-      "address": "Rua Carlos Brandão - Granjas Cabuçu, Itaboraí - RJ, Brasil",
-      "neighborhood": "GRANJAS CABUCU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7950824,
-      "longitude": -42.9197396,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
       "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
       "documentNumber": 79662,
       "date": "2026-11-01T15:00:00.000Z",
@@ -620,6 +620,26 @@
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "fc4e3ddd-4ff3-40b1-9b41-b920ee6a7e8c",
+      "documentNumber": 79694,
+      "date": "2026-11-01T15:00:00.000Z",
+      "address": "Rua Carlos Brandão - Granjas Cabuçu, Itaboraí - RJ, Brasil",
+      "neighborhood": "GRANJAS CABUCU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7950824,
+      "longitude": -42.9197396,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -798,11 +818,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -845,146 +865,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "8c4c5139-e88b-4fd0-9959-d68b0a7864ee",
-      "documentNumber": 79641,
-      "date": "2026-10-29T17:00:00.000Z",
-      "address": "Morro do Santo Cristo (Complexo do Santo Cristo) - Fonseca, Niterói - RJ, 24130-308, Brasil",
-      "neighborhood": "FONSECA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO SANTO CRISTO (COMPLEXO DO SANTO CRISTO)",
-      "latitude": -22.876769777555676,
-      "longitude": -43.0903831011946,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "86075820-eb0f-44f9-bba9-9d6fd156ceda",
-      "documentNumber": 79639,
-      "date": "2026-10-29T16:00:00.000Z",
-      "address": "Parque União (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21044-030, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "PARQUE UNIAO (COMPLEXO DA MARE)",
-      "latitude": -22.85115502,
-      "longitude": -43.24390164,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "2231090c-4f3f-4a50-a583-078dcefac11f",
-      "documentNumber": 79633,
-      "date": "2026-10-29T13:00:00.000Z",
-      "address": "Morro do Amor - Jardim Iris, Venda Velha - São João de Meriti - RJ, 25580-310, Brasil",
-      "neighborhood": "VENDA VELHA",
-      "subNeighborhood": "JARDIM IRIS",
-      "locality": "MORRO DO AMOR",
-      "latitude": -22.781209,
-      "longitude": -43.347688,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "d26cdc7e-a1d8-4089-9062-f50282dd4d7e",
-      "documentNumber": 79640,
-      "date": "2026-10-29T10:30:00.000Z",
-      "address": "Av. Governador Leonel de Moura Brizola - Centro, Duque de Caxias - RJ, 25010-007, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.794692693707713,
-      "longitude": -43.30575033705721,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "e388c912-81b8-4ba8-907a-ef402329bb98",
-      "documentNumber": 79632,
-      "date": "2026-10-29T10:00:00.000Z",
-      "address": "Morro da Primavera  - Cavalcanti, Rio de Janeiro - RJ, 21370-280, Brasil",
-      "neighborhood": "CAVALCANTI",
-      "subNeighborhood": "",
-      "locality": "MORRO DA PRIMAVERA",
-      "latitude": -22.86902669,
-      "longitude": -43.31696145,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "861173cc-a25d-4125-92b9-105855bfa868",
-      "documentNumber": 79631,
-      "date": "2026-10-29T07:00:00.000Z",
-      "address": "Comunidade do JJ - Tomás Coelho, Rio de Janeiro - RJ, 21370-460, Brasil",
-      "neighborhood": "TOMAS COELHO",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DO JJ",
-      "latitude": -22.865185896330377,
-      "longitude": -43.31065010394612,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "9bed1aed-99b1-4ce4-b711-6f97d76206f1",
-      "documentNumber": 79629,
-      "date": "2026-10-29T06:20:00.000Z",
-      "address": "Morro da Serrinha - Vaz Lobo, Rio de Janeiro - RJ, 21360-320, Brasil",
-      "neighborhood": "VAZ LOBO",
-      "subNeighborhood": "",
-      "locality": "MORRO DA SERRINHA (COMPLEXO DA SERRINHA)",
-      "latitude": -22.86651325,
-      "longitude": -43.32711774,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "d458f216-4b34-4b69-b97d-a8062c5d21b2",
-      "documentNumber": 79628,
-      "date": "2026-10-29T06:00:00.000Z",
-      "address": "Vila Vintém - Padre Miguel, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PADRE MIGUEL",
-      "subNeighborhood": "",
-      "locality": "VILA VINTEM",
-      "latitude": -22.8710072,
-      "longitude": -43.4430577,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     }
   ]
 }

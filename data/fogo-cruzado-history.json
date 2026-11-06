@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T23:42:20.668Z",
+  "generatedAt": "2026-11-06T03:42:03.186Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,25 +10,25 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 475,
+  "count": 476,
   "occurrences": [
     {
-      "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
-      "documentNumber": 79726,
-      "date": "2026-11-05T17:54:00.000Z",
-      "address": "Rua Dr. Augusto Figueiredo - Bangu, Vila Aliança, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BANGU",
+      "id": "e25f3285-9b8d-47b2-a561-6686a24da6ca",
+      "documentNumber": 79729,
+      "date": "2026-11-05T21:00:00.000Z",
+      "address": "Buraco Quente - Trindade, São Gonçalo - RJ, 24457-370, Brasil",
+      "neighborhood": "TRINDADE",
       "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.8742041,
-      "longitude": -43.473073,
-      "reason": "Homicidio/Tentativa",
+      "locality": "BURACO QUENTE",
+      "latitude": -22.7979723,
+      "longitude": -43.0134477,
+      "reason": "Tentativa/Roubo",
       "policeAction": false,
-      "agentPresence": true,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Wounded",
-          "personType": "Agent"
+          "personType": "Civilian"
         }
       ]
     },
@@ -154,6 +154,26 @@
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
+      "documentNumber": 79726,
+      "date": "2026-11-04T17:54:00.000Z",
+      "address": "Rua Dr. Augusto Figueiredo - Bangu, Vila Aliança, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.8742041,
+      "longitude": -43.473073,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
         }
       ]
     },
@@ -315,11 +335,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -877,11 +897,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
