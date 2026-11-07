@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T20:16:42.489Z",
+  "generatedAt": "2026-11-07T23:39:27.882Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 487,
+  "count": 488,
   "occurrences": [
+    {
+      "id": "c1b1af1a-f53a-40ad-90a1-8258a1877d61",
+      "documentNumber": 79750,
+      "date": "2026-11-07T03:00:00.000Z",
+      "address": "Engenho, Itaguaí - RJ, 23820-310, Brasil",
+      "neighborhood": "ENGENHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.858189,
+      "longitude": -43.7884535,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "6205188e-0067-4885-b378-6688380a4cdb",
       "documentNumber": 79747,
@@ -485,11 +500,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

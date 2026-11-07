@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T20:16:42.487Z",
+  "generatedAt": "2026-11-07T23:39:27.880Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 56,
-  "lastUpdate": "2026-11-07T16:00:46-03:00",
+  "count": 57,
+  "lastUpdate": "2026-11-07T19:47:34-03:00",
   "occurrences": [
+    {
+      "id": "c1b1af1a-f53a-40ad-90a1-8258a1877d61",
+      "documentNumber": 79750,
+      "date": "2026-11-07T03:00:00.000Z",
+      "address": "Engenho, Itaguaí - RJ, 23820-310, Brasil",
+      "neighborhood": "ENGENHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.858189,
+      "longitude": -43.7884535,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "6205188e-0067-4885-b378-6688380a4cdb",
       "documentNumber": 79747,
@@ -514,11 +529,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -554,26 +569,6 @@
       "victims": []
     },
     {
-      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
-      "documentNumber": 79707,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
-      "neighborhood": "BALNEARIO BAMBUI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.94219966644062,
-      "longitude": -42.76012644850468,
-      "reason": "Suicídio",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
       "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
       "documentNumber": 79692,
       "date": "2026-11-03T08:00:00.000Z",
@@ -590,6 +585,26 @@
         {
           "situation": "Dead",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
+      "documentNumber": 79707,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
+      "neighborhood": "BALNEARIO BAMBUI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.94219966644062,
+      "longitude": -42.76012644850468,
+      "reason": "Suicídio",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
