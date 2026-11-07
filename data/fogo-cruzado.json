@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T09:54:06.505Z",
+  "generatedAt": "2026-11-07T16:17:16.770Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-11-06T21:59:12-03:00",
+  "count": 55,
+  "lastUpdate": "2026-11-07T13:10:54-03:00",
   "occurrences": [
+    {
+      "id": "6205188e-0067-4885-b378-6688380a4cdb",
+      "documentNumber": 79747,
+      "date": "2026-11-06T17:50:00.000Z",
+      "address": "Rua João Bruno Lobo - Curicica, Rio de Janeiro - RJ, 22780-805, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.95262811640059,
+      "longitude": -43.38292104902824,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2684ffea-60a8-41af-b2ce-475a13617b65",
+      "documentNumber": 79746,
+      "date": "2026-11-06T16:00:00.000Z",
+      "address": "Rua Canadá, Assentamento Sabugo - Sabugo, Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "SABUGO",
+      "locality": "ASSENTAMENTO SANBUGO",
+      "latitude": -22.620405188350478,
+      "longitude": -43.72596953148855,
+      "reason": "Disparo Acidental",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "65bf1c7a-655a-4791-bbb7-f56219d949c4",
       "documentNumber": 79737,
@@ -77,6 +112,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "047cdb85-feda-448b-a499-42615773effe",
+      "documentNumber": 79744,
+      "date": "2026-11-06T03:00:00.000Z",
+      "address": "Favelinha (São José) - Lages, Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "LAGES",
+      "locality": "FAVELINHA (VILA SAO JOSE)",
+      "latitude": -22.6247464,
+      "longitude": -43.708173,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "083a183c-513f-4fc7-8b76-73c5795909a1",
@@ -402,30 +457,6 @@
       ]
     },
     {
-      "id": "56f5886b-e0e3-4a05-bcca-002c7f31731a",
-      "documentNumber": 79711,
-      "date": "2026-11-03T15:00:00.000Z",
-      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22780-084, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9625029,
-      "longitude": -43.3993006,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "8529d3b7-e385-45e4-a29f-64bffc76a3bd",
       "documentNumber": 79709,
       "date": "2026-11-03T15:00:00.000Z",
@@ -445,6 +476,30 @@
         },
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "56f5886b-e0e3-4a05-bcca-002c7f31731a",
+      "documentNumber": 79711,
+      "date": "2026-11-03T15:00:00.000Z",
+      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22780-084, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9625029,
+      "longitude": -43.3993006,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
