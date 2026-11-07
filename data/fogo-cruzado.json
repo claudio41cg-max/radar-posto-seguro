@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T16:17:16.770Z",
+  "generatedAt": "2026-11-07T20:16:42.487Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-11-07T13:10:54-03:00",
+  "count": 56,
+  "lastUpdate": "2026-11-07T16:00:46-03:00",
   "occurrences": [
     {
       "id": "6205188e-0067-4885-b378-6688380a4cdb",
@@ -203,11 +203,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -336,6 +336,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "1f005d32-516d-477b-b9bf-7d9941c15a3c",
+      "documentNumber": 79748,
+      "date": "2026-11-05T00:00:00.000Z",
+      "address": "R. Teófilo, Teófilo Cunha, Japeri - RJ, 26460-330, Brasil",
+      "neighborhood": "TEOFILO CUNHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.657169972144445,
+      "longitude": -43.59713939588245,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
@@ -499,11 +514,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -539,26 +554,6 @@
       "victims": []
     },
     {
-      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
-      "documentNumber": 79692,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.82326393,
-      "longitude": -43.37707903,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
       "documentNumber": 79707,
       "date": "2026-11-03T08:00:00.000Z",
@@ -575,6 +570,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
+      "documentNumber": 79692,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.82326393,
+      "longitude": -43.37707903,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },

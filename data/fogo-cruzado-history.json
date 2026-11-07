@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T16:17:16.774Z",
+  "generatedAt": "2026-11-07T20:16:42.489Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 486,
+  "count": 487,
   "occurrences": [
     {
       "id": "6205188e-0067-4885-b378-6688380a4cdb",
@@ -202,11 +202,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -335,6 +335,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "1f005d32-516d-477b-b9bf-7d9941c15a3c",
+      "documentNumber": 79748,
+      "date": "2026-11-05T00:00:00.000Z",
+      "address": "R. Teófilo, Teófilo Cunha, Japeri - RJ, 26460-330, Brasil",
+      "neighborhood": "TEOFILO CUNHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.657169972144445,
+      "longitude": -43.59713939588245,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
@@ -470,11 +485,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
