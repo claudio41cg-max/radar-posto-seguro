@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T23:39:27.882Z",
+  "generatedAt": "2026-11-08T02:44:15.965Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 488,
+  "count": 489,
   "occurrences": [
+    {
+      "id": "52f0b707-f8c4-4ef3-a441-c6c0b43deba1",
+      "documentNumber": 79751,
+      "date": "2026-11-07T17:00:00.000Z",
+      "address": "Av. Roberto Silveira, Centro Olinda, Nilópolis - RJ, 26540-030, Brasil",
+      "neighborhood": "CENTRO DE OLINDA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8172397,
+      "longitude": -43.40976,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "c1b1af1a-f53a-40ad-90a1-8258a1877d61",
       "documentNumber": 79750,
@@ -217,11 +237,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -500,11 +520,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -524,11 +544,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {

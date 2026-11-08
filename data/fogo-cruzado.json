@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T23:39:27.880Z",
+  "generatedAt": "2026-11-08T02:44:15.963Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 57,
-  "lastUpdate": "2026-11-07T19:47:34-03:00",
+  "count": 50,
+  "lastUpdate": "2026-11-07T21:22:07-03:00",
   "occurrences": [
+    {
+      "id": "52f0b707-f8c4-4ef3-a441-c6c0b43deba1",
+      "documentNumber": 79751,
+      "date": "2026-11-07T17:00:00.000Z",
+      "address": "Av. Roberto Silveira, Centro Olinda, Nilópolis - RJ, 26540-030, Brasil",
+      "neighborhood": "CENTRO DE OLINDA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8172397,
+      "longitude": -43.40976,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "c1b1af1a-f53a-40ad-90a1-8258a1877d61",
       "documentNumber": 79750,
@@ -218,11 +238,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -501,11 +521,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -529,11 +549,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -569,26 +589,6 @@
       "victims": []
     },
     {
-      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
-      "documentNumber": 79692,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.82326393,
-      "longitude": -43.37707903,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
       "documentNumber": 79707,
       "date": "2026-11-03T08:00:00.000Z",
@@ -605,6 +605,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
+      "documentNumber": 79692,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.82326393,
+      "longitude": -43.37707903,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
@@ -748,21 +768,6 @@
       "victims": []
     },
     {
-      "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
-      "documentNumber": 79666,
-      "date": "2026-11-02T02:00:00.000Z",
-      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GARDENIA AZUL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9582037,
-      "longitude": -43.3529536,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
       "documentNumber": 79679,
       "date": "2026-11-02T02:00:00.000Z",
@@ -775,6 +780,21 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
+      "documentNumber": 79666,
+      "date": "2026-11-02T02:00:00.000Z",
+      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GARDENIA AZUL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9582037,
+      "longitude": -43.3529536,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -813,26 +833,6 @@
       "victims": []
     },
     {
-      "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
-      "documentNumber": 79662,
-      "date": "2026-11-01T15:00:00.000Z",
-      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
-      "neighborhood": "BOA VISTA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8134189,
-      "longitude": -43.0626713,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "fc4e3ddd-4ff3-40b1-9b41-b920ee6a7e8c",
       "documentNumber": 79694,
       "date": "2026-11-01T15:00:00.000Z",
@@ -849,6 +849,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
+      "documentNumber": 79662,
+      "date": "2026-11-01T15:00:00.000Z",
+      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
+      "neighborhood": "BOA VISTA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8134189,
+      "longitude": -43.0626713,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -911,145 +931,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "f290cb2a-65b9-49c3-bb6b-7f10438100b3",
-      "documentNumber": 79654,
-      "date": "2026-10-31T21:37:00.000Z",
-      "address": "Rua Prof. Câncio Póvoa - Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-150, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
-      "latitude": -22.8940921,
-      "longitude": -43.3347693,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "df525f1b-a70d-4460-b646-96332e54225d",
-      "documentNumber": 79685,
-      "date": "2026-10-31T15:58:00.000Z",
-      "address": "Corte 8 (Complexo da Mangueirinha) - Centenario, Duque de Caxias - RJ, 25030-050, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.77095968425896,
-      "longitude": -43.30980255,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "82d88088-080c-4b52-832f-8af8fb05c978",
-      "documentNumber": 79653,
-      "date": "2026-10-31T10:00:00.000Z",
-      "address": "R. José Giuponi - Jardim Metropole, São João de Meriti - RJ, 25571-401, Brasil",
-      "neighborhood": "JARDIM METROPOLE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.759566157360855,
-      "longitude": -43.33930157124996,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "77ef20f1-4359-43ca-a164-69b04e3a353b",
-      "documentNumber": 79661,
-      "date": "2026-10-31T07:35:00.000Z",
-      "address": "Vila Leopoldina - Gramacho, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "VILA LEOPOLDINA",
-      "locality": "",
-      "latitude": -22.7600138,
-      "longitude": -43.3077331,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "9d42797c-da8f-401d-b8de-4e7804a32c38",
-      "documentNumber": 79660,
-      "date": "2026-10-31T07:00:00.000Z",
-      "address": "Comunidade da Jaqueira - Vila São José, Duque de Caxias - RJ, 25040-610, Brasil",
-      "neighborhood": "VILA SAO JOSE",
-      "subNeighborhood": "",
-      "locality": "Comunidade DA JAQUEIRA",
-      "latitude": -22.746791575398262,
-      "longitude": -43.32838160422973,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "1f8b83e1-6cd0-4c2a-9f8f-718742e75dd8",
-      "documentNumber": 79702,
-      "date": "2026-10-31T05:00:00.000Z",
-      "address": "Rod. Pres. Dutra, Riachão, Nova Iguaçu - RJ, Brasil",
-      "neighborhood": "RIACHAO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7390975,
-      "longitude": -43.5316351,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "60be2376-6fe4-47f1-a851-60dc07ba75e2",
-      "documentNumber": 79649,
-      "date": "2026-10-31T03:00:00.000Z",
-      "address": "Comunidade do Barro Vermelho - Pantanal, Gramacho - Duque de Caxias - RJ, 25040-160, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "PANTANAL",
-      "locality": "Comunidade DO BARRO VERMELHO",
-      "latitude": -22.74787062,
-      "longitude": -43.31411117,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "9ff45cfd-e89b-4c61-a01a-10305bf72e5c",
-      "documentNumber": 79647,
-      "date": "2026-10-31T00:23:00.000Z",
-      "address": "Estr. dos Teixeiras - Teixeiras, Realengo, Rio de Janeiro - RJ, 22723-205, Brasil",
-      "neighborhood": "REALENGO",
-      "subNeighborhood": "",
-      "locality": "TEIXEIRAS",
-      "latitude": -22.9059533572963,
-      "longitude": -43.42401698623047,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
