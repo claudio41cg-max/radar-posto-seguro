@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T16:14:42.505Z",
+  "generatedAt": "2026-11-08T20:31:35.113Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 53,
-  "lastUpdate": "2026-11-08T11:00:50-03:00",
+  "count": 56,
+  "lastUpdate": "2026-11-08T16:29:53-03:00",
   "occurrences": [
+    {
+      "id": "f0850073-8656-493d-86dc-48335bff8f88",
+      "documentNumber": 79763,
+      "date": "2026-11-08T08:00:00.000Z",
+      "address": "Guaratiba, Rio de Janeiro - RJ, 23030-240, Brasil",
+      "neighborhood": "GUARATIBA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.980717174351156,
+      "longitude": -43.585256734088134,
+      "reason": "Disparo Acidental",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "b9758948-a0ba-414c-aa04-ca7b16610508",
       "documentNumber": 79756,
@@ -46,6 +66,36 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "e6218bfc-2f68-4b8d-91f3-d0d108978749",
+      "documentNumber": 79764,
+      "date": "2026-11-07T22:00:00.000Z",
+      "address": "Morro da Mineira, Catumbi, Rio de Janeiro - RJ, 20211-320, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "MORRO DA MINEIRA (COMPLEXO DO SAO CARLOS)",
+      "latitude": -22.91844405821879,
+      "longitude": -43.19841100404748,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "7b312cad-f973-4f5c-b49d-6b339444a86f",
+      "documentNumber": 79754,
+      "date": "2026-11-07T20:00:00.000Z",
+      "address": "R. das Laranjeiras - Laranjeiras, Rio de Janeiro - RJ, 22240-006, Brasil",
+      "neighborhood": "LARANJEIRAS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.937486495036687,
+      "longitude": -43.19027344679872,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -557,6 +607,30 @@
       ]
     },
     {
+      "id": "56f5886b-e0e3-4a05-bcca-002c7f31731a",
+      "documentNumber": 79711,
+      "date": "2026-11-03T15:00:00.000Z",
+      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22780-084, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9625029,
+      "longitude": -43.3993006,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "8529d3b7-e385-45e4-a29f-64bffc76a3bd",
       "documentNumber": 79709,
       "date": "2026-11-03T15:00:00.000Z",
@@ -574,30 +648,6 @@
           "situation": "Dead",
           "personType": "Civilian"
         },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "56f5886b-e0e3-4a05-bcca-002c7f31731a",
-      "documentNumber": 79711,
-      "date": "2026-11-03T15:00:00.000Z",
-      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22780-084, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9625029,
-      "longitude": -43.3993006,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -639,26 +689,6 @@
       "victims": []
     },
     {
-      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
-      "documentNumber": 79707,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
-      "neighborhood": "BALNEARIO BAMBUI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.94219966644062,
-      "longitude": -42.76012644850468,
-      "reason": "Suicídio",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
       "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
       "documentNumber": 79692,
       "date": "2026-11-03T08:00:00.000Z",
@@ -675,6 +705,26 @@
         {
           "situation": "Dead",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
+      "documentNumber": 79707,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
+      "neighborhood": "BALNEARIO BAMBUI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.94219966644062,
+      "longitude": -42.76012644850468,
+      "reason": "Suicídio",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
