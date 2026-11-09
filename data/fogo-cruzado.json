@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T23:57:13.621Z",
+  "generatedAt": "2026-11-09T06:00:11.059Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 56,
-  "lastUpdate": "2026-11-08T18:26:54-03:00",
+  "count": 50,
+  "lastUpdate": "2026-11-08T22:38:07-03:00",
   "occurrences": [
+    {
+      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
+      "documentNumber": 79767,
+      "date": "2026-11-08T17:14:00.000Z",
+      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.950183209082496,
+      "longitude": -43.37623313515122,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
@@ -338,11 +353,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -453,6 +468,21 @@
       ]
     },
     {
+      "id": "1f005d32-516d-477b-b9bf-7d9941c15a3c",
+      "documentNumber": 79748,
+      "date": "2026-11-05T00:00:00.000Z",
+      "address": "R. Teófilo, Teófilo Cunha, Japeri - RJ, 26460-330, Brasil",
+      "neighborhood": "TEOFILO CUNHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.657169972144445,
+      "longitude": -43.59713939588245,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "8a61a92d-e8e1-4501-908f-effac448109f",
       "documentNumber": 79720,
       "date": "2026-11-05T00:00:00.000Z",
@@ -471,21 +501,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "1f005d32-516d-477b-b9bf-7d9941c15a3c",
-      "documentNumber": 79748,
-      "date": "2026-11-05T00:00:00.000Z",
-      "address": "R. Teófilo, Teófilo Cunha, Japeri - RJ, 26460-330, Brasil",
-      "neighborhood": "TEOFILO CUNHA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.657169972144445,
-      "longitude": -43.59713939588245,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
@@ -621,11 +636,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -689,26 +704,6 @@
       "victims": []
     },
     {
-      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
-      "documentNumber": 79692,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.82326393,
-      "longitude": -43.37707903,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
       "documentNumber": 79707,
       "date": "2026-11-03T08:00:00.000Z",
@@ -725,6 +720,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
+      "documentNumber": 79692,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.82326393,
+      "longitude": -43.37707903,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
@@ -896,141 +911,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "ca28bec1-a80e-4527-82b4-1a301f217a11",
-      "documentNumber": 79675,
-      "date": "2026-11-01T22:00:00.000Z",
-      "address": "Rio das Pedras - Jacarepaguá, Rio de Janeiro - RJ, 22753-737, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "RIO DAS PEDRAS",
-      "latitude": -22.974708761378366,
-      "longitude": -43.3328467674851,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "b5f79190-6aff-4e8e-8fe6-e20d7ee4e97c",
-      "documentNumber": 79684,
-      "date": "2026-11-01T18:59:00.000Z",
-      "address": "Santa Eugenia, Nova Iguaçu - RJ, 26286-270, Brasil",
-      "neighborhood": "SANTA EUGENIA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.750145738532098,
-      "longitude": -43.46843224054489,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "fc4e3ddd-4ff3-40b1-9b41-b920ee6a7e8c",
-      "documentNumber": 79694,
-      "date": "2026-11-01T15:00:00.000Z",
-      "address": "Rua Carlos Brandão - Granjas Cabuçu, Itaboraí - RJ, Brasil",
-      "neighborhood": "GRANJAS CABUCU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7950824,
-      "longitude": -42.9197396,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "f3f4ad98-d517-4880-8fa4-96ff88c5c99f",
-      "documentNumber": 79662,
-      "date": "2026-11-01T15:00:00.000Z",
-      "address": "Boa Vista, São Gonçalo - RJ, Brasil",
-      "neighborhood": "BOA VISTA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8134189,
-      "longitude": -43.0626713,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8e4f04fb-3cf3-44b0-8d36-e8b2fc8eafe1",
-      "documentNumber": 79664,
-      "date": "2026-11-01T13:37:00.000Z",
-      "address": "Bom Retiro, São Gonçalo - RJ, 24722-360, Brasil",
-      "neighborhood": "BOM RETIRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.79047619884831,
-      "longitude": -42.957545025903336,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "7cd37e7e-67c2-41be-96ca-cec823c86f30",
-      "documentNumber": 79663,
-      "date": "2026-11-01T13:20:00.000Z",
-      "address": "Apollo III, São Gonçalo - RJ, 24727-181, Brasil",
-      "neighborhood": "APOLLO III",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.783255453416913,
-      "longitude": -42.94340227095253,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1d70fa74-07e9-44b1-9a67-b52ddb3d646c",
-      "documentNumber": 79667,
-      "date": "2026-11-01T00:00:00.000Z",
-      "address": "Rua Caituba, Comunidade Nova Aurora (Cabeça de Porco) - Taquara, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "Comunidade NOVA AURORA (CABECA DE PORCO)",
-      "latitude": -22.9168984,
-      "longitude": -43.3758415,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }

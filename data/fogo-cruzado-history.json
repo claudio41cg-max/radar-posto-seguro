@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T23:57:13.623Z",
+  "generatedAt": "2026-11-09T06:00:11.062Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 495,
+  "count": 496,
   "occurrences": [
+    {
+      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
+      "documentNumber": 79767,
+      "date": "2026-11-08T17:14:00.000Z",
+      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.950183209082496,
+      "longitude": -43.37623313515122,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
@@ -337,11 +352,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -620,11 +635,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
