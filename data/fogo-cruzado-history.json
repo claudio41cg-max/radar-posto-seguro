@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T06:00:11.062Z",
+  "generatedAt": "2026-11-09T15:58:36.074Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,47 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 496,
+  "count": 500,
   "occurrences": [
+    {
+      "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
+      "documentNumber": 79772,
+      "date": "2026-11-09T09:40:00.000Z",
+      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
+      "latitude": -22.892324971301786,
+      "longitude": -43.33377861518315,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "2730ab54-1796-4a1f-9769-f377f9369e2b",
+      "documentNumber": 79769,
+      "date": "2026-11-08T23:00:00.000Z",
+      "address": "Caju, Rio de Janeiro - RJ, 20931-002, Brasil",
+      "neighborhood": "CAJU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.879168123661128,
+      "longitude": -43.22529473701781,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
       "documentNumber": 79767,
@@ -31,12 +70,12 @@
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
       "date": "2026-11-08T08:00:00.000Z",
-      "address": "Guaratiba, Rio de Janeiro - RJ, 23030-240, Brasil",
+      "address": "Estr. do Magarça, 5053, Jardim Maravilha - Guaratiba, Rio de Janeiro - RJ, 23031-203, Brasil",
       "neighborhood": "GUARATIBA",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.980717174351156,
-      "longitude": -43.585256734088134,
+      "locality": "JARDIM MARAVILHA",
+      "latitude": -22.964084068654067,
+      "longitude": -43.61696633280081,
       "reason": "Disparo Acidental",
       "policeAction": false,
       "agentPresence": false,
@@ -133,6 +172,50 @@
       ]
     },
     {
+      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
+      "documentNumber": 79770,
+      "date": "2026-11-07T16:00:00.000Z",
+      "address": "Rua Santa Teresinha - Guarajuba, Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "GUARAJUBA",
+      "locality": "",
+      "latitude": -22.634632964312384,
+      "longitude": -43.712133613482294,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "06857ecc-d6bd-4eed-9f95-a67f3edc8239",
+      "documentNumber": 79771,
+      "date": "2026-11-07T16:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Comunidade de Acari - Acari, Rio de Janeiro - RJ, 21530-014, Brasil",
+      "neighborhood": "ACARI",
+      "subNeighborhood": "",
+      "locality": "Comunidade DE ACARI",
+      "latitude": -22.82696538337559,
+      "longitude": -43.347309898442646,
+      "reason": "Tentativa/Roubo de cargas",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "6f35a4c1-a68f-4c47-adfe-077c64b4d9bc",
       "documentNumber": 79753,
       "date": "2026-11-07T11:30:00.000Z",
@@ -181,8 +264,8 @@
       "id": "2684ffea-60a8-41af-b2ce-475a13617b65",
       "documentNumber": 79746,
       "date": "2026-11-06T16:00:00.000Z",
-      "address": "Rua Canadá, Assentamento Sabugo - Sabugo, Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "NI",
+      "address": "Rua Canadá, Assentamento Sabugo - Sabugo, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
       "subNeighborhood": "SABUGO",
       "locality": "ASSENTAMENTO SANBUGO",
       "latitude": -22.620405188350478,
@@ -266,8 +349,8 @@
       "id": "047cdb85-feda-448b-a499-42615773effe",
       "documentNumber": 79744,
       "date": "2026-11-06T03:00:00.000Z",
-      "address": "Favelinha (São José) - Lages, Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "NI",
+      "address": "Favelinha (Vila São José) - Lages, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
       "subNeighborhood": "LAGES",
       "locality": "FAVELINHA (VILA SAO JOSE)",
       "latitude": -22.6247464,
@@ -536,11 +619,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -635,11 +718,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -663,11 +746,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
