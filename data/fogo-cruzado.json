@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T15:58:36.072Z",
+  "generatedAt": "2026-11-10T00:07:03.592Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 54,
-  "lastUpdate": "2026-11-09T10:12:43-03:00",
+  "count": 49,
+  "lastUpdate": "2026-11-09T20:32:04-03:00",
   "occurrences": [
+    {
+      "id": "78618419-119f-463c-9f17-952a94ac56ed",
+      "documentNumber": 79780,
+      "date": "2026-11-09T15:10:00.000Z",
+      "address": "Estrada dos Bandeirantes - Camorim, Rio de Janeiro - RJ, 22783-113, Brasil",
+      "neighborhood": "CAMORIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.984975031137147,
+      "longitude": -43.426948744180294,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
+      "documentNumber": 79774,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8627778,
+      "longitude": -43.3152778,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
       "documentNumber": 79772,
@@ -23,7 +58,42 @@
       "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
       "latitude": -22.892324971301786,
       "longitude": -43.33377861518315,
-      "reason": "Operação policial",
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "f925732b-73a2-4d64-8733-ca812ff32acb",
+      "documentNumber": 79777,
+      "date": "2026-11-09T01:00:00.000Z",
+      "address": "Bongaba, Magé - RJ, 25930-550, Brasil",
+      "neighborhood": "BONGABA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.641531094063634,
+      "longitude": -43.17725581719665,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "915576bd-8354-4798-8209-0d07d0a95671",
+      "documentNumber": 79779,
+      "date": "2026-11-09T00:00:00.000Z",
+      "address": "Complexo da Serrinha, R. Andrade Figueira, Madureira, Rio de Janeiro - RJ, 21360-210, Brasil",
+      "neighborhood": "MADUREIRA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA SERRINHA",
+      "latitude": -22.871426053316,
+      "longitude": -43.33457864418029,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -55,14 +125,14 @@
     {
       "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
       "documentNumber": 79767,
-      "date": "2026-11-08T17:14:00.000Z",
+      "date": "2026-11-08T08:00:00.000Z",
       "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
       "neighborhood": "CURICICA",
       "subNeighborhood": "",
       "locality": "Comunidade VILA SAPE",
       "latitude": -22.950183209082496,
       "longitude": -43.37623313515122,
-      "reason": "Não identificado",
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -88,15 +158,15 @@
       ]
     },
     {
-      "id": "b9758948-a0ba-414c-aa04-ca7b16610508",
-      "documentNumber": 79756,
-      "date": "2026-11-08T06:30:00.000Z",
-      "address": "Rod. Gov. Mário Covas - Marambaia, São Gonçalo - RJ, 24425-285, Brasil",
-      "neighborhood": "MARAMBAIA",
+      "id": "26e36c27-1b7e-4ad4-82cf-189a4de53ce2",
+      "documentNumber": 79755,
+      "date": "2026-11-08T06:15:00.000Z",
+      "address": "Morro da Viúva - Bom Retiro, São Gonçalo - RJ, 24726-069, Brasil",
+      "neighborhood": "BOM RETIRO",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7767203337588,
-      "longitude": -42.94906179889103,
+      "locality": "MORRO DA VIUVA",
+      "latitude": -22.784159078700462,
+      "longitude": -42.95104276123233,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -106,21 +176,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "26e36c27-1b7e-4ad4-82cf-189a4de53ce2",
-      "documentNumber": 79755,
-      "date": "2026-11-08T06:15:00.000Z",
-      "address": "Morro da Viúva - Bom Retiro, São Gonçalo - RJ, 24722-030, Brasil",
-      "neighborhood": "BOM RETIRO",
-      "subNeighborhood": "",
-      "locality": "MORRO DA VIUVA",
-      "latitude": -22.78431793796595,
-      "longitude": -42.949814608865985,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "e6218bfc-2f68-4b8d-91f3-d0d108978749",
@@ -134,7 +189,7 @@
       "longitude": -43.19841100404748,
       "reason": "Não identificado",
       "policeAction": false,
-      "agentPresence": true,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -176,7 +231,7 @@
       "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
       "documentNumber": 79770,
       "date": "2026-11-07T16:00:00.000Z",
-      "address": "Rua Santa Teresinha - Guarajuba, Paracambi - RJ, 26600-000, Brasil",
+      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
       "neighborhood": "DISTRITO SEDE",
       "subNeighborhood": "GUARAJUBA",
       "locality": "",
@@ -220,7 +275,7 @@
       "id": "6f35a4c1-a68f-4c47-adfe-077c64b4d9bc",
       "documentNumber": 79753,
       "date": "2026-11-07T11:30:00.000Z",
-      "address": "R. Henriqueta, 197 - Tanque, Rio de Janeiro - RJ, 22735-130, Brasil",
+      "address": "R. Henriqueta, 197, DEAM - Tanque, Rio de Janeiro - RJ, 22735-130, Brasil",
       "neighborhood": "TANQUE",
       "subNeighborhood": "",
       "locality": "",
@@ -620,11 +675,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -719,11 +774,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -747,11 +802,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -787,26 +842,6 @@
       "victims": []
     },
     {
-      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
-      "documentNumber": 79692,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.82326393,
-      "longitude": -43.37707903,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
       "documentNumber": 79707,
       "date": "2026-11-03T08:00:00.000Z",
@@ -823,6 +858,26 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
+      "documentNumber": 79692,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.82326393,
+      "longitude": -43.37707903,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
         }
       ]
     },
@@ -857,140 +912,6 @@
       "latitude": -22.6651554,
       "longitude": -43.2279653,
       "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "5f8b83a9-9963-4321-853b-669fba29d11e",
-      "documentNumber": 79686,
-      "date": "2026-11-02T20:00:00.000Z",
-      "address": "Ramos, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "RAMOS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8502757,
-      "longitude": -43.2565495,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "d588f7b9-4670-44f8-97e4-bf0e5550930b",
-      "documentNumber": 79677,
-      "date": "2026-11-02T13:10:00.000Z",
-      "address": "Baixa do Sapateiro (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-140, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "BAIXA DO SAPATEIRO (COMPLEXO DA MARE)",
-      "latitude": -22.8613469,
-      "longitude": -43.2420588,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "37d18c5b-3e13-49b8-ac74-e2601ecbcbdd",
-      "documentNumber": 79676,
-      "date": "2026-11-02T10:00:00.000Z",
-      "address": "Rua do Jacaré - Lins de Vasconcelos, Rio de Janeiro - RJ, 20725-080, Brasil",
-      "neighborhood": "LINS DE VASCONCELOS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.91399336200699,
-      "longitude": -43.281588186101324,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "ad7fa1de-6a2f-4746-bca1-0e9b6797d022",
-      "documentNumber": 79665,
-      "date": "2026-11-02T05:00:00.000Z",
-      "address": "Rua Aricuri, Parque Francisco José - Campo Grande, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CAMPO GRANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8920649,
-      "longitude": -43.568372,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a71e4303-b0a0-4104-a813-ac1265b97fff",
-      "documentNumber": 79681,
-      "date": "2026-11-02T04:00:00.000Z",
-      "address": "Comunidade do Guandu - Guandu, Japeri - RJ, 26420-130, Brasil",
-      "neighborhood": "GUANDU",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO GUANDU",
-      "latitude": -22.685739679174677,
-      "longitude": -43.63457797580493,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "290a2597-f233-4c66-9ea4-759c9441fd5a",
-      "documentNumber": 79680,
-      "date": "2026-11-02T03:00:00.000Z",
-      "address": "Comunidade do Ferroviário - Centro de Japeri, Japeri - RJ, 26445-010, Brasil",
-      "neighborhood": "CENTRO DE JAPERI",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DO FERROVIÁRIO",
-      "latitude": -22.676671269091166,
-      "longitude": -43.61709286202405,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "2e75f800-fa34-4d51-b172-7017e190a81a",
-      "documentNumber": 79666,
-      "date": "2026-11-02T02:00:00.000Z",
-      "address": "Gardênia Azul, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GARDENIA AZUL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9582037,
-      "longitude": -43.3529536,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "50b8235e-fa1d-420c-b965-c7f2c2d73b2c",
-      "documentNumber": 79679,
-      "date": "2026-11-02T02:00:00.000Z",
-      "address": "Comunidade do São Jorge - São Jorge, Japeri - RJ, 26453-090, Brasil",
-      "neighborhood": "SAO JORGE",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DO SAO JORGE",
-      "latitude": -22.670376176523714,
-      "longitude": -43.6155250324896,
-      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
