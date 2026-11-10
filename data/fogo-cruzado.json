@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T00:07:03.592Z",
+  "generatedAt": "2026-11-10T07:08:06.793Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -23,7 +23,7 @@
       "locality": "",
       "latitude": -22.984975031137147,
       "longitude": -43.426948744180294,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Briga",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
