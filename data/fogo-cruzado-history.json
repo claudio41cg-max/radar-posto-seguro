@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T15:38:37.082Z",
+  "generatedAt": "2026-11-10T21:26:34.632Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 510,
+  "count": 515,
   "occurrences": [
+    {
+      "id": "1e8f1623-5979-4491-89e8-d152e130bb85",
+      "documentNumber": 79794,
+      "date": "2026-11-10T12:30:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-490, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.8684647,
+      "longitude": -43.4754753,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
@@ -31,6 +46,36 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
+      "documentNumber": 79799,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
+      "neighborhood": "TENENTE JARDIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8643918,
+      "longitude": -43.0845165,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
@@ -74,13 +119,17 @@
       "address": "Curral (Complexo do Salgueiro) - Salgueiro, São Gonçalo - RJ, 24473-460, Brasil",
       "neighborhood": "SALGUEIRO",
       "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
+      "locality": "",
       "latitude": -22.78451445501235,
       "longitude": -43.02055560509685,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -283,6 +332,10 @@
         {
           "situation": "Wounded",
           "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -305,6 +358,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "47b78ac4-db36-4f17-927b-12055895cb99",
+      "documentNumber": 79798,
+      "date": "2026-11-08T02:00:00.000Z",
+      "address": "Av. Francisco Augusto Marquês - Lages, Distrito Sede, Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "LAGES",
+      "locality": "",
+      "latitude": -22.625568347478257,
+      "longitude": -43.70567326137696,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "e6218bfc-2f68-4b8d-91f3-d0d108978749",
@@ -581,6 +649,21 @@
       "latitude": -22.649608268791187,
       "longitude": -43.218419653443114,
       "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "ef95606e-6ce9-496c-a407-06716e58975c",
+      "documentNumber": 79745,
+      "date": "2026-11-06T00:00:00.000Z",
+      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, 24942-395, Brasil",
+      "neighborhood": "INOA",
+      "subNeighborhood": "",
+      "locality": "FAVELINHA DO RISCA A FACA",
+      "latitude": -22.9149188,
+      "longitude": -42.934742,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -927,15 +1010,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
