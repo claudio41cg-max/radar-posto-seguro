@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T07:08:06.793Z",
+  "generatedAt": "2026-11-10T15:38:37.080Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,99 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 49,
-  "lastUpdate": "2026-11-09T20:32:04-03:00",
+  "count": 55,
+  "lastUpdate": "2026-11-10T12:25:42-03:00",
   "occurrences": [
+    {
+      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
+      "documentNumber": 79792,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
+      "neighborhood": "SALGUEIRO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.78466913,
+      "longitude": -43.02685063,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
+      "documentNumber": 79791,
+      "date": "2026-11-10T09:35:00.000Z",
+      "address": "Comunidade Vila Sapê - Jacarepaguá, Rio de Janeiro - RJ, 22775-400, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.95051047,
+      "longitude": -43.37547407,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "177e020d-d885-4e95-bb84-e850f2b3dcdc",
+      "documentNumber": 79793,
+      "date": "2026-11-10T09:20:00.000Z",
+      "address": "Ipuca - Jardim Catarina, São Gonçalo - RJ, 24716-380, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "IPUCA",
+      "latitude": -22.79195408,
+      "longitude": -43.00650063,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "b1d2fc28-d383-447e-94b4-1b782d48f8da",
+      "documentNumber": 79789,
+      "date": "2026-11-10T06:50:00.000Z",
+      "address": "Curral (Complexo do Salgueiro) - Salgueiro, São Gonçalo - RJ, 24473-460, Brasil",
+      "neighborhood": "SALGUEIRO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.78451445501235,
+      "longitude": -43.02055560509685,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "c4e1ff82-601b-49ea-b52b-f55d8f933f94",
+      "documentNumber": 79788,
+      "date": "2026-11-10T04:40:00.000Z",
+      "address": "Estrada Adhemar Bebiano - Engenho da Rainha, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ENGENHO DA RAINHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8652774,
+      "longitude": -43.2970385,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "78618419-119f-463c-9f17-952a94ac56ed",
       "documentNumber": 79780,
@@ -178,6 +268,26 @@
       ]
     },
     {
+      "id": "af588024-3c22-4ae6-9188-20f766a26c5a",
+      "documentNumber": 79790,
+      "date": "2026-11-08T05:35:00.000Z",
+      "address": "Rua Elias da Silva - Piedade, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PIEDADE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8893055,
+      "longitude": -43.3110474,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "e6218bfc-2f68-4b8d-91f3-d0d108978749",
       "documentNumber": 79764,
       "date": "2026-11-07T22:00:00.000Z",
@@ -228,26 +338,6 @@
       ]
     },
     {
-      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
-      "documentNumber": 79770,
-      "date": "2026-11-07T16:00:00.000Z",
-      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "GUARAJUBA",
-      "locality": "",
-      "latitude": -22.634632964312384,
-      "longitude": -43.712133613482294,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "06857ecc-d6bd-4eed-9f95-a67f3edc8239",
       "documentNumber": 79771,
       "date": "2026-11-07T16:00:00.000Z",
@@ -265,6 +355,26 @@
           "situation": "Wounded",
           "personType": "Civilian"
         },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
+      "documentNumber": 79770,
+      "date": "2026-11-07T16:00:00.000Z",
+      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "GUARAJUBA",
+      "locality": "",
+      "latitude": -22.634632964312384,
+      "longitude": -43.712133613482294,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -491,11 +601,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -842,26 +952,6 @@
       "victims": []
     },
     {
-      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
-      "documentNumber": 79707,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
-      "neighborhood": "BALNEARIO BAMBUI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.94219966644062,
-      "longitude": -42.76012644850468,
-      "reason": "Suicídio",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
       "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
       "documentNumber": 79692,
       "date": "2026-11-03T08:00:00.000Z",
@@ -878,6 +968,26 @@
         {
           "situation": "Dead",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
+      "documentNumber": 79707,
+      "date": "2026-11-03T08:00:00.000Z",
+      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
+      "neighborhood": "BALNEARIO BAMBUI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.94219966644062,
+      "longitude": -42.76012644850468,
+      "reason": "Suicídio",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
