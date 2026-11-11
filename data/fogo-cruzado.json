@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T01:26:24.976Z",
+  "generatedAt": "2026-11-11T08:16:25.409Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 50,
-  "lastUpdate": "2026-11-10T21:10:50-03:00",
+  "count": 52,
+  "lastUpdate": "2026-11-11T00:25:14-03:00",
   "occurrences": [
     {
       "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
@@ -44,21 +44,6 @@
       "victims": []
     },
     {
-      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
-      "documentNumber": 79799,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
-      "neighborhood": "TENENTE JARDIM",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8643918,
-      "longitude": -43.0845165,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
       "date": "2026-11-10T10:00:00.000Z",
@@ -77,6 +62,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
+      "documentNumber": 79799,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
+      "neighborhood": "TENENTE JARDIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8643918,
+      "longitude": -43.0845165,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
@@ -201,6 +201,41 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
+      "documentNumber": 79803,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9153318,
+      "longitude": -43.194736,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
+      "documentNumber": 79804,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-062, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.79069314682588,
+      "longitude": -42.99792229416503,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",

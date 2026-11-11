@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T01:26:24.978Z",
+  "generatedAt": "2026-11-11T08:16:25.410Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 516,
+  "count": 518,
   "occurrences": [
     {
       "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
@@ -200,6 +200,41 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
+      "documentNumber": 79803,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9153318,
+      "longitude": -43.194736,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
+      "documentNumber": 79804,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-062, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.79069314682588,
+      "longitude": -42.99792229416503,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
