@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T16:15:50.081Z",
+  "generatedAt": "2026-11-11T22:44:42.145Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,89 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-11-11T12:22:44-03:00",
+  "count": 62,
+  "lastUpdate": "2026-11-11T19:20:18-03:00",
   "occurrences": [
+    {
+      "id": "2f0d2398-ff8f-4be7-b22f-a6d376423a93",
+      "documentNumber": 79815,
+      "date": "2026-11-11T17:07:00.000Z",
+      "address": "Av. Ernani Cardoso - Cascadura, Rio de Janeiro - RJ, 21310-310, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8824421,
+      "longitude": -43.3361721,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "36684cd7-13f3-49b9-94cb-2b8f08dc7537",
+      "documentNumber": 79817,
+      "date": "2026-11-11T16:10:00.000Z",
+      "address": "Rua Maria de lourdes Martins, Parque União (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21044-020, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "PARQUE UNIAO (COMPLEXO DA MARE)",
+      "latitude": -22.84903254124488,
+      "longitude": -43.24454616469509,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "0ba77bbf-fd9f-4f3a-83c0-75fa14a9ab3d",
+      "documentNumber": 79812,
+      "date": "2026-11-11T14:50:00.000Z",
+      "address": "Tatajuba (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21044-650, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.856473,
+      "longitude": -43.2424128,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "f00689c1-83c2-4d4f-b2ed-b0e2cf24977f",
+      "documentNumber": 79813,
+      "date": "2026-11-11T13:30:00.000Z",
+      "address": "Morro da Primavera - Cavalcanti, Rio de Janeiro - RJ, 21370-230, Brasil",
+      "neighborhood": "CAVALCANTI",
+      "subNeighborhood": "",
+      "locality": "MORRO DA PRIMAVERA",
+      "latitude": -22.86714,
+      "longitude": -43.3170319,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "1e5e460b-0331-44fc-9a57-ebdfb47ed706",
+      "documentNumber": 79816,
+      "date": "2026-11-11T12:00:00.000Z",
+      "address": "Av. Abílio Augusto Távora, Comunidade Danon - Danon, Nova Iguaçu - RJ, 26270-080, Brasil",
+      "neighborhood": "DANON",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DANON",
+      "latitude": -22.770424086441032,
+      "longitude": -43.51042986190186,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "70ad5510-dff2-41d8-925d-7635f7e5e65c",
       "documentNumber": 79809,
@@ -24,6 +104,21 @@
       "latitude": -22.8505857,
       "longitude": -43.2429542,
       "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "3528759c-d52b-4a33-a985-3ae9bdf92c8c",
+      "documentNumber": 79814,
+      "date": "2026-11-11T07:00:00.000Z",
+      "address": "Rodovia Amaral Peixoto, Comunidade da Linha - São José de Imbassai, Maricá - RJ, 24931-845, Brasil",
+      "neighborhood": "SAO JOSE DO IMBASSAI",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE DA LINHA",
+      "latitude": -22.930842303900864,
+      "longitude": -42.87503879783747,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -94,6 +189,26 @@
       "victims": []
     },
     {
+      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
+      "documentNumber": 79792,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
+      "neighborhood": "SALGUEIRO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.78466913,
+      "longitude": -43.02685063,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
       "documentNumber": 79799,
       "date": "2026-11-10T10:00:00.000Z",
@@ -122,26 +237,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
-      "documentNumber": 79792,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
-      "neighborhood": "SALGUEIRO",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
-      "latitude": -22.78466913,
-      "longitude": -43.02685063,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     },
     {
       "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
@@ -218,6 +313,21 @@
       "victims": []
     },
     {
+      "id": "4259b5b8-0937-4959-b764-81053923ecf6",
+      "documentNumber": 79819,
+      "date": "2026-11-10T00:00:00.000Z",
+      "address": "Saracuruna, Duque de Caxias - RJ, 25212-070, Brasil",
+      "neighborhood": "SARACURUNA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6752829,
+      "longitude": -43.2570791,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "78618419-119f-463c-9f17-952a94ac56ed",
       "documentNumber": 79780,
       "date": "2026-11-09T15:10:00.000Z",
@@ -238,21 +348,6 @@
       ]
     },
     {
-      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
-      "documentNumber": 79803,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9153318,
-      "longitude": -43.194736,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
       "documentNumber": 79774,
       "date": "2026-11-09T15:00:00.000Z",
@@ -263,6 +358,21 @@
       "latitude": -22.8627778,
       "longitude": -43.3152778,
       "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
+      "documentNumber": 79803,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9153318,
+      "longitude": -43.194736,
+      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -362,6 +472,21 @@
       ]
     },
     {
+      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
+      "documentNumber": 79767,
+      "date": "2026-11-08T08:00:00.000Z",
+      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.950183209082496,
+      "longitude": -43.37623313515122,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
       "date": "2026-11-08T08:00:00.000Z",
@@ -380,21 +505,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
-      "documentNumber": 79767,
-      "date": "2026-11-08T08:00:00.000Z",
-      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA SAPE",
-      "latitude": -22.950183209082496,
-      "longitude": -43.37623313515122,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "26e36c27-1b7e-4ad4-82cf-189a4de53ce2",
@@ -506,6 +616,26 @@
       ]
     },
     {
+      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
+      "documentNumber": 79770,
+      "date": "2026-11-07T16:00:00.000Z",
+      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "GUARAJUBA",
+      "locality": "",
+      "latitude": -22.634632964312384,
+      "longitude": -43.712133613482294,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "06857ecc-d6bd-4eed-9f95-a67f3edc8239",
       "documentNumber": 79771,
       "date": "2026-11-07T16:00:00.000Z",
@@ -523,26 +653,6 @@
           "situation": "Wounded",
           "personType": "Civilian"
         },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
-      "documentNumber": 79770,
-      "date": "2026-11-07T16:00:00.000Z",
-      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "GUARAJUBA",
-      "locality": "",
-      "latitude": -22.634632964312384,
-      "longitude": -43.712133613482294,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
