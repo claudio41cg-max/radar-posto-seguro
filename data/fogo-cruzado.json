@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T08:16:25.409Z",
+  "generatedAt": "2026-11-11T16:15:50.081Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,23 +10,73 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-11-11T00:25:14-03:00",
+  "count": 55,
+  "lastUpdate": "2026-11-11T12:22:44-03:00",
   "occurrences": [
+    {
+      "id": "70ad5510-dff2-41d8-925d-7635f7e5e65c",
+      "documentNumber": 79809,
+      "date": "2026-11-11T11:00:00.000Z",
+      "address": "Parque União - Maré, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "PARQUE UNIAO (COMPLEXO DA MARE)",
+      "latitude": -22.8505857,
+      "longitude": -43.2429542,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "614f2386-3d7d-4034-ab5e-f79a13e30aa7",
+      "documentNumber": 79805,
+      "date": "2026-11-11T05:25:00.000Z",
+      "address": "Parque União - Maré, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "PARQUE UNIAO (COMPLEXO DA MARE)",
+      "latitude": -22.8505857,
+      "longitude": -43.2429542,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
       "documentNumber": 79802,
       "date": "2026-11-10T19:00:00.000Z",
-      "address": "Nova Holanda, Maré, Rio de Janeiro - RJ, 21043-500, Brasil",
+      "address": "Nova Holanda - Maré, Rio de Janeiro - RJ, 21044-242, Brasil",
       "neighborhood": "MARE",
       "subNeighborhood": "",
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
-      "latitude": -22.858193,
-      "longitude": -43.2439368,
+      "latitude": -22.854234841753122,
+      "longitude": -43.24085306849724,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "4ae1bb3e-fbdf-4587-b538-aa64a520bf0b",
+      "documentNumber": 79806,
+      "date": "2026-11-10T14:00:00.000Z",
+      "address": "Rua Mogiqui, Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.8249744,
+      "longitude": -43.368951,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "1e8f1623-5979-4491-89e8-d152e130bb85",
@@ -42,26 +92,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
-      "documentNumber": 79792,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
-      "neighborhood": "SALGUEIRO",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
-      "latitude": -22.78466913,
-      "longitude": -43.02685063,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     },
     {
       "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
@@ -92,6 +122,26 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
+      "documentNumber": 79792,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
+      "neighborhood": "SALGUEIRO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.78466913,
+      "longitude": -43.02685063,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
@@ -188,21 +238,6 @@
       ]
     },
     {
-      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
-      "documentNumber": 79774,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.8627778,
-      "longitude": -43.3152778,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
       "documentNumber": 79803,
       "date": "2026-11-09T15:00:00.000Z",
@@ -213,6 +248,21 @@
       "latitude": -22.9153318,
       "longitude": -43.194736,
       "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
+      "documentNumber": 79774,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8627778,
+      "longitude": -43.3152778,
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -312,21 +362,6 @@
       ]
     },
     {
-      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
-      "documentNumber": 79767,
-      "date": "2026-11-08T08:00:00.000Z",
-      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA SAPE",
-      "latitude": -22.950183209082496,
-      "longitude": -43.37623313515122,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
       "date": "2026-11-08T08:00:00.000Z",
@@ -345,6 +380,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
+      "documentNumber": 79767,
+      "date": "2026-11-08T08:00:00.000Z",
+      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.950183209082496,
+      "longitude": -43.37623313515122,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "26e36c27-1b7e-4ad4-82cf-189a4de53ce2",

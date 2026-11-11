@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T08:16:25.410Z",
+  "generatedAt": "2026-11-11T16:15:50.084Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,22 +10,72 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 518,
+  "count": 521,
   "occurrences": [
+    {
+      "id": "70ad5510-dff2-41d8-925d-7635f7e5e65c",
+      "documentNumber": 79809,
+      "date": "2026-11-11T11:00:00.000Z",
+      "address": "Parque União - Maré, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "PARQUE UNIAO (COMPLEXO DA MARE)",
+      "latitude": -22.8505857,
+      "longitude": -43.2429542,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "614f2386-3d7d-4034-ab5e-f79a13e30aa7",
+      "documentNumber": 79805,
+      "date": "2026-11-11T05:25:00.000Z",
+      "address": "Parque União - Maré, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "PARQUE UNIAO (COMPLEXO DA MARE)",
+      "latitude": -22.8505857,
+      "longitude": -43.2429542,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
       "documentNumber": 79802,
       "date": "2026-11-10T19:00:00.000Z",
-      "address": "Nova Holanda, Maré, Rio de Janeiro - RJ, 21043-500, Brasil",
+      "address": "Nova Holanda - Maré, Rio de Janeiro - RJ, 21044-242, Brasil",
       "neighborhood": "MARE",
       "subNeighborhood": "",
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
-      "latitude": -22.858193,
-      "longitude": -43.2439368,
+      "latitude": -22.854234841753122,
+      "longitude": -43.24085306849724,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "4ae1bb3e-fbdf-4587-b538-aa64a520bf0b",
+      "documentNumber": 79806,
+      "date": "2026-11-10T14:00:00.000Z",
+      "address": "Rua Mogiqui, Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.8249744,
+      "longitude": -43.368951,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "1e8f1623-5979-4491-89e8-d152e130bb85",
