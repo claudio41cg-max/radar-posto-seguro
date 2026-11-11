@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T21:26:34.632Z",
+  "generatedAt": "2026-11-11T01:26:24.978Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 515,
+  "count": 516,
   "occurrences": [
+    {
+      "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
+      "documentNumber": 79802,
+      "date": "2026-11-10T19:00:00.000Z",
+      "address": "Nova Holanda, Maré, Rio de Janeiro - RJ, 21043-500, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
+      "latitude": -22.858193,
+      "longitude": -43.2439368,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "1e8f1623-5979-4491-89e8-d152e130bb85",
       "documentNumber": 79794,
@@ -703,11 +718,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -887,11 +902,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

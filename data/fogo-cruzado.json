@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T21:26:34.630Z",
+  "generatedAt": "2026-11-11T01:26:24.976Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 60,
-  "lastUpdate": "2026-11-10T16:33:27-03:00",
+  "count": 50,
+  "lastUpdate": "2026-11-10T21:10:50-03:00",
   "occurrences": [
+    {
+      "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
+      "documentNumber": 79802,
+      "date": "2026-11-10T19:00:00.000Z",
+      "address": "Nova Holanda, Maré, Rio de Janeiro - RJ, 21043-500, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
+      "latitude": -22.858193,
+      "longitude": -43.2439368,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "1e8f1623-5979-4491-89e8-d152e130bb85",
       "documentNumber": 79794,
@@ -684,11 +699,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -868,11 +883,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -896,218 +911,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "e53dd85a-c8de-4068-bd83-5f134b158fe3",
-      "documentNumber": 79713,
-      "date": "2026-11-03T21:00:00.000Z",
-      "address": "Estrada do Camboatá, Floresta do Camboatá - Deodoro, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "DEODORO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8448917,
-      "longitude": -43.3841672,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "5ed42d4c-8117-4891-bad4-547837c0bd24",
-      "documentNumber": 79704,
-      "date": "2026-11-03T20:39:00.000Z",
-      "address": "Comunidade do Canal - Vargem Grande, Rio de Janeiro - RJ, 22785-620, Brasil",
-      "neighborhood": "VARGEM GRANDE",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE DO CANAL",
-      "latitude": -22.993908202794533,
-      "longitude": -43.49636536585868,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "95dc937d-211a-481c-b381-88ae85346fa1",
-      "documentNumber": 79706,
-      "date": "2026-11-03T18:50:00.000Z",
-      "address": "Rua Sebastião Haroldo de Souza, Morro da Coruja - Vila Lage, São Gonçalo - RJ, 24426-330, Brasil",
-      "neighborhood": "VILA LAGE",
-      "subNeighborhood": "",
-      "locality": "MORRO DA CORUJA",
-      "latitude": -22.848047,
-      "longitude": -43.0877244,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "56f5886b-e0e3-4a05-bcca-002c7f31731a",
-      "documentNumber": 79711,
-      "date": "2026-11-03T15:00:00.000Z",
-      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22780-084, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9625029,
-      "longitude": -43.3993006,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8529d3b7-e385-45e4-a29f-64bffc76a3bd",
-      "documentNumber": 79709,
-      "date": "2026-11-03T15:00:00.000Z",
-      "address": "Rua Gen. Gomes de Castro - Padre Miguel, Rio de Janeiro - RJ, 21721-000, Brasil",
-      "neighborhood": "PADRE MIGUEL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8719246,
-      "longitude": -43.4481168,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c5b0030a-8427-4478-b6d3-9c26934d4f23",
-      "documentNumber": 79698,
-      "date": "2026-11-03T14:00:00.000Z",
-      "address": "Rua Orélia - Guadalupe, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "GUADALUPE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8457187,
-      "longitude": -43.3768595,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "1cbe6925-b3ab-45ad-b0fa-2f978e7232bc",
-      "documentNumber": 79693,
-      "date": "2026-11-03T10:40:00.000Z",
-      "address": "Comunidade Nova Brasília - Engenhoca, Niterói - RJ, 24110-491, Brasil",
-      "neighborhood": "ENGENHOCA",
-      "subNeighborhood": "",
-      "locality": "Comunidade NOVA BRASILIA",
-      "latitude": -22.868884,
-      "longitude": -43.091615,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "5b72750b-90f6-4b3f-b0f8-3d2b41e9e82d",
-      "documentNumber": 79692,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.82326393,
-      "longitude": -43.37707903,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "cf95868a-5d0e-420c-9660-36d29cbd5305",
-      "documentNumber": 79707,
-      "date": "2026-11-03T08:00:00.000Z",
-      "address": "Balneário Bambui, Maricá - RJ, 24921-000, Brasil",
-      "neighborhood": "BALNEARIO BAMBUI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.94219966644062,
-      "longitude": -42.76012644850468,
-      "reason": "Suicídio",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "85f18d4c-bc53-4637-bbf1-36da2fc68191",
-      "documentNumber": 79691,
-      "date": "2026-11-03T04:22:00.000Z",
-      "address": "Itamar - Cidade de Deus, Rio de Janeiro - RJ, 22773-200, Brasil",
-      "neighborhood": "CIDADE DE DEUS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.95349002599571,
-      "longitude": -43.36077190922544,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "9dce5002-0357-49b7-abdf-64d4650340d9",
-      "documentNumber": 79695,
-      "date": "2026-11-03T00:07:00.000Z",
-      "address": "Parada Morabi, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "PARADA MORABI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6651554,
-      "longitude": -43.2279653,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
