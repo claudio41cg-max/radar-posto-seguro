@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T22:44:42.145Z",
+  "generatedAt": "2026-11-12T03:24:44.900Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 62,
-  "lastUpdate": "2026-11-11T19:20:18-03:00",
+  "count": 60,
+  "lastUpdate": "2026-11-11T23:15:44-03:00",
   "occurrences": [
+    {
+      "id": "e54e00a8-fdb1-486c-8170-ec415b68e977",
+      "documentNumber": 79822,
+      "date": "2026-11-11T20:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTINHO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8627778,
+      "longitude": -43.3152778,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "2f0d2398-ff8f-4be7-b22f-a6d376423a93",
       "documentNumber": 79815,
@@ -189,6 +204,21 @@
       "victims": []
     },
     {
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
       "date": "2026-11-10T10:00:00.000Z",
@@ -219,21 +249,6 @@
       "latitude": -22.8643918,
       "longitude": -43.0845165,
       "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -1039,70 +1054,6 @@
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c8d1a6f9-6bf8-4eb6-9e89-6bd9a53c1a0a",
-      "documentNumber": 79726,
-      "date": "2026-11-04T16:45:00.000Z",
-      "address": "Rua Dr. Augusto Figueiredo - Vila Aliança, Bangu, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.8742041,
-      "longitude": -43.473073,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
-      "id": "3a72c940-5161-4ecf-a897-efc26ad79f39",
-      "documentNumber": 79724,
-      "date": "2026-11-04T08:29:00.000Z",
-      "address": "R. Profa. Luiza Vieira Silva - Figueira, Magé - RJ, 25903-587, Brasil",
-      "neighborhood": "FIGUEIRA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.70553474106021,
-      "longitude": -43.15754698897349,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "40583075-ec37-4ee1-b5d3-fd5dda3bc2b7",
-      "documentNumber": 79710,
-      "date": "2026-11-04T06:00:00.000Z",
-      "address": "Irajá, Rio de Janeiro - RJ, 21235-113, Brasil",
-      "neighborhood": "IRAJA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8349,
-      "longitude": -43.3265,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
