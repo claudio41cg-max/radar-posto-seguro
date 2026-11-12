@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T11:44:12.014Z",
+  "generatedAt": "2026-11-12T19:10:08.580Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,77 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 529,
+  "count": 535,
   "occurrences": [
+    {
+      "id": "4a3f1ce6-4210-478c-9f3b-1817f1efc4c4",
+      "documentNumber": 79829,
+      "date": "2026-11-12T10:40:00.000Z",
+      "address": "Cordovil, Rio de Janeiro - RJ, 21011-350, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.823823968092775,
+      "longitude": -43.29619299539409,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "6fe7306f-7f1f-4573-88b0-15675fe28e86",
+      "documentNumber": 79828,
+      "date": "2026-11-12T09:03:00.000Z",
+      "address": "Mauá,  Baia Branca, Magé - RJ, 25903-587, Brasil",
+      "neighborhood": "BAIA BRANCA",
+      "subNeighborhood": "MAUA",
+      "locality": "",
+      "latitude": -22.714032253019766,
+      "longitude": -43.17379916310978,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "23add126-ead2-46c7-b5bf-c4ea42e11384",
+      "documentNumber": 79825,
+      "date": "2026-11-12T05:44:00.000Z",
+      "address": "Morro do Jordão - Tanque, Rio de Janeiro - RJ, 22725-549, Brasil",
+      "neighborhood": "TANQUE",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JORDAO",
+      "latitude": -22.91094354,
+      "longitude": -43.37403875,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "88b31eb7-36c5-4bc5-a788-52b19beb2dfb",
+      "documentNumber": 79827,
+      "date": "2026-11-12T05:00:00.000Z",
+      "address": "Morro do Andaraí - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.922329,
+      "longitude": -43.2477454,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "e54e00a8-fdb1-486c-8170-ec415b68e977",
       "documentNumber": 79822,
@@ -26,6 +95,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "067b8f7b-36c1-4729-a958-b587cb809b4a",
+      "documentNumber": 79826,
+      "date": "2026-11-11T19:30:00.000Z",
+      "address": "Av. Eng. Souza Filho - Rio das Pedras, Jacarepaguá, Rio de Janeiro - RJ, 22753-039, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.976183771100143,
+      "longitude": -43.33485618230897,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "2f0d2398-ff8f-4be7-b22f-a6d376423a93",
@@ -148,6 +237,21 @@
       "latitude": -22.8505857,
       "longitude": -43.2429542,
       "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "40d58a51-249a-4613-9173-75adaac1d2d9",
+      "documentNumber": 79830,
+      "date": "2026-11-11T00:00:00.000Z",
+      "address": "Comunidade do Vai Quem Quer - Chácaras Rio-Petrópolis, Duque de Caxias - RJ, 25243-150, Brasil",
+      "neighborhood": "CHACARAS RIO PETROPOLIS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO VAI QUEM QUER",
+      "latitude": -22.66769695,
+      "longitude": -43.29536637,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -928,11 +1032,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

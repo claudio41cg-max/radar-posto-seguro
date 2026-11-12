@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T11:44:12.011Z",
+  "generatedAt": "2026-11-12T19:10:08.538Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,78 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 60,
-  "lastUpdate": "2026-11-12T07:40:13-03:00",
+  "count": 66,
+  "lastUpdate": "2026-11-12T16:03:52-03:00",
   "occurrences": [
+    {
+      "id": "4a3f1ce6-4210-478c-9f3b-1817f1efc4c4",
+      "documentNumber": 79829,
+      "date": "2026-11-12T10:40:00.000Z",
+      "address": "Cordovil, Rio de Janeiro - RJ, 21011-350, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.823823968092775,
+      "longitude": -43.29619299539409,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "6fe7306f-7f1f-4573-88b0-15675fe28e86",
+      "documentNumber": 79828,
+      "date": "2026-11-12T09:03:00.000Z",
+      "address": "Mauá,  Baia Branca, Magé - RJ, 25903-587, Brasil",
+      "neighborhood": "BAIA BRANCA",
+      "subNeighborhood": "MAUA",
+      "locality": "",
+      "latitude": -22.714032253019766,
+      "longitude": -43.17379916310978,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "23add126-ead2-46c7-b5bf-c4ea42e11384",
+      "documentNumber": 79825,
+      "date": "2026-11-12T05:44:00.000Z",
+      "address": "Morro do Jordão - Tanque, Rio de Janeiro - RJ, 22725-549, Brasil",
+      "neighborhood": "TANQUE",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JORDAO",
+      "latitude": -22.91094354,
+      "longitude": -43.37403875,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "88b31eb7-36c5-4bc5-a788-52b19beb2dfb",
+      "documentNumber": 79827,
+      "date": "2026-11-12T05:00:00.000Z",
+      "address": "Morro do Andaraí - Andaraí, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.922329,
+      "longitude": -43.2477454,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "e54e00a8-fdb1-486c-8170-ec415b68e977",
       "documentNumber": 79822,
@@ -27,6 +96,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "067b8f7b-36c1-4729-a958-b587cb809b4a",
+      "documentNumber": 79826,
+      "date": "2026-11-11T19:30:00.000Z",
+      "address": "Av. Eng. Souza Filho - Rio das Pedras, Jacarepaguá, Rio de Janeiro - RJ, 22753-039, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.976183771100143,
+      "longitude": -43.33485618230897,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "2f0d2398-ff8f-4be7-b22f-a6d376423a93",
@@ -154,6 +243,21 @@
       "victims": []
     },
     {
+      "id": "40d58a51-249a-4613-9173-75adaac1d2d9",
+      "documentNumber": 79830,
+      "date": "2026-11-11T00:00:00.000Z",
+      "address": "Comunidade do Vai Quem Quer - Chácaras Rio-Petrópolis, Duque de Caxias - RJ, 25243-150, Brasil",
+      "neighborhood": "CHACARAS RIO PETROPOLIS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO VAI QUEM QUER",
+      "latitude": -22.66769695,
+      "longitude": -43.29536637,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
       "documentNumber": 79802,
       "date": "2026-11-10T19:00:00.000Z",
@@ -204,16 +308,16 @@
       "victims": []
     },
     {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
+      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
+      "documentNumber": 79799,
       "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
+      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
+      "neighborhood": "TENENTE JARDIM",
       "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
+      "locality": "",
+      "latitude": -22.8643918,
+      "longitude": -43.0845165,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -239,16 +343,16 @@
       ]
     },
     {
-      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
-      "documentNumber": 79799,
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
       "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
-      "neighborhood": "TENENTE JARDIM",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8643918,
-      "longitude": -43.0845165,
-      "reason": "Ação policial",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -363,6 +467,26 @@
       ]
     },
     {
+      "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
+      "documentNumber": 79804,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-062, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.79069314682588,
+      "longitude": -42.99792229416503,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
       "documentNumber": 79774,
       "date": "2026-11-09T15:00:00.000Z",
@@ -391,26 +515,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
-      "documentNumber": 79804,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-062, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.79069314682588,
-      "longitude": -42.99792229416503,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     },
     {
       "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
@@ -631,26 +735,6 @@
       ]
     },
     {
-      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
-      "documentNumber": 79770,
-      "date": "2026-11-07T16:00:00.000Z",
-      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "GUARAJUBA",
-      "locality": "",
-      "latitude": -22.634632964312384,
-      "longitude": -43.712133613482294,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "06857ecc-d6bd-4eed-9f95-a67f3edc8239",
       "documentNumber": 79771,
       "date": "2026-11-07T16:00:00.000Z",
@@ -668,6 +752,26 @@
           "situation": "Wounded",
           "personType": "Civilian"
         },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
+      "documentNumber": 79770,
+      "date": "2026-11-07T16:00:00.000Z",
+      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "GUARAJUBA",
+      "locality": "",
+      "latitude": -22.634632964312384,
+      "longitude": -43.712133613482294,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -845,21 +949,6 @@
       ]
     },
     {
-      "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
-      "documentNumber": 79740,
-      "date": "2026-11-06T00:00:00.000Z",
-      "address": "R. Mal. Floriano - Vila Sapê, Imbariê, Duque de Caxias - RJ, 25275-254, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "VILA SAPE",
-      "locality": "",
-      "latitude": -22.649608268791187,
-      "longitude": -43.218419653443114,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "ef95606e-6ce9-496c-a407-06716e58975c",
       "documentNumber": 79745,
       "date": "2026-11-06T00:00:00.000Z",
@@ -870,6 +959,21 @@
       "latitude": -22.9149188,
       "longitude": -42.934742,
       "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
+      "documentNumber": 79740,
+      "date": "2026-11-06T00:00:00.000Z",
+      "address": "R. Mal. Floriano - Vila Sapê, Imbariê, Duque de Caxias - RJ, 25275-254, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "VILA SAPE",
+      "locality": "",
+      "latitude": -22.649608268791187,
+      "longitude": -43.218419653443114,
+      "reason": "Tentativa/Roubo",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -909,11 +1013,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -1024,21 +1128,6 @@
       ]
     },
     {
-      "id": "1f005d32-516d-477b-b9bf-7d9941c15a3c",
-      "documentNumber": 79748,
-      "date": "2026-11-05T00:00:00.000Z",
-      "address": "R. Teófilo, Teófilo Cunha, Japeri - RJ, 26460-330, Brasil",
-      "neighborhood": "TEOFILO CUNHA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.657169972144445,
-      "longitude": -43.59713939588245,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "8a61a92d-e8e1-4501-908f-effac448109f",
       "documentNumber": 79720,
       "date": "2026-11-05T00:00:00.000Z",
@@ -1057,6 +1146,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "1f005d32-516d-477b-b9bf-7d9941c15a3c",
+      "documentNumber": 79748,
+      "date": "2026-11-05T00:00:00.000Z",
+      "address": "R. Teófilo, Teófilo Cunha, Japeri - RJ, 26460-330, Brasil",
+      "neighborhood": "TEOFILO CUNHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.657169972144445,
+      "longitude": -43.59713939588245,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     }
   ]
 }
