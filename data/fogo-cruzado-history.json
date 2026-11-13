@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T15:27:11.958Z",
+  "generatedAt": "2026-11-13T21:32:08.060Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,47 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 546,
+  "count": 548,
   "occurrences": [
+    {
+      "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
+      "documentNumber": 79845,
+      "date": "2026-11-13T13:00:00.000Z",
+      "address": "Comunidade do Brejal- Jardim Bom Retiro, São Gonçalo - RJ, 24722-271, Brasil",
+      "neighborhood": "BOM RETIRO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO BREJAL",
+      "latitude": -22.79654842,
+      "longitude": -42.9620609,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
+      "documentNumber": 79848,
+      "date": "2026-11-13T10:50:00.000Z",
+      "address": "Beco do Adão - Apolo II, Itaboraí - RJ, 24800-053, Brasil",
+      "neighborhood": "APOLLO II",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.77684177460865,
+      "longitude": -42.93879651858849,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "9c933f23-e497-4532-ac39-8ac02785cb8d",
       "documentNumber": 79843,
@@ -55,7 +94,28 @@
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "ec8ce3fb-e156-46f8-ba6b-2b7efc334be5",
@@ -980,11 +1040,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

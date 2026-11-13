@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T15:27:11.956Z",
+  "generatedAt": "2026-11-13T21:32:08.057Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,48 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 67,
-  "lastUpdate": "2026-11-13T11:19:17-03:00",
+  "count": 69,
+  "lastUpdate": "2026-11-13T15:25:29-03:00",
   "occurrences": [
+    {
+      "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
+      "documentNumber": 79845,
+      "date": "2026-11-13T13:00:00.000Z",
+      "address": "Comunidade do Brejal- Jardim Bom Retiro, São Gonçalo - RJ, 24722-271, Brasil",
+      "neighborhood": "BOM RETIRO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO BREJAL",
+      "latitude": -22.79654842,
+      "longitude": -42.9620609,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
+      "documentNumber": 79848,
+      "date": "2026-11-13T10:50:00.000Z",
+      "address": "Beco do Adão - Apolo II, Itaboraí - RJ, 24800-053, Brasil",
+      "neighborhood": "APOLLO II",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.77684177460865,
+      "longitude": -42.93879651858849,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "9c933f23-e497-4532-ac39-8ac02785cb8d",
       "documentNumber": 79843,
@@ -56,7 +95,28 @@
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "ec8ce3fb-e156-46f8-ba6b-2b7efc334be5",
@@ -485,6 +545,21 @@
       "victims": []
     },
     {
+      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
+      "documentNumber": 79799,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
+      "neighborhood": "TENENTE JARDIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8643918,
+      "longitude": -43.0845165,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
       "date": "2026-11-10T10:00:00.000Z",
@@ -503,21 +578,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
-      "documentNumber": 79799,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
-      "neighborhood": "TENENTE JARDIM",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8643918,
-      "longitude": -43.0845165,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
@@ -659,6 +719,21 @@
       "victims": []
     },
     {
+      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
+      "documentNumber": 79774,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8627778,
+      "longitude": -43.3152778,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
       "documentNumber": 79804,
       "date": "2026-11-09T15:00:00.000Z",
@@ -677,21 +752,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
-      "documentNumber": 79774,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.8627778,
-      "longitude": -43.3152778,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
@@ -961,11 +1021,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -1141,21 +1201,6 @@
       ]
     },
     {
-      "id": "ef95606e-6ce9-496c-a407-06716e58975c",
-      "documentNumber": 79745,
-      "date": "2026-11-06T00:00:00.000Z",
-      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, 24942-395, Brasil",
-      "neighborhood": "INOA",
-      "subNeighborhood": "",
-      "locality": "FAVELINHA DO RISCA A FACA",
-      "latitude": -22.9149188,
-      "longitude": -42.934742,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
       "documentNumber": 79740,
       "date": "2026-11-06T00:00:00.000Z",
@@ -1166,6 +1211,21 @@
       "latitude": -22.649608268791187,
       "longitude": -43.218419653443114,
       "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "ef95606e-6ce9-496c-a407-06716e58975c",
+      "documentNumber": 79745,
+      "date": "2026-11-06T00:00:00.000Z",
+      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, 24942-395, Brasil",
+      "neighborhood": "INOA",
+      "subNeighborhood": "",
+      "locality": "FAVELINHA DO RISCA A FACA",
+      "latitude": -22.9149188,
+      "longitude": -42.934742,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
