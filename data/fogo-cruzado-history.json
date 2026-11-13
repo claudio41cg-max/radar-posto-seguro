@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T19:10:08.580Z",
+  "generatedAt": "2026-11-13T00:31:35.282Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,58 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 535,
+  "count": 538,
   "occurrences": [
+    {
+      "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
+      "documentNumber": 79833,
+      "date": "2026-11-12T17:00:00.000Z",
+      "address": "Anaia Pequeno, São Gonçalo - RJ, Brasil",
+      "neighborhood": "ANAIA PEQUENO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8619209,
+      "longitude": -42.9959577,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "b7ef3a1a-c673-4b45-b380-c89e5be0ca41",
+      "documentNumber": 79832,
+      "date": "2026-11-12T14:39:00.000Z",
+      "address": "Estr. do Quitungo - Brás de Pina, Rio de Janeiro - RJ, 21240-070, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.827346678171995,
+      "longitude": -43.29770326693906,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "cc74df83-c4cd-4c68-b4d4-89b4a921f774",
+      "documentNumber": 79831,
+      "date": "2026-11-12T11:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, 21235-000, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8595476,
+      "longitude": -43.3148861,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "4a3f1ce6-4210-478c-9f3b-1817f1efc4c4",
       "documentNumber": 79829,
@@ -239,7 +289,20 @@
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "40d58a51-249a-4613-9173-75adaac1d2d9",

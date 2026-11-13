@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T19:10:08.538Z",
+  "generatedAt": "2026-11-13T00:31:35.223Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,59 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 66,
-  "lastUpdate": "2026-11-12T16:03:52-03:00",
+  "count": 59,
+  "lastUpdate": "2026-11-12T19:18:08-03:00",
   "occurrences": [
+    {
+      "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
+      "documentNumber": 79833,
+      "date": "2026-11-12T17:00:00.000Z",
+      "address": "Anaia Pequeno, São Gonçalo - RJ, Brasil",
+      "neighborhood": "ANAIA PEQUENO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8619209,
+      "longitude": -42.9959577,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "b7ef3a1a-c673-4b45-b380-c89e5be0ca41",
+      "documentNumber": 79832,
+      "date": "2026-11-12T14:39:00.000Z",
+      "address": "Estr. do Quitungo - Brás de Pina, Rio de Janeiro - RJ, 21240-070, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.827346678171995,
+      "longitude": -43.29770326693906,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "cc74df83-c4cd-4c68-b4d4-89b4a921f774",
+      "documentNumber": 79831,
+      "date": "2026-11-12T11:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, 21235-000, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8595476,
+      "longitude": -43.3148861,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "4a3f1ce6-4210-478c-9f3b-1817f1efc4c4",
       "documentNumber": 79829,
@@ -240,7 +290,20 @@
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "40d58a51-249a-4613-9173-75adaac1d2d9",
@@ -323,6 +386,21 @@
       "victims": []
     },
     {
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
       "date": "2026-11-10T10:00:00.000Z",
@@ -341,21 +419,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
@@ -467,6 +530,21 @@
       ]
     },
     {
+      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
+      "documentNumber": 79803,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9153318,
+      "longitude": -43.194736,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
       "documentNumber": 79804,
       "date": "2026-11-09T15:00:00.000Z",
@@ -497,21 +575,6 @@
       "latitude": -22.8627778,
       "longitude": -43.3152778,
       "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
-      "documentNumber": 79803,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9153318,
-      "longitude": -43.194736,
-      "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
@@ -949,21 +1012,6 @@
       ]
     },
     {
-      "id": "ef95606e-6ce9-496c-a407-06716e58975c",
-      "documentNumber": 79745,
-      "date": "2026-11-06T00:00:00.000Z",
-      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, 24942-395, Brasil",
-      "neighborhood": "INOA",
-      "subNeighborhood": "",
-      "locality": "FAVELINHA DO RISCA A FACA",
-      "latitude": -22.9149188,
-      "longitude": -42.934742,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
       "documentNumber": 79740,
       "date": "2026-11-06T00:00:00.000Z",
@@ -979,184 +1027,15 @@
       "victims": []
     },
     {
-      "id": "de5f20f5-b67c-43c0-bb33-d57739463825",
-      "documentNumber": 79739,
-      "date": "2026-11-05T21:00:00.000Z",
-      "address": "R. Valicia, 8 - Carmo, Queimados - RJ, 26381-312, Brasil",
-      "neighborhood": "CARMO",
+      "id": "ef95606e-6ce9-496c-a407-06716e58975c",
+      "documentNumber": 79745,
+      "date": "2026-11-06T00:00:00.000Z",
+      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, 24942-395, Brasil",
+      "neighborhood": "INOA",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.690846204040117,
-      "longitude": -43.56265275792933,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "e25f3285-9b8d-47b2-a561-6686a24da6ca",
-      "documentNumber": 79729,
-      "date": "2026-11-05T19:00:00.000Z",
-      "address": "Rua Benjamin Constant - Neves, São Gonçalo - RJ, 24425-640, Brasil",
-      "neighborhood": "NEVES I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.85351782924157,
-      "longitude": -43.091222291232306,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "615785f1-3023-4fe9-916a-4df826f26f29",
-      "documentNumber": 79725,
-      "date": "2026-11-05T15:00:00.000Z",
-      "address": "Vila Ipiranga - Fonseca, Niterói - RJ, 24130-209, Brasil",
-      "neighborhood": "FONSECA",
-      "subNeighborhood": "",
-      "locality": "VILA IPIRANGA",
-      "latitude": -22.8788556,
-      "longitude": -43.09226994,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "5857054b-62fc-40a1-aea4-1ac066cafcb0",
-      "documentNumber": 79721,
-      "date": "2026-11-05T12:10:00.000Z",
-      "address": "Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-580, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.82425288,
-      "longitude": -43.36809439,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "b29a3d28-d315-4a4b-9864-79f5243f4346",
-      "documentNumber": 79722,
-      "date": "2026-11-05T12:00:00.000Z",
-      "address": "Av. Epitácio Pessoa, Fonte da Saudade - Lagoa, Rio de Janeiro - RJ, 22471-220, Brasil",
-      "neighborhood": "LAGOA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.964377015288314,
-      "longitude": -43.2037626955542,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "13ac8b14-c672-4b71-9cba-e19386bdd82c",
-      "documentNumber": 79727,
-      "date": "2026-11-05T09:00:00.000Z",
-      "address": "Estr. Rio São Paulo, 149 - Km 32, Nova Iguaçu - RJ, 26298-566",
-      "neighborhood": "KM 32",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.848903703683007,
-      "longitude": -43.60388592343789,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "6ce46e5c-da6d-4331-8774-2664adad5131",
-      "documentNumber": 79718,
-      "date": "2026-11-05T05:49:00.000Z",
-      "address": "Morro do Andaraí - Andaraí, Rio de Janeiro - RJ, 20541-240, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ANDARAI",
-      "latitude": -22.93296722,
-      "longitude": -43.25643623,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "10967528-ae4c-4273-be45-6fd2968106a3",
-      "documentNumber": 79723,
-      "date": "2026-11-05T01:20:00.000Z",
-      "address": "Av. Maracanã - Tijuca, Rio de Janeiro - RJ, 20511-000, Brasil",
-      "neighborhood": "TIJUCA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.93307454114324,
-      "longitude": -43.24283719259032,
-      "reason": "Briga",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "8a61a92d-e8e1-4501-908f-effac448109f",
-      "documentNumber": 79720,
-      "date": "2026-11-05T00:00:00.000Z",
-      "address": "Santa Teresa, Belford Roxo - RJ, 26110-163, Brasil",
-      "neighborhood": "SANTA TEREZA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.75291996466968,
-      "longitude": -43.35664419070384,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1f005d32-516d-477b-b9bf-7d9941c15a3c",
-      "documentNumber": 79748,
-      "date": "2026-11-05T00:00:00.000Z",
-      "address": "R. Teófilo, Teófilo Cunha, Japeri - RJ, 26460-330, Brasil",
-      "neighborhood": "TEOFILO CUNHA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.657169972144445,
-      "longitude": -43.59713939588245,
+      "locality": "FAVELINHA DO RISCA A FACA",
+      "latitude": -22.9149188,
+      "longitude": -42.934742,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
