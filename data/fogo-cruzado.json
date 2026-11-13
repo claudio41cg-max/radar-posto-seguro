@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T07:07:31.225Z",
+  "generatedAt": "2026-11-13T15:27:11.956Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,17 +10,116 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 59,
-  "lastUpdate": "2026-11-12T19:18:08-03:00",
+  "count": 67,
+  "lastUpdate": "2026-11-13T11:19:17-03:00",
   "occurrences": [
+    {
+      "id": "9c933f23-e497-4532-ac39-8ac02785cb8d",
+      "documentNumber": 79843,
+      "date": "2026-11-13T07:00:00.000Z",
+      "address": "Morro do Engenho da Rainha - Engenho da Rainha, Rio de Janeiro - RJ, 20761-170, Brasil",
+      "neighborhood": "ENGENHO DA RAINHA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ENGENHO DA RAINHA",
+      "latitude": -22.87239083,
+      "longitude": -43.29229679,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "76bb6fb5-8c75-445b-8ee0-b9882f161322",
+      "documentNumber": 79836,
+      "date": "2026-11-13T06:18:00.000Z",
+      "address": "Comunidade do Lixão - Centro, Duque de Caxias - RJ, 25011-000, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO LIXAO",
+      "latitude": -22.797893,
+      "longitude": -43.308876,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "e0d41dbd-7f3a-45bc-bc2b-de6e3428a040",
+      "documentNumber": 79835,
+      "date": "2026-11-13T06:00:00.000Z",
+      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
+      "neighborhood": "CASCADURA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
+      "latitude": -22.892324971301786,
+      "longitude": -43.33377861518315,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "ec8ce3fb-e156-46f8-ba6b-2b7efc334be5",
+      "documentNumber": 79837,
+      "date": "2026-11-13T04:59:00.000Z",
+      "address": "Avenida Renascer - Comunidade da Furquim Mendes, Vigário Geral, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VIGARIO GERAL",
+      "subNeighborhood": "",
+      "locality": "FURQUIM MENDES",
+      "latitude": -22.8035032,
+      "longitude": -43.3160903,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "d62b905d-8cc6-450c-9949-4967369e9f92",
+      "documentNumber": 79838,
+      "date": "2026-11-13T04:30:00.000Z",
+      "address": "Santa Dalila, Magé - RJ, Brasil",
+      "neighborhood": "SANTA DALILA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6504235,
+      "longitude": -43.1541276,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "3e82df3b-4f11-4bdd-afdc-75a06700644a",
+      "documentNumber": 79844,
+      "date": "2026-11-13T01:22:00.000Z",
+      "address": "Suruí, Magé, RJ, Brasil",
+      "neighborhood": "SURUI (CENTRO)",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.670122136714312,
+      "longitude": -43.138097433312986,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
       "documentNumber": 79833,
       "date": "2026-11-12T17:00:00.000Z",
-      "address": "Anaia Pequeno, São Gonçalo - RJ, Brasil",
+      "address": "Comunidade do Anaia Pequeno - Anaia Pequeno, São Gonçalo - RJ, Brasil",
       "neighborhood": "ANAIA PEQUENO",
       "subNeighborhood": "",
-      "locality": "",
+      "locality": "Comunidade DO ANAIA PEQUENO",
       "latitude": -22.8619209,
       "longitude": -42.9959577,
       "reason": "Tentativa/Roubo",
@@ -91,6 +190,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "67ceecf7-2f88-4f25-86e5-d333be419fba",
+      "documentNumber": 79839,
+      "date": "2026-11-12T06:30:00.000Z",
+      "address": "Catete, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "CATETE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9268338,
+      "longitude": -43.1793449,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -371,6 +485,26 @@
       "victims": []
     },
     {
+      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
+      "documentNumber": 79792,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
+      "neighborhood": "SALGUEIRO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.78466913,
+      "longitude": -43.02685063,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
       "documentNumber": 79799,
       "date": "2026-11-10T10:00:00.000Z",
@@ -399,26 +533,6 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
-    },
-    {
-      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
-      "documentNumber": 79792,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
-      "neighborhood": "SALGUEIRO",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
-      "latitude": -22.78466913,
-      "longitude": -43.02685063,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     },
     {
       "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
@@ -595,6 +709,21 @@
       "victims": []
     },
     {
+      "id": "5a2a097c-3a9a-4491-bca8-b436ec645823",
+      "documentNumber": 79840,
+      "date": "2026-11-09T02:00:00.000Z",
+      "address": "Av. Pref. Hélio Ferreira da Silva - Lages, Distrito Sede, Paracambi - RJ, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "LAGES",
+      "locality": "",
+      "latitude": -22.6250619,
+      "longitude": -43.7061666,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "f925732b-73a2-4d64-8733-ca812ff32acb",
       "documentNumber": 79777,
       "date": "2026-11-09T01:00:00.000Z",
@@ -654,21 +783,6 @@
       ]
     },
     {
-      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
-      "documentNumber": 79767,
-      "date": "2026-11-08T08:00:00.000Z",
-      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA SAPE",
-      "latitude": -22.950183209082496,
-      "longitude": -43.37623313515122,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
       "date": "2026-11-08T08:00:00.000Z",
@@ -687,6 +801,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
+      "documentNumber": 79767,
+      "date": "2026-11-08T08:00:00.000Z",
+      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.950183209082496,
+      "longitude": -43.37623313515122,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "26e36c27-1b7e-4ad4-82cf-189a4de53ce2",
@@ -798,6 +927,26 @@
       ]
     },
     {
+      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
+      "documentNumber": 79770,
+      "date": "2026-11-07T16:00:00.000Z",
+      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "GUARAJUBA",
+      "locality": "",
+      "latitude": -22.634632964312384,
+      "longitude": -43.712133613482294,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "06857ecc-d6bd-4eed-9f95-a67f3edc8239",
       "documentNumber": 79771,
       "date": "2026-11-07T16:00:00.000Z",
@@ -815,26 +964,6 @@
           "situation": "Wounded",
           "personType": "Civilian"
         },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
-      "documentNumber": 79770,
-      "date": "2026-11-07T16:00:00.000Z",
-      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "GUARAJUBA",
-      "locality": "",
-      "latitude": -22.634632964312384,
-      "longitude": -43.712133613482294,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
         {
           "situation": "Dead",
           "personType": "Civilian"
@@ -1012,21 +1141,6 @@
       ]
     },
     {
-      "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
-      "documentNumber": 79740,
-      "date": "2026-11-06T00:00:00.000Z",
-      "address": "R. Mal. Floriano - Vila Sapê, Imbariê, Duque de Caxias - RJ, 25275-254, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "VILA SAPE",
-      "locality": "",
-      "latitude": -22.649608268791187,
-      "longitude": -43.218419653443114,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "ef95606e-6ce9-496c-a407-06716e58975c",
       "documentNumber": 79745,
       "date": "2026-11-06T00:00:00.000Z",
@@ -1037,6 +1151,21 @@
       "latitude": -22.9149188,
       "longitude": -42.934742,
       "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
+      "documentNumber": 79740,
+      "date": "2026-11-06T00:00:00.000Z",
+      "address": "R. Mal. Floriano - Vila Sapê, Imbariê, Duque de Caxias - RJ, 25275-254, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "VILA SAPE",
+      "locality": "",
+      "latitude": -22.649608268791187,
+      "longitude": -43.218419653443114,
+      "reason": "Tentativa/Roubo",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
