@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T08:05:18.822Z",
+  "generatedAt": "2026-11-14T14:58:34.121Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -11,7 +11,7 @@
     "days": 7
   },
   "count": 61,
-  "lastUpdate": "2026-11-13T22:33:30-03:00",
+  "lastUpdate": "2026-11-14T09:31:43-03:00",
   "occurrences": [
     {
       "id": "ab15b1f2-c14e-48d4-bf8d-480cc0b79a88",
@@ -26,7 +26,20 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
@@ -580,21 +593,6 @@
       "victims": []
     },
     {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
       "date": "2026-11-10T10:00:00.000Z",
@@ -613,6 +611,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
@@ -739,6 +752,26 @@
       ]
     },
     {
+      "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
+      "documentNumber": 79804,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-062, Brasil",
+      "neighborhood": "JARDIM CATARINA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.79069314682588,
+      "longitude": -42.99792229416503,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
       "documentNumber": 79803,
       "date": "2026-11-09T15:00:00.000Z",
@@ -767,26 +800,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
-      "documentNumber": 79804,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-062, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.79069314682588,
-      "longitude": -42.99792229416503,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     },
     {
       "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
@@ -878,21 +891,6 @@
       ]
     },
     {
-      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
-      "documentNumber": 79767,
-      "date": "2026-11-08T08:00:00.000Z",
-      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA SAPE",
-      "latitude": -22.950183209082496,
-      "longitude": -43.37623313515122,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
       "date": "2026-11-08T08:00:00.000Z",
@@ -911,6 +909,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
+      "documentNumber": 79767,
+      "date": "2026-11-08T08:00:00.000Z",
+      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.950183209082496,
+      "longitude": -43.37623313515122,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "26e36c27-1b7e-4ad4-82cf-189a4de53ce2",

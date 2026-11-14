@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T08:05:18.825Z",
+  "generatedAt": "2026-11-14T14:58:34.123Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -25,7 +25,20 @@
       "reason": "Disputa",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
