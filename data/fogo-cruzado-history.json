@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T21:32:08.060Z",
+  "generatedAt": "2026-11-14T01:40:44.116Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 548,
+  "count": 550,
   "occurrences": [
+    {
+      "id": "ab15b1f2-c14e-48d4-bf8d-480cc0b79a88",
+      "documentNumber": 79849,
+      "date": "2026-11-13T20:40:00.000Z",
+      "address": "Favelinha da Renascer (Chácara do Tanque) - Tanque, Rio de Janeiro - RJ, 22733-240, Brasil",
+      "neighborhood": "TANQUE",
+      "subNeighborhood": "",
+      "locality": "FAVELINHA DA RENASCER (OU CHACARA DO TANQUE)",
+      "latitude": -22.915556,
+      "longitude": -43.3625,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
       "documentNumber": 79845,
@@ -172,22 +187,22 @@
       "victims": []
     },
     {
-      "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
-      "documentNumber": 79833,
-      "date": "2026-11-12T17:00:00.000Z",
-      "address": "Comunidade do Anaia Pequeno - Anaia Pequeno, São Gonçalo - RJ, Brasil",
-      "neighborhood": "ANAIA PEQUENO",
+      "id": "29d875af-0684-4382-9782-37a09d259718",
+      "documentNumber": 79850,
+      "date": "2026-11-13T00:00:00.000Z",
+      "address": "Morro do Amorim - Manguinhos, Rio de Janeiro - RJ, 21041-250, Brasil",
+      "neighborhood": "MANGUINHOS",
       "subNeighborhood": "",
-      "locality": "Comunidade DO ANAIA PEQUENO",
-      "latitude": -22.8619209,
-      "longitude": -42.9959577,
-      "reason": "Tentativa/Roubo",
+      "locality": "MORRO DO AMORIM (COMPLEXO DE MANGUINHOS)",
+      "latitude": -22.874590230275516,
+      "longitude": -43.24955561865956,
+      "reason": "Homicidio/Tentativa",
       "policeAction": false,
-      "agentPresence": false,
+      "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -235,6 +250,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
+      "documentNumber": 79833,
+      "date": "2026-11-12T10:00:00.000Z",
+      "address": "Comunidade do Anaia Pequeno - Anaia Pequeno, São Gonçalo - RJ, Brasil",
+      "neighborhood": "ANAIA PEQUENO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO ANAIA PEQUENO",
+      "latitude": -22.8619209,
+      "longitude": -42.9959577,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "6fe7306f-7f1f-4573-88b0-15675fe28e86",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T21:32:08.057Z",
+  "generatedAt": "2026-11-14T01:40:44.113Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 69,
-  "lastUpdate": "2026-11-13T15:25:29-03:00",
+  "count": 61,
+  "lastUpdate": "2026-11-13T22:33:30-03:00",
   "occurrences": [
+    {
+      "id": "ab15b1f2-c14e-48d4-bf8d-480cc0b79a88",
+      "documentNumber": 79849,
+      "date": "2026-11-13T20:40:00.000Z",
+      "address": "Favelinha da Renascer (Chácara do Tanque) - Tanque, Rio de Janeiro - RJ, 22733-240, Brasil",
+      "neighborhood": "TANQUE",
+      "subNeighborhood": "",
+      "locality": "FAVELINHA DA RENASCER (OU CHACARA DO TANQUE)",
+      "latitude": -22.915556,
+      "longitude": -43.3625,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
       "documentNumber": 79845,
@@ -173,22 +188,22 @@
       "victims": []
     },
     {
-      "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
-      "documentNumber": 79833,
-      "date": "2026-11-12T17:00:00.000Z",
-      "address": "Comunidade do Anaia Pequeno - Anaia Pequeno, São Gonçalo - RJ, Brasil",
-      "neighborhood": "ANAIA PEQUENO",
+      "id": "29d875af-0684-4382-9782-37a09d259718",
+      "documentNumber": 79850,
+      "date": "2026-11-13T00:00:00.000Z",
+      "address": "Morro do Amorim - Manguinhos, Rio de Janeiro - RJ, 21041-250, Brasil",
+      "neighborhood": "MANGUINHOS",
       "subNeighborhood": "",
-      "locality": "Comunidade DO ANAIA PEQUENO",
-      "latitude": -22.8619209,
-      "longitude": -42.9959577,
-      "reason": "Tentativa/Roubo",
+      "locality": "MORRO DO AMORIM (COMPLEXO DE MANGUINHOS)",
+      "latitude": -22.874590230275516,
+      "longitude": -43.24955561865956,
+      "reason": "Homicidio/Tentativa",
       "policeAction": false,
-      "agentPresence": false,
+      "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -236,6 +251,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
+      "documentNumber": 79833,
+      "date": "2026-11-12T10:00:00.000Z",
+      "address": "Comunidade do Anaia Pequeno - Anaia Pequeno, São Gonçalo - RJ, Brasil",
+      "neighborhood": "ANAIA PEQUENO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO ANAIA PEQUENO",
+      "latitude": -22.8619209,
+      "longitude": -42.9959577,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "6fe7306f-7f1f-4573-88b0-15675fe28e86",
@@ -545,16 +580,16 @@
       "victims": []
     },
     {
-      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
-      "documentNumber": 79799,
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
       "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
-      "neighborhood": "TENENTE JARDIM",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8643918,
-      "longitude": -43.0845165,
-      "reason": "Ação policial",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -580,16 +615,16 @@
       ]
     },
     {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
+      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
+      "documentNumber": 79799,
       "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
+      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
+      "neighborhood": "TENENTE JARDIM",
       "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
+      "locality": "",
+      "latitude": -22.8643918,
+      "longitude": -43.0845165,
+      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -843,6 +878,21 @@
       ]
     },
     {
+      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
+      "documentNumber": 79767,
+      "date": "2026-11-08T08:00:00.000Z",
+      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade VILA SAPE",
+      "latitude": -22.950183209082496,
+      "longitude": -43.37623313515122,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "f0850073-8656-493d-86dc-48335bff8f88",
       "documentNumber": 79763,
       "date": "2026-11-08T08:00:00.000Z",
@@ -861,21 +911,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "74ec1943-891f-4f04-930f-ff2584afd0a8",
-      "documentNumber": 79767,
-      "date": "2026-11-08T08:00:00.000Z",
-      "address": "Comunidade Vila Sapê, Curicica, Rio de Janeiro - RJ, 22775-270, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA SAPE",
-      "latitude": -22.950183209082496,
-      "longitude": -43.37623313515122,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "26e36c27-1b7e-4ad4-82cf-189a4de53ce2",
@@ -987,26 +1022,6 @@
       ]
     },
     {
-      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
-      "documentNumber": 79770,
-      "date": "2026-11-07T16:00:00.000Z",
-      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "GUARAJUBA",
-      "locality": "",
-      "latitude": -22.634632964312384,
-      "longitude": -43.712133613482294,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "06857ecc-d6bd-4eed-9f95-a67f3edc8239",
       "documentNumber": 79771,
       "date": "2026-11-07T16:00:00.000Z",
@@ -1026,6 +1041,26 @@
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "f014d830-a3bd-4ff1-a3a6-d3c3ccfa8384",
+      "documentNumber": 79770,
+      "date": "2026-11-07T16:00:00.000Z",
+      "address": "Rua Santa Teresinha - Guarajuba, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
+      "neighborhood": "DISTRITO SEDE",
+      "subNeighborhood": "GUARAJUBA",
+      "locality": "",
+      "latitude": -22.634632964312384,
+      "longitude": -43.712133613482294,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -1058,176 +1093,6 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "6205188e-0067-4885-b378-6688380a4cdb",
-      "documentNumber": 79747,
-      "date": "2026-11-06T17:50:00.000Z",
-      "address": "Rua João Bruno Lobo - Curicica, Rio de Janeiro - RJ, 22780-805, Brasil",
-      "neighborhood": "CURICICA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.95262811640059,
-      "longitude": -43.38292104902824,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "2684ffea-60a8-41af-b2ce-475a13617b65",
-      "documentNumber": 79746,
-      "date": "2026-11-06T16:00:00.000Z",
-      "address": "Rua Canadá, Assentamento Sabugo - Sabugo, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "SABUGO",
-      "locality": "ASSENTAMENTO SANBUGO",
-      "latitude": -22.620405188350478,
-      "longitude": -43.72596953148855,
-      "reason": "Disparo Acidental",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "65bf1c7a-655a-4791-bbb7-f56219d949c4",
-      "documentNumber": 79737,
-      "date": "2026-11-06T09:48:00.000Z",
-      "address": "Rua Guaraúna - Loteamento Parque Celeste - Vicente de Carvalho, Rio de Janeiro - RJ, 21371-010, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "LOTEAMENTO PARQUE CELESTE",
-      "latitude": -22.8540279,
-      "longitude": -43.3151814,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "cc146a01-c744-42cd-a13e-5d4b35c01e9f",
-      "documentNumber": 79731,
-      "date": "2026-11-06T08:34:00.000Z",
-      "address": "Jardim Novo - Realengo, Rio de Janeiro - RJ, 21760-000, Brasil",
-      "neighborhood": "REALENGO",
-      "subNeighborhood": "JARDIM NOVO",
-      "locality": "",
-      "latitude": -22.89122085328802,
-      "longitude": -43.418290389747156,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "20321576-bd12-41e3-a1d3-029c247a39f6",
-      "documentNumber": 79734,
-      "date": "2026-11-06T05:30:00.000Z",
-      "address": "Morro do 18 (Complexo do 18) - Água Santa, Rio de Janeiro - RJ, 20740-600, Brasil",
-      "neighborhood": "AGUA SANTA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO 18 (COMPLEXO DO 18)",
-      "latitude": -22.905011856611303,
-      "longitude": -43.31769304011568,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "e110f26e-31e2-4592-bd43-d5ea45676195",
-      "documentNumber": 79733,
-      "date": "2026-11-06T04:38:00.000Z",
-      "address": "Morro da Covanca - Tanque, Rio de Janeiro - RJ, 22735-020, Brasil",
-      "neighborhood": "TANQUE",
-      "subNeighborhood": "",
-      "locality": "MORRO DA COVANCA",
-      "latitude": -22.91453531221287,
-      "longitude": -43.344235155542,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "047cdb85-feda-448b-a499-42615773effe",
-      "documentNumber": 79744,
-      "date": "2026-11-06T03:00:00.000Z",
-      "address": "Favelinha (Vila São José) - Lages, Distrito Sede - Paracambi - RJ, 26600-000, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "LAGES",
-      "locality": "FAVELINHA (VILA SAO JOSE)",
-      "latitude": -22.6247464,
-      "longitude": -43.708173,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "083a183c-513f-4fc7-8b76-73c5795909a1",
-      "documentNumber": 79732,
-      "date": "2026-11-06T00:20:00.000Z",
-      "address": "Morro do Dendê - Tauá, Rio de Janeiro - RJ, 21922-490, Brasil",
-      "neighborhood": "TAUA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO DENDE",
-      "latitude": -22.802039,
-      "longitude": -43.184899,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "ed2d686c-5f57-48dd-afe5-247e8d1ed491",
-      "documentNumber": 79740,
-      "date": "2026-11-06T00:00:00.000Z",
-      "address": "R. Mal. Floriano - Vila Sapê, Imbariê, Duque de Caxias - RJ, 25275-254, Brasil",
-      "neighborhood": "IMBARIE",
-      "subNeighborhood": "VILA SAPE",
-      "locality": "",
-      "latitude": -22.649608268791187,
-      "longitude": -43.218419653443114,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "ef95606e-6ce9-496c-a407-06716e58975c",
-      "documentNumber": 79745,
-      "date": "2026-11-06T00:00:00.000Z",
-      "address": "Favelinha do Risca Faca - Inoã, Maricá - RJ, 24942-395, Brasil",
-      "neighborhood": "INOA",
-      "subNeighborhood": "",
-      "locality": "FAVELINHA DO RISCA A FACA",
-      "latitude": -22.9149188,
-      "longitude": -42.934742,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
       "victims": []
     }
   ]
