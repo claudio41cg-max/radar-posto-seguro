@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T14:58:34.121Z",
+  "generatedAt": "2026-11-14T19:51:52.062Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 61,
-  "lastUpdate": "2026-11-14T09:31:43-03:00",
+  "count": 64,
+  "lastUpdate": "2026-11-14T14:38:49-03:00",
   "occurrences": [
+    {
+      "id": "85e24819-1111-485d-94a8-1bf472a56dbe",
+      "documentNumber": 79857,
+      "date": "2026-11-14T11:00:00.000Z",
+      "address": "Conjunto Habitacional Portus II (Beirute) - Costa Barros, Rio de Janeiro - RJ, 21532-198, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8200169,
+      "longitude": -43.3647537,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "ab15b1f2-c14e-48d4-bf8d-480cc0b79a88",
       "documentNumber": 79849,
@@ -28,15 +43,31 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "5c19dcba-3605-4f1c-8e8b-86b6263758de",
+      "documentNumber": 79855,
+      "date": "2026-11-13T15:00:00.000Z",
+      "address": "Rua Mauá - São Bernardo, Belford Roxo - RJ, 26165-110, Brasil",
+      "neighborhood": "SAO BERNARDO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.734351809864997,
+      "longitude": -43.388216836930575,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -64,6 +95,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
+      "documentNumber": 79856,
+      "date": "2026-11-13T13:00:00.000Z",
+      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8712722,
+      "longitude": -43.4600043,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
@@ -330,11 +376,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -593,6 +639,21 @@
       "victims": []
     },
     {
+      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
+      "documentNumber": 79799,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
+      "neighborhood": "TENENTE JARDIM",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8643918,
+      "longitude": -43.0845165,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
       "date": "2026-11-10T10:00:00.000Z",
@@ -623,21 +684,6 @@
       "latitude": -22.8961019,
       "longitude": -43.4820843,
       "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
-      "documentNumber": 79799,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
-      "neighborhood": "TENENTE JARDIM",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8643918,
-      "longitude": -43.0845165,
-      "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -752,6 +798,21 @@
       ]
     },
     {
+      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
+      "documentNumber": 79803,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
+      "neighborhood": "CATUMBI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9153318,
+      "longitude": -43.194736,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
       "documentNumber": 79804,
       "date": "2026-11-09T15:00:00.000Z",
@@ -770,21 +831,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
-      "documentNumber": 79803,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9153318,
-      "longitude": -43.194736,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
