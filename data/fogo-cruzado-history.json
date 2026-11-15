@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T10:39:50.971Z",
+  "generatedAt": "2026-11-15T17:26:17.057Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,67 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 554,
+  "count": 558,
   "occurrences": [
+    {
+      "id": "0a98783d-4938-4e98-a5d1-4ae5d029f38c",
+      "documentNumber": 79865,
+      "date": "2026-11-15T07:14:00.000Z",
+      "address": "Rua Clarimundo de Melo, 827 - Quintino Bocaiúva, Rio de Janeiro - RJ, 21311-281, Brasil",
+      "neighborhood": "QUINTINO BOCAIUVA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.893356905303584,
+      "longitude": -43.32225767040376,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "a086853a-fb46-49c8-8c59-4916c4852447",
+      "documentNumber": 79867,
+      "date": "2026-11-15T07:00:00.000Z",
+      "address": "Estrada da Posse - Campo Grande, Rio de Janeiro - RJ, 23088-000, Brasil",
+      "neighborhood": "CAMPO GRANDE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8847155,
+      "longitude": -43.5537529,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "728be369-6f25-4cdc-96ea-a7bdd8a6e67c",
+      "documentNumber": 79866,
+      "date": "2026-11-14T19:00:00.000Z",
+      "address": "Rua Flexa, Morro do Juca Branco - Fonseca, Niterói - RJ, 24120-016, Brasil",
+      "neighborhood": "CUBANGO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JUCA BRANCO",
+      "latitude": -22.8861688054583,
+      "longitude": -43.0985519802648,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "6dda11a9-4e23-45e5-b17f-009c9cf3d663",
       "documentNumber": 79858,
@@ -67,6 +126,30 @@
       ]
     },
     {
+      "id": "02b4b153-b941-4b5b-a6ca-641963ea79bd",
+      "documentNumber": 79868,
+      "date": "2026-11-13T17:00:00.000Z",
+      "address": "Rua Estr. de Ferro - Vila de Cava, Nova Iguaçu - RJ, 26053-620, Brasil",
+      "neighborhood": "VILA DE CAVA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.67496766995277,
+      "longitude": -43.43488165273775,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "5c19dcba-3605-4f1c-8e8b-86b6263758de",
       "documentNumber": 79855,
       "date": "2026-11-13T15:00:00.000Z",
@@ -101,11 +184,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
