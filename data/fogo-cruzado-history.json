@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T17:26:17.057Z",
+  "generatedAt": "2026-11-15T22:01:18.309Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 558,
+  "count": 559,
   "occurrences": [
+    {
+      "id": "1defaffe-9004-4f69-b1d7-58f8f8484385",
+      "documentNumber": 79871,
+      "date": "2026-11-15T13:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Inhaúma, Rio de Janeiro - RJ, 20765-360, Brasil",
+      "neighborhood": "INHAUMA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.868415212976117,
+      "longitude": -43.29440425372497,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "0a98783d-4938-4e98-a5d1-4ae5d029f38c",
       "documentNumber": 79865,

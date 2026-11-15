@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T17:26:17.055Z",
+  "generatedAt": "2026-11-15T22:01:18.307Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 62,
-  "lastUpdate": "2026-11-15T13:26:48-03:00",
+  "count": 63,
+  "lastUpdate": "2026-11-15T15:06:14-03:00",
   "occurrences": [
+    {
+      "id": "1defaffe-9004-4f69-b1d7-58f8f8484385",
+      "documentNumber": 79871,
+      "date": "2026-11-15T13:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Inhaúma, Rio de Janeiro - RJ, 20765-360, Brasil",
+      "neighborhood": "INHAUMA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.868415212976117,
+      "longitude": -43.29440425372497,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "0a98783d-4938-4e98-a5d1-4ae5d029f38c",
       "documentNumber": 79865,
@@ -737,21 +757,6 @@
       "victims": []
     },
     {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
       "documentNumber": 79799,
       "date": "2026-11-10T10:00:00.000Z",
@@ -785,6 +790,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
@@ -911,21 +931,6 @@
       "victims": []
     },
     {
-      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
-      "documentNumber": 79774,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.8627778,
-      "longitude": -43.3152778,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
       "documentNumber": 79804,
       "date": "2026-11-09T15:00:00.000Z",
@@ -944,6 +949,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
+      "documentNumber": 79774,
+      "date": "2026-11-09T15:00:00.000Z",
+      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VICENTE DE CARVALHO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
+      "latitude": -22.8627778,
+      "longitude": -43.3152778,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
