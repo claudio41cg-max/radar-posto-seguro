@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T08:38:16.725Z",
+  "generatedAt": "2026-11-16T18:57:00.797Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,93 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 560,
+  "count": 567,
   "occurrences": [
+    {
+      "id": "ed73adf9-bb72-4d62-a702-79cfaf3751af",
+      "documentNumber": 79879,
+      "date": "2026-11-16T08:00:00.000Z",
+      "address": "Rodrigues Alves - Parque Estrela, Duque de Caxias - RJ, 25275-160, Brasil",
+      "neighborhood": "IMBARIE",
+      "subNeighborhood": "PARQUE ESTRELA",
+      "locality": "RODRIGUES ALVES",
+      "latitude": -22.64446,
+      "longitude": -43.219395,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "5c824b7f-42af-4e03-b761-959e9ec186a4",
+      "documentNumber": 79876,
+      "date": "2026-11-16T06:00:00.000Z",
+      "address": "Gardênia Azul, Rio de Janeiro - RJ, 22765-451, Brasil",
+      "neighborhood": "GARDENIA AZUL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.961374822175085,
+      "longitude": -43.34939162642822,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "41c2e9fd-27d0-448a-9224-5913d69490ae",
+      "documentNumber": 79874,
+      "date": "2026-11-16T05:00:00.000Z",
+      "address": "Baixa do Sapateiro (Complexo da Maré) Maré, Rio de Janeiro - RJ, 21042-450, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "BAIXA DO SAPATEIRO (COMPLEXO DA MARE)",
+      "latitude": -22.86007183,
+      "longitude": -43.24258995,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "af3ad7a7-52b9-4eef-8836-bdd3bd96f302",
+      "documentNumber": 79875,
+      "date": "2026-11-15T21:00:00.000Z",
+      "address": "Avenida Leopoldo Bulhões - Complexo de Manguinhos, Manguinhos, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "MANGUINHOS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DE MANGUINHOS",
+      "latitude": -22.8782038,
+      "longitude": -43.2516842,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "fd7c2c83-f13d-4ab1-a34e-545eacb1982c",
+      "documentNumber": 79873,
+      "date": "2026-11-15T19:57:00.000Z",
+      "address": "Quitungo-Guaporé - Brás de Pina, Rio de Janeiro - RJ, 21215-510, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "QUITUNGO-GUAPORE",
+      "latitude": -22.835,
+      "longitude": -43.300278,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
       "documentNumber": 79872,
@@ -31,6 +116,41 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
+      "documentNumber": 79878,
+      "date": "2026-11-15T19:00:00.000Z",
+      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.81949929,
+      "longitude": -43.36693375,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "5fc1ff28-c286-475b-ad83-0baeebe3c236",
+      "documentNumber": 79877,
+      "date": "2026-11-15T17:00:00.000Z",
+      "address": "Comunidade Estrada da Cachamorra - Guaratiba, Rio de Janeiro - RJ, 23040-310, Brasil",
+      "neighborhood": "GUARATIBA",
+      "subNeighborhood": "",
+      "locality": "COMUNIDADE ESTRADA DA CACHAMORRA",
+      "latitude": -22.9555111,
+      "longitude": -43.5712499,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "1defaffe-9004-4f69-b1d7-58f8f8484385",
@@ -67,11 +187,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -95,7 +215,7 @@
       "id": "728be369-6f25-4cdc-96ea-a7bdd8a6e67c",
       "documentNumber": 79866,
       "date": "2026-11-14T19:00:00.000Z",
-      "address": "Rua Flexa, Morro do Juca Branco - Fonseca, Niterói - RJ, 24120-016, Brasil",
+      "address": "Rua Flexa, Morro do Juca Branco - Cubango, Niterói - RJ, 24120-016, Brasil",
       "neighborhood": "CUBANGO",
       "subNeighborhood": "",
       "locality": "MORRO DO JUCA BRANCO",
@@ -115,7 +235,7 @@
       "id": "6dda11a9-4e23-45e5-b17f-009c9cf3d663",
       "documentNumber": 79858,
       "date": "2026-11-14T16:24:00.000Z",
-      "address": "Corte Oito (Complexo da Mangueirinha), Duque de Caxias - RJ, Brasil",
+      "address": "Corte Oito (Complexo da Mangueirinha), Centenário - Duque de Caxias - RJ, Brasil",
       "neighborhood": "CENTENARIO",
       "subNeighborhood": "",
       "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
@@ -177,7 +297,7 @@
       "longitude": -43.43488165273775,
       "reason": "Disputa",
       "policeAction": false,
-      "agentPresence": true,
+      "agentPresence": false,
       "victims": [
         {
           "situation": "Dead",
@@ -213,7 +333,7 @@
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
       "documentNumber": 79845,
       "date": "2026-11-13T13:00:00.000Z",
-      "address": "Comunidade do Brejal- Jardim Bom Retiro, São Gonçalo - RJ, 24722-271, Brasil",
+      "address": "Comunidade do Brejal - Jardim Bom Retiro, São Gonçalo - RJ, 24722-271, Brasil",
       "neighborhood": "BOM RETIRO",
       "subNeighborhood": "",
       "locality": "Comunidade DO BREJAL",
@@ -224,11 +344,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
