@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T22:01:18.309Z",
+  "generatedAt": "2026-11-16T01:49:34.935Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 559,
+  "count": 560,
   "occurrences": [
+    {
+      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
+      "documentNumber": 79872,
+      "date": "2026-11-15T19:00:00.000Z",
+      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
+      "neighborhood": "MARIA PAULA I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8740993,
+      "longitude": -43.023337,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "1defaffe-9004-4f69-b1d7-58f8f8484385",
       "documentNumber": 79871,
@@ -47,11 +67,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -204,11 +224,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
