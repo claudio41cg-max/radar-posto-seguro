@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T11:01:58.447Z",
+  "generatedAt": "2026-11-17T19:44:22.229Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,93 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 569,
+  "count": 575,
   "occurrences": [
+    {
+      "id": "5effc372-20b8-40fa-b46d-fcee5b4acae4",
+      "documentNumber": 79888,
+      "date": "2026-11-17T10:25:00.000Z",
+      "address": "Vila Vintém - Realengo, Rio de Janeiro - RJ, 21721-480, Brasil",
+      "neighborhood": "REALENGO",
+      "subNeighborhood": "",
+      "locality": "VILA VINTEM",
+      "latitude": -22.87151602990278,
+      "longitude": -43.44071568723083,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "acab1572-9343-4b09-9a76-f7995d370207",
+      "documentNumber": 79885,
+      "date": "2026-11-17T10:03:00.000Z",
+      "address": "Morro do Salgueiro - Tijuca, Rio de Janeiro - RJ, 20521-110, Brasil",
+      "neighborhood": "TIJUCA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO SALGUEIRO",
+      "latitude": -22.92950955316818,
+      "longitude": -43.22710174173829,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "950219de-7738-43d4-a715-5d15a17dcf05",
+      "documentNumber": 79887,
+      "date": "2026-11-17T01:30:00.000Z",
+      "address": "Complexo do Caju - Caju, Rio de Janeiro - RJ, 20931-002, Brasil",
+      "neighborhood": "CAJU",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CAJU",
+      "latitude": -22.88040806851387,
+      "longitude": -43.22587020392944,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "a356bd02-188e-488b-8369-c4529d0b4cdf",
+      "documentNumber": 79886,
+      "date": "2026-11-17T00:45:00.000Z",
+      "address": "Complexo de Israel, Cordovil, Rio de Janeiro - RJ, 21250-500, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DE ISRAEL",
+      "latitude": -22.821586605008797,
+      "longitude": -43.296370112133786,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "cdafab89-d866-4f54-9e25-6df5286469e9",
+      "documentNumber": 79890,
+      "date": "2026-11-16T19:00:00.000Z",
+      "address": "Rua Onze de Novembro - Citrópolis, Centro de Engenheiro da Pedreira, Japeri - RJ, 26420-280, Brasil",
+      "neighborhood": "CENTRO DE ENGENHEIRO PEDREIRA",
+      "subNeighborhood": "CITROPOLIS",
+      "locality": "",
+      "latitude": -22.681587612467272,
+      "longitude": -43.60527518303155,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "5dc86e52-c213-4b79-abfc-92e15b898044",
       "documentNumber": 79881,
@@ -36,7 +121,7 @@
       "id": "ed73adf9-bb72-4d62-a702-79cfaf3751af",
       "documentNumber": 79879,
       "date": "2026-11-16T08:00:00.000Z",
-      "address": "Rodrigues Alves - Parque Estrela, Duque de Caxias - RJ, 25275-160, Brasil",
+      "address": "Rodrigues Alves - Parque Estrela,  Imbariê - Duque de Caxias - RJ, 25275-160, Brasil",
       "neighborhood": "IMBARIE",
       "subNeighborhood": "PARQUE ESTRELA",
       "locality": "RODRIGUES ALVES",
@@ -81,6 +166,34 @@
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "44cfa98b-73c7-4971-a54e-d7c1d135ace5",
+      "documentNumber": 79889,
+      "date": "2026-11-16T03:00:00.000Z",
+      "address": "Estrada Carlos Sampaio - São Simão, Pedreira, Queimados - RJ, 26380-270, Brasil",
+      "neighborhood": "PEDREIRA",
+      "subNeighborhood": "SAO SIMAO",
+      "locality": "",
+      "latitude": -22.709972061266036,
+      "longitude": -43.55345567367065,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "af3ad7a7-52b9-4eef-8836-bdd3bd96f302",
@@ -176,12 +289,12 @@
       "id": "4f7a71fd-f6e3-494d-92ab-929c4e48c143",
       "documentNumber": 79882,
       "date": "2026-11-15T16:00:00.000Z",
-      "address": "Coelho da Rocha, São João de Meriti - RJ, 25515-126, Brasil",
+      "address": " Coelho da Rocha, São João de Meriti - RJ, 25550-570, Brasil",
       "neighborhood": "COELHO DA ROCHA",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.7989608,
-      "longitude": -43.3665643,
+      "latitude": -22.77734199065663,
+      "longitude": -43.384621989885744,
       "reason": "Briga",
       "policeAction": false,
       "agentPresence": false,
@@ -216,22 +329,22 @@
       "id": "0a98783d-4938-4e98-a5d1-4ae5d029f38c",
       "documentNumber": 79865,
       "date": "2026-11-15T07:14:00.000Z",
-      "address": "Rua Clarimundo de Melo, 827 - Quintino Bocaiúva, Rio de Janeiro - RJ, 21311-281, Brasil",
+      "address": "Morro da Caixa D'água - Quintino Bocaiúva, Rio de Janeiro - RJ, 20740-070, Brasil",
       "neighborhood": "QUINTINO BOCAIUVA",
       "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.893356905303584,
-      "longitude": -43.32225767040376,
+      "locality": "MORRO DA CAIXA D'AGUA (COMPLEXO DO 18)",
+      "latitude": -22.892304716555564,
+      "longitude": -43.316045835186074,
       "reason": "Operação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -384,11 +497,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
