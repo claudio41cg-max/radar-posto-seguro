@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T18:57:00.795Z",
+  "generatedAt": "2026-11-17T02:24:59.261Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,29 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 65,
-  "lastUpdate": "2026-11-16T14:54:20-03:00",
+  "count": 59,
+  "lastUpdate": "2026-11-16T22:15:58-03:00",
   "occurrences": [
+    {
+      "id": "5dc86e52-c213-4b79-abfc-92e15b898044",
+      "documentNumber": 79881,
+      "date": "2026-11-16T18:00:00.000Z",
+      "address": "Magé - RJ, 25900-115, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6546807,
+      "longitude": -43.0381736,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "ed73adf9-bb72-4d62-a702-79cfaf3751af",
       "documentNumber": 79879,
@@ -99,26 +119,6 @@
       "victims": []
     },
     {
-      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
-      "documentNumber": 79872,
-      "date": "2026-11-15T19:00:00.000Z",
-      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
-      "neighborhood": "MARIA PAULA I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8740993,
-      "longitude": -43.023337,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
       "documentNumber": 79878,
       "date": "2026-11-15T19:00:00.000Z",
@@ -139,6 +139,26 @@
       ]
     },
     {
+      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
+      "documentNumber": 79872,
+      "date": "2026-11-15T19:00:00.000Z",
+      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
+      "neighborhood": "MARIA PAULA I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8740993,
+      "longitude": -43.023337,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "5fc1ff28-c286-475b-ad83-0baeebe3c236",
       "documentNumber": 79877,
       "date": "2026-11-15T17:00:00.000Z",
@@ -152,6 +172,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "4f7a71fd-f6e3-494d-92ab-929c4e48c143",
+      "documentNumber": 79882,
+      "date": "2026-11-15T16:00:00.000Z",
+      "address": "Coelho da Rocha, São João de Meriti - RJ, 25515-126, Brasil",
+      "neighborhood": "COELHO DA ROCHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7989608,
+      "longitude": -43.3665643,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "1defaffe-9004-4f69-b1d7-58f8f8484385",
@@ -188,11 +228,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -331,6 +371,21 @@
       ]
     },
     {
+      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
+      "documentNumber": 79856,
+      "date": "2026-11-13T13:00:00.000Z",
+      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8712722,
+      "longitude": -43.4600043,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
       "documentNumber": 79845,
       "date": "2026-11-13T13:00:00.000Z",
@@ -353,21 +408,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
-      "documentNumber": 79856,
-      "date": "2026-11-13T13:00:00.000Z",
-      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8712722,
-      "longitude": -43.4600043,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
@@ -897,6 +937,21 @@
       "victims": []
     },
     {
+      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
+      "documentNumber": 79801,
+      "date": "2026-11-10T10:00:00.000Z",
+      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
+      "neighborhood": "SENADOR CAMARA",
+      "subNeighborhood": "",
+      "locality": "MORRO SANTO ANDRE",
+      "latitude": -22.8961019,
+      "longitude": -43.4820843,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
       "documentNumber": 79792,
       "date": "2026-11-10T10:00:00.000Z",
@@ -915,21 +970,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     },
     {
       "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
@@ -1030,141 +1070,6 @@
       "locality": "",
       "latitude": -22.6752829,
       "longitude": -43.2570791,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "78618419-119f-463c-9f17-952a94ac56ed",
-      "documentNumber": 79780,
-      "date": "2026-11-09T15:10:00.000Z",
-      "address": "Estrada dos Bandeirantes - Camorim, Rio de Janeiro - RJ, 22783-113, Brasil",
-      "neighborhood": "CAMORIM",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.984975031137147,
-      "longitude": -43.426948744180294,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "971486c0-f862-4c81-a093-bf8b760a44e5",
-      "documentNumber": 79804,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Jardim Catarina, São Gonçalo - RJ, 24716-062, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.79069314682588,
-      "longitude": -42.99792229416503,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "ee038e24-4519-4f6a-b06c-48df6d7ccc5d",
-      "documentNumber": 79774,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.8627778,
-      "longitude": -43.3152778,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "0a01e275-182f-41ec-b5d3-76740dced3e1",
-      "documentNumber": 79803,
-      "date": "2026-11-09T15:00:00.000Z",
-      "address": "Catumbi, Rio de Janeiro - RJ, 20251-590, Brasil",
-      "neighborhood": "CATUMBI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9153318,
-      "longitude": -43.194736,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "10dcef0e-3f12-43ad-9c3a-92bd9b4ba67c",
-      "documentNumber": 79772,
-      "date": "2026-11-09T09:40:00.000Z",
-      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
-      "latitude": -22.892324971301786,
-      "longitude": -43.33377861518315,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "5a2a097c-3a9a-4491-bca8-b436ec645823",
-      "documentNumber": 79840,
-      "date": "2026-11-09T02:00:00.000Z",
-      "address": "Av. Pref. Hélio Ferreira da Silva - Lages, Distrito Sede, Paracambi - RJ, Brasil",
-      "neighborhood": "DISTRITO SEDE",
-      "subNeighborhood": "LAGES",
-      "locality": "",
-      "latitude": -22.6250619,
-      "longitude": -43.7061666,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "f925732b-73a2-4d64-8733-ca812ff32acb",
-      "documentNumber": 79777,
-      "date": "2026-11-09T01:00:00.000Z",
-      "address": "Bongaba, Magé - RJ, 25930-550, Brasil",
-      "neighborhood": "BONGABA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.641531094063634,
-      "longitude": -43.17725581719665,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "915576bd-8354-4798-8209-0d07d0a95671",
-      "documentNumber": 79779,
-      "date": "2026-11-09T00:00:00.000Z",
-      "address": "Complexo da Serrinha, R. Andrade Figueira, Madureira, Rio de Janeiro - RJ, 21360-210, Brasil",
-      "neighborhood": "MADUREIRA",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA SERRINHA",
-      "latitude": -22.871426053316,
-      "longitude": -43.33457864418029,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T18:57:00.797Z",
+  "generatedAt": "2026-11-17T02:24:59.264Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,28 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 567,
+  "count": 569,
   "occurrences": [
+    {
+      "id": "5dc86e52-c213-4b79-abfc-92e15b898044",
+      "documentNumber": 79881,
+      "date": "2026-11-16T18:00:00.000Z",
+      "address": "Magé - RJ, 25900-115, Brasil",
+      "neighborhood": "NI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6546807,
+      "longitude": -43.0381736,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "ed73adf9-bb72-4d62-a702-79cfaf3751af",
       "documentNumber": 79879,
@@ -153,6 +173,26 @@
       "victims": []
     },
     {
+      "id": "4f7a71fd-f6e3-494d-92ab-929c4e48c143",
+      "documentNumber": 79882,
+      "date": "2026-11-15T16:00:00.000Z",
+      "address": "Coelho da Rocha, São João de Meriti - RJ, 25515-126, Brasil",
+      "neighborhood": "COELHO DA ROCHA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7989608,
+      "longitude": -43.3665643,
+      "reason": "Briga",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "1defaffe-9004-4f69-b1d7-58f8f8484385",
       "documentNumber": 79871,
       "date": "2026-11-15T13:00:00.000Z",
@@ -187,11 +227,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
