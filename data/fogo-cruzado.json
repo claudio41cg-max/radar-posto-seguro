@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T10:00:04.633Z",
+  "generatedAt": "2026-11-18T18:46:32.277Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,16 +10,145 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 58,
-  "lastUpdate": "2026-11-17T22:36:55-03:00",
+  "count": 66,
+  "lastUpdate": "2026-11-18T15:44:07-03:00",
   "occurrences": [
+    {
+      "id": "6b87513f-8bc6-4b04-b70b-6f724b36354d",
+      "documentNumber": 79907,
+      "date": "2026-11-18T15:30:00.000Z",
+      "address": "Rua Sete, Vila do João - Maré, Rio de Janeiro - RJ, 21210-570, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "VILA DO JOAO (COMPLEXO DA MARE)",
+      "latitude": -22.873048688004413,
+      "longitude": -43.242021919464634,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "cfc784b2-c86a-4c81-a186-b4796f398467",
+      "documentNumber": 79906,
+      "date": "2026-11-18T14:20:00.000Z",
+      "address": "R. Três - Maré, Rio de Janeiro - RJ, 21046-605, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "VILA DO JOAO (COMPLEXO DA MARE)",
+      "latitude": -22.872608177627733,
+      "longitude": -43.24100402114739,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "329e9821-7d87-408e-a5d0-7e06e54b5c20",
+      "documentNumber": 79904,
+      "date": "2026-11-18T13:00:00.000Z",
+      "address": "Amendoeira, São Gonçalo - RJ, 24732-035, Brasil",
+      "neighborhood": "AMENDOEIRA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8283235,
+      "longitude": -42.9802322,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "858758a8-603c-4111-9916-e767653e112d",
+      "documentNumber": 79902,
+      "date": "2026-11-18T12:20:00.000Z",
+      "address": "Rua Nove, Vila do João - Maré, Rio de Janeiro - RJ, 21046-505, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "VILA DO JOAO (COMPLEXO DA MARE)",
+      "latitude": -22.869624063853276,
+      "longitude": -43.24279784368159,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "c787069f-36ee-4891-b0ac-b3726b610dbb",
+      "documentNumber": 79905,
+      "date": "2026-11-18T11:30:00.000Z",
+      "address": "R. Pedro Azeredo - Centro, Itaboraí - RJ, 24800-117, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.74622200083662,
+      "longitude": -42.862574327789495,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "7a486de2-caba-456d-99b2-61ea7d2b8181",
+      "documentNumber": 79896,
+      "date": "2026-11-18T07:50:00.000Z",
+      "address": " Complexo do Salgueiro, Salgueiro São Gonçalo - RJ, Brasil",
+      "neighborhood": "SALGUEIRO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO SALGUEIRO",
+      "latitude": -22.7827609,
+      "longitude": -43.0208231,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "73a0b1c2-2c15-4bc7-abbd-d145daa98bf7",
+      "documentNumber": 79898,
+      "date": "2026-11-18T03:00:00.000Z",
+      "address": "Estrada Luiz de Lemos  - Nova América , Nova Iguaçu - RJ, 26035-220",
+      "neighborhood": "NOVA AMERICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7162528,
+      "longitude": -43.44106499999999,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "2b735ddc-b194-4eb5-a862-29d76f8957ba",
       "documentNumber": 79895,
       "date": "2026-11-17T21:35:00.000Z",
-      "address": "Comunidade do Barro Vermelho, Vila São José, Duque de Caxias - RJ, 25041-455, Brasil",
+      "address": "Comunidade do Barro Vermelho, Pantanal, Vila São José, Duque de Caxias - RJ, 25041-455, Brasil",
       "neighborhood": "VILA SAO JOSE",
-      "subNeighborhood": "",
+      "subNeighborhood": "PANTANAL",
       "locality": "Comunidade DO BARRO VERMELHO",
       "latitude": -22.7472555,
       "longitude": -43.3143023,
@@ -32,7 +161,7 @@
       "id": "7a38c81d-b882-4b00-a7a9-a11eeca13c4d",
       "documentNumber": 79894,
       "date": "2026-11-17T21:00:00.000Z",
-      "address": "Nova Holanda, R. Tancredo Neves, Maré, Rio de Janeiro - RJ, 21044-725, Brasil",
+      "address": "R. Tancredo Neves, Nova Holanda, Maré, Rio de Janeiro - RJ, 21044-725, Brasil",
       "neighborhood": "MARE",
       "subNeighborhood": "",
       "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
@@ -41,6 +170,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "13280f88-62b0-4bbf-af55-79b8d7aa52db",
+      "documentNumber": 79900,
+      "date": "2026-11-17T20:00:00.000Z",
+      "address": "Estr. do Campinho - Vila Palmares, Campo Grande, Rio de Janeiro - RJ, 23066-541, Brasil",
+      "neighborhood": "CAMPO GRANDE",
+      "subNeighborhood": "",
+      "locality": "VILA PALMARES",
+      "latitude": -22.891719,
+      "longitude": -43.593744,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -94,30 +238,6 @@
       "victims": []
     },
     {
-      "id": "57191dd6-35f4-4997-a75c-a002fa7d587a",
-      "documentNumber": 79891,
-      "date": "2026-11-17T08:00:00.000Z",
-      "address": "Estr. do Rio Douro - Rio Douro, Japeri - RJ, 26050-215, Brasil",
-      "neighborhood": "RIO D OURO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.673752992363127,
-      "longitude": -43.552611997991754,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "950219de-7738-43d4-a715-5d15a17dcf05",
       "documentNumber": 79887,
       "date": "2026-11-17T01:30:00.000Z",
@@ -151,6 +271,30 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "57191dd6-35f4-4997-a75c-a002fa7d587a",
+      "documentNumber": 79891,
+      "date": "2026-11-17T00:00:00.000Z",
+      "address": "Estr. do Rio Douro - Rio Douro, Japeri - RJ, 26050-215, Brasil",
+      "neighborhood": "RIO D OURO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.673752992363127,
+      "longitude": -43.552611997991754,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "cdafab89-d866-4f54-9e25-6df5286469e9",
@@ -306,26 +450,6 @@
       "victims": []
     },
     {
-      "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
-      "documentNumber": 79878,
-      "date": "2026-11-15T19:00:00.000Z",
-      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.81949929,
-      "longitude": -43.36693375,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
       "documentNumber": 79872,
       "date": "2026-11-15T19:00:00.000Z",
@@ -341,6 +465,26 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
+      "documentNumber": 79878,
+      "date": "2026-11-15T19:00:00.000Z",
+      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.81949929,
+      "longitude": -43.36693375,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
