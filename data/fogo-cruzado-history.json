@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T19:44:22.229Z",
+  "generatedAt": "2026-11-18T01:52:49.497Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,58 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 575,
+  "count": 579,
   "occurrences": [
+    {
+      "id": "2b735ddc-b194-4eb5-a862-29d76f8957ba",
+      "documentNumber": 79895,
+      "date": "2026-11-17T21:35:00.000Z",
+      "address": "Comunidade do Barro Vermelho, Vila São José, Duque de Caxias - RJ, 25041-455, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.7472555,
+      "longitude": -43.3143023,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7a38c81d-b882-4b00-a7a9-a11eeca13c4d",
+      "documentNumber": 79894,
+      "date": "2026-11-17T21:00:00.000Z",
+      "address": "Nova Holanda, R. Tancredo Neves, Maré, Rio de Janeiro - RJ, 21044-725, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
+      "latitude": -22.8559884,
+      "longitude": -43.2402932,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "adfa7f95-4b45-40bd-844e-28d4a1301fd2",
+      "documentNumber": 79892,
+      "date": "2026-11-17T17:00:00.000Z",
+      "address": "Boqueirão, Rio Bonito - RJ, 28800-000, Brasil",
+      "neighborhood": "BOQUEIRAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.72112994526333,
+      "longitude": -42.61372447116395,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "5effc372-20b8-40fa-b46d-fcee5b4acae4",
       "documentNumber": 79888,
@@ -41,6 +91,30 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "57191dd6-35f4-4997-a75c-a002fa7d587a",
+      "documentNumber": 79891,
+      "date": "2026-11-17T08:00:00.000Z",
+      "address": "Estr. do Rio Douro - Rio Douro, Japeri - RJ, 26050-215, Brasil",
+      "neighborhood": "RIO D OURO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.673752992363127,
+      "longitude": -43.552611997991754,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "950219de-7738-43d4-a715-5d15a17dcf05",

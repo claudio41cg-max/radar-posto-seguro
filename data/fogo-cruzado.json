@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T19:44:22.226Z",
+  "generatedAt": "2026-11-18T01:52:49.495Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,59 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 65,
-  "lastUpdate": "2026-11-17T15:47:10-03:00",
+  "count": 58,
+  "lastUpdate": "2026-11-17T22:36:55-03:00",
   "occurrences": [
+    {
+      "id": "2b735ddc-b194-4eb5-a862-29d76f8957ba",
+      "documentNumber": 79895,
+      "date": "2026-11-17T21:35:00.000Z",
+      "address": "Comunidade do Barro Vermelho, Vila São José, Duque de Caxias - RJ, 25041-455, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.7472555,
+      "longitude": -43.3143023,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "7a38c81d-b882-4b00-a7a9-a11eeca13c4d",
+      "documentNumber": 79894,
+      "date": "2026-11-17T21:00:00.000Z",
+      "address": "Nova Holanda, R. Tancredo Neves, Maré, Rio de Janeiro - RJ, 21044-725, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
+      "latitude": -22.8559884,
+      "longitude": -43.2402932,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "adfa7f95-4b45-40bd-844e-28d4a1301fd2",
+      "documentNumber": 79892,
+      "date": "2026-11-17T17:00:00.000Z",
+      "address": "Boqueirão, Rio Bonito - RJ, 28800-000, Brasil",
+      "neighborhood": "BOQUEIRAO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.72112994526333,
+      "longitude": -42.61372447116395,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "5effc372-20b8-40fa-b46d-fcee5b4acae4",
       "documentNumber": 79888,
@@ -42,6 +92,30 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "57191dd6-35f4-4997-a75c-a002fa7d587a",
+      "documentNumber": 79891,
+      "date": "2026-11-17T08:00:00.000Z",
+      "address": "Estr. do Rio Douro - Rio Douro, Japeri - RJ, 26050-215, Brasil",
+      "neighborhood": "RIO D OURO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.673752992363127,
+      "longitude": -43.552611997991754,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "950219de-7738-43d4-a715-5d15a17dcf05",
@@ -484,6 +558,21 @@
       ]
     },
     {
+      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
+      "documentNumber": 79856,
+      "date": "2026-11-13T13:00:00.000Z",
+      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8712722,
+      "longitude": -43.4600043,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
       "documentNumber": 79845,
       "date": "2026-11-13T13:00:00.000Z",
@@ -506,21 +595,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
-      "documentNumber": 79856,
-      "date": "2026-11-13T13:00:00.000Z",
-      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8712722,
-      "longitude": -43.4600043,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
@@ -994,195 +1068,6 @@
       "locality": "Comunidade DO VAI QUEM QUER",
       "latitude": -22.66769695,
       "longitude": -43.29536637,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4f212e97-77d7-4daf-a03c-33d25a2e2933",
-      "documentNumber": 79802,
-      "date": "2026-11-10T19:00:00.000Z",
-      "address": "Nova Holanda - Maré, Rio de Janeiro - RJ, 21044-242, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "NOVA HOLANDA (COMPLEXO DA MARE)",
-      "latitude": -22.854234841753122,
-      "longitude": -43.24085306849724,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "4ae1bb3e-fbdf-4587-b538-aa64a520bf0b",
-      "documentNumber": 79806,
-      "date": "2026-11-10T14:00:00.000Z",
-      "address": "Rua Mogiqui, Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DA PEDREIRA",
-      "latitude": -22.8249744,
-      "longitude": -43.368951,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1e8f1623-5979-4491-89e8-d152e130bb85",
-      "documentNumber": 79794,
-      "date": "2026-11-10T12:30:00.000Z",
-      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, 21842-490, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "VILA ALIANCA",
-      "latitude": -22.8684647,
-      "longitude": -43.4754753,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "cac71f65-c3e1-4b2a-bcae-6ab56495b1b8",
-      "documentNumber": 79801,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro Santo André - Senador Camará, Rio de Janeiro - RJ, 21825-390, Brasil",
-      "neighborhood": "SENADOR CAMARA",
-      "subNeighborhood": "",
-      "locality": "MORRO SANTO ANDRE",
-      "latitude": -22.8961019,
-      "longitude": -43.4820843,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "56c81226-ccad-4f6c-bf69-28e710b9fe73",
-      "documentNumber": 79792,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Complexo do Salgueiro - Salgueiro, São Gonçalo - RJ, 24473-185, Brasil",
-      "neighborhood": "SALGUEIRO",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO SALGUEIRO",
-      "latitude": -22.78466913,
-      "longitude": -43.02685063,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "e5c8be5c-85e7-4906-b25f-b007ae602015",
-      "documentNumber": 79799,
-      "date": "2026-11-10T10:00:00.000Z",
-      "address": "Morro do Gelo - Tenente Jardim, Niterói - RJ, 24110-708, Brasil",
-      "neighborhood": "TENENTE JARDIM",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8643918,
-      "longitude": -43.0845165,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "167dd055-301b-433e-b75b-8f0be6e7ff89",
-      "documentNumber": 79791,
-      "date": "2026-11-10T09:35:00.000Z",
-      "address": "Comunidade Vila Sapê - Jacarepaguá, Rio de Janeiro - RJ, 22775-400, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "Comunidade VILA SAPE",
-      "latitude": -22.95051047,
-      "longitude": -43.37547407,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "177e020d-d885-4e95-bb84-e850f2b3dcdc",
-      "documentNumber": 79793,
-      "date": "2026-11-10T09:20:00.000Z",
-      "address": "Ipuca - Jardim Catarina, São Gonçalo - RJ, 24716-380, Brasil",
-      "neighborhood": "JARDIM CATARINA",
-      "subNeighborhood": "",
-      "locality": "IPUCA",
-      "latitude": -22.79195408,
-      "longitude": -43.00650063,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "b1d2fc28-d383-447e-94b4-1b782d48f8da",
-      "documentNumber": 79789,
-      "date": "2026-11-10T06:50:00.000Z",
-      "address": "Curral (Complexo do Salgueiro) - Salgueiro, São Gonçalo - RJ, 24473-460, Brasil",
-      "neighborhood": "SALGUEIRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.78451445501235,
-      "longitude": -43.02055560509685,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c4e1ff82-601b-49ea-b52b-f55d8f933f94",
-      "documentNumber": 79788,
-      "date": "2026-11-10T04:40:00.000Z",
-      "address": "Estrada Adhemar Bebiano - Engenho da Rainha, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ENGENHO DA RAINHA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8652774,
-      "longitude": -43.2970385,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "4259b5b8-0937-4959-b764-81053923ecf6",
-      "documentNumber": 79819,
-      "date": "2026-11-10T00:00:00.000Z",
-      "address": "Saracuruna, Duque de Caxias - RJ, 25212-070, Brasil",
-      "neighborhood": "SARACURUNA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6752829,
-      "longitude": -43.2570791,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
