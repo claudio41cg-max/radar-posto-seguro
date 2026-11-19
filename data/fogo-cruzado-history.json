@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T17:16:02.999Z",
+  "generatedAt": "2026-11-19T23:36:57.652Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 596,
+  "count": 598,
   "occurrences": [
     {
       "id": "16cbab96-48cb-4b8e-bf8d-e3cd96ad11a4",
@@ -31,6 +31,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "567db6cc-4679-41a4-b39a-a45e82c5a201",
+      "documentNumber": 79920,
+      "date": "2026-11-19T08:00:00.000Z",
+      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO CHAPADAO",
+      "latitude": -22.82326393,
+      "longitude": -43.37707903,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "d9b757f5-9dda-4e43-a619-625a9036ac63",
@@ -66,6 +81,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "68bf605d-9b17-4c02-a5fa-6acf7b3d57c2",
+      "documentNumber": 79921,
+      "date": "2026-11-19T00:00:00.000Z",
+      "address": "Av. Eng. Souza Filho - Itanhangá, Rio de Janeiro - RJ, 22753-039, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.988131060260073,
+      "longitude": -43.32692879766979,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "b3514d16-6298-410a-9a47-7b3910cbc02c",
@@ -165,7 +200,7 @@
       "id": "cfc784b2-c86a-4c81-a186-b4796f398467",
       "documentNumber": 79906,
       "date": "2026-11-18T14:20:00.000Z",
-      "address": "R. Três - Maré, Rio de Janeiro - RJ, 21046-605, Brasil",
+      "address": "R. Três, Vila do João - Maré, Rio de Janeiro - RJ, 21046-605, Brasil",
       "neighborhood": "MARE",
       "subNeighborhood": "",
       "locality": "VILA DO JOAO (COMPLEXO DA MARE)",
@@ -275,7 +310,7 @@
       "id": "7a486de2-caba-456d-99b2-61ea7d2b8181",
       "documentNumber": 79896,
       "date": "2026-11-18T07:50:00.000Z",
-      "address": " Complexo do Salgueiro, Salgueiro São Gonçalo - RJ, Brasil",
+      "address": "Complexo do Salgueiro, Salgueiro São Gonçalo - RJ, Brasil",
       "neighborhood": "SALGUEIRO",
       "subNeighborhood": "",
       "locality": "COMPLEXO DO SALGUEIRO",
@@ -434,7 +469,7 @@
       "id": "a356bd02-188e-488b-8369-c4529d0b4cdf",
       "documentNumber": 79886,
       "date": "2026-11-17T00:45:00.000Z",
-      "address": "Complexo de Israel, Cordovil, Rio de Janeiro - RJ, 21250-500, Brasil",
+      "address": "Complexo de Israel - Cordovil, Rio de Janeiro - RJ, 21250-500, Brasil",
       "neighborhood": "CORDOVIL",
       "subNeighborhood": "",
       "locality": "COMPLEXO DE ISRAEL",
