@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T18:46:32.279Z",
+  "generatedAt": "2026-11-19T00:44:57.668Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 587,
+  "count": 590,
   "occurrences": [
+    {
+      "id": "a108315d-e45f-4897-bdd4-286623399977",
+      "documentNumber": 79911,
+      "date": "2026-11-18T19:35:00.000Z",
+      "address": "Rua Camalau - Guadalupe, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "GUADALUPE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8443585,
+      "longitude": -43.3775742,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "6b87513f-8bc6-4b04-b70b-6f724b36354d",
       "documentNumber": 79907,
@@ -94,6 +109,46 @@
         {
           "situation": "Dead",
           "personType": "Agent"
+        }
+      ]
+    },
+    {
+      "id": "d66abbca-d260-41e7-9c8b-174693046c65",
+      "documentNumber": 79908,
+      "date": "2026-11-18T10:00:00.000Z",
+      "address": "Comunidade Nova Aurora (Cabeça de Porco) - Taquara, Rio de Janeiro, RJ, 22725-800, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "Comunidade NOVA AURORA (CABECA DE PORCO)",
+      "latitude": -22.91695341486991,
+      "longitude": -43.3757493531613,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "18f70237-67d0-4b81-8d85-f9b5ca94ef49",
+      "documentNumber": 79910,
+      "date": "2026-11-18T08:00:00.000Z",
+      "address": "Complexo da Mangueirinha - Centenario, Duque de Caxias - RJ, 25025-065, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA MANGUEIRINHA",
+      "latitude": -22.77843725855744,
+      "longitude": -43.318257973715326,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
         }
       ]
     },
@@ -715,11 +770,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
