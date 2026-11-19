@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T07:58:57.350Z",
+  "generatedAt": "2026-11-19T17:16:02.997Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,19 +10,74 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 61,
-  "lastUpdate": "2026-11-18T22:54:23-03:00",
+  "count": 64,
+  "lastUpdate": "2026-11-19T13:58:04-03:00",
   "occurrences": [
+    {
+      "id": "16cbab96-48cb-4b8e-bf8d-e3cd96ad11a4",
+      "documentNumber": 79919,
+      "date": "2026-11-19T09:00:00.000Z",
+      "address": "Santa Amélia, Japeri - RJ, 26440-000, Brasil",
+      "neighborhood": "SANTA AMELIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.666551291574706,
+      "longitude": -43.58396528518065,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "d9b757f5-9dda-4e43-a619-625a9036ac63",
+      "documentNumber": 79918,
+      "date": "2026-11-19T03:00:00.000Z",
+      "address": "Santa Amélia, Japeri - RJ, 26440-000, Brasil",
+      "neighborhood": "SANTA AMELIA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6670859,
+      "longitude": -43.5845661,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "f3db5501-d884-4d20-befc-edc88ad0a939",
+      "documentNumber": 79916,
+      "date": "2026-11-19T01:00:00.000Z",
+      "address": "Vila São José, Pantanal, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "PANTANAL",
+      "locality": "",
+      "latitude": -22.7472326,
+      "longitude": -43.3173933,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "b3514d16-6298-410a-9a47-7b3910cbc02c",
       "documentNumber": 79914,
       "date": "2026-11-18T21:00:00.000Z",
-      "address": "R. Cel. Francisco Soares - Centro, Nova Iguaçu - RJ, 26216-041, Brasil",
+      "address": "Rua Frederico de Castro Pereira - Centro, Nova Iguaçu - RJ, Brasil",
       "neighborhood": "CENTRO",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.754664686907528,
-      "longitude": -43.43682283513489,
+      "latitude": -22.7539973,
+      "longitude": -43.4376093,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
       "agentPresence": false,
@@ -61,7 +116,16 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
-      "victims": []
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "6b87513f-8bc6-4b04-b70b-6f724b36354d",
@@ -88,7 +152,7 @@
       "locality": "",
       "latitude": -22.72133841752899,
       "longitude": -43.31662986305994,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -669,11 +733,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -812,6 +876,21 @@
       ]
     },
     {
+      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
+      "documentNumber": 79856,
+      "date": "2026-11-13T13:00:00.000Z",
+      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8712722,
+      "longitude": -43.4600043,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
       "documentNumber": 79845,
       "date": "2026-11-13T13:00:00.000Z",
@@ -834,21 +913,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
-      "documentNumber": 79856,
-      "date": "2026-11-13T13:00:00.000Z",
-      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8712722,
-      "longitude": -43.4600043,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     },
     {
       "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
