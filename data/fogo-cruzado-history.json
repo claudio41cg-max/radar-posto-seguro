@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T04:14:04.046Z",
+  "generatedAt": "2026-11-20T13:02:55.505Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 600,
+  "count": 602,
   "occurrences": [
+    {
+      "id": "39c3bf79-89b9-47fe-ac5a-7f617137f6e7",
+      "documentNumber": 79925,
+      "date": "2026-11-20T00:06:00.000Z",
+      "address": "Andaraí, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.922329,
+      "longitude": -43.2477454,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "285591c5-72b3-45b9-96d6-8820489dd8e0",
       "documentNumber": 79924,
@@ -26,6 +41,26 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "b6e3a93a-6e60-4aa8-ad45-632541b6ca76",
+      "documentNumber": 79926,
+      "date": "2026-11-19T20:22:00.000Z",
+      "address": "Gramacho, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "GRAMACHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7523096,
+      "longitude": -43.2739077,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "fff4e95d-e179-40e6-afef-7645b6429558",
@@ -802,11 +837,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -959,11 +994,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
