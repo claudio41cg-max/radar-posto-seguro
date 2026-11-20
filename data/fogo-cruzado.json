@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T23:36:57.649Z",
+  "generatedAt": "2026-11-20T04:14:04.044Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 66,
-  "lastUpdate": "2026-11-19T17:28:44-03:00",
+  "count": 60,
+  "lastUpdate": "2026-11-19T23:56:57-03:00",
   "occurrences": [
+    {
+      "id": "285591c5-72b3-45b9-96d6-8820489dd8e0",
+      "documentNumber": 79924,
+      "date": "2026-11-19T22:49:00.000Z",
+      "address": "Av. Salvador Allende - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22783-127, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.967403015588673,
+      "longitude": -43.39745064083558,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "fff4e95d-e179-40e6-afef-7645b6429558",
+      "documentNumber": 79922,
+      "date": "2026-11-19T14:00:00.000Z",
+      "address": "Rua Paulino Bazani - Terreirão,  Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO TERREIRAO",
+      "latitude": -23.0252733,
+      "longitude": -43.4820938,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "16cbab96-48cb-4b8e-bf8d-e3cd96ad11a4",
       "documentNumber": 79919,
@@ -768,11 +803,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -911,21 +946,6 @@
       ]
     },
     {
-      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
-      "documentNumber": 79856,
-      "date": "2026-11-13T13:00:00.000Z",
-      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8712722,
-      "longitude": -43.4600043,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
       "documentNumber": 79845,
       "date": "2026-11-13T13:00:00.000Z",
@@ -948,6 +968,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
+      "documentNumber": 79856,
+      "date": "2026-11-13T13:00:00.000Z",
+      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8712722,
+      "longitude": -43.4600043,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
@@ -1103,140 +1138,6 @@
           "personType": "Agent"
         }
       ]
-    },
-    {
-      "id": "b7ef3a1a-c673-4b45-b380-c89e5be0ca41",
-      "documentNumber": 79832,
-      "date": "2026-11-12T14:39:00.000Z",
-      "address": "Estr. do Quitungo - Brás de Pina, Rio de Janeiro - RJ, 21240-070, Brasil",
-      "neighborhood": "BRAS DE PINA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.827346678171995,
-      "longitude": -43.29770326693906,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "cc74df83-c4cd-4c68-b4d4-89b4a921f774",
-      "documentNumber": 79831,
-      "date": "2026-11-12T11:00:00.000Z",
-      "address": "Morro do Juramento - Vicente de Carvalho, Rio de Janeiro - RJ, 21235-000, Brasil",
-      "neighborhood": "VICENTE DE CARVALHO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JURAMENTO (COMPLEXO DO JURAMENTO)",
-      "latitude": -22.8595476,
-      "longitude": -43.3148861,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "4a3f1ce6-4210-478c-9f3b-1817f1efc4c4",
-      "documentNumber": 79829,
-      "date": "2026-11-12T10:40:00.000Z",
-      "address": "Cordovil, Rio de Janeiro - RJ, 21011-350, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.823823968092775,
-      "longitude": -43.29619299539409,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "a1db5c89-76ba-438e-9656-2c631bce9037",
-      "documentNumber": 79833,
-      "date": "2026-11-12T10:00:00.000Z",
-      "address": "Comunidade do Anaia Pequeno - Anaia Pequeno, São Gonçalo - RJ, Brasil",
-      "neighborhood": "ANAIA PEQUENO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO ANAIA PEQUENO",
-      "latitude": -22.8619209,
-      "longitude": -42.9959577,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "6fe7306f-7f1f-4573-88b0-15675fe28e86",
-      "documentNumber": 79828,
-      "date": "2026-11-12T09:03:00.000Z",
-      "address": "Mauá,  Baia Branca, Magé - RJ, 25903-587, Brasil",
-      "neighborhood": "BAIA BRANCA",
-      "subNeighborhood": "MAUA",
-      "locality": "",
-      "latitude": -22.714032253019766,
-      "longitude": -43.17379916310978,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "67ceecf7-2f88-4f25-86e5-d333be419fba",
-      "documentNumber": 79839,
-      "date": "2026-11-12T06:30:00.000Z",
-      "address": "Catete, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CATETE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9268338,
-      "longitude": -43.1793449,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "23add126-ead2-46c7-b5bf-c4ea42e11384",
-      "documentNumber": 79825,
-      "date": "2026-11-12T05:44:00.000Z",
-      "address": "Morro do Jordão - Tanque, Rio de Janeiro - RJ, 22725-549, Brasil",
-      "neighborhood": "TANQUE",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JORDAO",
-      "latitude": -22.91094354,
-      "longitude": -43.37403875,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "88b31eb7-36c5-4bc5-a788-52b19beb2dfb",
-      "documentNumber": 79827,
-      "date": "2026-11-12T05:00:00.000Z",
-      "address": "Morro do Andaraí - Andaraí, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ANDARAI",
-      "latitude": -22.922329,
-      "longitude": -43.2477454,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
     }
   ]
 }

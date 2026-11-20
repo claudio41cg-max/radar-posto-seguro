@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T23:36:57.652Z",
+  "generatedAt": "2026-11-20T04:14:04.046Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 598,
+  "count": 600,
   "occurrences": [
+    {
+      "id": "285591c5-72b3-45b9-96d6-8820489dd8e0",
+      "documentNumber": 79924,
+      "date": "2026-11-19T22:49:00.000Z",
+      "address": "Av. Salvador Allende - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22783-127, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.967403015588673,
+      "longitude": -43.39745064083558,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "fff4e95d-e179-40e6-afef-7645b6429558",
+      "documentNumber": 79922,
+      "date": "2026-11-19T14:00:00.000Z",
+      "address": "Rua Paulino Bazani - Terreirão,  Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO TERREIRAO",
+      "latitude": -23.0252733,
+      "longitude": -43.4820938,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "16cbab96-48cb-4b8e-bf8d-e3cd96ad11a4",
       "documentNumber": 79919,
@@ -767,11 +802,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
