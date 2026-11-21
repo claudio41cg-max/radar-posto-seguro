@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T21:00:11.167Z",
+  "generatedAt": "2026-11-21T02:05:19.054Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,53 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 607,
+  "count": 610,
   "occurrences": [
+    {
+      "id": "26f1d97f-ddbd-4e0f-9181-741f8521bb14",
+      "documentNumber": 79935,
+      "date": "2026-11-20T22:08:00.000Z",
+      "address": "Baixa do Sapateiro (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-450, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.86007183,
+      "longitude": -43.24258995,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
+      "documentNumber": 79933,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Rio das Pedras - Itanhangá, Rio de Janeiro - RJ, 22753-737, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.975582144895455,
+      "longitude": -43.33325272765687,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
+      "documentNumber": 79934,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Padre Miguel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PADRE MIGUEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8780905,
+      "longitude": -43.4482789,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "731127cd-156f-45bb-a2a7-2b0bf1cb85e9",
       "documentNumber": 79930,
@@ -22,7 +67,7 @@
       "locality": "",
       "latitude": -22.864322879442966,
       "longitude": -43.239293419039676,
-      "reason": "Ação policial",
+      "reason": "Outro",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -922,11 +967,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

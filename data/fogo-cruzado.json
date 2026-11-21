@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T21:00:11.165Z",
+  "generatedAt": "2026-11-21T02:05:19.051Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,54 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 67,
-  "lastUpdate": "2026-11-20T17:16:32-03:00",
+  "count": 57,
+  "lastUpdate": "2026-11-20T22:32:56-03:00",
   "occurrences": [
+    {
+      "id": "26f1d97f-ddbd-4e0f-9181-741f8521bb14",
+      "documentNumber": 79935,
+      "date": "2026-11-20T22:08:00.000Z",
+      "address": "Baixa do Sapateiro (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-450, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.86007183,
+      "longitude": -43.24258995,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
+      "documentNumber": 79933,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Rio das Pedras - Itanhangá, Rio de Janeiro - RJ, 22753-737, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.975582144895455,
+      "longitude": -43.33325272765687,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
+      "documentNumber": 79934,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Padre Miguel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PADRE MIGUEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8780905,
+      "longitude": -43.4482789,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "731127cd-156f-45bb-a2a7-2b0bf1cb85e9",
       "documentNumber": 79930,
@@ -23,7 +68,7 @@
       "locality": "",
       "latitude": -22.864322879442966,
       "longitude": -43.239293419039676,
-      "reason": "Ação policial",
+      "reason": "Outro",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
@@ -814,26 +859,6 @@
       "victims": []
     },
     {
-      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
-      "documentNumber": 79872,
-      "date": "2026-11-15T19:00:00.000Z",
-      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
-      "neighborhood": "MARIA PAULA I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8740993,
-      "longitude": -43.023337,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
       "documentNumber": 79878,
       "date": "2026-11-15T19:00:00.000Z",
@@ -849,6 +874,26 @@
       "victims": [
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
+      "documentNumber": 79872,
+      "date": "2026-11-15T19:00:00.000Z",
+      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
+      "neighborhood": "MARIA PAULA I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8740993,
+      "longitude": -43.023337,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -923,11 +968,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -996,268 +1041,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "ab15b1f2-c14e-48d4-bf8d-480cc0b79a88",
-      "documentNumber": 79849,
-      "date": "2026-11-13T20:40:00.000Z",
-      "address": "Favelinha da Renascer (Chácara do Tanque) - Tanque, Rio de Janeiro - RJ, 22733-240, Brasil",
-      "neighborhood": "TANQUE",
-      "subNeighborhood": "",
-      "locality": "FAVELINHA DA RENASCER (OU CHACARA DO TANQUE)",
-      "latitude": -22.915556,
-      "longitude": -43.3625,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "02b4b153-b941-4b5b-a6ca-641963ea79bd",
-      "documentNumber": 79868,
-      "date": "2026-11-13T17:00:00.000Z",
-      "address": "Rua Estr. de Ferro - Vila de Cava, Nova Iguaçu - RJ, 26053-620, Brasil",
-      "neighborhood": "VILA DE CAVA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.67496766995277,
-      "longitude": -43.43488165273775,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "5c19dcba-3605-4f1c-8e8b-86b6263758de",
-      "documentNumber": 79855,
-      "date": "2026-11-13T15:00:00.000Z",
-      "address": "Rua Mauá - São Bernardo, Belford Roxo - RJ, 26165-110, Brasil",
-      "neighborhood": "SAO BERNARDO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.734351809864997,
-      "longitude": -43.388216836930575,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "add3ac30-3514-4b66-93e6-dac0965f1d5b",
-      "documentNumber": 79845,
-      "date": "2026-11-13T13:00:00.000Z",
-      "address": "Comunidade do Brejal - Jardim Bom Retiro, São Gonçalo - RJ, 24722-271, Brasil",
-      "neighborhood": "BOM RETIRO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO BREJAL",
-      "latitude": -22.79654842,
-      "longitude": -42.9620609,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "c54acf75-2a25-4acb-9a41-ca7177b75024",
-      "documentNumber": 79856,
-      "date": "2026-11-13T13:00:00.000Z",
-      "address": "Rua Figueiredo Camargo - Bangu, Rio de Janeiro - RJ, 21870-210, Brasil",
-      "neighborhood": "BANGU",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8712722,
-      "longitude": -43.4600043,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "afd9d2db-5b91-4787-8509-655122a20c3b",
-      "documentNumber": 79848,
-      "date": "2026-11-13T10:50:00.000Z",
-      "address": "Beco do Adão - Apolo II, Itaboraí - RJ, 24800-053, Brasil",
-      "neighborhood": "APOLLO II",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.77684177460865,
-      "longitude": -42.93879651858849,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "9c933f23-e497-4532-ac39-8ac02785cb8d",
-      "documentNumber": 79843,
-      "date": "2026-11-13T07:00:00.000Z",
-      "address": "Morro do Engenho da Rainha - Engenho da Rainha, Rio de Janeiro - RJ, 20761-170, Brasil",
-      "neighborhood": "ENGENHO DA RAINHA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO ENGENHO DA RAINHA",
-      "latitude": -22.87239083,
-      "longitude": -43.29229679,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "76bb6fb5-8c75-445b-8ee0-b9882f161322",
-      "documentNumber": 79836,
-      "date": "2026-11-13T06:18:00.000Z",
-      "address": "Comunidade do Lixão - Centro, Duque de Caxias - RJ, 25011-000, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO LIXAO",
-      "latitude": -22.797893,
-      "longitude": -43.308876,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "e0d41dbd-7f3a-45bc-bc2b-de6e3428a040",
-      "documentNumber": 79835,
-      "date": "2026-11-13T06:00:00.000Z",
-      "address": "Morro do Fubá (Complexo do Fubá) - Cascadura, Rio de Janeiro - RJ, 21311-130, Brasil",
-      "neighborhood": "CASCADURA",
-      "subNeighborhood": "",
-      "locality": "MORRO DO FUBA (COMPLEXO DO FUBA)",
-      "latitude": -22.892324971301786,
-      "longitude": -43.33377861518315,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "ec8ce3fb-e156-46f8-ba6b-2b7efc334be5",
-      "documentNumber": 79837,
-      "date": "2026-11-13T04:59:00.000Z",
-      "address": "Avenida Renascer - Comunidade da Furquim Mendes, Vigário Geral, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "VIGARIO GERAL",
-      "subNeighborhood": "",
-      "locality": "FURQUIM MENDES",
-      "latitude": -22.8035032,
-      "longitude": -43.3160903,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "d62b905d-8cc6-450c-9949-4967369e9f92",
-      "documentNumber": 79838,
-      "date": "2026-11-13T04:30:00.000Z",
-      "address": "Santa Dalila, Magé - RJ, Brasil",
-      "neighborhood": "SANTA DALILA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6504235,
-      "longitude": -43.1541276,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "3e82df3b-4f11-4bdd-afdc-75a06700644a",
-      "documentNumber": 79844,
-      "date": "2026-11-13T01:22:00.000Z",
-      "address": "Suruí, Magé, RJ, Brasil",
-      "neighborhood": "SURUI (CENTRO)",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.670122136714312,
-      "longitude": -43.138097433312986,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "29d875af-0684-4382-9782-37a09d259718",
-      "documentNumber": 79850,
-      "date": "2026-11-13T00:00:00.000Z",
-      "address": "Morro do Amorim - Manguinhos, Rio de Janeiro - RJ, 21041-250, Brasil",
-      "neighborhood": "MANGUINHOS",
-      "subNeighborhood": "",
-      "locality": "MORRO DO AMORIM (COMPLEXO DE MANGUINHOS)",
-      "latitude": -22.874590230275516,
-      "longitude": -43.24955561865956,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
     }
   ]
 }
