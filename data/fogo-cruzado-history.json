@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T09:38:16.496Z",
+  "generatedAt": "2026-11-21T16:58:04.590Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 612,
+  "count": 615,
   "occurrences": [
+    {
+      "id": "8a1ed027-3f2d-4ebc-a4c6-d4f3b07dcd54",
+      "documentNumber": 79939,
+      "date": "2026-11-21T06:00:00.000Z",
+      "address": "Morro do Dendê - Tauá, Rio de Janeiro - RJ, 21922-490, Brasil",
+      "neighborhood": "TAUA",
+      "subNeighborhood": "",
+      "locality": "MORRO DO DENDE",
+      "latitude": -22.802039,
+      "longitude": -43.184899,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "26f1d97f-ddbd-4e0f-9181-741f8521bb14",
       "documentNumber": 79935,
@@ -101,6 +116,21 @@
       ]
     },
     {
+      "id": "64ebea68-b847-453c-8ad8-7c048e3587cc",
+      "documentNumber": 79938,
+      "date": "2026-11-20T14:00:00.000Z",
+      "address": "R. João Plaza Gonzales (Rua do Postinho IMOBE)  - Engenho, Itaguaí - RJ, 23820-370, Brasil",
+      "neighborhood": "ENGENHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8625,
+      "longitude": -43.7888,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
       "id": "731127cd-156f-45bb-a2a7-2b0bf1cb85e9",
       "documentNumber": 79930,
       "date": "2026-11-20T13:30:00.000Z",
@@ -128,6 +158,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "dcb61d2c-4129-48a4-8672-dd6946e1529f",
+      "documentNumber": 79940,
+      "date": "2026-11-20T09:45:00.000Z",
+      "address": "R. Caituba - Cabeça de Porco-  Taquara, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "Comunidade NOVA AURORA (CABECA DE PORCO)",
+      "latitude": -22.9168984,
+      "longitude": -43.3758415,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
