@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T02:05:19.054Z",
+  "generatedAt": "2026-11-21T09:38:16.496Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 610,
+  "count": 612,
   "occurrences": [
     {
       "id": "26f1d97f-ddbd-4e0f-9181-741f8521bb14",
@@ -22,9 +22,9 @@
       "locality": "",
       "latitude": -22.86007183,
       "longitude": -43.24258995,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -56,6 +56,49 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "a3c3d605-388c-4fe1-a253-7823b385e79c",
+      "documentNumber": 79936,
+      "date": "2026-11-20T17:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Irajá, Rio de Janeiro - RJ, 21220-301, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.84978518510721,
+      "longitude": -43.320043529638674,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a1431970-b994-4399-919b-5b9df2c2bb3e",
+      "documentNumber": 79937,
+      "date": "2026-11-20T14:50:00.000Z",
+      "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
+      "neighborhood": "VILA MARGARIDA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO SEM TERRA",
+      "latitude": -22.875830521250382,
+      "longitude": -43.79280801756136,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "731127cd-156f-45bb-a2a7-2b0bf1cb85e9",
@@ -541,11 +584,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -967,11 +1010,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T02:05:19.051Z",
+  "generatedAt": "2026-11-21T09:38:16.493Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 57,
-  "lastUpdate": "2026-11-20T22:32:56-03:00",
+  "count": 59,
+  "lastUpdate": "2026-11-20T23:52:41-03:00",
   "occurrences": [
     {
       "id": "26f1d97f-ddbd-4e0f-9181-741f8521bb14",
@@ -23,9 +23,9 @@
       "locality": "",
       "latitude": -22.86007183,
       "longitude": -43.24258995,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -57,6 +57,49 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
+    },
+    {
+      "id": "a3c3d605-388c-4fe1-a253-7823b385e79c",
+      "documentNumber": 79936,
+      "date": "2026-11-20T17:00:00.000Z",
+      "address": "Av. Pastor Martin Luther King Jr. - Irajá, Rio de Janeiro - RJ, 21220-301, Brasil",
+      "neighborhood": "IRAJA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.84978518510721,
+      "longitude": -43.320043529638674,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "a1431970-b994-4399-919b-5b9df2c2bb3e",
+      "documentNumber": 79937,
+      "date": "2026-11-20T14:50:00.000Z",
+      "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
+      "neighborhood": "VILA MARGARIDA",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO SEM TERRA",
+      "latitude": -22.875830521250382,
+      "longitude": -43.79280801756136,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "731127cd-156f-45bb-a2a7-2b0bf1cb85e9",
@@ -542,11 +585,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -859,26 +902,6 @@
       "victims": []
     },
     {
-      "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
-      "documentNumber": 79878,
-      "date": "2026-11-15T19:00:00.000Z",
-      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.81949929,
-      "longitude": -43.36693375,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
       "documentNumber": 79872,
       "date": "2026-11-15T19:00:00.000Z",
@@ -894,6 +917,26 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
+      "documentNumber": 79878,
+      "date": "2026-11-15T19:00:00.000Z",
+      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.81949929,
+      "longitude": -43.36693375,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -968,11 +1011,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
