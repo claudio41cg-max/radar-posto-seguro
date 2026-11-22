@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T09:52:55.606Z",
+  "generatedAt": "2026-11-22T17:44:35.325Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 616,
+  "count": 618,
   "occurrences": [
+    {
+      "id": "fed46792-4367-4ee8-8616-b9c4ee784a9b",
+      "documentNumber": 79945,
+      "date": "2026-11-22T10:17:00.000Z",
+      "address": "Vila Rosali, São João de Meriti - RJ, Brasil",
+      "neighborhood": "VILA ROSALI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.791262,
+      "longitude": -43.37410939999999,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "66f15cf9-aafa-400a-90d0-116bd5bbf8af",
+      "documentNumber": 79946,
+      "date": "2026-11-22T05:40:00.000Z",
+      "address": "Estrada dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9611951,
+      "longitude": -43.3943582,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "2f22526f-0999-4fd1-bf01-4032c06bc280",
       "documentNumber": 79942,
@@ -118,6 +153,10 @@
       "victims": [
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -1070,11 +1109,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

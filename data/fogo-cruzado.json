@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T09:52:55.604Z",
+  "generatedAt": "2026-11-22T17:44:35.322Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 60,
-  "lastUpdate": "2026-11-21T21:34:19-03:00",
+  "count": 62,
+  "lastUpdate": "2026-11-22T14:39:05-03:00",
   "occurrences": [
+    {
+      "id": "fed46792-4367-4ee8-8616-b9c4ee784a9b",
+      "documentNumber": 79945,
+      "date": "2026-11-22T10:17:00.000Z",
+      "address": "Vila Rosali, São João de Meriti - RJ, Brasil",
+      "neighborhood": "VILA ROSALI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.791262,
+      "longitude": -43.37410939999999,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "66f15cf9-aafa-400a-90d0-116bd5bbf8af",
+      "documentNumber": 79946,
+      "date": "2026-11-22T05:40:00.000Z",
+      "address": "Estrada dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9611951,
+      "longitude": -43.3943582,
+      "reason": "Tentativa/Roubo",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "2f22526f-0999-4fd1-bf01-4032c06bc280",
       "documentNumber": 79942,
@@ -59,21 +94,6 @@
       "victims": []
     },
     {
-      "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
-      "documentNumber": 79933,
-      "date": "2026-11-20T21:00:00.000Z",
-      "address": "Rio das Pedras - Itanhangá, Rio de Janeiro - RJ, 22753-737, Brasil",
-      "neighborhood": "ITANHANGA",
-      "subNeighborhood": "",
-      "locality": "RIO DAS PEDRAS",
-      "latitude": -22.975582144895455,
-      "longitude": -43.33325272765687,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
       "documentNumber": 79934,
       "date": "2026-11-20T21:00:00.000Z",
@@ -83,6 +103,21 @@
       "locality": "",
       "latitude": -22.8780905,
       "longitude": -43.4482789,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
+      "documentNumber": 79933,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Rio das Pedras - Itanhangá, Rio de Janeiro - RJ, 22753-737, Brasil",
+      "neighborhood": "ITANHANGA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.975582144895455,
+      "longitude": -43.33325272765687,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -119,6 +154,10 @@
       "victims": [
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -1071,11 +1110,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
