@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T22:07:40.482Z",
+  "generatedAt": "2026-11-22T02:17:50.726Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 62,
-  "lastUpdate": "2026-11-21T09:48:37-03:00",
+  "count": 60,
+  "lastUpdate": "2026-11-21T21:34:19-03:00",
   "occurrences": [
+    {
+      "id": "2f22526f-0999-4fd1-bf01-4032c06bc280",
+      "documentNumber": 79942,
+      "date": "2026-11-21T20:53:00.000Z",
+      "address": "Figueira - Parque Ambai, Nova Iguaçu - RJ, 26070-784, Brasil",
+      "neighborhood": "PARQUE AMBAI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6997,
+      "longitude": -43.4343,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "8a1ed027-3f2d-4ebc-a4c6-d4f3b07dcd54",
       "documentNumber": 79939,
@@ -630,11 +645,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -947,26 +962,6 @@
       "victims": []
     },
     {
-      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
-      "documentNumber": 79872,
-      "date": "2026-11-15T19:00:00.000Z",
-      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
-      "neighborhood": "MARIA PAULA I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8740993,
-      "longitude": -43.023337,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
       "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
       "documentNumber": 79878,
       "date": "2026-11-15T19:00:00.000Z",
@@ -982,6 +977,26 @@
       "victims": [
         {
           "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
+      "documentNumber": 79872,
+      "date": "2026-11-15T19:00:00.000Z",
+      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
+      "neighborhood": "MARIA PAULA I",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8740993,
+      "longitude": -43.023337,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -1075,56 +1090,6 @@
       "locality": "",
       "latitude": -22.8847155,
       "longitude": -43.5537529,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "728be369-6f25-4cdc-96ea-a7bdd8a6e67c",
-      "documentNumber": 79866,
-      "date": "2026-11-14T19:00:00.000Z",
-      "address": "Rua Flexa, Morro do Juca Branco - Cubango, Niterói - RJ, 24120-016, Brasil",
-      "neighborhood": "CUBANGO",
-      "subNeighborhood": "",
-      "locality": "MORRO DO JUCA BRANCO",
-      "latitude": -22.8861688054583,
-      "longitude": -43.0985519802648,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "6dda11a9-4e23-45e5-b17f-009c9cf3d663",
-      "documentNumber": 79858,
-      "date": "2026-11-14T16:24:00.000Z",
-      "address": "Corte Oito (Complexo da Mangueirinha), Centenário - Duque de Caxias - RJ, Brasil",
-      "neighborhood": "CENTENARIO",
-      "subNeighborhood": "",
-      "locality": "CORTE 8 (COMPLEXO DA MANGUEIRINHA)",
-      "latitude": -22.774734,
-      "longitude": -43.3047139,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "85e24819-1111-485d-94a8-1bf472a56dbe",
-      "documentNumber": 79857,
-      "date": "2026-11-14T11:00:00.000Z",
-      "address": "Conjunto Habitacional Portus II (Beirute) - Costa Barros, Rio de Janeiro - RJ, 21532-198, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8200169,
-      "longitude": -43.3647537,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,

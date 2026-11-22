@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T22:07:40.485Z",
+  "generatedAt": "2026-11-22T02:17:50.728Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 615,
+  "count": 616,
   "occurrences": [
+    {
+      "id": "2f22526f-0999-4fd1-bf01-4032c06bc280",
+      "documentNumber": 79942,
+      "date": "2026-11-21T20:53:00.000Z",
+      "address": "Figueira - Parque Ambai, Nova Iguaçu - RJ, 26070-784, Brasil",
+      "neighborhood": "PARQUE AMBAI",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.6997,
+      "longitude": -43.4343,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "8a1ed027-3f2d-4ebc-a4c6-d4f3b07dcd54",
       "documentNumber": 79939,
@@ -629,11 +644,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
