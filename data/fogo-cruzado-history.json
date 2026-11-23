@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T22:49:59.757Z",
+  "generatedAt": "2026-11-23T13:01:20.933Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 618,
+  "count": 619,
   "occurrences": [
+    {
+      "id": "6360aae4-b202-44fb-aa43-295ef76b9a91",
+      "documentNumber": 79947,
+      "date": "2026-11-22T21:53:00.000Z",
+      "address": "Morro do Turano - Rio Comprido, Rio de Janeiro - RJ, 20261-004, Brasil",
+      "neighborhood": "RIO COMPRIDO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO TURANO",
+      "latitude": -22.92595723,
+      "longitude": -43.21575894,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fed46792-4367-4ee8-8616-b9c4ee784a9b",
       "documentNumber": 79945,
@@ -683,11 +698,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]

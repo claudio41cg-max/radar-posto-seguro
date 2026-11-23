@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T22:49:59.756Z",
+  "generatedAt": "2026-11-23T13:01:20.930Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,24 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 62,
-  "lastUpdate": "2026-11-22T14:39:05-03:00",
+  "count": 54,
+  "lastUpdate": "2026-11-23T08:06:43-03:00",
   "occurrences": [
+    {
+      "id": "6360aae4-b202-44fb-aa43-295ef76b9a91",
+      "documentNumber": 79947,
+      "date": "2026-11-22T21:53:00.000Z",
+      "address": "Morro do Turano - Rio Comprido, Rio de Janeiro - RJ, 20261-004, Brasil",
+      "neighborhood": "RIO COMPRIDO",
+      "subNeighborhood": "",
+      "locality": "MORRO DO TURANO",
+      "latitude": -22.92595723,
+      "longitude": -43.21575894,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "fed46792-4367-4ee8-8616-b9c4ee784a9b",
       "documentNumber": 79945,
@@ -94,21 +109,6 @@
       "victims": []
     },
     {
-      "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
-      "documentNumber": 79934,
-      "date": "2026-11-20T21:00:00.000Z",
-      "address": "Padre Miguel, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PADRE MIGUEL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8780905,
-      "longitude": -43.4482789,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
       "documentNumber": 79933,
       "date": "2026-11-20T21:00:00.000Z",
@@ -118,6 +118,21 @@
       "locality": "RIO DAS PEDRAS",
       "latitude": -22.975582144895455,
       "longitude": -43.33325272765687,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
+      "documentNumber": 79934,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Padre Miguel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PADRE MIGUEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8780905,
+      "longitude": -43.4482789,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -684,11 +699,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -964,175 +979,6 @@
           "personType": "Civilian"
         }
       ]
-    },
-    {
-      "id": "af3ad7a7-52b9-4eef-8836-bdd3bd96f302",
-      "documentNumber": 79875,
-      "date": "2026-11-15T21:00:00.000Z",
-      "address": "Avenida Leopoldo Bulhões - Complexo de Manguinhos, Manguinhos, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "MANGUINHOS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DE MANGUINHOS",
-      "latitude": -22.8782038,
-      "longitude": -43.2516842,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "fd7c2c83-f13d-4ab1-a34e-545eacb1982c",
-      "documentNumber": 79873,
-      "date": "2026-11-15T19:57:00.000Z",
-      "address": "Quitungo-Guaporé - Brás de Pina, Rio de Janeiro - RJ, 21215-510, Brasil",
-      "neighborhood": "BRAS DE PINA",
-      "subNeighborhood": "",
-      "locality": "QUITUNGO-GUAPORE",
-      "latitude": -22.835,
-      "longitude": -43.300278,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "9aff7263-7bf0-45d8-a1e4-c14e465db52b",
-      "documentNumber": 79878,
-      "date": "2026-11-15T19:00:00.000Z",
-      "address": "Morro da Quitanda (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21532-050, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "MORRO DA QUITANDA (COMPLEXO DA PEDREIRA)",
-      "latitude": -22.81949929,
-      "longitude": -43.36693375,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "35e8cdee-8eb9-44f0-9541-22b152571847",
-      "documentNumber": 79872,
-      "date": "2026-11-15T19:00:00.000Z",
-      "address": "Maria Paula, São Gonçalo - RJ, Brasil",
-      "neighborhood": "MARIA PAULA I",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8740993,
-      "longitude": -43.023337,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "5fc1ff28-c286-475b-ad83-0baeebe3c236",
-      "documentNumber": 79877,
-      "date": "2026-11-15T17:00:00.000Z",
-      "address": "Comunidade Estrada da Cachamorra - Guaratiba, Rio de Janeiro - RJ, 23040-310, Brasil",
-      "neighborhood": "GUARATIBA",
-      "subNeighborhood": "",
-      "locality": "COMUNIDADE ESTRADA DA CACHAMORRA",
-      "latitude": -22.9555111,
-      "longitude": -43.5712499,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "4f7a71fd-f6e3-494d-92ab-929c4e48c143",
-      "documentNumber": 79882,
-      "date": "2026-11-15T16:00:00.000Z",
-      "address": " Coelho da Rocha, São João de Meriti - RJ, 25550-570, Brasil",
-      "neighborhood": "COELHO DA ROCHA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.77734199065663,
-      "longitude": -43.384621989885744,
-      "reason": "Briga",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "1defaffe-9004-4f69-b1d7-58f8f8484385",
-      "documentNumber": 79871,
-      "date": "2026-11-15T13:00:00.000Z",
-      "address": "Av. Pastor Martin Luther King Jr. - Inhaúma, Rio de Janeiro - RJ, 20765-360, Brasil",
-      "neighborhood": "INHAUMA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.868415212976117,
-      "longitude": -43.29440425372497,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "0a98783d-4938-4e98-a5d1-4ae5d029f38c",
-      "documentNumber": 79865,
-      "date": "2026-11-15T07:14:00.000Z",
-      "address": "Morro da Caixa D'água - Quintino Bocaiúva, Rio de Janeiro - RJ, 20740-070, Brasil",
-      "neighborhood": "QUINTINO BOCAIUVA",
-      "subNeighborhood": "",
-      "locality": "MORRO DA CAIXA D'AGUA (COMPLEXO DO 18)",
-      "latitude": -22.892304716555564,
-      "longitude": -43.316045835186074,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "a086853a-fb46-49c8-8c59-4916c4852447",
-      "documentNumber": 79867,
-      "date": "2026-11-15T07:00:00.000Z",
-      "address": "Estrada da Posse - Campo Grande, Rio de Janeiro - RJ, 23088-000, Brasil",
-      "neighborhood": "CAMPO GRANDE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8847155,
-      "longitude": -43.5537529,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
     }
   ]
 }
