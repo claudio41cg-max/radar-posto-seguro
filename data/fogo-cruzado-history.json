@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T10:27:33.066Z",
+  "generatedAt": "2026-11-24T20:49:21.742Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,7 +10,7 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 628,
+  "count": 632,
   "occurrences": [
     {
       "id": "5e7d2032-1778-4f93-9390-7d4c9ba03365",
@@ -43,6 +43,21 @@
       "victims": []
     },
     {
+      "id": "08e68127-656d-46dd-a121-3cb80a90d6cc",
+      "documentNumber": 79965,
+      "date": "2026-11-24T05:59:00.000Z",
+      "address": "Barreira do Vasco - Vasco da Gama, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "VASCO DA GAMA",
+      "subNeighborhood": "",
+      "locality": "BARREIRA DO VASCO",
+      "latitude": -22.8895526,
+      "longitude": -43.2290306,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "01790ecf-3b9a-4eba-b58c-818f902efa2b",
       "documentNumber": 79956,
       "date": "2026-11-23T21:05:00.000Z",
@@ -61,12 +76,27 @@
       "id": "121f2f29-15a2-4a34-8c62-00263e1c1021",
       "documentNumber": 79957,
       "date": "2026-11-23T20:54:00.000Z",
-      "address": "Av. Arthur Antônio Sendas - Parque Analândia, São João de Meriti - RJ, Brasil",
+      "address": "Av. Arthur Antônio Sendas - Parque Araruama, São João de Meriti - RJ, Brasil",
       "neighborhood": "PARQUE ARARUAMA",
-      "subNeighborhood": "PARQUE ANALANDIA",
+      "subNeighborhood": "",
       "locality": "",
       "latitude": -22.7950818,
       "longitude": -43.3325898,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "b8b9d395-c859-492a-ae12-7fe25dbd49c3",
+      "documentNumber": 79963,
+      "date": "2026-11-23T17:00:00.000Z",
+      "address": "Morro da Boa Esperança - Rua Carlos Chagas - Itaipu, Niterói - RJ, 24340-000, Brasil",
+      "neighborhood": "ITAIPU",
+      "subNeighborhood": "",
+      "locality": "MORRO DA BOA ESPERANCA",
+      "latitude": -22.940723293725096,
+      "longitude": -43.052978616192206,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -93,6 +123,21 @@
       ]
     },
     {
+      "id": "cde1b933-938e-419a-8447-51fcaeeb4e57",
+      "documentNumber": 79962,
+      "date": "2026-11-23T13:09:00.000Z",
+      "address": "Rua José Alves da Costa - Piquete, Centro, Maricá - RJ, 24900-355, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9147678,
+      "longitude": -42.8150751,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "87ffe52b-fc9e-433e-8031-2f428c719a0d",
       "documentNumber": 79952,
       "date": "2026-11-23T12:00:00.000Z",
@@ -111,6 +156,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "b7dccd11-4cb6-4687-8239-29007bd37754",
+      "documentNumber": 79964,
+      "date": "2026-11-23T10:35:00.000Z",
+      "address": "Rua Vinte e Um - Centro, Maricá - RJ, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.92728341731284,
+      "longitude": -42.82141402292698,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "f9744f92-9cd6-4479-92f3-4a21de1a35ce",
@@ -146,7 +206,7 @@
       "id": "a5210834-81b7-4577-9ee3-d3d745a7b9ae",
       "documentNumber": 79954,
       "date": "2026-11-22T19:00:00.000Z",
-      "address": "Parque Guinle - Rua Gago Coutinho - Laranjeiras, Rio de Janeiro - RJ, Brasil",
+      "address": "Rua Gago Coutinho, Parque Guinle - Laranjeiras, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "LARANJEIRAS",
       "subNeighborhood": "",
       "locality": "",
@@ -308,24 +368,9 @@
       "victims": []
     },
     {
-      "id": "64ebea68-b847-453c-8ad8-7c048e3587cc",
-      "documentNumber": 79938,
-      "date": "2026-11-20T14:50:00.000Z",
-      "address": "R. João Plaza Gonzales (Rua do Postinho IMOBE)  - Engenho, Itaguaí - RJ, 23820-370, Brasil",
-      "neighborhood": "ENGENHO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8625,
-      "longitude": -43.7888,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "a1431970-b994-4399-919b-5b9df2c2bb3e",
       "documentNumber": 79937,
-      "date": "2026-11-20T14:00:00.000Z",
+      "date": "2026-11-20T14:51:00.000Z",
       "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
       "neighborhood": "VILA MARGARIDA",
       "subNeighborhood": "",
@@ -345,14 +390,29 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "64ebea68-b847-453c-8ad8-7c048e3587cc",
+      "documentNumber": 79938,
+      "date": "2026-11-20T14:50:00.000Z",
+      "address": "R. João Plaza Gonzales (Rua do Postinho IMOBE)  - Engenho, Itaguaí - RJ, 23820-370, Brasil",
+      "neighborhood": "ENGENHO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8625,
+      "longitude": -43.7888,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
     },
     {
       "id": "731127cd-156f-45bb-a2a7-2b0bf1cb85e9",
