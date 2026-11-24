@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T00:43:06.643Z",
+  "generatedAt": "2026-11-24T10:27:33.064Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,29 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 55,
-  "lastUpdate": "2026-11-23T21:27:28-03:00",
+  "count": 56,
+  "lastUpdate": "2026-11-24T06:52:39-03:00",
   "occurrences": [
     {
-      "id": "01790ecf-3b9a-4eba-b58c-818f902efa2b",
-      "documentNumber": 79956,
-      "date": "2026-11-23T21:05:00.000Z",
-      "address": "Morro do Urubu - Piedade, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PIEDADE",
+      "id": "5e7d2032-1778-4f93-9390-7d4c9ba03365",
+      "documentNumber": 79959,
+      "date": "2026-11-24T06:10:00.000Z",
+      "address": "Morro do Timbau (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-050, Brasil",
+      "neighborhood": "MARE",
       "subNeighborhood": "",
-      "locality": "MORRO DO URUBU (COMPLEXO DO URUBU)",
-      "latitude": -22.87657404,
-      "longitude": -43.30422326,
+      "locality": "MORRO DO TIMBAU (COMPLEXO DA MARE)",
+      "latitude": -22.86250847,
+      "longitude": -43.24132626,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": []
     },
     {
+      "id": "289fab9f-40f9-43b2-99d5-f7af76d48913",
+      "documentNumber": 79960,
+      "date": "2026-11-24T06:05:00.000Z",
+      "address": "Morro do Andaraí - Andaraí, Rio de Janeiro - RJ, 20541-240, Brasil",
+      "neighborhood": "ANDARAI",
+      "subNeighborhood": "",
+      "locality": "MORRO DO ANDARAI",
+      "latitude": -22.93296722,
+      "longitude": -43.25643623,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
       "id": "121f2f29-15a2-4a34-8c62-00263e1c1021",
       "documentNumber": 79957,
       "date": "2026-11-23T20:54:00.000Z",
-      "address": "Av. Arthur Antônio Sendas, 593 - Parque Analândia, São João de Meriti - RJ, Brasil",
+      "address": "Av. Arthur Antônio Sendas - Parque Analândia, São João de Meriti - RJ, Brasil",
       "neighborhood": "PARQUE ARARUAMA",
       "subNeighborhood": "PARQUE ANALANDIA",
       "locality": "",
@@ -316,11 +331,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
