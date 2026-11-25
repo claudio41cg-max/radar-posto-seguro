@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T13:35:32.866Z",
+  "generatedAt": "2026-11-25T22:42:27.100Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,55 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 638,
+  "count": 641,
   "occurrences": [
+    {
+      "id": "5c1bbd7f-f5f2-4617-8db6-7293e5ffa78c",
+      "documentNumber": 79985,
+      "date": "2026-11-25T16:10:00.000Z",
+      "address": "Complexo do Lins - Lins de Vasconcelos, Rio de Janeiro - RJ, 20725-140, Brasil",
+      "neighborhood": "LINS DE VASCONCELOS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DO LINS",
+      "latitude": -22.91534468,
+      "longitude": -43.28452174,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "ba8643e9-3982-4add-8eda-f164778f83ae",
+      "documentNumber": 79984,
+      "date": "2026-11-25T15:11:00.000Z",
+      "address": "Rua do Bispo - Rio Comprido, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "RIO COMPRIDO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.9240038,
+      "longitude": -43.2125296,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "e9e233b4-98ed-4411-a9e8-52715e29b9fd",
       "documentNumber": 79981,
@@ -43,6 +90,30 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "d4060e4a-00f8-41f1-a7ef-226871d15fd5",
+      "documentNumber": 79986,
+      "date": "2026-11-24T22:00:00.000Z",
+      "address": "Comunidade do Barro Vermelho, Pantanal - Vila São José, Duque de Caxias - RJ, 25040-160, Brasil",
+      "neighborhood": "VILA SAO JOSE",
+      "subNeighborhood": "PANTANAL",
+      "locality": "Comunidade DO BARRO VERMELHO",
+      "latitude": -22.74787062,
+      "longitude": -43.31411117,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -482,19 +553,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
