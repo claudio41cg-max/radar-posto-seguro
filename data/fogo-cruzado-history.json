@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T03:48:04.109Z",
+  "generatedAt": "2026-11-25T13:35:32.866Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,23 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 636,
+  "count": 638,
   "occurrences": [
+    {
+      "id": "e9e233b4-98ed-4411-a9e8-52715e29b9fd",
+      "documentNumber": 79981,
+      "date": "2026-11-25T07:00:00.000Z",
+      "address": "Vila Centenário - Centenário, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "CENTENARIO",
+      "subNeighborhood": "VILA CENTENARIO",
+      "locality": "",
+      "latitude": -22.772689,
+      "longitude": -43.3125635,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "c132a569-9709-4849-ae06-964a8d46498d",
       "documentNumber": 79971,
@@ -22,10 +37,15 @@
       "locality": "",
       "latitude": -23.020782302591478,
       "longitude": -43.491520677801496,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "cf5cdb6a-a17a-4c74-b669-cac0e0677f82",
@@ -37,6 +57,21 @@
       "locality": "QUITUNGO-GUAPORE",
       "latitude": -22.835,
       "longitude": -43.300278,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "00840fe0-e6c5-4e3c-bdf2-90f7e57cc972",
+      "documentNumber": 79980,
+      "date": "2026-11-24T20:05:00.000Z",
+      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DOURADOS",
+      "latitude": -22.82650326,
+      "longitude": -43.29951507,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -447,19 +482,19 @@
       "agentPresence": false,
       "victims": [
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
