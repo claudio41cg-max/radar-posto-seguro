@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T20:49:21.742Z",
+  "generatedAt": "2026-11-25T03:48:04.109Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,53 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 632,
+  "count": 636,
   "occurrences": [
+    {
+      "id": "c132a569-9709-4849-ae06-964a8d46498d",
+      "documentNumber": 79971,
+      "date": "2026-11-24T22:30:00.000Z",
+      "address": "Av. das Américas - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22790-701, Brasil",
+      "neighborhood": "RECREIO DOS BANDEIRANTES",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -23.020782302591478,
+      "longitude": -43.491520677801496,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "cf5cdb6a-a17a-4c74-b669-cac0e0677f82",
+      "documentNumber": 79969,
+      "date": "2026-11-24T20:05:00.000Z",
+      "address": "Quitungo-Guaporé - Brás de Pina, Rio de Janeiro - RJ, 21215-510, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "QUITUNGO-GUAPORE",
+      "latitude": -22.835,
+      "longitude": -43.300278,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "65b3077a-529a-482c-b146-aa94785124ab",
+      "documentNumber": 79975,
+      "date": "2026-11-24T15:00:00.000Z",
+      "address": "Av. José Arantes de Melo, Complexo da Pedreira - Costa Barros, Rio de Janeiro - RJ, 21515-100, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PEDREIRA",
+      "latitude": -22.823600307592386,
+      "longitude": -43.368996107413615,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
     {
       "id": "5e7d2032-1778-4f93-9390-7d4c9ba03365",
       "documentNumber": 79959,
@@ -43,9 +88,29 @@
       "victims": []
     },
     {
+      "id": "34187e7a-1b97-4807-9772-b1cfe746df8a",
+      "documentNumber": 79974,
+      "date": "2026-11-24T00:30:00.000Z",
+      "address": "Morro da Palmerira - Centro, Belford Roxo - RJ, 26112-190, Brasil",
+      "neighborhood": "CENTRO",
+      "subNeighborhood": "",
+      "locality": "MORRO DA PALMEIRA",
+      "latitude": -22.75569518,
+      "longitude": -43.40391706,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
       "id": "08e68127-656d-46dd-a121-3cb80a90d6cc",
       "documentNumber": 79965,
-      "date": "2026-11-24T05:59:00.000Z",
+      "date": "2026-11-24T00:15:00.000Z",
       "address": "Barreira do Vasco - Vasco da Gama, Rio de Janeiro - RJ, Brasil",
       "neighborhood": "VASCO DA GAMA",
       "subNeighborhood": "",
@@ -382,19 +447,19 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
