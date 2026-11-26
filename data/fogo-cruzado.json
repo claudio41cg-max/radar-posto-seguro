@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T14:17:53.577Z",
+  "generatedAt": "2026-11-26T23:03:06.497Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,94 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 47,
-  "lastUpdate": "2026-11-26T08:12:45-03:00",
+  "count": 52,
+  "lastUpdate": "2026-11-26T17:13:54-03:00",
   "occurrences": [
+    {
+      "id": "7af9ec25-b75f-4bbb-81b5-c8f80bee1fba",
+      "documentNumber": 79992,
+      "date": "2026-11-26T12:30:00.000Z",
+      "address": "Av. Alm. Frontin, 628 - Maré, Rio de Janeiro - RJ, 21030-040",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.84197614798011,
+      "longitude": -43.24581709329912,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "23777212-6bab-4428-afe6-f8d902352e7e",
+      "documentNumber": 79994,
+      "date": "2026-11-26T12:00:00.000Z",
+      "address": "R. Brandão Monteiro - Comunidade Parque Dois irmãos, Curicica, Rio de Janeiro - RJ, 22711-000, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
+      "latitude": -22.951588084522786,
+      "longitude": -43.39356363908479,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "c8fa4d28-9065-447f-a0ed-a6176a30ca6f",
+      "documentNumber": 79995,
+      "date": "2026-11-26T10:00:00.000Z",
+      "address": "Estr. do Tindiba - Taquara, Rio de Janeiro - RJ, 22740-362, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.928012883213434,
+      "longitude": -43.362305397006956,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "5c872e75-6744-4b60-a4be-29e3803f3315",
+      "documentNumber": 79993,
+      "date": "2026-11-26T09:00:00.000Z",
+      "address": "Rod. Santos Dumont - Parque Silvestre, Guapimirim - RJ, 25940-000",
+      "neighborhood": "PARQUE SILVESTRE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.5206542,
+      "longitude": -43.0023122,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "dae8e295-3683-4331-9541-7855c74965ab",
+      "documentNumber": 79991,
+      "date": "2026-11-25T20:00:00.000Z",
+      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22775-400, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.95201,
+      "longitude": -43.37442,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "5c1bbd7f-f5f2-4617-8db6-7293e5ffa78c",
       "documentNumber": 79985,
@@ -28,19 +113,19 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -120,21 +205,6 @@
       ]
     },
     {
-      "id": "cf5cdb6a-a17a-4c74-b669-cac0e0677f82",
-      "documentNumber": 79969,
-      "date": "2026-11-24T20:05:00.000Z",
-      "address": "Quitungo-Guaporé - Brás de Pina, Rio de Janeiro - RJ, 21215-510, Brasil",
-      "neighborhood": "BRAS DE PINA",
-      "subNeighborhood": "",
-      "locality": "QUITUNGO-GUAPORE",
-      "latitude": -22.835,
-      "longitude": -43.300278,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "00840fe0-e6c5-4e3c-bdf2-90f7e57cc972",
       "documentNumber": 79980,
       "date": "2026-11-24T20:05:00.000Z",
@@ -144,6 +214,21 @@
       "locality": "Comunidade DOURADOS",
       "latitude": -22.82650326,
       "longitude": -43.29951507,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "cf5cdb6a-a17a-4c74-b669-cac0e0677f82",
+      "documentNumber": 79969,
+      "date": "2026-11-24T20:05:00.000Z",
+      "address": "Quitungo-Guaporé - Brás de Pina, Rio de Janeiro - RJ, 21215-510, Brasil",
+      "neighborhood": "BRAS DE PINA",
+      "subNeighborhood": "",
+      "locality": "QUITUNGO-GUAPORE",
+      "latitude": -22.835,
+      "longitude": -43.300278,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -480,21 +565,6 @@
       "victims": []
     },
     {
-      "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
-      "documentNumber": 79934,
-      "date": "2026-11-20T21:00:00.000Z",
-      "address": "Padre Miguel, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PADRE MIGUEL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8780905,
-      "longitude": -43.4482789,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
       "documentNumber": 79933,
       "date": "2026-11-20T21:00:00.000Z",
@@ -504,6 +574,21 @@
       "locality": "RIO DAS PEDRAS",
       "latitude": -22.975582144895455,
       "longitude": -43.33325272765687,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
+      "documentNumber": 79934,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Padre Miguel, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "PADRE MIGUEL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.8780905,
+      "longitude": -43.4482789,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -543,15 +628,15 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]

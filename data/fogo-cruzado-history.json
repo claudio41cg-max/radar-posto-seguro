@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T14:17:53.648Z",
+  "generatedAt": "2026-11-26T23:03:06.498Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,93 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 641,
+  "count": 646,
   "occurrences": [
+    {
+      "id": "7af9ec25-b75f-4bbb-81b5-c8f80bee1fba",
+      "documentNumber": 79992,
+      "date": "2026-11-26T12:30:00.000Z",
+      "address": "Av. Alm. Frontin, 628 - Maré, Rio de Janeiro - RJ, 21030-040",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.84197614798011,
+      "longitude": -43.24581709329912,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "23777212-6bab-4428-afe6-f8d902352e7e",
+      "documentNumber": 79994,
+      "date": "2026-11-26T12:00:00.000Z",
+      "address": "R. Brandão Monteiro - Comunidade Parque Dois irmãos, Curicica, Rio de Janeiro - RJ, 22711-000, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "Comunidade PARQUE DOIS IRMAOS (CURICICA)",
+      "latitude": -22.951588084522786,
+      "longitude": -43.39356363908479,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "c8fa4d28-9065-447f-a0ed-a6176a30ca6f",
+      "documentNumber": 79995,
+      "date": "2026-11-26T10:00:00.000Z",
+      "address": "Estr. do Tindiba - Taquara, Rio de Janeiro - RJ, 22740-362, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.928012883213434,
+      "longitude": -43.362305397006956,
+      "reason": "Tentativa/Roubo",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "5c872e75-6744-4b60-a4be-29e3803f3315",
+      "documentNumber": 79993,
+      "date": "2026-11-26T09:00:00.000Z",
+      "address": "Rod. Santos Dumont - Parque Silvestre, Guapimirim - RJ, 25940-000",
+      "neighborhood": "PARQUE SILVESTRE",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.5206542,
+      "longitude": -43.0023122,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "dae8e295-3683-4331-9541-7855c74965ab",
+      "documentNumber": 79991,
+      "date": "2026-11-25T20:00:00.000Z",
+      "address": "Estr. dos Bandeirantes - Jacarepaguá, Rio de Janeiro - RJ, 22775-400, Brasil",
+      "neighborhood": "CURICICA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.95201,
+      "longitude": -43.37442,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "5c1bbd7f-f5f2-4617-8db6-7293e5ffa78c",
       "documentNumber": 79985,
@@ -27,19 +112,19 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -557,15 +642,15 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
