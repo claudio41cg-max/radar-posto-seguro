@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T23:03:06.497Z",
+  "generatedAt": "2026-11-27T04:55:32.557Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,119 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 52,
-  "lastUpdate": "2026-11-26T17:13:54-03:00",
+  "count": 49,
+  "lastUpdate": "2026-11-26T23:47:06-03:00",
   "occurrences": [
+    {
+      "id": "c76a60a7-5258-4300-854e-ecadb26df71b",
+      "documentNumber": 79997,
+      "date": "2026-11-26T22:10:00.000Z",
+      "address": "Comunidade Nova Aurora (Cabeça de Porco) - Taquara - RJ, 22725-800, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "Comunidade NOVA AURORA (CABECA DE PORCO)",
+      "latitude": -22.91695341486991,
+      "longitude": -43.3757493531613,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "2c2a5029-1eb1-4471-bfaf-3bd6c9264960",
+      "documentNumber": 80001,
+      "date": "2026-11-26T20:00:00.000Z",
+      "address": "Jardim Pernambuco, Nova Iguaçu - RJ, Brasil",
+      "neighborhood": "JARDIM PERNAMBUCO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7536883,
+      "longitude": -43.4993795,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "f85c0cf7-aefb-48fe-831d-4ba5d2e38c88",
+      "documentNumber": 80002,
+      "date": "2026-11-26T20:00:00.000Z",
+      "address": " Areal, Itaboraí - RJ, 24800-622, Brasil",
+      "neighborhood": "AREAL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.725299439689152,
+      "longitude": -42.858428832101936,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "05d8040d-b9ef-4122-896d-50cf7bec8389",
+      "documentNumber": 79999,
+      "date": "2026-11-26T19:00:00.000Z",
+      "address": "Avenida Governador Leonel de Moura Brizola - São Bento, Duque de Caxias - RJ, Brasil",
+      "neighborhood": "SAO BENTO",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7292342,
+      "longitude": -43.3120538,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "33ce6db1-bcfa-4666-9de1-25b356db5102",
+      "documentNumber": 80000,
+      "date": "2026-11-26T18:55:00.000Z",
+      "address": "Rua da Fiscalização, Jardim das Acacias - Itaipu, Belford Roxo - RJ, Brasil",
+      "neighborhood": "ITAIPU",
+      "subNeighborhood": "",
+      "locality": "JARDIM DAS ACACIAS",
+      "latitude": -22.7237479,
+      "longitude": -43.4269241,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "03e1433d-de19-454a-83d7-0a61edd90b83",
+      "documentNumber": 79998,
+      "date": "2026-11-26T18:30:00.000Z",
+      "address": "Comunidade Sem Terra - Paraíso, Nova Iguaçu - RJ, 26297-210, Brasil",
+      "neighborhood": "PARAISO",
+      "subNeighborhood": "",
+      "locality": "Comunidade SEM TERRA",
+      "latitude": -22.8223548,
+      "longitude": -43.6008443,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
     {
       "id": "7af9ec25-b75f-4bbb-81b5-c8f80bee1fba",
       "documentNumber": 79992,
@@ -113,11 +223,11 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
@@ -205,21 +315,6 @@
       ]
     },
     {
-      "id": "00840fe0-e6c5-4e3c-bdf2-90f7e57cc972",
-      "documentNumber": 79980,
-      "date": "2026-11-24T20:05:00.000Z",
-      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DOURADOS",
-      "latitude": -22.82650326,
-      "longitude": -43.29951507,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "cf5cdb6a-a17a-4c74-b669-cac0e0677f82",
       "documentNumber": 79969,
       "date": "2026-11-24T20:05:00.000Z",
@@ -229,6 +324,21 @@
       "locality": "QUITUNGO-GUAPORE",
       "latitude": -22.835,
       "longitude": -43.300278,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "00840fe0-e6c5-4e3c-bdf2-90f7e57cc972",
+      "documentNumber": 79980,
+      "date": "2026-11-24T20:05:00.000Z",
+      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DOURADOS",
+      "latitude": -22.82650326,
+      "longitude": -43.29951507,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -632,11 +742,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -755,166 +865,6 @@
       "policeAction": false,
       "agentPresence": false,
       "victims": []
-    },
-    {
-      "id": "285591c5-72b3-45b9-96d6-8820489dd8e0",
-      "documentNumber": 79924,
-      "date": "2026-11-19T22:49:00.000Z",
-      "address": "Av. Salvador Allende - Recreio dos Bandeirantes, Rio de Janeiro - RJ, 22783-127, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.967403015588673,
-      "longitude": -43.39745064083558,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "b6e3a93a-6e60-4aa8-ad45-632541b6ca76",
-      "documentNumber": 79926,
-      "date": "2026-11-19T20:22:00.000Z",
-      "address": "Av. Governador Leonel de Moura Brizola - Gramacho, Duque de Caxias - RJ, 25265-008, Brasil",
-      "neighborhood": "GRAMACHO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7554651,
-      "longitude": -43.3026322,
-      "reason": "Tentativa/Roubo",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "e300755c-10a0-4ae2-a16b-bcceea189d1f",
-      "documentNumber": 79928,
-      "date": "2026-11-19T17:00:00.000Z",
-      "address": "Rod. Santos Dumont - Campinho, Magé - RJ, 25907-000, Brasil",
-      "neighborhood": "CAMPINHO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.657355533110675,
-      "longitude": -43.129464642758485,
-      "reason": "Tentativa/Roubo de cargas",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "fff4e95d-e179-40e6-afef-7645b6429558",
-      "documentNumber": 79922,
-      "date": "2026-11-19T14:00:00.000Z",
-      "address": "Rua Paulino Bazani - Comunidade do Terreirão,  Recreio dos Bandeirantes, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "RECREIO DOS BANDEIRANTES",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO TERREIRAO",
-      "latitude": -23.0252733,
-      "longitude": -43.4820938,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "16cbab96-48cb-4b8e-bf8d-e3cd96ad11a4",
-      "documentNumber": 79919,
-      "date": "2026-11-19T09:00:00.000Z",
-      "address": "Santa Amélia, Japeri - RJ, 26440-000, Brasil",
-      "neighborhood": "SANTA AMELIA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.666551291574706,
-      "longitude": -43.58396528518065,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "567db6cc-4679-41a4-b39a-a45e82c5a201",
-      "documentNumber": 79920,
-      "date": "2026-11-19T08:00:00.000Z",
-      "address": "Complexo do Chapadão - Costa Barros, Rio de Janeiro - RJ, 21650-020, Brasil",
-      "neighborhood": "COSTA BARROS",
-      "subNeighborhood": "",
-      "locality": "COMPLEXO DO CHAPADAO",
-      "latitude": -22.82326393,
-      "longitude": -43.37707903,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "d9b757f5-9dda-4e43-a619-625a9036ac63",
-      "documentNumber": 79918,
-      "date": "2026-11-19T03:00:00.000Z",
-      "address": "Santa Amélia, Japeri - RJ, 26440-000, Brasil",
-      "neighborhood": "SANTA AMELIA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.6670859,
-      "longitude": -43.5845661,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "f3db5501-d884-4d20-befc-edc88ad0a939",
-      "documentNumber": 79916,
-      "date": "2026-11-19T01:00:00.000Z",
-      "address": "Vila São José, Pantanal, Duque de Caxias - RJ, Brasil",
-      "neighborhood": "VILA SAO JOSE",
-      "subNeighborhood": "PANTANAL",
-      "locality": "",
-      "latitude": -22.7472326,
-      "longitude": -43.3173933,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "68bf605d-9b17-4c02-a5fa-6acf7b3d57c2",
-      "documentNumber": 79921,
-      "date": "2026-11-19T00:00:00.000Z",
-      "address": "Av. Eng. Souza Filho - Itanhangá, Rio de Janeiro - RJ, 22753-039, Brasil",
-      "neighborhood": "ITANHANGA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.988131060260073,
-      "longitude": -43.32692879766979,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
     }
   ]
 }
