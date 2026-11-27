@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T14:53:31.643Z",
+  "generatedAt": "2026-11-27T23:21:18.953Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,44 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 51,
-  "lastUpdate": "2026-11-27T07:43:20-03:00",
+  "count": 56,
+  "lastUpdate": "2026-11-27T19:03:30-03:00",
   "occurrences": [
+    {
+      "id": "af260b7c-acf8-4963-b20e-22be4df09ba4",
+      "documentNumber": 80012,
+      "date": "2026-11-27T18:20:00.000Z",
+      "address": "Complexo da Penha - Penha, Rio de Janeiro - RJ, 21070-470, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PENHA",
+      "latitude": -22.84557517,
+      "longitude": -43.28296391,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "a58f99bb-efca-4a59-8615-e2c1fb02aa73",
+      "documentNumber": 80007,
+      "date": "2026-11-27T10:40:00.000Z",
+      "address": "Teixeiras - Taquara, Rio de Janeiro - RJ, 22723-205, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "TEIXEIRAS",
+      "latitude": -22.907323032630213,
+      "longitude": -43.421669579142,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "e183ea1a-714e-4c9a-a07d-558afa7b817b",
       "documentNumber": 80004,
@@ -113,27 +148,7 @@
       "locality": "",
       "latitude": -22.7292342,
       "longitude": -43.3120538,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "33ce6db1-bcfa-4666-9de1-25b356db5102",
-      "documentNumber": 80000,
-      "date": "2026-11-26T18:55:00.000Z",
-      "address": "Rua da Fiscalização, Jardim das Acacias - Itaipu, Belford Roxo - RJ, Brasil",
-      "neighborhood": "ITAIPU",
-      "subNeighborhood": "",
-      "locality": "JARDIM DAS ACACIAS",
-      "latitude": -22.7237479,
-      "longitude": -43.4269241,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -156,6 +171,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "7b28ba71-b4db-40e9-999b-9cfd5989729b",
+      "documentNumber": 80009,
+      "date": "2026-11-26T14:40:00.000Z",
+      "address": "Comunidade do Terra Nostra (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21665-210, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA TERRA NOSTRA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.8296683,
+      "longitude": -43.367672,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -218,10 +248,45 @@
       "locality": "",
       "latitude": -22.5206542,
       "longitude": -43.0023122,
+      "reason": "Tentativa/Roubo de cargas",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "3f070335-59b6-4359-95b6-248a25650cb5",
+      "documentNumber": 80008,
+      "date": "2026-11-26T00:00:00.000Z",
+      "address": "Inferninho - Rosa dos Ventos, Nova Iguaçu - RJ, 26276-300, Brasil",
+      "neighborhood": "ROSA DOS VENTOS",
+      "subNeighborhood": "",
+      "locality": "INFERNINHO (BEN-10)",
+      "latitude": -22.744326,
+      "longitude": -43.506492,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
       "victims": []
+    },
+    {
+      "id": "33ce6db1-bcfa-4666-9de1-25b356db5102",
+      "documentNumber": 80000,
+      "date": "2026-11-26T00:00:00.000Z",
+      "address": "Rua da Fiscalização, Jardim das Acacias - Itaipu, Belford Roxo - RJ, Brasil",
+      "neighborhood": "ITAIPU",
+      "subNeighborhood": "",
+      "locality": "JARDIM DAS ACACIAS",
+      "latitude": -22.7237479,
+      "longitude": -43.4269241,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
     },
     {
       "id": "dae8e295-3683-4331-9541-7855c74965ab",
@@ -258,19 +323,19 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -288,6 +353,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "0bb52ce0-d338-4d75-bb36-e1b1dbc27e34",
+      "documentNumber": 80011,
+      "date": "2026-11-25T15:00:00.000Z",
+      "address": "Av. Euclídes da Cunha - Vila São João, Vilar dos Teles, São João de Meriti - RJ, 25570-835, Brasil",
+      "neighborhood": "VILAR DOS TELES",
+      "subNeighborhood": "VILA SAO JOAO",
+      "locality": "",
+      "latitude": -22.766427434529,
+      "longitude": -43.351900596820066,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -350,21 +430,6 @@
       ]
     },
     {
-      "id": "00840fe0-e6c5-4e3c-bdf2-90f7e57cc972",
-      "documentNumber": 79980,
-      "date": "2026-11-24T20:05:00.000Z",
-      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
-      "neighborhood": "CORDOVIL",
-      "subNeighborhood": "",
-      "locality": "Comunidade DOURADOS",
-      "latitude": -22.82650326,
-      "longitude": -43.29951507,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "cf5cdb6a-a17a-4c74-b669-cac0e0677f82",
       "documentNumber": 79969,
       "date": "2026-11-24T20:05:00.000Z",
@@ -374,6 +439,21 @@
       "locality": "QUITUNGO-GUAPORE",
       "latitude": -22.835,
       "longitude": -43.300278,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "00840fe0-e6c5-4e3c-bdf2-90f7e57cc972",
+      "documentNumber": 79980,
+      "date": "2026-11-24T20:05:00.000Z",
+      "address": "Comunidade Dourados - Cordovil, Rio de Janeiro - RJ, 21250-150, Brasil",
+      "neighborhood": "CORDOVIL",
+      "subNeighborhood": "",
+      "locality": "Comunidade DOURADOS",
+      "latitude": -22.82650326,
+      "longitude": -43.29951507,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -710,21 +790,6 @@
       "victims": []
     },
     {
-      "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
-      "documentNumber": 79933,
-      "date": "2026-11-20T21:00:00.000Z",
-      "address": "Rio das Pedras - Jacarepaguá, Rio de Janeiro - RJ, 22753-737, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "RIO DAS PEDRAS",
-      "latitude": -22.975582144895455,
-      "longitude": -43.33325272765687,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
       "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
       "documentNumber": 79934,
       "date": "2026-11-20T21:00:00.000Z",
@@ -734,6 +799,21 @@
       "locality": "",
       "latitude": -22.8780905,
       "longitude": -43.4482789,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
+      "documentNumber": 79933,
+      "date": "2026-11-20T21:00:00.000Z",
+      "address": "Rio das Pedras - Jacarepaguá, Rio de Janeiro - RJ, 22753-737, Brasil",
+      "neighborhood": "JACAREPAGUA",
+      "subNeighborhood": "",
+      "locality": "RIO DAS PEDRAS",
+      "latitude": -22.975582144895455,
+      "longitude": -43.33325272765687,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
@@ -769,11 +849,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {

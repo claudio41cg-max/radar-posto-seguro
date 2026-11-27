@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T14:53:31.644Z",
+  "generatedAt": "2026-11-27T23:21:18.955Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 654,
+  "count": 659,
   "occurrences": [
+    {
+      "id": "af260b7c-acf8-4963-b20e-22be4df09ba4",
+      "documentNumber": 80012,
+      "date": "2026-11-27T18:20:00.000Z",
+      "address": "Complexo da Penha - Penha, Rio de Janeiro - RJ, 21070-470, Brasil",
+      "neighborhood": "PENHA",
+      "subNeighborhood": "",
+      "locality": "COMPLEXO DA PENHA",
+      "latitude": -22.84557517,
+      "longitude": -43.28296391,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "a58f99bb-efca-4a59-8615-e2c1fb02aa73",
+      "documentNumber": 80007,
+      "date": "2026-11-27T10:40:00.000Z",
+      "address": "Teixeiras - Taquara, Rio de Janeiro - RJ, 22723-205, Brasil",
+      "neighborhood": "TAQUARA",
+      "subNeighborhood": "",
+      "locality": "TEIXEIRAS",
+      "latitude": -22.907323032630213,
+      "longitude": -43.421669579142,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "e183ea1a-714e-4c9a-a07d-558afa7b817b",
       "documentNumber": 80004,
@@ -112,27 +147,7 @@
       "locality": "",
       "latitude": -22.7292342,
       "longitude": -43.3120538,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "33ce6db1-bcfa-4666-9de1-25b356db5102",
-      "documentNumber": 80000,
-      "date": "2026-11-26T18:55:00.000Z",
-      "address": "Rua da Fiscalização, Jardim das Acacias - Itaipu, Belford Roxo - RJ, Brasil",
-      "neighborhood": "ITAIPU",
-      "subNeighborhood": "",
-      "locality": "JARDIM DAS ACACIAS",
-      "latitude": -22.7237479,
-      "longitude": -43.4269241,
-      "reason": "Homicidio/Tentativa",
+      "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
       "victims": [
@@ -155,6 +170,21 @@
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "7b28ba71-b4db-40e9-999b-9cfd5989729b",
+      "documentNumber": 80009,
+      "date": "2026-11-26T14:40:00.000Z",
+      "address": "Comunidade do Terra Nostra (Complexo da Pedreira) - Costa Barros, Rio de Janeiro - RJ, 21665-210, Brasil",
+      "neighborhood": "COSTA BARROS",
+      "subNeighborhood": "",
+      "locality": "Comunidade DA TERRA NOSTRA (COMPLEXO DA PEDREIRA)",
+      "latitude": -22.8296683,
+      "longitude": -43.367672,
+      "reason": "Não identificado",
+      "policeAction": false,
+      "agentPresence": false,
       "victims": []
     },
     {
@@ -217,6 +247,41 @@
       "locality": "",
       "latitude": -22.5206542,
       "longitude": -43.0023122,
+      "reason": "Tentativa/Roubo de cargas",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "33ce6db1-bcfa-4666-9de1-25b356db5102",
+      "documentNumber": 80000,
+      "date": "2026-11-26T00:00:00.000Z",
+      "address": "Rua da Fiscalização, Jardim das Acacias - Itaipu, Belford Roxo - RJ, Brasil",
+      "neighborhood": "ITAIPU",
+      "subNeighborhood": "",
+      "locality": "JARDIM DAS ACACIAS",
+      "latitude": -22.7237479,
+      "longitude": -43.4269241,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "3f070335-59b6-4359-95b6-248a25650cb5",
+      "documentNumber": 80008,
+      "date": "2026-11-26T00:00:00.000Z",
+      "address": "Inferninho - Rosa dos Ventos, Nova Iguaçu - RJ, 26276-300, Brasil",
+      "neighborhood": "ROSA DOS VENTOS",
+      "subNeighborhood": "",
+      "locality": "INFERNINHO (BEN-10)",
+      "latitude": -22.744326,
+      "longitude": -43.506492,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -257,19 +322,19 @@
       "agentPresence": true,
       "victims": [
         {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
           "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -287,6 +352,21 @@
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,
+      "victims": []
+    },
+    {
+      "id": "0bb52ce0-d338-4d75-bb36-e1b1dbc27e34",
+      "documentNumber": 80011,
+      "date": "2026-11-25T15:00:00.000Z",
+      "address": "Av. Euclídes da Cunha - Vila São João, Vilar dos Teles, São João de Meriti - RJ, 25570-835, Brasil",
+      "neighborhood": "VILAR DOS TELES",
+      "subNeighborhood": "VILA SAO JOAO",
+      "locality": "",
+      "latitude": -22.766427434529,
+      "longitude": -43.351900596820066,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
       "victims": []
     },
     {
@@ -783,11 +863,11 @@
       "agentPresence": false,
       "victims": [
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
