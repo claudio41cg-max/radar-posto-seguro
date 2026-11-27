@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T04:55:32.560Z",
+  "generatedAt": "2026-11-27T14:53:31.644Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,43 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 652,
+  "count": 654,
   "occurrences": [
+    {
+      "id": "e183ea1a-714e-4c9a-a07d-558afa7b817b",
+      "documentNumber": 80004,
+      "date": "2026-11-27T05:30:00.000Z",
+      "address": "Morro do Timbau (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-050, Brasil",
+      "neighborhood": "MARE",
+      "subNeighborhood": "",
+      "locality": "MORRO DO TIMBAU (COMPLEXO DA MARE)",
+      "latitude": -22.86250847,
+      "longitude": -43.24132626,
+      "reason": "Operação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
+    },
+    {
+      "id": "e3a27583-584b-4550-b6f4-5bf9f7517a12",
+      "documentNumber": 80005,
+      "date": "2026-11-27T03:11:00.000Z",
+      "address": "Comunidade do Rasta - Cangulo, Duque de Caxias - RJ, 25220-304, Brasil",
+      "neighborhood": "CANGULO",
+      "subNeighborhood": "",
+      "locality": "Comunidade DO RASTA",
+      "latitude": -22.688468772877677,
+      "longitude": -43.24380187962342,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "c76a60a7-5258-4300-854e-ecadb26df71b",
       "documentNumber": 79997,
@@ -51,19 +86,19 @@
       "id": "f85c0cf7-aefb-48fe-831d-4ba5d2e38c88",
       "documentNumber": 80002,
       "date": "2026-11-26T20:00:00.000Z",
-      "address": " Areal, Itaboraí - RJ, 24800-622, Brasil",
+      "address": "Rua Francisco Cardoso de Almeida - Campo Lindo, Areal, Itaboraí - RJ, 24800-622, Brasil",
       "neighborhood": "AREAL",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.725299439689152,
-      "longitude": -42.858428832101936,
+      "latitude": -22.725045965887293,
+      "longitude": -42.858433568122855,
       "reason": "Homicidio/Tentativa",
       "policeAction": false,
-      "agentPresence": false,
+      "agentPresence": true,
       "victims": [
         {
           "situation": "Dead",
-          "personType": "Civilian"
+          "personType": "Agent"
         }
       ]
     },
@@ -226,15 +261,15 @@
           "personType": "Civilian"
         },
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         }
       ]
@@ -752,11 +787,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         },
         {
