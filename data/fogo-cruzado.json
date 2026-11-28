@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T23:21:18.953Z",
+  "generatedAt": "2026-11-28T04:46:28.717Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,9 +10,33 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 56,
-  "lastUpdate": "2026-11-27T19:03:30-03:00",
+  "count": 45,
+  "lastUpdate": "2026-11-27T23:41:41-03:00",
   "occurrences": [
+    {
+      "id": "af85ca81-c5a2-46d8-95d1-116ff8dfcc11",
+      "documentNumber": 80015,
+      "date": "2026-11-27T19:00:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.8694071,
+      "longitude": -43.4790849,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "af260b7c-acf8-4963-b20e-22be4df09ba4",
       "documentNumber": 80012,
@@ -99,26 +123,6 @@
       "victims": []
     },
     {
-      "id": "f85c0cf7-aefb-48fe-831d-4ba5d2e38c88",
-      "documentNumber": 80002,
-      "date": "2026-11-26T20:00:00.000Z",
-      "address": "Rua Francisco Cardoso de Almeida - Campo Lindo, Areal, Itaboraí - RJ, 24800-622, Brasil",
-      "neighborhood": "AREAL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.725045965887293,
-      "longitude": -42.858433568122855,
-      "reason": "Homicidio/Tentativa",
-      "policeAction": false,
-      "agentPresence": true,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Agent"
-        }
-      ]
-    },
-    {
       "id": "2c2a5029-1eb1-4471-bfaf-3bd6c9264960",
       "documentNumber": 80001,
       "date": "2026-11-26T20:00:00.000Z",
@@ -135,6 +139,26 @@
         {
           "situation": "Dead",
           "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "f85c0cf7-aefb-48fe-831d-4ba5d2e38c88",
+      "documentNumber": 80002,
+      "date": "2026-11-26T20:00:00.000Z",
+      "address": "Rua Francisco Cardoso de Almeida - Campo Lindo, Areal, Itaboraí - RJ, 24800-622, Brasil",
+      "neighborhood": "AREAL",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.725045965887293,
+      "longitude": -42.858433568122855,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": true,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Agent"
         }
       ]
     },
@@ -323,15 +347,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
@@ -769,213 +793,6 @@
       "locality": "MORRO DO DENDE",
       "latitude": -22.802039,
       "longitude": -43.184899,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "26f1d97f-ddbd-4e0f-9181-741f8521bb14",
-      "documentNumber": 79935,
-      "date": "2026-11-20T22:08:00.000Z",
-      "address": "Baixa do Sapateiro (Complexo da Maré) - Maré, Rio de Janeiro - RJ, 21042-450, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "BAIXA DO SAPATEIRO (COMPLEXO DA MARE)",
-      "latitude": -22.86007183,
-      "longitude": -43.24258995,
-      "reason": "Operação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "3d358c34-b300-4451-84e2-fcdf78738c7f",
-      "documentNumber": 79934,
-      "date": "2026-11-20T21:00:00.000Z",
-      "address": "Padre Miguel, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "PADRE MIGUEL",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8780905,
-      "longitude": -43.4482789,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "e9b7d85b-e7bc-4478-b103-a66471f08685",
-      "documentNumber": 79933,
-      "date": "2026-11-20T21:00:00.000Z",
-      "address": "Rio das Pedras - Jacarepaguá, Rio de Janeiro - RJ, 22753-737, Brasil",
-      "neighborhood": "JACAREPAGUA",
-      "subNeighborhood": "",
-      "locality": "RIO DAS PEDRAS",
-      "latitude": -22.975582144895455,
-      "longitude": -43.33325272765687,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "a3c3d605-388c-4fe1-a253-7823b385e79c",
-      "documentNumber": 79936,
-      "date": "2026-11-20T17:00:00.000Z",
-      "address": "Av. Pastor Martin Luther King Jr. - Irajá, Rio de Janeiro - RJ, 21220-301, Brasil",
-      "neighborhood": "IRAJA",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.84978518510721,
-      "longitude": -43.320043529638674,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "a1431970-b994-4399-919b-5b9df2c2bb3e",
-      "documentNumber": 79937,
-      "date": "2026-11-20T14:51:00.000Z",
-      "address": "Comunidade do Sem Terra - Vila Margarida, Itaguaí - RJ, 23823-110, Brasil",
-      "neighborhood": "VILA MARGARIDA",
-      "subNeighborhood": "",
-      "locality": "Comunidade DO SEM TERRA",
-      "latitude": -22.875830521250382,
-      "longitude": -43.79280801756136,
-      "reason": "Disputa",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "64ebea68-b847-453c-8ad8-7c048e3587cc",
-      "documentNumber": 79938,
-      "date": "2026-11-20T14:50:00.000Z",
-      "address": "R. João Plaza Gonzales (Rua do Postinho IMOBE)  - Engenho, Itaguaí - RJ, 23820-370, Brasil",
-      "neighborhood": "ENGENHO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.8625,
-      "longitude": -43.7888,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "731127cd-156f-45bb-a2a7-2b0bf1cb85e9",
-      "documentNumber": 79930,
-      "date": "2026-11-20T13:30:00.000Z",
-      "address": "Av. Linha Amarela - Maré, Rio de Janeiro - RJ, 21042-130, Brasil",
-      "neighborhood": "MARE",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.864322879442966,
-      "longitude": -43.239293419039676,
-      "reason": "Outro",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "0bee5cf0-c1ba-41ef-b9ad-481225fafa37",
-      "documentNumber": 79932,
-      "date": "2026-11-20T11:00:00.000Z",
-      "address": "Rua Coimbra da Cruz - Pilares, Rio de Janeiro - RJ, 20755-240, Brasil",
-      "neighborhood": "PILARES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.885713928534436,
-      "longitude": -43.29407984205224,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
-      "id": "dcb61d2c-4129-48a4-8672-dd6946e1529f",
-      "documentNumber": 79940,
-      "date": "2026-11-20T09:45:00.000Z",
-      "address": "R. Caituba - Comunidade Nova Aurora (Cabeça de Porco) -  Taquara, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "TAQUARA",
-      "subNeighborhood": "",
-      "locality": "Comunidade NOVA AURORA (CABECA DE PORCO)",
-      "latitude": -22.9168984,
-      "longitude": -43.3758415,
-      "reason": "Não identificado",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": []
-    },
-    {
-      "id": "7f524579-8216-41e1-9234-b45addb6f7df",
-      "documentNumber": 79927,
-      "date": "2026-11-20T02:10:00.000Z",
-      "address": "Rua dos Inválidos - Centro, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "CENTRO",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.9129723,
-      "longitude": -43.1846128,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "98e3ef1e-3480-42a7-a105-f72af4deb743",
-      "documentNumber": 79931,
-      "date": "2026-11-20T02:00:00.000Z",
-      "address": "Rua Egas Muniz - Vilar dos Teles, São João de Meriti - RJ, 25576-270, Brasil",
-      "neighborhood": "VILAR DOS TELES",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.7766413564542,
-      "longitude": -43.360172220127254,
-      "reason": "Tentativa/Roubo",
-      "policeAction": false,
-      "agentPresence": false,
-      "victims": [
-        {
-          "situation": "Dead",
-          "personType": "Civilian"
-        }
-      ]
-    },
-    {
-      "id": "39c3bf79-89b9-47fe-ac5a-7f617137f6e7",
-      "documentNumber": 79925,
-      "date": "2026-11-20T00:06:00.000Z",
-      "address": "Andaraí, Rio de Janeiro - RJ, Brasil",
-      "neighborhood": "ANDARAI",
-      "subNeighborhood": "",
-      "locality": "",
-      "latitude": -22.922329,
-      "longitude": -43.2477454,
       "reason": "Não identificado",
       "policeAction": false,
       "agentPresence": false,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T23:21:18.955Z",
+  "generatedAt": "2026-11-28T04:46:28.720Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,32 @@
     "state": "Rio de Janeiro",
     "retention": "Histórico acumulado desde a ativação"
   },
-  "count": 659,
+  "count": 660,
   "occurrences": [
+    {
+      "id": "af85ca81-c5a2-46d8-95d1-116ff8dfcc11",
+      "documentNumber": 80015,
+      "date": "2026-11-27T19:00:00.000Z",
+      "address": "Vila Aliança - Bangu, Rio de Janeiro - RJ, Brasil",
+      "neighborhood": "BANGU",
+      "subNeighborhood": "",
+      "locality": "VILA ALIANCA",
+      "latitude": -22.8694071,
+      "longitude": -43.4790849,
+      "reason": "Homicidio/Tentativa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Dead",
+          "personType": "Civilian"
+        }
+      ]
+    },
     {
       "id": "af260b7c-acf8-4963-b20e-22be4df09ba4",
       "documentNumber": 80012,
@@ -322,15 +346,15 @@
       "agentPresence": true,
       "victims": [
         {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
+          "situation": "Wounded",
+          "personType": "Civilian"
+        },
+        {
           "situation": "Dead",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
-          "personType": "Civilian"
-        },
-        {
-          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
