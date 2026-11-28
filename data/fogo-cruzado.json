@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-28T04:46:28.717Z",
+  "generatedAt": "2026-11-28T13:40:55.589Z",
   "source": {
     "name": "Instituto Fogo Cruzado",
     "url": "https://fogocruzado.org.br/",
@@ -10,8 +10,8 @@
     "coverage": "Municípios atendidos pelo Instituto Fogo Cruzado no estado",
     "days": 7
   },
-  "count": 45,
-  "lastUpdate": "2026-11-27T23:41:41-03:00",
+  "count": 46,
+  "lastUpdate": "2026-11-28T10:03:43-03:00",
   "occurrences": [
     {
       "id": "af85ca81-c5a2-46d8-95d1-116ff8dfcc11",
@@ -278,21 +278,6 @@
       "victims": []
     },
     {
-      "id": "3f070335-59b6-4359-95b6-248a25650cb5",
-      "documentNumber": 80008,
-      "date": "2026-11-26T00:00:00.000Z",
-      "address": "Inferninho - Rosa dos Ventos, Nova Iguaçu - RJ, 26276-300, Brasil",
-      "neighborhood": "ROSA DOS VENTOS",
-      "subNeighborhood": "",
-      "locality": "INFERNINHO (BEN-10)",
-      "latitude": -22.744326,
-      "longitude": -43.506492,
-      "reason": "Ação policial",
-      "policeAction": true,
-      "agentPresence": true,
-      "victims": []
-    },
-    {
       "id": "33ce6db1-bcfa-4666-9de1-25b356db5102",
       "documentNumber": 80000,
       "date": "2026-11-26T00:00:00.000Z",
@@ -311,6 +296,21 @@
           "personType": "Civilian"
         }
       ]
+    },
+    {
+      "id": "3f070335-59b6-4359-95b6-248a25650cb5",
+      "documentNumber": 80008,
+      "date": "2026-11-26T00:00:00.000Z",
+      "address": "Inferninho - Rosa dos Ventos, Nova Iguaçu - RJ, 26276-300, Brasil",
+      "neighborhood": "ROSA DOS VENTOS",
+      "subNeighborhood": "",
+      "locality": "INFERNINHO (BEN-10)",
+      "latitude": -22.744326,
+      "longitude": -43.506492,
+      "reason": "Ação policial",
+      "policeAction": true,
+      "agentPresence": true,
+      "victims": []
     },
     {
       "id": "dae8e295-3683-4331-9541-7855c74965ab",
@@ -355,11 +355,11 @@
           "personType": "Civilian"
         },
         {
-          "situation": "Dead",
+          "situation": "Wounded",
           "personType": "Civilian"
         },
         {
-          "situation": "Wounded",
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
@@ -632,12 +632,12 @@
       "id": "87ffe52b-fc9e-433e-8031-2f428c719a0d",
       "documentNumber": 79952,
       "date": "2026-11-23T12:00:00.000Z",
-      "address": "Shangri-lá, Belford Roxo - RJ, 26150-280, Brasil",
-      "neighborhood": "SHANGRI LA",
+      "address": "Estr. Itaipu Babi - Itaipu, Belford Roxo - RJ, 26127-170",
+      "neighborhood": "ITAIPU",
       "subNeighborhood": "",
       "locality": "",
-      "latitude": -22.717153044078913,
-      "longitude": -43.415532532739185,
+      "latitude": -22.730143556626388,
+      "longitude": -43.42111988545711,
       "reason": "Ação policial",
       "policeAction": true,
       "agentPresence": true,
@@ -764,6 +764,26 @@
       "victims": [
         {
           "situation": "Wounded",
+          "personType": "Civilian"
+        }
+      ]
+    },
+    {
+      "id": "a1e61643-e643-47fa-a068-21aaeb703ea3",
+      "documentNumber": 80018,
+      "date": "2026-11-22T00:00:00.000Z",
+      "address": "Shangri-La, Belford Roxo - RJ, 26150-060, Brasil",
+      "neighborhood": "SHANGRI LA",
+      "subNeighborhood": "",
+      "locality": "",
+      "latitude": -22.7177652,
+      "longitude": -43.4134841,
+      "reason": "Disputa",
+      "policeAction": false,
+      "agentPresence": false,
+      "victims": [
+        {
+          "situation": "Dead",
           "personType": "Civilian"
         }
       ]
